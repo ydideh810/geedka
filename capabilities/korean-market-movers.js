@@ -136,12 +136,18 @@ export default {
       throw new Error(`Upbit fetch failed: ${err.message}`);
     }
 
-    // Rough USD conversion using BTC-KRW price + approximate USD/BTC
-    // We derive a KRW→USD rate from BTC prices on Upbit vs approximate world price.
-    // For now, use a static approximation: 1 USD ≈ 1390 KRW (updated 2026-06).
-    // Agents who need precision should use us-stock-price for cross-rate verification.
-    const KRW_PER_USD = 1390;
-    const usdPerKrw   = 1 / KRW_PER_USD;
+    // Fetch live KRW/USD rate from open.er-api.com (daily updates)
+    let KRW_PER_USD = 1530; // fallback if fetch fails
+    try {
+      const fxResp = await fetch("https://open.er-api.com/v6/latest/USD", {
+        headers: { "User-Agent": UA }, signal: AbortSignal.timeout(4000),
+      });
+      if (fxResp.ok) {
+        const fx = await fxResp.json();
+        if (fx.rates?.KRW) KRW_PER_USD = fx.rates.KRW;
+      }
+    } catch (_) { /* use fallback */ }
+    const usdPerKrw = 1 / KRW_PER_USD;
 
     const totalScanned = tickers.length;
 
