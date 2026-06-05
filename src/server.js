@@ -95,9 +95,9 @@ app.get("/.well-known/x402", (_req, res) =>
 app.get("/.well-known/agent.json", (_req, res) =>
   res.json({
     name: "The Stall",
-    description: "Domain-agnostic x402 capability chassis. Sells AI-callable data services for USDC on Base. Current capabilities: US stock prices, cross-asset market overview (SPY/QQQ/IWM/DIA/VIX/10Y + risk posture), x402 market intelligence, concentration-risk scoring. MCP interface available at /mcp (free, no payment required).",
+    description: "Domain-agnostic x402 capability chassis. Sells AI-callable data services for USDC on Base. Current capabilities: US stock prices, cross-asset market overview (SPY/QQQ/IWM/DIA/VIX/10Y + risk posture), x402 market intelligence, concentration-risk scoring, stablecoin depeg monitor (top 20 USD stablecoins, PARITY/MILD_DEPEG/MODERATE_DEPEG/SEVERE_DEPEG). MCP interface available at /mcp (free, no payment required).",
     url: BASE_URL,
-    version: "0.6.0",
+    version: "0.7.0",
     provider: {
       organization: "IntuiTek¹",
       url: "https://intuitek.ai",
