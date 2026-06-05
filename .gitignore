@@ -1,0 +1,28 @@
+# credentials — never commit
+.env
+credentials/
+
+# node
+node_modules/
+npm-debug.log*
+
+# data files — large local archive, never commit
+archive.db
+archive.db-shm
+archive.db-wal
+*.db
+*.db-shm
+*.db-wal
+
+# runtime logs
+logs/
+
+# internal ops docs — not published
+DIRECTIVE_TO_AEGIS.md
+RELAY_NOTE_FOR_KYLE.md
+market_verdict_rerun.py
+
+# OS / editor
+.DS_Store
+.vscode/
+*.swp
