@@ -132,6 +132,20 @@ app.get("/.well-known/agent.json", (_req, res) =>
   })
 );
 
+// ── Smithery server card (skip-scan path for capability enumeration) ─────────
+app.get("/.well-known/mcp/server-card.json", (_req, res) =>
+  res.json({
+    name: "The Stall",
+    description: "Domain-agnostic x402 capability chassis by IntuiTek¹. 29 AI-callable data tools: market data, DeFi yields, crypto sentiment, token security, gas prices, macro indicators, prediction markets, SEC EDGAR company due diligence, and more. MCP over Streamable HTTP — no API keys, no accounts.",
+    version: "2.8.0",
+    tools: capabilities.map((c) => ({
+      name: c.name,
+      description: c.description,
+      inputSchema: c.inputSchema,
+    })),
+  })
+);
+
 // ── MCP Streamable HTTP endpoint (free — handlers called directly, no x402) ──
 app.post("/mcp", makeMcpHandler(capabilities));
 app.get("/mcp", (_req, res) =>
