@@ -19,6 +19,7 @@ import { join, dirname } from "path";
 import { fileURLToPath } from "url";
 import { loadCapabilities } from "./registry.js";
 import { buildPaymentMiddleware } from "./payment.js";
+import { makeMcpHandler } from "./mcp.js";
 
 const __dir = dirname(fileURLToPath(import.meta.url));
 const LOG_DIR = join(__dir, "..", "logs");
@@ -94,9 +95,9 @@ app.get("/.well-known/x402", (_req, res) =>
 app.get("/.well-known/agent.json", (_req, res) =>
   res.json({
     name: "The Stall",
-    description: "Domain-agnostic x402 capability chassis. Sells AI-callable data services for USDC on Base. Current capabilities: US stock prices, market intelligence, concentration-risk scoring.",
+    description: "Domain-agnostic x402 capability chassis. Sells AI-callable data services for USDC on Base. Current capabilities: US stock prices, cross-asset market overview (SPY/QQQ/IWM/DIA/VIX/10Y + risk posture), x402 market intelligence, concentration-risk scoring. MCP interface available at /mcp (free, no payment required).",
     url: BASE_URL,
-    version: "0.4.1",
+    version: "0.6.0",
     provider: {
       organization: "IntuiTek¹",
       url: "https://intuitek.ai",
@@ -112,15 +113,29 @@ app.get("/.well-known/agent.json", (_req, res) =>
       description: c.description,
       inputModes: ["data"],
       outputModes: ["data"],
-      tags: ["x402", "data", "finance", "base", "usdc"],
+      tags: ["x402", "mcp", "data", "finance", "base", "usdc"],
       examples: [],
     })),
     authentication: {
-      schemes: ["x402"],
+      schemes: ["x402", "none"],
     },
     defaultInputModes: ["data"],
     defaultOutputModes: ["data"],
+    additionalInterfaces: [
+      {
+        type: "mcp",
+        transport: "streamable-http",
+        url: `${BASE_URL}/mcp`,
+        description: "MCP Streamable HTTP interface — all capabilities available free, no wallet required",
+      },
+    ],
   })
+);
+
+// ── MCP Streamable HTTP endpoint (free — handlers called directly, no x402) ──
+app.post("/mcp", makeMcpHandler(capabilities));
+app.get("/mcp", (_req, res) =>
+  res.status(405).json({ jsonrpc: "2.0", error: { code: -32000, message: "Use POST for MCP requests" }, id: null })
 );
 
 // ── PAID capability routes (x402-gated) ───────────────────────────────────────

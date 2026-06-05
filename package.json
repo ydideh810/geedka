@@ -1,6 +1,6 @@
 {
   "name": "the-stall",
-  "version": "0.4.1",
+  "version": "0.6.0",
   "description": "Domain-agnostic x402 capability chassis + PROSPECTOR [REDACTED]. The Stall is the empty seat in the agentic bazaar; PROSPECTOR is the four-stream scout that decides what to put in it.",
   "type": "module",
   "main": "src/server.js",
@@ -11,6 +11,7 @@
     "scan:legacy": "node prospector/legacy/prospector_scan_v0_2.mjs"
   },
   "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.29.0",
     "better-sqlite3": "^11.3.0",
     "dotenv": "^16.4.5",
     "express": "^4.19.2",
