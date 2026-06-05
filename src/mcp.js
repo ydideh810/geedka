@@ -35,7 +35,7 @@ function buildZodShape(inputSchema) {
 // Build a fresh McpServer with all STALL capabilities registered as tools.
 // Called once per request (stateless transport requires fresh server per request).
 function buildServer(capabilities) {
-  const server = new McpServer({ name: "The Stall", version: "0.5.0" });
+  const server = new McpServer({ name: "The Stall", version: "3.1.0" });
 
   for (const cap of capabilities) {
     const inputSchema = buildZodShape(cap.inputSchema);
