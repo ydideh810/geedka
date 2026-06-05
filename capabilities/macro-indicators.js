@@ -8,6 +8,9 @@
 // in a multi-asset workflow pays once for the full macro backdrop rather than
 // inferring it from equity prices. 10Y yield and VIX are in market-overview;
 // this cap covers the FRED-sourced policy/economic data that market-overview omits.
+//
+// Seam origin: natural extension of us-stock-price + equity-technicals workflow.
+// Free upstream: FRED public CSV (fred.stlouisfed.org) — no crumb, no auth.
 
 const FRED_BASE = "https://fred.stlouisfed.org/graph/fredgraph.csv";
 const UA        = "Mozilla/5.0 (compatible; the-stall/0.4; +https://intuitek.ai)";
