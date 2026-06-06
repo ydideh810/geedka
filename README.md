@@ -15,7 +15,7 @@
 
 ---
 
-## Current capabilities — 104 live tools (v3.61.0)
+## Current capabilities — 105 live tools (v3.62.0)
 
 Full catalog at `/catalog`. Each capability is behind a per-call x402 paywall — no API keys, no accounts, no monthly fees. Pay USDC on Base mainnet per call.
 
@@ -101,6 +101,7 @@ Full catalog at `/catalog`. Each capability is behind a per-call x402 paywall �
 | `solana-token-risk` | $0.350 | Rug-pull and risk scanner for Solana SPL tokens via RugCheck. Returns mint risk score, top holders, freeze authority. |
 | `sports-prediction` | $0.005 | Today's sports games with team win-loss records, venue, broadcast info, and moneyline odds where available. |
 | `sports-scores` | $0.004 | Live and recent sports scores for NBA, NFL, MLB, NHL, MLS, EPL, La Liga, Bundesliga, Champions League, and more. |
+| `sec-filing-intel` | $0.015 | Real-time SEC EDGAR filing lookup by ticker or CIK. Returns company profile + recent filings (8-K, 10-K, 10-Q, Form 4, etc.) with EDGAR URLs. No API key. |
 | `ssl-cert` | $0.004 | TLS/SSL certificate inspection for any HTTPS host: validity window, issuer, SANs, days until expiry. |
 | `stablecoin-watch` | $0.050 | Real-time depeg monitor for top USD stablecoins (USDT, USDC, DAI, USDS, and others). |
 | `stock-brief` | $0.015 | US equity snapshot + Limitless prediction market sentiment in one call. |
@@ -244,7 +245,7 @@ Standard Node service. Set env vars (`WALLET_ADDRESS`, `X402_NETWORK=base`,
 - [x] `base_rpc` stream: no-auth on-chain settlement reader (Base public RPC)
 - [x] Concentration (few-payers path) producing real signals from live mainnet
 - [x] Wallet ownership verified (GATE 1) — Base mainnet, EIP-191 signature recovered
-- [x] **100 capabilities LIVE** at `https://the-stall.intuitek.ai` (Base mainnet, v3.57.0)
+- [x] **105 capabilities LIVE** at `https://the-stall.intuitek.ai` (Base mainnet, v3.62.0)
 - [x] A2A Agent Card at `/.well-known/agent.json`
 - [x] x402 discovery document at `/.well-known/x402`
 - [x] Payment logging (JSONL) — every settled call recorded
