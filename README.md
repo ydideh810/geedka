@@ -14,7 +14,7 @@
 
 ---
 
-## Current capabilities — 85 live tools (v3.42.0)
+## Current capabilities — 86 live tools (v3.43.0)
 
 Full catalog at `/catalog`. Each capability is behind a per-call x402 paywall — no API keys, no accounts, no monthly fees. Pay USDC on Base mainnet per call.
 
@@ -55,6 +55,7 @@ Full catalog at `/catalog`. Each capability is behind a per-call x402 paywall �
 | `funding-rates` | $0.020 | Current perpetual funding rates for 200+ assets on Hyperliquid DEX, sorted by 8h rate. |
 | `gas-prices` | $0.005 | Current gas prices and EIP-1559 fee recommendations across Ethereum, Base, Polygon, Arbitrum, BSC, Avalanche. |
 | `generate-meme` | $0.005 | Generates a meme image from 211 built-in templates. Returns a direct PNG URL. |
+| `meme-generator` | $0.005 | Generate a meme image with topic-based template auto-selection. Provide text_top/text_bottom and a topic keyword; returns image URL. 211 templates, optional style variants. |
 | `geocode` | $0.003 | Forward and reverse geocoding via OpenStreetMap Nominatim. Returns coordinates, address components, bounding box. |
 | `github-repo-intel` | $0.010 | GitHub repository intelligence: stars, forks, open issues, language, license, last commit date. |
 | `gov-votes` | $0.004 | US Congressional vote records from GovTrack (113th Congress onward). Search by congress, chamber, category. |
@@ -225,7 +226,7 @@ Standard Node service. Set env vars (`WALLET_ADDRESS`, `X402_NETWORK=base`,
 - [x] `base_rpc` stream: no-auth on-chain settlement reader (Base public RPC)
 - [x] Concentration (few-payers path) producing real signals from live mainnet
 - [x] Wallet ownership verified (GATE 1) — Base mainnet, EIP-191 signature recovered
-- [x] **85 capabilities LIVE** at `https://the-stall.intuitek.ai` (Base mainnet, v3.42.0)
+- [x] **86 capabilities LIVE** at `https://the-stall.intuitek.ai` (Base mainnet, v3.43.0)
 - [x] A2A Agent Card at `/.well-known/agent.json`
 - [x] x402 discovery document at `/.well-known/x402`
 - [x] Payment logging (JSONL) — every settled call recorded
