@@ -1,6 +1,6 @@
 {
   "name": "the-stall",
-  "version": "3.63.0",
+  "version": "3.65.0",
   "description": "Domain-agnostic x402 capability chassis + PROSPECTOR [REDACTED]. The Stall is the empty seat in the agentic bazaar; PROSPECTOR is the four-stream scout that decides what to put in it.",
   "type": "module",
   "main": "src/server.js",

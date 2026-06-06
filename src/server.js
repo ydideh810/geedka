@@ -14,12 +14,26 @@
 
 import "dotenv/config";
 import express from "express";
-import { appendFileSync, mkdirSync } from "fs";
+import { appendFileSync, mkdirSync, readFileSync } from "fs";
 import { join, dirname } from "path";
 import { fileURLToPath } from "url";
 import { loadCapabilities } from "./registry.js";
 import { buildPaymentMiddleware } from "./payment.js";
 import { makeMcpHandler } from "./mcp.js";
+
+function readPaymentStats() {
+  try {
+    const raw = readFileSync(PAYMENT_LOG, "utf8").trim();
+    if (!raw) return { total: 0, uniqueCaps: 0, since: null };
+    const lines = raw.split("\n").filter(Boolean);
+    const entries = lines.map((l) => { try { return JSON.parse(l); } catch { return null; } }).filter(Boolean);
+    const caps = new Set(entries.map((e) => e.cap));
+    const since = entries[0]?.ts ?? null;
+    return { total: entries.length, uniqueCaps: caps.size, since };
+  } catch {
+    return { total: 0, uniqueCaps: 0, since: null };
+  }
+}
 
 const __dir = dirname(fileURLToPath(import.meta.url));
 const LOG_DIR = join(__dir, "..", "logs");
@@ -145,6 +159,86 @@ app.get("/.well-known/mcp/server-card.json", (_req, res) =>
     })),
   })
 );
+
+// ── Public landing page — live traction signal ────────────────────────────────
+app.get("/", (_req, res) => {
+  const stats = readPaymentStats();
+  const sinceStr = stats.since
+    ? new Date(stats.since).toLocaleDateString("en-US", { year: "numeric", month: "short", day: "numeric" })
+    : "N/A";
+  res.setHeader("Content-Type", "text/html; charset=utf-8");
+  res.send(`<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>The Stall — x402 Intelligence Marketplace</title>
+  <style>
+    *{box-sizing:border-box;margin:0;padding:0}
+    body{font-family:system-ui,sans-serif;background:#0a0a0f;color:#e2e8f0;min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:2rem}
+    .brand{font-size:0.75rem;letter-spacing:0.2em;text-transform:uppercase;color:#6366f1;margin-bottom:1rem}
+    h1{font-size:2.5rem;font-weight:700;margin-bottom:0.5rem}
+    .tagline{color:#94a3b8;margin-bottom:3rem;font-size:1.1rem}
+    .stats{display:flex;gap:3rem;margin-bottom:3rem;flex-wrap:wrap;justify-content:center}
+    .stat{text-align:center}
+    .num{display:block;font-size:3rem;font-weight:800;color:#6366f1;line-height:1}
+    .label{display:block;font-size:0.8rem;letter-spacing:0.1em;text-transform:uppercase;color:#64748b;margin-top:0.25rem}
+    .since{font-size:0.65rem;color:#475569;margin-top:0.15rem}
+    .links{display:flex;gap:1rem;flex-wrap:wrap;justify-content:center}
+    a{color:#818cf8;text-decoration:none;padding:0.5rem 1.25rem;border:1px solid #312e81;border-radius:0.5rem;font-size:0.9rem;transition:border-color 0.15s}
+    a:hover{border-color:#6366f1}
+    .footer{margin-top:4rem;font-size:0.75rem;color:#334155;text-align:center}
+    .dot{display:inline-block;width:7px;height:7px;background:#22c55e;border-radius:50%;margin-right:0.4rem;animation:pulse 2s infinite}
+    @keyframes pulse{0%,100%{opacity:1}50%{opacity:0.4}}
+  </style>
+</head>
+<body>
+  <div class="brand">IntuiTek¹</div>
+  <h1>The Stall</h1>
+  <p class="tagline">AI-callable data services. Pay USDC on Base. No accounts.</p>
+  <div class="stats">
+    <div class="stat">
+      <span class="num">${capabilities.length}</span>
+      <span class="label">capabilities</span>
+    </div>
+    <div class="stat">
+      <span class="num">${stats.total}</span>
+      <span class="label">API calls served</span>
+      ${stats.since ? `<span class="since">since ${sinceStr}</span>` : ""}
+    </div>
+    <div class="stat">
+      <span class="num">${stats.uniqueCaps}</span>
+      <span class="label">caps called</span>
+    </div>
+  </div>
+  <div class="links">
+    <a href="/catalog">Browse catalog</a>
+    <a href="/.well-known/x402">x402 manifest</a>
+    <a href="/.well-known/agent.json">Agent card</a>
+    <a href="/stats">Stats JSON</a>
+  </div>
+  <div class="footer">
+    <span class="dot"></span>Live · Base mainnet · x402 · MCP
+    <br><br>
+    Built by <a href="https://intuitek.ai" style="border:none;padding:0">IntuiTek¹</a>
+  </div>
+</body>
+</html>`);
+});
+
+// ── Machine-readable stats endpoint ──────────────────────────────────────────
+app.get("/stats", (_req, res) => {
+  const stats = readPaymentStats();
+  res.json({
+    capabilities: capabilities.length,
+    paid_calls_total: stats.total,
+    unique_caps_called: stats.uniqueCaps,
+    first_call_at: stats.since,
+    network: NETWORK,
+    base_url: BASE_URL,
+    ts: new Date().toISOString(),
+  });
+});
 
 // ── MCP Streamable HTTP endpoint (free — handlers called directly, no x402) ──
 app.post("/mcp", makeMcpHandler(capabilities));
