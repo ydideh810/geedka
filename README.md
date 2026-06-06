@@ -234,12 +234,12 @@ Standard Node service. Set env vars (`WALLET_ADDRESS`, `X402_NETWORK=base`,
 - [x] `base_rpc` stream: no-auth on-chain settlement reader (Base public RPC)
 - [x] Concentration (few-payers path) producing real signals from live mainnet
 - [x] Wallet ownership verified (GATE 1) — Base mainnet, EIP-191 signature recovered
-- [x] **92 capabilities LIVE** at `https://the-stall.intuitek.ai` (Base mainnet, v3.49.0)
+- [x] **93 capabilities LIVE** at `https://the-stall.intuitek.ai` (Base mainnet, v3.50.0)
 - [x] A2A Agent Card at `/.well-known/agent.json`
 - [x] x402 discovery document at `/.well-known/x402`
 - [x] Payment logging (JSONL) — every settled call recorded
-- [ ] First settled call → auto-catalogs in x402 Bazaar
-- [ ] PROSPECTOR scout wired to heartbeat cadence
+- [x] First settled call → x402 Bazaar seeded (block 46944973, Base mainnet, 2026-06-05)
+- [x] PROSPECTOR scout wired to heartbeat cadence (v0.4, 3.7M+ settlements archived)
 
 ---
 
