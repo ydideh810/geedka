@@ -15,7 +15,7 @@
 
 ---
 
-## Current capabilities — 101 live tools (v3.58.0)
+## Current capabilities — 102 live tools (v3.59.0)
 
 Full catalog at `/catalog`. Each capability is behind a per-call x402 paywall — no API keys, no accounts, no monthly fees. Pay USDC on Base mainnet per call.
 
@@ -94,6 +94,7 @@ Full catalog at `/catalog`. Each capability is behind a per-call x402 paywall �
 | `research-paper-search` | $0.003 | Academic paper search across 250M+ works via OpenAlex. Returns title, authors, year, DOI, open-access status. |
 | `research-synthesis` | $0.200 | AI-synthesized intelligence report from multiple sources — Hacker News, academic papers, Reddit, arXiv, and more. Returns executive summary, key findings, sentiment, trends, and recommendations. 20% below nearest competitor. |
 | `readable-content` | $0.004 | Extracts full readable text from any public URL as clean Markdown, stripped of navigation, ads, and boilerplate. Returns title, published date, and complete article body ready for LLM ingestion. |
+| `roast` | $0.040 | AI-generated witty roast of any target — person, company, product, code snippet, or concept. 3-5 sentences of sharp, clever humor. Style: dry (default), savage, sarcastic, or gentle. 75% below anchor-x402.com. |
 | `rss-reader` | $0.004 | Fetches and parses any public RSS 2.0 or Atom 1.0 feed. Returns feed metadata and recent items. |
 | `solana-token-risk` | $0.350 | Rug-pull and risk scanner for Solana SPL tokens via RugCheck. Returns mint risk score, top holders, freeze authority. |
 | `sports-prediction` | $0.005 | Today's sports games with team win-loss records, venue, broadcast info, and moneyline odds where available. |
