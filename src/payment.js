@@ -32,13 +32,16 @@ export function buildPaymentMiddleware({ payTo, network, facilitator, capabiliti
   // Each capability becomes a paid GET route at /cap/<name>.
   // The `config` block (description + schemas) is what surfaces the route in
   // the x402 Bazaar discovery layer so agents can find and evaluate it.
+  // CDP facilitator enforces a 500-char max on the description field in paymentRequirements.
+  // Caps with longer descriptions trigger a 400 "invalid_request" at the verify step,
+  // causing the middleware to re-issue a 402 with an empty "error": {} body.
   const routeConfig = {};
   for (const cap of capabilities) {
     routeConfig[`GET /cap/${cap.name}`] = {
       price: cap.price,
       network,
       config: {
-        description: cap.description,
+        description: cap.description.slice(0, 499),
         inputSchema: cap.inputSchema,
         outputSchema: cap.outputSchema,
       },
