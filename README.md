@@ -14,7 +14,7 @@
 
 ---
 
-## Current capabilities — 87 live tools (v3.44.0)
+## Current capabilities — 88 live tools (v3.45.0)
 
 Full catalog at `/catalog`. Each capability is behind a per-call x402 paywall — no API keys, no accounts, no monthly fees. Pay USDC on Base mainnet per call.
 
@@ -101,6 +101,7 @@ Full catalog at `/catalog`. Each capability is behind a per-call x402 paywall �
 | `wallet-screener` | $0.010 | Risk screening for EVM wallet addresses: 0–100 risk score, individual factor breakdown (age, tx count, exposure). |
 | `weather` | $0.010 | Current conditions and 7-day forecast for any location worldwide via Open-Meteo. |
 | `web-change-monitor` | $0.005 | Content-change signals for any public URL: ETag, Last-Modified, Content-Length, response time. |
+| `web-scrape-links` | $0.004 | Extracts all hyperlinks from any public webpage. Returns absolute URLs with link text. Optional same-domain filter, deduplication, anchor inclusion. |
 | `web-company-intel` | $0.003 | Structured company intelligence from any public website: OpenGraph, schema.org, meta tags, social links. |
 | `world-bank-data` | $0.003 | World Bank open data — 1600+ development indicators for 200+ countries. GDP, poverty, health, education. |
 | `yield-farming-active` | $0.005 | Active DeFi yield farming pools sorted by 30-day average APY from DeFiLlama. |
@@ -227,7 +228,7 @@ Standard Node service. Set env vars (`WALLET_ADDRESS`, `X402_NETWORK=base`,
 - [x] `base_rpc` stream: no-auth on-chain settlement reader (Base public RPC)
 - [x] Concentration (few-payers path) producing real signals from live mainnet
 - [x] Wallet ownership verified (GATE 1) — Base mainnet, EIP-191 signature recovered
-- [x] **87 capabilities LIVE** at `https://the-stall.intuitek.ai` (Base mainnet, v3.44.0)
+- [x] **88 capabilities LIVE** at `https://the-stall.intuitek.ai` (Base mainnet, v3.45.0)
 - [x] A2A Agent Card at `/.well-known/agent.json`
 - [x] x402 discovery document at `/.well-known/x402`
 - [x] Payment logging (JSONL) — every settled call recorded
