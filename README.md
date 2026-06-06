@@ -14,7 +14,7 @@
 
 ---
 
-## Current capabilities — 86 live tools (v3.43.0)
+## Current capabilities — 87 live tools (v3.44.0)
 
 Full catalog at `/catalog`. Each capability is behind a per-call x402 paywall — no API keys, no accounts, no monthly fees. Pay USDC on Base mainnet per call.
 
@@ -71,6 +71,7 @@ Full catalog at `/catalog`. Each capability is behind a per-call x402 paywall �
 | `market-movers` | $0.004 | Today's top market movers — equity gainers, losers, most-active, and crypto gainers in one call. |
 | `market-overview` | $0.100 | Single-call market snapshot: SPY, QQQ, IWM, DIA price + intraday % change, VIX, BTC/ETH. |
 | `market-sentiment` | $0.015 | Combined crypto market sentiment: Crypto Fear & Greed Index + BTC dominance + altcoin season score. |
+| `news-sentiment` | $0.004 | Global news coverage and sentiment for any company, ticker, or topic (GDELT 250M+ articles + Google News fallback). Returns article count, avg tone score (−100 to +100), top headlines, and leading domains. 3-day default lookback (1–30 days). |
 | `npm-lookup` | $0.007 | Node.js package metadata from npm: latest version, description, downloads, dependencies, repository. |
 | `page-intel` | $0.004 | Structured content extraction from any public URL: title, meta description, H1-H3 headings, links, text preview. |
 | `ping` | $0.001 | Liveness + echo probe. Verifies the x402 payment rail end-to-end. |
@@ -226,7 +227,7 @@ Standard Node service. Set env vars (`WALLET_ADDRESS`, `X402_NETWORK=base`,
 - [x] `base_rpc` stream: no-auth on-chain settlement reader (Base public RPC)
 - [x] Concentration (few-payers path) producing real signals from live mainnet
 - [x] Wallet ownership verified (GATE 1) — Base mainnet, EIP-191 signature recovered
-- [x] **86 capabilities LIVE** at `https://the-stall.intuitek.ai` (Base mainnet, v3.43.0)
+- [x] **87 capabilities LIVE** at `https://the-stall.intuitek.ai` (Base mainnet, v3.44.0)
 - [x] A2A Agent Card at `/.well-known/agent.json`
 - [x] x402 discovery document at `/.well-known/x402`
 - [x] Payment logging (JSONL) — every settled call recorded
