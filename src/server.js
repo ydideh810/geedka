@@ -18,6 +18,8 @@ import { appendFileSync, mkdirSync, readFileSync } from "fs";
 import { join, dirname } from "path";
 import { fileURLToPath } from "url";
 import { loadCapabilities } from "./registry.js";
+
+const { version: PKG_VERSION } = JSON.parse(readFileSync(new URL("../package.json", import.meta.url)));
 import { buildPaymentMiddleware } from "./payment.js";
 import { makeMcpHandler } from "./mcp.js";
 
@@ -136,7 +138,7 @@ app.get("/.well-known/agent.json", (_req, res) =>
     name: "The Stall",
     description: `Domain-agnostic x402 capability chassis by IntuiTek¹. ${capabilities.length} AI-callable data services for USDC on Base — stock prices, DeFi analytics, token security, prediction markets, macro indicators, research papers, domain WHOIS, company intelligence, weather, flight tracking, and more. MCP interface at /mcp — no wallet, no API keys.`,
     url: BASE_URL,
-    version: "3.34.0",
+    version: PKG_VERSION,
     provider: {
       organization: "IntuiTek¹",
       url: "https://intuitek.ai",
@@ -176,7 +178,7 @@ app.get("/.well-known/mcp/server-card.json", (_req, res) =>
   res.json({
     name: "The Stall",
     description: `Domain-agnostic x402 capability chassis by IntuiTek¹. ${capabilities.length} AI-callable data tools: stock prices, market overview, DeFi yields, token security, wallet screening, gas prices, macro indicators, prediction markets, company due diligence, research papers, domain WHOIS, email verification, flight tracking, weather, and more. MCP over Streamable HTTP — no wallet, no API keys, no accounts.`,
-    version: "3.34.0",
+    version: PKG_VERSION,
     tools: capabilities.map((c) => ({
       name: c.name,
       description: c.description,
