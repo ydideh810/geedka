@@ -15,7 +15,7 @@
 
 ---
 
-## Current capabilities — 92 live tools (v3.49.0)
+## Current capabilities — 93 live tools (v3.50.0)
 
 Full catalog at `/catalog`. Each capability is behind a per-call x402 paywall — no API keys, no accounts, no monthly fees. Pay USDC on Base mainnet per call.
 
@@ -39,6 +39,7 @@ Full catalog at `/catalog`. Each capability is behind a per-call x402 paywall �
 | `company-intel` | $0.012 | SEC EDGAR due diligence data for any US public company: filings, financials, executives, SIC classification. |
 | `concentration-risk-score` | $0.100 | HHI-based concentration-risk score for any x402 pay_to wallet. Returns unique payers, top-payer share, risk tier. |
 | `country-info` | $0.002 | Country information by name, ISO code, or capital city: population, area, region, currencies, languages. |
+| `crypto-fiat-price` | $0.015 | Cryptocurrency price in any fiat currency — JPY, EUR, CNY, GBP, KRW, INR, AUD, BRL, or 80+ more. Input a coin (bitcoin, eth, sol) and one or more currency codes. Includes 24h % change. 85% below specialized oracles. |
 | `crypto-news-impact` | $0.008 | Latest cryptocurrency news headlines from CoinDesk with live price correlation for mentioned assets. |
 | `crypto-top-movers` | $0.008 | Real-time cryptocurrency market snapshot: top 5 gainers and losers by 24-hour performance from CoinGecko. |
 | `db-perf-intel` | $0.003 | Database version, EOL status, and benchmark-grade performance characteristics for 12+ database engines. |
@@ -101,7 +102,7 @@ Full catalog at `/catalog`. Each capability is behind a per-call x402 paywall �
 | `tx-intel` | $0.006 | Decode and explain any EVM transaction: type (swap/transfer/approval/contract call), human-readable summary, token transfers from logs, gas cost, block context. Base/ETH/Arb/Optimism/Polygon/Avalanche/BSC. 40% below tx-explainer. |
 | `tx-explainer` | $0.014 | Decoded EVM transaction breakdown: sender, recipient, value, gas, method name, event logs. |
 | `unit-converter` | $0.002 | Converts between 100+ units across 12 categories: length, weight, temperature, volume, speed, and more. |
-| `us-stock-price` | $0.030 | Current US equity price and intraday metrics for any NYSE/NASDAQ ticker via Yahoo Finance. |
+| `us-stock-price` | $0.018 | Current US equity price and intraday metrics for any NYSE/NASDAQ ticker via Yahoo Finance. 22% below blockrun.ai. |
 | `wallet-credit-score` | $0.020 | Composite EVM wallet trust score 0–100 with tier classification (PRIME/ESTABLISHED/ACTIVE/SPARSE/DORMANT). Age, tx volume, token diversity, DeFi exposure. |
 | `wallet-screener` | $0.010 | Risk screening for EVM wallet addresses: 0–100 risk score, individual factor breakdown (age, tx count, exposure). |
 | `weather` | $0.010 | Current conditions and 7-day forecast for any location worldwide via Open-Meteo. |

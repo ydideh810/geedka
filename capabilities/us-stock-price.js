@@ -1,9 +1,8 @@
 // us-stock-price.js
 //
 // Returns current US equity price + intraday metrics from Yahoo Finance public
-// chart API (no API key required). Priced at $0.030 — 31% below blockrun.ai's
-// observed $0.044/call for the same data, surfaced by [REDACTED]4 as a
-// hedge candidate on 2026-06-04 (23,104 AMD calls/mo signal strength 1.0).
+// chart API (no API key required). Priced at $0.018 — 22% below blockrun.ai's
+// current $0.023/call. Blockrun dropped from $0.044 → $0.023; repriced 2026-06-06.
 //
 // Data source: Yahoo Finance v8/finance/chart (public, no auth, no crumb).
 // Updates on each call — live market data during trading hours, last-close
@@ -14,10 +13,10 @@ const UA      = "Mozilla/5.0 (compatible; the-stall/0.4; +https://intuitek.ai)";
 
 export default {
   name: "us-stock-price",
-  price: "$0.030",
+  price: "$0.018",
 
   description:
-    "Returns current US equity price and intraday metrics (change %, volume, day high/low, 52-week range) for any NYSE/NASDAQ ticker. Sourced from Yahoo Finance public data — no API key, live during market hours. A $0.030 hedge against blockrun.ai's $0.044/call for the same signal.",
+    "Returns current US equity price and intraday metrics (change %, volume, day high/low, 52-week range) for any NYSE/NASDAQ ticker. Sourced from Yahoo Finance public data — no API key, live during market hours. Priced at $0.018, 22% below blockrun.ai's $0.023/call for the same data.",
 
   inputSchema: {
     type: "object",
