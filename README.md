@@ -15,7 +15,7 @@
 
 ---
 
-## Current capabilities — 109 live tools (v3.65.0)
+## Current capabilities — 110 live tools (v3.66.0)
 
 Full catalog at `/catalog`. Each capability is behind a per-call x402 paywall — no API keys, no accounts, no monthly fees. Pay USDC on Base mainnet per call.
 
@@ -92,6 +92,7 @@ Full catalog at `/catalog`. Each capability is behind a per-call x402 paywall �
 | `polymarket-sentiment-shift` | $0.008 | Polymarket prediction markets with the biggest recent probability shifts. |
 | `portfolio-rebalance` | $0.005 | Pure-math portfolio rebalancing calculator. Given holdings and target allocations, returns trade instructions. |
 | `prediction-markets` | $0.050 | Top active Polymarket prediction markets sorted by trading volume with crowd probabilities. |
+| `prediction-stock-pulse` | $0.016 | One call: Limitless prediction markets + live equity price for a specified ticker. Collapses the prediction-market → stock-price agent chain (33% cheaper than buying both separately). |
 | `pypi-lookup` | $0.007 | Python package metadata from PyPI: latest version, summary, author, license, dependencies. |
 | `reddit-intel` | $0.012 | Reddit post and comment search by keyword. Returns top results with scores, subreddit, timestamps. |
 | `regex-tester` | $0.003 | Safe regex testing and extraction. Validates pattern, finds all matches with capture groups. |
@@ -247,7 +248,7 @@ Standard Node service. Set env vars (`WALLET_ADDRESS`, `X402_NETWORK=base`,
 - [x] `base_rpc` stream: no-auth on-chain settlement reader (Base public RPC)
 - [x] Concentration (few-payers path) producing real signals from live mainnet
 - [x] Wallet ownership verified (GATE 1) — Base mainnet, EIP-191 signature recovered
-- [x] **109 capabilities LIVE** at `https://the-stall.intuitek.ai` (Base mainnet, v3.65.0)
+- [x] **110 capabilities LIVE** at `https://the-stall.intuitek.ai` (Base mainnet, v3.66.0)
 - [x] A2A Agent Card at `/.well-known/agent.json`
 - [x] x402 discovery document at `/.well-known/x402`
 - [x] Payment logging (JSONL) — every settled call recorded
