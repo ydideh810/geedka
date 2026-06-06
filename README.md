@@ -14,14 +14,92 @@
 
 ---
 
-## Current capabilities
+## Current capabilities — 80 live tools (v3.37.0)
+
+Full catalog at `/catalog`. Each capability is behind a per-call x402 paywall — no API keys, no accounts, no monthly fees. Pay USDC on Base mainnet per call.
 
 | Capability | Price | Description |
 |---|---|---|
-| `ping` | $0.001 | Liveness + echo probe. Confirms the x402 rail end-to-end. |
-| `us-stock-price` | $0.030 | Current US equity price + intraday metrics (change %, volume, day high/low, 52-week range) for any NYSE/NASDAQ ticker. Live during market hours via Yahoo Finance. 31% below comparable market rate. |
-| `concentration-risk-score` | $0.100 | HHI-based concentration-risk score for any x402 `pay_to` wallet. Returns unique payers, top-payer share, persistence, and a risk tier (LOW / MEDIUM / HIGH / CRITICAL). Use before building a workflow dependency on an external endpoint. |
-| `market-intelligence` | $0.500 | Settlement-verified x402 endpoint intelligence. Shows which endpoints have genuine organic payer breadth — sourced from on-chain Base mainnet settlements, not just catalog listings. Filter by category, price range, min payers. |
+| `agent-access-check` | $0.006 | Checks whether a website is accessible and agent-friendly. Fetches robots.txt, /.well-known/x402, and /.well-known/agent.json. |
+| `base-season` | $0.003 | Base chain season snapshot: total chain TVL, top 10 protocols by Base-native TVL, and trending tokens. |
+| `block-intel` | $0.002 | Block header data (number, hash, timestamp, gas used/limit, base fee, tx count) for Ethereum, Base, Polygon, Arbitrum. |
+| `breadcrumb-extractor` | $0.003 | Extracts structured breadcrumb navigation from a URL. Returns domain, ordered path segments, titles. |
+| `btc-game-theory` | $0.006 | Bitcoin mining game theory: selfish-mining threshold, 51% attack cost, fee-sniper window, difficulty adjustment. |
+| `btc-miner-econ` | $0.005 | Bitcoin mining economics via mempool.space: current hashrate, difficulty, block subsidy, fee rate percentiles. |
+| `btc-systems-theory` | $0.008 | Seven-lens systems-theory analysis of the Bitcoin network: difficulty, fee market, hash distribution, UTXO set, and more. |
+| `chromatic-dispersion` | $0.004 | Fiber optic chromatic dispersion calculator. Computes D(λ), pulse broadening, and maximum uncompensated link length. |
+| `citation-formatter` | $0.008 | Looks up a paper by DOI and formats it as BibTeX, APA, MLA, or Chicago. |
+| `classic-novels` | $0.004 | Book lookup by title, author, or ISBN via Open Library. Returns metadata, subjects, and first-sentence excerpt. |
+| `clinical-trials` | $0.008 | Search active and completed clinical trials from ClinicalTrials.gov. Filter by condition, intervention, phase, status. |
+| `code-api-surface` | $0.100 | Static analysis of any code snippet: HTTP routes (method + path + middleware), exported symbols. Supports Express, FastAPI, Flask, Spring Boot, NestJS, Gin. |
+| `code-test-detector` | $0.005 | Detects testing frameworks and test coverage presence in a code snippet or GitHub file URL. |
+| `commodity-futures` | $0.010 | Live price and intraday metrics for crude oil, gold, natural gas, wheat, copper, and silver front-month futures. |
+| `company-intel` | $0.012 | SEC EDGAR due diligence data for any US public company: filings, financials, executives, SIC classification. |
+| `concentration-risk-score` | $0.100 | HHI-based concentration-risk score for any x402 pay_to wallet. Returns unique payers, top-payer share, risk tier. |
+| `country-info` | $0.002 | Country information by name, ISO code, or capital city: population, area, region, currencies, languages. |
+| `crypto-news-impact` | $0.008 | Latest cryptocurrency news headlines from CoinDesk with live price correlation for mentioned assets. |
+| `crypto-top-movers` | $0.008 | Real-time cryptocurrency market snapshot: top 5 gainers and losers by 24-hour performance from CoinGecko. |
+| `db-perf-intel` | $0.003 | Database version, EOL status, and benchmark-grade performance characteristics for 12+ database engines. |
+| `defi-portfolio` | $0.007 | Multi-chain DeFi portfolio scanner: token holdings + USD values across Ethereum, Base, Polygon, Arbitrum. Free upstream: DRPC public RPCs + CoinGecko. |
+| `defi-yields` | $0.025 | Top DeFi yield pools ranked by APY from DeFiLlama. Covers 16,000+ pools across 80+ chains. |
+| `dex-trending-pools` | $0.015 | Trending DEX liquidity pools with buy/sell pressure data across multiple timeframes from GeckoTerminal. |
+| `dns-lookup` | $0.003 | DNS record lookup via Cloudflare DoH. Supports A, AAAA, MX, TXT, NS, CNAME, SOA records. |
+| `document-qa-prep` | $0.005 | Prepares a document for RAG pipelines. Chunks input text, extracts entities, returns semantic summary. |
+| `domain-whois` | $0.006 | Domain WHOIS/RDAP lookup: registration date, expiration, registrar, name servers, status codes. |
+| `email-verify` | $0.006 | Email validation and quality scoring: RFC-5322 syntax, disposable detection, MX record check. |
+| `equity-technicals` | $0.490 | Complete technical analysis package for any US stock: RSI(14), MACD, Bollinger Bands, support/resistance, volume trend. |
+| `eth-block` | $0.002 | Ethereum block header + transaction hashes by block number, hex, or tag (latest/pending/earliest/safe/finalized). |
+| `evm-token-security` | $0.007 | Honeypot, rug-pull, and scam detection for any EVM token. Returns 0–100 risk score with individual factor breakdown. |
+| `flight-tracker` | $0.008 | Departures or arrivals at any major airport via OpenSky Network. Returns flight number, status, delay data. |
+| `forex-rates` | $0.005 | Real-time fiat foreign exchange rates for 160+ currencies. Base defaults to USD. |
+| `funding-rates` | $0.020 | Current perpetual funding rates for 200+ assets on Hyperliquid DEX, sorted by 8h rate. |
+| `gas-prices` | $0.005 | Current gas prices and EIP-1559 fee recommendations across Ethereum, Base, Polygon, Arbitrum, BSC, Avalanche. |
+| `generate-meme` | $0.005 | Generates a meme image from 211 built-in templates. Returns a direct PNG URL. |
+| `geocode` | $0.003 | Forward and reverse geocoding via OpenStreetMap Nominatim. Returns coordinates, address components, bounding box. |
+| `github-repo-intel` | $0.010 | GitHub repository intelligence: stars, forks, open issues, language, license, last commit date. |
+| `gov-votes` | $0.004 | US Congressional vote records from GovTrack (113th Congress onward). Search by congress, chamber, category. |
+| `hn-search` | $0.010 | Hacker News story and comment search via Algolia. Returns titles, scores, comments, URLs. |
+| `http-headers` | $0.003 | HTTP response headers inspector and security grader for any public URL. |
+| `ip-intel` | $0.003 | Geolocation and network intelligence for IP addresses: country, city, ISP, ASN, timezone. |
+| `json-extract` | $0.004 | Extracts and parses JSON from mixed-content text, including LLM output with markdown code fences. |
+| `korean-market-movers` | $0.010 | Real-time movers and volume-spike leaders across all KRW-denominated markets on Upbit. |
+| `legal-search` | $0.008 | Searches 5M+ US court opinions (SCOTUS, federal circuits, district courts, state courts) via CourtListener. |
+| `limitless-markets` | $0.006 | Active prediction markets from Limitless Exchange with current Yes/No prices and open interest. |
+| `macro-indicators` | $0.008 | Current US macroeconomic indicators: Fed Funds Rate, CPI, GDP growth, unemployment, yield curve from FRED. |
+| `market-intelligence` | $0.500 | Settlement-verified x402 endpoint intelligence: which endpoints have genuine organic payer breadth. |
+| `market-movers` | $0.004 | Today's top market movers — equity gainers, losers, most-active, and crypto gainers in one call. |
+| `market-overview` | $0.100 | Single-call market snapshot: SPY, QQQ, IWM, DIA price + intraday % change, VIX, BTC/ETH. |
+| `market-sentiment` | $0.015 | Combined crypto market sentiment: Crypto Fear & Greed Index + BTC dominance + altcoin season score. |
+| `npm-lookup` | $0.007 | Node.js package metadata from npm: latest version, description, downloads, dependencies, repository. |
+| `page-intel` | $0.004 | Structured content extraction from any public URL: title, meta description, H1-H3 headings, links, text preview. |
+| `ping` | $0.001 | Liveness + echo probe. Verifies the x402 payment rail end-to-end. |
+| `place-details` | $0.020 | Enriched place and business details by name (OSM Nominatim): website, phone, hours, address, coordinates. |
+| `policy-impact-mapper` | $0.007 | Analyzes regulatory and policy text to map impact across industry sectors. Returns affected sectors with justification. |
+| `polymarket-sentiment-shift` | $0.008 | Polymarket prediction markets with the biggest recent probability shifts. |
+| `portfolio-rebalance` | $0.005 | Pure-math portfolio rebalancing calculator. Given holdings and target allocations, returns trade instructions. |
+| `prediction-markets` | $0.050 | Top active Polymarket prediction markets sorted by trading volume with crowd probabilities. |
+| `pypi-lookup` | $0.007 | Python package metadata from PyPI: latest version, summary, author, license, dependencies. |
+| `reddit-intel` | $0.012 | Reddit post and comment search by keyword. Returns top results with scores, subreddit, timestamps. |
+| `regex-tester` | $0.003 | Safe regex testing and extraction. Validates pattern, finds all matches with capture groups. |
+| `research-paper-search` | $0.003 | Academic paper search across 250M+ works via OpenAlex. Returns title, authors, year, DOI, open-access status. |
+| `rss-reader` | $0.004 | Fetches and parses any public RSS 2.0 or Atom 1.0 feed. Returns feed metadata and recent items. |
+| `solana-token-risk` | $0.350 | Rug-pull and risk scanner for Solana SPL tokens via RugCheck. Returns mint risk score, top holders, freeze authority. |
+| `sports-prediction` | $0.005 | Today's sports games with team win-loss records, venue, broadcast info, and moneyline odds where available. |
+| `sports-scores` | $0.004 | Live and recent sports scores for NBA, NFL, MLB, NHL, MLS, EPL, La Liga, Bundesliga, Champions League, and more. |
+| `ssl-cert` | $0.004 | TLS/SSL certificate inspection for any HTTPS host: validity window, issuer, SANs, days until expiry. |
+| `stablecoin-watch` | $0.050 | Real-time depeg monitor for top USD stablecoins (USDT, USDC, DAI, USDS, and others). |
+| `stock-brief` | $0.015 | US equity snapshot + Limitless prediction market sentiment in one call. |
+| `strategy-signal` | $0.006 | Technical analysis signal for US equities, ETFs, and crypto: RSI(14), MACD, Bollinger Bands, directional posture. |
+| `timezone` | $0.002 | Timezone intelligence using the IANA database (418 zones): current time, UTC offset, DST status. |
+| `tx-explainer` | $0.014 | Decoded EVM transaction breakdown: sender, recipient, value, gas, method name, event logs. |
+| `unit-converter` | $0.002 | Converts between 100+ units across 12 categories: length, weight, temperature, volume, speed, and more. |
+| `us-stock-price` | $0.030 | Current US equity price and intraday metrics for any NYSE/NASDAQ ticker via Yahoo Finance. |
+| `wallet-screener` | $0.010 | Risk screening for EVM wallet addresses: 0–100 risk score, individual factor breakdown (age, tx count, exposure). |
+| `weather` | $0.010 | Current conditions and 7-day forecast for any location worldwide via Open-Meteo. |
+| `web-change-monitor` | $0.005 | Content-change signals for any public URL: ETag, Last-Modified, Content-Length, response time. |
+| `web-company-intel` | $0.003 | Structured company intelligence from any public website: OpenGraph, schema.org, meta tags, social links. |
+| `world-bank-data` | $0.003 | World Bank open data — 1600+ development indicators for 200+ countries. GDP, poverty, health, education. |
+| `yield-farming-active` | $0.005 | Active DeFi yield farming pools sorted by 30-day average APY from DeFiLlama. |
 
 ### Quick call (x402 flow)
 
@@ -109,8 +187,8 @@ the-stall/
     _TEMPLATE.js             the contract: copy → fill → it goes live next deploy
     ping.js                  liveness probe
     us-stock-price.js        US equity price + intraday metrics (Yahoo Finance)
-    concentration-risk-score.js  HHI-based payer concentration analysis
-    market-intelligence.js   settlement-verified endpoint intelligence
+    defi-portfolio.js        multi-chain wallet scanner (ETH/Base/Polygon/Arb)
+    ... 77 more capability modules (see /catalog)
 ```
 
 ## Quickstart (self-hosted)
@@ -145,7 +223,7 @@ Standard Node service. Set env vars (`WALLET_ADDRESS`, `X402_NETWORK=base`,
 - [x] `base_rpc` stream: no-auth on-chain settlement reader (Base public RPC)
 - [x] Concentration (few-payers path) producing real signals from live mainnet
 - [x] Wallet ownership verified (GATE 1) — Base mainnet, EIP-191 signature recovered
-- [x] **4 capabilities LIVE** at `https://the-stall.intuitek.ai` (Base mainnet)
+- [x] **80 capabilities LIVE** at `https://the-stall.intuitek.ai` (Base mainnet, v3.37.0)
 - [x] A2A Agent Card at `/.well-known/agent.json`
 - [x] x402 discovery document at `/.well-known/x402`
 - [x] Payment logging (JSONL) — every settled call recorded
