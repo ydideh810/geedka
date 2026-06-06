@@ -21,6 +21,14 @@ import { loadCapabilities } from "./registry.js";
 import { buildPaymentMiddleware } from "./payment.js";
 import { makeMcpHandler } from "./mcp.js";
 
+function parseJsonlLog(filePath) {
+  try {
+    const raw = readFileSync(filePath, "utf8").trim();
+    if (!raw) return [];
+    return raw.split("\n").filter(Boolean).map(l => { try { return JSON.parse(l); } catch { return null; } }).filter(Boolean);
+  } catch { return []; }
+}
+
 function readPaymentStats() {
   try {
     const raw = readFileSync(PAYMENT_LOG, "utf8").trim();
@@ -39,12 +47,20 @@ const __dir = dirname(fileURLToPath(import.meta.url));
 const LOG_DIR = join(__dir, "..", "logs");
 mkdirSync(LOG_DIR, { recursive: true });
 const PAYMENT_LOG = join(LOG_DIR, "payments.jsonl");
+const REQUEST_LOG = join(LOG_DIR, "requests.jsonl");
 
 function logPaidCall(capName, price, query, statusCode, ip) {
   try {
     const entry = JSON.stringify({ ts: new Date().toISOString(), cap: capName, price, query, status: statusCode, ip: ip || "unknown" });
     appendFileSync(PAYMENT_LOG, entry + "\n");
   } catch (_) { /* never crash on log failure */ }
+}
+
+function logRequest(method, path, statusCode, ip, ua, ms) {
+  try {
+    const entry = JSON.stringify({ ts: new Date().toISOString(), method, path, status: statusCode, ip: ip || "unknown", ua: (ua || "").slice(0, 200), ms });
+    appendFileSync(REQUEST_LOG, entry + "\n");
+  } catch (_) {}
 }
 
 const PORT = process.env.PORT || 4021;
@@ -55,6 +71,15 @@ const FACILITATOR = process.env.FACILITATOR_URL || "https://x402.org/facilitator
 const app = express();
 app.set("trust proxy", 1);
 app.use(express.json());
+
+// Funnel instrumentation — logs every request on finish for conversion analysis
+app.use((req, res, next) => {
+  const start = Date.now();
+  res.on("finish", () => {
+    logRequest(req.method, req.path, res.statusCode, req.ip, req.get("user-agent"), Date.now() - start);
+  });
+  next();
+});
 
 const capabilities = await loadCapabilities();
 
@@ -236,6 +261,51 @@ app.get("/stats", (_req, res) => {
     first_call_at: stats.since,
     network: NETWORK,
     base_url: BASE_URL,
+    ts: new Date().toISOString(),
+  });
+});
+
+// ── Funnel metrics — full discovery → probe → pay conversion view ─────────────
+app.get("/metrics", (_req, res) => {
+  const requests = parseJsonlLog(REQUEST_LOG);
+  const payments = parseJsonlLog(PAYMENT_LOG);
+
+  const catalogHits = requests.filter(r => r.path === "/catalog").length;
+  const healthHits = requests.filter(r => r.path === "/health").length;
+  const mcpCalls = requests.filter(r => r.path === "/mcp").length;
+  const probes = requests.filter(r => r.path?.startsWith("/cap/") && r.status === 402);
+  const uniqueIPs = new Set(requests.map(r => r.ip)).size;
+  const uniqueProbeIPs = new Set(probes.map(r => r.ip)).size;
+
+  const probesByCap = {};
+  for (const r of probes) {
+    const cap = r.path.replace("/cap/", "");
+    probesByCap[cap] = (probesByCap[cap] || 0) + 1;
+  }
+
+  const uaGroups = {};
+  for (const r of requests) {
+    const ua = r.ua?.slice(0, 60) || "unknown";
+    uaGroups[ua] = (uaGroups[ua] || 0) + 1;
+  }
+
+  res.json({
+    funnel: {
+      catalog_hits: catalogHits,
+      health_hits: healthHits,
+      mcp_calls: mcpCalls,
+      cap_probes_402: probes.length,
+      paid_calls: payments.length,
+    },
+    conversion: {
+      probe_to_pay_rate: probes.length > 0 ? (payments.length / probes.length).toFixed(4) : null,
+      catalog_to_probe_rate: catalogHits > 0 ? (probes.length / catalogHits).toFixed(4) : null,
+    },
+    unique_ips: uniqueIPs,
+    unique_probe_ips: uniqueProbeIPs,
+    top_probed_caps: Object.entries(probesByCap).sort((a, b) => b[1] - a[1]).slice(0, 15),
+    top_user_agents: Object.entries(uaGroups).sort((a, b) => b[1] - a[1]).slice(0, 10),
+    request_total: requests.length,
     ts: new Date().toISOString(),
   });
 });

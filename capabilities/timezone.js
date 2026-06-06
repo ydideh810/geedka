@@ -11,6 +11,8 @@
 // enrichment, and any agent that needs to reason about time across zones.
 
 const ALL_ZONES = Intl.supportedValuesOf("timeZone");
+// UTC is always valid in Intl but absent from supportedValuesOf in some Node builds
+const VALID_ZONE = (tz) => tz === "UTC" || tz === "Etc/UTC" || ALL_ZONES.includes(tz);
 
 function getZoneInfo(tz, targetDate) {
   const date = targetDate || new Date();
@@ -122,7 +124,7 @@ export default {
 
     const results = [];
     for (const tz of zones) {
-      if (!ALL_ZONES.includes(tz)) throw new Error(`unknown timezone: '${tz}' — use 'search' to find valid names`);
+      if (!VALID_ZONE(tz)) throw new Error(`unknown timezone: '${tz}' — use 'search' to find valid IANA names (e.g. 'America/New_York', 'Europe/London')`);
       results.push(getZoneInfo(tz, date));
     }
 
