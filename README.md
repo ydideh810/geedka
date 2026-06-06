@@ -15,7 +15,7 @@
 
 ---
 
-## Current capabilities — 94 live tools (v3.51.0)
+## Current capabilities — 95 live tools (v3.52.0)
 
 Full catalog at `/catalog`. Each capability is behind a per-call x402 paywall — no API keys, no accounts, no monthly fees. Pay USDC on Base mainnet per call.
 
@@ -89,6 +89,7 @@ Full catalog at `/catalog`. Each capability is behind a per-call x402 paywall �
 | `reddit-intel` | $0.012 | Reddit post and comment search by keyword. Returns top results with scores, subreddit, timestamps. |
 | `regex-tester` | $0.003 | Safe regex testing and extraction. Validates pattern, finds all matches with capture groups. |
 | `research-paper-search` | $0.003 | Academic paper search across 250M+ works via OpenAlex. Returns title, authors, year, DOI, open-access status. |
+| `research-synthesis` | $0.200 | AI-synthesized intelligence report from multiple sources — Hacker News, academic papers, Reddit, arXiv, and more. Returns executive summary, key findings, sentiment, trends, and recommendations. 20% below nearest competitor. |
 | `readable-content` | $0.004 | Extracts full readable text from any public URL as clean Markdown, stripped of navigation, ads, and boilerplate. Returns title, published date, and complete article body ready for LLM ingestion. |
 | `rss-reader` | $0.004 | Fetches and parses any public RSS 2.0 or Atom 1.0 feed. Returns feed metadata and recent items. |
 | `solana-token-risk` | $0.350 | Rug-pull and risk scanner for Solana SPL tokens via RugCheck. Returns mint risk score, top holders, freeze authority. |
