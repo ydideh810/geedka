@@ -14,7 +14,7 @@
 
 ---
 
-## Current capabilities — 83 live tools (v3.40.0)
+## Current capabilities — 84 live tools (v3.41.0)
 
 Full catalog at `/catalog`. Each capability is behind a per-call x402 paywall — no API keys, no accounts, no monthly fees. Pay USDC on Base mainnet per call.
 
@@ -82,6 +82,7 @@ Full catalog at `/catalog`. Each capability is behind a per-call x402 paywall �
 | `reddit-intel` | $0.012 | Reddit post and comment search by keyword. Returns top results with scores, subreddit, timestamps. |
 | `regex-tester` | $0.003 | Safe regex testing and extraction. Validates pattern, finds all matches with capture groups. |
 | `research-paper-search` | $0.003 | Academic paper search across 250M+ works via OpenAlex. Returns title, authors, year, DOI, open-access status. |
+| `readable-content` | $0.004 | Extracts full readable text from any public URL as clean Markdown, stripped of navigation, ads, and boilerplate. Returns title, published date, and complete article body ready for LLM ingestion. |
 | `rss-reader` | $0.004 | Fetches and parses any public RSS 2.0 or Atom 1.0 feed. Returns feed metadata and recent items. |
 | `solana-token-risk` | $0.350 | Rug-pull and risk scanner for Solana SPL tokens via RugCheck. Returns mint risk score, top holders, freeze authority. |
 | `sports-prediction` | $0.005 | Today's sports games with team win-loss records, venue, broadcast info, and moneyline odds where available. |
@@ -224,7 +225,7 @@ Standard Node service. Set env vars (`WALLET_ADDRESS`, `X402_NETWORK=base`,
 - [x] `base_rpc` stream: no-auth on-chain settlement reader (Base public RPC)
 - [x] Concentration (few-payers path) producing real signals from live mainnet
 - [x] Wallet ownership verified (GATE 1) — Base mainnet, EIP-191 signature recovered
-- [x] **83 capabilities LIVE** at `https://the-stall.intuitek.ai` (Base mainnet, v3.40.0)
+- [x] **84 capabilities LIVE** at `https://the-stall.intuitek.ai` (Base mainnet, v3.41.0)
 - [x] A2A Agent Card at `/.well-known/agent.json`
 - [x] x402 discovery document at `/.well-known/x402`
 - [x] Payment logging (JSONL) — every settled call recorded
