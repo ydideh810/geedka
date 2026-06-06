@@ -15,7 +15,7 @@
 
 ---
 
-## Current capabilities — 112 live tools (v3.69.0)
+## Current capabilities — 113 live tools (v3.70.0)
 
 Full catalog at `/catalog`. Each capability is behind a per-call x402 paywall — no API keys, no accounts, no monthly fees. Pay USDC on Base mainnet per call.
 
@@ -46,6 +46,7 @@ Full catalog at `/catalog`. Each capability is behind a per-call x402 paywall �
 | `db-perf-intel` | $0.003 | Database version, EOL status, and benchmark-grade performance characteristics for 12+ database engines. |
 | `defi-portfolio` | $0.007 | Multi-chain DeFi portfolio scanner: token holdings + USD values across Ethereum, Base, Polygon, Arbitrum. Free upstream: DRPC public RPCs + CoinGecko. |
 | `defi-market-pulse` | $0.006 | Combined DeFi yields + market movers + cross-signal correlation in one call. Flags 'boosted' pools (APY + rising token) vs 'at_risk' pools (APY + sell-off). 33% cheaper than separate calls. |
+| `defi-state-pack` | $0.008 | Ethereum block header + stablecoin depeg status + top DeFi yield pools in one call. Collapses 3-hop eth-block → stablecoin-watch → yield-farming chain. All upstreams fetched in parallel. Filter pools by chain, protocol, min TVL, min APY. |
 | `defi-yields` | $0.025 | Top DeFi yield pools ranked by APY from DeFiLlama. Covers 16,000+ pools across 80+ chains. |
 | `dex-pair-search` | $0.005 | Search DEX trading pairs for any token (symbol, name, or contract address) across 50+ chains. Returns price, 24h volume, buy/sell pressure, liquidity, and FDV per pair via DexScreener. |
 | `dex-trending-pools` | $0.015 | Trending DEX liquidity pools with buy/sell pressure data across multiple timeframes from GeckoTerminal. |
@@ -250,7 +251,7 @@ Standard Node service. Set env vars (`WALLET_ADDRESS`, `X402_NETWORK=base`,
 - [x] `base_rpc` stream: no-auth on-chain settlement reader (Base public RPC)
 - [x] Concentration (few-payers path) producing real signals from live mainnet
 - [x] Wallet ownership verified (GATE 1) — Base mainnet, EIP-191 signature recovered
-- [x] **112 capabilities LIVE** at `https://the-stall.intuitek.ai` (Base mainnet, v3.69.0)
+- [x] **113 capabilities LIVE** at `https://the-stall.intuitek.ai` (Base mainnet, v3.70.0)
 - [x] A2A Agent Card at `/.well-known/agent.json`
 - [x] x402 discovery document at `/.well-known/x402`
 - [x] Payment logging (JSONL) — every settled call recorded
