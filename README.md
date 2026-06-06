@@ -14,7 +14,7 @@
 
 ---
 
-## Current capabilities — 84 live tools (v3.41.0)
+## Current capabilities — 85 live tools (v3.42.0)
 
 Full catalog at `/catalog`. Each capability is behind a per-call x402 paywall — no API keys, no accounts, no monthly fees. Pay USDC on Base mainnet per call.
 
@@ -225,7 +225,7 @@ Standard Node service. Set env vars (`WALLET_ADDRESS`, `X402_NETWORK=base`,
 - [x] `base_rpc` stream: no-auth on-chain settlement reader (Base public RPC)
 - [x] Concentration (few-payers path) producing real signals from live mainnet
 - [x] Wallet ownership verified (GATE 1) — Base mainnet, EIP-191 signature recovered
-- [x] **84 capabilities LIVE** at `https://the-stall.intuitek.ai` (Base mainnet, v3.41.0)
+- [x] **85 capabilities LIVE** at `https://the-stall.intuitek.ai` (Base mainnet, v3.42.0)
 - [x] A2A Agent Card at `/.well-known/agent.json`
 - [x] x402 discovery document at `/.well-known/x402`
 - [x] Payment logging (JSONL) — every settled call recorded
