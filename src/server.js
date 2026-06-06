@@ -73,6 +73,12 @@ const FACILITATOR = process.env.FACILITATOR_URL || "https://x402.org/facilitator
 const app = express();
 app.set("trust proxy", 1);
 app.use(express.json());
+app.use((_req, res, next) => {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Methods", "GET, OPTIONS");
+  res.header("Access-Control-Allow-Headers", "Content-Type, X-PAYMENT, X-PAYMENT-RESPONSE");
+  next();
+});
 
 // Funnel instrumentation — logs every request on finish for conversion analysis
 app.use((req, res, next) => {
@@ -108,7 +114,10 @@ app.get("/catalog", (_req, res) =>
   })
 );
 
-// ── x402 Discovery document (Rug-Munch / xpaysh catalog standard) ───────────
+// ── x402 Discovery document (dual-format: xpaysh/Rug-Munch + official x402) ──
+// payTo + accepts[] added for x402scan / CDP Bazaar compatibility.
+// paymentAddress kept for xpaysh/awesome-x402 catalog compatibility.
+const USDC_BASE = "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913";
 app.get("/.well-known/x402", (_req, res) =>
   res.json({
     version: "1.0.0",
@@ -119,6 +128,14 @@ app.get("/.well-known/x402", (_req, res) =>
     currency: "USDC",
     facilitator: FACILITATOR,
     paymentAddress: PAY_TO || null,
+    payTo: PAY_TO || null,
+    accepts: PAY_TO ? [{
+      scheme: "exact",
+      network: "base",
+      asset: USDC_BASE,
+      payTo: PAY_TO,
+      maxTimeoutSeconds: 300,
+    }] : [],
     endpoints: capabilities.map((c) => ({
       path: `/cap/${c.name}`,
       method: "GET",
@@ -126,6 +143,8 @@ app.get("/.well-known/x402", (_req, res) =>
         amount: c.price.replace("$", ""),
         currency: "USDC",
         network: "base",
+        maxAmountRequired: String(Math.round(parseFloat(c.price.replace("$", "")) * 1e6)),
+        asset: USDC_BASE,
       },
       description: c.description,
     })),
