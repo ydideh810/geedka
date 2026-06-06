@@ -15,7 +15,7 @@
 
 ---
 
-## Current capabilities — 115 live tools (v3.72.0)
+## Current capabilities — 119 live tools (v3.76.0)
 
 Full catalog at `/catalog`. Each capability is behind a per-call x402 paywall — no API keys, no accounts, no monthly fees. Pay USDC on Base mainnet per call.
 
@@ -130,6 +130,16 @@ Full catalog at `/catalog`. Each capability is behind a per-call x402 paywall �
 | `world-bank-data` | $0.003 | World Bank open data — 1600+ development indicators for 200+ countries. GDP, poverty, health, education. |
 | `yield-farming-active` | $0.005 | Active DeFi yield farming pools sorted by 30-day average APY from DeFiLlama. |
 | `nft-metadata` | $0.002 | NFT metadata, traits, image URL, and collection floor price for any ERC-721/ERC-1155 token. Supports Ethereum, Polygon, Base, Arbitrum. Collapses OneSource Media-category seam. |
+| `address-security` | $0.007 | Wallet/address security and reputation check. Detects phishing, sanctions, cybercrime, money laundering, dark-web activity, and blacklisted wallets using GoPlus Labs + SlowMist + BlockSec data. |
+| `chain-pulse` | $0.006 | Returns an Ethereum block header + current stablecoin depeg status in one call. Collapses the eth-block → stablecoin-watch agent chain. All upstreams fetched in parallel. |
+| `company-due-diligence` | $0.007 | AI-agent due diligence on any company. Queries SEC EDGAR for public company data (CIK, ticker, SIC, address, filing history) with structured output. |
+| `crypto-pulse` | $0.007 | Crypto market pulse — latest Ethereum (or Base) block context plus top crypto gainers and losers by 24h change, in a single x402 call. |
+| `dex-swap-quote` | $0.012 | Best-route DEX swap quote across 20+ chains via Li.Fi aggregator. Returns expected output, exchange rate, gas cost, price impact, and route steps. |
+| `ens-lookup` | $0.004 | ENS name ↔ Ethereum address resolution. Forward: pass a .eth name to get the address, avatar, and social profile records. Reverse: pass a 0x address to get its primary ENS name. |
+| `erc20-snapshot` | $0.007 | Complete ERC20 token state in one call: name, symbol, decimals, total supply (raw + formatted), wallet balance, and allowances. Supports Ethereum, Base, Polygon, Arbitrum. |
+| `gas-estimate` | $0.003 | Multi-chain gas price oracle: fast/standard/slow Gwei + USD cost for a transfer. Chains: ethereum, base, polygon, arbitrum, bsc. |
+| `insider-trades` | $0.012 | Recent SEC Form 4 insider trading activity for any US public company. Returns who bought or sold (director, officer, 10%+ holder), transaction type, shares, and price. |
+| `social-intel` | $0.004 | Returns public profile data for any social platform account. Pass a profile URL (platform auto-detected) or platform + username. Covers GitHub, HackerNews, Reddit, npm, Twitter/X, and Open Graph fallback. |
 
 ### Quick call (x402 flow)
 
@@ -253,7 +263,7 @@ Standard Node service. Set env vars (`WALLET_ADDRESS`, `X402_NETWORK=base`,
 - [x] `base_rpc` stream: no-auth on-chain settlement reader (Base public RPC)
 - [x] Concentration (few-payers path) producing real signals from live mainnet
 - [x] Wallet ownership verified (GATE 1) — Base mainnet, EIP-191 signature recovered
-- [x] **115 capabilities LIVE** at `https://the-stall.intuitek.ai` (Base mainnet, v3.72.0)
+- [x] **119 capabilities LIVE** at `https://the-stall.intuitek.ai` (Base mainnet, v3.76.0)
 - [x] A2A Agent Card at `/.well-known/agent.json`
 - [x] x402 discovery document at `/.well-known/x402`
 - [x] Payment logging (JSONL) — every settled call recorded
