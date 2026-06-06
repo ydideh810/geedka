@@ -6,6 +6,7 @@
 [![Network](https://img.shields.io/badge/network-Base%20mainnet-0052FF)](https://base.org)
 [![Currency](https://img.shields.io/badge/payment-USDC%20%C2%B7%20x402-26A17B)](https://x402.org)
 [![Provider](https://img.shields.io/badge/provider-IntuiTek%C2%B9-5A1AE5)](https://intuitek.ai)
+[![thebrierfox/the-stall MCP server](https://glama.ai/mcp/servers/thebrierfox/the-stall/badges/score.svg)](https://glama.ai/mcp/servers/thebrierfox/the-stall)
 
 > **Live endpoint:** `https://the-stall.intuitek.ai`
 > **Agent card:** [`/.well-known/agent.json`](https://the-stall.intuitek.ai/.well-known/agent.json)
@@ -14,7 +15,7 @@
 
 ---
 
-## Current capabilities — 88 live tools (v3.45.0)
+## Current capabilities — 91 live tools (v3.48.0)
 
 Full catalog at `/catalog`. Each capability is behind a per-call x402 paywall — no API keys, no accounts, no monthly fees. Pay USDC on Base mainnet per call.
 
@@ -29,6 +30,7 @@ Full catalog at `/catalog`. Each capability is behind a per-call x402 paywall �
 | `btc-systems-theory` | $0.008 | Seven-lens systems-theory analysis of the Bitcoin network: difficulty, fee market, hash distribution, UTXO set, and more. |
 | `chromatic-dispersion` | $0.004 | Fiber optic chromatic dispersion calculator. Computes D(λ), pulse broadening, and maximum uncompensated link length. |
 | `citation-formatter` | $0.008 | Looks up a paper by DOI and formats it as BibTeX, APA, MLA, or Chicago. |
+| `city-lookup` | $0.010 | Search for cities and airports by keyword, IATA/ICAO code, or name. Optional country filter. Returns IATA, ICAO, city name, country, coordinates, timezone. |
 | `classic-novels` | $0.004 | Book lookup by title, author, or ISBN via Open Library. Returns metadata, subjects, and first-sentence excerpt. |
 | `clinical-trials` | $0.008 | Search active and completed clinical trials from ClinicalTrials.gov. Filter by condition, intervention, phase, status. |
 | `code-api-surface` | $0.100 | Static analysis of any code snippet: HTTP routes (method + path + middleware), exported symbols. Supports Express, FastAPI, Flask, Spring Boot, NestJS, Gin. |
@@ -92,12 +94,14 @@ Full catalog at `/catalog`. Each capability is behind a per-call x402 paywall �
 | `ssl-cert` | $0.004 | TLS/SSL certificate inspection for any HTTPS host: validity window, issuer, SANs, days until expiry. |
 | `stablecoin-watch` | $0.050 | Real-time depeg monitor for top USD stablecoins (USDT, USDC, DAI, USDS, and others). |
 | `stock-brief` | $0.015 | US equity snapshot + Limitless prediction market sentiment in one call. |
+| `stock-price-multi` | $0.018 | Batch US equity price lookup — up to 5 tickers in one call via Yahoo Finance. 83% cheaper than sequential single-ticker calls. |
 | `strategy-signal` | $0.006 | Technical analysis signal for US equities, ETFs, and crypto: RSI(14), MACD, Bollinger Bands, directional posture. |
 | `timezone` | $0.002 | Timezone intelligence using the IANA database (418 zones): current time, UTC offset, DST status. |
 | `tx-intel` | $0.006 | Decode and explain any EVM transaction: type (swap/transfer/approval/contract call), human-readable summary, token transfers from logs, gas cost, block context. Base/ETH/Arb/Optimism/Polygon/Avalanche/BSC. 40% below tx-explainer. |
 | `tx-explainer` | $0.014 | Decoded EVM transaction breakdown: sender, recipient, value, gas, method name, event logs. |
 | `unit-converter` | $0.002 | Converts between 100+ units across 12 categories: length, weight, temperature, volume, speed, and more. |
 | `us-stock-price` | $0.030 | Current US equity price and intraday metrics for any NYSE/NASDAQ ticker via Yahoo Finance. |
+| `wallet-credit-score` | $0.020 | Composite EVM wallet trust score 0–100 with tier classification (PRIME/ESTABLISHED/ACTIVE/SPARSE/DORMANT). Age, tx volume, token diversity, DeFi exposure. |
 | `wallet-screener` | $0.010 | Risk screening for EVM wallet addresses: 0–100 risk score, individual factor breakdown (age, tx count, exposure). |
 | `weather` | $0.010 | Current conditions and 7-day forecast for any location worldwide via Open-Meteo. |
 | `web-change-monitor` | $0.005 | Content-change signals for any public URL: ETag, Last-Modified, Content-Length, response time. |
@@ -228,7 +232,7 @@ Standard Node service. Set env vars (`WALLET_ADDRESS`, `X402_NETWORK=base`,
 - [x] `base_rpc` stream: no-auth on-chain settlement reader (Base public RPC)
 - [x] Concentration (few-payers path) producing real signals from live mainnet
 - [x] Wallet ownership verified (GATE 1) — Base mainnet, EIP-191 signature recovered
-- [x] **88 capabilities LIVE** at `https://the-stall.intuitek.ai` (Base mainnet, v3.45.0)
+- [x] **91 capabilities LIVE** at `https://the-stall.intuitek.ai` (Base mainnet, v3.48.0)
 - [x] A2A Agent Card at `/.well-known/agent.json`
 - [x] x402 discovery document at `/.well-known/x402`
 - [x] Payment logging (JSONL) — every settled call recorded
