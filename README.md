@@ -15,7 +15,7 @@
 
 ---
 
-## Current capabilities — 113 live tools (v3.70.0)
+## Current capabilities — 115 live tools (v3.72.0)
 
 Full catalog at `/catalog`. Each capability is behind a per-call x402 paywall — no API keys, no accounts, no monthly fees. Pay USDC on Base mainnet per call.
 
@@ -107,6 +107,7 @@ Full catalog at `/catalog`. Each capability is behind a per-call x402 paywall �
 | `sports-scores` | $0.004 | Live and recent sports scores for NBA, NFL, MLB, NHL, MLS, EPL, La Liga, Bundesliga, Champions League, and more. |
 | `sec-filing-intel` | $0.015 | Real-time SEC EDGAR filing lookup by ticker or CIK. Returns company profile + recent filings (8-K, 10-K, 10-Q, Form 4, etc.) with EDGAR URLs. No API key. |
 | `short-volume-intel` | $0.012 | Daily FINRA consolidated short-sale volume for any US equity: short volume, total volume, short ratio, and trend over the last N trading days. Free FINRA CDN, no API key. |
+| `solar-intel` | $0.020 | Solar irradiance and 7-day forecast for any location: GHI, DNI, DHI, peak sun hours, panel yield estimate (1 kW system), sunrise/sunset, cloud cover, and solar rating. Free via Open-Meteo. Undercuts stableenrich.dev/solar by 31%. |
 | `ssl-cert` | $0.004 | TLS/SSL certificate inspection for any HTTPS host: validity window, issuer, SANs, days until expiry. |
 | `stablecoin-watch` | $0.050 | Real-time depeg monitor for top USD stablecoins (USDT, USDC, DAI, USDS, and others). |
 | `stock-brief` | $0.015 | US equity snapshot + Limitless prediction market sentiment in one call. |
@@ -118,6 +119,7 @@ Full catalog at `/catalog`. Each capability is behind a per-call x402 paywall �
 | `unit-converter` | $0.002 | Converts between 100+ units across 12 categories: length, weight, temperature, volume, speed, and more. |
 | `us-stock-price` | $0.018 | Current US equity price and intraday metrics for any NYSE/NASDAQ ticker via Yahoo Finance. 22% below blockrun.ai. |
 | `stock-ohlcv` | $0.010 | Historical OHLCV candlestick data for any stock, ETF, or index. Intervals from 1-minute to monthly; ranges from 1-day to max history. Returns candles array, period high/low, and % change. Yahoo Finance, no API key. |
+| `wallet-balance` | $0.002 | Native EVM token balance and USD value for any wallet across 6 chains (ETH, Base, Polygon, Arbitrum, Optimism, BSC). Free via DRPC + CoinGecko. |
 | `wallet-credit-score` | $0.020 | Composite EVM wallet trust score 0–100 with tier classification (PRIME/ESTABLISHED/ACTIVE/SPARSE/DORMANT). Age, tx volume, token diversity, DeFi exposure. |
 | `wallet-screener` | $0.010 | Risk screening for EVM wallet addresses: 0–100 risk score, individual factor breakdown (age, tx count, exposure). |
 | `weather` | $0.010 | Current conditions and 7-day forecast for any location worldwide via Open-Meteo. |
@@ -251,7 +253,7 @@ Standard Node service. Set env vars (`WALLET_ADDRESS`, `X402_NETWORK=base`,
 - [x] `base_rpc` stream: no-auth on-chain settlement reader (Base public RPC)
 - [x] Concentration (few-payers path) producing real signals from live mainnet
 - [x] Wallet ownership verified (GATE 1) — Base mainnet, EIP-191 signature recovered
-- [x] **113 capabilities LIVE** at `https://the-stall.intuitek.ai` (Base mainnet, v3.70.0)
+- [x] **115 capabilities LIVE** at `https://the-stall.intuitek.ai` (Base mainnet, v3.72.0)
 - [x] A2A Agent Card at `/.well-known/agent.json`
 - [x] x402 discovery document at `/.well-known/x402`
 - [x] Payment logging (JSONL) — every settled call recorded
