@@ -95,9 +95,9 @@ app.get("/.well-known/x402", (_req, res) =>
 app.get("/.well-known/agent.json", (_req, res) =>
   res.json({
     name: "The Stall",
-    description: "Domain-agnostic x402 capability chassis. Sells AI-callable data services for USDC on Base. Current capabilities: US stock prices, cross-asset market overview (SPY/QQQ/IWM/DIA/VIX/10Y + risk posture), x402 market intelligence, concentration-risk scoring, stablecoin depeg monitor (top 20 USD stablecoins, PARITY/MILD_DEPEG/MODERATE_DEPEG/SEVERE_DEPEG). MCP interface available at /mcp (free, no payment required).",
+    description: `Domain-agnostic x402 capability chassis by IntuiTek¹. ${capabilities.length} AI-callable data services for USDC on Base — stock prices, DeFi analytics, token security, prediction markets, macro indicators, research papers, domain WHOIS, company intelligence, weather, flight tracking, and more. MCP interface at /mcp — no wallet, no API keys.`,
     url: BASE_URL,
-    version: "0.7.0",
+    version: "3.34.0",
     provider: {
       organization: "IntuiTek¹",
       url: "https://intuitek.ai",
@@ -136,8 +136,8 @@ app.get("/.well-known/agent.json", (_req, res) =>
 app.get("/.well-known/mcp/server-card.json", (_req, res) =>
   res.json({
     name: "The Stall",
-    description: "Domain-agnostic x402 capability chassis by IntuiTek¹. 29 AI-callable data tools: market data, DeFi yields, crypto sentiment, token security, gas prices, macro indicators, prediction markets, SEC EDGAR company due diligence, and more. MCP over Streamable HTTP — no API keys, no accounts.",
-    version: "2.8.0",
+    description: `Domain-agnostic x402 capability chassis by IntuiTek¹. ${capabilities.length} AI-callable data tools: stock prices, market overview, DeFi yields, token security, wallet screening, gas prices, macro indicators, prediction markets, company due diligence, research papers, domain WHOIS, email verification, flight tracking, weather, and more. MCP over Streamable HTTP — no wallet, no API keys, no accounts.`,
+    version: "3.34.0",
     tools: capabilities.map((c) => ({
       name: c.name,
       description: c.description,
