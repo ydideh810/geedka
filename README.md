@@ -15,7 +15,7 @@
 
 ---
 
-## Current capabilities — 110 live tools (v3.67.0)
+## Current capabilities — 110 live tools (v3.68.0)
 
 Full catalog at `/catalog`. Each capability is behind a per-call x402 paywall — no API keys, no accounts, no monthly fees. Pay USDC on Base mainnet per call.
 
@@ -116,6 +116,7 @@ Full catalog at `/catalog`. Each capability is behind a per-call x402 paywall �
 | `tx-explainer` | $0.014 | Decoded EVM transaction breakdown: sender, recipient, value, gas, method name, event logs. |
 | `unit-converter` | $0.002 | Converts between 100+ units across 12 categories: length, weight, temperature, volume, speed, and more. |
 | `us-stock-price` | $0.018 | Current US equity price and intraday metrics for any NYSE/NASDAQ ticker via Yahoo Finance. 22% below blockrun.ai. |
+| `stock-ohlcv` | $0.010 | Historical OHLCV candlestick data for any stock, ETF, or index. Intervals from 1-minute to monthly; ranges from 1-day to max history. Returns candles array, period high/low, and % change. Yahoo Finance, no API key. |
 | `wallet-credit-score` | $0.020 | Composite EVM wallet trust score 0–100 with tier classification (PRIME/ESTABLISHED/ACTIVE/SPARSE/DORMANT). Age, tx volume, token diversity, DeFi exposure. |
 | `wallet-screener` | $0.010 | Risk screening for EVM wallet addresses: 0–100 risk score, individual factor breakdown (age, tx count, exposure). |
 | `weather` | $0.010 | Current conditions and 7-day forecast for any location worldwide via Open-Meteo. |
@@ -249,7 +250,7 @@ Standard Node service. Set env vars (`WALLET_ADDRESS`, `X402_NETWORK=base`,
 - [x] `base_rpc` stream: no-auth on-chain settlement reader (Base public RPC)
 - [x] Concentration (few-payers path) producing real signals from live mainnet
 - [x] Wallet ownership verified (GATE 1) — Base mainnet, EIP-191 signature recovered
-- [x] **110 capabilities LIVE** at `https://the-stall.intuitek.ai` (Base mainnet, v3.67.0)
+- [x] **111 capabilities LIVE** at `https://the-stall.intuitek.ai` (Base mainnet, v3.68.0)
 - [x] A2A Agent Card at `/.well-known/agent.json`
 - [x] x402 discovery document at `/.well-known/x402`
 - [x] Payment logging (JSONL) — every settled call recorded
