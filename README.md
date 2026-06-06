@@ -15,7 +15,7 @@
 
 ---
 
-## Current capabilities — 105 live tools (v3.62.0)
+## Current capabilities — 106 live tools (v3.63.0)
 
 Full catalog at `/catalog`. Each capability is behind a per-call x402 paywall — no API keys, no accounts, no monthly fees. Pay USDC on Base mainnet per call.
 
@@ -49,6 +49,7 @@ Full catalog at `/catalog`. Each capability is behind a per-call x402 paywall �
 | `defi-yields` | $0.025 | Top DeFi yield pools ranked by APY from DeFiLlama. Covers 16,000+ pools across 80+ chains. |
 | `dex-pair-search` | $0.005 | Search DEX trading pairs for any token (symbol, name, or contract address) across 50+ chains. Returns price, 24h volume, buy/sell pressure, liquidity, and FDV per pair via DexScreener. |
 | `dex-trending-pools` | $0.015 | Trending DEX liquidity pools with buy/sell pressure data across multiple timeframes from GeckoTerminal. |
+| `dividend-intel` | $0.015 | Full dividend intelligence for any US equity: trailing 12-month yield, forward annual rate, payout frequency, 5-year CAGR, consecutive years paid/growth, and complete 5-year dividend history. Yahoo Finance chart API, no API key. |
 | `dns-lookup` | $0.003 | DNS record lookup via Cloudflare DoH. Supports A, AAAA, MX, TXT, NS, CNAME, SOA records. |
 | `document-qa-prep` | $0.005 | Prepares a document for RAG pipelines. Chunks input text, extracts entities, returns semantic summary. |
 | `domain-whois` | $0.006 | Domain WHOIS/RDAP lookup: registration date, expiration, registrar, name servers, status codes. |
@@ -245,7 +246,7 @@ Standard Node service. Set env vars (`WALLET_ADDRESS`, `X402_NETWORK=base`,
 - [x] `base_rpc` stream: no-auth on-chain settlement reader (Base public RPC)
 - [x] Concentration (few-payers path) producing real signals from live mainnet
 - [x] Wallet ownership verified (GATE 1) — Base mainnet, EIP-191 signature recovered
-- [x] **105 capabilities LIVE** at `https://the-stall.intuitek.ai` (Base mainnet, v3.62.0)
+- [x] **106 capabilities LIVE** at `https://the-stall.intuitek.ai` (Base mainnet, v3.63.0)
 - [x] A2A Agent Card at `/.well-known/agent.json`
 - [x] x402 discovery document at `/.well-known/x402`
 - [x] Payment logging (JSONL) — every settled call recorded
