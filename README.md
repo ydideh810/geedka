@@ -15,7 +15,7 @@
 
 ---
 
-## Current capabilities — 102 live tools (v3.59.0)
+## Current capabilities — 103 live tools (v3.60.0)
 
 Full catalog at `/catalog`. Each capability is behind a per-call x402 paywall — no API keys, no accounts, no monthly fees. Pay USDC on Base mainnet per call.
 
@@ -45,6 +45,7 @@ Full catalog at `/catalog`. Each capability is behind a per-call x402 paywall �
 | `crypto-top-movers` | $0.008 | Real-time cryptocurrency market snapshot: top 5 gainers and losers by 24-hour performance from CoinGecko. |
 | `db-perf-intel` | $0.003 | Database version, EOL status, and benchmark-grade performance characteristics for 12+ database engines. |
 | `defi-portfolio` | $0.007 | Multi-chain DeFi portfolio scanner: token holdings + USD values across Ethereum, Base, Polygon, Arbitrum. Free upstream: DRPC public RPCs + CoinGecko. |
+| `defi-market-pulse` | $0.006 | Combined DeFi yields + market movers + cross-signal correlation in one call. Flags 'boosted' pools (APY + rising token) vs 'at_risk' pools (APY + sell-off). 33% cheaper than separate calls. |
 | `defi-yields` | $0.025 | Top DeFi yield pools ranked by APY from DeFiLlama. Covers 16,000+ pools across 80+ chains. |
 | `dex-pair-search` | $0.005 | Search DEX trading pairs for any token (symbol, name, or contract address) across 50+ chains. Returns price, 24h volume, buy/sell pressure, liquidity, and FDV per pair via DexScreener. |
 | `dex-trending-pools` | $0.015 | Trending DEX liquidity pools with buy/sell pressure data across multiple timeframes from GeckoTerminal. |
