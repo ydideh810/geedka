@@ -15,7 +15,7 @@
 
 ---
 
-## Current capabilities — 93 live tools (v3.50.0)
+## Current capabilities — 94 live tools (v3.51.0)
 
 Full catalog at `/catalog`. Each capability is behind a per-call x402 paywall — no API keys, no accounts, no monthly fees. Pay USDC on Base mainnet per call.
 
@@ -65,6 +65,7 @@ Full catalog at `/catalog`. Each capability is behind a per-call x402 paywall �
 | `gov-votes` | $0.004 | US Congressional vote records from GovTrack (113th Congress onward). Search by congress, chamber, category. |
 | `hn-search` | $0.010 | Hacker News story and comment search via Algolia. Returns titles, scores, comments, URLs. |
 | `http-headers` | $0.003 | HTTP response headers inspector and security grader for any public URL. |
+| `image-detect` | $0.040 | Detects the true image format of any URL via magic byte inspection — works even when the extension or Content-Type lies. Returns format (png/jpeg/gif/webp/avif/bmp/tiff/svg/ico), MIME type, content-type match flag, file size, and pixel dimensions for PNG/JPEG. 20% below x402node. |
 | `ip-intel` | $0.003 | Geolocation and network intelligence for IP addresses: country, city, ISP, ASN, timezone. |
 | `json-extract` | $0.004 | Extracts and parses JSON from mixed-content text, including LLM output with markdown code fences. |
 | `korean-market-movers` | $0.010 | Real-time movers and volume-spike leaders across all KRW-denominated markets on Upbit. |
