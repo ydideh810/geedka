@@ -14,7 +14,7 @@
 
 ---
 
-## Current capabilities — 80 live tools (v3.37.0)
+## Current capabilities — 83 live tools (v3.40.0)
 
 Full catalog at `/catalog`. Each capability is behind a per-call x402 paywall — no API keys, no accounts, no monthly fees. Pay USDC on Base mainnet per call.
 
@@ -91,6 +91,7 @@ Full catalog at `/catalog`. Each capability is behind a per-call x402 paywall �
 | `stock-brief` | $0.015 | US equity snapshot + Limitless prediction market sentiment in one call. |
 | `strategy-signal` | $0.006 | Technical analysis signal for US equities, ETFs, and crypto: RSI(14), MACD, Bollinger Bands, directional posture. |
 | `timezone` | $0.002 | Timezone intelligence using the IANA database (418 zones): current time, UTC offset, DST status. |
+| `tx-intel` | $0.006 | Decode and explain any EVM transaction: type (swap/transfer/approval/contract call), human-readable summary, token transfers from logs, gas cost, block context. Base/ETH/Arb/Optimism/Polygon/Avalanche/BSC. 40% below tx-explainer. |
 | `tx-explainer` | $0.014 | Decoded EVM transaction breakdown: sender, recipient, value, gas, method name, event logs. |
 | `unit-converter` | $0.002 | Converts between 100+ units across 12 categories: length, weight, temperature, volume, speed, and more. |
 | `us-stock-price` | $0.030 | Current US equity price and intraday metrics for any NYSE/NASDAQ ticker via Yahoo Finance. |
@@ -223,7 +224,7 @@ Standard Node service. Set env vars (`WALLET_ADDRESS`, `X402_NETWORK=base`,
 - [x] `base_rpc` stream: no-auth on-chain settlement reader (Base public RPC)
 - [x] Concentration (few-payers path) producing real signals from live mainnet
 - [x] Wallet ownership verified (GATE 1) — Base mainnet, EIP-191 signature recovered
-- [x] **80 capabilities LIVE** at `https://the-stall.intuitek.ai` (Base mainnet, v3.37.0)
+- [x] **83 capabilities LIVE** at `https://the-stall.intuitek.ai` (Base mainnet, v3.40.0)
 - [x] A2A Agent Card at `/.well-known/agent.json`
 - [x] x402 discovery document at `/.well-known/x402`
 - [x] Payment logging (JSONL) — every settled call recorded
