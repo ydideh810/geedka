@@ -15,7 +15,7 @@
 
 ---
 
-## Current capabilities — 103 live tools (v3.60.0)
+## Current capabilities — 104 live tools (v3.61.0)
 
 Full catalog at `/catalog`. Each capability is behind a per-call x402 paywall — no API keys, no accounts, no monthly fees. Pay USDC on Base mainnet per call.
 
@@ -53,6 +53,7 @@ Full catalog at `/catalog`. Each capability is behind a per-call x402 paywall �
 | `document-qa-prep` | $0.005 | Prepares a document for RAG pipelines. Chunks input text, extracts entities, returns semantic summary. |
 | `domain-whois` | $0.006 | Domain WHOIS/RDAP lookup: registration date, expiration, registrar, name servers, status codes. |
 | `earnings-calendar` | $0.005 | Upcoming US stock earnings — report date, EPS estimate, pre/post-market timing. Filter by ticker or look N days ahead (1–90). Covers 6,500+ companies. |
+| `fact-check` | $0.500 | AI-powered claim verification. Searches DuckDuckGo, Wikipedia, Hacker News, and arXiv in parallel, then returns a structured verdict: confirmed / contradicted / uncertain, with confidence score (0–1), supporting and contradicting evidence excerpts with source URLs, and step-by-step reasoning. Use before an agent acts on a factual assertion. |
 | `email-verify` | $0.006 | Email validation and quality scoring: RFC-5322 syntax, disposable detection, MX record check. |
 | `equity-technicals` | $0.490 | Complete technical analysis package for any US stock: RSI(14), MACD, Bollinger Bands, support/resistance, volume trend. |
 | `eth-block` | $0.002 | Ethereum block header + transaction hashes by block number, hex, or tag (latest/pending/earliest/safe/finalized). |
@@ -208,7 +209,7 @@ the-stall/
     ping.js                  liveness probe
     us-stock-price.js        US equity price + intraday metrics (Yahoo Finance)
     defi-portfolio.js        multi-chain wallet scanner (ETH/Base/Polygon/Arb)
-    ... 77 more capability modules (see /catalog)
+    ... 78 more capability modules (see /catalog)
 ```
 
 ## Quickstart (self-hosted)
