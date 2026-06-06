@@ -122,7 +122,60 @@ export default {
     required: ["ticker"],
   },
 
-  async run({ ticker, days = 30 }) {
+  outputSchema: {
+    type: "object",
+    properties: {
+      ticker:          { type: "string" },
+      company:         { type: "string" },
+      cik:             { type: "integer" },
+      days:            { type: "integer" },
+      filings_found:   { type: "integer" },
+      filings_parsed:  { type: "integer" },
+      summary: {
+        type: "object",
+        properties: {
+          total_buy_shares:  { type: ["integer", "null"] },
+          total_buy_value:   { type: ["number", "null"] },
+          total_sell_shares: { type: ["integer", "null"] },
+          total_sell_value:  { type: ["number", "null"] },
+          net_sentiment:     { type: "string", enum: ["net_buying", "net_selling", "neutral", "none"] },
+        },
+      },
+      filings: {
+        type: "array",
+        items: {
+          type: "object",
+          properties: {
+            owner:        { type: "string" },
+            role:         { type: "string" },
+            filing_date:  { type: "string" },
+            period:       { type: "string" },
+            transactions: {
+              type: "array",
+              items: {
+                type: "object",
+                properties: {
+                  type:             { type: "string" },
+                  code:             { type: "string" },
+                  security:         { type: "string" },
+                  date:             { type: "string" },
+                  shares:           { type: "number" },
+                  price_per_share:  { type: "number" },
+                  total_value:      { type: ["number", "null"] },
+                  shares_owned_after: { type: ["number", "null"] },
+                },
+              },
+            },
+          },
+        },
+      },
+      message: { type: "string", description: "Present only when no filings were found." },
+      error:   { type: "string", description: "Present only on error (e.g. unknown ticker)." },
+    },
+    required: ["ticker"],
+  },
+
+  async handler({ ticker, days = 30 }) {
     ticker = ticker.toUpperCase().trim();
     days   = Math.min(Math.max(parseInt(days) || 30, 1), 180);
 
