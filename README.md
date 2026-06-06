@@ -15,7 +15,7 @@
 
 ---
 
-## Current capabilities — 100 live tools (v3.57.0)
+## Current capabilities — 101 live tools (v3.58.0)
 
 Full catalog at `/catalog`. Each capability is behind a per-call x402 paywall — no API keys, no accounts, no monthly fees. Pay USDC on Base mainnet per call.
 
@@ -117,6 +117,7 @@ Full catalog at `/catalog`. Each capability is behind a per-call x402 paywall �
 | `web-company-intel` | $0.003 | Structured company intelligence from any public website: OpenGraph, schema.org, meta tags, social links. |
 | `world-bank-data` | $0.003 | World Bank open data — 1600+ development indicators for 200+ countries. GDP, poverty, health, education. |
 | `yield-farming-active` | $0.005 | Active DeFi yield farming pools sorted by 30-day average APY from DeFiLlama. |
+| `nft-metadata` | $0.002 | NFT metadata, traits, image URL, and collection floor price for any ERC-721/ERC-1155 token. Supports Ethereum, Polygon, Base, Arbitrum. Collapses OneSource Media-category seam. |
 
 ### Quick call (x402 flow)
 
