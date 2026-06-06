@@ -104,6 +104,21 @@ export default {
     required: ["url"],
   },
 
+  outputSchema: {
+    type: "object",
+    properties: {
+      url:                  { type: "string" },
+      format:               { type: "string" },
+      detected_mime:        { type: ["string", "null"] },
+      content_type_header:  { type: ["string", "null"] },
+      content_type_match:   { type: ["boolean", "null"] },
+      file_size_bytes:      { type: ["integer", "null"] },
+      dimensions:           { type: ["object", "null"] },
+      bytes_inspected:      { type: "integer" },
+      note:                 { type: ["string", "null"] },
+    },
+  },
+
   async handler({ url }) {
     // Basic URL validation
     let parsed;
