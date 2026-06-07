@@ -15,7 +15,7 @@
 
 ---
 
-## Current capabilities — 125 live tools (v3.84.0)
+## Current capabilities — 126 live tools (v3.85.0)
 
 Full catalog at `/catalog`. Each capability is behind a per-call x402 paywall — no API keys, no accounts, no monthly fees. Pay USDC on Base mainnet per call.
 
@@ -78,6 +78,7 @@ Full catalog at `/catalog`. Each capability is behind a per-call x402 paywall �
 | `intel-pack` | $0.15 | Three-source intelligence pack in one x402 call: equity market snapshot (SPY/QQQ/IWM/VIX/risk signal) + top DeFi yield pools by APY + top prediction markets by volume. Replaces three separate calls; $0.175 purchased individually. |
 | `ip-intel` | $0.003 | Geolocation and network intelligence for IP addresses: country, city, ISP, ASN, timezone. |
 | `json-extract` | $0.004 | Extracts and parses JSON from mixed-content text, including LLM output with markdown code fences. |
+| `kimchi-premium` | $0.001 | Real-time Kimchi Premium for any Upbit-listed token: KRW price vs global USD spot (Kraken/OKX), FX-adjusted. Returns premium_percent and premium_direction. |
 | `korean-market-movers` | $0.010 | Real-time movers and volume-spike leaders across all KRW-denominated markets on Upbit. |
 | `lbo-model` | $4.50 | Full leveraged buyout model: sources & uses, year-by-year operating model, debt schedule with cash sweep, IRR + MOIC, and 3×3 entry/exit multiple sensitivity tables. Pure computation — no API dependency. |
 | `legal-search` | $0.008 | Searches 5M+ US court opinions (SCOTUS, federal circuits, district courts, state courts) via CourtListener. |
