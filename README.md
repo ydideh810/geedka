@@ -15,7 +15,7 @@
 
 ---
 
-## Current capabilities — 131 live tools (v3.90.0)
+## Current capabilities — 132 live tools (v3.91.0)
 
 Full catalog at `/catalog`. Each capability is behind a per-call x402 paywall — no API keys, no accounts, no monthly fees. Pay USDC on Base mainnet per call.
 
@@ -41,6 +41,7 @@ Full catalog at `/catalog`. Each capability is behind a per-call x402 paywall �
 | `company-intel` | $0.012 | SEC EDGAR due diligence data for any US public company: filings, financials, executives, SIC classification. |
 | `concentration-risk-score` | $0.100 | HHI-based concentration-risk score for any x402 pay_to wallet. Returns unique payers, top-payer share, risk tier. |
 | `country-info` | $0.002 | Country information by name, ISO code, or capital city: population, area, region, currencies, languages. |
+| `credit-spreads` | $0.008 | Current US corporate credit spreads: High Yield OAS, Investment Grade OAS, and BBB OAS from ICE BofA indices via FRED (free, no API key). Includes HY-IG differential and risk regime classification (tight/normal/wide/stress). Pairs with treasury-yields for full fixed-income discount rate construction. |
 | `crypto-fiat-price` | $0.015 | Cryptocurrency price in any fiat currency — JPY, EUR, CNY, GBP, KRW, INR, AUD, BRL, or 80+ more. Input a coin (bitcoin, eth, sol) and one or more currency codes. Includes 24h % change. 85% below specialized oracles. |
 | `crypto-news-impact` | $0.008 | Latest cryptocurrency news headlines from CoinDesk with live price correlation for mentioned assets. |
 | `crypto-top-movers` | $0.008 | Real-time cryptocurrency market snapshot: top 5 gainers and losers by 24-hour performance from CoinGecko. |
@@ -273,7 +274,7 @@ Standard Node service. Set env vars (`WALLET_ADDRESS`, `X402_NETWORK=base`,
 - [x] `base_rpc` stream: no-auth on-chain settlement reader (Base public RPC)
 - [x] Concentration (few-payers path) producing real signals from live mainnet
 - [x] Wallet ownership verified (GATE 1) — Base mainnet, EIP-191 signature recovered
-- [x] **131 capabilities LIVE** at `https://the-stall.intuitek.ai` (Base mainnet, v3.90.0)
+- [x] **132 capabilities LIVE** at `https://the-stall.intuitek.ai` (Base mainnet, v3.91.0)
 - [x] A2A Agent Card at `/.well-known/agent.json`
 - [x] x402 discovery document at `/.well-known/x402`
 - [x] Payment logging (JSONL) — every settled call recorded
