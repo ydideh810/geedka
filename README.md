@@ -15,7 +15,7 @@
 
 ---
 
-## Current capabilities — 122 live tools (v3.79.0)
+## Current capabilities — 123 live tools (v3.80.0)
 
 Full catalog at `/catalog`. Each capability is behind a per-call x402 paywall — no API keys, no accounts, no monthly fees. Pay USDC on Base mainnet per call.
 
@@ -59,6 +59,7 @@ Full catalog at `/catalog`. Each capability is behind a per-call x402 paywall �
 | `email-verify` | $0.006 | Email validation and quality scoring: RFC-5322 syntax, disposable detection, MX record check. |
 | `equity-technicals` | $0.490 | Complete technical analysis package for any US stock: RSI(14), MACD, Bollinger Bands, support/resistance, volume trend. |
 | `eth-block` | $0.002 | Ethereum block header + transaction hashes by block number, hex, or tag (latest/pending/earliest/safe/finalized). |
+| `evm-log-events` | $0.004 | EVM contract event log query via eth_getLogs. Filter by contract address, event topic (Transfer/Approval/Swap/custom), and block range. Returns up to 50 decoded log entries with topics, data, tx hash, block number. Supports Ethereum/Base/Polygon/Arbitrum via free DRPC. 20% below market rate. |
 | `evm-nonce` | $0.002 | EVM address nonce lookup — confirmed and pending transaction count. Supports Ethereum, Base, Polygon, Arbitrum, Optimism. Use pending nonce when building new transactions. 33% below market rate. |
 | `evm-token-security` | $0.007 | Honeypot, rug-pull, and scam detection for any EVM token. Returns 0–100 risk score with individual factor breakdown. |
 | `flight-tracker` | $0.008 | Departures or arrivals at any major airport via OpenSky Network. Returns flight number, status, delay data. |
@@ -266,7 +267,7 @@ Standard Node service. Set env vars (`WALLET_ADDRESS`, `X402_NETWORK=base`,
 - [x] `base_rpc` stream: no-auth on-chain settlement reader (Base public RPC)
 - [x] Concentration (few-payers path) producing real signals from live mainnet
 - [x] Wallet ownership verified (GATE 1) — Base mainnet, EIP-191 signature recovered
-- [x] **122 capabilities LIVE** at `https://the-stall.intuitek.ai` (Base mainnet, v3.79.0)
+- [x] **123 capabilities LIVE** at `https://the-stall.intuitek.ai` (Base mainnet, v3.80.0)
 - [x] A2A Agent Card at `/.well-known/agent.json`
 - [x] x402 discovery document at `/.well-known/x402`
 - [x] Payment logging (JSONL) — every settled call recorded

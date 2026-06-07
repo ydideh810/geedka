@@ -77,6 +77,7 @@ app.use((_req, res, next) => {
   res.header("Access-Control-Allow-Origin", "*");
   res.header("Access-Control-Allow-Methods", "GET, OPTIONS");
   res.header("Access-Control-Allow-Headers", "Content-Type, X-PAYMENT, X-PAYMENT-RESPONSE");
+  res.header("Access-Control-Expose-Headers", "X-PAYMENT-RESPONSE");
   next();
 });
 
@@ -113,6 +114,134 @@ app.get("/catalog", (_req, res) =>
     })),
   })
 );
+
+// ── OpenAPI 3.1.0 spec — required params, schemas, security per endpoint ─────
+// Issue constraints addressed here:
+//   - Required query params have required:true (per inputSchema.required arrays)
+//   - All endpoints include request/response schemas
+//   - Free (identity-gated) endpoints declare security:[]
+//   - Paid endpoints declare security:[{x402Payment:[]}]
+// IMPORTANT: any request-validation middleware added in future MUST be placed
+// AFTER app.use(buildPaymentMiddleware(...)) so unauthenticated probes receive
+// 402 (not 400/422) and x402scan can detect the paywall correctly.
+
+function inputSchemaToParams(inputSchema) {
+  if (!inputSchema?.properties) return [];
+  const required = new Set(inputSchema.required || []);
+  return Object.entries(inputSchema.properties).map(([name, prop]) => {
+    const { description, ...schemaPart } = prop;
+    return {
+      name,
+      in: "query",
+      required: required.has(name),
+      ...(description ? { description } : {}),
+      schema: schemaPart,
+    };
+  });
+}
+
+app.get("/openapi.json", (_req, res) => {
+  const freePaths = {
+    "/health": {
+      get: {
+        operationId: "health",
+        summary: "Health check",
+        description: "Returns network, capability list, and ok:true.",
+        security: [],
+        responses: { "200": { description: "OK", content: { "application/json": { schema: { type: "object", properties: { ok: { type: "boolean" }, network: { type: "string" }, capabilities: { type: "array", items: { type: "string" } } }, required: ["ok", "network", "capabilities"] } } } } },
+      },
+    },
+    "/catalog": {
+      get: {
+        operationId: "catalog",
+        summary: "Full capability catalog",
+        description: "Returns all capabilities with names, paths, prices, descriptions, and input/output schemas.",
+        security: [],
+        responses: { "200": { description: "Catalog", content: { "application/json": { schema: { type: "object" } } } } },
+      },
+    },
+    "/stats": {
+      get: {
+        operationId: "stats",
+        summary: "Aggregated usage statistics",
+        security: [],
+        responses: { "200": { description: "Stats", content: { "application/json": { schema: { type: "object" } } } } },
+      },
+    },
+    "/metrics": {
+      get: {
+        operationId: "metrics",
+        summary: "Discovery-to-payment funnel metrics",
+        security: [],
+        responses: { "200": { description: "Metrics", content: { "application/json": { schema: { type: "object" } } } } },
+      },
+    },
+    "/openapi.json": {
+      get: {
+        operationId: "openapi",
+        summary: "This OpenAPI specification",
+        security: [],
+        responses: { "200": { description: "OpenAPI 3.1.0 spec", content: { "application/json": { schema: { type: "object" } } } } },
+      },
+    },
+  };
+
+  const capPaths = {};
+  for (const cap of capabilities) {
+    capPaths[`/cap/${cap.name}`] = {
+      get: {
+        operationId: cap.name,
+        summary: cap.description,
+        tags: ["capabilities"],
+        security: [{ x402Payment: [] }],
+        parameters: inputSchemaToParams(cap.inputSchema),
+        responses: {
+          "200": {
+            description: "Capability result",
+            content: { "application/json": { schema: cap.outputSchema ?? { type: "object" } } },
+          },
+          "402": {
+            description: "Payment required — attach X-PAYMENT header with USDC on Base mainnet",
+            content: {
+              "application/json": {
+                schema: {
+                  type: "object",
+                  properties: {
+                    x402Version: { type: "integer", example: 1 },
+                    error: { type: "string" },
+                    accepts: { type: "array", items: { type: "object" } },
+                  },
+                  required: ["x402Version", "accepts"],
+                },
+              },
+            },
+          },
+        },
+      },
+    };
+  }
+
+  res.json({
+    openapi: "3.1.0",
+    info: {
+      title: "The Stall",
+      description: `Domain-agnostic x402 capability chassis by IntuiTek¹. ${capabilities.length} AI-callable data services — pay USDC on Base mainnet. No accounts or API keys required.`,
+      version: PKG_VERSION,
+      contact: { url: BASE_URL },
+    },
+    servers: [{ url: BASE_URL, description: "Production (Base mainnet)" }],
+    components: {
+      securitySchemes: {
+        x402Payment: {
+          type: "http",
+          scheme: "x402",
+          description: "Attach X-PAYMENT header containing a signed EIP-3009 USDC transfer authorization on Base mainnet. Payment is verified and settled by the x402 facilitator before the capability handler runs.",
+        },
+      },
+    },
+    paths: { ...freePaths, ...capPaths },
+  });
+});
 
 // ── x402 Discovery document (dual-format: xpaysh/Rug-Munch + official x402) ──
 // payTo + accepts[] added for x402scan / CDP Bazaar compatibility.
@@ -338,6 +467,11 @@ app.get("/mcp", (_req, res) =>
 );
 
 // ── PAID capability routes (x402-gated) ───────────────────────────────────────
+// ORDERING CONSTRAINT: x402 middleware MUST run before any request validation.
+// Do NOT add body/query validation middleware above this line — unauthenticated
+// probes would receive 400/422 instead of 402, breaking x402scan detection.
+// Validation that rejects for missing params belongs inside the route handlers,
+// which only run after x402 has verified and settled the payment.
 app.use(buildPaymentMiddleware({ payTo: PAY_TO, network: NETWORK, facilitator: FACILITATOR, capabilities }));
 
 for (const cap of capabilities) {

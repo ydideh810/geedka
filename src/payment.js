@@ -11,6 +11,27 @@ import { paymentMiddleware } from "x402-express";
 import { getAuthHeaders } from "@coinbase/cdp-sdk/auth";
 
 /**
+ * Convert a JSON Schema inputSchema to the queryParams format x402-express expects.
+ * x402-express spreads `...inputSchema` into the HTTPRequestStructureSchema, so it
+ * must be { queryParams: Record<string, string> } not the raw JSON Schema object.
+ */
+function buildQueryParams(inputSchema) {
+  if (!inputSchema?.properties) return {};
+  return {
+    queryParams: Object.fromEntries(
+      Object.entries(inputSchema.properties).map(([name, prop]) => [
+        name,
+        prop.default !== undefined
+          ? String(prop.default)
+          : prop.type === "integer" || prop.type === "number"
+            ? "0"
+            : "string",
+      ])
+    ),
+  };
+}
+
+/**
  * Build the x402 payment middleware from a list of capability modules.
  *
  * @param {object} opts
@@ -35,6 +56,10 @@ export function buildPaymentMiddleware({ payTo, network, facilitator, capabiliti
   // CDP facilitator enforces a 500-char max on the description field in paymentRequirements.
   // Caps with longer descriptions trigger a 400 "invalid_request" at the verify step,
   // causing the middleware to re-issue a 402 with an empty "error": {} body.
+  //
+  // inputSchema is passed as { queryParams: {...} } — HTTPRequestStructureSchema format.
+  // x402-express spreads `...inputSchema` into { type:"http", method:"GET", ...inputSchema },
+  // so passing the JSON Schema directly would clobber type:"http" with type:"object".
   const routeConfig = {};
   for (const cap of capabilities) {
     routeConfig[`GET /cap/${cap.name}`] = {
@@ -42,7 +67,8 @@ export function buildPaymentMiddleware({ payTo, network, facilitator, capabiliti
       network,
       config: {
         description: cap.description.slice(0, 499),
-        inputSchema: cap.inputSchema,
+        mimeType: "application/json",
+        inputSchema: buildQueryParams(cap.inputSchema),
         outputSchema: cap.outputSchema,
       },
     };
