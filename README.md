@@ -15,7 +15,7 @@
 
 ---
 
-## Current capabilities — 139 live tools (v3.98.0)
+## Current capabilities — 140 live tools (v3.99.0)
 
 Full catalog at `/catalog`. Each capability is behind a per-call x402 paywall — no API keys, no accounts, no monthly fees. Pay USDC on Base mainnet per call.
 
@@ -70,6 +70,7 @@ Full catalog at `/catalog`. Each capability is behind a per-call x402 paywall �
 | `evm-nonce` | $0.002 | EVM address nonce lookup — confirmed and pending transaction count. Supports Ethereum, Base, Polygon, Arbitrum, Optimism. Use pending nonce when building new transactions. 33% below market rate. |
 | `evm-token-security` | $0.007 | Honeypot, rug-pull, and scam detection for any EVM token. Returns 0–100 risk score with individual factor breakdown. |
 | `flight-tracker` | $0.008 | Departures or arrivals at any major airport via OpenSky Network. Returns flight number, status, delay data. |
+| `fomc-tracker` | $0.008 | Current US Federal Funds Rate, next FOMC meeting date and countdown, rate trend (hiking/holding/cutting), and full 2026 schedule. FRED public CSV + static federalreserve.gov calendar — no API key. Pairs with treasury-yields and credit-spreads for complete fixed-income context. |
 | `forex-rates` | $0.005 | Real-time fiat foreign exchange rates for 160+ currencies. Base defaults to USD. |
 | `funding-rates` | $0.020 | Current perpetual funding rates for 200+ assets on Hyperliquid DEX, sorted by 8h rate. |
 | `gas-prices` | $0.005 | Current gas prices and EIP-1559 fee recommendations across Ethereum, Base, Polygon, Arbitrum, BSC, Avalanche. |
@@ -281,7 +282,7 @@ Standard Node service. Set env vars (`WALLET_ADDRESS`, `X402_NETWORK=base`,
 - [x] `base_rpc` stream: no-auth on-chain settlement reader (Base public RPC)
 - [x] Concentration (few-payers path) producing real signals from live mainnet
 - [x] Wallet ownership verified (GATE 1) — Base mainnet, EIP-191 signature recovered
-- [x] **139 capabilities LIVE** at `https://the-stall.intuitek.ai` (Base mainnet, v3.98.0)
+- [x] **140 capabilities LIVE** at `https://the-stall.intuitek.ai` (Base mainnet, v3.99.0)
 - [x] A2A Agent Card at `/.well-known/agent.json`
 - [x] x402 discovery document at `/.well-known/x402`
 - [x] Payment logging (JSONL) — every settled call recorded
