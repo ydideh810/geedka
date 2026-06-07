@@ -15,7 +15,7 @@
 
 ---
 
-## Current capabilities — 123 live tools (v3.82.0)
+## Current capabilities — 124 live tools (v3.83.0)
 
 Full catalog at `/catalog`. Each capability is behind a per-call x402 paywall — no API keys, no accounts, no monthly fees. Pay USDC on Base mainnet per call.
 
@@ -33,6 +33,7 @@ Full catalog at `/catalog`. Each capability is behind a per-call x402 paywall �
 | `citation-formatter` | $0.008 | Looks up a paper by DOI and formats it as BibTeX, APA, MLA, or Chicago. |
 | `city-lookup` | $0.010 | Search for cities and airports by keyword, IATA/ICAO code, or name. Optional country filter. Returns IATA, ICAO, city name, country, coordinates, timezone. |
 | `classic-novels` | $0.004 | Book lookup by title, author, or ISBN via Open Library. Returns metadata, subjects, and first-sentence excerpt. |
+| `drug-intel` | $0.008 | FDA drug safety intelligence: labeling (warnings, dosage, interactions, contraindications), adverse event summary (top FAERS reactions + total report count), and recall history. Brand or generic name. openFDA free API. |
 | `clinical-trials` | $0.008 | Search active and completed clinical trials from ClinicalTrials.gov. Filter by condition, intervention, phase, status. |
 | `code-api-surface` | $0.100 | Static analysis of any code snippet: HTTP routes (method + path + middleware), exported symbols. Supports Express, FastAPI, Flask, Spring Boot, NestJS, Gin. |
 | `code-test-detector` | $0.005 | Detects testing frameworks and test coverage presence in a code snippet or GitHub file URL. |
