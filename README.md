@@ -15,7 +15,7 @@
 
 ---
 
-## Current capabilities — 127 live tools (v3.86.0)
+## Current capabilities — 128 live tools (v3.87.0)
 
 Full catalog at `/catalog`. Each capability is behind a per-call x402 paywall — no API keys, no accounts, no monthly fees. Pay USDC on Base mainnet per call.
 
@@ -57,6 +57,7 @@ Full catalog at `/catalog`. Each capability is behind a per-call x402 paywall �
 | `domain-whois` | $0.006 | Domain WHOIS/RDAP lookup: registration date, expiration, registrar, name servers, status codes. |
 | `earnings-calendar` | $0.005 | Upcoming US stock earnings — report date, EPS estimate, pre/post-market timing. Filter by ticker or look N days ahead (1–90). Covers 6,500+ companies. |
 | `fact-check` | $0.500 | AI-powered claim verification. Searches DuckDuckGo, Wikipedia, Hacker News, and arXiv in parallel, then returns a structured verdict: confirmed / contradicted / uncertain, with confidence score (0–1), supporting and contradicting evidence excerpts with source URLs, and step-by-step reasoning. Use before an agent acts on a factual assertion. |
+| `federal-contract-intel` | $0.008 | US federal contract and grant intelligence via USASpending.gov. Returns top awards (award ID, amount, agency, description), agency breakdown, and total obligated amount for any company. Covers $10T+ in federal spending since 2007. Useful for procurement research, vendor due diligence, and competitive intelligence. No API key. |
 | `email-verify` | $0.006 | Email validation and quality scoring: RFC-5322 syntax, disposable detection, MX record check. |
 | `equity-technicals` | $0.490 | Complete technical analysis package for any US stock: RSI(14), MACD, Bollinger Bands, support/resistance, volume trend. |
 | `eth-block` | $0.002 | Ethereum block header + transaction hashes by block number, hex, or tag (latest/pending/earliest/safe/finalized). |
