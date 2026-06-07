@@ -15,7 +15,7 @@
 
 ---
 
-## Current capabilities — 126 live tools (v3.85.0)
+## Current capabilities — 127 live tools (v3.86.0)
 
 Full catalog at `/catalog`. Each capability is behind a per-call x402 paywall — no API keys, no accounts, no monthly fees. Pay USDC on Base mainnet per call.
 

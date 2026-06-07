@@ -71,7 +71,18 @@ export default {
     additionalProperties: false,
   },
 
-  async run({ category, min_liquidity = 1000 }) {
+  outputSchema: {
+    type: "object",
+    properties: {
+      categories:    { type: "array", description: "Categories ranked by 7-day volume." },
+      summary:       { type: "object", description: "Aggregate totals and top category." },
+      note:          { type: "string" },
+      source:        { type: "string" },
+      timestamp:     { type: "string" },
+    },
+  },
+
+  async handler({ category, min_liquidity = 1000 }) {
     const catFilter = category?.toLowerCase() || null;
     const stats = {};  // category → { volume7d, liquidity, count, topMarket, confidenceSum }
 
