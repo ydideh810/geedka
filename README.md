@@ -15,7 +15,7 @@
 
 ---
 
-## Current capabilities — 140 live tools (v3.99.0)
+## Current capabilities — 141 live tools (v4.0.0)
 
 Full catalog at `/catalog`. Each capability is behind a per-call x402 paywall — no API keys, no accounts, no monthly fees. Pay USDC on Base mainnet per call.
 
@@ -95,6 +95,7 @@ Full catalog at `/catalog`. Each capability is behind a per-call x402 paywall �
 | `limitless-markets` | $0.006 | Active prediction markets from Limitless Exchange with current Yes/No prices and open interest. |
 | `macro-brief` | $0.350 | AI-synthesized US macroeconomic situation briefing. Gathers HY/IG credit spreads, yield curve, jobless claims, JOLTS, core PCE, and Fed Funds rate from FRED then uses GPT-4o-mini to synthesize a structured briefing: regime label, dominant risk, agent implication, and 200-word narrative. Replaces a 5+ step data + LLM chain. |
 | `macro-indicators` | $0.008 | Current US macroeconomic indicators: Fed Funds Rate, CPI, GDP growth, unemployment, yield curve from FRED. |
+| `manufacturing-brief` | $0.350 | AI-synthesized US manufacturing & industrial sector briefing. Gathers 7 FRED signals (Industrial Production, Capacity Utilization, Durable Goods Orders, Manufacturing Output, Manufacturing Employment, Inventory/Sales Ratio, PPI All Commodities) and uses GPT-4o-mini to produce manufacturing regime (expanding/growing/stagnant/contracting), dominant risk, agent implication, and 200-word narrative. Completes the macro intelligence suite alongside energy-brief, labor-brief, consumer-brief, and housing-brief. |
 | `market-intelligence` | $0.500 | Settlement-verified x402 endpoint intelligence: which endpoints have genuine organic payer breadth. |
 | `market-movers` | $0.004 | Today's top market movers — equity gainers, losers, most-active, and crypto gainers in one call. |
 | `market-overview` | $0.100 | Single-call market snapshot: SPY, QQQ, IWM, DIA price + intraday % change, VIX, BTC/ETH. |
