@@ -188,13 +188,27 @@ app.get("/openapi.json", (_req, res) => {
 
   const capPaths = {};
   for (const cap of capabilities) {
+    const params = inputSchemaToParams(cap.inputSchema);
+    // Zero-param caps: x402scan requires at least a requestBody or parameter schema.
+    // For GET endpoints with no query parameters, include an explicit empty requestBody
+    // so discovery scanners know "call this with no body / no query params required."
+    const requestBody = params.length === 0 ? {
+      required: false,
+      description: "No parameters required.",
+      content: {
+        "application/json": {
+          schema: cap.inputSchema ?? { type: "object", properties: {} },
+        },
+      },
+    } : undefined;
     capPaths[`/cap/${cap.name}`] = {
       get: {
         operationId: cap.name,
         summary: cap.description,
         tags: ["capabilities"],
         security: [{ x402Payment: [] }],
-        parameters: inputSchemaToParams(cap.inputSchema),
+        parameters: params,
+        ...(requestBody ? { requestBody } : {}),
         responses: {
           "200": {
             description: "Capability result",
