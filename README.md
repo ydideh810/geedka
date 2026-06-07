@@ -15,7 +15,7 @@
 
 ---
 
-## Current capabilities — 121 live tools (v3.78.0)
+## Current capabilities — 122 live tools (v3.79.0)
 
 Full catalog at `/catalog`. Each capability is behind a per-call x402 paywall — no API keys, no accounts, no monthly fees. Pay USDC on Base mainnet per call.
 
@@ -77,6 +77,7 @@ Full catalog at `/catalog`. Each capability is behind a per-call x402 paywall �
 | `ip-intel` | $0.003 | Geolocation and network intelligence for IP addresses: country, city, ISP, ASN, timezone. |
 | `json-extract` | $0.004 | Extracts and parses JSON from mixed-content text, including LLM output with markdown code fences. |
 | `korean-market-movers` | $0.010 | Real-time movers and volume-spike leaders across all KRW-denominated markets on Upbit. |
+| `lbo-model` | $4.50 | Full leveraged buyout model: sources & uses, year-by-year operating model, debt schedule with cash sweep, IRR + MOIC, and 3×3 entry/exit multiple sensitivity tables. Pure computation — no API dependency. |
 | `legal-search` | $0.008 | Searches 5M+ US court opinions (SCOTUS, federal circuits, district courts, state courts) via CourtListener. |
 | `limitless-markets` | $0.006 | Active prediction markets from Limitless Exchange with current Yes/No prices and open interest. |
 | `macro-indicators` | $0.008 | Current US macroeconomic indicators: Fed Funds Rate, CPI, GDP growth, unemployment, yield curve from FRED. |
@@ -265,7 +266,7 @@ Standard Node service. Set env vars (`WALLET_ADDRESS`, `X402_NETWORK=base`,
 - [x] `base_rpc` stream: no-auth on-chain settlement reader (Base public RPC)
 - [x] Concentration (few-payers path) producing real signals from live mainnet
 - [x] Wallet ownership verified (GATE 1) — Base mainnet, EIP-191 signature recovered
-- [x] **121 capabilities LIVE** at `https://the-stall.intuitek.ai` (Base mainnet, v3.78.0)
+- [x] **122 capabilities LIVE** at `https://the-stall.intuitek.ai` (Base mainnet, v3.79.0)
 - [x] A2A Agent Card at `/.well-known/agent.json`
 - [x] x402 discovery document at `/.well-known/x402`
 - [x] Payment logging (JSONL) — every settled call recorded
