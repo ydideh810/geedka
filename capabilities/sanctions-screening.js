@@ -192,7 +192,37 @@ export default {
     additionalProperties: false,
   },
 
-  async run({ name, type, limit = 10 }) {
+  outputSchema: {
+    type: "object",
+    properties: {
+      query:         { type: "string" },
+      type_filter:   { type: "string" },
+      matched:       { type: "boolean", description: "True if any hits found at or above 35% match score" },
+      hit_count:     { type: "integer" },
+      hits: {
+        type: "array",
+        items: {
+          type: "object",
+          properties: {
+            ent_num:     { type: "string", description: "OFAC internal entity number" },
+            name:        { type: "string", description: "Official SDN name" },
+            type:        { type: "string", description: "individual | entity | vessel | aircraft" },
+            program:     { type: "string", description: "Sanctions program(s) e.g. RUSSIA-EO14024, SDGT" },
+            title:       { type: ["string", "null"] },
+            remarks:     { type: ["string", "null"], description: "AKA aliases and remarks (first 200 chars)" },
+            match_score: { type: "integer", description: "0–100 name match confidence (F1 score)" },
+            match_type:  { type: "string", description: "primary | alias (matched via AKA)" },
+          },
+        },
+      },
+      programs_hit:  { type: "array", items: { type: "string" } },
+      sdn_list_date: { type: "string", description: "Date the SDN list was last fetched (YYYY-MM-DD)" },
+      source:        { type: "string" },
+      disclaimer:    { type: "string" },
+    },
+  },
+
+  async handler({ name, type, limit = 10 }) {
     if (!name || name.trim().length < 2) {
       return { error: "name must be at least 2 characters" };
     }
