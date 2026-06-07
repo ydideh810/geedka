@@ -9,6 +9,7 @@ import { paymentMiddleware, x402ResourceServer } from "@x402/express";
 import { ExactEvmScheme } from "@x402/evm/exact/server";
 import { HTTPFacilitatorClient } from "@x402/core/server";
 import { getAuthHeaders } from "@coinbase/cdp-sdk/auth";
+import { declareDiscoveryExtension } from "@x402/extensions/bazaar";
 
 // Convert legacy network names to CAIP-2 identifiers required by x402 v2.
 function toCAIP2(network) {
@@ -53,6 +54,10 @@ export function buildPaymentMiddleware({ payTo, network, facilitator, capabiliti
       },
       description: cap.description.slice(0, 499),
       mimeType: "application/json",
+      extensions: declareDiscoveryExtension({
+        method: "GET",
+        inputSchema: cap.inputSchema || { type: "object", properties: {} },
+      }),
     };
   }
 
