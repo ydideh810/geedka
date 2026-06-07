@@ -4,9 +4,9 @@
 // Computes RSI(14), MACD(12/26/9), Bollinger Bands(20), and volume trend
 // from public OHLCV data, then outputs a directional posture + key levels.
 //
-// Seam: api.minebean.com/api/strategy/decide — 27,459 sett/wk, 10 payers,
-// $0.010/call observed. This cap provides equivalent signal at $0.006, sourced
-// from public APIs with no payment required.
+// Seam: api.minebean.com/api/strategy/decide — 32K+ sett/wk, $0.100/call
+// (observed 2026-06-07 via PROSPECTOR). This cap provides richer signal
+// (RSI+MACD+BB+volume) at $0.090 — 10% undercut, from public APIs.
 //
 // Upstreams:
 //   US equities/ETFs: Yahoo Finance v8 chart API (public, no auth)
@@ -207,10 +207,10 @@ async function fetchCG(symbol) {
 
 export default {
   name: "strategy-signal",
-  price: "$0.006",
+  price: "$0.090",
 
   description:
-    "Technical analysis signal for US equities, ETFs, and crypto. Returns RSI(14), MACD(12/26/9), Bollinger Bands(20), volume trend, and a directional posture (STRONG_BUY / BUY / NEUTRAL / SELL / STRONG_SELL) with key price levels. Free upstream: Yahoo Finance (equities) and CoinGecko (crypto). $0.006 hedge against minebean strategy/decide.",
+    "Technical analysis signal for any US equity, ETF, or crypto. Returns RSI(14), MACD(12/26/9), Bollinger Bands(20), volume trend, directional posture (STRONG_BUY/BUY/NEUTRAL/SELL/STRONG_SELL), and key price levels. Richer output than comparable services at $0.090. Free upstream: Yahoo Finance (equities), CoinGecko (crypto).",
 
   inputSchema: {
     type: "object",
