@@ -15,7 +15,7 @@
 
 ---
 
-## Current capabilities — 135 live tools (v3.94.0)
+## Current capabilities — 136 live tools (v3.95.0)
 
 Full catalog at `/catalog`. Each capability is behind a per-call x402 paywall — no API keys, no accounts, no monthly fees. Pay USDC on Base mainnet per call.
 
@@ -76,6 +76,7 @@ Full catalog at `/catalog`. Each capability is behind a per-call x402 paywall �
 | `geocode` | $0.003 | Forward and reverse geocoding via OpenStreetMap Nominatim. Returns coordinates, address components, bounding box. |
 | `github-repo-intel` | $0.010 | GitHub repository intelligence: stars, forks, open issues, language, license, last commit date. |
 | `gov-votes` | $0.004 | US Congressional vote records from GovTrack (113th Congress onward). Search by congress, chamber, category. |
+| `housing-brief` | $0.350 | AI-synthesized US housing market briefing. Fetches 8 FRED signals (housing starts, permits, existing/new sales, months supply, 30Y mortgage rate, Case-Shiller HPI, median price) and uses GPT-4o-mini to produce market phase, direction, supply posture, affordability regime, 150-word narrative, dominant risk, and agent implication. One call collapses 8 FRED lookups + LLM synthesis for REIT analysis, mortgage exposure, consumer wealth, and macro housing drag. |
 | `hn-search` | $0.010 | Hacker News story and comment search via Algolia. Returns titles, scores, comments, URLs. |
 | `http-headers` | $0.003 | HTTP response headers inspector and security grader for any public URL. |
 | `image-detect` | $0.040 | Detects the true image format of any URL via magic byte inspection — works even when the extension or Content-Type lies. Returns format (png/jpeg/gif/webp/avif/bmp/tiff/svg/ico), MIME type, content-type match flag, file size, and pixel dimensions for PNG/JPEG. 20% below x402node. |
@@ -277,7 +278,7 @@ Standard Node service. Set env vars (`WALLET_ADDRESS`, `X402_NETWORK=base`,
 - [x] `base_rpc` stream: no-auth on-chain settlement reader (Base public RPC)
 - [x] Concentration (few-payers path) producing real signals from live mainnet
 - [x] Wallet ownership verified (GATE 1) — Base mainnet, EIP-191 signature recovered
-- [x] **134 capabilities LIVE** at `https://the-stall.intuitek.ai` (Base mainnet, v3.93.0)
+- [x] **136 capabilities LIVE** at `https://the-stall.intuitek.ai` (Base mainnet, v3.95.0)
 - [x] A2A Agent Card at `/.well-known/agent.json`
 - [x] x402 discovery document at `/.well-known/x402`
 - [x] Payment logging (JSONL) — every settled call recorded
