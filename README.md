@@ -15,7 +15,7 @@
 
 ---
 
-## Current capabilities — 143 live tools (v4.2.0)
+## Current capabilities — 146 live tools (v4.3.0)
 
 Full catalog at `/catalog`. Each capability is behind a per-call x402 paywall — no API keys, no accounts, no monthly fees. Pay USDC on Base mainnet per call.
 
@@ -58,6 +58,7 @@ Full catalog at `/catalog`. Each capability is behind a per-call x402 paywall �
 | `document-qa-prep` | $0.005 | Prepares a document for RAG pipelines. Chunks input text, extracts entities, returns semantic summary. |
 | `domain-whois` | $0.006 | Domain WHOIS/RDAP lookup: registration date, expiration, registrar, name servers, status codes. |
 | `earnings-calendar` | $0.005 | Upcoming US stock earnings — report date, EPS estimate, pre/post-market timing. Filter by ticker or look N days ahead (1–90). Covers 6,500+ companies. |
+| `earthquake-intel` | $0.005 | Real-time earthquake intelligence from USGS. Fetch recent global significant quakes (M5.0+ last 7 days) or quakes near a lat/lon (M3.0+ within 500 km). Returns magnitude, depth, location, tsunami flag, and shake intensity. Free USGS FDSN API — no key required. |
 | `fact-check` | $0.500 | AI-powered claim verification. Searches DuckDuckGo, Wikipedia, Hacker News, and arXiv in parallel, then returns a structured verdict: confirmed / contradicted / uncertain, with confidence score (0–1), supporting and contradicting evidence excerpts with source URLs, and step-by-step reasoning. Use before an agent acts on a factual assertion. |
 | `fda-recall-watch` | $0.008 | FDA recall and enforcement search across drugs, food/cosmetics, and medical devices (85,000+ actions). Returns classification (Class I/II/III), recall reason, product description, status, and distribution pattern. Seam: fills the product-safety layer missing from drug-intel + company-due-diligence chains. No API key required. |
 | `federal-contract-intel` | $0.008 | US federal contract and grant intelligence via USASpending.gov. Returns top awards (award ID, amount, agency, description), agency breakdown, and total obligated amount for any company. Covers $10T+ in federal spending since 2007. Useful for procurement research, vendor due diligence, and competitive intelligence. No API key. |
@@ -112,6 +113,7 @@ Full catalog at `/catalog`. Each capability is behind a per-call x402 paywall �
 | `place-details` | $0.020 | Enriched place and business details by name (OSM Nominatim): website, phone, hours, address, coordinates. |
 | `policy-impact-mapper` | $0.007 | Analyzes regulatory and policy text to map impact across industry sectors. Returns affected sectors with justification. |
 | `polymarket-accuracy-score` | $0.004 | Historical Polymarket crowd accuracy score and Brier calibration by category (crypto, politics, sports, macro). |
+| `polymarket-category-performance` | $0.004 | Polymarket category activity breakdown: volume, liquidity, market count, and top market per category (crypto, politics, sports, ai, macro, equities). Shows where trading activity is concentrated. Optionally filter to one category. $0.004/call — 20% below closest x402 competitor. |
 | `polymarket-sentiment-shift` | $0.008 | Polymarket prediction markets with the biggest recent probability shifts. |
 | `portfolio-rebalance` | $0.005 | Pure-math portfolio rebalancing calculator. Given holdings and target allocations, returns trade instructions. |
 | `prediction-markets` | $0.050 | Top active Polymarket prediction markets sorted by trading volume with crowd probabilities. |
@@ -136,6 +138,7 @@ Full catalog at `/catalog`. Each capability is behind a per-call x402 paywall �
 | `stock-price-multi` | $0.018 | Batch US equity price lookup — up to 5 tickers in one call via Yahoo Finance. 83% cheaper than sequential single-ticker calls. |
 | `strategy-signal` | $0.006 | Technical analysis signal for US equities, ETFs, and crypto: RSI(14), MACD, Bollinger Bands, directional posture. |
 | `timezone` | $0.002 | Timezone intelligence using the IANA database (418 zones): current time, UTC offset, DST status. |
+| `treasury-yields` | $0.008 | Current US Treasury yield curve at 3M, 5Y, 10Y, and 30Y nodes from CBOE interest-rate indices (free, no API key). Includes 10Y-3M spread and curve shape classification. Essential for DCF discount rates, bond pricing, and recession signal monitoring. |
 | `tx-intel` | $0.006 | Decode and explain any EVM transaction: type (swap/transfer/approval/contract call), human-readable summary, token transfers from logs, gas cost, block context. Base/ETH/Arb/Optimism/Polygon/Avalanche/BSC. 40% below tx-explainer. |
 | `tx-explainer` | $0.014 | Decoded EVM transaction breakdown: sender, recipient, value, gas, method name, event logs. |
 | `unit-converter` | $0.002 | Converts between 100+ units across 12 categories: length, weight, temperature, volume, speed, and more. |
