@@ -9,165 +9,192 @@
 [![thebrierfox/the-stall MCP server](https://glama.ai/mcp/servers/thebrierfox/the-stall/badges/score.svg)](https://glama.ai/mcp/servers/thebrierfox/the-stall)
 
 > **Live endpoint:** `https://the-stall.intuitek.ai`
+> **MCP endpoint:** [`/mcp`](https://the-stall.intuitek.ai/mcp) — streamable HTTP, use POST
 > **Agent card:** [`/.well-known/agent.json`](https://the-stall.intuitek.ai/.well-known/agent.json)
 > **x402 discovery:** [`/.well-known/x402`](https://the-stall.intuitek.ai/.well-known/x402)
 > **Catalog:** [`/catalog`](https://the-stall.intuitek.ai/catalog)
+> **MCP registry:** `ai.intuitek.the-stall/the-stall`
 
 ---
 
-## Current capabilities — 149 live tools (v4.6.0)
+## Current capabilities — 172 live tools (v4.27.0)
 
 Full catalog at `/catalog`. Each capability is behind a per-call x402 paywall — no API keys, no accounts, no monthly fees. Pay USDC on Base mainnet per call.
 
 | Capability | Price | Description |
 |---|---|---|
-| `agent-access-check` | $0.006 | Checks whether a website is accessible and agent-friendly. Fetches robots.txt, /.well-known/x402, and /.well-known/agent.json. |
-| `analyst-ratings` | $0.010 | Wall Street analyst consensus and price targets for any US equity. Returns buy/hold/sell breakdown, mean recommendation score (1=Strong Buy, 5=Strong Sell), analyst count, and price target range (low/mean/median/high) with upside-to-target. 4-month trend history. Free Yahoo Finance data, no API key. |
-| `ai-image-gen` | $0.080 | Generate an AI image from a text prompt using DALL-E 3. Returns a public URL (valid 1h), revised prompt, and generation metadata. Supports vivid/natural style and three aspect ratios. 20% below nearest x402 competitor. |
-| `base-season` | $0.003 | Base chain season snapshot: total chain TVL, top 10 protocols by Base-native TVL, and trending tokens. |
-| `block-intel` | $0.002 | Block header data (number, hash, timestamp, gas used/limit, base fee, tx count) for Ethereum, Base, Polygon, Arbitrum. |
-| `breadcrumb-extractor` | $0.003 | Extracts structured breadcrumb navigation from a URL. Returns domain, ordered path segments, titles. |
-| `btc-game-theory` | $0.006 | Bitcoin mining game theory: selfish-mining threshold, 51% attack cost, fee-sniper window, difficulty adjustment. |
-| `btc-miner-econ` | $0.005 | Bitcoin mining economics via mempool.space: current hashrate, difficulty, block subsidy, fee rate percentiles. |
-| `btc-systems-theory` | $0.008 | Seven-lens systems-theory analysis of the Bitcoin network: difficulty, fee market, hash distribution, UTXO set, and more. |
-| `chromatic-dispersion` | $0.004 | Fiber optic chromatic dispersion calculator. Computes D(λ), pulse broadening, and maximum uncompensated link length. |
-| `citation-formatter` | $0.008 | Looks up a paper by DOI and formats it as BibTeX, APA, MLA, or Chicago. |
-| `city-lookup` | $0.010 | Search for cities and airports by keyword, IATA/ICAO code, or name. Optional country filter. Returns IATA, ICAO, city name, country, coordinates, timezone. |
-| `classic-novels` | $0.004 | Book lookup by title, author, or ISBN via Open Library. Returns metadata, subjects, and first-sentence excerpt. |
-| `drug-intel` | $0.008 | FDA drug safety intelligence: labeling (warnings, dosage, interactions, contraindications), adverse event summary (top FAERS reactions + total report count), and recall history. Brand or generic name. openFDA free API. |
-| `clinical-trials` | $0.008 | Search active and completed clinical trials from ClinicalTrials.gov. Filter by condition, intervention, phase, status. |
-| `code-api-surface` | $0.100 | Static analysis of any code snippet: HTTP routes (method + path + middleware), exported symbols. Supports Express, FastAPI, Flask, Spring Boot, NestJS, Gin. |
-| `code-test-detector` | $0.005 | Detects testing frameworks and test coverage presence in a code snippet or GitHub file URL. |
-| `commodity-futures` | $0.010 | Live price and intraday metrics for crude oil, gold, natural gas, wheat, copper, and silver front-month futures. |
-| `company-intel` | $0.012 | SEC EDGAR due diligence data for any US public company: filings, financials, executives, SIC classification. |
-| `concentration-risk-score` | $0.100 | HHI-based concentration-risk score for any x402 pay_to wallet. Returns unique payers, top-payer share, risk tier. |
-| `consumer-brief` | $0.350 | AI-synthesized US consumer health briefing. Fetches 8 FRED signals (Michigan sentiment, retail sales MoM, real PCE, real disposable income, savings rate, total/revolving consumer credit) and uses GPT-4o-mini to produce consumer posture, spending regime, confidence level, savings stress, credit dependency, 150-word narrative, dominant risk, and agent implication. One call collapses 8 FRED lookups + LLM synthesis for retail sector exposure, recession probability, and consumer credit risk. |
-| `country-info` | $0.002 | Country information by name, ISO code, or capital city: population, area, region, currencies, languages. |
-| `credit-spreads` | $0.008 | Current US corporate credit spreads: High Yield OAS, Investment Grade OAS, and BBB OAS from ICE BofA indices via FRED (free, no API key). Includes HY-IG differential and risk regime classification (tight/normal/wide/stress). Pairs with treasury-yields for full fixed-income discount rate construction. |
-| `crypto-fiat-price` | $0.015 | Cryptocurrency price in any fiat currency — JPY, EUR, CNY, GBP, KRW, INR, AUD, BRL, or 80+ more. Input a coin (bitcoin, eth, sol) and one or more currency codes. Includes 24h % change. 85% below specialized oracles. |
-| `crypto-news-impact` | $0.008 | Latest cryptocurrency news headlines from CoinDesk with live price correlation for mentioned assets. |
-| `crypto-top-movers` | $0.008 | Real-time cryptocurrency market snapshot: top 5 gainers and losers by 24-hour performance from CoinGecko. |
-| `db-perf-intel` | $0.003 | Database version, EOL status, and benchmark-grade performance characteristics for 12+ database engines. |
-| `defi-portfolio` | $0.007 | Multi-chain DeFi portfolio scanner: token holdings + USD values across Ethereum, Base, Polygon, Arbitrum. Free upstream: DRPC public RPCs + CoinGecko. |
-| `defi-market-pulse` | $0.006 | Combined DeFi yields + market movers + cross-signal correlation in one call. Flags 'boosted' pools (APY + rising token) vs 'at_risk' pools (APY + sell-off). 33% cheaper than separate calls. |
-| `defi-state-pack` | $0.008 | Ethereum block header + stablecoin depeg status + top DeFi yield pools in one call. Collapses 3-hop eth-block → stablecoin-watch → yield-farming chain. All upstreams fetched in parallel. Filter pools by chain, protocol, min TVL, min APY. |
-| `defi-yields` | $0.025 | Top DeFi yield pools ranked by APY from DeFiLlama. Covers 16,000+ pools across 80+ chains. |
-| `dex-pair-search` | $0.005 | Search DEX trading pairs for any token (symbol, name, or contract address) across 50+ chains. Returns price, 24h volume, buy/sell pressure, liquidity, and FDV per pair via DexScreener. |
-| `dex-trending-pools` | $0.015 | Trending DEX liquidity pools with buy/sell pressure data across multiple timeframes from GeckoTerminal. |
-| `dividend-intel` | $0.015 | Full dividend intelligence for any US equity: trailing 12-month yield, forward annual rate, payout frequency, 5-year CAGR, consecutive years paid/growth, and complete 5-year dividend history. Yahoo Finance chart API, no API key. |
-| `dns-lookup` | $0.003 | DNS record lookup via Cloudflare DoH. Supports A, AAAA, MX, TXT, NS, CNAME, SOA records. |
-| `document-qa-prep` | $0.005 | Prepares a document for RAG pipelines. Chunks input text, extracts entities, returns semantic summary. |
-| `domain-whois` | $0.006 | Domain WHOIS/RDAP lookup: registration date, expiration, registrar, name servers, status codes. |
-| `earnings-calendar` | $0.005 | Upcoming US stock earnings — report date, EPS estimate, pre/post-market timing. Filter by ticker or look N days ahead (1–90). Covers 6,500+ companies. |
-| `earthquake-intel` | $0.005 | Real-time earthquake intelligence from USGS. Fetch recent global significant quakes (M5.0+ last 7 days) or quakes near a lat/lon (M3.0+ within 500 km). Returns magnitude, depth, location, tsunami flag, and shake intensity. Free USGS FDSN API — no key required. |
-| `fact-check` | $0.500 | AI-powered claim verification. Searches DuckDuckGo, Wikipedia, Hacker News, and arXiv in parallel, then returns a structured verdict: confirmed / contradicted / uncertain, with confidence score (0–1), supporting and contradicting evidence excerpts with source URLs, and step-by-step reasoning. Use before an agent acts on a factual assertion. |
-| `fda-recall-watch` | $0.008 | FDA recall and enforcement search across drugs, food/cosmetics, and medical devices (85,000+ actions). Returns classification (Class I/II/III), recall reason, product description, status, and distribution pattern. Seam: fills the product-safety layer missing from drug-intel + company-due-diligence chains. No API key required. |
-| `federal-contract-intel` | $0.008 | US federal contract and grant intelligence via USASpending.gov. Returns top awards (award ID, amount, agency, description), agency breakdown, and total obligated amount for any company. Covers $10T+ in federal spending since 2007. Useful for procurement research, vendor due diligence, and competitive intelligence. No API key. |
-| `email-verify` | $0.006 | Email validation and quality scoring: RFC-5322 syntax, disposable detection, MX record check. |
-| `energy-brief` | $0.350 | AI-synthesized US energy market briefing. Gathers 7 FRED signals (WTI crude price, gasoline, Henry Hub natural gas, CPI Energy, PPI Oil & Gas, utilities output, electric power production) and uses GPT-4o-mini to produce energy regime label (energy_shock/elevated/normal/energy_glut/uncertain), dominant risk, agent implication, and 200-word narrative. One call replaces 7 FRED lookups + LLM synthesis — extends the macro intelligence suite to energy markets, critical for inflation analysis and commodity exposure. |
-| `equity-brief` | $0.350 | AI-synthesized equity situation brief for any US stock. Gathers price/52w range, RSI-14 + SMA20/50/200 trend regime, insider buy/sell activity (SEC EDGAR Form 4, 60 days), options IV30 + P/C ratio (CBOE), and next earnings date + EPS estimate — then GPT-4o-mini synthesizes a structured brief: regime label, bull/bear case, dominant risk, agent implication, 160-word narrative. Replaces a 4-call chain at $0.350. |
-| `equity-sentiment` | $0.015 | Equity market Fear & Greed composite. Four signals: VIX vs 90-day percentile, SPY vs 200-day moving average, US high-yield credit spread vs 90-day range (FRED BAMLH0A0HYM2), SPY RSI-14. Returns composite score 0–100 (0=extreme greed, 100=extreme fear) with regime label (EXTREME_GREED→EXTREME_FEAR) and per-signal breakdown. Distinct from market-sentiment (crypto). Use before sizing positions, adjusting portfolio risk, or routing capital. Free sources, no API keys. |
-| `equity-technicals` | $0.490 | Complete technical analysis package for any US stock: RSI(14), MACD, Bollinger Bands, support/resistance, volume trend. |
-| `eth-block` | $0.002 | Ethereum block header + transaction hashes by block number, hex, or tag (latest/pending/earliest/safe/finalized). |
-| `evm-log-events` | $0.004 | EVM contract event log query via eth_getLogs. Filter by contract address, event topic (Transfer/Approval/Swap/custom), and block range. Returns up to 50 decoded log entries with topics, data, tx hash, block number. Supports Ethereum/Base/Polygon/Arbitrum via free DRPC. 20% below market rate. |
-| `evm-nonce` | $0.002 | EVM address nonce lookup — confirmed and pending transaction count. Supports Ethereum, Base, Polygon, Arbitrum, Optimism. Use pending nonce when building new transactions. 33% below market rate. |
-| `evm-token-security` | $0.007 | Honeypot, rug-pull, and scam detection for any EVM token. Returns 0–100 risk score with individual factor breakdown. |
-| `flight-tracker` | $0.008 | Departures or arrivals at any major airport via OpenSky Network. Returns flight number, status, delay data. |
-| `fomc-tracker` | $0.008 | Current US Federal Funds Rate, next FOMC meeting date and countdown, rate trend (hiking/holding/cutting), and full 2026 schedule. FRED public CSV + static federalreserve.gov calendar — no API key. Pairs with treasury-yields and credit-spreads for complete fixed-income context. |
-| `forex-rates` | $0.005 | Real-time fiat foreign exchange rates for 160+ currencies. Base defaults to USD. |
-| `funding-rates` | $0.020 | Current perpetual funding rates for 200+ assets on Hyperliquid DEX, sorted by 8h rate. |
-| `gas-prices` | $0.005 | Current gas prices and EIP-1559 fee recommendations across Ethereum, Base, Polygon, Arbitrum, BSC, Avalanche. |
-| `generate-meme` | $0.005 | Generates a meme image from 211 built-in templates. Returns a direct PNG URL. |
-| `meme-generator` | $0.005 | Generate a meme image with topic-based template auto-selection. Provide text_top/text_bottom and a topic keyword; returns image URL. 211 templates, optional style variants. |
-| `geocode` | $0.003 | Forward and reverse geocoding via OpenStreetMap Nominatim. Returns coordinates, address components, bounding box. |
-| `github-repo-intel` | $0.010 | GitHub repository intelligence: stars, forks, open issues, language, license, last commit date. |
-| `gov-votes` | $0.004 | US Congressional vote records from GovTrack (113th Congress onward). Search by congress, chamber, category. |
-| `housing-brief` | $0.350 | AI-synthesized US housing market briefing. Fetches 8 FRED signals (housing starts, permits, existing/new sales, months supply, 30Y mortgage rate, Case-Shiller HPI, median price) and uses GPT-4o-mini to produce market phase, direction, supply posture, affordability regime, 150-word narrative, dominant risk, and agent implication. One call collapses 8 FRED lookups + LLM synthesis for REIT analysis, mortgage exposure, consumer wealth, and macro housing drag. |
-| `hn-search` | $0.010 | Hacker News story and comment search via Algolia. Returns titles, scores, comments, URLs. |
-| `http-headers` | $0.003 | HTTP response headers inspector and security grader for any public URL. |
-| `imf-country-outlook` | $0.006 | IMF World Economic Outlook forecasts for 180+ countries — current year + 3-year horizon. Returns GDP growth, CPI inflation, unemployment, current account (% GDP), government gross debt (% GDP), and fiscal balance (% GDP). Free IMF DataMapper API, no key required. Accepts ISO2 or ISO3 codes, up to 5 countries for comparison. Updated Apr/Oct with each WEO release. Distinct from world-bank-data (historical) — these are IMF forward projections. Use for sovereign risk, EM allocation, currency thesis, fiscal sustainability. |
-| `global-equity-indices` | $0.010 | Global equity snapshot: Nikkei 225, Hang Seng, ASX 200, Nifty 50, Shanghai Composite, FTSE 100, DAX, CAC 40, Euro Stoxx 50, and DXY. Returns current level, daily % change, 52-week range context, and region posture (bullish/mixed/bearish). Free Yahoo Finance, no API key. Overnight context for global macro and forex agents. |
-| `image-detect` | $0.040 | Detects the true image format of any URL via magic byte inspection — works even when the extension or Content-Type lies. Returns format (png/jpeg/gif/webp/avif/bmp/tiff/svg/ico), MIME type, content-type match flag, file size, and pixel dimensions for PNG/JPEG. 20% below x402node. |
-| `intel-pack` | $0.15 | Three-source intelligence pack in one x402 call: equity market snapshot (SPY/QQQ/IWM/VIX/risk signal) + top DeFi yield pools by APY + top prediction markets by volume. Replaces three separate calls; $0.175 purchased individually. |
-| `ip-intel` | $0.003 | Geolocation and network intelligence for IP addresses: country, city, ISP, ASN, timezone. |
-| `json-extract` | $0.004 | Extracts and parses JSON from mixed-content text, including LLM output with markdown code fences. |
-| `kimchi-premium` | $0.001 | Real-time Kimchi Premium for any Upbit-listed token: KRW price vs global USD spot (Kraken/OKX), FX-adjusted. Returns premium_percent and premium_direction. |
-| `korean-market-movers` | $0.010 | Real-time movers and volume-spike leaders across all KRW-denominated markets on Upbit. |
-| `labor-brief` | $0.350 | AI-synthesized US labor market briefing. Fetches 7 FRED signals (initial claims, continued claims, JOLTS openings, nonfarm payrolls MoM, unemployment rate, wage growth YoY, labor force participation + openings-per-unemployed ratio) and uses GPT-4o-mini to produce labor regime, wage pressure, claims trend, Fed posture signal, 150-word narrative, dominant risk, and agent implication. One call collapses 7 FRED lookups + LLM synthesis for wage inflation models, recession probability, and Fed policy forecasting. |
-| `labor-market` | $0.008 | US labor market leading indicators from FRED: initial jobless claims (weekly), continued claims, JOLTS job openings, nonfarm payrolls, labor force participation rate, average hourly earnings with YoY wage growth, and the Beveridge curve openings-per-unemployed ratio. No API key. |
-| `lbo-model` | $4.50 | Full leveraged buyout model: sources & uses, year-by-year operating model, debt schedule with cash sweep, IRR + MOIC, and 3×3 entry/exit multiple sensitivity tables. Pure computation — no API dependency. |
-| `legal-search` | $0.008 | Searches 5M+ US court opinions (SCOTUS, federal circuits, district courts, state courts) via CourtListener. |
-| `limitless-markets` | $0.006 | Active prediction markets from Limitless Exchange with current Yes/No prices and open interest. |
-| `macro-brief` | $0.350 | AI-synthesized US macroeconomic situation briefing. Gathers HY/IG credit spreads, yield curve, jobless claims, JOLTS, core PCE, and Fed Funds rate from FRED then uses GPT-4o-mini to synthesize a structured briefing: regime label, dominant risk, agent implication, and 200-word narrative. Replaces a 5+ step data + LLM chain. |
-| `macro-indicators` | $0.008 | Current US macroeconomic indicators: Fed Funds Rate, CPI, GDP growth, unemployment, yield curve from FRED. |
-| `manufacturing-brief` | $0.350 | AI-synthesized US manufacturing & industrial sector briefing. Gathers 7 FRED signals (Industrial Production, Capacity Utilization, Durable Goods Orders, Manufacturing Output, Manufacturing Employment, Inventory/Sales Ratio, PPI All Commodities) and uses GPT-4o-mini to produce manufacturing regime (expanding/growing/stagnant/contracting), dominant risk, agent implication, and 200-word narrative. Completes the macro intelligence suite alongside energy-brief, labor-brief, consumer-brief, and housing-brief. |
-| `market-intelligence` | $0.500 | Settlement-verified x402 endpoint intelligence: which endpoints have genuine organic payer breadth. |
-| `market-movers` | $0.004 | Today's top market movers — equity gainers, losers, most-active, and crypto gainers in one call. |
-| `market-overview` | $0.100 | Single-call market snapshot: SPY, QQQ, IWM, DIA price + intraday % change, VIX, BTC/ETH. |
-| `market-sentiment` | $0.015 | Combined crypto market sentiment: Crypto Fear & Greed Index + BTC dominance + altcoin season score. |
-| `news-sentiment` | $0.004 | Global news coverage and sentiment for any company, ticker, or topic (GDELT 250M+ articles + Google News fallback). Returns article count, avg tone score (−100 to +100), top headlines, and leading domains. 3-day default lookback (1–30 days). |
-| `hf-model-search` | $0.002 | Search HuggingFace Hub for ML models by keyword and task filter. Returns top results by downloads or likes with model ID, author, pipeline task, library, download count, and tags. 1M+ models indexed. |
-| `npm-lookup` | $0.007 | Node.js package metadata from npm: latest version, description, downloads, dependencies, repository. |
-| `options-snapshot` | $0.015 | Options intelligence snapshot for any US equity — IV30, put/call volume ratio, top calls and puts by volume, and unusual-volume flags (volume ≥ 2× open interest). Free CBOE delayed data (15-min delay), no API key. Complements us-stock-price and equity-technicals with the options-layer sentiment agents need for complete trade context. |
-| `page-intel` | $0.004 | Structured content extraction from any public URL: title, meta description, H1-H3 headings, links, text preview. |
-| `page-links` | $0.004 | Extracts all hyperlinks from any public webpage with internal/external classification. Filter by link type (all/external/internal), returns {href, text, is_external, domain}. 20% below orbisapi web-scrape-links. |
-| `ping` | $0.001 | Liveness + echo probe. Verifies the x402 payment rail end-to-end. |
-| `place-details` | $0.020 | Enriched place and business details by name (OSM Nominatim): website, phone, hours, address, coordinates. |
-| `policy-impact-mapper` | $0.007 | Analyzes regulatory and policy text to map impact across industry sectors. Returns affected sectors with justification. |
-| `polymarket-accuracy-score` | $0.004 | Historical Polymarket crowd accuracy score and Brier calibration by category (crypto, politics, sports, macro). |
-| `polymarket-category-performance` | $0.004 | Polymarket category activity breakdown: volume, liquidity, market count, and top market per category (crypto, politics, sports, ai, macro, equities). Shows where trading activity is concentrated. Optionally filter to one category. $0.004/call — 20% below closest x402 competitor. |
-| `polymarket-sentiment-shift` | $0.008 | Polymarket prediction markets with the biggest recent probability shifts. |
-| `portfolio-rebalance` | $0.005 | Pure-math portfolio rebalancing calculator. Given holdings and target allocations, returns trade instructions. |
-| `prediction-markets` | $0.050 | Top active Polymarket prediction markets sorted by trading volume with crowd probabilities. |
-| `prediction-stock-pulse` | $0.016 | One call: Limitless prediction markets + live equity price for a specified ticker. Collapses the prediction-market → stock-price agent chain (33% cheaper than buying both separately). |
-| `pypi-lookup` | $0.007 | Python package metadata from PyPI: latest version, summary, author, license, dependencies. |
-| `reddit-intel` | $0.012 | Reddit post and comment search by keyword. Returns top results with scores, subreddit, timestamps. |
-| `regex-tester` | $0.003 | Safe regex testing and extraction. Validates pattern, finds all matches with capture groups. |
-| `research-paper-search` | $0.003 | Academic paper search across 250M+ works via OpenAlex. Returns title, authors, year, DOI, open-access status. |
-| `research-synthesis` | $0.200 | AI-synthesized intelligence report from multiple sources — Hacker News, academic papers, Reddit, arXiv, and more. Returns executive summary, key findings, sentiment, trends, and recommendations. 20% below nearest competitor. |
-| `readable-content` | $0.004 | Extracts full readable text from any public URL as clean Markdown, stripped of navigation, ads, and boilerplate. Returns title, published date, and complete article body ready for LLM ingestion. |
-| `roast` | $0.040 | AI-generated witty roast of any target — person, company, product, code snippet, or concept. 3-5 sentences of sharp, clever humor. Style: dry (default), savage, sarcastic, or gentle. 75% below anchor-x402.com. |
-| `rss-reader` | $0.004 | Fetches and parses any public RSS 2.0 or Atom 1.0 feed. Returns feed metadata and recent items. |
-| `solana-token-risk` | $0.350 | Rug-pull and risk scanner for Solana SPL tokens via RugCheck. Returns mint risk score, top holders, freeze authority. |
-| `sports-prediction` | $0.005 | Today's sports games with team win-loss records, venue, broadcast info, and moneyline odds where available. |
-| `sports-scores` | $0.004 | Live and recent sports scores for NBA, NFL, MLB, NHL, MLS, EPL, La Liga, Bundesliga, Champions League, and more. |
-| `sec-filing-intel` | $0.015 | Real-time SEC EDGAR filing lookup by ticker or CIK. Returns company profile + recent filings (8-K, 10-K, 10-Q, Form 4, etc.) with EDGAR URLs. No API key. |
-| `sector-rotation` | $0.020 | S&P 500 sector rotation: relative performance of all 11 GICS sectors (XLK XLF XLE XLV XLI XLY XLP XLB XLRE XLU XLC) vs SPY benchmark. Returns 1D, 5D, 1M, and 3M absolute and relative returns, rotation signal per sector (LEADING, CATCHING_UP, FALLING_BEHIND, LAGGING), and 1M leadership ranking. Parameterizable: sort by any timeframe. Free Yahoo Finance, no API keys. |
-| `short-volume-intel` | $0.012 | Daily FINRA consolidated short-sale volume for any US equity: short volume, total volume, short ratio, and trend over the last N trading days. Free FINRA CDN, no API key. |
-| `solar-intel` | $0.020 | Solar irradiance and 7-day forecast for any location: GHI, DNI, DHI, peak sun hours, panel yield estimate (1 kW system), sunrise/sunset, cloud cover, and solar rating. Free via Open-Meteo. Undercuts stableenrich.dev/solar by 31%. |
-| `ssl-cert` | $0.004 | TLS/SSL certificate inspection for any HTTPS host: validity window, issuer, SANs, days until expiry. |
-| `stablecoin-watch` | $0.050 | Real-time depeg monitor for top USD stablecoins (USDT, USDC, DAI, USDS, and others). |
-| `stock-brief` | $0.015 | US equity snapshot + Limitless prediction market sentiment in one call. |
-| `stock-price-multi` | $0.018 | Batch US equity price lookup — up to 5 tickers in one call via Yahoo Finance. 83% cheaper than sequential single-ticker calls. |
-| `strategy-signal` | $0.006 | Technical analysis signal for US equities, ETFs, and crypto: RSI(14), MACD, Bollinger Bands, directional posture. |
-| `timezone` | $0.002 | Timezone intelligence using the IANA database (418 zones): current time, UTC offset, DST status. |
-| `treasury-yields` | $0.008 | Current US Treasury yield curve at 3M, 5Y, 10Y, and 30Y nodes from CBOE interest-rate indices (free, no API key). Includes 10Y-3M spread and curve shape classification. Essential for DCF discount rates, bond pricing, and recession signal monitoring. |
-| `tx-intel` | $0.006 | Decode and explain any EVM transaction: type (swap/transfer/approval/contract call), human-readable summary, token transfers from logs, gas cost, block context. Base/ETH/Arb/Optimism/Polygon/Avalanche/BSC. 40% below tx-explainer. |
-| `tx-explainer` | $0.014 | Decoded EVM transaction breakdown: sender, recipient, value, gas, method name, event logs. |
-| `unit-converter` | $0.002 | Converts between 100+ units across 12 categories: length, weight, temperature, volume, speed, and more. |
-| `us-stock-price` | $0.018 | Current US equity price and intraday metrics for any NYSE/NASDAQ ticker via Yahoo Finance. 22% below blockrun.ai. |
-| `stock-ohlcv` | $0.010 | Historical OHLCV candlestick data for any stock, ETF, or index. Intervals from 1-minute to monthly; ranges from 1-day to max history. Returns candles array, period high/low, and % change. Yahoo Finance, no API key. |
-| `wallet-balance` | $0.002 | Native EVM token balance and USD value for any wallet across 6 chains (ETH, Base, Polygon, Arbitrum, Optimism, BSC). Free via DRPC + CoinGecko. |
-| `wallet-credit-score` | $0.020 | Composite EVM wallet trust score 0–100 with tier classification (PRIME/ESTABLISHED/ACTIVE/SPARSE/DORMANT). Age, tx volume, token diversity, DeFi exposure. |
-| `wallet-screener` | $0.010 | Risk screening for EVM wallet addresses: 0–100 risk score, individual factor breakdown (age, tx count, exposure). |
-| `weather` | $0.010 | Current conditions and 7-day forecast for any location worldwide via Open-Meteo. |
-| `whale-radar` | $0.003 | Polymarket whale intelligence for any proxy wallet — recent trades, open positions, inferred tier (whale/shark/dolphin/minnow), and P&L summary. Collapses seerium.xyz + hugen.tokyo seam (451 settlements/wk). |
-| `web-change-monitor` | $0.005 | Content-change signals for any public URL: ETag, Last-Modified, Content-Length, response time. |
-| `web-scrape-links` | $0.004 | Extracts all hyperlinks from any public webpage. Returns absolute URLs with link text. Optional same-domain filter, deduplication, anchor inclusion. |
-| `web-company-intel` | $0.003 | Structured company intelligence from any public website: OpenGraph, schema.org, meta tags, social links. |
-| `world-bank-data` | $0.003 | World Bank open data — 1600+ development indicators for 200+ countries. GDP, poverty, health, education. |
-| `yield-farming-active` | $0.005 | Active DeFi yield farming pools sorted by 30-day average APY from DeFiLlama. |
-| `nft-metadata` | $0.002 | NFT metadata, traits, image URL, and collection floor price for any ERC-721/ERC-1155 token. Supports Ethereum, Polygon, Base, Arbitrum. Collapses OneSource Media-category seam. |
-| `address-security` | $0.007 | Wallet/address security and reputation check. Detects phishing, sanctions, cybercrime, money laundering, dark-web activity, and blacklisted wallets using GoPlus Labs + SlowMist + BlockSec data. |
-| `chain-pulse` | $0.006 | Returns an Ethereum block header + current stablecoin depeg status in one call. Collapses the eth-block → stablecoin-watch agent chain. All upstreams fetched in parallel. |
-| `company-due-diligence` | $0.007 | AI-agent due diligence on any company. Queries SEC EDGAR for public company data (CIK, ticker, SIC, address, filing history) with structured output. |
-| `crypto-pulse` | $0.007 | Crypto market pulse — latest Ethereum (or Base) block context plus top crypto gainers and losers by 24h change, in a single x402 call. |
-| `dex-swap-quote` | $0.012 | Best-route DEX swap quote across 20+ chains via Li.Fi aggregator. Returns expected output, exchange rate, gas cost, price impact, and route steps. |
-| `ens-lookup` | $0.004 | ENS name ↔ Ethereum address resolution. Forward: pass a .eth name to get the address, avatar, and social profile records. Reverse: pass a 0x address to get its primary ENS name. |
-| `erc20-snapshot` | $0.007 | Complete ERC20 token state in one call: name, symbol, decimals, total supply (raw + formatted), wallet balance, and allowances. Supports Ethereum, Base, Polygon, Arbitrum. |
-| `gas-estimate` | $0.003 | Multi-chain gas price oracle: fast/standard/slow Gwei + USD cost for a transfer. Chains: ethereum, base, polygon, arbitrum, bsc. |
-| `insider-trades` | $0.012 | Recent SEC Form 4 insider trading activity for any US public company. Returns who bought or sold (director, officer, 10%+ holder), transaction type, shares, and price. |
-| `social-intel` | $0.004 | Returns public profile data for any social platform account. Pass a profile URL (platform auto-detected) or platform + username. Covers GitHub, HackerNews, Reddit, npm, Twitter/X, and Open Graph fallback. |
+| `address-security` | $0.007 | Wallet/address security and reputation check |
+| `agent-access-check` | $0.006 | Checks whether a website is accessible and agent-friendly |
+| `agent-kya-score` | $0.003 | Know Your Agent (KYA) trust score for any EVM wallet |
+| `ai-image-gen` | $0.080 | Generate an AI image from a text prompt using DALL-E 3 |
+| `air-quality` | $0.002 | Real-time US AQI and pollutant readings for any lat/lon |
+| `analyst-ratings` | $0.010 | Wall Street analyst consensus and price targets for any US equity |
+| `base-season` | $0.003 | Base chain season snapshot: total chain TVL, top 10 protocols by Base-native TVL, category breakdown, 7d trend, and top Base ecosystem tokens by market cap |
+| `block-intel` | $0.002 | Returns block header data (number, hash, timestamp, gas used/limit, base fee, tx count, validator address) for any block on Base, Ethereum, or Arbitrum |
+| `breadcrumb-extractor` | $0.003 | Extracts structured breadcrumb navigation from a URL |
+| `btc-game-theory` | $0.006 | Bitcoin mining game theory and systems dynamics in one call |
+| `btc-miner-econ` | $0.005 | Bitcoin mining economics and fee-market game theory via mempool |
+| `btc-systems-theory` | $0.008 | Seven-lens systems theory analysis of the Bitcoin network |
+| `chain-pulse` | $0.006 | Returns an Ethereum block header + current stablecoin depeg status in one call |
+| `chromatic-dispersion` | $0.004 | Fiber optic chromatic dispersion calculator |
+| `citation-formatter` | $0.008 | Looks up an academic paper by DOI and formats it as BibTeX, APA, MLA, or Chicago citation |
+| `city-lookup` | $0.010 | Search airports and cities by keyword, IATA code, or city name |
+| `classic-novels` | $0.004 | Looks up classic and contemporary books by title, author, or ISBN via Open Library (748M+ editions) |
+| `clinical-trials` | $0.005 | Search ClinicalTrials |
+| `code-api-surface` | $0.10 | Analyzes a code snippet and returns its API surface: HTTP routes (method + path), exported symbols, and middleware |
+| `code-test-detector` | $0.005 | Detects testing frameworks and test coverage presence in a code snippet or GitHub repository |
+| `commodity-futures` | $0.010 | Returns live price and intraday metrics for major commodity futures: crude oil, natural gas, gold, silver, copper, platinum, wheat, corn, soybeans, and coffee |
+| `company-due-diligence` | $0.007 | AI-agent due diligence on any company |
+| `company-intel` | $0.012 | Returns SEC EDGAR due diligence data for any US public company by ticker symbol: legal name, CIK, SIC industry code and description, state of incorpor |
+| `concentration-risk-score` | $0.10 | Returns a concentration-risk score for an x402 pay_to wallet: HHI, unique payer count, top-payer share, persistence across scans, and a risk tier (LOW / MEDIUM / HIGH / CRITICAL) |
+| `congressional-trades` | $0.022 | US Congressional stock trades (STOCK Act disclosures) |
+| `consumer-brief` | $0.350 | AI-synthesized US consumer health briefing |
+| `country-info` | $0.002 | Country information lookup by name, ISO code (alpha-2 or alpha-3), or capital city |
+| `credit-spreads` | $0.008 | Returns current US corporate credit spreads from ICE BofA indices via FRED (free, no API key): High Yield OAS, Investment Grade OAS, and BBB (lowest IG tier) OAS |
+| `crypto-fear-greed` | $0.005 | Crypto Fear & Greed Index — current score (0=extreme fear, 100=extreme greed), 7-day trend, 30-day min/max/avg, and trading regime signal |
+| `crypto-fiat-price` | $0.015 | Cryptocurrency price in any fiat currency — JPY, EUR, CNY, GBP, KRW, INR, AUD, BRL, or 80+ more |
+| `crypto-news-impact` | $0.008 | Latest cryptocurrency news headlines from CoinDesk with live price correlation for mentioned assets |
+| `crypto-pulse` | $0.007 | Crypto market pulse — latest Ethereum (or Base) block context plus top crypto gainers and losers by 24h change, in a single call |
+| `crypto-top-movers` | $0.008 | Real-time cryptocurrency market snapshot: top 5 gainers and top 5 losers by 24-hour percentage change (among the top 100 coins by market cap), plus th |
+| `db-perf-intel` | $0.003 | Database performance intelligence: current versions, EOL status, and benchmark-grounded performance profiles for PostgreSQL, MySQL, MariaDB, MongoDB, |
+| `defi-market-pulse` | $0.006 | Combined DeFi yield intelligence and market momentum in one call — 33% cheaper than separate yield-farming-active + market-movers calls ($0 |
+| `defi-portfolio` | $0.007 | Multi-chain DeFi portfolio scanner |
+| `defi-state-pack` | $0.008 | Returns Ethereum block header + stablecoin depeg status + top DeFi yield farming pools in one call |
+| `defi-yields` | $0.025 | Returns top DeFi yield pools ranked by APY from DeFiLlama |
+| `dex-pair-search` | $0.005 | Search DEX trading pairs for any token (by symbol, name, or contract address) across 50+ chains including Ethereum, Solana, Base, BSC, Arbitrum, Polygon, and Avalanche |
+| `dex-swap-quote` | $0.012 | Best-route DEX swap quote across 20+ chains via Li |
+| `dex-trending-pools` | $0.015 | Trending DEX liquidity pools with buy/sell pressure data across multiple timeframes (5m, 1h, 6h, 24h) |
+| `dividend-calendar` | $0.008 | Upcoming dividend ex-dates from NASDAQ — all stocks going ex-dividend on a given date (default: today) or in the next 1–7 days |
+| `dividend-intel` | $0.015 | Full dividend intelligence for any US equity: trailing 12-month yield, forward annual rate, payout frequency (monthly/quarterly/semi-annual/annual), 5 |
+| `dns-lookup` | $0.003 | DNS record lookup for any domain via Cloudflare DoH |
+| `document-qa-prep` | $0.005 | Prepares a document for question-answering and RAG pipelines |
+| `domain-whois` | $0.006 | Domain WHOIS/RDAP lookup |
+| `drug-intel` | $0.008 | FDA drug intelligence: labeling (warnings, dosage, drug interactions, contraindications, indications), adverse event report summary (top reactions + total count), and recent recall history |
+| `earnings-calendar` | $0.005 | Upcoming US stock earnings — report date, EPS estimate, pre/post-market timing |
+| `earnings-surprises` | $0.010 | Historical EPS beat/miss data for any US equity: actual EPS, consensus estimate, surprise %, beat rate, estimate revisions (30-day EPS drift), and next earnings date |
+| `earthquake-intel` | $0.005 | Real-time earthquake intelligence from USGS |
+| `economic-calendar` | $0.010 | Upcoming US macro data release schedule: CPI, NFP, FOMC, GDP, PCE, PPI, JOLTS, Retail Sales, Housing Starts, and 20+ more releases with exact dates, times (ET), and market-impact priority |
+| `email-verify` | $0.006 | Email address validation and quality scoring |
+| `energy-brief` | $0.350 | AI-synthesized US energy market situation briefing |
+| `ens-lookup` | $0.004 | ENS name ↔ Ethereum address resolution |
+| `equity-brief` | $0.350 | AI-synthesized equity situation brief for any US stock |
+| `equity-fundamentals` | $0.015 | Fundamental valuation metrics for any US public company — P/E TTM, forward P/E, PEG, P/B, EV/EBITDA, margins, ROE, ROA, revenue TTM, earnings/revenue growth, free cash flow, market cap, beta |
+| `equity-sentiment` | $0.015 | Equity market Fear & Greed composite |
+| `equity-technicals` | $0.49 | Returns a complete technical analysis package for any US stock: RSI(14) with oversold/overbought signal, MACD(12/26/9) with histogram, Bollinger Bands |
+| `erc20-snapshot` | $0.007 | Complete ERC20 token state in one call: name, symbol, decimals, total supply (raw + formatted), wallet balance, and allowance |
+| `etf-holdings` | $0.018 | Top holdings, sector weights, and asset allocation for any US ETF (SPY, VOO, QQQ, AGG, XLK, etc |
+| `eth-block` | $0.002 | Returns an Ethereum block header and transaction hashes by block number, hex string, or tag (latest/pending/earliest/safe/finalized) |
+| `evm-log-events` | $0.004 | Query EVM contract event logs via eth_getLogs |
+| `evm-nonce` | $0.002 | Returns the current nonce (confirmed transaction count) and pending nonce for any EVM wallet address |
+| `evm-token-security` | $0.007 | Honeypot, rug-pull, and scam detection for any EVM token |
+| `fact-check` | $0.500 | AI-powered claim verification |
+| `fda-recall-watch` | $0.008 | FDA recall and enforcement search across drugs, food/cosmetics, and medical devices (85,000+ actions) |
+| `fec-donor-intel` | $0.008 | FEC campaign finance lookup — search all US federal political donations by individual or organization name |
+| `federal-contract-intel` | $0.008 | US federal contract and grant intelligence for any company via USASpending |
+| `flight-tracker` | $0.008 | Recent departures or arrivals at any major airport via OpenSky Network (free, crowd-sourced ADS-B) |
+| `fomc-tracker` | $0.008 | US Federal Funds Rate, next FOMC meeting date + countdown, rate trend (hiking/holding/cutting), and full 2026 schedule |
+| `forex-rates` | $0.005 | Real-time fiat foreign exchange rates |
+| `funding-rates` | $0.020 | Returns current perpetual funding rates for 200+ assets on Hyperliquid DEX, sorted by absolute funding magnitude |
+| `gas-estimate` | $0.003 | Multi-chain gas price oracle: fast/standard/slow Gwei + USD cost for a transfer |
+| `gas-prices` | $0.005 | Current gas prices and EIP-1559 fee recommendations across 6 major EVM chains: Ethereum, Base, Arbitrum, Optimism, Polygon, BNB Chain |
+| `generate-meme` | $0.005 | Generates a meme image from 211 built-in templates |
+| `geocode` | $0.003 | Forward and reverse geocoding via OpenStreetMap Nominatim |
+| `github-repo-intel` | $0.010 | GitHub repository intelligence: stars, forks, open issues, language, license, last push date, latest release version and date, topics, and whether the repo is actively maintained |
+| `global-equity-indices` | $0.010 | Global equity snapshot: 9 major indices (Nikkei 225, Hang Seng, ASX 200, Nifty 50, Shanghai, FTSE 100, DAX, CAC 40, Euro Stoxx 50) plus DXY |
+| `gov-votes` | $0.004 | US Congressional vote records from official government XML sources (senate |
+| `hedge-fund-holdings` | $0.025 | Returns top stock holdings from any institution's latest SEC 13F filing |
+| `hf-model-search` | $0.002 | Search HuggingFace Hub for ML models |
+| `hn-search` | $0.010 | Hacker News story and comment search via Algolia |
+| `housing-brief` | $0.350 | AI-synthesized US housing market briefing |
+| `http-headers` | $0.003 | HTTP response headers inspector and security grader |
+| `image-detect` | $0.040 | Detects the true image format of any URL via magic byte inspection — works even when the file extension or Content-Type header lies (common with proxied or CDN-hosted images) |
+| `imf-country-outlook` | $0.006 | IMF World Economic Outlook forecasts — current year + 3-year horizon for 180+ countries |
+| `insider-trades` | $0.012 | Recent SEC Form 4 insider trading activity for any US public company |
+| `intel-pack` | $0.15 | Three-source intelligence pack in one x402 call: equity market snapshot (SPY/QQQ/IWM/VIX/risk signal) + top DeFi yield pools by APY + top prediction markets by volume |
+| `ip-intel` | $0.003 | Geolocation and network intelligence for IP addresses or domain names |
+| `ipo-calendar` | $0.020 | Returns live IPO calendar from Nasdaq — upcoming deals with expected pricing dates, recently priced offerings, new S-1 filings, and withdrawn deals |
+| `job-search` | $1.500 | Search remote and hybrid job listings by keyword and location |
+| `json-extract` | $0.004 | Extracts and parses JSON from mixed-content text |
+| `kimchi-premium` | $0.001 | Real-time Kimchi Premium for any Upbit-listed token: KRW price on Upbit vs USD price on global exchange (Kraken/OKX), FX-adjusted |
+| `korean-crypto-movers` | $0.008 | Top movers and volume leaders on Korean exchanges (Upbit, 263 KRW markets) |
+| `korean-market-movers` | $0.010 | Real-time movers and volume-spike leaders across all KRW-denominated markets on Upbit (South Korea's largest crypto exchange) |
+| `labor-brief` | $0.350 | AI-synthesized US labor market briefing |
+| `labor-market` | $0.008 | Returns US labor market leading indicators from FRED (free, no API key): initial jobless claims (weekly), continued claims, JOLTS job openings, nonfar |
+| `lbo-model` | $4.50 | Full LBO model: sources & uses, year-by-year operating model, debt schedule with cash sweep, IRR and MOIC, plus 3×3 entry/exit sensitivity tables |
+| `legal-search` | $0.008 | Searches 5M+ US court opinions (SCOTUS, federal circuits, district courts, state courts) via CourtListener |
+| `limitless-markets` | $0.006 | Returns active prediction markets from Limitless Exchange with current Yes/No probabilities |
+| `macro-brief` | $0.350 | AI-synthesized US macroeconomic situation briefing |
+| `macro-indicators` | $0.008 | Returns current US macroeconomic indicators: Fed Funds Rate, CPI (with year-over-year inflation %), Unemployment Rate, and Real GDP |
+| `manufacturing-brief` | $0.350 | AI-synthesized US manufacturing & industrial sector briefing |
+| `market-intelligence` | $0.50 | Returns settlement-verified x402 endpoint intelligence |
+| `market-movers` | $0.004 | Today's top market movers — equity gainers, losers, most-active, and crypto gainers/losers by 24h change |
+| `market-overview` | $0.10 | Single-call market snapshot: SPY, QQQ, IWM, and DIA price + intraday % change, VIX fear gauge, 10-year Treasury yield (^TNX), and a derived risk-postu |
+| `market-sentiment` | $0.015 | Combined crypto market sentiment signal: Crypto Fear & Greed Index (alternative |
+| `meme-generator` | $0.005 | Generate a meme image URL from text |
+| `news-sentiment` | $0.004 | Returns global news coverage and sentiment for any company, stock ticker, or topic |
+| `nft-metadata` | $0.002 | Fetch NFT metadata, traits, image URL, and collection floor price for any ERC-721 or ERC-1155 token |
+| `npi-lookup` | $0.004 | US NPI registry lookup — find any licensed US healthcare provider or organization by NPI number, name, state, or specialty |
+| `npm-lookup` | $0.007 | Node |
+| `options-chain` | $0.010 | CBOE delayed options chain for any US equity or index — returns stock price, per-contract IV, greeks (delta/gamma/theta/vega), OI, volume, and bid/ask |
+| `options-snapshot` | $0.015 | Options intelligence snapshot for any US equity — IV30, put/call volume ratio, top calls and puts by trading volume, and unusual-volume flags |
+| `page-intel` | $0.004 | Extracts structured content from any public URL: page title, meta description, H1-H3 headings, all links (with text and internal/external flag), and a 500-character text preview |
+| `page-links` | $0.004 | Extracts all hyperlinks from a webpage |
+| `ping` | $0.001 | Liveness + echo probe |
+| `place-details` | $0.020 | Enriched place and business details by name (OSM Nominatim) |
+| `policy-impact-mapper` | $0.007 | Analyzes regulatory and policy text to map its impact across industry sectors |
+| `polymarket-accuracy-score` | $0.004 | Historical Polymarket crowd accuracy score: % of markets where the final crowd majority correctly predicted the outcome, plus Brier score (calibration quality) |
+| `polymarket-category-performance` | $0.004 | Polymarket category activity breakdown: volume, liquidity, market count, and top market per category (crypto, politics, sports, ai, macro, equities) |
+| `polymarket-sentiment-shift` | $0.008 | Returns Polymarket prediction markets with the biggest recent probability shifts — useful for detecting sudden consensus changes on elections, crypto prices, and macro outcomes |
+| `portfolio-rebalance` | $0.005 | Pure-math portfolio rebalancing calculator |
+| `prediction-markets` | $0.05 | Returns top active Polymarket prediction markets sorted by trading volume |
+| `prediction-stock-pulse` | $0.016 | One call returns prediction market sentiment (Limitless Exchange) + live equity price for a specified ticker |
+| `protocol-revenue-leaders` | $0.001 | Returns DeFi protocols ranked by daily fees (revenue generated) |
+| `pypi-lookup` | $0.007 | Python package metadata from PyPI |
+| `readable-content` | $0.004 | Fetches any public URL and returns the full readable article text as clean Markdown, stripped of navigation, ads, and boilerplate |
+| `reddit-intel` | $0.012 | Searches Reddit posts and/or comments by keyword |
+| `regex-tester` | $0.003 | Safe regex testing and extraction |
+| `research-paper-search` | $0.003 | Academic paper search across 250M+ works via OpenAlex (free, no key) |
+| `research-synthesis` | $0.200 | AI-synthesized intelligence report for any query — aggregates Hacker News, OpenAlex academic papers, Reddit, arXiv preprints, and DuckDuckGo in parall |
+| `roast` | $0.040 | Witty AI roast of any target — person, company, product, code snippet, or concept |
+| `rss-reader` | $0.004 | Fetches and parses any public RSS 2 |
+| `sanctions-screening` | $0.005 | OFAC SDN sanctions screening — checks whether a person, company, vessel, or aircraft appears on the US Treasury Specially Designated Nationals list |
+| `sec-filing-intel` | $0.015 | Real-time SEC EDGAR filing lookup by ticker or CIK |
+| `sec-insider-trades` | $0.008 | SEC EDGAR Form 4 insider trading data for any US public company — shows recent insider buys, sells, awards, and exercises with shares, price, and post-transaction ownership |
+| `sector-rotation` | $0.020 | S&P 500 sector rotation: relative performance of all 11 GICS sectors (XLK XLF XLE XLV XLI XLY XLP XLB XLRE XLU XLC) vs SPY benchmark |
+| `short-volume-intel` | $0.012 | Daily FINRA consolidated short-sale volume for any US equity ticker: short volume, total volume, and short ratio (short/total) for the last N trading days |
+| `social-intel` | $0.004 | Returns public profile data for any social platform account |
+| `solana-token-risk` | $0.35 | Rug-pull and risk scanner for Solana SPL tokens |
+| `solana-tx-explainer` | $0.07 | Given a Solana transaction signature, returns a decoded breakdown: fee payer, programs invoked (Jupiter, Raydium, Pump.fun, SPL Token, etc.), SPL toke |
+| `solar-intel` | $0.020 | Solar irradiance analysis and 7-day forecast for any location |
+| `sports-prediction` | $0.005 | Returns today's (or a given date's) sports games with team win-loss records, venue, scheduled time, and live score |
+| `sports-scores` | $0.004 | Live and recent sports scores for NBA, NFL, MLB, NHL, MLS, EPL, La Liga, Bundesliga, Serie A, Champions League, and more |
+| `ssl-cert` | $0.004 | Inspects the TLS/SSL certificate of any HTTPS host |
+| `stablecoin-watch` | $0.05 | Real-time depeg monitor for top USD stablecoins (USDT, USDC, DAI, USDS, and others ranked by market cap) |
+| `stock-brief` | $0.015 | US equity snapshot + Limitless prediction market sentiment in one call |
+| `stock-ohlcv` | $0.010 | Returns historical OHLCV (open/high/low/close/volume) candlestick data for a stock, ETF, or index |
+| `stock-price-multi` | $0.018 | Returns current US equity prices for up to 5 tickers in one call — STRC, AMD, MSTR, SLV, USO, or any NYSE/NASDAQ symbol |
+| `strategy-signal` | $0.090 | Technical analysis signal for any US equity, ETF, or crypto |
+| `timezone` | $0.002 | Timezone intelligence using the IANA database (418 zones) built into Node |
+| `token-top-holders` | $0.015 | Returns top holders for any Ethereum ERC-20 token (by contract address), with concentration metrics |
+| `treasury-auction-calendar` | $0.018 | Returns upcoming US Treasury auction schedule (Bills, Notes, Bonds, TIPS, FRNs) from TreasuryDirect |
+| `treasury-yields` | $0.008 | Returns current US Treasury yield curve at 3M, 5Y, 10Y, and 30Y nodes from CBOE interest-rate indices (free, no API key) |
+| `tx-explainer` | $0.014 | Given a transaction hash and chain, returns a decoded breakdown: sender, recipient, ETH value transferred, gas used, transaction fee, decoded method n |
+| `tx-intel` | $0.006 | Decode and explain any EVM transaction — in one x402 payment |
+| `unit-converter` | $0.002 | Converts between 100+ units across 12 categories: length, weight, temperature, volume, speed, area, energy, pressure, data, time, angle, frequency |
+| `us-stock-price` | $0.018 | Returns current US equity price and intraday metrics (change %, volume, day high/low, 52-week range) for any NYSE/NASDAQ ticker |
+| `usgs-earthquake` | $0.002 | Real-time global earthquake events from USGS |
+| `wallet-balance` | $0.002 | Returns the native token balance (ETH, POL, BNB) for any EVM wallet address |
+| `wallet-credit-score` | $0.020 | Composite credit score (0–100) for any EVM wallet |
+| `wallet-screener` | $0.010 | Risk screening for EVM wallet addresses |
+| `weather` | $0.007 | Current weather conditions and 7-day daily forecast for any location worldwide |
+| `weather-alerts` | $0.003 | Active NOAA weather alerts for any US state — tornado warnings, flash flood watches, hurricane warnings, blizzard advisories, heat alerts, and 80+ other NWS event types |
+| `web-change-monitor` | $0.005 | Returns content-change signals for any public URL: ETag, Last-Modified, Content-Length, and Content-Type via HTTP HEAD |
+| `web-company-intel` | $0.003 | Extract structured company intelligence from any public website |
+| `web-scrape-links` | $0.004 | Extracts all hyperlinks from any public webpage |
+| `whale-radar` | $0.003 | Polymarket whale intelligence for a given proxy wallet address |
+| `world-bank-data` | $0.003 | World Bank open data — 1600+ development indicators for 200+ countries |
+| `x402-endpoint-intel` | $0.020 | Market intelligence for any x402 endpoint or operator wallet |
+| `yield-farming-active` | $0.005 | Returns active DeFi yield farming pools sorted by 30-day average APY |
 
 ### Quick call (x402 flow)
 
@@ -181,6 +208,19 @@ curl https://the-stall.intuitek.ai/cap/us-stock-price?ticker=AAPL
 ```
 
 See the [x402 protocol spec](https://x402.org) for client SDKs (TypeScript, Python) that handle steps 2-3 automatically.
+
+### MCP (streamable HTTP)
+
+```json
+{
+  "mcpServers": {
+    "the-stall": {
+      "type": "streamable-http",
+      "url": "https://the-stall.intuitek.ai/mcp"
+    }
+  }
+}
+```
 
 ---
 
@@ -256,7 +296,7 @@ the-stall/
     ping.js                  liveness probe
     us-stock-price.js        US equity price + intraday metrics (Yahoo Finance)
     defi-portfolio.js        multi-chain wallet scanner (ETH/Base/Polygon/Arb)
-    ... 78 more capability modules (see /catalog)
+    ... 168 more capability modules (see /catalog)
 ```
 
 ## Quickstart (self-hosted)
@@ -291,12 +331,15 @@ Standard Node service. Set env vars (`WALLET_ADDRESS`, `X402_NETWORK=base`,
 - [x] `base_rpc` stream: no-auth on-chain settlement reader (Base public RPC)
 - [x] Concentration (few-payers path) producing real signals from live mainnet
 - [x] Wallet ownership verified (GATE 1) — Base mainnet, EIP-191 signature recovered
-- [x] **140 capabilities LIVE** at `https://the-stall.intuitek.ai` (Base mainnet, v3.99.0)
+- [x] **172 capabilities LIVE** at `https://the-stall.intuitek.ai` (Base mainnet, v4.27.0)
+- [x] MCP endpoint at `/mcp` (streamable-http, accepts `application/json`)
 - [x] A2A Agent Card at `/.well-known/agent.json`
 - [x] x402 discovery document at `/.well-known/x402`
+- [x] Official MCP registry: `ai.intuitek.the-stall/the-stall`
 - [x] Payment logging (JSONL) — every settled call recorded
 - [x] First settled call → x402 Bazaar seeded (block 46944973, Base mainnet, 2026-06-05)
 - [x] PROSPECTOR scout wired to heartbeat cadence (v0.4, 3.7M+ settlements archived)
+- [x] Listed on [Glama](https://glama.ai/mcp/servers/thebrierfox/the-stall)
 
 ---
 
