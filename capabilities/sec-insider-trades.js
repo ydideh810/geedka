@@ -147,12 +147,17 @@ function parseTransactions(xml) {
   return txns;
 }
 
-async function parseForm4(cik, accession) {
+async function parseForm4(cik, accession, primaryDoc) {
   const accNoDash = accession.replace(/-/g, "");
-  const xmlUrl = `https://www.sec.gov/Archives/edgar/data/${cik}/${accNoDash}/form4.xml`;
+  // primaryDoc may be "xslF345X06/wk-form4_xxx.xml" — strip any path prefix
+  const xmlFile = primaryDoc
+    ? primaryDoc.split("/").pop()
+    : "form4.xml";
+  const xmlUrl = `https://www.sec.gov/Archives/edgar/data/${cik}/${accNoDash}/${xmlFile}`;
   let xml;
   try {
     xml = await fetchText(xmlUrl);
+    if (xml.includes("<Error>") || xml.includes("NoSuchKey")) throw new Error("not found");
   } catch {
     return null;
   }
@@ -267,6 +272,7 @@ export default {
     const forms    = recent.form ?? [];
     const dates    = recent.filingDate ?? [];
     const accns    = recent.accessionNumber ?? [];
+    const pdocs    = recent.primaryDocument ?? [];
 
     // Filter to Form 4
     const form4Idxs = forms.reduce((arr, f, i) => {
@@ -282,16 +288,18 @@ export default {
     for (let i = 0; i < toFetch.length; i += 5) {
       const batch = toFetch.slice(i, i + 5);
       const results = await Promise.allSettled(
-        batch.map(idx => parseForm4(cik, accns[idx]).then(parsed => ({
+        batch.map(idx => parseForm4(cik, accns[idx], pdocs[idx]).then(parsed => ({
           filing_date: dates[idx],
           accession:   accns[idx],
+          primaryDoc:  pdocs[idx],
           parsed,
         })))
       );
       for (const r of results) {
         if (r.status === "fulfilled" && r.value.parsed) {
-          const { filing_date, accession, parsed } = r.value;
+          const { filing_date, accession, primaryDoc, parsed } = r.value;
           const accNoDash = accession.replace(/-/g, "");
+          const xmlFile = primaryDoc ? primaryDoc.split("/").pop() : "form4.xml";
           const txns = include_derivatives
             ? parsed.transactions
             : parsed.transactions.filter(t => !t.is_derivative);
@@ -305,7 +313,7 @@ export default {
             is_ten_pct_owner:  parsed.is_ten_pct_owner,
             officer_title:     parsed.officer_title,
             transactions:      txns,
-            form_url: `https://www.sec.gov/Archives/edgar/data/${cik}/${accNoDash}/form4.xml`,
+            form_url: `https://www.sec.gov/Archives/edgar/data/${cik}/${accNoDash}/${xmlFile}`,
           });
         }
       }
