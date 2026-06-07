@@ -15,7 +15,7 @@
 
 ---
 
-## Current capabilities — 128 live tools (v3.87.0)
+## Current capabilities — 129 live tools (v3.88.0)
 
 Full catalog at `/catalog`. Each capability is behind a per-call x402 paywall — no API keys, no accounts, no monthly fees. Pay USDC on Base mainnet per call.
 
@@ -92,6 +92,7 @@ Full catalog at `/catalog`. Each capability is behind a per-call x402 paywall �
 | `news-sentiment` | $0.004 | Global news coverage and sentiment for any company, ticker, or topic (GDELT 250M+ articles + Google News fallback). Returns article count, avg tone score (−100 to +100), top headlines, and leading domains. 3-day default lookback (1–30 days). |
 | `hf-model-search` | $0.002 | Search HuggingFace Hub for ML models by keyword and task filter. Returns top results by downloads or likes with model ID, author, pipeline task, library, download count, and tags. 1M+ models indexed. |
 | `npm-lookup` | $0.007 | Node.js package metadata from npm: latest version, description, downloads, dependencies, repository. |
+| `options-snapshot` | $0.015 | Options intelligence snapshot for any US equity — IV30, put/call volume ratio, top calls and puts by volume, and unusual-volume flags (volume ≥ 2× open interest). Free CBOE delayed data (15-min delay), no API key. Complements us-stock-price and equity-technicals with the options-layer sentiment agents need for complete trade context. |
 | `page-intel` | $0.004 | Structured content extraction from any public URL: title, meta description, H1-H3 headings, links, text preview. |
 | `page-links` | $0.004 | Extracts all hyperlinks from any public webpage with internal/external classification. Filter by link type (all/external/internal), returns {href, text, is_external, domain}. 20% below orbisapi web-scrape-links. |
 | `ping` | $0.001 | Liveness + echo probe. Verifies the x402 payment rail end-to-end. |
@@ -271,7 +272,7 @@ Standard Node service. Set env vars (`WALLET_ADDRESS`, `X402_NETWORK=base`,
 - [x] `base_rpc` stream: no-auth on-chain settlement reader (Base public RPC)
 - [x] Concentration (few-payers path) producing real signals from live mainnet
 - [x] Wallet ownership verified (GATE 1) — Base mainnet, EIP-191 signature recovered
-- [x] **123 capabilities LIVE** at `https://the-stall.intuitek.ai` (Base mainnet, v3.82.0)
+- [x] **129 capabilities LIVE** at `https://the-stall.intuitek.ai` (Base mainnet, v3.88.0)
 - [x] A2A Agent Card at `/.well-known/agent.json`
 - [x] x402 discovery document at `/.well-known/x402`
 - [x] Payment logging (JSONL) — every settled call recorded
