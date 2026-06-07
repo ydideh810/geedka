@@ -15,7 +15,7 @@
 
 ---
 
-## Current capabilities — 144 live tools (v4.3.0)
+## Current capabilities — 146 live tools (v4.4.0)
 
 Full catalog at `/catalog`. Each capability is behind a per-call x402 paywall — no API keys, no accounts, no monthly fees. Pay USDC on Base mainnet per call.
 
@@ -65,6 +65,7 @@ Full catalog at `/catalog`. Each capability is behind a per-call x402 paywall �
 | `email-verify` | $0.006 | Email validation and quality scoring: RFC-5322 syntax, disposable detection, MX record check. |
 | `energy-brief` | $0.350 | AI-synthesized US energy market briefing. Gathers 7 FRED signals (WTI crude price, gasoline, Henry Hub natural gas, CPI Energy, PPI Oil & Gas, utilities output, electric power production) and uses GPT-4o-mini to produce energy regime label (energy_shock/elevated/normal/energy_glut/uncertain), dominant risk, agent implication, and 200-word narrative. One call replaces 7 FRED lookups + LLM synthesis — extends the macro intelligence suite to energy markets, critical for inflation analysis and commodity exposure. |
 | `equity-brief` | $0.350 | AI-synthesized equity situation brief for any US stock. Gathers price/52w range, RSI-14 + SMA20/50/200 trend regime, insider buy/sell activity (SEC EDGAR Form 4, 60 days), options IV30 + P/C ratio (CBOE), and next earnings date + EPS estimate — then GPT-4o-mini synthesizes a structured brief: regime label, bull/bear case, dominant risk, agent implication, 160-word narrative. Replaces a 4-call chain at $0.350. |
+| `equity-sentiment` | $0.015 | Equity market Fear & Greed composite. Four signals: VIX vs 90-day percentile, SPY vs 200-day moving average, US high-yield credit spread vs 90-day range (FRED BAMLH0A0HYM2), SPY RSI-14. Returns composite score 0–100 (0=extreme greed, 100=extreme fear) with regime label (EXTREME_GREED→EXTREME_FEAR) and per-signal breakdown. Distinct from market-sentiment (crypto). Use before sizing positions, adjusting portfolio risk, or routing capital. Free sources, no API keys. |
 | `equity-technicals` | $0.490 | Complete technical analysis package for any US stock: RSI(14), MACD, Bollinger Bands, support/resistance, volume trend. |
 | `eth-block` | $0.002 | Ethereum block header + transaction hashes by block number, hex, or tag (latest/pending/earliest/safe/finalized). |
 | `evm-log-events` | $0.004 | EVM contract event log query via eth_getLogs. Filter by contract address, event topic (Transfer/Approval/Swap/custom), and block range. Returns up to 50 decoded log entries with topics, data, tx hash, block number. Supports Ethereum/Base/Polygon/Arbitrum via free DRPC. 20% below market rate. |
@@ -130,6 +131,7 @@ Full catalog at `/catalog`. Each capability is behind a per-call x402 paywall �
 | `sports-prediction` | $0.005 | Today's sports games with team win-loss records, venue, broadcast info, and moneyline odds where available. |
 | `sports-scores` | $0.004 | Live and recent sports scores for NBA, NFL, MLB, NHL, MLS, EPL, La Liga, Bundesliga, Champions League, and more. |
 | `sec-filing-intel` | $0.015 | Real-time SEC EDGAR filing lookup by ticker or CIK. Returns company profile + recent filings (8-K, 10-K, 10-Q, Form 4, etc.) with EDGAR URLs. No API key. |
+| `sector-rotation` | $0.020 | S&P 500 sector rotation: relative performance of all 11 GICS sectors (XLK XLF XLE XLV XLI XLY XLP XLB XLRE XLU XLC) vs SPY benchmark. Returns 1D, 5D, 1M, and 3M absolute and relative returns, rotation signal per sector (LEADING, CATCHING_UP, FALLING_BEHIND, LAGGING), and 1M leadership ranking. Parameterizable: sort by any timeframe. Free Yahoo Finance, no API keys. |
 | `short-volume-intel` | $0.012 | Daily FINRA consolidated short-sale volume for any US equity: short volume, total volume, short ratio, and trend over the last N trading days. Free FINRA CDN, no API key. |
 | `solar-intel` | $0.020 | Solar irradiance and 7-day forecast for any location: GHI, DNI, DHI, peak sun hours, panel yield estimate (1 kW system), sunrise/sunset, cloud cover, and solar rating. Free via Open-Meteo. Undercuts stableenrich.dev/solar by 31%. |
 | `ssl-cert` | $0.004 | TLS/SSL certificate inspection for any HTTPS host: validity window, issuer, SANs, days until expiry. |
