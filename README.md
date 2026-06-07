@@ -15,7 +15,7 @@
 
 ---
 
-## Current capabilities — 137 live tools (v3.96.0)
+## Current capabilities — 138 live tools (v3.97.0)
 
 Full catalog at `/catalog`. Each capability is behind a per-call x402 paywall — no API keys, no accounts, no monthly fees. Pay USDC on Base mainnet per call.
 
@@ -86,6 +86,7 @@ Full catalog at `/catalog`. Each capability is behind a per-call x402 paywall �
 | `json-extract` | $0.004 | Extracts and parses JSON from mixed-content text, including LLM output with markdown code fences. |
 | `kimchi-premium` | $0.001 | Real-time Kimchi Premium for any Upbit-listed token: KRW price vs global USD spot (Kraken/OKX), FX-adjusted. Returns premium_percent and premium_direction. |
 | `korean-market-movers` | $0.010 | Real-time movers and volume-spike leaders across all KRW-denominated markets on Upbit. |
+| `labor-brief` | $0.350 | AI-synthesized US labor market briefing. Fetches 7 FRED signals (initial claims, continued claims, JOLTS openings, nonfarm payrolls MoM, unemployment rate, wage growth YoY, labor force participation + openings-per-unemployed ratio) and uses GPT-4o-mini to produce labor regime, wage pressure, claims trend, Fed posture signal, 150-word narrative, dominant risk, and agent implication. One call collapses 7 FRED lookups + LLM synthesis for wage inflation models, recession probability, and Fed policy forecasting. |
 | `labor-market` | $0.008 | US labor market leading indicators from FRED: initial jobless claims (weekly), continued claims, JOLTS job openings, nonfarm payrolls, labor force participation rate, average hourly earnings with YoY wage growth, and the Beveridge curve openings-per-unemployed ratio. No API key. |
 | `lbo-model` | $4.50 | Full leveraged buyout model: sources & uses, year-by-year operating model, debt schedule with cash sweep, IRR + MOIC, and 3×3 entry/exit multiple sensitivity tables. Pure computation — no API dependency. |
 | `legal-search` | $0.008 | Searches 5M+ US court opinions (SCOTUS, federal circuits, district courts, state courts) via CourtListener. |
@@ -279,7 +280,7 @@ Standard Node service. Set env vars (`WALLET_ADDRESS`, `X402_NETWORK=base`,
 - [x] `base_rpc` stream: no-auth on-chain settlement reader (Base public RPC)
 - [x] Concentration (few-payers path) producing real signals from live mainnet
 - [x] Wallet ownership verified (GATE 1) — Base mainnet, EIP-191 signature recovered
-- [x] **137 capabilities LIVE** at `https://the-stall.intuitek.ai` (Base mainnet, v3.96.0)
+- [x] **138 capabilities LIVE** at `https://the-stall.intuitek.ai` (Base mainnet, v3.97.0)
 - [x] A2A Agent Card at `/.well-known/agent.json`
 - [x] x402 discovery document at `/.well-known/x402`
 - [x] Payment logging (JSONL) — every settled call recorded
