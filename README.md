@@ -15,7 +15,7 @@
 
 ---
 
-## Current capabilities — 138 live tools (v3.97.0)
+## Current capabilities — 139 live tools (v3.98.0)
 
 Full catalog at `/catalog`. Each capability is behind a per-call x402 paywall — no API keys, no accounts, no monthly fees. Pay USDC on Base mainnet per call.
 
@@ -62,6 +62,7 @@ Full catalog at `/catalog`. Each capability is behind a per-call x402 paywall �
 | `fda-recall-watch` | $0.008 | FDA recall and enforcement search across drugs, food/cosmetics, and medical devices (85,000+ actions). Returns classification (Class I/II/III), recall reason, product description, status, and distribution pattern. Seam: fills the product-safety layer missing from drug-intel + company-due-diligence chains. No API key required. |
 | `federal-contract-intel` | $0.008 | US federal contract and grant intelligence via USASpending.gov. Returns top awards (award ID, amount, agency, description), agency breakdown, and total obligated amount for any company. Covers $10T+ in federal spending since 2007. Useful for procurement research, vendor due diligence, and competitive intelligence. No API key. |
 | `email-verify` | $0.006 | Email validation and quality scoring: RFC-5322 syntax, disposable detection, MX record check. |
+| `energy-brief` | $0.350 | AI-synthesized US energy market briefing. Gathers 7 FRED signals (WTI crude price, gasoline, Henry Hub natural gas, CPI Energy, PPI Oil & Gas, utilities output, electric power production) and uses GPT-4o-mini to produce energy regime label (energy_shock/elevated/normal/energy_glut/uncertain), dominant risk, agent implication, and 200-word narrative. One call replaces 7 FRED lookups + LLM synthesis — extends the macro intelligence suite to energy markets, critical for inflation analysis and commodity exposure. |
 | `equity-brief` | $0.350 | AI-synthesized equity situation brief for any US stock. Gathers price/52w range, RSI-14 + SMA20/50/200 trend regime, insider buy/sell activity (SEC EDGAR Form 4, 60 days), options IV30 + P/C ratio (CBOE), and next earnings date + EPS estimate — then GPT-4o-mini synthesizes a structured brief: regime label, bull/bear case, dominant risk, agent implication, 160-word narrative. Replaces a 4-call chain at $0.350. |
 | `equity-technicals` | $0.490 | Complete technical analysis package for any US stock: RSI(14), MACD, Bollinger Bands, support/resistance, volume trend. |
 | `eth-block` | $0.002 | Ethereum block header + transaction hashes by block number, hex, or tag (latest/pending/earliest/safe/finalized). |
@@ -280,7 +281,7 @@ Standard Node service. Set env vars (`WALLET_ADDRESS`, `X402_NETWORK=base`,
 - [x] `base_rpc` stream: no-auth on-chain settlement reader (Base public RPC)
 - [x] Concentration (few-payers path) producing real signals from live mainnet
 - [x] Wallet ownership verified (GATE 1) — Base mainnet, EIP-191 signature recovered
-- [x] **138 capabilities LIVE** at `https://the-stall.intuitek.ai` (Base mainnet, v3.97.0)
+- [x] **139 capabilities LIVE** at `https://the-stall.intuitek.ai` (Base mainnet, v3.98.0)
 - [x] A2A Agent Card at `/.well-known/agent.json`
 - [x] x402 discovery document at `/.well-known/x402`
 - [x] Payment logging (JSONL) — every settled call recorded
