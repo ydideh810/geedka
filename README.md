@@ -15,7 +15,7 @@
 
 ---
 
-## Current capabilities — 129 live tools (v3.88.0)
+## Current capabilities — 130 live tools (v3.89.0)
 
 Full catalog at `/catalog`. Each capability is behind a per-call x402 paywall — no API keys, no accounts, no monthly fees. Pay USDC on Base mainnet per call.
 
@@ -57,6 +57,7 @@ Full catalog at `/catalog`. Each capability is behind a per-call x402 paywall �
 | `domain-whois` | $0.006 | Domain WHOIS/RDAP lookup: registration date, expiration, registrar, name servers, status codes. |
 | `earnings-calendar` | $0.005 | Upcoming US stock earnings — report date, EPS estimate, pre/post-market timing. Filter by ticker or look N days ahead (1–90). Covers 6,500+ companies. |
 | `fact-check` | $0.500 | AI-powered claim verification. Searches DuckDuckGo, Wikipedia, Hacker News, and arXiv in parallel, then returns a structured verdict: confirmed / contradicted / uncertain, with confidence score (0–1), supporting and contradicting evidence excerpts with source URLs, and step-by-step reasoning. Use before an agent acts on a factual assertion. |
+| `fda-recall-watch` | $0.008 | FDA recall and enforcement search across drugs, food/cosmetics, and medical devices (85,000+ actions). Returns classification (Class I/II/III), recall reason, product description, status, and distribution pattern. Seam: fills the product-safety layer missing from drug-intel + company-due-diligence chains. No API key required. |
 | `federal-contract-intel` | $0.008 | US federal contract and grant intelligence via USASpending.gov. Returns top awards (award ID, amount, agency, description), agency breakdown, and total obligated amount for any company. Covers $10T+ in federal spending since 2007. Useful for procurement research, vendor due diligence, and competitive intelligence. No API key. |
 | `email-verify` | $0.006 | Email validation and quality scoring: RFC-5322 syntax, disposable detection, MX record check. |
 | `equity-technicals` | $0.490 | Complete technical analysis package for any US stock: RSI(14), MACD, Bollinger Bands, support/resistance, volume trend. |
@@ -272,7 +273,7 @@ Standard Node service. Set env vars (`WALLET_ADDRESS`, `X402_NETWORK=base`,
 - [x] `base_rpc` stream: no-auth on-chain settlement reader (Base public RPC)
 - [x] Concentration (few-payers path) producing real signals from live mainnet
 - [x] Wallet ownership verified (GATE 1) — Base mainnet, EIP-191 signature recovered
-- [x] **129 capabilities LIVE** at `https://the-stall.intuitek.ai` (Base mainnet, v3.88.0)
+- [x] **130 capabilities LIVE** at `https://the-stall.intuitek.ai` (Base mainnet, v3.89.0)
 - [x] A2A Agent Card at `/.well-known/agent.json`
 - [x] x402 discovery document at `/.well-known/x402`
 - [x] Payment logging (JSONL) — every settled call recorded
