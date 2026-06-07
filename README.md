@@ -15,13 +15,14 @@
 
 ---
 
-## Current capabilities — 146 live tools (v4.4.0)
+## Current capabilities — 147 live tools (v4.5.0)
 
 Full catalog at `/catalog`. Each capability is behind a per-call x402 paywall — no API keys, no accounts, no monthly fees. Pay USDC on Base mainnet per call.
 
 | Capability | Price | Description |
 |---|---|---|
 | `agent-access-check` | $0.006 | Checks whether a website is accessible and agent-friendly. Fetches robots.txt, /.well-known/x402, and /.well-known/agent.json. |
+| `analyst-ratings` | $0.010 | Wall Street analyst consensus and price targets for any US equity. Returns buy/hold/sell breakdown, mean recommendation score (1=Strong Buy, 5=Strong Sell), analyst count, and price target range (low/mean/median/high) with upside-to-target. 4-month trend history. Free Yahoo Finance data, no API key. |
 | `ai-image-gen` | $0.080 | Generate an AI image from a text prompt using DALL-E 3. Returns a public URL (valid 1h), revised prompt, and generation metadata. Supports vivid/natural style and three aspect ratios. 20% below nearest x402 competitor. |
 | `base-season` | $0.003 | Base chain season snapshot: total chain TVL, top 10 protocols by Base-native TVL, and trending tokens. |
 | `block-intel` | $0.002 | Block header data (number, hash, timestamp, gas used/limit, base fee, tx count) for Ethereum, Base, Polygon, Arbitrum. |
