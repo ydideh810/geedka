@@ -159,7 +159,7 @@ export default {
     },
   },
 
-  async call({ ticker, limit = 25, transaction_type = "all", chamber = "all" }) {
+  async handler({ ticker, limit = 25, transaction_type = "all", chamber = "all" }) {
     const effectiveLimit = Math.min(Math.max(1, limit), 100);
     const txFilter   = (transaction_type ?? "all").toLowerCase();
     const chamFilter = (chamber ?? "all").toLowerCase();
