@@ -149,7 +149,7 @@ export default {
     },
   },
 
-  async run(_params) {
+  async handler(_params) {
     const [vixResult, spyResult, hyObs] = await Promise.all([
       fetchYF("^VIX", "3mo", "1d"),
       fetchYF("SPY",  "1y",  "1d"),

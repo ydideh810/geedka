@@ -111,7 +111,7 @@ export default {
     },
   },
 
-  async run(params) {
+  async handler(params) {
     const rankBy = params?.rank_by || "1m";
 
     // Fetch SPY + all 11 sectors in parallel
