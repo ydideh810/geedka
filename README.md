@@ -15,7 +15,7 @@
 
 ---
 
-## Current capabilities — 133 live tools (v3.92.0)
+## Current capabilities — 134 live tools (v3.93.0)
 
 Full catalog at `/catalog`. Each capability is behind a per-call x402 paywall — no API keys, no accounts, no monthly fees. Pay USDC on Base mainnet per call.
 
@@ -87,6 +87,7 @@ Full catalog at `/catalog`. Each capability is behind a per-call x402 paywall �
 | `lbo-model` | $4.50 | Full leveraged buyout model: sources & uses, year-by-year operating model, debt schedule with cash sweep, IRR + MOIC, and 3×3 entry/exit multiple sensitivity tables. Pure computation — no API dependency. |
 | `legal-search` | $0.008 | Searches 5M+ US court opinions (SCOTUS, federal circuits, district courts, state courts) via CourtListener. |
 | `limitless-markets` | $0.006 | Active prediction markets from Limitless Exchange with current Yes/No prices and open interest. |
+| `macro-brief` | $0.350 | AI-synthesized US macroeconomic situation briefing. Gathers HY/IG credit spreads, yield curve, jobless claims, JOLTS, core PCE, and Fed Funds rate from FRED then uses GPT-4o-mini to synthesize a structured briefing: regime label, dominant risk, agent implication, and 200-word narrative. Replaces a 5+ step data + LLM chain. |
 | `macro-indicators` | $0.008 | Current US macroeconomic indicators: Fed Funds Rate, CPI, GDP growth, unemployment, yield curve from FRED. |
 | `market-intelligence` | $0.500 | Settlement-verified x402 endpoint intelligence: which endpoints have genuine organic payer breadth. |
 | `market-movers` | $0.004 | Today's top market movers — equity gainers, losers, most-active, and crypto gainers in one call. |
@@ -275,7 +276,7 @@ Standard Node service. Set env vars (`WALLET_ADDRESS`, `X402_NETWORK=base`,
 - [x] `base_rpc` stream: no-auth on-chain settlement reader (Base public RPC)
 - [x] Concentration (few-payers path) producing real signals from live mainnet
 - [x] Wallet ownership verified (GATE 1) — Base mainnet, EIP-191 signature recovered
-- [x] **133 capabilities LIVE** at `https://the-stall.intuitek.ai` (Base mainnet, v3.92.0)
+- [x] **134 capabilities LIVE** at `https://the-stall.intuitek.ai` (Base mainnet, v3.93.0)
 - [x] A2A Agent Card at `/.well-known/agent.json`
 - [x] x402 discovery document at `/.well-known/x402`
 - [x] Payment logging (JSONL) — every settled call recorded
