@@ -7,9 +7,12 @@
 // Each POST /mcp request gets a fresh McpServer + transport (stateless mode).
 // This matches the MCP spec: no session state between calls.
 
+import { readFileSync } from "fs";
 import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
 import { StreamableHTTPServerTransport } from "@modelcontextprotocol/sdk/server/streamableHttp.js";
 import { z } from "zod";
+
+const { version: PKG_VERSION } = JSON.parse(readFileSync(new URL("../package.json", import.meta.url)));
 
 // Convert a single JSON Schema property descriptor to a Zod type
 function propToZod(prop) {
@@ -35,7 +38,7 @@ function buildZodShape(inputSchema) {
 // Build a fresh McpServer with all STALL capabilities registered as tools.
 // Called once per request (stateless transport requires fresh server per request).
 function buildServer(capabilities) {
-  const server = new McpServer({ name: "The Stall", version: "3.1.0" });
+  const server = new McpServer({ name: "The Stall", version: PKG_VERSION });
 
   for (const cap of capabilities) {
     const inputSchema = buildZodShape(cap.inputSchema);
@@ -65,6 +68,25 @@ function buildServer(capabilities) {
 // Attach with: app.post("/mcp", makeMcpHandler(capabilities))
 export function makeMcpHandler(capabilities) {
   return async (req, res) => {
+    // Normalize Accept header — StreamableHTTP requires both application/json and
+    // text/event-stream. Some conformance checkers send only application/json.
+    // @hono/node-server reads rawHeaders (not req.headers), so we must update both.
+    const accept = req.headers["accept"] || "";
+    if (!accept.includes("text/event-stream")) {
+      const normalized = accept
+        ? `${accept}, text/event-stream`
+        : "application/json, text/event-stream";
+      req.headers["accept"] = normalized;
+      // Update rawHeaders so @hono/node-server picks up the change
+      const rawIdx = req.rawHeaders.findIndex(
+        (h, i) => i % 2 === 0 && h.toLowerCase() === "accept"
+      );
+      if (rawIdx >= 0) {
+        req.rawHeaders[rawIdx + 1] = normalized;
+      } else {
+        req.rawHeaders.push("Accept", normalized);
+      }
+    }
     const server = buildServer(capabilities);
     try {
       const transport = new StreamableHTTPServerTransport({
