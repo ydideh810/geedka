@@ -15,7 +15,7 @@
 
 ---
 
-## Current capabilities — 124 live tools (v3.83.0)
+## Current capabilities — 125 live tools (v3.84.0)
 
 Full catalog at `/catalog`. Each capability is behind a per-call x402 paywall — no API keys, no accounts, no monthly fees. Pay USDC on Base mainnet per call.
 
@@ -95,6 +95,7 @@ Full catalog at `/catalog`. Each capability is behind a per-call x402 paywall �
 | `ping` | $0.001 | Liveness + echo probe. Verifies the x402 payment rail end-to-end. |
 | `place-details` | $0.020 | Enriched place and business details by name (OSM Nominatim): website, phone, hours, address, coordinates. |
 | `policy-impact-mapper` | $0.007 | Analyzes regulatory and policy text to map impact across industry sectors. Returns affected sectors with justification. |
+| `polymarket-accuracy-score` | $0.004 | Historical Polymarket crowd accuracy score and Brier calibration by category (crypto, politics, sports, macro). |
 | `polymarket-sentiment-shift` | $0.008 | Polymarket prediction markets with the biggest recent probability shifts. |
 | `portfolio-rebalance` | $0.005 | Pure-math portfolio rebalancing calculator. Given holdings and target allocations, returns trade instructions. |
 | `prediction-markets` | $0.050 | Top active Polymarket prediction markets sorted by trading volume with crowd probabilities. |
