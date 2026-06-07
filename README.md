@@ -15,7 +15,7 @@
 
 ---
 
-## Current capabilities — 142 live tools (v4.1.0)
+## Current capabilities — 143 live tools (v4.2.0)
 
 Full catalog at `/catalog`. Each capability is behind a per-call x402 paywall — no API keys, no accounts, no monthly fees. Pay USDC on Base mainnet per call.
 
@@ -83,6 +83,7 @@ Full catalog at `/catalog`. Each capability is behind a per-call x402 paywall �
 | `hn-search` | $0.010 | Hacker News story and comment search via Algolia. Returns titles, scores, comments, URLs. |
 | `http-headers` | $0.003 | HTTP response headers inspector and security grader for any public URL. |
 | `imf-country-outlook` | $0.006 | IMF World Economic Outlook forecasts for 180+ countries — current year + 3-year horizon. Returns GDP growth, CPI inflation, unemployment, current account (% GDP), government gross debt (% GDP), and fiscal balance (% GDP). Free IMF DataMapper API, no key required. Accepts ISO2 or ISO3 codes, up to 5 countries for comparison. Updated Apr/Oct with each WEO release. Distinct from world-bank-data (historical) — these are IMF forward projections. Use for sovereign risk, EM allocation, currency thesis, fiscal sustainability. |
+| `global-equity-indices` | $0.010 | Global equity snapshot: Nikkei 225, Hang Seng, ASX 200, Nifty 50, Shanghai Composite, FTSE 100, DAX, CAC 40, Euro Stoxx 50, and DXY. Returns current level, daily % change, 52-week range context, and region posture (bullish/mixed/bearish). Free Yahoo Finance, no API key. Overnight context for global macro and forex agents. |
 | `image-detect` | $0.040 | Detects the true image format of any URL via magic byte inspection — works even when the extension or Content-Type lies. Returns format (png/jpeg/gif/webp/avif/bmp/tiff/svg/ico), MIME type, content-type match flag, file size, and pixel dimensions for PNG/JPEG. 20% below x402node. |
 | `intel-pack` | $0.15 | Three-source intelligence pack in one x402 call: equity market snapshot (SPY/QQQ/IWM/VIX/risk signal) + top DeFi yield pools by APY + top prediction markets by volume. Replaces three separate calls; $0.175 purchased individually. |
 | `ip-intel` | $0.003 | Geolocation and network intelligence for IP addresses: country, city, ISP, ASN, timezone. |
