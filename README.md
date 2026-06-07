@@ -15,7 +15,7 @@
 
 ---
 
-## Current capabilities — 119 live tools (v3.77.0)
+## Current capabilities — 121 live tools (v3.78.0)
 
 Full catalog at `/catalog`. Each capability is behind a per-call x402 paywall — no API keys, no accounts, no monthly fees. Pay USDC on Base mainnet per call.
 
@@ -88,6 +88,7 @@ Full catalog at `/catalog`. Each capability is behind a per-call x402 paywall �
 | `hf-model-search` | $0.002 | Search HuggingFace Hub for ML models by keyword and task filter. Returns top results by downloads or likes with model ID, author, pipeline task, library, download count, and tags. 1M+ models indexed. |
 | `npm-lookup` | $0.007 | Node.js package metadata from npm: latest version, description, downloads, dependencies, repository. |
 | `page-intel` | $0.004 | Structured content extraction from any public URL: title, meta description, H1-H3 headings, links, text preview. |
+| `page-links` | $0.004 | Extracts all hyperlinks from any public webpage with internal/external classification. Filter by link type (all/external/internal), returns {href, text, is_external, domain}. 20% below orbisapi web-scrape-links. |
 | `ping` | $0.001 | Liveness + echo probe. Verifies the x402 payment rail end-to-end. |
 | `place-details` | $0.020 | Enriched place and business details by name (OSM Nominatim): website, phone, hours, address, coordinates. |
 | `policy-impact-mapper` | $0.007 | Analyzes regulatory and policy text to map impact across industry sectors. Returns affected sectors with justification. |
@@ -264,7 +265,7 @@ Standard Node service. Set env vars (`WALLET_ADDRESS`, `X402_NETWORK=base`,
 - [x] `base_rpc` stream: no-auth on-chain settlement reader (Base public RPC)
 - [x] Concentration (few-payers path) producing real signals from live mainnet
 - [x] Wallet ownership verified (GATE 1) — Base mainnet, EIP-191 signature recovered
-- [x] **120 capabilities LIVE** at `https://the-stall.intuitek.ai` (Base mainnet, v3.77.0)
+- [x] **121 capabilities LIVE** at `https://the-stall.intuitek.ai` (Base mainnet, v3.78.0)
 - [x] A2A Agent Card at `/.well-known/agent.json`
 - [x] x402 discovery document at `/.well-known/x402`
 - [x] Payment logging (JSONL) — every settled call recorded
