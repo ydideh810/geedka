@@ -2,33 +2,19 @@
 // x402 is moving fast (it just went to the Linux Foundation). Everything that
 // can churn is quarantined here so a protocol bump is a one-file edit.
 //
-// DEFAULT: legacy `x402-express` (installs cleanly today; matches the live
-//   Railway/Express/USDC-on-Base proof points in the wild as of 2026).
-// FUTURE:  the foundation-canonical `@x402/express` + x402ResourceServer +
-//   ExactEvmScheme. The migration shim is documented at the bottom.
+// CURRENT: foundation-canonical @x402/express v2 + x402ResourceServer + ExactEvmScheme.
+// Migrated from legacy x402-express (v1) on 2026-06-07 per x402scan v2 requirement.
 
-import { paymentMiddleware } from "x402-express";
+import { paymentMiddleware, x402ResourceServer } from "@x402/express";
+import { ExactEvmScheme } from "@x402/evm/exact/server";
+import { HTTPFacilitatorClient } from "@x402/core/server";
 import { getAuthHeaders } from "@coinbase/cdp-sdk/auth";
 
-/**
- * Convert a JSON Schema inputSchema to the queryParams format x402-express expects.
- * x402-express spreads `...inputSchema` into the HTTPRequestStructureSchema, so it
- * must be { queryParams: Record<string, string> } not the raw JSON Schema object.
- */
-function buildQueryParams(inputSchema) {
-  if (!inputSchema?.properties) return {};
-  return {
-    queryParams: Object.fromEntries(
-      Object.entries(inputSchema.properties).map(([name, prop]) => [
-        name,
-        prop.default !== undefined
-          ? String(prop.default)
-          : prop.type === "integer" || prop.type === "number"
-            ? "0"
-            : "string",
-      ])
-    ),
-  };
+// Convert legacy network names to CAIP-2 identifiers required by x402 v2.
+function toCAIP2(network) {
+  if (network === "base") return "eip155:8453";
+  if (network === "base-sepolia") return "eip155:84532";
+  return network;
 }
 
 /**
@@ -50,27 +36,23 @@ export function buildPaymentMiddleware({ payTo, network, facilitator, capabiliti
     );
   }
 
-  // Each capability becomes a paid GET route at /cap/<name>.
-  // The `config` block (description + schemas) is what surfaces the route in
-  // the x402 Bazaar discovery layer so agents can find and evaluate it.
-  // CDP facilitator enforces a 500-char max on the description field in paymentRequirements.
-  // Caps with longer descriptions trigger a 400 "invalid_request" at the verify step,
-  // causing the middleware to re-issue a 402 with an empty "error": {} body.
-  //
-  // inputSchema is passed as { queryParams: {...} } — HTTPRequestStructureSchema format.
-  // x402-express spreads `...inputSchema` into { type:"http", method:"GET", ...inputSchema },
-  // so passing the JSON Schema directly would clobber type:"http" with type:"object".
+  const caip2Network = toCAIP2(network);
+
+  // x402 v2 route config — each cap becomes a paid GET route at /cap/<name>.
+  // `accepts.price` uses the human-readable dollar string (e.g. "$0.007"); the
+  // scheme server resolves it to token atomic units via getDefaultAsset.
+  // Description is capped at 499 chars: CDP facilitator enforces a 500-char max.
   const routeConfig = {};
   for (const cap of capabilities) {
     routeConfig[`GET /cap/${cap.name}`] = {
-      price: cap.price,
-      network,
-      config: {
-        description: cap.description.slice(0, 499),
-        mimeType: "application/json",
-        inputSchema: buildQueryParams(cap.inputSchema),
-        outputSchema: cap.outputSchema,
+      accepts: {
+        scheme: "exact",
+        price: cap.price,
+        network: caip2Network,
+        payTo,
       },
+      description: cap.description.slice(0, 499),
+      mimeType: "application/json",
     };
   }
 
@@ -98,30 +80,10 @@ export function buildPaymentMiddleware({ payTo, network, facilitator, capabiliti
     };
   }
 
-  return paymentMiddleware(payTo, routeConfig, facilitatorConfig);
-}
+  // x402 v2: ResourceServer registers the ExactEvmScheme for the target network,
+  // then paymentMiddleware receives (routes, server) — no payTo/network at top level.
+  const resourceServer = new x402ResourceServer(new HTTPFacilitatorClient(facilitatorConfig))
+    .register(caip2Network, new ExactEvmScheme());
 
-/*
- * ── MIGRATION SHIM (foundation-canonical @x402/express) ───────────────────────
- * When you move to the Linux Foundation packages, replace the import + body above
- * with the pattern below. Nothing else in the codebase changes.
- *
- *   import { paymentMiddleware, x402ResourceServer } from "@x402/express";
- *   import { ExactEvmScheme } from "@x402/evm/exact/server";
- *   import { HTTPFacilitatorClient } from "@x402/core/server";
- *
- *   // network identifiers become CAIP-2: eip155:84532 (Base Sepolia), eip155:8453 (Base mainnet)
- *   const routeConfig = {};
- *   for (const cap of capabilities) {
- *     routeConfig[`GET /cap/${cap.name}`] = {
- *       accepts: { scheme: "exact", price: cap.price, network: caip2(network), payTo },
- *       description: cap.description,
- *       mimeType: "application/json",
- *     };
- *   }
- *   const resourceServer = new x402ResourceServer(
- *     new HTTPFacilitatorClient({ url: facilitator })
- *   ).register("eip155:*", new ExactEvmScheme());
- *   return paymentMiddleware(routeConfig, resourceServer);
- * ──────────────────────────────────────────────────────────────────────────────
- */
+  return paymentMiddleware(routeConfig, resourceServer);
+}

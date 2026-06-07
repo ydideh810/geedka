@@ -76,8 +76,8 @@ app.use(express.json());
 app.use((_req, res, next) => {
   res.header("Access-Control-Allow-Origin", "*");
   res.header("Access-Control-Allow-Methods", "GET, OPTIONS");
-  res.header("Access-Control-Allow-Headers", "Content-Type, X-PAYMENT, X-PAYMENT-RESPONSE");
-  res.header("Access-Control-Expose-Headers", "X-PAYMENT-RESPONSE");
+  res.header("Access-Control-Allow-Headers", "Content-Type, X-PAYMENT, X-PAYMENT-RESPONSE, PAYMENT-REQUIRED");
+  res.header("Access-Control-Expose-Headers", "X-PAYMENT-RESPONSE, PAYMENT-REQUIRED");
   next();
 });
 
@@ -207,7 +207,7 @@ app.get("/openapi.json", (_req, res) => {
                 schema: {
                   type: "object",
                   properties: {
-                    x402Version: { type: "integer", example: 1 },
+                    x402Version: { type: "integer", example: 2 },
                     error: { type: "string" },
                     accepts: { type: "array", items: { type: "object" } },
                   },
