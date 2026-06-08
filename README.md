@@ -17,7 +17,7 @@
 
 ---
 
-## Current capabilities — 177 live tools (v4.32.0)
+## Current capabilities — 178 live tools (v4.33.0)
 
 Full catalog at `/catalog`. Each capability is behind a per-call x402 paywall — no API keys, no accounts, no monthly fees. Pay USDC on Base mainnet per call.
 
@@ -58,6 +58,7 @@ Full catalog at `/catalog`. Each capability is behind a per-call x402 paywall �
 | `crypto-top-movers` | $0.008 | Real-time cryptocurrency market snapshot: top 5 gainers and top 5 losers by 24-hour percentage change (among the top 100 coins by market cap), plus th |
 | `db-perf-intel` | $0.003 | Database performance intelligence: current versions, EOL status, and benchmark-grounded performance profiles for PostgreSQL, MySQL, MariaDB, MongoDB, |
 | `defillama-coin-price` | $0.016 | On-chain aggregated token prices via DefiLlama coins API — coingecko IDs, contract addresses, or shorthand (eth, btc, sol). Up to 10 tokens per call. Undercuts blockrun.ai $0.021/call by 24%. |
+| `defillama-pack` | $0.024 | DeFi research pack: TVL, chain breakdown, fees, and native token price for 1–3 protocols in one call. Collapses defillama-protocol + defillama-coin-price 2-call chain at 70% of combined cost ($0.034→$0.024). |
 | `defillama-protocol` | $0.018 | DefiLlama protocol TVL, chain breakdown, 24h/7d change, fees, and metadata for any DeFi protocol (aave, uniswap-v3, lido, etc.). Undercuts blockrun.ai $0.022/call by 18%. |
 | `defi-market-pulse` | $0.006 | Combined DeFi yield intelligence and market momentum in one call — 33% cheaper than separate yield-farming-active + market-movers calls ($0 |
 | `defi-portfolio` | $0.007 | Multi-chain DeFi portfolio scanner |
