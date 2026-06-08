@@ -32,34 +32,39 @@ function toCAIP2(network) {
 // Build minimal example values for required inputSchema fields.
 // The CDP Bazaar validates info.queryParams against the schema's required array —
 // an empty {} fails required-field checks, silently excluding caps from indexing.
-// Also handles pattern, minimum, minLength, and minItems constraints.
+// Handles pattern, minimum, minLength, minItems, and nested object required fields.
+function exampleForProp(prop) {
+  if (prop.enum?.length > 0) return prop.enum[0];
+  if (prop.type === "number" || prop.type === "integer")
+    return typeof prop.minimum === "number" ? prop.minimum : 1;
+  if (prop.type === "boolean") return false;
+  if (prop.type === "array") {
+    const count = Math.max(prop.minItems ?? 0, 1);
+    const itemEx = prop.items ? exampleForProp(prop.items) : "example";
+    return Array.from({ length: count }, () => itemEx);
+  }
+  if (prop.type === "object" && prop.properties) {
+    const obj = {};
+    const req = new Set(prop.required || Object.keys(prop.properties));
+    for (const [k, v] of Object.entries(prop.properties)) {
+      if (req.has(k)) obj[k] = exampleForProp(v);
+    }
+    return obj;
+  }
+  // EVM address patterns (0x + 40 hex chars) — match any variant of the character class
+  if (prop.pattern && prop.pattern.includes("0x") && prop.pattern.includes("{40}"))
+    return "0x0000000000000000000000000000000000000000";
+  if (prop.minLength && prop.minLength > 7) return "A".repeat(prop.minLength);
+  return "example";
+}
+
 function buildExampleInput(inputSchema) {
   if (!inputSchema?.properties) return undefined;
   const required = new Set(inputSchema.required || []);
   if (required.size === 0) return undefined;
   const example = {};
   for (const [name, prop] of Object.entries(inputSchema.properties)) {
-    if (!required.has(name)) continue;
-    if (prop.enum?.length > 0) {
-      example[name] = prop.enum[0];
-    } else if (prop.type === "number" || prop.type === "integer") {
-      example[name] = typeof prop.minimum === "number" ? prop.minimum : 1;
-    } else if (prop.type === "boolean") {
-      example[name] = false;
-    } else if (prop.type === "array") {
-      const count = prop.minItems ?? 0;
-      const itemEx = prop.items?.type === "string" ? "AAPL"
-                   : prop.items?.type === "number"  ? 1
-                   : prop.items?.type === "object"  ? { name: "example", value: 1 }
-                   : "example";
-      example[name] = Array.from({ length: Math.max(count, 1) }, () => itemEx);
-    } else if (prop.pattern && /0x\[0-9a-fA-F\]/.test(prop.pattern)) {
-      example[name] = "0x0000000000000000000000000000000000000000";
-    } else if (prop.minLength && prop.minLength > 7) {
-      example[name] = "A".repeat(prop.minLength);
-    } else {
-      example[name] = "example";
-    }
+    if (required.has(name)) example[name] = exampleForProp(prop);
   }
   return Object.keys(example).length > 0 ? example : undefined;
 }
