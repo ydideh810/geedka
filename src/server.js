@@ -50,11 +50,54 @@ const LOG_DIR = join(__dir, "..", "logs");
 mkdirSync(LOG_DIR, { recursive: true });
 const PAYMENT_LOG = join(LOG_DIR, "payments.jsonl");
 const REQUEST_LOG = join(LOG_DIR, "requests.jsonl");
+const SETTLEMENT_LOG = join(LOG_DIR, "settlement.jsonl");
 
 function logPaidCall(capName, price, query, statusCode, ip) {
   try {
     const entry = JSON.stringify({ ts: new Date().toISOString(), cap: capName, price, query, status: statusCode, ip: ip || "unknown" });
     appendFileSync(PAYMENT_LOG, entry + "\n");
+  } catch (_) { /* never crash on log failure */ }
+}
+
+// Settlement-grade log — payer address + tx hash per paid call.
+// Required so "first organic revenue" alerts can only fire on chain-verified data.
+// xPayment:  raw X-PAYMENT request header (Base64 JSON, contains EIP-3009 authorization)
+// xPayResp:  raw X-PAYMENT-RESPONSE response header (Base64 JSON, contains settlement receipt)
+function logSettlement(capName, price, query, statusCode, ip, xPayment, xPayResp) {
+  try {
+    let payer = null;
+    let txHash = null;
+    let receiptRaw = null;
+
+    if (xPayResp) {
+      try {
+        receiptRaw = JSON.parse(Buffer.from(String(xPayResp), "base64").toString("utf8"));
+        txHash = receiptRaw?.transaction ?? receiptRaw?.txHash ?? receiptRaw?.tx_hash ?? null;
+        payer = receiptRaw?.payer ?? null;
+      } catch { /* keep null — format may evolve */ }
+    }
+
+    if (!payer && xPayment) {
+      try {
+        const decoded = JSON.parse(Buffer.from(String(xPayment), "base64").toString("utf8"));
+        payer = decoded?.payload?.authorization?.from
+          ?? decoded?.payload?.from
+          ?? decoded?.from
+          ?? null;
+      } catch { /* keep null */ }
+    }
+
+    const entry = JSON.stringify({
+      ts: new Date().toISOString(),
+      cap: capName,
+      price,
+      status: statusCode,
+      ip: ip || "unknown",
+      payer,
+      tx_hash: txHash,
+      receipt: receiptRaw,
+    });
+    appendFileSync(SETTLEMENT_LOG, entry + "\n");
   } catch (_) { /* never crash on log failure */ }
 }
 
@@ -490,12 +533,34 @@ app.use(buildPaymentMiddleware({ payTo: PAY_TO, network: NETWORK, facilitator: F
 
 for (const cap of capabilities) {
   app.get(`/cap/${cap.name}`, async (req, res) => {
+    const xPayment = req.headers["x-payment"] || null;
+
+    // Validate required params AFTER x402 payment — probe calls never reach here
+    // (they hit 402 from the middleware above). Missing params on a paid call = 400.
+    const required = cap.inputSchema?.required || [];
+    const missing = required.filter(p => req.query[p] === undefined || req.query[p] === "");
+    if (missing.length > 0) {
+      const xPayResp = res.getHeader("x-payment-response") || null;
+      logPaidCall(cap.name, cap.price, req.query, 400, req.ip);
+      logSettlement(cap.name, cap.price, req.query, 400, req.ip, xPayment, xPayResp);
+      return res.status(400).json({
+        error: "missing_required_params",
+        capability: cap.name,
+        missing,
+        message: `Required parameters: ${missing.join(", ")}`,
+      });
+    }
+
     try {
       const out = await cap.handler(req.query, { req });
+      const xPayResp = res.getHeader("x-payment-response") || null;
       logPaidCall(cap.name, cap.price, req.query, 200, req.ip);
+      logSettlement(cap.name, cap.price, req.query, 200, req.ip, xPayment, xPayResp);
       res.json(out);
     } catch (err) {
+      const xPayResp = res.getHeader("x-payment-response") || null;
       logPaidCall(cap.name, cap.price, req.query, 500, req.ip);
+      logSettlement(cap.name, cap.price, req.query, 500, req.ip, xPayment, xPayResp);
       res.status(500).json({ error: "capability_error", capability: cap.name, message: String(err?.message || err) });
     }
   });
