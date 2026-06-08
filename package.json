@@ -1,7 +1,7 @@
 {
   "name": "the-stall",
   "version": "4.27.0",
-  "description": "Domain-agnostic x402 capability chassis + PROSPECTOR [REDACTED]. The Stall is the empty seat in the agentic bazaar; PROSPECTOR is the four-stream scout that decides what to put in it.",
+  "description": "172 pay-per-call AI data tools via MCP and x402 — no API keys required. US stocks, crypto/DeFi analytics, macro indicators, sanctions screening, prediction markets, and 160+ more. USDC on Base.",
   "type": "module",
   "main": "src/server.js",
   "scripts": {
