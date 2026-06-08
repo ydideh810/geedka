@@ -32,6 +32,7 @@ function toCAIP2(network) {
 // Build minimal example values for required inputSchema fields.
 // The CDP Bazaar validates info.queryParams against the schema's required array —
 // an empty {} fails required-field checks, silently excluding caps from indexing.
+// Also handles pattern, minimum, minLength, and minItems constraints.
 function buildExampleInput(inputSchema) {
   if (!inputSchema?.properties) return undefined;
   const required = new Set(inputSchema.required || []);
@@ -39,11 +40,26 @@ function buildExampleInput(inputSchema) {
   const example = {};
   for (const [name, prop] of Object.entries(inputSchema.properties)) {
     if (!required.has(name)) continue;
-    if (prop.enum?.length > 0) example[name] = prop.enum[0];
-    else if (prop.type === "number" || prop.type === "integer") example[name] = 0;
-    else if (prop.type === "boolean") example[name] = false;
-    else if (prop.type === "array") example[name] = [];
-    else example[name] = "example";
+    if (prop.enum?.length > 0) {
+      example[name] = prop.enum[0];
+    } else if (prop.type === "number" || prop.type === "integer") {
+      example[name] = typeof prop.minimum === "number" ? prop.minimum : 1;
+    } else if (prop.type === "boolean") {
+      example[name] = false;
+    } else if (prop.type === "array") {
+      const count = prop.minItems ?? 0;
+      const itemEx = prop.items?.type === "string" ? "AAPL"
+                   : prop.items?.type === "number"  ? 1
+                   : prop.items?.type === "object"  ? { name: "example", value: 1 }
+                   : "example";
+      example[name] = Array.from({ length: Math.max(count, 1) }, () => itemEx);
+    } else if (prop.pattern && /0x\[0-9a-fA-F\]/.test(prop.pattern)) {
+      example[name] = "0x0000000000000000000000000000000000000000";
+    } else if (prop.minLength && prop.minLength > 7) {
+      example[name] = "A".repeat(prop.minLength);
+    } else {
+      example[name] = "example";
+    }
   }
   return Object.keys(example).length > 0 ? example : undefined;
 }
