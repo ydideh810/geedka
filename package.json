@@ -1,7 +1,7 @@
 {
   "name": "the-stall",
-  "version": "4.35.0",
-  "description": "182 pay-per-call AI data tools via MCP and x402 — no API keys required. US stocks, international equities (EU/UK/JP/AU), DefiLlama research pack (TVL+price in one call), crypto/DeFi analytics, macro indicators, global news intelligence, sanctions screening, Polymarket prediction markets, Wikipedia, arXiv, and 169+ more. USDC on Base.",
+  "version": "4.36.0",
+  "description": "183 pay-per-call AI data tools via MCP and x402 — no API keys required. US stocks, international equities (EU/UK/JP/AU), social momentum intelligence (Reddit+HN+GitHub in one call), DefiLlama research pack, crypto/DeFi analytics, macro indicators, global news, sanctions screening, Polymarket, Wikipedia, arXiv, and 170+ more. USDC on Base.",
   "type": "module",
   "main": "src/server.js",
   "scripts": {
