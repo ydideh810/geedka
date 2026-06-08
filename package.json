@@ -1,7 +1,7 @@
 {
   "name": "the-stall",
-  "version": "4.28.0",
-  "description": "173 pay-per-call AI data tools via MCP and x402 — no API keys required. US stocks, crypto/DeFi analytics, macro indicators, sanctions screening, Polymarket prediction markets, and 160+ more. USDC on Base.",
+  "version": "4.29.0",
+  "description": "174 pay-per-call AI data tools via MCP and x402 — no API keys required. US stocks, crypto/DeFi analytics, macro indicators, sanctions screening, Polymarket prediction markets, and 161+ more. USDC on Base.",
   "type": "module",
   "main": "src/server.js",
   "scripts": {
