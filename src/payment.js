@@ -29,6 +29,25 @@ function toCAIP2(network) {
  * @param {Array}  opts.capabilities Loaded capability modules (see capabilities/_TEMPLATE.js).
  * @returns {Function} express middleware
  */
+// Build minimal example values for required inputSchema fields.
+// The CDP Bazaar validates info.queryParams against the schema's required array —
+// an empty {} fails required-field checks, silently excluding caps from indexing.
+function buildExampleInput(inputSchema) {
+  if (!inputSchema?.properties) return undefined;
+  const required = new Set(inputSchema.required || []);
+  if (required.size === 0) return undefined;
+  const example = {};
+  for (const [name, prop] of Object.entries(inputSchema.properties)) {
+    if (!required.has(name)) continue;
+    if (prop.enum?.length > 0) example[name] = prop.enum[0];
+    else if (prop.type === "number" || prop.type === "integer") example[name] = 0;
+    else if (prop.type === "boolean") example[name] = false;
+    else if (prop.type === "array") example[name] = [];
+    else example[name] = "example";
+  }
+  return Object.keys(example).length > 0 ? example : undefined;
+}
+
 export function buildPaymentMiddleware({ payTo, network, facilitator, capabilities }) {
   if (!payTo || !/^0x[a-fA-F0-9]{40}$/.test(payTo)) {
     throw new Error(
@@ -57,6 +76,7 @@ export function buildPaymentMiddleware({ payTo, network, facilitator, capabiliti
       extensions: declareDiscoveryExtension({
         method: "GET",
         inputSchema: cap.inputSchema || { type: "object", properties: {} },
+        input: buildExampleInput(cap.inputSchema),
       }),
     };
   }
