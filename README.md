@@ -17,7 +17,7 @@
 
 ---
 
-## Current capabilities — 172 live tools (v4.27.0)
+## Current capabilities — 173 live tools (v4.28.0)
 
 Full catalog at `/catalog`. Each capability is behind a per-call x402 paywall — no API keys, no accounts, no monthly fees. Pay USDC on Base mainnet per call.
 
@@ -144,6 +144,7 @@ Full catalog at `/catalog`. Each capability is behind a per-call x402 paywall �
 | `policy-impact-mapper` | $0.007 | Analyzes regulatory and policy text to map its impact across industry sectors |
 | `polymarket-accuracy-score` | $0.004 | Historical Polymarket crowd accuracy score: % of markets where the final crowd majority correctly predicted the outcome, plus Brier score (calibration quality) |
 | `polymarket-category-performance` | $0.004 | Polymarket category activity breakdown: volume, liquidity, market count, and top market per category (crypto, politics, sports, ai, macro, equities) |
+| `polymarket-intel` | $0.003 | Top active Polymarket prediction markets by trading volume — question, Yes/No probability, 24h volume, liquidity, 1d/1wk price change, resolution date |
 | `polymarket-sentiment-shift` | $0.008 | Returns Polymarket prediction markets with the biggest recent probability shifts — useful for detecting sudden consensus changes on elections, crypto prices, and macro outcomes |
 | `portfolio-rebalance` | $0.005 | Pure-math portfolio rebalancing calculator |
 | `prediction-markets` | $0.05 | Returns top active Polymarket prediction markets sorted by trading volume |
@@ -296,7 +297,7 @@ the-stall/
     ping.js                  liveness probe
     us-stock-price.js        US equity price + intraday metrics (Yahoo Finance)
     defi-portfolio.js        multi-chain wallet scanner (ETH/Base/Polygon/Arb)
-    ... 168 more capability modules (see /catalog)
+    ... 169 more capability modules (see /catalog)
 ```
 
 ## Quickstart (self-hosted)
@@ -331,7 +332,7 @@ Standard Node service. Set env vars (`WALLET_ADDRESS`, `X402_NETWORK=base`,
 - [x] `base_rpc` stream: no-auth on-chain settlement reader (Base public RPC)
 - [x] Concentration (few-payers path) producing real signals from live mainnet
 - [x] Wallet ownership verified (GATE 1) — Base mainnet, EIP-191 signature recovered
-- [x] **172 capabilities LIVE** at `https://the-stall.intuitek.ai` (Base mainnet, v4.27.0)
+- [x] **173 capabilities LIVE** at `https://the-stall.intuitek.ai` (Base mainnet, v4.28.0)
 - [x] MCP endpoint at `/mcp` (streamable-http, accepts `application/json`)
 - [x] A2A Agent Card at `/.well-known/agent.json`
 - [x] x402 discovery document at `/.well-known/x402`
