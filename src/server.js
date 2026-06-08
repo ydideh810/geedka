@@ -392,6 +392,18 @@ app.get("/.well-known/mcp/server-card.json", (_req, res) =>
   })
 );
 
+// ── mcpub.dev domain verification ─────────────────────────────────────────────
+app.get("/.well-known/mcp.json", (_req, res) =>
+  res.json({
+    name: "The Stall",
+    mcp_endpoint: `${BASE_URL}/mcp`,
+    version: PKG_VERSION,
+    description: `${capabilities.length} pay-per-call AI capabilities via x402 on Base mainnet. Finance, crypto, DeFi, macro, compliance, OSINT. No API keys.`,
+    provider: "IntuiTek¹",
+    contact: "kyle@intuitek.ai",
+  })
+);
+
 // ── Public landing page — live traction signal ────────────────────────────────
 app.get("/", (_req, res) => {
   const stats = readPaymentStats();
