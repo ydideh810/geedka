@@ -1,51 +1,69 @@
 {
-  "live_cap_count": 175,
-  "live_version": "4.30.0",
-  "last_deploy_ts": "2026-06-08T10:55:35.954230+00:00",
-  "last_updated": "2026-06-08T10:55:36.875948+00:00",
-  "tunnel_alive": true,
-  "claim_registry": {
-    "readme": {
-      "cap_count": 175,
-      "version": "4.30.0",
-      "published_at": "2026-06-08T10:55:36.768258+00:00",
-      "notes": "README.md cap-count line updated and staged"
-    },
-    "punkpeye_pr": {
-      "cap_count": 175,
-      "version": "4.30.0",
-      "published_at": "2026-06-08T10:55:35.954230+00:00",
-      "notes": "Bootstrapped to 175/v4.30.0 (global-news-intel) \u2014 reconciled from 173/v4.28.0"
-    },
-    "ai4finance_pr": {
-      "cap_count": 175,
-      "version": "4.30.0",
-      "published_at": "2026-06-08T10:55:35.954230+00:00",
-      "notes": "Bootstrapped to 175/v4.30.0 (global-news-intel) \u2014 reconciled from 173/v4.28.0"
-    },
-    "commit": {
-      "cap_count": 175,
-      "version": "4.30.0",
-      "published_at": "2026-06-08T10:55:35.954230+00:00",
-      "notes": "Bootstrapped to 175/v4.30.0 (global-news-intel) \u2014 reconciled from 173/v4.28.0"
-    },
-    "telegram": {
-      "cap_count": 175,
-      "version": "4.30.0",
-      "published_at": "2026-06-08T10:55:35.954230+00:00",
-      "notes": "Bootstrapped to 175/v4.30.0 (global-news-intel) \u2014 reconciled from 173/v4.28.0"
-    },
-    "mcp_registry": {
-      "cap_count": 175,
-      "version": "4.30.0",
-      "published_at": "2026-06-08T10:55:35.954230+00:00",
-      "notes": "Bootstrapped to 175/v4.30.0 (global-news-intel) \u2014 reconciled from 173/v4.28.0"
-    },
-    "smithery": {
-      "cap_count": 175,
-      "version": "4.30.0",
-      "published_at": "2026-06-08T10:55:35.954230+00:00",
-      "notes": "Bootstrapped to 175/v4.30.0 (global-news-intel) \u2014 reconciled from 173/v4.28.0"
+    "live_cap_count": 175,
+    "live_version": "4.31.0",
+    "last_deploy_ts": "2026-06-08T10:55:35.954230+00:00",
+    "last_updated": "2026-06-08T12:49:01.671010+00:00",
+    "tunnel_alive": true,
+    "claim_registry": {
+        "readme": {
+            "cap_count": 175,
+            "version": "4.30.0",
+            "published_at": "2026-06-08T10:55:36.768258+00:00",
+            "notes": "README.md cap-count line updated and staged"
+        },
+        "punkpeye_pr": {
+            "cap_count": 175,
+            "version": "4.30.0",
+            "published_at": "2026-06-08T10:55:35.954230+00:00",
+            "notes": "Bootstrapped to 175/v4.30.0 (global-news-intel) \u2014 reconciled from 173/v4.28.0"
+        },
+        "ai4finance_pr": {
+            "cap_count": 175,
+            "version": "4.30.0",
+            "published_at": "2026-06-08T10:55:35.954230+00:00",
+            "notes": "Bootstrapped to 175/v4.30.0 (global-news-intel) \u2014 reconciled from 173/v4.28.0"
+        },
+        "commit": {
+            "cap_count": 175,
+            "version": "4.30.0",
+            "published_at": "2026-06-08T10:55:35.954230+00:00",
+            "notes": "Bootstrapped to 175/v4.30.0 (global-news-intel) \u2014 reconciled from 173/v4.28.0"
+        },
+        "telegram": {
+            "cap_count": 175,
+            "version": "4.30.0",
+            "published_at": "2026-06-08T10:55:35.954230+00:00",
+            "notes": "Bootstrapped to 175/v4.30.0 (global-news-intel) \u2014 reconciled from 173/v4.28.0"
+        },
+        "mcp_registry": {
+            "cap_count": 175,
+            "version": "4.30.0",
+            "published_at": "2026-06-08T10:55:35.954230+00:00",
+            "notes": "Bootstrapped to 175/v4.30.0 (global-news-intel) \u2014 reconciled from 173/v4.28.0"
+        },
+        "smithery": {
+            "cap_count": 175,
+            "version": "4.30.0",
+            "published_at": "2026-06-08T10:55:35.954230+00:00",
+            "notes": "Bootstrapped to 175/v4.30.0 (global-news-intel) \u2014 reconciled from 173/v4.28.0"
+        },
+        "jaw9c_pr": {
+            "cap_count": 175,
+            "version": "4.30.0",
+            "published_at": "2026-06-08T11:40:00+00:00",
+            "notes": "PR#377 jaw9c/awesome-remote-mcp-servers \u2014 updated title+body to 175 caps"
+        },
+        "mcpub_dev": {
+            "cap_count": 175,
+            "version": "4.30.0",
+            "published_at": "2026-06-08T11:53:29+00:00",
+            "notes": "Registered via submit tool at mcpub.dev/mcp \u2014 live in search"
+        },
+        "bazaar_seed": {
+            "cap_count": 175,
+            "version": "4.31.0",
+            "published_at": "2026-06-08T12:49:01.671010+00:00",
+            "notes": "CDP Bazaar re-seeded via hot wallet after v4.31.0 fix (all 175 caps now have valid Bazaar extensions)"
+        }
     }
-  }
 }

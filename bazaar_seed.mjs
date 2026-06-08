@@ -1,16 +1,18 @@
 /**
  * bazaar_seed.mjs — One-shot Bazaar seed payment script.
- * Sends $0.001 USDC to /cap/ping via the x402 exact EVM scheme
+ * Sends $0.001 USDC to /cap/ping via x402 v2 exact EVM scheme
  * to trigger auto-cataloging in the CDP x402 Bazaar.
  *
- * Uses the x402 library already installed in node_modules.
+ * x402 v2 protocol:
+ *   402 response: payment requirements in PAYMENT-REQUIRED header (base64 JSON)
+ *   Payment:      PAYMENT-SIGNATURE header (base64 JSON of paymentPayload)
+ *
  * Run from ~/intuitek/the-stall/ with: node bazaar_seed.mjs
  */
 
 import { privateKeyToAccount } from "viem/accounts";
-import { createWalletClient, http } from "viem";
-import { base } from "viem/chains";
-import { createPaymentHeader } from "x402/client";
+import { x402Client } from "@x402/core/client";
+import { ExactEvmScheme } from "@x402/evm/exact/client";
 
 const PRIVATE_KEY = process.env.AEGIS_WALLET_PRIVATE_KEY;
 if (!PRIVATE_KEY) {
@@ -21,17 +23,26 @@ if (!PRIVATE_KEY) {
 const RESOURCE_URL = "https://the-stall.intuitek.ai/cap/ping";
 const RPC_URL = process.env.BASE_RPC_URL || "https://base-rpc.publicnode.com";
 
+function decodeHeader(b64) {
+  return JSON.parse(Buffer.from(b64, "base64").toString("utf8"));
+}
+
+function encodePayload(payload) {
+  return Buffer.from(JSON.stringify(payload)).toString("base64");
+}
+
 async function main() {
   const account = privateKeyToAccount(`0x${PRIVATE_KEY.replace(/^0x/, "")}`);
   console.log(`Signer: ${account.address}`);
 
-  const walletClient = createWalletClient({
-    account,
-    chain: base,
-    transport: http(RPC_URL),
-  });
+  // ExactEvmScheme reads signer.address + signer.signTypedData directly —
+  // a viem LocalAccount (from privateKeyToAccount) satisfies both without WalletClient.
+  // Build x402 v2 client — ExactEvmScheme handles eip155:* networks
+  const client = new x402Client();
+  const evmScheme = new ExactEvmScheme(account);
+  client.register("eip155:*", evmScheme);
 
-  // Step 1: fetch 402 to get payment requirements
+  // Step 1: fetch 402 to get payment requirements from PAYMENT-REQUIRED header
   console.log(`Fetching payment requirements from ${RESOURCE_URL}...`);
   const r402 = await fetch(RESOURCE_URL);
   if (r402.status !== 402) {
@@ -39,23 +50,33 @@ async function main() {
     console.error(`Expected 402, got ${r402.status}: ${body}`);
     process.exit(1);
   }
-  const requirements = await r402.json();
-  const paymentReq = requirements.accepts?.[0];
-  if (!paymentReq) {
-    console.error("No accepts in 402 response:", JSON.stringify(requirements));
+
+  const paymentRequiredHeader = r402.headers.get("PAYMENT-REQUIRED") || r402.headers.get("payment-required");
+  if (!paymentRequiredHeader) {
+    console.error("No PAYMENT-REQUIRED header in 402 response. Headers:", [...r402.headers.entries()]);
     process.exit(1);
   }
-  console.log(`Payment required: ${Number(paymentReq.maxAmountRequired) / 1e6} USDC → ${paymentReq.payTo}`);
 
-  // Step 2: build and sign payment header
+  const paymentRequired = decodeHeader(paymentRequiredHeader);
+  console.log(`x402 version: ${paymentRequired.x402Version}`);
+  console.log(`Networks offered: ${paymentRequired.accepts?.map(a => a.network).join(", ")}`);
+  const accept = paymentRequired.accepts?.[0];
+  if (!accept) {
+    console.error("No accepts in payment required:", JSON.stringify(paymentRequired));
+    process.exit(1);
+  }
+  console.log(`Payment required: ${Number(accept.amount) / 1e6} USDC → ${accept.payTo} on ${accept.network}`);
+
+  // Step 2: create signed payment payload using @x402/evm ExactEvmScheme
   console.log("Signing payment...");
-  const paymentHeader = await createPaymentHeader(walletClient, requirements.x402Version ?? 1, paymentReq);
-  console.log(`Payment header length: ${paymentHeader.length} chars`);
+  const paymentPayload = await client.createPaymentPayload(paymentRequired);
+  const encoded = encodePayload(paymentPayload);
+  console.log(`PAYMENT-SIGNATURE length: ${encoded.length} chars`);
 
-  // Step 3: submit with payment
+  // Step 3: submit with PAYMENT-SIGNATURE header (x402 v2)
   console.log("Submitting paid request...");
   const response = await fetch(`${RESOURCE_URL}?msg=bazaar_seed`, {
-    headers: { "X-PAYMENT": paymentHeader },
+    headers: { "PAYMENT-SIGNATURE": encoded },
   });
 
   const status = response.status;
@@ -75,6 +96,11 @@ async function main() {
     console.log("SUCCESS: Payment settled. STALL should now appear in the x402 Bazaar.");
     process.exitCode = 0;
   } else {
+    const errorHeader = response.headers.get("PAYMENT-REQUIRED") || response.headers.get("payment-required");
+    if (errorHeader) {
+      const errDecoded = decodeHeader(errorHeader);
+      console.error(`Error from server: ${JSON.stringify(errDecoded, null, 2)}`);
+    }
     console.error(`FAILED: Unexpected status ${status}`);
     process.exitCode = 1;
   }
