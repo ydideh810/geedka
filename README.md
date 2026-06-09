@@ -17,7 +17,7 @@
 
 ---
 
-## Current capabilities — 189 live tools (v4.43.0)
+## Current capabilities — 190 live tools (v4.44.0)
 
 Full catalog at `/catalog`. Each capability is behind a per-call x402 paywall — no API keys, no accounts, no monthly fees. Pay USDC on Base mainnet per call.
 
@@ -71,6 +71,7 @@ Full catalog at `/catalog`. Each capability is behind a per-call x402 paywall �
 | `dex-trending-pools` | $0.015 | Trending DEX liquidity pools with buy/sell pressure data across multiple timeframes (5m, 1h, 6h, 24h) |
 | `dividend-calendar` | $0.008 | Upcoming dividend ex-dates from NASDAQ — all stocks going ex-dividend on a given date (default: today) or in the next 1–7 days |
 | `dividend-intel` | $0.015 | Full dividend intelligence for any US equity: trailing 12-month yield, forward annual rate, payout frequency (monthly/quarterly/semi-annual/annual), 5 |
+| `cve-intel` | $0.004 | CVE vulnerability lookup via NVD NIST (260K+ CVEs). Query by CVE ID, keyword, or severity. Returns CVSS score, attack vector, CWEs, and references |
 | `dns-lookup` | $0.003 | DNS record lookup for any domain via Cloudflare DoH |
 | `document-qa-prep` | $0.005 | Prepares a document for question-answering and RAG pipelines |
 | `domain-whois` | $0.006 | Domain WHOIS/RDAP lookup |
@@ -338,7 +339,7 @@ Standard Node service. Set env vars (`WALLET_ADDRESS`, `X402_NETWORK=base`,
 - [x] `base_rpc` stream: no-auth on-chain settlement reader (Base public RPC)
 - [x] Concentration (few-payers path) producing real signals from live mainnet
 - [x] Wallet ownership verified (GATE 1) — Base mainnet, EIP-191 signature recovered
-- [x] **189 capabilities LIVE** at `https://the-stall.intuitek.ai` (Base mainnet, v4.43.0)
+- [x] **190 capabilities LIVE** at `https://the-stall.intuitek.ai` (Base mainnet, v4.44.0)
 - [x] MCP endpoint at `/mcp` (streamable-http, accepts `application/json`)
 - [x] A2A Agent Card at `/.well-known/agent.json`
 - [x] x402 discovery document at `/.well-known/x402`
