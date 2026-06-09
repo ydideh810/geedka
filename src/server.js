@@ -250,6 +250,10 @@ app.get("/openapi.json", (_req, res) => {
         summary: cap.description,
         tags: ["capabilities"],
         security: [{ x402Payment: [] }],
+        "x-payment-info": {
+          protocols: ["x402"],
+          price: { mode: "fixed", currency: "USD", amount: cap.price.replace("$", "") },
+        },
         parameters: params,
         ...(requestBody ? { requestBody } : {}),
         responses: {
@@ -286,6 +290,7 @@ app.get("/openapi.json", (_req, res) => {
       version: PKG_VERSION,
       contact: { url: BASE_URL },
     },
+    "x-discovery": { ownershipProofs: PAY_TO ? [PAY_TO] : [] },
     servers: [{ url: BASE_URL, description: "Production (Base mainnet)" }],
     components: {
       securitySchemes: {
@@ -322,6 +327,7 @@ app.get("/.well-known/x402", (_req, res) =>
       payTo: PAY_TO,
       maxTimeoutSeconds: 300,
     }] : [],
+    resources: capabilities.map((c) => `${BASE_URL}/cap/${c.name}`),
     endpoints: capabilities.map((c) => ({
       path: `/cap/${c.name}`,
       method: "GET",
