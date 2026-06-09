@@ -68,24 +68,27 @@ function buildServer(capabilities) {
 // Attach with: app.post("/mcp", makeMcpHandler(capabilities))
 export function makeMcpHandler(capabilities) {
   return async (req, res) => {
-    // Normalize Accept header — StreamableHTTP requires both application/json and
-    // text/event-stream. Some conformance checkers send only application/json.
-    // @hono/node-server reads rawHeaders (not req.headers), so we must update both.
+    // Normalize Accept header — the MCP SDK requires both "application/json" and
+    // "text/event-stream" as literal substrings (it uses string.includes, not proper
+    // content negotiation). Crawlers often send Accept: */* or omit the header entirely.
+    // @hono/node-server reads rawHeaders (not req.headers), so we replace the whole array.
     const accept = req.headers["accept"] || "";
-    if (!accept.includes("text/event-stream")) {
-      const normalized = accept
-        ? `${accept}, text/event-stream`
-        : "application/json, text/event-stream";
+    if (!accept.includes("application/json") || !accept.includes("text/event-stream")) {
+      const normalized = "application/json, text/event-stream";
       req.headers["accept"] = normalized;
-      // Update rawHeaders so @hono/node-server picks up the change
-      const rawIdx = req.rawHeaders.findIndex(
-        (h, i) => i % 2 === 0 && h.toLowerCase() === "accept"
-      );
-      if (rawIdx >= 0) {
-        req.rawHeaders[rawIdx + 1] = normalized;
-      } else {
-        req.rawHeaders.push("Accept", normalized);
+      // Replace rawHeaders so @hono/node-server sees the correct Accept value
+      const newRaw = [];
+      let found = false;
+      for (let i = 0; i < req.rawHeaders.length; i += 2) {
+        if (req.rawHeaders[i].toLowerCase() === "accept") {
+          newRaw.push("accept", normalized);
+          found = true;
+        } else {
+          newRaw.push(req.rawHeaders[i], req.rawHeaders[i + 1]);
+        }
       }
+      if (!found) newRaw.push("accept", normalized);
+      req.rawHeaders = newRaw;
     }
     const server = buildServer(capabilities);
     try {
