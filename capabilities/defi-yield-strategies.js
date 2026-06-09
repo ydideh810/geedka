@@ -123,7 +123,49 @@ export default {
     },
   },
 
-  async run({ amount_usd, risk_tolerance = "medium", chains, max_positions = 5 }) {
+  outputSchema: {
+    type: "object",
+    properties: {
+      strategy: {
+        type: "array",
+        description: "Recommended positions with allocation details.",
+        items: {
+          type: "object",
+          properties: {
+            protocol:           { type: "string",  description: "DeFi protocol name." },
+            pool:               { type: "string",  description: "DeFiLlama pool UUID." },
+            symbol:             { type: "string",  description: "Pool token symbol." },
+            chain:              { type: "string",  description: "Blockchain name." },
+            apy:                { type: "number",  description: "Current APY %." },
+            apy_7d_change:      { type: "number",  description: "7-day APY change in percentage points." },
+            tvl_usd:            { type: "number",  description: "Total value locked in USD." },
+            stablecoin:         { type: "boolean", description: "True if stablecoin pool." },
+            allocated_usd:      { type: "number",  description: "Recommended allocation in USD." },
+            weekly_yield_usd:   { type: "number",  description: "Estimated weekly yield in USD." },
+            allocation_pct:     { type: "number",  description: "Allocation as percent of total portfolio." },
+          },
+        },
+      },
+      summary: {
+        type: "object",
+        properties: {
+          total_allocated_usd:        { type: "number",  description: "Total portfolio amount allocated." },
+          positions:                  { type: "integer", description: "Number of positions in strategy." },
+          estimated_weekly_yield_usd: { type: "number",  description: "Expected weekly yield across all positions." },
+          estimated_annual_yield_usd: { type: "number",  description: "Expected annual yield (weekly × 52)." },
+          weighted_avg_apy:           { type: "number",  description: "Allocation-weighted average APY %." },
+          risk_tier:                  { type: "string",  description: "Risk tier used." },
+          chains_included:            { type: "string",  description: "Chains included in strategy." },
+        },
+      },
+      note: {
+        type: "string",
+        description: "Optional note if no pools matched filters.",
+      },
+    },
+  },
+
+  async handler({ amount_usd, risk_tolerance = "medium", chains, max_positions = 5 }) {
     if (!amount_usd || amount_usd <= 0) {
       throw new Error("amount_usd must be a positive number.");
     }
