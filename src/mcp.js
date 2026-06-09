@@ -19,8 +19,10 @@ function propToZod(prop) {
   let base;
   if (prop.type === "integer") base = z.number().int();
   else if (prop.type === "number") base = z.number();
+  else if (prop.type === "boolean") base = z.boolean();
+  else if (prop.type === "array") base = z.array(propToZod(prop.items ?? { type: "string" }));
   else base = z.string();
-  if (prop.description) base = base.describe(prop.description);
+  if (prop.description && typeof base.describe === "function") base = base.describe(prop.description);
   return base;
 }
 

@@ -164,10 +164,26 @@ export default {
     const txFilter   = (transaction_type ?? "all").toLowerCase();
     const chamFilter = (chamber ?? "all").toLowerCase();
 
-    // Fetch full live feed (up to 1,000 records, ~12-month span, no auth required).
-    // Ticker filtering is applied client-side — the historical per-ticker endpoint
-    // requires paid auth, the live feed is free and covers 400+ tickers.
-    const raw  = await fetchJSON(`${QQ_BASE}/live/congresstrading`);
+    // Fetch full live feed (up to 1,000 records, ~12-month span).
+    let raw;
+    try {
+      raw = await fetchJSON(`${QQ_BASE}/live/congresstrading`);
+    } catch (err) {
+      // QuiverQuant moved the live endpoint behind auth as of ~2026-06-09.
+      // Return a degraded response rather than a 500 so callers get useful context.
+      if (err.message.includes("401") || err.message.includes("403")) {
+        return {
+          mode: ticker ? "ticker" : "market_wide",
+          trades: [],
+          summary: { total_trades: 0, purchases: 0, sales: 0, unique_representatives: 0, tickers_mentioned: [], date_range: null, avg_excess_return_pct: null, filter_applied: { transaction_type: txFilter, chamber: chamFilter } },
+          source: "quiverquant.com — STOCK Act disclosures",
+          upstream_status: "upstream_unavailable",
+          upstream_note: "The Quiver Quant public live feed now requires authentication. Congressional trade data is temporarily unavailable. Check back after the upstream is updated.",
+          ts: new Date().toISOString(),
+        };
+      }
+      throw err;
+    }
     const mode = ticker ? "ticker" : "market_wide";
 
     if (!Array.isArray(raw)) {

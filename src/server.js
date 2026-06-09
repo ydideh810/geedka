@@ -535,6 +535,26 @@ app.get("/mcp", (_req, res) =>
   res.status(405).json({ jsonrpc: "2.0", error: { code: -32000, message: "Use POST for MCP requests" }, id: null })
 );
 
+// ── Query param coercion — REST callers pass everything as strings ─────────────
+// For fields with type: "array" in inputSchema, accept comma-separated strings
+// and coerce them to arrays. Numeric array items are parsed as floats.
+function coerceQuery(query, inputSchema) {
+  if (!inputSchema?.properties) return query;
+  const out = { ...query };
+  for (const [key, prop] of Object.entries(inputSchema.properties)) {
+    if (prop.type !== "array" || !(key in out)) continue;
+    const val = out[key];
+    if (Array.isArray(val)) continue; // already an array (e.g. ?a=1&a=2)
+    if (typeof val !== "string") continue;
+    const items = val.split(",").map(s => s.trim()).filter(Boolean);
+    const itemType = prop.items?.type ?? "string";
+    out[key] = itemType === "number" || itemType === "integer"
+      ? items.map(Number)
+      : items;
+  }
+  return out;
+}
+
 // ── PAID capability routes (x402-gated) ───────────────────────────────────────
 // ORDERING CONSTRAINT: x402 middleware MUST run before any request validation.
 // Do NOT add body/query validation middleware above this line — unauthenticated
@@ -564,7 +584,7 @@ for (const cap of capabilities) {
     }
 
     try {
-      const out = await cap.handler(req.query, { req });
+      const out = await cap.handler(coerceQuery(req.query, cap.inputSchema), { req });
       const xPayResp = res.getHeader("x-payment-response") || null;
       logPaidCall(cap.name, cap.price, req.query, 200, req.ip);
       logSettlement(cap.name, cap.price, req.query, 200, req.ip, xPayment, xPayResp);
