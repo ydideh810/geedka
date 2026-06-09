@@ -1,6 +1,6 @@
 // polymarket-intel.js
 //
-// Top active Polymarket prediction markets ranked by trading volume.
+// Polymarket prediction market intelligence — search by topic or get top markets.
 // Returns market questions, current probabilities (Yes/No prices), 24h volume,
 // liquidity, price momentum (1d/1wk change), and resolution date.
 //
@@ -10,22 +10,27 @@
 // Polymarket is the dominant PM with $2B+ cumulative volume; Gamma API is free.
 //
 // Free upstream: gamma-api.polymarket.com — no API key, no auth, real-time data.
-// Priced at $0.003 — signal-layer data comparable to chain-pulse.
+// Priced at $0.008 — with keyword search, substantially more useful than raw top-N.
 
-const GAMMA_URL = "https://gamma-api.polymarket.com/markets";
-const UA        = "Mozilla/5.0 (compatible; the-stall/4.5; +https://intuitek.ai)";
-const TIMEOUT   = 12_000;
+const GAMMA_URL        = "https://gamma-api.polymarket.com/markets";
+const GAMMA_EVENTS_URL = "https://gamma-api.polymarket.com/events";
+const UA               = "Mozilla/5.0 (compatible; the-stall/4.40; +https://intuitek.ai)";
+const TIMEOUT          = 12_000;
 
 export default {
   name:  "polymarket-intel",
-  price: "$0.003",
+  price: "$0.008",
 
   description:
-    "Top active Polymarket prediction markets ranked by trading volume — question, Yes probability, 24h volume, liquidity, 1d/1wk price change, resolution date. No API keys. $0.003/call.",
+    "Polymarket prediction market data. Search by topic keyword (e.g. 'bitcoin', 'election', 'fed rate') or retrieve top markets by trading volume. Returns Yes/No probabilities, volume, liquidity, price momentum, and resolution date. No API keys. Use for event risk, trading signal context, or agent decision support.",
 
   inputSchema: {
     type:       "object",
     properties: {
+      q: {
+        type:        "string",
+        description: "Topic keyword to search (e.g. 'bitcoin', 'trump', 'recession', 'fed rate'). Omit for top markets by volume.",
+      },
       limit: {
         type:        "integer",
         minimum:     1,
@@ -39,7 +44,7 @@ export default {
       },
       min_liquidity: {
         type:        "number",
-        description: "Filter out markets with liquidity below this USD threshold (default: 1000).",
+        description: "Filter out markets with liquidity below this USD threshold (default: 500).",
       },
     },
     required: [],
@@ -74,29 +79,65 @@ export default {
   },
 
   async handler(query) {
+    const q           = (query.q ?? "").trim().toLowerCase();
     const limit       = Math.min(Math.max(parseInt(query.limit ?? "10", 10), 1), 25);
     const period      = query.period ?? "24h";
-    const minLiq      = parseFloat(query.min_liquidity ?? "1000");
+    const minLiq      = parseFloat(query.min_liquidity ?? "500");
 
     // Map period to API order field
     const orderField = period === "1mo" ? "volume1mo" : period === "1wk" ? "volume1wk" : "volume24hr";
 
-    // Fetch more than limit to allow liquidity filtering
-    const fetchLimit = Math.min(limit * 3, 75);
-    const url = `${GAMMA_URL}?limit=${fetchLimit}&active=true&order=${orderField}&ascending=false`;
+    // When keyword-searching: fetch a large pool from the events API (better grouping),
+    // fall back to markets if no event results found.
+    let data = [];
 
-    const r = await fetch(url, {
-      headers: { "User-Agent": UA },
-      signal:  AbortSignal.timeout(TIMEOUT),
-    });
-    if (!r.ok) throw new Error(`Polymarket Gamma API HTTP ${r.status}`);
-
-    const data = await r.json();
-    if (!Array.isArray(data)) throw new Error("Unexpected response format");
+    if (q) {
+      // Try events endpoint first — broader pool for keyword matching
+      const evUrl = `${GAMMA_EVENTS_URL}?limit=200&active=true&closed=false&order=${orderField}&ascending=false`;
+      const evRes = await fetch(evUrl, { headers: { "User-Agent": UA }, signal: AbortSignal.timeout(TIMEOUT) });
+      if (evRes.ok) {
+        const events = await evRes.json();
+        if (Array.isArray(events)) {
+          const terms = q.split(/\s+/).filter(Boolean);
+          const matchedEvents = events.filter(e => {
+            const text = (e.title || "").toLowerCase();
+            return terms.every(t => text.includes(t));
+          });
+          // Expand to individual markets from matched events
+          for (const e of matchedEvents) {
+            for (const m of (e.markets || [])) {
+              data.push(m);
+            }
+          }
+        }
+      }
+      // If event search found nothing, fall back to markets endpoint
+      if (data.length === 0) {
+        const mUrl = `${GAMMA_URL}?limit=200&active=true&order=${orderField}&ascending=false`;
+        const mRes = await fetch(mUrl, { headers: { "User-Agent": UA }, signal: AbortSignal.timeout(TIMEOUT) });
+        if (!mRes.ok) throw new Error(`Polymarket Gamma API HTTP ${mRes.status}`);
+        const all = await mRes.json();
+        if (!Array.isArray(all)) throw new Error("Unexpected response format");
+        const terms = q.split(/\s+/).filter(Boolean);
+        data = all.filter(m => {
+          const text = (m.question || "").toLowerCase();
+          return terms.every(t => text.includes(t));
+        });
+      }
+    } else {
+      // No keyword: fetch top markets directly
+      const fetchLimit = Math.min(limit * 3, 75);
+      const url = `${GAMMA_URL}?limit=${fetchLimit}&active=true&order=${orderField}&ascending=false`;
+      const r = await fetch(url, { headers: { "User-Agent": UA }, signal: AbortSignal.timeout(TIMEOUT) });
+      if (!r.ok) throw new Error(`Polymarket Gamma API HTTP ${r.status}`);
+      data = await r.json();
+      if (!Array.isArray(data)) throw new Error("Unexpected response format");
+    }
 
     // Filter by liquidity and take top N
     const filtered = data
       .filter(m => parseFloat(m.liquidityNum ?? m.liquidity ?? "0") >= minLiq)
+      .sort((a, b) => parseFloat(b[orderField === "volume24hr" ? "volume24hr" : "volume"] ?? "0") - parseFloat(a[orderField === "volume24hr" ? "volume24hr" : "volume"] ?? "0"))
       .slice(0, limit);
 
     const markets = filtered.map(m => {
