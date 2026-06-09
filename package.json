@@ -1,7 +1,7 @@
 {
   "name": "the-stall",
-  "version": "4.47.0",
-  "description": "193 pay-per-call AI data tools via MCP and x402 — no API keys required. AI content analysis (URL→summary+entities+sentiment), Wayback Machine (800B+ archived pages, 27yr history), CVE intel (260K+ CVEs), US stocks + OHLCV history, DeFi yield planner, international equities (EU/UK/JP/AU), Korean exchange momentum, social momentum, DefiLlama pack, crypto/DeFi analytics, macro indicators, global news, and 183+ more. USDC on Base.",
+  "version": "4.48.0",
+  "description": "194 pay-per-call AI data tools via MCP and x402 — no API keys required. Income statements + cash flow (quarterly/annual P&L for any US stock), AI content analysis, Wayback Machine (800B+ pages), CVE intel, US stocks + OHLCV history, DeFi yield planner, international equities, Korean exchange momentum, social momentum, DefiLlama pack, crypto/DeFi analytics, macro indicators, global news, and 184+ more. USDC on Base.",
   "type": "module",
   "main": "src/server.js",
   "scripts": {
