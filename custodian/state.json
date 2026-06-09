@@ -1,69 +1,69 @@
 {
-  "live_cap_count": 183,
-  "live_version": "4.36.0",
-  "last_deploy_ts": "2026-06-08T22:38:59.780968+00:00",
-  "last_updated": "2026-06-08T22:38:59.780985+00:00",
+  "live_cap_count": 198,
+  "live_version": "4.52.0",
+  "last_deploy_ts": "2026-06-09T23:06:31.855258+00:00",
+  "last_updated": "2026-06-09T23:35:00.000000+00:00",
   "tunnel_alive": true,
   "claim_registry": {
     "readme": {
-      "cap_count": 183,
-      "version": "4.36.0",
-      "published_at": "2026-06-08T22:39:03.659682+00:00",
-      "notes": "v4.36.0 \u2014 social-momentum cap added (Reddit+HN+GitHub, PROSPECTOR signal_id 82182)"
+      "cap_count": 198,
+      "version": "4.52.0",
+      "published_at": "2026-06-09T23:35:00.000000+00:00",
+      "notes": "README.md cap-count updated to 198/v4.52.0 (forex-historical)"
     },
     "punkpeye_pr": {
-      "cap_count": 183,
-      "version": "4.36.0",
-      "published_at": "2026-06-08T22:39:03.659682+00:00",
-      "notes": "v4.36.0 \u2014 social-momentum cap added (Reddit+HN+GitHub, PROSPECTOR signal_id 82182)"
+      "cap_count": 197,
+      "version": "4.51.0",
+      "published_at": "2026-06-09T23:14:10.048670+00:00",
+      "notes": "PATCH PR#7481 body+title to 197 caps v4.51.0"
     },
     "ai4finance_pr": {
-      "cap_count": 183,
-      "version": "4.36.0",
-      "published_at": "2026-06-08T22:39:03.659682+00:00",
-      "notes": "v4.36.0 \u2014 social-momentum cap added (Reddit+HN+GitHub, PROSPECTOR signal_id 82182)"
+      "cap_count": 197,
+      "version": "4.51.0",
+      "published_at": "2026-06-09T23:14:00.424135+00:00",
+      "notes": "PATCH PR#164 body+title to 197 caps v4.51.0"
     },
     "commit": {
-      "cap_count": 183,
-      "version": "4.36.0",
-      "published_at": "2026-06-08T22:39:03.659682+00:00",
-      "notes": "v4.36.0 \u2014 social-momentum cap added (Reddit+HN+GitHub, PROSPECTOR signal_id 82182)"
+      "cap_count": 189,
+      "version": "4.43.0",
+      "published_at": "2026-06-09T08:39:48.819354+00:00",
+      "notes": "latest deploy commit 457d40c (us-stock-history cap189), README 182ed43"
     },
     "telegram": {
-      "cap_count": 183,
-      "version": "4.36.0",
-      "published_at": "2026-06-08T22:39:03.659682+00:00",
-      "notes": "v4.36.0 \u2014 social-momentum cap added (Reddit+HN+GitHub, PROSPECTOR signal_id 82182)"
+      "cap_count": 189,
+      "version": "4.43.0",
+      "published_at": "2026-06-09T08:41:14.848263+00:00",
+      "notes": "Telegram notification sent: v4.43.0 189caps PR7481=open Smithery=PENDING organic=zero"
     },
     "mcp_registry": {
-      "cap_count": 183,
-      "version": "4.36.0",
-      "published_at": "2026-06-08T22:39:03.659682+00:00",
-      "notes": "v4.36.0 \u2014 social-momentum cap added (Reddit+HN+GitHub, PROSPECTOR signal_id 82182)"
+      "cap_count": 189,
+      "version": "4.43.0",
+      "published_at": "2026-06-09T08:39:30.993847+00:00",
+      "notes": "MCP registry already at v4.43.0 (duplicate version confirmed)"
     },
     "smithery": {
-      "cap_count": 183,
-      "version": "4.36.0",
-      "published_at": "2026-06-08T22:39:03.659682+00:00",
-      "notes": "v4.36.0 \u2014 social-momentum cap added (Reddit+HN+GitHub, PROSPECTOR signal_id 82182)"
+      "cap_count": 189,
+      "version": "4.43.0",
+      "published_at": "2026-06-09T08:39:31.104121+00:00",
+      "notes": "Smithery republish 007b6012 submitted PENDING"
     },
     "jaw9c_pr": {
-      "cap_count": 183,
-      "version": "4.36.0",
-      "published_at": "2026-06-08T22:39:03.659682+00:00",
-      "notes": "v4.36.0 \u2014 social-momentum cap added (Reddit+HN+GitHub, PROSPECTOR signal_id 82182)"
+      "cap_count": 189,
+      "version": "4.43.0",
+      "published_at": "2026-06-09T08:39:31.206506+00:00",
+      "notes": "PR377 title updated to 189 caps/v4.43.0"
     },
     "mcpub_dev": {
-      "cap_count": 183,
-      "version": "4.36.0",
-      "published_at": "2026-06-08T22:39:03.659682+00:00",
-      "notes": "v4.36.0 \u2014 social-momentum cap added (Reddit+HN+GitHub, PROSPECTOR signal_id 82182)"
+      "cap_count": 184,
+      "version": "4.38.0",
+      "published_at": "2026-06-09T05:27:50.124972+00:00",
+      "notes": "v4.38.0 \u2014 market-regime-intel: 5-signal US equity regime classifier (BULL/CORRECTION/BEAR/SIDEWAYS/RISK_OFF)"
     },
     "bazaar_seed": {
-      "cap_count": 183,
-      "version": "4.36.0",
-      "published_at": "2026-06-08T22:39:03.659682+00:00",
-      "notes": "v4.36.0 \u2014 social-momentum cap added (Reddit+HN+GitHub, PROSPECTOR signal_id 82182)"
+      "cap_count": 184,
+      "version": "4.38.0",
+      "published_at": "2026-06-09T05:27:50.124972+00:00",
+      "notes": "v4.38.0 \u2014 market-regime-intel: 5-signal US equity regime classifier (BULL/CORRECTION/BEAR/SIDEWAYS/RISK_OFF)"
     }
   }
 }
