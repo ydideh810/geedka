@@ -17,7 +17,7 @@
 
 ---
 
-## Current capabilities — 190 live tools (v4.44.0)
+## Current capabilities — 191 live tools (v4.45.0)
 
 Full catalog at `/catalog`. Each capability is behind a per-call x402 paywall — no API keys, no accounts, no monthly fees. Pay USDC on Base mainnet per call.
 
@@ -201,6 +201,7 @@ Full catalog at `/catalog`. Each capability is behind a per-call x402 paywall �
 | `whale-radar` | $0.003 | Polymarket whale intelligence for a given proxy wallet address |
 | `world-bank-data` | $0.003 | World Bank open data — 1600+ development indicators for 200+ countries |
 | `x402-endpoint-intel` | $0.020 | Market intelligence for any x402 endpoint or operator wallet |
+| `wayback-intel` | $0.003 | Queries the Internet Archive Wayback Machine for historical snapshots of any public URL. Returns closest archived snapshot URL, capture timestamp (ISO 8601), and HTTP status at capture time. Optionally lists up to 10 recent snapshots to trace how a site evolved over time. Covers 800B+ archived pages spanning 27+ years of web history. No API key. |
 | `wikipedia-intel` | $0.002 | Wikipedia article search and lookup. Returns top matching articles with plain-text extract (~800 chars), description, thumbnail URL, page URL, and last-modified date. Supports multi-language editions. Useful for entity enrichment, concept explanation, and pre-flight research. No API key. |
 | `yield-farming-active` | $0.005 | Returns active DeFi yield farming pools sorted by 30-day average APY |
 
@@ -339,7 +340,7 @@ Standard Node service. Set env vars (`WALLET_ADDRESS`, `X402_NETWORK=base`,
 - [x] `base_rpc` stream: no-auth on-chain settlement reader (Base public RPC)
 - [x] Concentration (few-payers path) producing real signals from live mainnet
 - [x] Wallet ownership verified (GATE 1) — Base mainnet, EIP-191 signature recovered
-- [x] **190 capabilities LIVE** at `https://the-stall.intuitek.ai` (Base mainnet, v4.44.0)
+- [x] **191 capabilities LIVE** at `https://the-stall.intuitek.ai` (Base mainnet, v4.45.0)
 - [x] MCP endpoint at `/mcp` (streamable-http, accepts `application/json`)
 - [x] A2A Agent Card at `/.well-known/agent.json`
 - [x] x402 discovery document at `/.well-known/x402`
