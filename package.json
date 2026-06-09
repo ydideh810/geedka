@@ -1,7 +1,7 @@
 {
   "name": "the-stall",
-  "version": "4.43.0",
-  "description": "189 pay-per-call AI data tools via MCP and x402 — no API keys required. US stocks + OHLCV history (TradingView-compatible, undercuts blockrun.ai), DeFi yield strategy planner, international equities (EU/UK/JP/AU), Korean exchange momentum (Upbit), social momentum intelligence (Reddit+HN+GitHub), DefiLlama research pack, crypto/DeFi analytics, macro indicators, global news, and 178+ more. USDC on Base.",
+  "version": "4.44.0",
+  "description": "190 pay-per-call AI data tools via MCP and x402 — no API keys required. CVE vulnerability intel (NVD NIST, 260K+ CVEs), US stocks + OHLCV history (TradingView-compatible, undercuts blockrun.ai), DeFi yield strategy planner, international equities (EU/UK/JP/AU), Korean exchange momentum, social momentum intelligence, DefiLlama pack, crypto/DeFi analytics, macro indicators, global news, and 179+ more. USDC on Base.",
   "type": "module",
   "main": "src/server.js",
   "scripts": {
