@@ -71,7 +71,21 @@ export default {
     required: ["name"],
   },
 
-  async run({ name, tlds }) {
+  outputSchema: {
+    type: "object",
+    properties: {
+      base_name:        { type: "string" },
+      available_count:  { type: "number" },
+      registered_count: { type: "number" },
+      available:        { type: "array", items: { type: "string" } },
+      registered:       { type: "array", items: { type: "string" } },
+      details:          { type: "array", items: { type: "object" } },
+      errors:           { type: "array", items: { type: "string" } },
+      checked_at:       { type: "string" },
+    },
+  },
+
+  async handler({ name, tlds }) {
     if (!name || typeof name !== "string") throw new Error("name is required");
 
     // Strip TLD if caller passed a full domain
