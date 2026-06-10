@@ -17,7 +17,7 @@
 
 ---
 
-## Current capabilities — 203 live tools (v4.57.0)
+## Current capabilities — 204 live tools (v4.58.0)
 
 Full catalog at `/catalog`. Each capability is behind a per-call x402 paywall — no API keys, no accounts, no monthly fees. Pay USDC on Base mainnet per call.
 
@@ -175,6 +175,7 @@ Full catalog at `/catalog`. Each capability is behind a per-call x402 paywall �
 | `sector-rotation` | $0.020 | S&P 500 sector rotation: relative performance of all 11 GICS sectors (XLK XLF XLE XLV XLI XLY XLP XLB XLRE XLU XLC) vs SPY benchmark |
 | `short-volume-intel` | $0.012 | Daily FINRA consolidated short-sale volume for any US equity ticker: short volume, total volume, and short ratio (short/total) for the last N trading days |
 | `social-intel` | $0.004 | Returns public profile data for any social platform account |
+| `stackoverflow-intel` | $0.010 | Stack Overflow question search. Returns top-scored questions with answer counts, accepted-answer status, tags, and body excerpts. Filter by tags (e.g. 'python;asyncio'). Useful for developer agents debugging errors or researching library usage. |
 | `solana-token-risk` | $0.35 | Rug-pull and risk scanner for Solana SPL tokens |
 | `solana-tx-explainer` | $0.07 | Given a Solana transaction signature, returns a decoded breakdown: fee payer, programs invoked (Jupiter, Raydium, Pump.fun, SPL Token, etc.), SPL toke |
 | `solar-intel` | $0.020 | Solar irradiance analysis and 7-day forecast for any location |

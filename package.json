@@ -1,7 +1,7 @@
 {
   "name": "the-stall",
-  "version": "4.57.0",
-  "description": "203 pay-per-call AI data tools via MCP and x402 — no API keys required. Aviation weather (METAR+TAF), Polymarket whale entries, changelog generation, YouTube metadata, historical FX rates, domain availability, audio transcription, income statements, Wayback Machine, CVE intel, US stocks, DeFi yields, global news, and 196+ more. USDC on Base.",
+  "version": "4.58.0",
+  "description": "204 pay-per-call AI data tools via MCP and x402 \u2014 no API keys required. Stack Overflow, aviation weather (METAR+TAF), Polymarket whale entries, changelog generation, YouTube metadata, historical FX rates, audio transcription, income statements, Wayback Machine, CVE intel, US stocks, DeFi yields, global news, and 197+ more. USDC on Base.",
   "type": "module",
   "main": "src/server.js",
   "scripts": {
