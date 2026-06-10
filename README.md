@@ -17,7 +17,7 @@
 
 ---
 
-## Current capabilities — 201 live tools (v4.55.0)
+## Current capabilities — 202 live tools (v4.56.0)
 
 Full catalog at `/catalog`. Each capability is behind a per-call x402 paywall — no API keys, no accounts, no monthly fees. Pay USDC on Base mainnet per call.
 
@@ -37,6 +37,7 @@ Full catalog at `/catalog`. Each capability is behind a per-call x402 paywall �
 | `btc-miner-econ` | $0.005 | Bitcoin mining economics and fee-market game theory via mempool |
 | `btc-systems-theory` | $0.008 | Seven-lens systems theory analysis of the Bitcoin network |
 | `chain-pulse` | $0.006 | Returns an Ethereum block header + current stablecoin depeg status in one call |
+| `changelog-generate` | $0.003 | Converts conventional commit messages to keep-a-changelog format blocks. Supports full BREAKING CHANGE / footer / multi-scope syntax. Pure transform — no external API. |
 | `chromatic-dispersion` | $0.004 | Fiber optic chromatic dispersion calculator |
 | `citation-formatter` | $0.008 | Looks up an academic paper by DOI and formats it as BibTeX, APA, MLA, or Chicago citation |
 | `city-lookup` | $0.010 | Search airports and cities by keyword, IATA code, or city name |
@@ -153,6 +154,7 @@ Full catalog at `/catalog`. Each capability is behind a per-call x402 paywall �
 | `polymarket-category-performance` | $0.004 | Polymarket category activity breakdown: volume, liquidity, market count, and top market per category (crypto, politics, sports, ai, macro, equities) |
 | `polymarket-intel` | $0.003 | Top active Polymarket prediction markets by trading volume — question, Yes/No probability, 24h volume, liquidity, 1d/1wk price change, resolution date |
 | `polymarket-sentiment-shift` | $0.008 | Returns Polymarket prediction markets with the biggest recent probability shifts — useful for detecting sudden consensus changes on elections, crypto prices, and macro outcomes |
+| `polymarket-whale-entries` | $0.008 | Scans Polymarket for recent large-position trades filtered by min USDC value. Returns trader wallet, YES/NO side, USDC amount, entry price, market name, and on-chain tx hash. Smart-money signals, copy-trade detection, market sentiment. |
 | `portfolio-rebalance` | $0.005 | Pure-math portfolio rebalancing calculator |
 | `prediction-markets` | $0.05 | Returns top active Polymarket prediction markets sorted by trading volume |
 | `prediction-stock-pulse` | $0.016 | One call returns prediction market sentiment (Limitless Exchange) + live equity price for a specified ticker |
