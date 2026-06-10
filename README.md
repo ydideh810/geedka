@@ -17,7 +17,7 @@
 
 ---
 
-## Current capabilities — 204 live tools (v4.58.0)
+## Current capabilities — 206 live tools (v4.61.0)
 
 Full catalog at `/catalog`. Each capability is behind a per-call x402 paywall — no API keys, no accounts, no monthly fees. Pay USDC on Base mainnet per call.
 
@@ -27,6 +27,7 @@ Full catalog at `/catalog`. Each capability is behind a per-call x402 paywall �
 | `agent-access-check` | $0.006 | Checks whether a website is accessible and agent-friendly |
 | `agent-kya-score` | $0.003 | Know Your Agent (KYA) trust score for any EVM wallet |
 | `ai-image-gen` | $0.080 | Generate an AI image from a text prompt using DALL-E 3 |
+| `vision-analyze` | $0.025 | AI vision analysis of any image URL using GPT-4o-mini. Modes: describe (full scene), ocr (text extraction), chart (data/trends), ui (interface analysis), identify (object ID), qa (answer a question about the image). |
 | `air-quality` | $0.002 | Real-time US AQI and pollutant readings for any lat/lon |
 | `analyst-ratings` | $0.010 | Wall Street analyst consensus and price targets for any US equity |
 | `arxiv-intel` | $0.003 | Search arXiv preprints by query, field (title/abstract/author), and category (cs.AI, cs.LG, etc.). Returns title, authors, abstract, arXiv ID, PDF link, and publish date. Canonical source for AI/ML/CS preprints — months ahead of peer-reviewed journals. No API key. |
