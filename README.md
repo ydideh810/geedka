@@ -17,7 +17,7 @@
 
 ---
 
-## Current capabilities — 198 live tools (v4.52.0)
+## Current capabilities — 199 live tools (v4.53.0)
 
 Full catalog at `/catalog`. Each capability is behind a per-call x402 paywall — no API keys, no accounts, no monthly fees. Pay USDC on Base mainnet per call.
 
@@ -116,6 +116,7 @@ Full catalog at `/catalog`. Each capability is behind a per-call x402 paywall �
 | `image-detect` | $0.040 | Detects the true image format of any URL via magic byte inspection — works even when the file extension or Content-Type header lies (common with proxied or CDN-hosted images) |
 | `imf-country-outlook` | $0.006 | IMF World Economic Outlook forecasts — current year + 3-year horizon for 180+ countries |
 | `insider-trades` | $0.012 | Recent SEC Form 4 insider trading activity for any US public company |
+| `form-144-intel` | $0.003 | SEC Form 144 planned insider sale filings — pre-Form 4 signal with seller, role, shares, market value, approx sale date |
 | `intel-pack` | $0.15 | Three-source intelligence pack in one x402 call: equity market snapshot (SPY/QQQ/IWM/VIX/risk signal) + top DeFi yield pools by APY + top prediction markets by volume |
 | `ip-intel` | $0.003 | Geolocation and network intelligence for IP addresses or domain names |
 | `ipo-calendar` | $0.020 | Returns live IPO calendar from Nasdaq — upcoming deals with expected pricing dates, recently priced offerings, new S-1 filings, and withdrawn deals |
@@ -340,7 +341,7 @@ Standard Node service. Set env vars (`WALLET_ADDRESS`, `X402_NETWORK=base`,
 - [x] `base_rpc` stream: no-auth on-chain settlement reader (Base public RPC)
 - [x] Concentration (few-payers path) producing real signals from live mainnet
 - [x] Wallet ownership verified (GATE 1) — Base mainnet, EIP-191 signature recovered
-- [x] **198 capabilities LIVE** at `https://the-stall.intuitek.ai` (Base mainnet, v4.52.0)
+- [x] **199 capabilities LIVE** at `https://the-stall.intuitek.ai` (Base mainnet, v4.53.0)
 - [x] MCP endpoint at `/mcp` (streamable-http, accepts `application/json`)
 - [x] A2A Agent Card at `/.well-known/agent.json`
 - [x] x402 discovery document at `/.well-known/x402`
