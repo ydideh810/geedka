@@ -1,103 +1,135 @@
 // energy-brief.js
 //
-// AI-synthesized US energy market situation briefing.
+// AI-synthesized US energy market intelligence briefing.
 //
-// Gathers 7 real-time signals from FRED (no API key required), then uses
+// Gathers 9 real-time signals from Yahoo Finance (free, no key), then uses
 // gpt-4o-mini to produce a structured ~200-word energy market assessment.
-// One call replaces manual assembly of 7 data series + LLM synthesis.
+// One call replaces manual assembly of 9 live tickers + LLM synthesis.
 //
 // Signals assembled:
-//   1. WTI crude oil price    — WTISPLC ($/barrel, monthly)
-//   2. Gasoline price         — GASREGCOVW ($/gallon, weekly)
-//   3. Natural gas price      — MHHNGSP (Henry Hub $/mmBtu, monthly)
-//   4. CPI Energy             — CPIENGSL (index, monthly) — consumer inflation from energy
-//   5. PPI Oil & Gas          — PCU211211 (index, monthly) — producer-side price pressure
-//   6. Utilities production   — IPUTIL (index, monthly) — energy demand signal
-//   7. Electric power output  — IPG22112N (index, monthly) — electricity demand
+//   1. WTI crude futures    (CL=F) — real-time price + 52-week range
+//   2. Brent crude futures  (BZ=F) — Brent/WTI spread indicator
+//   3. Natural gas futures  (NG=F) — Henry Hub proxy, real-time
+//   4. Energy sector ETF   (XLE)  — broad energy equity performance
+//   5. Oil services ETF    (OIH)  — rig/activity proxy (no Baker Hughes key needed)
+//   6. ExxonMobil          (XOM)  — integrated major bellwether
+//   7. Chevron             (CVX)  — second integrated major
+//   8. Marathon Petroleum  (MPC)  — downstream/refining spread signal
+//   9. Baker Hughes        (BKR)  — oilfield services / activity proxy
 //
-// Seam: agents assessing energy market exposure, inflation risk, commodity
-// cycles, or macro-energy linkages chain 5+ FRED lookups + LLM synthesis;
-// this collapses into one $0.350 call with AI interpretation.
+// Derived: Brent/WTI spread, WTI vs 52-week range, market regime classification.
 //
-// Upstreams: FRED public CSV (free, no auth) + gpt-4o-mini (OPENAI_API_KEY).
+// Seam: crownblock.lonestaroracle.xyz/report — $1.00/call, ~40 settlements/wk,
+// 2 payers (energy/trading agents). STALL prices at $0.65 — 35% undercut,
+// real-time data (not monthly FRED averages), broader equity coverage.
+//
+// Upstreams: Yahoo Finance v8 chart (free, no auth) + gpt-4o-mini (OPENAI_API_KEY).
 
-const FRED_BASE  = "https://fred.stlouisfed.org/graph/fredgraph.csv";
+const YF_BASE    = "https://query1.finance.yahoo.com/v8/finance/chart";
 const OPENAI_URL = "https://api.openai.com/v1/chat/completions";
 const MODEL      = "gpt-4o-mini";
-const UA         = "Mozilla/5.0 (compatible; the-stall/3.98; +https://intuitek.ai)";
-const FRED_TMO   = 14_000;
+const UA         = "Mozilla/5.0 (compatible; the-stall/4.59; +https://intuitek.ai)";
+const YF_TMO     = 12_000;
 const GPT_TMO    = 28_000;
 
-async function fredLatest(id) {
-  const resp = await fetch(`${FRED_BASE}?id=${id}`, {
-    headers: { "User-Agent": UA },
-    signal: AbortSignal.timeout(FRED_TMO),
+const r2  = n => Math.round(n * 100) / 100;
+const pct = (a, b) => b ? r2(((a - b) / b) * 100) : null;
+
+async function fetchQuote(symbol) {
+  const url  = `${YF_BASE}/${encodeURIComponent(symbol)}?range=1y&interval=1d`;
+  const resp = await fetch(url, {
+    headers: { "User-Agent": UA, Accept: "application/json" },
+    signal: AbortSignal.timeout(YF_TMO),
   });
-  if (!resp.ok) throw new Error(`FRED ${id} HTTP ${resp.status}`);
-  const text  = await resp.text();
-  if (text.includes("<html") || text.includes("<!DOCTYPE")) {
-    throw new Error(`FRED ${id} returned HTML — invalid series ID`);
-  }
-  const lines = text.trim().split("\n").filter(l => !l.startsWith("DATE") && l.includes(","));
-  for (let i = lines.length - 1; i >= 0; i--) {
-    const [date, val] = lines[i].split(",");
-    if (val && val.trim() !== "." && val.trim() !== "") {
-      return { date: date.trim(), value: parseFloat(val.trim()) };
-    }
-  }
-  return null;
+  if (!resp.ok) throw new Error(`YF ${symbol} HTTP ${resp.status}`);
+  const data   = await resp.json();
+  const result = data?.chart?.result?.[0];
+  if (!result) throw new Error(`YF ${symbol}: no result`);
+
+  const meta    = result.meta || {};
+  const closes  = result.indicators?.quote?.[0]?.close || [];
+  const validC  = closes.filter(v => v != null && !isNaN(v));
+  const price   = meta.regularMarketPrice ?? validC[validC.length - 1];
+  const prev    = meta.previousClose ?? meta.chartPreviousClose;
+  const w52Hi   = meta.fiftyTwoWeekHigh ?? (validC.length ? Math.max(...validC) : null);
+  const w52Lo   = meta.fiftyTwoWeekLow  ?? (validC.length ? Math.min(...validC) : null);
+
+  return {
+    symbol,
+    price:              price ? r2(price) : null,
+    change_pct:         pct(price, prev),
+    week_52_high:       w52Hi ? r2(w52Hi) : null,
+    week_52_low:        w52Lo ? r2(w52Lo) : null,
+    pct_from_52w_high:  (price && w52Hi) ? pct(price, w52Hi) : null,
+    pct_from_52w_low:   (price && w52Lo) ? pct(price, w52Lo) : null,
+  };
 }
 
-const r2 = n => Math.round(n * 100) / 100;
-
 async function gatherSignals() {
-  const [wti, gasoline, natgas, cpiEnergy, ppiOilGas, utilProd, elecProd] = await Promise.all([
-    fredLatest("WTISPLC").catch(() => null),    // WTI crude oil $/barrel (monthly)
-    fredLatest("GASREGCOVW").catch(() => null), // Regular gasoline $/gallon (weekly)
-    fredLatest("MHHNGSP").catch(() => null),    // Henry Hub natural gas $/mmBtu (monthly)
-    fredLatest("CPIENGSL").catch(() => null),   // CPI Energy index (monthly)
-    fredLatest("PCU211211").catch(() => null),  // PPI Oil & Gas extraction (monthly)
-    fredLatest("IPUTIL").catch(() => null),     // Industrial production: utilities (monthly)
-    fredLatest("IPG22112N").catch(() => null),  // Industrial production: electric power (monthly)
-  ]);
-  return { wti, gasoline, natgas, cpiEnergy, ppiOilGas, utilProd, elecProd };
+  const SYMS    = ["CL=F", "BZ=F", "NG=F", "XLE", "OIH", "XOM", "CVX", "MPC", "BKR"];
+  const results = await Promise.allSettled(SYMS.map(s => fetchQuote(s)));
+  const Q       = {};
+  SYMS.forEach((s, i) => { Q[s] = results[i].status === "fulfilled" ? results[i].value : null; });
+
+  const wti   = Q["CL=F"];
+  const brent = Q["BZ=F"];
+  const ng    = Q["NG=F"];
+
+  return {
+    wti_crude:        wti,
+    brent_crude:      brent,
+    natural_gas:      ng,
+    energy_etf_xle:   Q["XLE"],
+    oil_services_oih: Q["OIH"],
+    exxon_mobil:      Q["XOM"],
+    chevron:          Q["CVX"],
+    marathon_petro:   Q["MPC"],
+    baker_hughes:     Q["BKR"],
+    derived: {
+      brent_wti_spread:   (wti?.price && brent?.price) ? r2(brent.price - wti.price) : null,
+      brent_premium:      (wti?.price && brent?.price) ? (brent.price > wti.price ? "Brent premium" : "WTI premium") : null,
+    },
+  };
 }
 
 function interpretSignals(s) {
-  const oil_regime =
-    !s.wti             ? "unknown"
-    : s.wti.value > 120 ? "shock"
-    : s.wti.value > 90  ? "elevated"
-    : s.wti.value > 60  ? "normal"
-    :                     "low";
+  const wti = s.wti_crude;
+  const ng  = s.natural_gas;
 
-  const gas_stress =
-    !s.gasoline            ? "unknown"
-    : s.gasoline.value > 4.50 ? "high"
-    : s.gasoline.value > 3.50 ? "elevated"
-    :                           "low";
+  const oil_regime =
+    !wti            ? "unknown"
+    : wti.price > 120 ? "shock"
+    : wti.price > 90  ? "elevated"
+    : wti.price > 60  ? "normal"
+    :                   "low";
 
   const natgas_regime =
-    !s.natgas             ? "unknown"
-    : s.natgas.value > 5.0 ? "tight"
-    : s.natgas.value > 3.0 ? "normal"
-    :                        "glut";
+    !ng             ? "unknown"
+    : ng.price > 5.0 ? "tight"
+    : ng.price > 3.0 ? "normal"
+    :                  "glut";
 
-  return { oil_regime, gas_stress, natgas_regime };
+  return { oil_regime, natgas_regime };
 }
 
 async function synthesize(signals, interp, style) {
   const apiKey = process.env.OPENAI_API_KEY;
   if (!apiKey) throw new Error("OPENAI_API_KEY not configured");
 
+  const wti   = signals.wti_crude;
+  const brent = signals.brent_crude;
+  const ng    = signals.natural_gas;
+  const xle   = signals.energy_etf_xle;
+  const oih   = signals.oil_services_oih;
+  const d     = signals.derived;
+
   const block = [
-    `WTI crude oil: ${signals.wti     ? `$${r2(signals.wti.value)}/barrel (${signals.wti.date}) — regime: ${interp.oil_regime}` : "N/A"}`,
-    `Gasoline price: ${signals.gasoline ? `$${r2(signals.gasoline.value)}/gallon (${signals.gasoline.date}) — stress: ${interp.gas_stress}` : "N/A"}`,
-    `Natural gas (Henry Hub): ${signals.natgas ? `$${r2(signals.natgas.value)}/mmBtu (${signals.natgas.date}) — regime: ${interp.natgas_regime}` : "N/A"}`,
-    `CPI Energy index: ${signals.cpiEnergy ? `${r2(signals.cpiEnergy.value)} (${signals.cpiEnergy.date})` : "N/A"}`,
-    `PPI Oil & Gas extraction: ${signals.ppiOilGas ? `${r2(signals.ppiOilGas.value)} (${signals.ppiOilGas.date})` : "N/A"}`,
-    `Industrial production — utilities: ${signals.utilProd  ? `${r2(signals.utilProd.value)} (${signals.utilProd.date})` : "N/A"}`,
-    `Industrial production — electric power: ${signals.elecProd ? `${r2(signals.elecProd.value)} (${signals.elecProd.date})` : "N/A"}`,
+    `WTI crude futures: $${wti?.price ?? "N/A"}/bbl (${wti?.change_pct ?? "N/A"}% today, ${wti?.pct_from_52w_high ?? "N/A"}% from 52w high) — regime: ${interp.oil_regime}`,
+    `Brent crude: $${brent?.price ?? "N/A"}/bbl (spread vs WTI: ${d.brent_wti_spread ?? "N/A"} — ${d.brent_premium ?? "N/A"})`,
+    `Natural gas (Henry Hub proxy): $${ng?.price ?? "N/A"}/MMBtu (${ng?.change_pct ?? "N/A"}% today) — regime: ${interp.natgas_regime}`,
+    `Energy sector (XLE): ${xle?.change_pct ?? "N/A"}% today | Oil services (OIH): ${oih?.change_pct ?? "N/A"}% today`,
+    `ExxonMobil: ${signals.exxon_mobil?.change_pct ?? "N/A"}% | Chevron: ${signals.chevron?.change_pct ?? "N/A"}% | Marathon: ${signals.marathon_petro?.change_pct ?? "N/A"}%`,
+    `Baker Hughes (activity proxy): ${signals.baker_hughes?.change_pct ?? "N/A"}%`,
   ].join("\n");
 
   const toneClause = style === "concise"
@@ -106,7 +138,7 @@ async function synthesize(signals, interp, style) {
 
   const prompt = `You are a senior energy market analyst writing a daily situation briefing for AI agents. Synthesize the energy signal data below into a coherent, actionable assessment of current US energy market conditions.
 
-CURRENT SIGNAL DATA (sourced from FRED):
+CURRENT SIGNAL DATA (Yahoo Finance real-time):
 ${block}
 
 ${toneClause} Focus on: (1) the overall energy market regime and what is driving it, (2) the single most important risk for agents relying on energy-sensitive assumptions, and (3) one concrete implication for agent decision-making (especially macro, inflation, commodities, or equity agents).
@@ -150,10 +182,10 @@ Respond ONLY with a JSON object (no markdown, no text outside JSON):
 
 export default {
   name:  "energy-brief",
-  price: "$0.350",
+  price: "$0.65",
 
   description:
-    "AI-synthesized US energy market situation briefing. Gathers 7 real-time signals from FRED (free, no auth): WTI crude price, regular gasoline price, Henry Hub natural gas, CPI Energy, PPI Oil & Gas, utilities output, and electric power production. Uses GPT-4o-mini to synthesize: energy regime label (energy_shock/elevated/normal/energy_glut/uncertain), dominant risk, agent implication, and a 200-word narrative. Extends the macro intelligence suite to energy — critical for inflation analysis, commodity exposure, and sector rotation decisions.",
+    "AI-synthesized US energy market intelligence brief. Assembles 9 real-time signals from Yahoo Finance: WTI crude futures, Brent crude (with spread), natural gas (Henry Hub proxy), energy sector ETF (XLE), oil services ETF (OIH), ExxonMobil, Chevron, Marathon Petroleum, and Baker Hughes. Returns 52-week context, Brent/WTI spread, market-regime classification, and a 200-word GPT-4o-mini narrative covering oil regime, dominant risk, and agent decision implications. Seam: crownblock upstream $1.00/call — STALL at $0.65 with real-time futures data vs monthly averages.",
 
   inputSchema: {
     type: "object",
@@ -170,26 +202,31 @@ export default {
   outputSchema: {
     type: "object",
     properties: {
-      energy_regime:      { type: "string",  description: "Current energy regime: energy_shock | elevated | normal | energy_glut | uncertain" },
-      situation:          { type: "string",  description: "One-sentence energy market summary." },
-      dominant_risk:      { type: "string",  description: "Most important risk the combined signals imply." },
-      agent_implication:  { type: "string",  description: "Concrete decision relevance for AI agents." },
-      narrative:          { type: "string",  description: "Full ~200-word briefing narrative." },
-      confidence:         { type: "number",  description: "Synthesis confidence 0–1." },
-      signals: {
+      energy_regime:     { type: "string", description: "energy_shock | elevated | normal | energy_glut | uncertain" },
+      situation:         { type: "string", description: "One-sentence energy market summary." },
+      dominant_risk:     { type: "string", description: "Most important risk implied by the signals." },
+      agent_implication: { type: "string", description: "Concrete action relevance for AI agents." },
+      narrative:         { type: "string", description: "Full ~200-word briefing narrative." },
+      confidence:        { type: "number", description: "Synthesis confidence 0–1." },
+      prices: {
         type: "object",
-        description: "Raw signal data used in synthesis.",
+        description: "Real-time commodity futures prices.",
         properties: {
-          wti_crude_barrel:     { type: "number" },
-          gasoline_per_gallon:  { type: "number" },
-          natgas_mmbtu:         { type: "number" },
-          cpi_energy_index:     { type: "number" },
-          ppi_oil_gas:          { type: "number" },
-          util_production:      { type: "number" },
-          elec_production:      { type: "number" },
-          oil_regime:           { type: "string" },
-          gas_stress:           { type: "string" },
-          natgas_regime:        { type: "string" },
+          wti_crude_bbl:     { type: "object" },
+          brent_crude_bbl:   { type: "object" },
+          natural_gas_mmbtu: { type: "object" },
+        },
+      },
+      sector: {
+        type: "object",
+        description: "Energy equity performance signals.",
+        properties: {
+          xle_energy:        { type: "object" },
+          oih_oil_services:  { type: "object" },
+          xom_exxon:         { type: "object" },
+          cvx_chevron:       { type: "object" },
+          mpc_marathon:      { type: "object" },
+          bkr_baker_hughes:  { type: "object" },
         },
       },
       generated_at: { type: "string" },
@@ -205,17 +242,18 @@ export default {
 
     return {
       ...synth,
-      signals: {
-        wti_crude_barrel:    raw.wti       ? r2(raw.wti.value)        : null,
-        gasoline_per_gallon: raw.gasoline  ? r2(raw.gasoline.value)   : null,
-        natgas_mmbtu:        raw.natgas    ? r2(raw.natgas.value)      : null,
-        cpi_energy_index:    raw.cpiEnergy ? r2(raw.cpiEnergy.value)  : null,
-        ppi_oil_gas:         raw.ppiOilGas ? r2(raw.ppiOilGas.value)  : null,
-        util_production:     raw.utilProd  ? r2(raw.utilProd.value)   : null,
-        elec_production:     raw.elecProd  ? r2(raw.elecProd.value)   : null,
-        oil_regime:          interp.oil_regime,
-        gas_stress:          interp.gas_stress,
-        natgas_regime:       interp.natgas_regime,
+      prices: {
+        wti_crude_bbl:    raw.wti_crude     ? { price: raw.wti_crude.price,    change_pct: raw.wti_crude.change_pct,    week_52_high: raw.wti_crude.week_52_high,    week_52_low: raw.wti_crude.week_52_low,    pct_from_52w_high: raw.wti_crude.pct_from_52w_high    } : null,
+        brent_crude_bbl:  raw.brent_crude   ? { price: raw.brent_crude.price,  change_pct: raw.brent_crude.change_pct,  spread_vs_wti: raw.derived.brent_wti_spread, spread_type: raw.derived.brent_premium } : null,
+        natural_gas_mmbtu: raw.natural_gas  ? { price: raw.natural_gas.price,  change_pct: raw.natural_gas.change_pct,  week_52_high: raw.natural_gas.week_52_high,  regime: interp.natgas_regime              } : null,
+      },
+      sector: {
+        xle_energy:       raw.energy_etf_xle  ? { price: raw.energy_etf_xle.price,  change_pct: raw.energy_etf_xle.change_pct  } : null,
+        oih_oil_services: raw.oil_services_oih ? { price: raw.oil_services_oih.price, change_pct: raw.oil_services_oih.change_pct } : null,
+        xom_exxon:        raw.exxon_mobil  ? { price: raw.exxon_mobil.price,  change_pct: raw.exxon_mobil.change_pct  } : null,
+        cvx_chevron:      raw.chevron      ? { price: raw.chevron.price,      change_pct: raw.chevron.change_pct      } : null,
+        mpc_marathon:     raw.marathon_petro ? { price: raw.marathon_petro.price, change_pct: raw.marathon_petro.change_pct } : null,
+        bkr_baker_hughes: raw.baker_hughes ? { price: raw.baker_hughes.price, change_pct: raw.baker_hughes.change_pct } : null,
       },
       generated_at: new Date().toISOString(),
     };
