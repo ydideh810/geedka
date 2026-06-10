@@ -335,6 +335,25 @@ Standard Node service. Set env vars (`WALLET_ADDRESS`, `X402_NETWORK=base`,
 
 ---
 
+## Migrating from orbisapi
+
+Several orbisapi proxy endpoints went offline in June 2026. The Stall covers all of them at lower prices with no x402 configuration required beyond a Base USDC wallet:
+
+| Dead orbisapi endpoint | The Stall replacement | STALL price | Orbisapi price |
+|---|---|---|---|
+| `orbisapi.com/proxy/cryptocurrency-news-api-456a6a` | [`crypto-news-impact`](https://the-stall.intuitek.ai/cap/crypto-news-impact) | $0.008 | $0.005 |
+| `orbisapi.com/proxy/web-scrape-links-api-4e3ed0` | [`page-links`](https://the-stall.intuitek.ai/cap/page-links) | $0.004 | $0.005 |
+| `orbisapi.com/proxy/forex-rate-*` | [`forex-rates`](https://the-stall.intuitek.ai/cap/forex-rates) | $0.005 | $0.005 |
+| `orbisapi.com/proxy/changelog-generate-*` | [`changelog-generate`](https://the-stall.intuitek.ai/cap/changelog-generate) | $0.003 | $0.005 |
+| `orbisapi.com/proxy/defi-yield-strategies-*` | [`defi-yield-strategies`](https://the-stall.intuitek.ai/cap/defi-yield-strategies) | $0.005 | $0.005 |
+| `orbisapi.com/proxy/content-moderation-*` | [`content-moderation`](https://the-stall.intuitek.ai/cap/content-moderation) | $0.003 | $0.012 |
+| `orbisapi.com/proxy/policy-change-impact-mapper-*` | [`policy-impact-mapper`](https://the-stall.intuitek.ai/cap/policy-impact-mapper) | $0.008 | $0.005 |
+| `orbisapi.com/proxy/polymarket-sentiment-shift-*` | [`polymarket-sentiment-shift`](https://the-stall.intuitek.ai/cap/polymarket-sentiment-shift) | $0.005 | $0.005 |
+
+All STALL capabilities are x402-compatible — the same payment flow, USDC on Base, no re-integration needed. Update `pay_to` address and endpoint URL.
+
+---
+
 ## Status
 
 - [x] Chassis boots, loads capabilities, paywalls them, serves free introspection
@@ -342,7 +361,7 @@ Standard Node service. Set env vars (`WALLET_ADDRESS`, `X402_NETWORK=base`,
 - [x] `base_rpc` stream: no-auth on-chain settlement reader (Base public RPC)
 - [x] Concentration (few-payers path) producing real signals from live mainnet
 - [x] Wallet ownership verified (GATE 1) — Base mainnet, EIP-191 signature recovered
-- [x] **199 capabilities LIVE** at `https://the-stall.intuitek.ai` (Base mainnet, v4.54.0)
+- [x] **200 capabilities LIVE** at `https://the-stall.intuitek.ai` (Base mainnet, v4.54.0)
 - [x] MCP endpoint at `/mcp` (streamable-http, accepts `application/json`)
 - [x] A2A Agent Card at `/.well-known/agent.json`
 - [x] x402 discovery document at `/.well-known/x402`
