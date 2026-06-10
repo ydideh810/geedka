@@ -17,7 +17,7 @@
 
 ---
 
-## Current capabilities — 202 live tools (v4.56.0)
+## Current capabilities — 203 live tools (v4.57.0)
 
 Full catalog at `/catalog`. Each capability is behind a per-call x402 paywall — no API keys, no accounts, no monthly fees. Pay USDC on Base mainnet per call.
 
@@ -30,6 +30,7 @@ Full catalog at `/catalog`. Each capability is behind a per-call x402 paywall �
 | `air-quality` | $0.002 | Real-time US AQI and pollutant readings for any lat/lon |
 | `analyst-ratings` | $0.010 | Wall Street analyst consensus and price targets for any US equity |
 | `arxiv-intel` | $0.003 | Search arXiv preprints by query, field (title/abstract/author), and category (cs.AI, cs.LG, etc.). Returns title, authors, abstract, arXiv ID, PDF link, and publish date. Canonical source for AI/ML/CS preprints — months ahead of peer-reviewed journals. No API key. |
+| `aviation-weather` | $0.003 | Current METAR + 24–30h TAF forecast for any airport. Returns flight category (VFR/MVFR/IFR/LIFR), wind, visibility, ceiling, and forecast periods. Accepts IATA (JFK) or ICAO (KJFK). Source: NOAA Aviation Weather Center — free, no API key. |
 | `base-season` | $0.003 | Base chain season snapshot: total chain TVL, top 10 protocols by Base-native TVL, category breakdown, 7d trend, and top Base ecosystem tokens by market cap |
 | `block-intel` | $0.002 | Returns block header data (number, hash, timestamp, gas used/limit, base fee, tx count, validator address) for any block on Base, Ethereum, or Arbitrum |
 | `breadcrumb-extractor` | $0.003 | Extracts structured breadcrumb navigation from a URL |
