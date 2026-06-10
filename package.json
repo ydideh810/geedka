@@ -1,7 +1,7 @@
 {
   "name": "the-stall",
-  "version": "4.55.0",
-  "description": "201 pay-per-call AI data tools via MCP and x402 — no API keys required. YouTube video metadata (yt-dlp), historical ECB FX rates (1999-present, single date + time series), domain availability (8 TLDs), currency formatting (150+ currencies), audio transcription (OpenAI Whisper), income statements + cash flow, AI content analysis, Wayback Machine (800B+ pages), CVE intel, US stocks + OHLCV history, DeFi yield planner, global news, and 195+ more. USDC on Base.",
+  "version": "4.56.0",
+  "description": "202 pay-per-call AI data tools via MCP and x402 — no API keys required. Polymarket whale entries (smart-money tracker), changelog generation, YouTube metadata, historical FX rates, domain availability, audio transcription, income statements, Wayback Machine, CVE intel, US stocks, DeFi yields, global news, and 196+ more. USDC on Base.",
   "type": "module",
   "main": "src/server.js",
   "scripts": {
