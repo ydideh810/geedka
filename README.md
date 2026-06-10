@@ -17,7 +17,7 @@
 
 ---
 
-## Current capabilities — 199 live tools (v4.53.0)
+## Current capabilities — 200 live tools (v4.54.0)
 
 Full catalog at `/catalog`. Each capability is behind a per-call x402 paywall — no API keys, no accounts, no monthly fees. Pay USDC on Base mainnet per call.
 
@@ -161,6 +161,7 @@ Full catalog at `/catalog`. Each capability is behind a per-call x402 paywall �
 | `readable-content` | $0.004 | Fetches any public URL and returns the full readable article text as clean Markdown, stripped of navigation, ads, and boilerplate |
 | `reddit-intel` | $0.012 | Searches Reddit posts and/or comments by keyword |
 | `regex-tester` | $0.003 | Safe regex testing and extraction |
+| `cron-parser` | $0.001 | Parse and explain any Unix cron expression — human description + next N run times. Supports @shortcuts |
 | `research-paper-search` | $0.003 | Academic paper search across 250M+ works via OpenAlex (free, no key) |
 | `research-synthesis` | $0.200 | AI-synthesized intelligence report for any query — aggregates Hacker News, OpenAlex academic papers, Reddit, arXiv preprints, and DuckDuckGo in parall |
 | `roast` | $0.040 | Witty AI roast of any target — person, company, product, code snippet, or concept |
@@ -341,7 +342,7 @@ Standard Node service. Set env vars (`WALLET_ADDRESS`, `X402_NETWORK=base`,
 - [x] `base_rpc` stream: no-auth on-chain settlement reader (Base public RPC)
 - [x] Concentration (few-payers path) producing real signals from live mainnet
 - [x] Wallet ownership verified (GATE 1) — Base mainnet, EIP-191 signature recovered
-- [x] **199 capabilities LIVE** at `https://the-stall.intuitek.ai` (Base mainnet, v4.53.0)
+- [x] **199 capabilities LIVE** at `https://the-stall.intuitek.ai` (Base mainnet, v4.54.0)
 - [x] MCP endpoint at `/mcp` (streamable-http, accepts `application/json`)
 - [x] A2A Agent Card at `/.well-known/agent.json`
 - [x] x402 discovery document at `/.well-known/x402`
