@@ -12,7 +12,7 @@
 // writes the function statement, price, and ToS note.
 
 import Database from "better-sqlite3";
-import { writeFileSync, mkdirSync, existsSync } from "node:fs";
+import { writeFileSync, mkdirSync, existsSync, readdirSync, readFileSync } from "node:fs";
 import { homedir } from "node:os";
 import { dirname, join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
@@ -24,6 +24,29 @@ const DB_PATH            = process.env.[REDACTED] || join(REPO_ROOT, "archive.db
 const HANDOFF_DIR        = process.env.HANDOFF_DIR || join(homedir(), "intuitek", "outputs", "for_claude_web");
 const STRENGTH_THRESHOLD = parseFloat(process.env.HANDOFF_STRENGTH || "0.70");
 const RECENT_MINUTES     = parseInt(process.env.HANDOFF_WINDOW_MIN || "12", 10);
+
+const CAPS_DIR = join(REPO_ROOT, "capabilities");
+
+// Build a set of hostnames already covered by seam comments in existing caps.
+// Cap files annotate: // Seam: https://host/path — skip re-signaling covered hosts.
+function buildCoveredDomains() {
+  const covered = new Set();
+  try {
+    const files = readdirSync(CAPS_DIR).filter(f => f.endsWith(".js"));
+    for (const f of files) {
+      const content = readFileSync(join(CAPS_DIR, f), "utf8");
+      for (const m of content.matchAll(/\/\/\s+[Ss]eam:\s+(https?:\/\/[^\s,]+)/g)) {
+        try { covered.add(new URL(m[1]).hostname.replace(/^www\./, "")); } catch {}
+      }
+    }
+  } catch {}
+  return covered;
+}
+
+function subjectDomain(subject) {
+  const firstPart = subject.split("|")[0].split("→")[0].trim();
+  try { return new URL(firstPart).hostname.replace(/^www\./, ""); } catch { return null; }
+}
 
 const HOOK_BY_PATTERN = {
   seam:          "seam",
@@ -158,8 +181,13 @@ const insertHandoff = db.prepare(`
   VALUES (?, ?, ?, ?, ?, ?)
 `);
 
-let written = 0, skipped = 0;
+const coveredDomains = buildCoveredDomains();
+let written = 0, skipped = 0, already_built = 0;
 for (const s of strong) {
+  // Skip signals whose seam domain is already served by an existing cap
+  const domain = subjectDomain(s.subject);
+  if (domain && coveredDomains.has(domain)) { already_built += 1; continue; }
+
   const ev = JSON.parse(s.evidence_json || "{}");
   const hookType = HOOK_BY_PATTERN[s.pattern] || s.pattern;
   const ts = new Date().toISOString().replace(/[:.]/g, "-");
@@ -175,5 +203,5 @@ for (const s of strong) {
   written += 1;
 }
 
-console.log(`handoff: wrote=${written} skipped(deduped)=${skipped} considered=${strong.length} threshold=${STRENGTH_THRESHOLD} window=${RECENT_MINUTES}m`);
+console.log(`handoff: wrote=${written} skipped(deduped)=${skipped} already_built=${already_built} considered=${strong.length} threshold=${STRENGTH_THRESHOLD} window=${RECENT_MINUTES}m`);
 db.close();
