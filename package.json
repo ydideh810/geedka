@@ -11,13 +11,17 @@
     "scan:legacy": "node prospector/legacy/prospector_scan_v0_2.mjs"
   },
   "dependencies": {
+    "@coinbase/cdp-sdk": "^1.51.0",
     "@modelcontextprotocol/sdk": "^1.29.0",
     "@x402/core": "^2.14.0",
     "@x402/evm": "^2.14.0",
     "@x402/express": "^2.14.0",
     "better-sqlite3": "^11.3.0",
     "dotenv": "^16.4.5",
-    "express": "^4.19.2"
+    "express": "^4.19.2",
+    "franc": "^6.2.0",
+    "franc-all": "^7.2.0",
+    "franc-min": "^6.2.0"
   },
   "engines": {
     "node": ">=20"
