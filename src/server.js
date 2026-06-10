@@ -343,6 +343,30 @@ app.get("/.well-known/x402", (_req, res) =>
   })
 );
 
+// ── x402.json alias — version:1 integer format for Agentic.Market / CDP crawler ─
+// Mirrors the format used by blockrun.ai (version=1 int, resources as "METHOD /path")
+// to ensure Agentic.Market's indexer can enumerate all 205 capabilities.
+app.get("/.well-known/x402.json", (_req, res) =>
+  res.json({
+    version: 1,
+    name: "The Stall",
+    description: `Domain-agnostic x402 capability chassis by IntuiTek¹. ${capabilities.length} AI-callable data services on Base mainnet. No API keys or accounts required.`,
+    network: "base",
+    currency: "USDC",
+    payTo: PAY_TO || null,
+    resources: capabilities.map((c) => `GET /cap/${c.name}`),
+    endpoints: capabilities.map((c) => ({
+      method: "GET",
+      path: `/cap/${c.name}`,
+      url: `${BASE_URL}/cap/${c.name}`,
+      description: c.description,
+      price: { amount: c.price.replace("$", ""), currency: "USDC", network: "base" },
+    })),
+    catalog: `${BASE_URL}/catalog`,
+    openapi: `${BASE_URL}/openapi.json`,
+  })
+);
+
 // ── A2A Agent Card (ACP / Google A2A discovery standard) ─────────────────────
 app.get("/.well-known/agent.json", (_req, res) =>
   res.json({
