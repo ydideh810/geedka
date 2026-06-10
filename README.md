@@ -17,7 +17,7 @@
 
 ---
 
-## Current capabilities — 206 live tools (v4.61.0)
+## Current capabilities — 208 live tools (v4.63.0)
 
 Full catalog at `/catalog`. Each capability is behind a per-call x402 paywall — no API keys, no accounts, no monthly fees. Pay USDC on Base mainnet per call.
 
@@ -189,6 +189,7 @@ Full catalog at `/catalog`. Each capability is behind a per-call x402 paywall �
 | `stock-price-multi` | $0.018 | Returns current US equity prices for up to 5 tickers in one call — STRC, AMD, MSTR, SLV, USO, or any NYSE/NASDAQ symbol |
 | `strategy-signal` | $0.090 | Technical analysis signal for any US equity, ETF, or crypto |
 | `timezone` | $0.002 | Timezone intelligence using the IANA database (418 zones) built into Node |
+| `twitter-intel` | $0.015 | Real-time Twitter/X data without an API key. lookup_user returns full profile (followers, bio, verification). search_tweets returns 10 recent tweets matching a keyword query. x402-settled upstream via twit.sh. |
 | `token-top-holders` | $0.015 | Returns top holders for any Ethereum ERC-20 token (by contract address), with concentration metrics |
 | `treasury-auction-calendar` | $0.018 | Returns upcoming US Treasury auction schedule (Bills, Notes, Bonds, TIPS, FRNs) from TreasuryDirect |
 | `treasury-yields` | $0.008 | Returns current US Treasury yield curve at 3M, 5Y, 10Y, and 30Y nodes from CBOE interest-rate indices (free, no API key) |
