@@ -1,7 +1,7 @@
 {
   "name": "the-stall",
-  "version": "4.52.0",
-  "description": "198 pay-per-call AI data tools via MCP and x402 \u2014 no API keys required. Historical ECB FX rates (1999-present, single date + time series), domain availability (8 TLDs), currency formatting (150+ currencies), audio transcription (OpenAI Whisper), income statements + cash flow, AI content analysis, Wayback Machine (800B+ pages), CVE intel, US stocks + OHLCV history, DeFi yield planner, global news, and 190+ more. USDC on Base.",
+  "version": "4.53.0",
+  "description": "198 pay-per-call AI data tools via MCP and x402 — no API keys required. Historical ECB FX rates (1999-present, single date + time series), domain availability (8 TLDs), currency formatting (150+ currencies), audio transcription (OpenAI Whisper), income statements + cash flow, AI content analysis, Wayback Machine (800B+ pages), CVE intel, US stocks + OHLCV history, DeFi yield planner, global news, and 190+ more. USDC on Base.",
   "type": "module",
   "main": "src/server.js",
   "scripts": {
