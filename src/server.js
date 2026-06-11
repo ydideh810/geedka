@@ -521,6 +521,46 @@ app.get("/", (_req, res) => {
 </html>`);
 });
 
+// ── llms.txt — agent/registry discovery file ─────────────────────────────────
+app.get("/llms.txt", (_req, res) => {
+  const cats = [
+    { name: "Finance & Markets", caps: capabilities.filter(c => /stock|equity|market|earning|dividend|etf|option|insider|sector|treasury|credit|hedge|short|fec|ipo|form-144|fomc|fed|fiscal|econ|labor|consumer|housing|intl-stock|global-equity/i.test(c.name)).map(c => c.name) },
+    { name: "Crypto & DeFi", caps: capabilities.filter(c => /crypto|defi|btc|eth|token|wallet|nft|solana|dex|chain|block|tx|evm|erc20|ens|gas|defillama|kimchi|korean|stablecoin|yield-farm|whale|funding/i.test(c.name)).map(c => c.name) },
+    { name: "Prediction Markets", caps: capabilities.filter(c => /polymarket|prediction|sports/i.test(c.name)).map(c => c.name) },
+    { name: "News & Research", caps: capabilities.filter(c => /news|research|arxiv|reddit|hn|rss|social|fact-check|wikipedia|stackoverflow|github-repo|github-org/i.test(c.name)).map(c => c.name) },
+    { name: "AI & Compute", caps: capabilities.filter(c => /ai-image|audio|vision|meme|generate|hf-model|code|content-|roast/i.test(c.name)).map(c => c.name) },
+    { name: "Infrastructure & Data", caps: capabilities.filter(c => /dns|ip-intel|ssl|http|ping|agent-access|geo|city|place|domain|email-verify|npm|pypi|json|regex|unit|timezone|cron|page-intel|readable|web-scrape|web-change|web-company|wayback/i.test(c.name)).map(c => c.name) },
+    { name: "On-chain Risk & Compliance", caps: capabilities.filter(c => /sanctions|wallet-credit|wallet-screener|address-security|agent-kya|kya|cve|drug-intel|npi|clinical|fda/i.test(c.name)).map(c => c.name) },
+    { name: "Macro & Alternative Data", caps: capabilities.filter(c => /macro|imf|world-bank|commodity|energy|solar|earthquake|usgs|weather|air-quality|aviation|flight|legal|gov-vote|congressional|federal-contract|federal-register|country-info/i.test(c.name)).map(c => c.name) },
+  ];
+  const capLines = cats.map(cat => {
+    const names = cat.caps.slice(0, 15).map(n => `  - [${n}](${BASE_URL}/cap/${n}): $${capabilities.find(c=>c.name===n)?.price?.replace('$','') || '?'} USDC`).join('\n');
+    return names ? `## ${cat.name}\n\n${names}` : null;
+  }).filter(Boolean).join('\n\n');
+  res.setHeader("Content-Type", "text/plain; charset=utf-8");
+  res.send(`# The Stall
+
+> ${capabilities.length} AI-callable pay-per-call data tools. No API keys. Pay USDC on Base. MCP + REST.
+
+The Stall is an x402-native capability chassis by IntuiTek¹. Every capability is a GET endpoint — agents probe, receive a 402 Payment Required with the exact USDC price, pay on Base mainnet via the Coinbase CDP facilitator, and receive the result. No accounts, no subscriptions required.
+
+- MCP endpoint: ${BASE_URL}/mcp (streamable-http)
+- SSE endpoint: ${BASE_URL}/sse
+- x402 manifest: ${BASE_URL}/.well-known/x402
+- Agent card: ${BASE_URL}/.well-known/agent.json
+- Full catalog: ${BASE_URL}/catalog
+- OpenAPI spec: ${BASE_URL}/openapi.json
+
+${capLines}
+
+## Retainer Plans
+
+Counterparty-risk monitoring subscribers get unlimited /v1/risk/{address} calls:
+- 7-day plan: $10 USDC
+- 30-day plan: $25 USDC
+`);
+});
+
 // ── Machine-readable stats endpoint ──────────────────────────────────────────
 app.get("/stats", (_req, res) => {
   const stats = readPaymentStats();
