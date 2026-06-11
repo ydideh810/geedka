@@ -17,7 +17,7 @@
 
 ---
 
-## Current capabilities — 208 live tools (v4.63.0)
+## Current capabilities — 209 live tools (v4.63.1)
 
 Full catalog at `/catalog`. Each capability is behind a per-call x402 paywall — no API keys, no accounts, no monthly fees. Pay USDC on Base mainnet per call.
 
@@ -313,7 +313,7 @@ the-stall/
     ping.js                  liveness probe
     us-stock-price.js        US equity price + intraday metrics (Yahoo Finance)
     defi-portfolio.js        multi-chain wallet scanner (ETH/Base/Polygon/Arb)
-    ... 172 more capability modules (see /catalog)
+    ... 206 more capability modules (see /catalog)
 ```
 
 ## Quickstart (self-hosted)
