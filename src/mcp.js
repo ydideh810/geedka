@@ -113,9 +113,12 @@ export function makeMcpHandler(capabilities) {
     // Normalize Accept header — the MCP SDK requires both "application/json" and
     // "text/event-stream" as literal substrings (it uses string.includes, not proper
     // content negotiation). Crawlers often send Accept: */* or omit the header entirely.
-    // @hono/node-server reads rawHeaders (not req.headers), so we replace the whole array.
+    // Only normalize when the client does NOT explicitly prefer JSON-only — conformance
+    // checkers that send Accept: application/json (no SSE) expect a JSON body response,
+    // not SSE. Overriding their preference causes conformance failures.
     const accept = req.headers["accept"] || "";
-    if (!accept.includes("application/json") || !accept.includes("text/event-stream")) {
+    const wantsJsonOnly = accept.includes("application/json") && !accept.includes("text/event-stream") && !accept.includes("*/*");
+    if (!wantsJsonOnly && (!accept.includes("application/json") || !accept.includes("text/event-stream"))) {
       const normalized = "application/json, text/event-stream";
       req.headers["accept"] = normalized;
       // Replace rawHeaders so @hono/node-server sees the correct Accept value
