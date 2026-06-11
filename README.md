@@ -17,7 +17,7 @@
 
 ---
 
-## Current capabilities — 209 live tools (v4.63.1)
+## Current capabilities — 210 live tools (v4.64.0)
 
 Full catalog at `/catalog`. Each capability is behind a per-call x402 paywall — no API keys, no accounts, no monthly fees. Pay USDC on Base mainnet per call.
 
@@ -367,7 +367,7 @@ All STALL capabilities are x402-compatible — the same payment flow, USDC on Ba
 - [x] `base_rpc` stream: no-auth on-chain settlement reader (Base public RPC)
 - [x] Concentration (few-payers path) producing real signals from live mainnet
 - [x] Wallet ownership verified (GATE 1) — Base mainnet, EIP-191 signature recovered
-- [x] **209 capabilities LIVE** at `https://the-stall.intuitek.ai` (Base mainnet, v4.63.1)
+- [x] **210 capabilities LIVE** at `https://the-stall.intuitek.ai` (Base mainnet, v4.64.0, SSE transport added)
 - [x] MCP endpoint at `/mcp` (streamable-http, accepts `application/json`)
 - [x] A2A Agent Card at `/.well-known/agent.json`
 - [x] x402 discovery document at `/.well-known/x402`
