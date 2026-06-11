@@ -668,6 +668,29 @@ function coerceQuery(query, inputSchema) {
 // probes would receive 400/422 instead of 402, breaking x402scan detection.
 // Validation that rejects for missing params belongs inside the route handlers,
 // which only run after x402 has verified and settled the payment.
+
+// x402 body-mirror middleware — belts + suspenders for v1 x402 clients.
+// @x402/express puts requirements only in PAYMENT-REQUIRED header (valid x402 v2).
+// Body-only clients (legacy x402-fetch/axios) parse the body, not the header,
+// and silently fail to pay when they see {}. QuickNode fills both. We do too now.
+// Strictly additive: only fires when status=402 + header present + header decodes.
+app.use((_req, res, next) => {
+  const _origJson = res.json.bind(res);
+  res.json = function (body) {
+    if (res.statusCode === 402) {
+      const prHeader = res.getHeader('PAYMENT-REQUIRED') || res.getHeader('payment-required');
+      if (prHeader) {
+        try {
+          const requirements = JSON.parse(Buffer.from(String(prHeader), 'base64').toString('utf8'));
+          return _origJson(requirements);
+        } catch (_) { /* header malformed — fall through */ }
+      }
+    }
+    return _origJson(body);
+  };
+  next();
+});
+
 app.use(buildPaymentMiddleware({ payTo: PAY_TO, network: NETWORK, facilitator: FACILITATOR, capabilities }));
 
 // ── Retainer mount (subscription shape — POST /v1/subscribe/:plan + GET /v1/risk/:address) ──
