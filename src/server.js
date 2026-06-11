@@ -21,7 +21,7 @@ import { loadCapabilities } from "./registry.js";
 
 const { version: PKG_VERSION } = JSON.parse(readFileSync(new URL("../package.json", import.meta.url)));
 import { buildPaymentMiddleware } from "./payment.js";
-import { makeMcpHandler } from "./mcp.js";
+import { makeMcpHandler, makeSSEHandlers } from "./mcp.js";
 import { mountRetainer } from "./retainer/index.js";
 import { makeLiveProvider } from "./retainer/risk.js";
 
@@ -419,6 +419,12 @@ app.get("/.well-known/agent.json", (_req, res) =>
         url: `${BASE_URL}/mcp`,
         description: "MCP Streamable HTTP interface — all capabilities available free, no wallet required",
       },
+      {
+        type: "mcp",
+        transport: "sse",
+        url: `${BASE_URL}/sse`,
+        description: "MCP SSE interface — legacy SSE transport for clients that require it",
+      },
     ],
   })
 );
@@ -579,6 +585,11 @@ app.post("/mcp", makeMcpHandler(capabilities));
 app.get("/mcp", (_req, res) =>
   res.status(405).json({ jsonrpc: "2.0", error: { code: -32000, message: "Use POST for MCP requests" }, id: null })
 );
+
+// ── MCP SSE transport (legacy — for clients that require SSE over streamable-http) ──
+const { connect: sseConnect, message: sseMessage } = makeSSEHandlers(capabilities);
+app.get("/sse", sseConnect);
+app.post("/messages", sseMessage);
 
 // ── Query param coercion — REST callers pass everything as strings ─────────────
 // For fields with type: "array" in inputSchema, accept comma-separated strings

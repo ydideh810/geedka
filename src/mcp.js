@@ -1,16 +1,19 @@
-// mcp.js — MCP Streamable HTTP integration for The Stall
+// mcp.js — MCP transport integration for The Stall
 //
-// Exposes all STALL capabilities as MCP tools via Streamable HTTP transport.
+// Exposes all STALL capabilities as MCP tools via two transports:
+//   - Streamable HTTP (POST /mcp) — stateless, preferred
+//   - SSE (GET /sse + POST /messages) — legacy, for clients that require it
 // Handlers are called directly — no x402 payment required for MCP callers.
 // Direct HTTP calls via /cap/:name remain x402-gated for autonomous agent billing.
-//
-// Each POST /mcp request gets a fresh McpServer + transport (stateless mode).
-// This matches the MCP spec: no session state between calls.
 
 import { readFileSync } from "fs";
 import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
 import { StreamableHTTPServerTransport } from "@modelcontextprotocol/sdk/server/streamableHttp.js";
+import { SSEServerTransport } from "@modelcontextprotocol/sdk/server/sse.js";
 import { z } from "zod";
+
+// Session store for SSE connections (in-memory, per-process)
+const sseSessions = new Map();
 
 const { version: PKG_VERSION } = JSON.parse(readFileSync(new URL("../package.json", import.meta.url)));
 
@@ -64,6 +67,43 @@ function buildServer(capabilities) {
   }
 
   return server;
+}
+
+// Returns handlers for SSE transport.
+//   app.get("/sse", handlers.connect)
+//   app.post("/messages", handlers.message)
+export function makeSSEHandlers(capabilities) {
+  async function connect(req, res) {
+    try {
+      const transport = new SSEServerTransport("/messages", res);
+      const sessionId = transport.sessionId;
+      const server = buildServer(capabilities);
+      sseSessions.set(sessionId, { transport, server });
+      res.on("close", () => {
+        sseSessions.delete(sessionId);
+        server.close().catch(() => {});
+      });
+      await server.connect(transport); // also calls transport.start()
+    } catch (err) {
+      console.error("[SSE] connect error:", err);
+      if (!res.headersSent) res.status(500).end("SSE setup failed");
+    }
+  }
+
+  async function message(req, res) {
+    const sessionId = req.query.sessionId;
+    if (!sessionId) return res.status(400).json({ error: "Missing sessionId" });
+    const session = sseSessions.get(String(sessionId));
+    if (!session) return res.status(404).json({ error: "Unknown session" });
+    try {
+      await session.transport.handlePostMessage(req, res, req.body);
+    } catch (err) {
+      console.error("[SSE] message error:", err);
+      if (!res.headersSent) res.status(500).end("Message handling failed");
+    }
+  }
+
+  return { connect, message };
 }
 
 // Returns an Express request handler for POST /mcp.
