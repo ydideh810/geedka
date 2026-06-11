@@ -367,14 +367,14 @@ All STALL capabilities are x402-compatible — the same payment flow, USDC on Ba
 - [x] `base_rpc` stream: no-auth on-chain settlement reader (Base public RPC)
 - [x] Concentration (few-payers path) producing real signals from live mainnet
 - [x] Wallet ownership verified (GATE 1) — Base mainnet, EIP-191 signature recovered
-- [x] **200 capabilities LIVE** at `https://the-stall.intuitek.ai` (Base mainnet, v4.54.0)
+- [x] **209 capabilities LIVE** at `https://the-stall.intuitek.ai` (Base mainnet, v4.63.1)
 - [x] MCP endpoint at `/mcp` (streamable-http, accepts `application/json`)
 - [x] A2A Agent Card at `/.well-known/agent.json`
 - [x] x402 discovery document at `/.well-known/x402`
 - [x] Official MCP registry: `ai.intuitek.the-stall/the-stall`
 - [x] Payment logging (JSONL) — every settled call recorded
 - [x] First settled call → x402 Bazaar seeded (block 46944973, Base mainnet, 2026-06-05)
-- [x] PROSPECTOR scout wired to heartbeat cadence (v0.4, 3.7M+ settlements archived)
+- [x] PROSPECTOR scout wired to heartbeat cadence (v0.4, 6.6M+ settlements archived)
 - [x] Listed on [Glama](https://glama.ai/mcp/servers/thebrierfox/the-stall)
 
 ---
