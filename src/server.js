@@ -623,7 +623,18 @@ app.get("/metrics", (_req, res) => {
 // ── MCP Streamable HTTP endpoint (free — handlers called directly, no x402) ──
 app.post("/mcp", makeMcpHandler(capabilities));
 app.get("/mcp", (_req, res) =>
-  res.status(405).json({ jsonrpc: "2.0", error: { code: -32000, message: "Use POST for MCP requests" }, id: null })
+  res.status(200).json({
+    jsonrpc: "2.0",
+    result: {
+      serverInfo: { name: "The Stall", version: PKG_VERSION },
+      capabilities: { tools: {} },
+      protocolVersion: "2024-11-05",
+      capabilityCount: capabilities.length,
+      endpoint: `${BASE_URL}/mcp`,
+      note: "POST to this endpoint to send MCP messages",
+    },
+    id: null,
+  })
 );
 
 // ── MCP SSE transport (legacy — for clients that require SSE over streamable-http) ──
