@@ -22,6 +22,8 @@ import { loadCapabilities } from "./registry.js";
 const { version: PKG_VERSION } = JSON.parse(readFileSync(new URL("../package.json", import.meta.url)));
 import { buildPaymentMiddleware } from "./payment.js";
 import { makeMcpHandler } from "./mcp.js";
+import { mountRetainer } from "./retainer/index.js";
+import { makeLiveProvider } from "./retainer/risk.js";
 
 function parseJsonlLog(filePath) {
   try {
@@ -118,8 +120,8 @@ app.set("trust proxy", 1);
 app.use(express.json());
 app.use((_req, res, next) => {
   res.header("Access-Control-Allow-Origin", "*");
-  res.header("Access-Control-Allow-Methods", "GET, OPTIONS");
-  res.header("Access-Control-Allow-Headers", "Content-Type, X-PAYMENT, X-PAYMENT-RESPONSE, PAYMENT-REQUIRED");
+  res.header("Access-Control-Allow-Methods", "GET, POST, OPTIONS");
+  res.header("Access-Control-Allow-Headers", "Content-Type, X-PAYMENT, X-PAYMENT-RESPONSE, PAYMENT-REQUIRED, Authorization");
   res.header("Access-Control-Expose-Headers", "X-PAYMENT-RESPONSE, PAYMENT-REQUIRED");
   next();
 });
@@ -136,6 +138,8 @@ app.use((req, res, next) => {
 const capabilities = await loadCapabilities();
 
 const BASE_URL = process.env.BASE_URL || "https://the-stall.intuitek.ai";
+
+let retainerPlans = {}; // populated by mountRetainer after payment middleware boots
 
 // ── FREE introspection routes (not paywalled) ────────────────────────────────
 app.get("/health", (_req, res) =>
@@ -383,15 +387,26 @@ app.get("/.well-known/agent.json", (_req, res) =>
       pushNotifications: false,
       stateTransitionHistory: false,
     },
-    skills: capabilities.map((c) => ({
-      id: c.name,
-      name: c.name,
-      description: c.description,
-      inputModes: ["data"],
-      outputModes: ["data"],
-      tags: ["x402", "mcp", "data", "finance", "base", "usdc"],
-      examples: [],
-    })),
+    skills: [
+      ...capabilities.map((c) => ({
+        id: c.name,
+        name: c.name,
+        description: c.description,
+        inputModes: ["data"],
+        outputModes: ["data"],
+        tags: ["x402", "mcp", "data", "finance", "base", "usdc"],
+        examples: [],
+      })),
+      ...Object.entries(retainerPlans).map(([id, cfg]) => ({
+        id,
+        name: id,
+        description: `Counterparty risk retainer — ${cfg.windowSeconds / 86400}d subscription at ${cfg.price}. POST /v1/subscribe/${id} to pay; receive JWT granting access to GET /v1/risk/:address.`,
+        inputModes: ["data"],
+        outputModes: ["data"],
+        tags: ["x402", "risk", "retainer", "subscription", "compliance", "base"],
+        examples: [],
+      })),
+    ],
     authentication: {
       schemes: ["x402", "none"],
     },
@@ -592,6 +607,15 @@ function coerceQuery(query, inputSchema) {
 // Validation that rejects for missing params belongs inside the route handlers,
 // which only run after x402 has verified and settled the payment.
 app.use(buildPaymentMiddleware({ payTo: PAY_TO, network: NETWORK, facilitator: FACILITATOR, capabilities }));
+
+// ── Retainer mount (subscription shape — POST /v1/subscribe/:plan + GET /v1/risk/:address) ──
+const { plans } = mountRetainer(app, {
+  payTo: PAY_TO,
+  network: NETWORK,
+  facilitator: FACILITATOR,
+  provider: makeLiveProvider(),
+});
+retainerPlans = plans;
 
 for (const cap of capabilities) {
   app.get(`/cap/${cap.name}`, async (req, res) => {
