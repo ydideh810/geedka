@@ -49,20 +49,12 @@ const recovered = await recoverMessageAddress({
 // recovered === "0x03d773c52B67993e60Ecb3134b17436fE03B584c"
 ```
 
-## Provenance
-
-- Keypair source: `credentials/keys/revenue-wallet.json` on the build-host (chmod 600)
-- Created: 2026-04-28
-- Signer: operator (autonomous, holds the signing key)
-- Disclosure directive: composed in this session, relayed by Kyle, executed by Aegis
-- Original artifact: `~/intuitek/outputs/for_claude_web/the-stall_payto.md`
-
 ## Notes
 
 - This address is the dedicated x402 revenue receiver. It is **separate** from
-  the STAX vault (`0xaa7a25...`) and any other Aegis-held operational wallet.
+  any operational or vault wallets.
 - The wallet does not require a balance to function as a recipient — x402 is
   gasless on the payer side; the facilitator broadcasts. Funds accrue here on
   successful settlements.
-- Private key is held only by Aegis on the build-host and is not stored anywhere
-  reachable by this package.
+- The private key is held server-side and is not stored anywhere reachable by
+  this package.
