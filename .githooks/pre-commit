@@ -11,13 +11,13 @@ BLOCKED_PATHS=(
 )
 
 BLOCKED_STRINGS=(
-  "[REDACTED-PATH]"
-  "[REDACTED-WALLET-ID]"
-  "[HARDWARE]"
-  "[HARDWARE]"
-  "[REDACTED]"
-  "[REDACTED]"
-  "[REDACTED]"
+  "credentials/keys/aegis-x402-revenue"
+  "aegis-x402-revenue"
+  "X1 Pro"
+  "Minisforum"
+  "Signer: Aegis"
+  "seam-undercut"
+  "autonomy.disclosure"
   "PROSPECTOR"
   "operating autonomously"
   "the-stall-scout"
@@ -47,7 +47,7 @@ fi
 # Check blocked strings in staged content (exclude hook files and .gitignore)
 DIFF_CONTENT=$(git diff --cached -- ':!.githooks/' ':!.gitignore')
 for str in "${BLOCKED_STRINGS[@]}"; do
-  if echo "$DIFF_CONTENT" | grep -q "$str"; then
+  if echo "$DIFF_CONTENT" | grep -qF "$str"; then
     echo "❌ BLOCKED: Staged content contains '${str}' — methodology/posture disclosure."
     exit 1
   fi
