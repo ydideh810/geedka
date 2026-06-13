@@ -29,3 +29,10 @@ market_verdict_rerun.py
 
 # pre-patch backups — methodology snapshots, never public
 .backup/
+
+# methodology — lives in the-stall-ops private repo, never track in public
+prospector/
+bazaar_seed*.mjs
+fund_seeder*.mjs
+seeder_recycler.mjs
+seam_undercut*.mjs
