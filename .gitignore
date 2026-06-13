@@ -26,3 +26,6 @@ market_verdict_rerun.py
 .DS_Store
 .vscode/
 *.swp
+
+# pre-patch backups — methodology snapshots, never public
+.backup/
