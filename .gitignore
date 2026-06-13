@@ -36,3 +36,11 @@ bazaar_seed*.mjs
 fund_seeder*.mjs
 seeder_recycler.mjs
 seam_undercut*.mjs
+
+# ops/methodology files — live in KyleMillion/the-stall-ops
+prospector/
+bazaar_seed*.mjs
+fund_seeder*.mjs
+seeder_recycler.mjs
+*scout*
+seam_undercut*
