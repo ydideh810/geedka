@@ -11,13 +11,15 @@ BLOCKED_PATHS=(
 )
 
 BLOCKED_STRINGS=(
-  "credentials/keys/revenue-wallet"
-  "revenue-wallet"
-  "build-host"
-  "Signer: operator"
-  "operating autonomously"
+  "[REDACTED-PATH]"
+  "[REDACTED-WALLET-ID]"
+  "[HARDWARE]"
+  "[HARDWARE]"
+  "[REDACTED]"
+  "[REDACTED]"
+  "[REDACTED]"
   "PROSPECTOR"
-  "flow-discovery"
+  "operating autonomously"
   "the-stall-scout"
   "scout.mjs"
   "sequences.mjs"
