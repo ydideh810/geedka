@@ -1,27 +1,18 @@
 #!/usr/bin/env bash
-# RUN_ME.sh — self-documents, then sets up and boots The Stall.
+# RUN_ME.sh — setup and boot The Stall.
 set -euo pipefail
 cd "$(dirname "$0")"
 
 cat <<'BANNER'
 ────────────────────────────────────────────────────────────────────
-  THE STALL  +  PROSPECTOR  (v0.3)
-  A domain-agnostic x402 capability chassis + the four-stream flow
-  observer that decides what capability to put in it.
+  THE STALL — pay-per-call MCP server (x402 / Base mainnet)
 
-  THE STALL    a reusable paid endpoint in the agentic bazaar. Ships
-               with one trivial probe (ping) so it boots and can take
-               a first payment to get cataloged. The product slot is
-               INTENTIONALLY EMPTY until PROSPECTOR signals fill it.
-
-  PROSPECTOR   the discovery operator. Streams: bazaar (no auth),
-               cloudflare (CF_API_TOKEN), dune (DUNE_API_KEY),
-               x402scan (X402SCAN_API_URL). Analyses: growth, seam,
-               convergence, concentration. See prospector/PROSPECTOR.md.
+  Add https://the-stall.intuitek.ai/mcp to any MCP client.
+  No API keys. No accounts. Agents pay USDC per call.
 
   TWO GATES BEFORE LIVE USDC:
     1. Verify you own the payTo wallet. Nothing settles otherwise.
-    2. A data/market capability inherits its source's ToS/licensing.
+    2. A data/market capability inherits its source ToS/licensing.
 
   Boots on TESTNET (base-sepolia) by default = $0 risk.
 ────────────────────────────────────────────────────────────────────
@@ -41,11 +32,8 @@ fi
 
 echo
 echo "Next moves:"
-echo "  1. Run the scout (Stream 3 works with no setup):  npm run scan"
-echo "  2. Light up settlement-level signals:              add DUNE_API_KEY or X402SCAN_API_URL to .env"
-echo "  3. Boot the stall on testnet:                      npm start"
-echo "  4. Probe it (free):                                curl localhost:4021/catalog"
-echo "  5. Read the operator doctrine:                     prospector/PROSPECTOR.md"
+echo "  1. Boot the stall on testnet:  npm start"
+echo "  2. Probe it (free):            curl localhost:4021/catalog"
 echo
 read -r -p "Boot the stall now on testnet? [y/N] " ans
 if [[ "${ans:-N}" =~ ^[Yy]$ ]]; then
