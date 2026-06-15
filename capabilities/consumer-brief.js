@@ -134,7 +134,7 @@ async function gatherSignals() {
 }
 
 async function synthesize(sig, env) {
-  const apiKey = env.OPENAI_API_KEY;
+  const apiKey = process.env.OPENAI_API_KEY;
   if (!apiKey) throw new Error("OPENAI_API_KEY not set");
 
   const prompt = `You are a US consumer health analyst. Based on current FRED data, produce a structured briefing in JSON.
