@@ -17,7 +17,7 @@
 // watchlist setup; section='all' for the full current week calendar.
 
 const NASDAQ_IPO = "https://api.nasdaq.com/api/ipo/calendar";
-const UA         = "Mozilla/5.0 (compatible; the-stall/4.15; +https://intuitek.ai)";
+const UA         = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/125.0.0.0 Safari/537.36";
 const TIMEOUT    = 30_000;
 
 async function fetchIPO() {

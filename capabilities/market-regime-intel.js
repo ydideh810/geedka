@@ -21,26 +21,25 @@ const VIX_URL = "https://cdn.cboe.com/api/global/delayed_quotes/charts/historica
 const UA      = "Mozilla/5.0 (compatible; the-stall/4.38; +https://intuitek.ai)";
 const TIMEOUT = 12000;
 
+// CBOE delayed quotes historical — rate-limit free, no auth (YF v8 blocks server IPs)
+const CBOE_BASE = "https://cdn.cboe.com/api/global/delayed_quotes/charts/historical";
+const CBOE_TICKER = { "SPY": "SPY", "QQQ": "QQQ", "IWM": "IWM", "HYG": "HYG", "IEF": "IEF", "^TNX": "_TNX" };
+
 async function fetchYF(ticker) {
-  const url  = `${YF_BASE}/${encodeURIComponent(ticker)}?range=1y&interval=1d`;
+  const cboe = CBOE_TICKER[ticker] || ticker;
+  const url = `${CBOE_BASE}/${cboe}.json`;
   const resp = await fetch(url, {
-    headers: { "User-Agent": UA, Accept: "application/json" },
+    headers: { "User-Agent": UA },
     signal: AbortSignal.timeout(TIMEOUT),
   });
-  if (!resp.ok) throw new Error(`YF ${resp.status}: ${ticker}`);
-  const body   = await resp.json();
-  const result = body?.chart?.result?.[0];
-  if (!result) throw new Error(`No YF data: ${ticker}`);
-  const { timestamps, indicators } = result;
-  if (!timestamps || !timestamps.length) throw new Error(`No timestamps in YF data: ${ticker}`);
-  const quoteData = indicators?.quote?.[0];
-  if (!quoteData) throw new Error(`No quote data in YF response: ${ticker}`);
-  const { close } = quoteData;
-  const out = [];
-  for (let i = 0; i < timestamps.length; i++) {
-    if (close?.[i] != null) out.push(close[i]);
-  }
-  return { closes: out, lastTs: timestamps.at(-1) };
+  if (!resp.ok) throw new Error(`CBOE ${resp.status}: ${ticker}`);
+  const body = await resp.json();
+  const rows = body?.data;
+  if (!rows || !rows.length) throw new Error(`No CBOE data: ${ticker}`);
+  const recent = rows.slice(-252);
+  const closes = recent.map(r => parseFloat(r.close)).filter(v => !isNaN(v));
+  const lastTs = Math.floor(new Date(recent.at(-1).date + "T16:00:00Z").getTime() / 1000);
+  return { closes, lastTs };
 }
 
 async function fetchVIX() {
