@@ -84,8 +84,6 @@ export default {
     const section = (query.section || "all").toLowerCase();
     const limit   = Math.min(50, Math.max(1, parseInt(query.limit || "20", 10)));
 
-    const fetch = (await import("node-fetch")).default;
-
     // Step 1: get all KRW market codes from Upbit
     let tickers = [];
     let source  = "upbit";

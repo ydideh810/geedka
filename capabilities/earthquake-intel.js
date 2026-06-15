@@ -17,6 +17,41 @@
 // Price: $0.005
 
 const BASE = "https://earthquake.usgs.gov/fdsnws/event/1/query";
+const CACHE_TTL_MS = 60 * 60 * 1000; // 1 hour
+const _cache = new Map(); // cacheKey → { ts, data }
+
+// USGS GeoJSON feeds (pre-computed, rate-limit resistant, updated every 60s)
+const FEEDS = {
+  "5.0_week":  "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/5.0_week.geojson",
+  "4.5_week":  "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/4.5_week.geojson",
+  "2.5_week":  "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/2.5_week.geojson",
+};
+
+async function fetchUSGSFeed(minMag) {
+  const feedKey = minMag >= 5.0 ? "5.0_week" : minMag >= 4.5 ? "4.5_week" : "2.5_week";
+  const url = FEEDS[feedKey];
+  const resp = await fetch(url, {
+    headers: { "User-Agent": "the-stall/4.3 (+https://intuitek.ai)" },
+    signal: AbortSignal.timeout(12_000),
+  });
+  if (!resp.ok) throw new Error(`USGS feed HTTP ${resp.status}`);
+  return resp;
+}
+
+async function fetchUSGS(url, opts) {
+  for (let attempt = 1; attempt <= 5; attempt++) {
+    const resp = await fetch(url, { ...opts, signal: AbortSignal.timeout(12_000) });
+    if (resp.ok) return resp;
+    // 400 = USGS rate-limit on query API (returns 400 not 429); retry with backoff
+    const retryable = resp.status >= 400 && resp.status < 500 ? attempt < 5 : attempt < 3;
+    if (retryable) {
+      await new Promise(r => setTimeout(r, Math.min(2 ** attempt * 1000, 16000)));
+      continue;
+    }
+    throw new Error(`USGS API error: HTTP ${resp.status}`);
+  }
+  throw new Error("USGS API error: exhausted retries");
+}
 
 function iso(daysAgo) {
   const d = new Date(Date.now() - daysAgo * 86_400_000);
@@ -135,14 +170,29 @@ export default {
       params.set("orderby",       "time");
     }
 
-    const resp = await fetch(`${BASE}?${params}`, {
-      headers: { "User-Agent": "the-stall/4.3 (+https://intuitek.ai)" },
-      signal:  AbortSignal.timeout(12_000),
-    });
+    const cacheKey = `${mode}|${windowDays}|${clampedMag}|${lat ?? ""}|${lon ?? ""}`;
+    const cached = _cache.get(cacheKey);
 
-    if (!resp.ok) throw new Error(`USGS API error: HTTP ${resp.status}`);
-    const data = await resp.json();
-
+    let data;
+    try {
+      let resp;
+      if (mode === "recent" && windowDays <= 7) {
+        // Use pre-computed GeoJSON feed for recent mode — avoids USGS query API rate-limits
+        resp = await fetchUSGSFeed(clampedMag);
+      } else {
+        resp = await fetchUSGS(`${BASE}?${params}`, {
+          headers: { "User-Agent": "the-stall/4.3 (+https://intuitek.ai)" },
+        });
+      }
+      data = await resp.json();
+      _cache.set(cacheKey, { ts: Date.now(), data });
+    } catch (err) {
+      if (cached && Date.now() - cached.ts < CACHE_TTL_MS) {
+        data = cached.data;
+      } else {
+        throw err;
+      }
+    }
     const features = data.features || [];
 
     const events = features.map(f => {

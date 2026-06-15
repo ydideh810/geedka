@@ -18,7 +18,7 @@
 
 const NASDAQ_IPO = "https://api.nasdaq.com/api/ipo/calendar";
 const UA         = "Mozilla/5.0 (compatible; the-stall/4.15; +https://intuitek.ai)";
-const TIMEOUT    = 10_000;
+const TIMEOUT    = 30_000;
 
 async function fetchIPO() {
   const r = await fetch(NASDAQ_IPO, {

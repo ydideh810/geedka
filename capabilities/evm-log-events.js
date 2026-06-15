@@ -137,11 +137,14 @@ export default {
     if (query.from_block) {
       fromBlock = toBlockParam(query.from_block);
     } else {
-      // Default: 100 blocks before latest
+      // Default: last 10 blocks — larger ranges without address+topic filters return
+      // massive responses (16MB+) that cause JSON parse failures. Use from_block to
+      // explicitly widen the range.
+      const defaultRange = (address || topic0) ? 100 : 10;
       try {
         const latest = await rpc(rpcUrl, "eth_blockNumber", []);
         const latestNum = parseInt(latest, 16);
-        const startNum = Math.max(0, latestNum - 100);
+        const startNum = Math.max(0, latestNum - defaultRange);
         fromBlock = "0x" + startNum.toString(16);
       } catch {
         fromBlock = toBlock; // fallback to single-block query

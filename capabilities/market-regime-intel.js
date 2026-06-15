@@ -32,10 +32,13 @@ async function fetchYF(ticker) {
   const result = body?.chart?.result?.[0];
   if (!result) throw new Error(`No YF data: ${ticker}`);
   const { timestamps, indicators } = result;
-  const { close } = indicators.quote[0];
+  if (!timestamps || !timestamps.length) throw new Error(`No timestamps in YF data: ${ticker}`);
+  const quoteData = indicators?.quote?.[0];
+  if (!quoteData) throw new Error(`No quote data in YF response: ${ticker}`);
+  const { close } = quoteData;
   const out = [];
   for (let i = 0; i < timestamps.length; i++) {
-    if (close[i] != null) out.push(close[i]);
+    if (close?.[i] != null) out.push(close[i]);
   }
   return { closes: out, lastTs: timestamps.at(-1) };
 }
