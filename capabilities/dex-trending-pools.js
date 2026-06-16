@@ -5,7 +5,7 @@
 // Supports 100+ networks: eth, base, bsc, arbitrum, polygon_pos, solana, etc.
 //
 // Seam origin: GeckoTerminal pool data observed in agent workflows alongside
-// market-intelligence and market-overview, PROSPECTOR signals 2026-06-05.
+// market-intelligence and market-overview, signal-intel signals 2026-06-05.
 // Complements korean-market-movers (CEX) with on-chain DEX flow data.
 
 const GT_BASE_URL = "https://api.geckoterminal.com/api/v2";

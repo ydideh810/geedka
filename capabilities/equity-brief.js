@@ -16,7 +16,7 @@
 //   5. Earnings date   — next expected report + consensus EPS (Yahoo Finance quoteSummary)
 //
 // Seam: equity-research agents currently chain equity-technicals + us-stock-price
-// + insider-trades + options-snapshot — observed pattern in PROSPECTOR.
+// + insider-trades + options-snapshot — observed pattern in signal-intel.
 // This cap collapses that 4-call workflow into one AI-synthesized output at $0.350.
 //
 // Upstreams: Yahoo Finance public chart/quoteSummary APIs (free, no auth),

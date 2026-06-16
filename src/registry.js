@@ -1,6 +1,6 @@
 // registry.js — loads every capability module in /capabilities and validates
-// its shape. This is the "function slot." PROSPECTOR's job is to produce new
-// modules that drop in here; the chassis itself never needs editing to add one.
+// its shape. This is the "function slot." New capability modules drop in here;
+// the chassis itself never needs editing to add one.
 
 import { readdirSync } from "node:fs";
 import { fileURLToPath, pathToFileURL } from "node:url";

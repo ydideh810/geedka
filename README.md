@@ -243,7 +243,7 @@ See the [x402 protocol spec](https://x402.org) for client SDKs (TypeScript, Pyth
 
 ## Architecture
 
-A domain-agnostic **x402 capability chassis** + a four-stream **[REDACTED]** (PROSPECTOR) that decides what capability to put in it. Built as the answer to one question:
+A domain-agnostic **x402 capability chassis** + a proprietary intelligence layer that decides what capability to put in it. Built as the answer to one question:
 *where is the way into the agentic economy that a solo operator can actually take, given that the giants now own the rail?*
 
 ### The architecture decision
@@ -256,9 +256,9 @@ a service is auto-cataloged on first settled payment.
 
 So this splits into two parts:
 
-| | **The Stall** | **PROSPECTOR** |
+| | **The Stall** | **Intelligence Layer** |
 |---|---|---|
-| is | infra — a reusable paid endpoint | a persona + a [REDACTED] |
+| is | infra — a reusable paid endpoint | proprietary signal analysis |
 | owns | x402 wiring, payment, schemas | the doctrine + the archive |
 | changes | almost never | every scan cycle |
 | answers | "how does an agent pay me" | "what will an agent pay me for, where the seat is open" |
@@ -320,7 +320,7 @@ the-stall/
 
 ```bash
 ./RUN_ME.sh           # installs, scaffolds .env, optionally boots on testnet
-npm run scan          # PROSPECTOR scout: pulls streams, runs analyses, prints seat report
+npm run scan          # intelligence scanner: pulls streams, runs analyses, prints seat report
 npm start             # boot the stall (base-sepolia by default = $0 risk)
 curl localhost:4021/catalog
 ```
@@ -374,7 +374,7 @@ All STALL capabilities are x402-compatible — the same payment flow, USDC on Ba
 - [x] Official MCP registry: `ai.intuitek.the-stall/the-stall`
 - [x] Payment logging (JSONL) — every settled call recorded
 - [x] First settled call → x402 Bazaar seeded (block 46944973, Base mainnet, 2026-06-05)
-- [x] PROSPECTOR scout wired to heartbeat cadence (v0.4, 6.6M+ settlements archived)
+- [x] Settlement intelligence scanner wired to heartbeat cadence (v0.4, 6.6M+ settlements archived)
 - [x] Listed on [Glama](https://glama.ai/mcp/servers/thebrierfox/the-stall)
 
 ---

@@ -5,7 +5,7 @@
 // Supports 40+ chains: Ethereum, Base, BSC, Arbitrum, Polygon, Solana, etc.
 //
 // Seam origin: x402.ottoai.services/token-security observed with 54 organic
-// payers ($0.007/call, PROSPECTOR archive 2026-06-05). Complements the
+// payers ($0.007/call, signal-intel archive 2026-06-05). Complements the
 // existing solana-token-risk capability with EVM/multi-chain coverage.
 
 const GOPLUS_URL = "https://api.gopluslabs.io/api/v1/token_security";

@@ -2,7 +2,7 @@
 // Its ONLY jobs: (1) let the stall boot green, (2) be a real paid route so the
 // first settled payment catalogs the stall into the Bazaar and proves the rail
 // end to end. It is NOT the product. The product slot stays empty until
-// PROSPECTOR earns the right to fill it. Delete or keep as a heartbeat probe.
+// signal-intel earns the right to fill it. Delete or keep as a heartbeat probe.
 
 export default {
   name: "ping",

@@ -5,7 +5,7 @@
 // Sourced from GoPlusLabs public API (free, no key required).
 //
 // Seam origin: defi.hugen.tokyo/defi/address observed with 41 organic payers
-// ($0.011/call, PROSPECTOR archive 2026-06-05). Distinct from evm-token-security
+// ($0.011/call, signal-intel archive 2026-06-05). Distinct from evm-token-security
 // (which screens TOKEN contracts) — this screens WALLET ADDRESSES.
 
 const GOPLUS_URL = "https://api.gopluslabs.io/api/v1/address_security";

@@ -3,7 +3,7 @@
 // EVM transaction decoder — collapses the observed seam:
 //   x402.ottoai.services/tx-explainer   18 wallets / 8-day persistence / $0.010
 //   skills.onesource.io/api/chain/block  called immediately after by same agents
-//   PROSPECTOR signals 60350/60351/60271 (seam, strength 1.00).
+//   signal-intel signals 60350/60351/60271 (seam, strength 1.00).
 //
 // Decodes and summarises any EVM tx: type detection (ETH transfer, ERC20 transfer,
 // swap, approval, contract call), token amount parsing from logs, block context —

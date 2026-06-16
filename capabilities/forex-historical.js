@@ -4,7 +4,7 @@
 // Sourced from api.frankfurter.app (free, no key, ECB data back to 1999-01-04).
 // 30 currencies: all majors + key regional. Complement to forex-rates (real-time).
 //
-// Growth signal: "Search" category, +8.5 endpoints/day (PROSPECTOR 2026-06-09).
+// Growth signal: "Search" category, +8.5 endpoints/day (signal-intel 2026-06-09).
 // Use case: tax reporting, expense reconciliation, financial analysis, accounting.
 
 const BASE_URL = "https://api.frankfurter.app";

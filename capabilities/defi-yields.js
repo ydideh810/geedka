@@ -4,7 +4,7 @@
 // Covers 16,000+ pools across 400+ protocols and 50+ chains. Free upstream —
 // no API key, no rate limit, updated continuously. Priced at $0.025, undercutting
 // otto.ai's /yield-markets and /yield-farming-active endpoints (both observed
-// generating organic seam traffic, strength 1.0, PROSPECTOR signals 52618/52618).
+// generating organic seam traffic, strength 1.0, signal-intel signals 52618/52618).
 //
 // Data source: https://yields.llama.fi/pools (DeFiLlama public API).
 

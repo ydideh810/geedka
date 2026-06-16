@@ -3,7 +3,7 @@
 // Today's top equity and crypto market movers (gainers, losers, most-active).
 // Collapses the observed seam: api.printmoneylab.com/api/v1/market-movers →
 // tx-explainer + chain/block chain (6-7 distinct wallets, 7-day persistence,
-// PROSPECTOR strength 1.0). Agents chain market movers with on-chain queries —
+// signal-intel strength 1.0). Agents chain market movers with on-chain queries —
 // this consolidates the market-context leg.
 // Priced at $0.004. Free upstream: Yahoo Finance screener + CoinGecko.
 

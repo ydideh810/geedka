@@ -44,3 +44,4 @@ fund_seeder*.mjs
 seeder_recycler.mjs
 *scout*
 seam_undercut*
+scripts/handoff_strong_signals.mjs

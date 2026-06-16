@@ -8,7 +8,7 @@
 // per-signal scores, composite confidence, and plain-English narrative.
 //
 // Seam: orbisapi.com/proxy/stock-market-regime-classifier-api-fde6a6/:end
-//   3,005 settlements/48h, 10 payers, $0.005/call (PROSPECTOR 2026-06-09)
+//   3,005 settlements/48h, 10 payers, $0.005/call (signal-intel 2026-06-09)
 //
 // Data sources (free, no auth):
 //   SPY/QQQ/IWM/HYG/IEF/^TNX: Yahoo Finance v8 chart (1-year daily OHLCV)

@@ -5,7 +5,7 @@
 //
 // Collapses the ottoai.services/generate-meme seam:
 //   5 days observation, strength 1.0, Media category growth 8→25→85/day.
-//   PROSPECTOR signal_id 53879 (seam) — priced at $0.005 vs ottoai's higher rate.
+//   signal-intel signal_id 53879 (seam) — priced at $0.005 vs ottoai's higher rate.
 //
 // Free upstream: api.memegen.link — no API key, no rate limit, MIT license.
 

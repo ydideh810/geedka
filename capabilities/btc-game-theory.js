@@ -2,7 +2,7 @@
 //
 // Bitcoin mining game theory + systems theory analysis in one call.
 // Collapses the observed seam: btcnode.uk/api/game-theory → btcnode.uk/api/systems-theory
-// (11 distinct wallets, 5-day persistence, PROSPECTOR strength 1.0).
+// (11 distinct wallets, 5-day persistence, signal-intel strength 1.0).
 // Priced at $0.006. Free upstream: mempool.space public API + CoinGecko.
 //
 // Computes: selfish-mining threshold, 51%-attack cost estimate, fee/subsidy ratio,

@@ -2,7 +2,7 @@
 //
 // Equity price + Limitless prediction market sentiment in one call.
 // Collapses the observed seam: blockrun.ai/pm/limitless/markets → blockrun.ai/stocks/us/price/<TICKER>
-// (PROSPECTOR signal_id 57539 · 6 distinct wallets · 5-day persistence · 80% strength)
+// (signal-intel signal_id 57539 · 6 distinct wallets · 5-day persistence · 80% strength)
 //
 // Agents that want to pair a prediction market signal with a live price currently
 // make 2 sequential calls. This collapses that into one paid endpoint at $0.015 —
@@ -107,7 +107,7 @@ export default {
       prediction_market_count: { type: "integer" },
       seam_note: {
         type: "string",
-        description: "PROSPECTOR provenance — the x402 settlement seam this capability collapses.",
+        description: "Data provenance — the x402 settlement seam this capability collapses.",
       },
       generated_at: { type: "string" },
     },
@@ -173,7 +173,7 @@ export default {
       equity,
       prediction_markets,
       prediction_market_count: prediction_markets.length,
-      seam_note:               "Collapses blockrun.ai/pm/limitless → blockrun.ai/stocks seam (PROSPECTOR signal_id 57539, strength 0.80, 6 wallets, 5d).",
+      seam_note:               "Collapses blockrun.ai/pm/limitless → blockrun.ai/stocks seam into a single call.",
       generated_at:            new Date().toISOString(),
     };
   },

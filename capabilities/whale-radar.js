@@ -9,7 +9,7 @@
 // Free upstream: data-api.polymarket.com (no API key required).
 // Returns: recent trades, open positions, inferred whale tier, activity summary.
 //
-// PROSPECTOR signals 62865, 62870 — strength 1.00. 2026-06-06.
+// signal-intel signals 62865, 62870 — strength 1.00. 2026-06-06.
 
 const PM_API  = "https://data-api.polymarket.com";
 const UA      = "Mozilla/5.0 (compatible; the-stall/3.57; +https://intuitek.ai)";

@@ -2,7 +2,7 @@
 //
 // Seven-lens systems theory analysis of the Bitcoin network.
 // Seam origin: btcnode.uk/api/game-theory → btcnode.uk/api/systems-theory
-// (11 distinct wallets, 1.0 strength, PROSPECTOR archive 2026-06-06).
+// (11 distinct wallets, 1.0 strength, signal-intel archive 2026-06-06).
 // Sister capability to btc-game-theory; purpose-built for systemic analysis.
 //
 // 7 lenses:

@@ -3,7 +3,7 @@
 // 1-minute movers and volume spikes on Korean crypto exchanges (Upbit).
 // Seam origin: api.printmoneylab.com/api/v1/market-movers observed in
 // agent chains alongside tx-explainer and yield-farming-active
-// (PROSPECTOR signals 52618+52619, strength 0.85, 2026-06-05).
+// (signal-intel signals 52618+52619, strength 0.85, 2026-06-05).
 //
 // Free upstream: Upbit public REST API (no key required).
 // Returns top risers, top fallers, and volume spike leaders across all

@@ -6,7 +6,7 @@
 // settlements only. An agent uses this before wiring a workflow to an external
 // endpoint to avoid building on dead or private infrastructure.
 //
-// Data source: local archive.db accumulated by the PROSPECTOR scout.
+// Data source: local archive.db accumulated by the signal-intel scout.
 // Reads only — never writes.
 
 import Database from "better-sqlite3";
@@ -15,7 +15,7 @@ import { fileURLToPath } from "node:url";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const REPO_ROOT  = join(__dirname, "..");
-const DB_PATH    = process.env.[REDACTED] || join(REPO_ROOT, "archive.db");
+const DB_PATH    = process.env.ARCHIVE_DB || join(REPO_ROOT, "archive.db");
 
 const VALID_SORT = new Set(["payers", "settlements", "price_asc", "price_desc", "last_seen"]);
 

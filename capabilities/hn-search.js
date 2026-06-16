@@ -5,7 +5,7 @@
 // with score, comment count, author, and URL.
 //
 // Priced at $0.010/call — Search category is growing 26+ new Bazaar
-// endpoints/day (PROSPECTOR growth signal, 2026-06-05). Positioned
+// endpoints/day (signal-intel growth signal, 2026-06-05). Positioned
 // below oneshotagent.com/research ($0.008) for volume; above noise.
 
 const ALGOLIA_BASE = "https://hn.algolia.com/api/v1";

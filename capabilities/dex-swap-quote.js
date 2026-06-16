@@ -6,7 +6,7 @@
 // Optimism, BSC, Avalanche, and more.
 //
 // Seam: proxy.suverse.io/v1/swap/base/quote
-//       64 settlements/week, 1 payer, $0.255/call (PROSPECTOR archive 2026-06-06)
+//       64 settlements/week, 1 payer, $0.255/call (signal-intel archive 2026-06-06)
 //
 // Free upstream: li.quest/v1/quote — no API key, aggregates 1inch, Uniswap, Relay, etc.
 // Priced at $0.012 — 95% below suverse's $0.255; also covers cross-chain routes suverse doesn't.

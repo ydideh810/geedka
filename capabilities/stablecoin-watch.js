@@ -5,7 +5,7 @@
 // plus a composite alert level.
 //
 // Priced at $0.05 — 70% of the observed dataendpoints→onesource.io
-// multi-hop chain (14 wallets, signal strength 0.80, PROSPECTOR 2026-06-05).
+// multi-hop chain (14 wallets, signal strength 0.80, signal-intel 2026-06-05).
 
 const LLAMA_URL = "https://stablecoins.llama.fi/stablecoins?includePrices=true";
 const UA        = "Mozilla/5.0 (compatible; the-stall/0.7; +https://intuitek.ai)";

@@ -8,7 +8,7 @@
 // violence, and illicit/dangerous instruction detection.
 //
 // Seam: orbisapi.com/proxy/content-moderation-api-4fa8a6/
-//   2,573 settlements/48h, 3 payers, $0.005/call (PROSPECTOR 2026-06-09)
+//   2,573 settlements/48h, 3 payers, $0.005/call (signal-intel 2026-06-09)
 //
 // Upstream: OpenAI Moderation API (api.openai.com/v1/moderations)
 //   Free-tier endpoint — not billed as tokens. Available to all API users.

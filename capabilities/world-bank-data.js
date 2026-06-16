@@ -3,7 +3,7 @@
 // World Bank open data — 1600+ development indicators across 200+ countries.
 // Free World Bank API, no key required.
 //
-// Growth signal: "Data" category, +229 endpoints/day (PROSPECTOR 2026-06-06).
+// Growth signal: "Data" category, +229 endpoints/day (signal-intel 2026-06-06).
 // Use case: macro agents, country risk, development economics, policy analysis.
 
 const WB_BASE = "https://api.worldbank.org/v2";

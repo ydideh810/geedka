@@ -5,7 +5,7 @@
 // from public OHLCV data, then outputs a directional posture + key levels.
 //
 // Seam: api.minebean.com/api/strategy/decide — 32K+ sett/wk, $0.100/call
-// (observed 2026-06-07 via PROSPECTOR). This cap provides richer signal
+// (observed 2026-06-07 via signal-intel). This cap provides richer signal
 // (RSI+MACD+BB+volume) at $0.090 — 10% undercut, from public APIs.
 //
 // Upstreams:

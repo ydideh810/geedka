@@ -1,7 +1,7 @@
 // defi-state-pack.js
 //
 // Seam: eth-block → yield-farming-active (+ stablecoin-watch) in one call.
-// PROSPECTOR signal_id 64812 (seam, strength 1.0) — observed agents running
+// signal-intel signal_id 64812 (seam, strength 1.0) — observed agents running
 // block/0x1212D00 → yield-farming-active chain in the wild.
 // Also collapses signal_id 60977 (stablecoin-watch seam, strength 1.0).
 // Priced at $0.008 (~70% of $0.011 summed chain cost).
@@ -62,7 +62,7 @@ export default {
   price: "$0.008",
 
   description:
-    "Returns Ethereum block header + stablecoin depeg status + top DeFi yield farming pools in one call. Collapses the 3-hop eth-block → stablecoin-watch → yield-farming chain (PROSPECTOR signals 64812 + 60977, strength 1.0). All three upstreams fetched in parallel. Supports Ethereum, Base, Polygon, Arbitrum. Filter yield pools by chain, protocol, min TVL, min APY. Free upstreams — DRPC + DeFiLlama — no API key required.",
+    "Returns Ethereum block header + stablecoin depeg status + top DeFi yield farming pools in one call. Collapses the 3-hop eth-block → stablecoin-watch → yield-farming chain into a single call. All three upstreams fetched in parallel. Supports Ethereum, Base, Polygon, Arbitrum. Filter yield pools by chain, protocol, min TVL, min APY. Free upstreams — DRPC + DeFiLlama — no API key required.",
 
   inputSchema: {
     type: "object",

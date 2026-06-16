@@ -730,9 +730,14 @@ for (const cap of capabilities) {
       res.json(out);
     } catch (err) {
       const xPayResp = res.getHeader("x-payment-response") || null;
-      logPaidCall(cap.name, cap.price, req.query, 500, req.ip);
-      logSettlement(cap.name, cap.price, req.query, 500, req.ip, xPayment, xPayResp);
-      res.status(500).json({ error: "capability_error", capability: cap.name, message: String(err?.message || err) });
+      // Validation throws (missing required input) should be 400, not 500.
+      // Caps throw explicit messages when no required param is provided.
+      const isValidationError = err.status === 400 ||
+        /^(provide |at least one|lat and lon are required)/i.test(err.message || "");
+      const status = isValidationError ? 400 : 500;
+      logPaidCall(cap.name, cap.price, req.query, status, req.ip);
+      logSettlement(cap.name, cap.price, req.query, status, req.ip, xPayment, xPayResp);
+      res.status(status).json({ error: isValidationError ? "bad_request" : "capability_error", capability: cap.name, message: String(err?.message || err) });
     }
   });
 }
@@ -743,5 +748,5 @@ app.listen(PORT, () => {
   console.log(`  payTo: ${PAY_TO || "⚠ NOT SET — paid routes will refuse to boot"}`);
   console.log(`  capabilities (${capabilities.length}): ${capabilities.map((c) => c.name).join(", ") || "none"}`);
   console.log(`  free:  GET /health   GET /catalog`);
-  console.log(`  paid:  ${capabilities.map((c) => `GET /cap/${c.name}`).join("   ") || "(none yet — PROSPECTOR's job)"}\n`);
+  console.log(`  paid:  ${capabilities.map((c) => `GET /cap/${c.name}`).join("   ") || "(none yet — add a capability module)"}\n`);
 });

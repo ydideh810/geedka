@@ -6,7 +6,7 @@
 //
 // Seam: dataendpoints-production.up.railway.app/base-season (Otto AI) —
 // 66 settlements, 35 payers (widest payer distribution of any uncovered seam
-// on 2026-06-06). PROSPECTOR strength 0.6 on base-season ↔ yield-farming-active
+// on 2026-06-06). signal-intel strength 0.6 on base-season ↔ yield-farming-active
 // seam, indicating agents use this as pre-trade orientation before DeFi calls.
 //
 // Free upstreams: DeFiLlama (no key, 300 req/min) + CoinGecko public API.

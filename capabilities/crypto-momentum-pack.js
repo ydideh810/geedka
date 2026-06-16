@@ -1,7 +1,7 @@
 // crypto-momentum-pack.js
 //
 // Collapses seam: printmoneylab/market-movers → x402.ottoai.services/yield-farming-active
-// 5 wallets, 7-day persistence, strength 0.95 (PROSPECTOR 2026-06-09, signal 85399 + 85401)
+// 5 wallets, 7-day persistence, strength 0.95 (signal-intel 2026-06-09, signal 85399 + 85401)
 //
 // Delivers in one call: Korean exchange volume leaders + global 24h movers + optional DeFi yields
 // Price: $0.007 (vs $0.015+ chain cost)

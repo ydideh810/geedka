@@ -6,7 +6,7 @@
 // revenue, creating fragility for the endpoint operator AND an insertion
 // window for a competing capability that serves those agents better.
 //
-// Data source: the local archive.db accumulated by the PROSPECTOR scout.
+// Data source: the local archive.db accumulated by the signal-intel scout.
 // Reads only — never writes.
 
 import Database from "better-sqlite3";
@@ -15,7 +15,7 @@ import { fileURLToPath } from "node:url";
 
 const __dirname   = dirname(fileURLToPath(import.meta.url));
 const REPO_ROOT   = join(__dirname, "..");
-const DB_PATH     = process.env.[REDACTED] || join(REPO_ROOT, "archive.db");
+const DB_PATH     = process.env.ARCHIVE_DB || join(REPO_ROOT, "archive.db");
 
 const RISK_TIERS = [
   { max: 0.15, tier: "LOW",      label: "Dispersed payer base — no single agent dependency" },

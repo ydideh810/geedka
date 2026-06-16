@@ -3,7 +3,7 @@
 // Decodes and explains a blockchain transaction in one call.
 // Collapses the observed seam: x402.ottoai.services/tx-explainer ($0.0164 avg) +
 // skills.onesource.io chain block query ($0.004 avg) — 18 distinct wallets,
-// 7-day persistence, PROSPECTOR signal 52760, strength 1.0.
+// 7-day persistence, signal-intel signal 52760, strength 1.0.
 // Priced at $0.014 (70% of $0.020 combined chain).
 //
 // Free upstream: public JSON-RPC nodes (drpc.org) — no API key required.

@@ -1,7 +1,7 @@
 // social-momentum.js
 //
 // Cross-platform social momentum for any topic.
-// Growth-adjacent response to PROSPECTOR signal_id 82182 (Social category,
+// Growth-adjacent response to signal-intel signal_id 82182 (Social category,
 // +7 endpoints/day, strength 0.70) — glim.sh entered Social on 2026-06-08
 // with 14 Twitter endpoints; listed here under convergence price before
 // category saturates.

@@ -5,7 +5,7 @@
 //
 // Priced at $0.002 — 33% below skills.onesource.io's $0.003/call for the same
 // eth_getBlockByNumber data. Targeted at the tx-explainer → block-context seam
-// observed in PROSPECTOR archive: 7-day signal, 6 distinct wallets (2026-06-06).
+// observed in signal-intel archive: 7-day signal, 6 distinct wallets (2026-06-06).
 //
 // Free RPCs used (no API key):
 //   Base:      https://mainnet.base.org         (Coinbase official)

@@ -3,7 +3,7 @@
 // Returns an Ethereum block header + transaction hashes for any block number,
 // tag (latest/pending/earliest/safe/finalized), or hex string.
 // Collapses the onesource.io seat: skills.onesource.io/api/chain/block/$0.003/call
-// — 14 distinct wallets, 1-day persistence, PROSPECTOR signal 52194, strength 0.80.
+// — 14 distinct wallets, 1-day persistence, signal-intel signal 52194, strength 0.80.
 // Priced at $0.002 (33% below onesource's $0.003).
 //
 // Free upstream: DRPC.org public JSON-RPC — no API key required.

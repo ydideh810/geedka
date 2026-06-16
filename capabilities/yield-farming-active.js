@@ -3,7 +3,7 @@
 // Active DeFi yield farming pools sorted by 30-day average APY.
 // Collapses the observed seam: x402.ottoai.services/yield-farming-active
 // → x402.ottoai.services/tx-explainer chain.
-// PROSPECTOR signal: 13 distinct wallets, 8-day persistence, strength 1.0.
+// signal-intel signal: 13 distinct wallets, 8-day persistence, strength 1.0.
 // Priced at $0.005 (70% of observed chain avg).
 //
 // Free upstream: DeFiLlama yields API (yields.llama.fi) — no API key required.

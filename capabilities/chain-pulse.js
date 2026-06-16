@@ -1,7 +1,7 @@
 // chain-pulse.js
 //
 // Seam: eth-block → stablecoin-watch in one call.
-// PROSPECTOR signal_id 60977 (seam, strength 70%) — 10 distinct wallets running
+// signal-intel signal_id 60977 (seam, strength 70%) — 10 distinct wallets running
 // skills.onesource.io/api/chain/block → stablecoin-watch over 2-day window.
 // Collapses 2 hops into 1. Priced at $0.006 (~70% of $0.009 summed).
 //

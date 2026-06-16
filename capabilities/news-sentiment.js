@@ -6,7 +6,7 @@
 // (unlimited, no key) — activates on GDELT rate-limit (429) after one retry.
 //
 // Seam: x402stock.xyz/api/v1/news-sentiment (Media category, new 2026-06-06,
-// PROSPECTOR archive). Free upstream + cache → clean hedge at $0.004.
+// signal-intel archive). Free upstream + cache → clean hedge at $0.004.
 //
 // Results cached 10 min per (query, days) to stay within GDELT's 1req/5s limit.
 // Concurrent calls for the same query return the cached result immediately.

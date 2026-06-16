@@ -9,7 +9,7 @@
 // ~2,935 observed settlements/week (6 payers). Priced at $0.010/call —
 // direct endpoint, no proxy overhead, better latency.
 //
-// PROSPECTOR source: x402 archive settlement analysis, 2026-06-05.
+// signal-intel source: x402 archive settlement analysis, 2026-06-05.
 
 const YF_BASE = "https://query1.finance.yahoo.com/v8/finance/chart";
 const UA = "Mozilla/5.0 (compatible; the-stall/2.5; +https://the-stall.intuitek.ai)";

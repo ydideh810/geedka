@@ -3,7 +3,7 @@
 // Academic paper search across 250M+ works via OpenAlex (free, no key).
 // Covers all disciplines: CS, medicine, physics, economics, social science, etc.
 //
-// Growth signal: "Search" category, +33.5 endpoints/day (PROSPECTOR 2026-06-06).
+// Growth signal: "Search" category, +33.5 endpoints/day (signal-intel 2026-06-06).
 // Use case: literature review agents, citation building, prior-art research.
 
 const OPENALEX = "https://api.openalex.org";

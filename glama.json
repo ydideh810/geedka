@@ -1217,7 +1217,7 @@
     },
     {
       "name": "defi-state-pack",
-      "description": "Returns Ethereum block header + stablecoin depeg status + top DeFi yield farming pools in one call. Collapses the 3-hop eth-block → stablecoin-watch → yield-farming chain (PROSPECTOR signals 64812 + 60977, strength 1.0). All three upstreams fetched in parallel. Supports Ethereum, Base, Polygon, Arbitrum. Filter yield pools by chain, protocol, min TVL, min APY. Free upstreams — DRPC + DeFiLlama — no API key required.",
+      "description": "Returns Ethereum block header + stablecoin depeg status + top DeFi yield farming pools in one call. Collapses the 3-hop eth-block → stablecoin-watch → yield-farming chain into a single call. All three upstreams fetched in parallel. Supports Ethereum, Base, Polygon, Arbitrum. Filter yield pools by chain, protocol, min TVL, min APY. Free upstreams — DRPC + DeFiLlama — no API key required.",
       "inputSchema": {
         "type": "object",
         "properties": {
@@ -4792,7 +4792,7 @@
     },
     {
       "name": "solana-tx-explainer",
-      "description": "Given a Solana transaction signature, returns a decoded breakdown: fee payer, programs invoked (Jupiter, Raydium, Pump.fun, SPL Token, etc.), SPL token balance changes with deltas, transaction fee in SOL and USD, block time, and a one-sentence human-readable summary. Uses public Solana mainnet RPC — no API key required. PROSPECTOR-class: 6 distinct wallets observed paying for this capability in organic x402 traffic. $0.07/call.",
+      "description": "Given a Solana transaction signature, returns a decoded breakdown: fee payer, programs invoked (Jupiter, Raydium, Pump.fun, SPL Token, etc.), SPL token balance changes with deltas, transaction fee in SOL and USD, block time, and a one-sentence human-readable summary. Uses public Solana mainnet RPC — no API key required. $0.07/call.",
       "inputSchema": {
         "type": "object",
         "properties": {
@@ -5812,7 +5812,7 @@
     },
     {
       "name": "x402-endpoint-intel",
-      "description": "Market intelligence for any x402 endpoint or operator wallet. Returns settlement volume, unique payer count, price range, reputation tier, activity window, and endpoint description — drawn from 4.1M+ Base mainnet settlements in the Stall's PROSPECTOR archive. Use before routing agent spend, vetting a counterparty operator, or benchmarking competitor pricing. No external API. Covers 80,000+ operators across 10+ days of live traffic.",
+      "description": "Market intelligence for any x402 endpoint or operator wallet. Returns settlement volume, unique payer count, price range, reputation tier, activity window, and endpoint description — drawn from 4.1M+ Base mainnet settlements in the Stall's proprietary on-chain dataset. Use before routing agent spend, vetting a counterparty operator, or benchmarking competitor pricing. No external API. Covers 80,000+ operators across 10+ days of live traffic.",
       "inputSchema": {
         "type": "object",
         "properties": {

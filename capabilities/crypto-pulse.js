@@ -3,7 +3,7 @@
 // Crypto market pulse — latest Ethereum block context + top crypto movers in
 // one call. Collapses the observed seam:
 //   skills.onesource.io/api/chain/block/0x1212D00 → api.printmoneylab.com/api/v1/market-movers
-// 5–6 distinct wallets, 8-day persistence, PROSPECTOR signals 60291/60292/60294.
+// 5–6 distinct wallets, 8-day persistence, signal-intel signals 60291/60292/60294.
 // onesource block seam: 363 payers / 2527 sett/7d @ $0.004.
 // printmoneylab movers: 31 payers / 510 sett/7d @ $0.006.
 // Priced at $0.007 — 30% below the $0.010 competitor chain.

@@ -5,7 +5,7 @@
 // download URLs, and latest release date.
 //
 // Seam origin: scout.hugen.tokyo/scout/pypi observed with 25 organic payers
-// ($0.013/call, PROSPECTOR 2026-06-05). Agents use this when evaluating
+// ($0.013/call, signal-intel 2026-06-05). Agents use this when evaluating
 // Python libraries before including them in toolchains.
 
 const PYPI_URL   = "https://pypi.org/pypi";

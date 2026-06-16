@@ -5,7 +5,7 @@
 // across top DeFi yield opportunities with risk-adjusted expected yield.
 //
 // Seam: orbisapi.com/proxy/defi-yield-strategies-api-bfb3cd
-//   23 payers / 2,392 calls in 3d (observed 2026-06-09 via PROSPECTOR).
+//   23 payers / 2,392 calls in 3d (observed 2026-06-09 via signal-intel).
 //   This cap provides richer output (full allocation plan + per-position APY
 //   breakdown) at $0.006 — 20% undercut from observed $0.0050/call.
 //

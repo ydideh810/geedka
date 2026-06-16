@@ -6,7 +6,7 @@
 //
 // Competes with stocktrends.com ($0.578/call observed, proprietary
 // classification) at $0.49 using standard open-methodology TA.
-// PROSPECTOR: stocktrends resource $0.578 avg, 108 calls, 1 payer observed.
+// signal-intel: stocktrends resource $0.578 avg, 108 calls, 1 payer observed.
 // Seam context: stocktrends appears downstream in agent equity-research flows.
 //
 // Free upstream: Yahoo Finance v8/finance/chart (1yr daily OHLCV, no auth).

@@ -3,7 +3,7 @@
 // Returns current US equity prices for up to 5 tickers in a single call.
 // Priced at $0.018 flat — agents querying blockrun.ai individually for
 // STRC ($0.022), AMD ($0.044), MSTR ($0.041) pay $0.107 total; this endpoint
-// returns all three for $0.018 (83% savings). PROSPECTOR signal: blockrun
+// returns all three for $0.018 (83% savings). signal-intel signal: blockrun
 // aggregator wallet received 153k STRC + 23k AMD + 1.9k MSTR settlements
 // in 72 hours (2026-06-06 concentration signal).
 //

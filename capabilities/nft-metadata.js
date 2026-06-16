@@ -7,7 +7,7 @@
 //
 // Free upstream: Alchemy NFT API v3 public demo endpoint — no API key, no auth.
 // Supports Ethereum, Polygon, Base, Arbitrum mainnet.
-// PROSPECTOR signal: Media growth + OneSource seam — 2026-06-06.
+// signal-intel signal: Media growth + OneSource seam — 2026-06-06.
 
 const ALCHEMY_BASE = "https://{network}.g.alchemy.com/nft/v3/demo/getNFTMetadata";
 const UA = "Mozilla/5.0 (compatible; the-stall/3.58; +https://intuitek.ai)";

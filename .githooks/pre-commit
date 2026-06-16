@@ -44,11 +44,11 @@ if echo "$STAGED" | grep -qiE "scout"; then
   exit 1
 fi
 
-# Check blocked strings in staged content (exclude hook files and .gitignore)
-DIFF_CONTENT=$(git diff --cached -- ':!.githooks/' ':!.gitignore')
+# Check blocked strings in newly-added content only (ignore removed lines so cleanup commits work)
+DIFF_CONTENT=$(git diff --cached -- ':!.githooks/' ':!.gitignore' | grep '^+[^+]')
 for str in "${BLOCKED_STRINGS[@]}"; do
   if echo "$DIFF_CONTENT" | grep -qF "$str"; then
-    echo "❌ BLOCKED: Staged content contains '${str}' — methodology/posture disclosure."
+    echo "❌ BLOCKED: Added content contains '${str}' — methodology/posture disclosure."
     exit 1
   fi
 done

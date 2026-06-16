@@ -4,7 +4,7 @@
 // shifts. Sorted by |oneWeekPriceChange| (or 1-day / 1-month on request).
 //
 // Seam: orbisapi.com/proxy/polymarket-sentiment-shift-api-9e4424
-//   2,864 settlements/week, 7 payers, $0.005/call (PROSPECTOR archive 2026-06-06)
+//   2,864 settlements/week, 7 payers, $0.005/call (signal-intel archive 2026-06-06)
 //
 // Free upstream: gamma-api.polymarket.com — no API key required.
 // Complements prediction-markets.js (which sorts by volume, not movement).

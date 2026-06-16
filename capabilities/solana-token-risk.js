@@ -13,7 +13,7 @@
 //
 // Both upstreams are free, no key required.
 // Priced at $0.35/call — 30% below oatp.cc/tools/token_risk_scan ($0.50/call,
-// confirmed live 2026-06-05 via PROSPECTOR archive, 27 calls / 3 unique payers).
+// confirmed live 2026-06-05 via signal-intel archive, 27 calls / 3 unique payers).
 
 const SOL_RPC    = "https://api.mainnet-beta.solana.com";
 const DEX_BASE   = "https://api.dexscreener.com/latest/dex/tokens";

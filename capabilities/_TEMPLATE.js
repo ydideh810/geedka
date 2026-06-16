@@ -1,8 +1,8 @@
 // _TEMPLATE.js — copy this to capabilities/<your-name>.js to add a capability.
 // Files prefixed with "_" are ignored by the registry, so this never mounts.
 //
-// This is the entire contract between PROSPECTOR's excavation and the Stall.
-// PROSPECTOR surfaces a function the bazaar will pay for; you express it here;
+// This is the entire contract between signal-intel's excavation and the Stall.
+// signal-intel surfaces a function the bazaar will pay for; you express it here;
 // it goes live on the next deploy. The chassis code is never touched.
 
 export default {
