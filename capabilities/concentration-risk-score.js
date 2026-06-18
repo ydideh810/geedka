@@ -36,7 +36,7 @@ function hhi(counts) {
 
 export default {
   name: "concentration-risk-score",
-  price: "$0.100",
+  price: "$0.050",
 
   description:
     "Returns a concentration-risk score for an x402 pay_to wallet: HHI, unique payer count, top-payer share, persistence across scans, and a risk tier (LOW / MEDIUM / HIGH / CRITICAL). An agent uses this to assess whether an endpoint is a single-agent dependency before building a workflow that depends on it.",
