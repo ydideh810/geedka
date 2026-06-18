@@ -64,10 +64,11 @@ function logPaidCall(capName, price, query, statusCode, ip) {
 
 // Settlement-grade log — payer address + tx hash per paid call.
 // xPayment: raw X-PAYMENT request header (base64 JSON, EIP-3009 authorization)
-// res:      Express response object — X-PAYMENT-RESPONSE is read in a finish listener
-//           because @x402/express v2 uses a buffered-response pattern: settlement
-//           headers are set AFTER the handler returns, so res.getHeader() returns null
-//           inside the handler. Reading in finish() gets the populated value.
+// res:      Express response object — X-PAYMENT-RESPONSE is captured two ways:
+//           1. res.setHeader intercept: catches the value the moment the payment
+//              middleware calls res.setHeader, regardless of buffering timing.
+//           2. res.on('finish') fallback: reads res.getHeader() after response ends.
+//           Intercept is primary; getHeader fallback covers non-setHeader write paths.
 // ip:       caller IP for debug capture when payer extraction fails
 function logSettlement(capName, price, query, statusCode, res, ip, xPayment) {
   try {
@@ -90,13 +91,25 @@ function logSettlement(capName, price, query, statusCode, res, ip, xPayment) {
     // Capture raw X-Payment for null-payer entries so we can diagnose CDP schema differences.
     const rawXPaymentCapture = (!payer && xPayment) ? String(xPayment) : null;
 
-    // Defer receipt/txHash reading to finish — middleware sets X-PAYMENT-RESPONSE after next().
+    // Intercept res.setHeader to capture X-PAYMENT-RESPONSE the moment middleware writes it.
+    // @x402/express v2 sets this header AFTER next() returns; the intercept fires synchronously
+    // at that point so we never miss it due to response-buffer timing.
+    let capturedXPayResp = null;
+    const origSetHeader = res.setHeader;
+    res.setHeader = function(name, value) {
+      if (typeof name === "string" && name.toLowerCase() === "x-payment-response") {
+        capturedXPayResp = value;
+      }
+      return origSetHeader.call(this, name, value);
+    };
+
     const ts = new Date().toISOString();
     res.on("finish", () => {
       try {
+        res.setHeader = origSetHeader;
         let txHash = null;
         let receiptRaw = null;
-        const xPayResp = res.getHeader("x-payment-response") || null;
+        const xPayResp = capturedXPayResp || res.getHeader("x-payment-response") || null;
         if (xPayResp) {
           try {
             receiptRaw = JSON.parse(Buffer.from(String(xPayResp), "base64").toString("utf8"));
