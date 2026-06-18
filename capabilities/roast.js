@@ -22,7 +22,7 @@ const STYLE_GUIDE = {
 export default {
   name: "roast",
 
-  price: "$0.040",
+  price: "$0.125",
 
   description:
     "Witty AI roast of any target — person, company, product, code snippet, or concept. " +

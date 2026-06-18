@@ -88,7 +88,7 @@ function readJpegDimensions(bytes) {
 
 export default {
   name: "image-detect",
-  price: "$0.040",
+  price: "$0.050",
 
   description:
     "Detects the true image format of any URL via magic byte inspection — works even when the file extension or Content-Type header lies (common with proxied or CDN-hosted images). Returns: format (png/jpeg/gif/webp/avif/bmp/tiff/svg/ico/unknown), detected MIME type, whether Content-Type header matches, file size (bytes), and pixel dimensions for PNG and JPEG. No API key required. $0.040/call — 20% below x402node.",

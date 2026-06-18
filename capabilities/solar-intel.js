@@ -56,7 +56,7 @@ function panelYield(peakSunHours, systemKw = 1, efficiency = 0.80) {
 
 export default {
   name:  "solar-intel",
-  price: "$0.020",
+  price: "$0.025",
 
   description:
     "Solar irradiance analysis and 7-day forecast for any location. Returns GHI (global horizontal irradiance), DNI (direct normal), DHI (diffuse), peak sun hours, cloud cover, sunrise/sunset, and panel yield estimate for a 1 kW system. Useful for rooftop solar feasibility, agricultural planning, EV charging optimization, and energy market analysis. Free upstream: Open-Meteo (no API key, no rate limits). Undercuts stableenrich.dev/api/google-maps/solar by 31%.",

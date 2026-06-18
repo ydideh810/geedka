@@ -26,7 +26,7 @@ const RESOLUTION_MAP = {
 
 export default {
   name:  "us-stock-history",
-  price: "$0.001",
+  price: "$0.005",
 
   description:
     "Historical OHLCV bars for any US stock, ETF, or index. TradingView-compatible resolution (D, W, M, 60, 15, 5, 1). Pass Unix timestamps for from/to. Matches blockrun.ai at $0.001/call — same price, no API key required. Use us-stock-price for live quotes; equity-technicals for indicators.",

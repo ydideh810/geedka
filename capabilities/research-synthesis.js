@@ -175,7 +175,7 @@ Respond ONLY with a JSON object (no markdown, no prose outside the JSON) with th
 
 export default {
   name:  "research-synthesis",
-  price: "$0.200",
+  price: "$0.150",
 
   description:
     "AI-synthesized intelligence report for any query — aggregates Hacker News, OpenAlex academic papers, Reddit, arXiv preprints, and DuckDuckGo in parallel, then distills into a structured report: executive summary, key findings, market sentiment, emerging trends, and recommendations. Useful for market research, competitive intelligence, technology landscape analysis, and due diligence. $0.200/call — 20% below nearest competitor. Up to 5 source categories queried per call.",

@@ -132,7 +132,7 @@ function formatMla(item) {
 
 export default {
   name: "citation-formatter",
-  price: "$0.008",
+  price: "$0.020",
 
   description:
     "Looks up an academic paper by DOI and formats it as BibTeX, APA, MLA, or Chicago citation. Returns full paper metadata: authors, year, journal, volume, pages, publisher. Covers 148M+ works via CrossRef (free registry). Useful for research agents building reference lists, literature review workflows, and knowledge extraction pipelines.",

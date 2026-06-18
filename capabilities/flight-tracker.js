@@ -57,7 +57,7 @@ function fmtTime(unixSec) {
 
 export default {
   name:  "flight-tracker",
-  price: "$0.008",
+  price: "$0.015",
 
   description:
     "Recent departures or arrivals at any major airport via OpenSky Network (free, crowd-sourced ADS-B). Accepts 3-letter IATA (JFK) or 4-letter ICAO (KJFK) codes. Returns callsign, origin/destination airports, estimated times, and aircraft identifiers. Useful for logistics workflows, travel agents, itinerary builders, and supply-chain tracking tasks. Default: departures from airport in last 4 hours.",

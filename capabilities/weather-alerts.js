@@ -52,7 +52,7 @@ function shapeAlert(f) {
 
 export default {
   name: "weather-alerts",
-  price: "$0.003",
+  price: "$0.010",
 
   description:
     "Active NOAA weather alerts for any US state — tornado warnings, flash flood watches, hurricane warnings, blizzard advisories, heat alerts, and 80+ other NWS event types. Real-time data from api.weather.gov; no API key. Filterable by state, event type, or severity. Returns event, severity, certainty, urgency, affected areas, onset/expiry, headline, and protective action instructions. Complements weather.js (forecasts) — this cap covers active emergencies.",

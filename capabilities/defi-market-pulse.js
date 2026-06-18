@@ -148,7 +148,7 @@ function buildCrossSignals(pools, cryptoGainers, cryptoLosers) {
 export default {
   name: "defi-market-pulse",
 
-  price: "$0.006",
+  price: "$0.012",
 
   description:
     "Combined DeFi yield intelligence and market momentum in one call — 33% cheaper than separate " +

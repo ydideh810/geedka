@@ -66,7 +66,7 @@ function computeIV30(byExp) {
 
 export default {
   name:  "options-chain",
-  price: "$0.010",
+  price: "$0.015",
 
   description:
     "CBOE delayed options chain for any US equity or index — returns stock price, per-contract IV, greeks (delta/gamma/theta/vega), OI, volume, and bid/ask. Filterable by expiration date and call/put. Free CBOE data, no API key.",

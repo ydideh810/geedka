@@ -78,7 +78,7 @@ function shapePlace(r) {
 
 export default {
   name: "place-details",
-  price: "$0.020",
+  price: "$0.025",
 
   description:
     "Enriched place and business details by name (OSM Nominatim). Returns website, phone, email, opening hours, operator, brand, cuisine, social media links, full address, and coordinates. Use when you need the business metadata behind a location — not just where it is, but who runs it and how to reach it. Cheaper than Google Maps place details.",

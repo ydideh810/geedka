@@ -105,7 +105,7 @@ function buildQuery(input) {
 
 export default {
   name:  "arxiv-intel",
-  price: "$0.003",
+  price: "$0.010",
 
   description:
     "Search arXiv preprints by query, filtered by field (title/abstract/author/all) and category. Returns title, authors (up to 6), abstract (first 600 chars), arXiv ID, PDF link, publish date, and subject categories. arXiv is the canonical source for AI/ML, CS, physics, math, and quantitative biology preprints — typically months ahead of peer-reviewed journals. Useful for AI research agents, literature scouts, competitive technique tracking, and grant-writing support. No API key required.",

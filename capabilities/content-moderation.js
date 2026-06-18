@@ -89,7 +89,7 @@ async function generateSafeRewrite(apiKey, text) {
 
 export default {
   name:        "content-moderation",
-  price:       "$0.003",
+  price:       "$0.010",
   description:
     "Classify text (and optional image URLs) for harmful content — hate speech, harassment, self-harm, sexual content, violence, and illicit instructions. Returns flagged status, risk level (NONE/LOW/MEDIUM/HIGH), flagged categories, per-category confidence scores, and an optional AI-generated safe rewrite.",
 

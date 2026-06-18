@@ -23,7 +23,7 @@ async function fetchJson(url) {
 
 export default {
   name:  "forex-rates",
-  price: "$0.005",
+  price: "$0.020",
 
   description:
     "Real-time fiat foreign exchange rates. Base currency defaults to USD; returns rates for all 166 supported currencies, or a filtered subset. Sourced from open.er-api.com (free, no key, daily updates ~00:00 UTC). Supports any ISO 4217 base: EUR, GBP, JPY, KRW, CNY, AUD, etc. Use for: USD→KRW conversion when reading Korean exchange data, cross-border payment amounts, international price normalization, or any multi-currency DeFi workflow.",

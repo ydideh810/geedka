@@ -102,7 +102,7 @@ function summarise(arr) {
 
 export default {
   name:  "weather-history",
-  price: "$0.007",
+  price: "$0.012",
 
   description:
     "Historical daily weather (temperature, precipitation, wind, sunshine) for any location from 1940 to ~5 days ago. Uses ERA5 reanalysis data. Accepts city name or lat,lng. Returns per-day values plus period summary stats. Useful for seasonal analysis, anomaly detection, and climate-context enrichment.",

@@ -23,7 +23,7 @@ function dateFilter(range) {
 
 export default {
   name:  "hn-search",
-  price: "$0.010",
+  price: "$0.020",
 
   description:
     "Hacker News story and comment search via Algolia. Returns titles, scores, comment counts, authors, and URLs for posts matching the query. Filter by type (story/comment) and date range (day/week/month/year/all). Sorted by relevance by default; use sort=date for newest-first. Useful for tech news, community sentiment, or discovering discussion threads about a topic.",
