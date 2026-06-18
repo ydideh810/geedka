@@ -96,7 +96,7 @@ function logSettlement(capName, price, query, statusCode, res, ip, xPayment) {
     // CDP facilitator uses "X-PAYMENT-RESPONSE"; the generic x402.org facilitator uses
     // "PAYMENT-RESPONSE" (no X-). We capture both to be facilitator-agnostic.
     let capturedXPayResp = null;
-    const origSetHeader = res.setHeader;
+    const origSetHeader = res.setHeader.bind(res);
     res.setHeader = function(name, value) {
       if (typeof name === "string") {
         const lower = name.toLowerCase();
@@ -104,7 +104,7 @@ function logSettlement(capName, price, query, statusCode, res, ip, xPayment) {
           capturedXPayResp = value;
         }
       }
-      return origSetHeader.call(this, name, value);
+      return origSetHeader(name, value);
     };
 
     const ts = new Date().toISOString();
