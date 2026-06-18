@@ -91,13 +91,13 @@ function logSettlement(capName, price, query, statusCode, res, ip, xPayment) {
     // Capture raw X-Payment for null-payer entries so we can diagnose CDP schema differences.
     const rawXPaymentCapture = (!payer && xPayment) ? String(xPayment) : null;
 
-    // Intercept res.setHeader to capture X-PAYMENT-RESPONSE the moment middleware writes it.
-    // @x402/express v2 sets this header AFTER next() returns; the intercept fires synchronously
-    // at that point so we never miss it due to response-buffer timing.
+    // Intercept res.setHeader to capture payment-response the moment middleware writes it.
+    // @x402/express v2 sets "payment-response" (not "x-payment-response") AFTER next() returns;
+    // the intercept fires synchronously so we never miss it due to response-buffer timing.
     let capturedXPayResp = null;
     const origSetHeader = res.setHeader;
     res.setHeader = function(name, value) {
-      if (typeof name === "string" && name.toLowerCase() === "x-payment-response") {
+      if (typeof name === "string" && name.toLowerCase() === "payment-response") {
         capturedXPayResp = value;
       }
       return origSetHeader.call(this, name, value);
@@ -109,7 +109,7 @@ function logSettlement(capName, price, query, statusCode, res, ip, xPayment) {
         res.setHeader = origSetHeader;
         let txHash = null;
         let receiptRaw = null;
-        const xPayResp = capturedXPayResp || res.getHeader("x-payment-response") || null;
+        const xPayResp = capturedXPayResp || res.getHeader("payment-response") || null;
         if (xPayResp) {
           try {
             receiptRaw = JSON.parse(Buffer.from(String(xPayResp), "base64").toString("utf8"));
