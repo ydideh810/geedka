@@ -22,7 +22,9 @@
     "express": "^4.19.2",
     "franc": "^6.2.0",
     "franc-all": "^7.2.0",
-    "franc-min": "^6.2.0"
+    "franc-min": "^6.2.0",
+    "viem": "2.51.3",
+    "zod": "3.25.76"
   },
   "engines": {
     "node": ">=20"
