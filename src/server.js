@@ -63,44 +63,62 @@ function logPaidCall(capName, price, query, statusCode, ip) {
 }
 
 // Settlement-grade log — payer address + tx hash per paid call.
-// Required so "first organic revenue" alerts can only fire on chain-verified data.
-// xPayment:  raw X-PAYMENT request header (Base64 JSON, contains EIP-3009 authorization)
-// xPayResp:  raw X-PAYMENT-RESPONSE response header (Base64 JSON, contains settlement receipt)
-function logSettlement(capName, price, query, statusCode, ip, xPayment, xPayResp) {
+// xPayment: raw X-PAYMENT request header (base64 JSON, EIP-3009 authorization)
+// res:      Express response object — X-PAYMENT-RESPONSE is read in a finish listener
+//           because @x402/express v2 uses a buffered-response pattern: settlement
+//           headers are set AFTER the handler returns, so res.getHeader() returns null
+//           inside the handler. Reading in finish() gets the populated value.
+// ip:       caller IP for debug capture when payer extraction fails
+function logSettlement(capName, price, query, statusCode, res, ip, xPayment) {
   try {
+    // Extract payer from X-PAYMENT challenge header (available synchronously — it's a
+    // request header set before the handler runs). Expands the extraction chain to cover
+    // additional x402 v2 payload shapes seen from CDP infrastructure.
     let payer = null;
-    let txHash = null;
-    let receiptRaw = null;
-
-    if (xPayResp) {
-      try {
-        receiptRaw = JSON.parse(Buffer.from(String(xPayResp), "base64").toString("utf8"));
-        txHash = receiptRaw?.transaction ?? receiptRaw?.txHash ?? receiptRaw?.tx_hash ?? null;
-        payer = receiptRaw?.payer ?? null;
-      } catch { /* keep null — format may evolve */ }
-    }
-
-    if (!payer && xPayment) {
+    if (xPayment) {
       try {
         const decoded = JSON.parse(Buffer.from(String(xPayment), "base64").toString("utf8"));
         payer = decoded?.payload?.authorization?.from
           ?? decoded?.payload?.from
           ?? decoded?.from
+          ?? decoded?.payment?.authorization?.from
+          ?? decoded?.authorization?.from
           ?? null;
       } catch { /* keep null */ }
     }
 
-    const entry = JSON.stringify({
-      ts: new Date().toISOString(),
-      cap: capName,
-      price,
-      status: statusCode,
-      ip: ip || "unknown",
-      payer,
-      tx_hash: txHash,
-      receipt: receiptRaw,
+    // Capture raw X-Payment for null-payer entries so we can diagnose CDP schema differences.
+    const rawXPaymentCapture = (!payer && xPayment) ? String(xPayment) : null;
+
+    // Defer receipt/txHash reading to finish — middleware sets X-PAYMENT-RESPONSE after next().
+    const ts = new Date().toISOString();
+    res.on("finish", () => {
+      try {
+        let txHash = null;
+        let receiptRaw = null;
+        const xPayResp = res.getHeader("x-payment-response") || null;
+        if (xPayResp) {
+          try {
+            receiptRaw = JSON.parse(Buffer.from(String(xPayResp), "base64").toString("utf8"));
+            txHash = receiptRaw?.transaction
+              ?? receiptRaw?.transactionHash
+              ?? receiptRaw?.txHash
+              ?? receiptRaw?.tx_hash
+              ?? receiptRaw?.receipt?.transactionHash
+              ?? null;
+            if (!payer) {
+              payer = receiptRaw?.payer ?? receiptRaw?.from ?? null;
+            }
+          } catch { /* receipt format evolving */ }
+        }
+        const entry = JSON.stringify({
+          ts, cap: capName, price, status: statusCode,
+          ip: ip || "unknown", payer, tx_hash: txHash, receipt: receiptRaw,
+          ...(rawXPaymentCapture ? { _raw_xpayment_debug: rawXPaymentCapture } : {}),
+        });
+        appendFileSync(SETTLEMENT_LOG, entry + "\n");
+      } catch (_) { /* never crash on log failure */ }
     });
-    appendFileSync(SETTLEMENT_LOG, entry + "\n");
   } catch (_) { /* never crash on log failure */ }
 }
 
@@ -742,9 +760,8 @@ for (const cap of capabilities) {
       const required = cap.inputSchema?.required || [];
       const missing = required.filter(p => params[p] === undefined || params[p] === "");
       if (missing.length > 0) {
-        const xPayResp = res.getHeader("x-payment-response") || null;
         logPaidCall(cap.name, cap.price, params, 400, req.ip);
-        logSettlement(cap.name, cap.price, params, 400, req.ip, xPayment, xPayResp);
+        logSettlement(cap.name, cap.price, params, 400, res, req.ip, xPayment);
         logCallAudit(req.method, req.path, 400, req.ip, req.get("user-agent"), xPayment);
         return res.status(400).json({
           error: "missing_required_params",
@@ -756,18 +773,16 @@ for (const cap of capabilities) {
 
       try {
         const out = await cap.handler(coerceQuery(params, cap.inputSchema), { req });
-        const xPayResp = res.getHeader("x-payment-response") || null;
         logPaidCall(cap.name, cap.price, params, 200, req.ip);
-        logSettlement(cap.name, cap.price, params, 200, req.ip, xPayment, xPayResp);
+        logSettlement(cap.name, cap.price, params, 200, res, req.ip, xPayment);
         logCallAudit(req.method, req.path, 200, req.ip, req.get("user-agent"), xPayment);
         res.json(out);
       } catch (err) {
-        const xPayResp = res.getHeader("x-payment-response") || null;
         const isValidationError = err.status === 400 ||
           /^(provide |at least one|lat and lon are required)/i.test(err.message || "");
         const status = isValidationError ? 400 : 500;
         logPaidCall(cap.name, cap.price, params, status, req.ip);
-        logSettlement(cap.name, cap.price, params, status, req.ip, xPayment, xPayResp);
+        logSettlement(cap.name, cap.price, params, status, res, req.ip, xPayment);
         logCallAudit(req.method, req.path, status, req.ip, req.get("user-agent"), xPayment);
         res.status(status).json({ error: isValidationError ? "bad_request" : "capability_error", capability: cap.name, message: String(err?.message || err) });
       }
