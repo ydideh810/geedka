@@ -91,14 +91,18 @@ function logSettlement(capName, price, query, statusCode, res, ip, xPayment) {
     // Capture raw X-Payment for null-payer entries so we can diagnose CDP schema differences.
     const rawXPaymentCapture = (!payer && xPayment) ? String(xPayment) : null;
 
-    // Intercept res.setHeader to capture payment-response the moment middleware writes it.
-    // @x402/express v2 sets "payment-response" (not "x-payment-response") AFTER next() returns;
-    // the intercept fires synchronously so we never miss it due to response-buffer timing.
+    // Intercept res.setHeader to capture the payment receipt the moment middleware writes it.
+    // @x402/express v2 sets the receipt AFTER next() returns via the buffered-response pattern.
+    // CDP facilitator uses "X-PAYMENT-RESPONSE"; the generic x402.org facilitator uses
+    // "PAYMENT-RESPONSE" (no X-). We capture both to be facilitator-agnostic.
     let capturedXPayResp = null;
     const origSetHeader = res.setHeader;
     res.setHeader = function(name, value) {
-      if (typeof name === "string" && name.toLowerCase() === "payment-response") {
-        capturedXPayResp = value;
+      if (typeof name === "string") {
+        const lower = name.toLowerCase();
+        if (lower === "x-payment-response" || lower === "payment-response") {
+          capturedXPayResp = value;
+        }
       }
       return origSetHeader.call(this, name, value);
     };
@@ -109,7 +113,10 @@ function logSettlement(capName, price, query, statusCode, res, ip, xPayment) {
         res.setHeader = origSetHeader;
         let txHash = null;
         let receiptRaw = null;
-        const xPayResp = capturedXPayResp || res.getHeader("payment-response") || null;
+        const xPayResp = capturedXPayResp
+          || res.getHeader("x-payment-response")
+          || res.getHeader("payment-response")
+          || null;
         if (xPayResp) {
           try {
             receiptRaw = JSON.parse(Buffer.from(String(xPayResp), "base64").toString("utf8"));
