@@ -53,6 +53,7 @@ mkdirSync(LOG_DIR, { recursive: true });
 const PAYMENT_LOG = join(LOG_DIR, "payments.jsonl");
 const REQUEST_LOG = join(LOG_DIR, "requests.jsonl");
 const SETTLEMENT_LOG = join(LOG_DIR, "settlement.jsonl");
+const CALL_AUDIT_LOG = join(LOG_DIR, "call_audit.jsonl");
 
 function logPaidCall(capName, price, query, statusCode, ip) {
   try {
@@ -107,6 +108,34 @@ function logRequest(method, path, statusCode, ip, ua, ms) {
   try {
     const entry = JSON.stringify({ ts: new Date().toISOString(), method, path, status: statusCode, ip: ip || "unknown", ua: (ua || "").slice(0, 200), ms });
     appendFileSync(REQUEST_LOG, entry + "\n");
+  } catch (_) {}
+}
+
+// Per-call audit log: ts, IP, UA, method, path, payment-status, payer wallet.
+// Fires for every /cap/* call that reaches a route handler (post-payment-verification).
+function extractPayerFromHeader(xPayment) {
+  if (!xPayment) return null;
+  try {
+    const decoded = JSON.parse(Buffer.from(String(xPayment), "base64").toString("utf8"));
+    return decoded?.payload?.authorization?.from ?? decoded?.payload?.from ?? decoded?.from ?? null;
+  } catch { return null; }
+}
+
+function logCallAudit(method, path, statusCode, ip, ua, xPayment) {
+  try {
+    const payer = extractPayerFromHeader(xPayment);
+    const paymentStatus = statusCode === 200 ? "paid" : statusCode === 400 ? "paid_bad_params" : "paid_error";
+    const entry = JSON.stringify({
+      ts: new Date().toISOString(),
+      ip: ip || "unknown",
+      ua: (ua || "").slice(0, 200),
+      method,
+      path,
+      payment_status: paymentStatus,
+      payer_wallet: payer,
+      status: statusCode,
+    });
+    appendFileSync(CALL_AUDIT_LOG, entry + "\n");
   } catch (_) {}
 }
 
@@ -703,43 +732,54 @@ const { plans } = mountRetainer(app, {
 retainerPlans = plans;
 
 for (const cap of capabilities) {
-  app.get(`/cap/${cap.name}`, async (req, res) => {
-    const xPayment = req.headers["x-payment"] || null;
+  // Shared handler factory — GET reads params from req.query; POST merges req.body + req.query
+  // (body takes precedence so structured JSON clients can pass params naturally).
+  function makeCapHandler(paramSource) {
+    return async (req, res) => {
+      const xPayment = req.headers["x-payment"] || null;
+      const params = paramSource(req);
 
-    // Validate required params AFTER x402 payment — probe calls never reach here
-    // (they hit 402 from the middleware above). Missing params on a paid call = 400.
-    const required = cap.inputSchema?.required || [];
-    const missing = required.filter(p => req.query[p] === undefined || req.query[p] === "");
-    if (missing.length > 0) {
-      const xPayResp = res.getHeader("x-payment-response") || null;
-      logPaidCall(cap.name, cap.price, req.query, 400, req.ip);
-      logSettlement(cap.name, cap.price, req.query, 400, req.ip, xPayment, xPayResp);
-      return res.status(400).json({
-        error: "missing_required_params",
-        capability: cap.name,
-        missing,
-        message: `Required parameters: ${missing.join(", ")}`,
-      });
-    }
+      const required = cap.inputSchema?.required || [];
+      const missing = required.filter(p => params[p] === undefined || params[p] === "");
+      if (missing.length > 0) {
+        const xPayResp = res.getHeader("x-payment-response") || null;
+        logPaidCall(cap.name, cap.price, params, 400, req.ip);
+        logSettlement(cap.name, cap.price, params, 400, req.ip, xPayment, xPayResp);
+        logCallAudit(req.method, req.path, 400, req.ip, req.get("user-agent"), xPayment);
+        return res.status(400).json({
+          error: "missing_required_params",
+          capability: cap.name,
+          missing,
+          message: `Required parameters: ${missing.join(", ")}`,
+        });
+      }
 
-    try {
-      const out = await cap.handler(coerceQuery(req.query, cap.inputSchema), { req });
-      const xPayResp = res.getHeader("x-payment-response") || null;
-      logPaidCall(cap.name, cap.price, req.query, 200, req.ip);
-      logSettlement(cap.name, cap.price, req.query, 200, req.ip, xPayment, xPayResp);
-      res.json(out);
-    } catch (err) {
-      const xPayResp = res.getHeader("x-payment-response") || null;
-      // Validation throws (missing required input) should be 400, not 500.
-      // Caps throw explicit messages when no required param is provided.
-      const isValidationError = err.status === 400 ||
-        /^(provide |at least one|lat and lon are required)/i.test(err.message || "");
-      const status = isValidationError ? 400 : 500;
-      logPaidCall(cap.name, cap.price, req.query, status, req.ip);
-      logSettlement(cap.name, cap.price, req.query, status, req.ip, xPayment, xPayResp);
-      res.status(status).json({ error: isValidationError ? "bad_request" : "capability_error", capability: cap.name, message: String(err?.message || err) });
-    }
-  });
+      try {
+        const out = await cap.handler(coerceQuery(params, cap.inputSchema), { req });
+        const xPayResp = res.getHeader("x-payment-response") || null;
+        logPaidCall(cap.name, cap.price, params, 200, req.ip);
+        logSettlement(cap.name, cap.price, params, 200, req.ip, xPayment, xPayResp);
+        logCallAudit(req.method, req.path, 200, req.ip, req.get("user-agent"), xPayment);
+        res.json(out);
+      } catch (err) {
+        const xPayResp = res.getHeader("x-payment-response") || null;
+        const isValidationError = err.status === 400 ||
+          /^(provide |at least one|lat and lon are required)/i.test(err.message || "");
+        const status = isValidationError ? 400 : 500;
+        logPaidCall(cap.name, cap.price, params, status, req.ip);
+        logSettlement(cap.name, cap.price, params, status, req.ip, xPayment, xPayResp);
+        logCallAudit(req.method, req.path, status, req.ip, req.get("user-agent"), xPayment);
+        res.status(status).json({ error: isValidationError ? "bad_request" : "capability_error", capability: cap.name, message: String(err?.message || err) });
+      }
+    };
+  }
+
+  app.get(`/cap/${cap.name}`, makeCapHandler(req => req.query));
+  // POST: body params take precedence over query params for structured JSON clients.
+  app.post(`/cap/${cap.name}`, makeCapHandler(req => ({
+    ...req.query,
+    ...(req.body && typeof req.body === "object" && !Array.isArray(req.body) ? req.body : {}),
+  })));
 }
 
 app.listen(PORT, () => {

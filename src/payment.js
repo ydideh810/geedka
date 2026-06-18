@@ -85,7 +85,7 @@ export function buildPaymentMiddleware({ payTo, network, facilitator, capabiliti
   // Description is capped at 499 chars: CDP facilitator enforces a 500-char max.
   const routeConfig = {};
   for (const cap of capabilities) {
-    routeConfig[`GET /cap/${cap.name}`] = {
+    const capPaymentConfig = {
       accepts: {
         scheme: "exact",
         price: cap.price,
@@ -100,6 +100,9 @@ export function buildPaymentMiddleware({ payTo, network, facilitator, capabiliti
         input: buildExampleInput(cap.inputSchema),
       }),
     };
+    routeConfig[`GET /cap/${cap.name}`] = capPaymentConfig;
+    routeConfig[`POST /cap/${cap.name}`] = capPaymentConfig;
+    routeConfig[`HEAD /cap/${cap.name}`] = capPaymentConfig;
   }
 
   // Build the facilitator config. When CDP credentials are present and the
