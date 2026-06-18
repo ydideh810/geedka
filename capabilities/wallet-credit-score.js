@@ -6,7 +6,7 @@
 // multi-chain footprint, and deductions for zero activity or known-risky patterns.
 //
 // Seam: api.x402node.dev/wallet/score — 589 calls/wk, 20 payers, ~$0.037/call.
-// Priced at $0.020 (46% below x402node avg).
+// Priced at $0.025.
 //
 // Free upstream: DRPC.org public JSON-RPC (no API key) for nonce + balance.
 // CoinGecko public API for ETH → USD conversion.

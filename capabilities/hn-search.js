@@ -4,9 +4,8 @@
 // No key required. Returns stories ranked by relevance or recency,
 // with score, comment count, author, and URL.
 //
-// Priced at $0.010/call — Search category is growing 26+ new Bazaar
-// endpoints/day (signal-intel growth signal, 2026-06-05). Positioned
-// below oneshotagent.com/research ($0.008) for volume; above noise.
+// Priced at $0.020/call — Search category is growing 26+ new Bazaar
+// endpoints/day (signal-intel growth signal, 2026-06-05).
 
 const ALGOLIA_BASE = "https://hn.algolia.com/api/v1";
 const UA           = "Mozilla/5.0 (compatible; the-stall/1.3; +https://intuitek.ai)";

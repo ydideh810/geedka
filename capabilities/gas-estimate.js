@@ -7,7 +7,7 @@
 // Seam: api.x402node.dev/chain/eth-gas (9p, 165s, $0.005) +
 //        api.x402node.dev/chain/base-gas (21p, 124s, $0.005) +
 //        api.myceliasignal.com/oracle/gas/ethereum (5p, 39s) —
-//        collapse 3 separate per-chain endpoints into one $0.003 multi-chain call.
+//        collapse 3 separate per-chain endpoints into one $0.015 multi-chain call.
 //
 // Free upstream: DRPC.org + public RPCs — eth_gasPrice + eth_feeHistory.
 // Chains: ethereum, base, polygon, arbitrum, bsc.

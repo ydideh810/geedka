@@ -7,8 +7,7 @@
 //
 // Seam: agents building verification pipelines currently chain web-search +
 // multiple knowledge-base lookups + LLM synthesis in 3-5 sequential calls.
-// This collapses the chain into one paid endpoint at $0.500 — below the
-// $0.50–$1.50 market for structured claim-verification services.
+// This collapses the chain into one paid endpoint at $0.150.
 //
 // Upstreams: DuckDuckGo Instant Answer (free), Wikipedia REST API (free),
 //            HN Algolia (free), arXiv (free)
@@ -189,7 +188,7 @@ export default {
   price: "$0.150",
 
   description:
-    "AI-powered claim verification. Searches DuckDuckGo, Wikipedia, Hacker News, and arXiv in parallel, then uses GPT-4o-mini to assess the claim and return a structured verdict: confirmed / contradicted / uncertain, with confidence score (0–1), supporting and contradicting evidence excerpts with source URLs, key entities, and step-by-step reasoning. Use before an agent acts on a factual assertion it received from another agent or user. $0.500/call.",
+    "AI-powered claim verification. Searches DuckDuckGo, Wikipedia, Hacker News, and arXiv in parallel, then uses GPT-4o-mini to assess the claim and return a structured verdict: confirmed / contradicted / uncertain, with confidence score (0–1), supporting and contradicting evidence excerpts with source URLs, key entities, and step-by-step reasoning. Use before an agent acts on a factual assertion it received from another agent or user. $0.150/call.",
 
   inputSchema: {
     type: "object",

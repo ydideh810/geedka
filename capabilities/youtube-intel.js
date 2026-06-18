@@ -112,7 +112,7 @@ export default {
   price: "$0.012",
 
   description:
-    "YouTube video metadata: title, author, description (2000-char cap), view count, duration, upload date, thumbnail URL, tags (20 max), and categories. Accepts any YouTube URL format or bare 11-character video ID. Uses yt-dlp for full metadata with YouTube oembed as fallback. Priced at $0.008 — 71% below hirescrape ($0.028/call).",
+    "YouTube video metadata: title, author, description (2000-char cap), view count, duration, upload date, thumbnail URL, tags (20 max), and categories. Accepts any YouTube URL format or bare 11-character video ID. Uses yt-dlp for full metadata with YouTube oembed as fallback. $0.012/call.",
 
   inputSchema: {
     type: "object",

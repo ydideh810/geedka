@@ -9,7 +9,7 @@
 // shares, price per share, and post-transaction ownership.
 //
 // Seam: OpenInsider, Insider Monitor, Finviz premium charge for structured
-// insider data. EDGAR primary source at $0.008/call cuts cost to zero.
+// insider data. EDGAR primary source at $0.015/call cuts cost to zero.
 //
 // [REDACTED]3, 2026-06-07.
 

@@ -5,7 +5,7 @@
 // sentiment, topics, content type, and credibility signals.
 //
 // Seam: content.hugen.tokyo/content/analyze — 182 calls / 14 payers on day 1
-// (2026-06-09), $0.0200/call. STALL prices at $0.008 (60% undercut).
+// (2026-06-09), $0.0200/call. STALL prices at $0.012.
 //
 // Upstreams:
 //   r.jina.ai  — free URL-to-Markdown reader (proven in readable-content.js)
@@ -99,7 +99,7 @@ export default {
   price: "$0.012",
 
   description:
-    "AI-powered URL content analysis. Fetches a URL, extracts the readable article text, and returns structured intelligence: 2–3 sentence summary, key points, named entities with types, sentiment score, topic tags, content type classification, and credibility signals (has author/date/sources). Use for content intelligence pipelines, research synthesis, or automated brief generation. $0.008/call.",
+    "AI-powered URL content analysis. Fetches a URL, extracts the readable article text, and returns structured intelligence: 2–3 sentence summary, key points, named entities with types, sentiment score, topic tags, content type classification, and credibility signals (has author/date/sources). Use for content intelligence pipelines, research synthesis, or automated brief generation. $0.012/call.",
 
   inputSchema: {
     type: "object",

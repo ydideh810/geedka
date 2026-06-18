@@ -36,7 +36,7 @@ export default {
   price: "$0.020",
 
   description:
-    "Returns current price and intraday metrics for international equities (EU, UK, Swiss, Japan, Australia, Canada, Hong Kong, India). Accepts exchange-suffixed tickers (MC.PA for LVMH, SAP.DE for SAP, AZN.L for AstraZeneca) or market shorthand (market=fr, ticker=MC). Sourced from Yahoo Finance — no API key, live during market hours. Priced at $0.016, 27% below blockrun.ai $0.022/call.",
+    "Returns current price and intraday metrics for international equities (EU, UK, Swiss, Japan, Australia, Canada, Hong Kong, India). Accepts exchange-suffixed tickers (MC.PA for LVMH, SAP.DE for SAP, AZN.L for AstraZeneca) or market shorthand (market=fr, ticker=MC). Sourced from Yahoo Finance — no API key, live during market hours. $0.020/call.",
 
   inputSchema: {
     type: "object",

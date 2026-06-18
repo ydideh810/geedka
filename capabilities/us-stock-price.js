@@ -1,8 +1,7 @@
 // us-stock-price.js
 //
 // Returns current US equity price + intraday metrics from Yahoo Finance public
-// chart API (no API key required). Priced at $0.001 — matched to blockrun.ai's
-// current price. Blockrun path: $0.044 → $0.023 (2026-06-06) → $0.001 (2026-06-11).
+// chart API (no API key required). Priced at $0.005.
 //
 // Data source: Yahoo Finance v8/finance/chart (public, no auth, no crumb).
 // Updates on each call — live market data during trading hours, last-close
@@ -16,7 +15,7 @@ export default {
   price: "$0.005",
 
   description:
-    "Returns current US equity price and intraday metrics (change %, volume, day high/low, 52-week range) for any NYSE/NASDAQ ticker. Sourced from Yahoo Finance public data — no API key, live during market hours. Priced at $0.001/call, matched to market rate.",
+    "Returns current US equity price and intraday metrics (change %, volume, day high/low, 52-week range) for any NYSE/NASDAQ ticker. Sourced from Yahoo Finance public data — no API key, live during market hours. $0.005/call.",
 
   inputSchema: {
     type: "object",

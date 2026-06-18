@@ -5,7 +5,7 @@
 //
 // Demand basis: blockrun.ai /api/v1/stocks/us/history saw 48,360 settlements
 // (~$48) in 72h in archive.db — highest-volume external endpoint observed.
-// Blockrun charges $0.0010/call. Repriced $0.0009→$0.001 (CDP facilitator floor).
+// Blockrun charges $0.0010/call. STALL priced at $0.005/call.
 //
 // Upstream: Yahoo Finance v8/finance/chart — free, no API key, no rate limit.
 
@@ -29,7 +29,7 @@ export default {
   price: "$0.005",
 
   description:
-    "Historical OHLCV bars for any US stock, ETF, or index. TradingView-compatible resolution (D, W, M, 60, 15, 5, 1). Pass Unix timestamps for from/to. Matches blockrun.ai at $0.001/call — same price, no API key required. Use us-stock-price for live quotes; equity-technicals for indicators.",
+    "Historical OHLCV bars for any US stock, ETF, or index. TradingView-compatible resolution (D, W, M, 60, 15, 5, 1). Pass Unix timestamps for from/to. $0.005/call — no API key required. Use us-stock-price for live quotes; equity-technicals for indicators.",
 
   inputSchema: {
     type: "object",

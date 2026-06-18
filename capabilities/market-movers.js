@@ -5,7 +5,7 @@
 // tx-explainer + chain/block chain (6-7 distinct wallets, 7-day persistence,
 // signal-intel strength 1.0). Agents chain market movers with on-chain queries —
 // this consolidates the market-context leg.
-// Priced at $0.004. Free upstream: Yahoo Finance screener + CoinGecko.
+// Priced at $0.006. Free upstream: Yahoo Finance screener + CoinGecko.
 
 const YF_BASE = "https://query1.finance.yahoo.com/v1/finance/screener/predefined/saved";
 const CG_BASE = "https://api.coingecko.com/api/v3/coins/markets";

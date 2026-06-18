@@ -2,7 +2,7 @@
 //
 // Returns current US Treasury yield curve at 3M, 5Y, 10Y, and 30Y nodes.
 // Sourced from CBOE interest-rate indices via Yahoo Finance public API —
-// no API key, updated during market hours. Priced at $0.008.
+// no API key, updated during market hours. Priced at $0.010.
 //
 // Seam: fills the term-structure gap in the financial intelligence stack.
 // Agents pricing risk, running DCF models, or building bond analytics need

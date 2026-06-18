@@ -3,7 +3,7 @@
 // Combined DeFi yield intelligence + market momentum in one call.
 // Collapses the observed seam: yield-farming-active → market-movers
 // (6 distinct wallets, 4-day persistence, signal-intel signal_id 57542, strength 70%).
-// Priced at $0.006 — saves ~33% vs separate calls ($0.009 combined).
+// Priced at $0.012.
 //
 // Adds cross-signal layer: matches yield pool tokens to market movers to surface
 // "boosted" (APY + momentum), "at_risk" (APY + sell-off), and "neutral" pools.

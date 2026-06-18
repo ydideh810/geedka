@@ -121,7 +121,7 @@ export default {
   price: "$0.010",
 
   description:
-    "Multi-chain DeFi portfolio scanner. Returns token holdings and USD values for any EVM wallet across Ethereum, Base, Polygon, and Arbitrum mainnet. Covers ETH, major stablecoins (USDC, USDT, DAI), WBTC, ARB, cbETH, and chain-native assets. Collapses the defi.hugen.tokyo/defi/address seam — 41 payers. $0.007/call.",
+    "Multi-chain DeFi portfolio scanner. Returns token holdings and USD values for any EVM wallet across Ethereum, Base, Polygon, and Arbitrum mainnet. Covers ETH, major stablecoins (USDC, USDT, DAI), WBTC, ARB, cbETH, and chain-native assets. Collapses the defi.hugen.tokyo/defi/address seam — 41 payers. $0.010/call.",
 
   inputSchema: {
     type: "object",

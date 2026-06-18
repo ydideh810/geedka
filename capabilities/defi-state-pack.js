@@ -4,7 +4,7 @@
 // signal-intel signal_id 64812 (seam, strength 1.0) — observed agents running
 // block/0x1212D00 → yield-farming-active chain in the wild.
 // Also collapses signal_id 60977 (stablecoin-watch seam, strength 1.0).
-// Priced at $0.008 (~70% of $0.011 summed chain cost).
+// Priced at $0.015.
 //
 // Free upstreams: DRPC.org public RPC + DeFiLlama stablecoins + DeFiLlama yields (no keys).
 

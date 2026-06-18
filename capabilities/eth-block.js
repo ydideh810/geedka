@@ -4,7 +4,7 @@
 // tag (latest/pending/earliest/safe/finalized), or hex string.
 // Collapses the onesource.io seat: skills.onesource.io/api/chain/block/$0.003/call
 // — 14 distinct wallets, 1-day persistence, signal-intel signal 52194, strength 0.80.
-// Priced at $0.002 (33% below onesource's $0.003).
+// Priced at $0.004.
 //
 // Free upstream: DRPC.org public JSON-RPC — no API key required.
 
@@ -45,7 +45,7 @@ export default {
   price: "$0.004",
 
   description:
-    "Returns an Ethereum block header and transaction hashes by block number, hex string, or tag (latest/pending/earliest/safe/finalized). Fields: block_number, hash, parent_hash, miner, timestamp_iso, gas_used, gas_limit, base_fee_gwei (EIP-1559), tx_count, transaction_hashes. Supports Ethereum (default), Base, Polygon, and Arbitrum. $0.002/call — 33% below comparable market rate.",
+    "Returns an Ethereum block header and transaction hashes by block number, hex string, or tag (latest/pending/earliest/safe/finalized). Fields: block_number, hash, parent_hash, miner, timestamp_iso, gas_used, gas_limit, base_fee_gwei (EIP-1559), tx_count, transaction_hashes. Supports Ethereum (default), Base, Polygon, and Arbitrum. $0.004/call.",
 
   inputSchema: {
     type: "object",

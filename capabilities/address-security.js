@@ -5,7 +5,7 @@
 // blacklisted entities, dark-web activity, and more.
 //
 // Seam: defi.hugen.tokyo/defi/address — 1,010 settlements / 41 payers / 7d,
-// ~$0.011/call. Priced at $0.007 (36% below hugen).
+// ~$0.011/call. Priced at $0.010.
 //
 // Free upstream: GoPlusLabs address_security API (no key required).
 // Data sources: SlowMist, BlockSec, GoPlus internal.

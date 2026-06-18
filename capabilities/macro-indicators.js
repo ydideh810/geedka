@@ -4,7 +4,7 @@
 // Unemployment Rate, and Real GDP. Sourced from FRED
 // (St. Louis Federal Reserve) public CSV endpoint — no API key, updated monthly.
 //
-// Priced at $0.008 — macro context in a single call. An agent pricing risk
+// Priced at $0.010 — macro context in a single call. An agent pricing risk
 // in a multi-asset workflow pays once for the full macro backdrop rather than
 // inferring it from equity prices. 10Y yield and VIX are in market-overview;
 // this cap covers the FRED-sourced policy/economic data that market-overview omits.

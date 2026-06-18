@@ -11,7 +11,7 @@
 //
 // Seam: agents doing due-diligence, compliance, or earnings-prep pipelines
 // currently chain ticker-lookup + EDGAR search + filing-parse in 3+ calls.
-// This collapses the chain into one paid endpoint at $0.015.
+// This collapses the chain into one paid endpoint at $0.018.
 
 const UA      = "Mozilla/5.0 (compatible; the-stall/3.62; +https://intuitek.ai; kyle@intuitek.ai)";
 const TIMEOUT = 10_000;

@@ -4,7 +4,7 @@
 // Returns 3-5 sentences of sharp, clever humor.
 //
 // Seam: api.anchor-x402.com/v1/roast — 31 payers, $0.159/call (7d).
-// STALL prices at $0.040 (75% below). Upstream cost: ~$0.0003 (gpt-4o-mini).
+// STALL prices at $0.125. Upstream cost: ~$0.0003 (gpt-4o-mini).
 //
 // Upstream: OpenAI gpt-4o-mini via OPENAI_API_KEY.
 

@@ -4,7 +4,7 @@
 // Collapses the observed seam:
 //   seerium.xyz/whale-radar/by-wallet   (303 settlements, $0.003, avg 6-day persist)
 //   whale.hugen.tokyo/whale/lookup      (148 settlements, $0.012, avg 6-day persist)
-// Combined seam: 451 settlements. Priced at $0.003 — matches seerium, 75% below hugen.
+// Combined seam: 451 settlements. Priced at $0.010.
 //
 // Free upstream: data-api.polymarket.com (no API key required).
 // Returns: recent trades, open positions, inferred whale tier, activity summary.
