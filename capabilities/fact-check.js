@@ -186,7 +186,7 @@ Respond ONLY with a JSON object (no markdown, no prose outside the JSON) with th
 
 export default {
   name:  "fact-check",
-  price: "$0.150",
+  price: "$0.500",
 
   description:
     "AI-powered claim verification. Searches DuckDuckGo, Wikipedia, Hacker News, and arXiv in parallel, then uses GPT-4o-mini to assess the claim and return a structured verdict: confirmed / contradicted / uncertain, with confidence score (0–1), supporting and contradicting evidence excerpts with source URLs, key entities, and step-by-step reasoning. Use before an agent acts on a factual assertion it received from another agent or user. $0.500/call.",
