@@ -600,11 +600,12 @@ app.get("/llms.txt", (_req, res) => {
     { name: "On-chain Risk & Compliance", caps: capabilities.filter(c => /sanctions|wallet-credit|wallet-screener|address-security|agent-kya|kya|cve|drug-intel|npi|clinical|fda/i.test(c.name)).map(c => c.name) },
     { name: "Macro & Alternative Data", caps: capabilities.filter(c => /macro|imf|world-bank|commodity|energy|solar|earthquake|usgs|weather|air-quality|aviation|flight|legal|gov-vote|congressional|federal-contract|federal-register|country-info/i.test(c.name)).map(c => c.name) },
   ];
-  // Extract a short example value from a property description (looks for "e.g. X" patterns)
+  // Extract a short example value from a property description
   function exampleFromDesc(desc = '') {
-    const m = desc.match(/e\.g\.\s+['"]?([^'")\n,\.]{2,40})/i);
+    // Match "e.g. X", "e.g., X", "Example: X", or "Example: 'X'"
+    const m = desc.match(/(?:e\.g\.[\s,]+|[Ee]xample:\s+)['"]?([^'")\n,\.]{2,40})/i);
     if (!m) return null;
-    return m[1].trim().replace(/['"]/g, '').split(/[,\s]+/)[0];
+    return m[1].trim().replace(/['"]/g, '').split(/\s*,\s*/)[0];
   }
   // Build a ?param=example hint string for caps that have required params
   function paramHint(cap) {
@@ -617,14 +618,27 @@ app.get("/llms.txt", (_req, res) => {
     });
     return ` | ?${parts.join('&')}`;
   }
-  const capLines = cats.map(cat => {
-    const names = cat.caps.slice(0, 15).map(n => {
+  // High-traffic caps that must always appear in llms.txt regardless of category ordering
+  const PRIORITY_CAPS = ['us-stock-price','stock-price-multi','crypto-top-movers',
+    'crypto-news-impact','research-synthesis','weather-history','hf-model-search','cron-parser'];
+  const prioritySection = `## Most Requested\n\n${PRIORITY_CAPS.map(n => {
+    const cap = capabilities.find(c => c.name === n);
+    if (!cap) return null;
+    const price = cap.price?.replace('$','') || '?';
+    // research-synthesis: special hint since query is optional
+    const hint = n === 'research-synthesis'
+      ? ' | ?query=AI+agents+2025 (query optional — defaults to AI agents report)'
+      : paramHint(cap);
+    return `  - [${n}](${BASE_URL}/cap/${n}): $${price} USDC${hint}`;
+  }).filter(Boolean).join('\n')}`;
+  const capLines = [prioritySection, ...cats.map(cat => {
+    const names = cat.caps.slice(0, 20).map(n => {
       const cap = capabilities.find(c => c.name === n);
       const price = cap?.price?.replace('$','') || '?';
       return `  - [${n}](${BASE_URL}/cap/${n}): $${price} USDC${paramHint(cap)}`;
     }).join('\n');
     return names ? `## ${cat.name}\n\n${names}` : null;
-  }).filter(Boolean).join('\n\n');
+  }).filter(Boolean)].join('\n\n');
   res.setHeader("Content-Type", "text/plain; charset=utf-8");
   res.send(`# The Stall
 
