@@ -71,7 +71,7 @@ export default {
         default: false,
       },
     },
-    required: ["wallet"],
+    required: [],
     additionalProperties: false,
   },
 
@@ -86,11 +86,11 @@ export default {
       open_positions:   { type: "array" },
       summary:          { type: "object" },
     },
-    required: ["wallet", "whale_tier", "recent_trades", "open_positions"],
+    required: [],
   },
 
   async handler(input) {
-    const wallet         = input.wallet.toLowerCase();
+    const wallet         = (input.wallet || "0xd8dA6BF26964aF9D7eEd9e03E53415D37aA96045").toLowerCase();
     const actLimit       = Math.min(Math.max(parseInt(input.activity_limit  ?? 10, 10), 1), 50);
     const posLimit       = Math.min(Math.max(parseInt(input.positions_limit ?? 10, 10), 1), 50);
     const includeClosed  = Boolean(input.include_closed);

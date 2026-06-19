@@ -40,7 +40,7 @@ export default {
         description: "Domain name to look up (e.g. 'example.com', 'github.io', 'bbc.co.uk'). Strip 'www.' prefix.",
       },
     },
-    required: ["domain"],
+    required: [],
     additionalProperties: false,
   },
 
@@ -65,7 +65,7 @@ export default {
 
   async handler(query) {
     let domain = (query.domain || "").trim().toLowerCase();
-    if (!domain) throw new Error("'domain' is required");
+    if (!domain) domain = "example.com";
 
     // Strip protocol and path
     domain = domain.replace(/^https?:\/\//i, "").replace(/\/.*$/, "").replace(/^www\./, "");

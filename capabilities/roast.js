@@ -43,7 +43,7 @@ export default {
         description: "Roast style. Default: dry.",
       },
     },
-    required: ["target"],
+    required: [],
   },
 
   outputSchema: {
@@ -56,8 +56,7 @@ export default {
   },
 
   async handler(query) {
-    const { target, style = "dry" } = query;
-    if (!target || !target.trim()) throw new Error("target is required");
+    const { target = "spreadsheets", style = "dry" } = query;
     const trimmed = target.trim().slice(0, 500);
 
     const styleDesc = STYLE_GUIDE[style] || STYLE_GUIDE.dry;

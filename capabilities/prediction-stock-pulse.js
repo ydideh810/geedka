@@ -35,7 +35,7 @@ export default {
         maximum: 10,
       },
     },
-    required: ["ticker"],
+    required: [],
     additionalProperties: false,
   },
 
@@ -82,7 +82,7 @@ export default {
   },
 
   async handler(query) {
-    const ticker = (query.ticker || "").trim().toUpperCase().replace(/[^A-Z0-9.\-^]/g, "");
+    const ticker = (query.ticker || "AAPL").trim().toUpperCase().replace(/[^A-Z0-9.\-^]/g, "");
     if (!ticker) throw new Error("ticker is required");
 
     const limit = Math.min(Math.max(Number(query.market_limit) || 5, 1), 10);

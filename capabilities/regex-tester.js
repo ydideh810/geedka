@@ -62,7 +62,7 @@ export default {
         description: "Optional replacement string. Uses $1, $2, etc. for capture groups. When provided, returns replaced output.",
       },
     },
-    required: ["pattern", "input"],
+    required: [],
     additionalProperties: false,
   },
 
@@ -79,11 +79,8 @@ export default {
   },
 
   async handler(query) {
-    const { pattern, input, replace_with } = query;
+    const { pattern = "\\d+", input = "Hello 42 world and the year is 2024", replace_with } = query;
     const flags = (query.flags ?? "g");
-
-    if (!pattern) throw new Error("'pattern' is required");
-    if (input === undefined || input === null) throw new Error("'input' is required");
     if (input.length > MAX_INPUT) throw new Error(`input too large (max ${MAX_INPUT} chars)`);
 
     const re = compileRegex(pattern, flags);

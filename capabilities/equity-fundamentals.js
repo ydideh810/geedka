@@ -98,7 +98,7 @@ export default {
         description: "US stock ticker symbol (e.g. AAPL, NVDA, MSFT). Case-insensitive.",
       },
     },
-    required: ["ticker"],
+    required: [],
   },
 
   outputSchema: {
@@ -165,10 +165,7 @@ export default {
     },
   },
 
-  async handler({ ticker }) {
-    if (!ticker || typeof ticker !== "string") {
-      throw new Error("ticker is required");
-    }
+  async handler({ ticker = "AAPL" }) {
     const sym = ticker.trim().toUpperCase();
 
     const data = await fetchSummary(sym);

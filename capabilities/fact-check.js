@@ -202,7 +202,7 @@ export default {
         description: "Optional background context that helps interpret the claim (e.g. domain, time period, known related facts). Narrows the verification scope.",
       },
     },
-    required: ["claim"],
+    required: [],
   },
 
   outputSchema: {
@@ -222,10 +222,7 @@ export default {
     },
   },
 
-  async handler({ claim, context }) {
-    if (!claim || claim.trim().length < 5) {
-      return { error: "invalid_claim", message: "Claim must be at least 5 characters." };
-    }
+  async handler({ claim = "The Eiffel Tower is located in Paris, France.", context }) {
     const c = claim.trim().slice(0, 400);
     const ctx = context ? context.trim().slice(0, 200) : null;
 

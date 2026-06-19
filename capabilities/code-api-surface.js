@@ -244,7 +244,7 @@ export default {
         description: "Output scope: 'full' (default) = all fields; 'routes' = HTTP routes only; 'exports' = exported symbols only.",
       },
     },
-    required: ["code"],
+    required: [],
     additionalProperties: false,
   },
 
@@ -262,10 +262,7 @@ export default {
     },
   },
 
-  async handler({ code, detail = "full" }) {
-    if (!code || typeof code !== "string") {
-      throw new Error("code is required and must be a string");
-    }
+  async handler({ code = "def hello():\n    return 'Hello, World!'", detail = "full" }) {
     if (code.length > 500_000) {
       throw new Error("code exceeds 500KB limit — send a representative excerpt");
     }

@@ -166,7 +166,7 @@ export default {
         description: "Max periods to return (1–8 for quarterly; 1–4 for annual). Default: 4.",
       },
     },
-    required: ["ticker"],
+    required: [],
   },
 
   outputSchema: {
@@ -205,8 +205,7 @@ export default {
     },
   },
 
-  async handler({ ticker, period = "quarterly", limit = 4 }) {
-    if (!ticker || typeof ticker !== "string") throw new Error("ticker is required");
+  async handler({ ticker = "AAPL", period = "quarterly", limit = 4 }) {
     const sym      = ticker.trim().toUpperCase();
     const maxLimit = Math.min(Math.max(1, limit), period === "annual" ? 4 : 8);
 

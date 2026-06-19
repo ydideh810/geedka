@@ -30,7 +30,7 @@ export default {
         description: "HTTPS or HTTP URL to poll. Must be a publicly accessible endpoint.",
       },
     },
-    required: ["url"],
+    required: [],
   },
 
   outputSchema: {
@@ -49,8 +49,7 @@ export default {
   },
 
   async handler(query) {
-    const raw = (query.url || "").trim();
-    if (!raw) throw new Error("url is required");
+    const raw = (query.url || "https://example.com").trim();
 
     let parsed;
     try { parsed = new URL(raw); } catch { throw new Error("invalid URL"); }

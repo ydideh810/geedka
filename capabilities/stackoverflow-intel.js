@@ -56,7 +56,7 @@ export default {
         description: "If true, return only questions with an accepted answer. Default: false.",
       },
     },
-    required: ["q"],
+    required: [],
     additionalProperties: false,
   },
 
@@ -88,8 +88,7 @@ export default {
   },
 
   async handler(query) {
-    const q    = String(query.q || "").trim();
-    if (!q) throw new Error("q is required");
+    const q    = String(query.q || "artificial intelligence").trim();
 
     const limit       = Math.min(Math.max(1, query.limit || 5), 10);
     const sort        = ["votes", "relevance", "activity", "creation"].includes(query.sort) ? query.sort : "votes";

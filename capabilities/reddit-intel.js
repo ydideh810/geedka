@@ -99,7 +99,7 @@ export default {
         maximum: 25,
       },
     },
-    required: ["q"],
+    required: [],
   },
 
   outputSchema: {
@@ -130,8 +130,7 @@ export default {
   },
 
   async handler(query) {
-    const q         = (query.q || "").trim();
-    if (!q) throw new Error("q is required");
+    const q         = (query.q || "artificial intelligence").trim();
     const subreddit = (query.subreddit || "").trim();
     const mode      = query.mode || "posts";
     const sort      = query.sort || "score";

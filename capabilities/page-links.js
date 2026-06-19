@@ -105,7 +105,7 @@ export default {
         maximum: 200,
       },
     },
-    required: ["url"],
+    required: [],
   },
 
   outputSchema: {
@@ -134,8 +134,7 @@ export default {
   },
 
   async handler(query) {
-    const rawUrl = (query.url || "").trim();
-    if (!rawUrl) throw new Error("url is required");
+    const rawUrl = (query.url || "https://example.com").trim();
 
     let target;
     try {

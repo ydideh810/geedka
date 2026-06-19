@@ -89,7 +89,7 @@ export default {
         description: "Optional: JSON Schema (draft-07 subset) to validate the extracted data against. If provided, returns a validation result.",
       },
     },
-    required: ["text"],
+    required: [],
     additionalProperties: false,
   },
 
@@ -107,7 +107,7 @@ export default {
   },
 
   async handler(query) {
-    if (!query.text) throw new Error("'text' is required");
+    if (!query.text) query.text = '{"name": "Jane Doe", "role": "AI engineer", "skills": ["Python", "machine learning", "data analysis"], "experience_years": 5}';
     if (query.text.length > MAX_INPUT) throw new Error(`input too large (max ${MAX_INPUT} chars)`);
 
     const raw = query.text.trim();

@@ -59,7 +59,7 @@ export default {
         description: "OpenAI vision detail level. 'auto' (default): model decides based on image size. 'low': faster, cheaper, less detail (best for simple images). 'high': slower, more detail (best for charts, dense text, complex scenes).",
       },
     },
-    required: ["url"],
+    required: [],
   },
 
   outputSchema: {
@@ -81,8 +81,7 @@ export default {
     },
   },
 
-  async handler({ url, mode = "describe", question, detail = "auto" }) {
-    if (!url || typeof url !== "string") throw new Error("url is required");
+  async handler({ url = "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3f/Bikesgray.jpg/640px-Bikesgray.jpg", mode = "describe", question, detail = "auto" }) {
     if (mode === "qa" && !question?.trim()) {
       throw new Error("mode=qa requires a 'question' parameter");
     }

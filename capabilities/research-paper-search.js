@@ -73,7 +73,7 @@ export default {
         default: false,
       },
     },
-    required: ["query"],
+    required: [],
     additionalProperties: false,
   },
 
@@ -104,7 +104,7 @@ export default {
   },
 
   async handler(input) {
-    const query         = String(input.query).trim();
+    const query         = String(input.query || "transformer neural networks").trim();
     const limit         = Math.min(10, Math.max(1, parseInt(input.limit ?? 5)));
     const sort          = input.sort ?? "relevant";
     const openAccessOnly = Boolean(input.open_access_only);

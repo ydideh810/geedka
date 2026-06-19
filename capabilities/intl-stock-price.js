@@ -52,7 +52,7 @@ export default {
           "Optional market shorthand to auto-append exchange suffix: fr=Paris, de=Frankfurt, gb=London, ch=Swiss, nl=Amsterdam, es=Madrid, it=Milan, jp=Tokyo, au=ASX, ca=TSX, hk=HongKong, in=BSE. Ignored when ticker already contains a period.",
       },
     },
-    required: ["ticker"],
+    required: [],
   },
 
   outputSchema: {
@@ -76,10 +76,8 @@ export default {
   },
 
   async handler(query) {
-    const rawTicker = (query.ticker || "").trim();
+    const rawTicker = (query.ticker || "MC.PA").trim();
     const rawMarket = (query.market || "").trim().toLowerCase();
-
-    if (!rawTicker) throw new Error("ticker is required");
 
     let symbol = rawTicker.toUpperCase().replace(/[^A-Z0-9.\-^]/g, "");
     if (!symbol) throw new Error("invalid ticker symbol");

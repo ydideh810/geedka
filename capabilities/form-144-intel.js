@@ -104,7 +104,7 @@ export default {
         default: 30,
       },
     },
-    required: ["ticker"],
+    required: [],
   },
   outputSchema: {
     type: "object",
@@ -143,9 +143,8 @@ export default {
       },
     },
   },
-  async handler({ ticker, days = 30 }) {
-    ticker = (ticker || "").toUpperCase().trim();
-    if (!ticker) throw new Error("ticker is required");
+  async handler({ ticker = "AAPL", days = 30 }) {
+    ticker = (ticker || "AAPL").toUpperCase().trim();
     days = Math.min(Math.max(1, parseInt(days, 10) || 30), 180);
 
     // 1. Resolve ticker → CIK

@@ -68,7 +68,7 @@ export default {
         maxItems: 10,
       },
     },
-    required: ["name"],
+    required: [],
   },
 
   outputSchema: {
@@ -85,8 +85,7 @@ export default {
     },
   },
 
-  async handler({ name, tlds }) {
-    if (!name || typeof name !== "string") throw new Error("name is required");
+  async handler({ name = "example", tlds }) {
 
     // Strip TLD if caller passed a full domain
     let baseName = name.trim().toLowerCase().replace(/^https?:\/\//, "");

@@ -77,7 +77,7 @@ export default {
         description: "SNI server name override (defaults to 'host'). Useful when connecting to an IP that hosts multiple domains.",
       },
     },
-    required: ["host"],
+    required: [],
     additionalProperties: false,
   },
 
@@ -102,8 +102,7 @@ export default {
   },
 
   async handler(query) {
-    const host = (query.host || "").trim();
-    if (!host) throw new Error("host is required");
+    const host = (query.host || "example.com").trim();
     const port       = parseInt(query.port, 10) || DEFAULT_PORT;
     const servername = (query.servername || "").trim() || host;
 

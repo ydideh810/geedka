@@ -167,7 +167,7 @@ export default {
         description: "URL of the company website to analyze (e.g. 'https://stripe.com').",
       },
     },
-    required: ["url"],
+    required: [],
     additionalProperties: false,
   },
 
@@ -194,8 +194,7 @@ export default {
   },
 
   async handler(query) {
-    if (!query.url) throw new Error("'url' is required");
-    const rawUrl = query.url.startsWith("http") ? query.url : `https://${query.url}`;
+    const rawUrl = (query.url || "https://anthropic.com").startsWith("http") ? (query.url || "https://anthropic.com") : `https://${query.url || "anthropic.com"}`;
 
     let html = "";
     let status = 0;

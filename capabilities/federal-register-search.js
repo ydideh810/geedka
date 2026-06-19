@@ -64,7 +64,7 @@ export default {
         description: "If true, return only documents flagged as significant by the issuing agency.",
       },
     },
-    required: ["q"],
+    required: [],
   },
 
   outputSchema: {
@@ -96,8 +96,7 @@ export default {
   },
 
   async handler(query) {
-    const q             = String(query.q ?? "").trim();
-    if (!q) throw new Error("q is required");
+    const q             = String(query.q ?? "artificial intelligence").trim();
 
     const limit         = Math.min(Math.max(parseInt(query.limit ?? "10", 10), 1), 20);
     const days          = Math.min(Math.max(parseInt(query.days  ?? "90",  10), 1), 730);

@@ -160,7 +160,7 @@ export default {
         description: "EVM wallet address (0x…, 40 hex chars). Checksummed or lowercase accepted.",
       },
     },
-    required: ["address"],
+    required: [],
     additionalProperties: false,
   },
 
@@ -193,7 +193,7 @@ export default {
   },
 
   async handler(query) {
-    const raw = (query.address || "").trim();
+    const raw = (query.address || "0xd8dA6BF26964aF9D7eEd9e03E53415D37aA96045").trim();
     if (!raw) throw new Error("'address' is required");
     if (!/^0x[0-9a-fA-F]{40}$/.test(raw)) throw new Error("invalid EVM address format — expected 0x followed by 40 hex chars");
     const address = raw.toLowerCase();

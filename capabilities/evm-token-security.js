@@ -62,7 +62,7 @@ export default {
 
   inputSchema: {
     type: "object",
-    required: ["address"],
+    required: [],
     properties: {
       address: {
         type: "string",
@@ -124,7 +124,7 @@ export default {
   async handler(query) {
     const rawChain  = (query.chain || "base").toLowerCase().trim();
     const chainId   = CHAIN_ALIASES[rawChain] || rawChain;
-    const address   = (query.address || "").trim();
+    const address   = (query.address || "0xd8dA6BF26964aF9D7eEd9e03E53415D37aA96045").trim();
 
     if (!address) throw new Error("address is required");
 

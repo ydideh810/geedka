@@ -30,7 +30,7 @@ export default {
 
   inputSchema: {
     type: "object",
-    required: ["token_address"],
+    required: [],
     properties: {
       token_address: {
         type: "string",
@@ -89,7 +89,7 @@ export default {
   },
 
   async handler(query) {
-    const raw     = (query.token_address ?? "").trim().toLowerCase();
+    const raw     = (query.token_address || "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48").trim().toLowerCase();
     if (!raw.startsWith("0x") || raw.length !== 42)
       throw new Error("token_address must be a 42-character 0x Ethereum address");
 

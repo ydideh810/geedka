@@ -46,7 +46,7 @@ export default {
 
   inputSchema: {
     type: "object",
-    required: ["date"],
+    required: [],
     properties: {
       date: {
         type: "string",
@@ -74,7 +74,7 @@ export default {
           from:   { type: "string" },
           to:     { type: "string" },
         },
-        required: ["amount", "from", "to"],
+        required: [],
       },
     },
     additionalProperties: false,

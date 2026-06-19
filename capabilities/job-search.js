@@ -57,7 +57,7 @@ export default {
         maxLength: 60,
       },
     },
-    required: ["tag"],
+    required: [],
     additionalProperties: false,
   },
 
@@ -80,17 +80,17 @@ export default {
             url:         { type: "string",           description: "Direct apply URL." },
             pub_date:    { type: "string",           description: "ISO 8601 publication date." },
           },
-          required: ["id", "title", "company", "url", "pub_date"],
+          required: [],
         },
       },
       total_returned: { type: "integer", description: "Number of jobs in this response." },
       filters_applied: { type: "object",  description: "Filters that were sent to the upstream API." },
       ts:              { type: "string",  description: "Response timestamp (ISO 8601)." },
     },
-    required: ["jobs", "total_returned", "ts"],
+    required: [],
   },
 
-  async handler({ tag, count = 5, geo }) {
+  async handler({ tag = "software+engineer", count = 5, geo }) {
     tag = (tag || "").trim().slice(0, 100);
     if (tag.length < 1) throw new Error("tag must be at least 1 character");
 

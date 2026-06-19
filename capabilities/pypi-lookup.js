@@ -21,7 +21,7 @@ export default {
 
   inputSchema: {
     type: "object",
-    required: ["package"],
+    required: [],
     properties: {
       package: {
         type: "string",
@@ -58,10 +58,8 @@ export default {
   },
 
   async handler(query) {
-    const pkg  = (query.package || "").trim().toLowerCase();
+    const pkg  = (query.package || "requests").trim().toLowerCase();
     const ver  = (query.version || "").trim();
-
-    if (!pkg) throw new Error("package is required");
 
     const url = ver
       ? `${PYPI_URL}/${encodeURIComponent(pkg)}/${encodeURIComponent(ver)}/json`

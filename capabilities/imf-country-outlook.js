@@ -83,7 +83,7 @@ export default {
         maximum: 5,
       },
     },
-    required: ["country"],
+    required: [],
   },
 
   outputSchema: {

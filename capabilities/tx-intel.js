@@ -226,7 +226,7 @@ export default {
         description: "Include block-level context (base_fee, tx_count, miner). Collapses the onesource/chain/block seam agents use after tx-explainer. Default: true.",
       },
     },
-    required: ["tx_hash"],
+    required: [],
     additionalProperties: false,
   },
 
@@ -278,11 +278,11 @@ export default {
   },
 
   async handler(input) {
-    const chain  = (input.chain || "base").toLowerCase();
+    const chain  = (input.chain || "ethereum").toLowerCase();
     const rpcUrl = CHAINS[chain];
     if (!rpcUrl) throw new Error(`Unsupported chain: ${chain}`);
 
-    const txHash = (input.tx_hash || "").toLowerCase();
+    const txHash = (input.tx_hash || "0xbe6c8a362d24e50e7bdada68bccfc65676d572aa0b09ca87e06b79adb69b1ab6").toLowerCase();
     if (!/^0x[0-9a-f]{64}$/.test(txHash)) {
       throw new Error("tx_hash must be 0x-prefixed and 64 hex characters");
     }

@@ -184,7 +184,7 @@ export default {
         maximum: 20,
       },
     },
-    required: ["topic"],
+    required: [],
     additionalProperties: false,
   },
 
@@ -225,8 +225,7 @@ export default {
   },
 
   async handler(query) {
-    const topic       = (query.topic || "").trim();
-    if (!topic) throw new Error("topic is required");
+    const topic       = (query.topic || "artificial intelligence").trim();
 
     const windowHours    = Math.min(Math.max(parseInt(query.window_hours || "24", 10), 1), 168);
     const subreddits     = Array.isArray(query.reddit_subreddits) ? query.reddit_subreddits.filter(Boolean) : [];

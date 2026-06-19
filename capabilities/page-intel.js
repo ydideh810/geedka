@@ -117,7 +117,7 @@ export default {
         description: "Maximum number of links to return (default 50, max 200).",
       },
     },
-    required: ["url"],
+    required: [],
     additionalProperties: false,
   },
 
@@ -137,8 +137,7 @@ export default {
   },
 
   async handler(query) {
-    const raw = (query.url || "").trim();
-    if (!raw) throw new Error("url is required");
+    const raw = (query.url || "https://example.com").trim();
     let parsed;
     try { parsed = new URL(raw); } catch { throw new Error("invalid URL"); }
     if (!["http:", "https:"].includes(parsed.protocol)) {

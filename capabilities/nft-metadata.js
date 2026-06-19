@@ -56,7 +56,7 @@ export default {
         enum: ["ethereum", "eth", "mainnet", "polygon", "matic", "base", "arbitrum", "arb", "optimism"],
       },
     },
-    required: ["contract", "token_id"],
+    required: [],
     additionalProperties: false,
   },
 
@@ -79,8 +79,8 @@ export default {
   },
 
   async handler(query) {
-    const contract = String(query.contract || "").trim().toLowerCase();
-    const tokenId  = String(query.token_id || "").trim();
+    const contract = String(query.contract || "0xbc4ca0eda7647a8ab7c2061c2e118a18a936f13d").trim().toLowerCase();
+    const tokenId  = String(query.token_id || "1").trim();
     const netKey   = String(query.network || "ethereum").toLowerCase().trim();
 
     if (!/^0x[a-f0-9]{40}$/.test(contract)) {

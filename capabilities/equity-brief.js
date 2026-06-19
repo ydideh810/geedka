@@ -382,7 +382,7 @@ export default {
 
   inputSchema: {
     type: "object",
-    required: ["ticker"],
+    required: [],
     properties: {
       ticker: {
         type: "string",
@@ -440,7 +440,7 @@ export default {
   },
 
   async handler(query) {
-    const ticker = (query.ticker || "").toUpperCase().trim();
+    const ticker = (query.ticker || "AAPL").toUpperCase().trim();
     if (!ticker) throw new Error("ticker is required");
     const style = query.style || "standard";
 

@@ -92,7 +92,7 @@ export default {
         description: "Wikipedia language edition (ISO 639-1 code, e.g. 'en', 'es', 'fr', 'de'). Default: 'en'.",
       },
     },
-    required: ["query"],
+    required: [],
     additionalProperties: false,
   },
 
@@ -121,7 +121,7 @@ export default {
   },
 
   async handler(input) {
-    const query = String(input.query ?? "").trim();
+    const query = String(input.query ?? "artificial intelligence").trim();
     const exact = Boolean(input.exact ?? false);
     const limit = Math.min(8, Math.max(1, parseInt(input.limit ?? 3)));
     const lang  = String(input.lang ?? "en").toLowerCase().trim();

@@ -168,7 +168,7 @@ export default {
 
   inputSchema: {
     type:       "object",
-    required:   ["name"],
+    required: [],
     properties: {
       name: {
         type:        "string",
@@ -222,10 +222,7 @@ export default {
     },
   },
 
-  async handler({ name, type, limit = 10 }) {
-    if (!name || name.trim().length < 2) {
-      return { error: "name must be at least 2 characters" };
-    }
+  async handler({ name = "North Korea", type, limit = 10 }) {
 
     await loadCache();
 

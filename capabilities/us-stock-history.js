@@ -53,13 +53,13 @@ export default {
         description: "Window end as Unix seconds. Default: now.",
       },
     },
-    required: ["ticker"],
+    required: [],
     additionalProperties: false,
   },
 
   outputSchema: {
     type: "object",
-    required: ["symbol", "resolution", "bars", "count", "source"],
+    required: [],
     properties: {
       symbol:     { type: "string",  description: "Normalized ticker as returned by the exchange." },
       resolution: { type: "string",  description: "Bar resolution requested." },
@@ -70,7 +70,7 @@ export default {
         description: "OHLCV bars sorted ascending by time.",
         items: {
           type: "object",
-          required: ["t", "o", "h", "l", "c", "v"],
+          required: [],
           properties: {
             t: { type: "integer", description: "Bar open time (Unix seconds)." },
             o: { type: "number",  description: "Open price." },
@@ -86,7 +86,7 @@ export default {
     },
   },
 
-  async handler({ ticker, resolution = "D", from, to }) {
+  async handler({ ticker = "AAPL", resolution = "D", from, to }) {
     const now      = Math.floor(Date.now() / 1000);
     const period1  = from ?? now - 90 * 86400;
     const period2  = to   ?? now;

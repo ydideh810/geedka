@@ -56,7 +56,7 @@ export default {
         description: "Filter results to a time window. Default: all.",
       },
     },
-    required: ["q"],
+    required: [],
     additionalProperties: false,
   },
 
@@ -87,8 +87,7 @@ export default {
   },
 
   async handler(query) {
-    const q         = String(query.q || "").trim();
-    if (!q) throw new Error("q is required");
+    const q         = String(query.q || "artificial intelligence").trim();
 
     const type      = query.type || "story";
     const limit     = Math.min(Math.max(1, query.limit || 10), 20);

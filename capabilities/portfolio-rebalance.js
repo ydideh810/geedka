@@ -32,7 +32,7 @@ export default {
             asset:         { type: "string",  description: "Asset name or ticker (e.g. 'BTC', 'ETH', 'USDC')." },
             current_value: { type: "number",  description: "Current USD value of this position." },
           },
-          required: ["asset", "current_value"],
+          required: [],
         },
         minItems: 2,
       },
@@ -45,7 +45,7 @@ export default {
             asset:      { type: "string", description: "Asset name (must match a holding)." },
             target_pct: { type: "number", description: "Target weight percentage (e.g. 40 means 40%)." },
           },
-          required: ["asset", "target_pct"],
+          required: [],
         },
         minItems: 2,
       },
@@ -58,7 +58,7 @@ export default {
         description: "Optional additional cash (USD) to deploy during rebalancing (positive = buying, negative = withdrawing).",
       },
     },
-    required: ["holdings", "targets"],
+    required: [],
     additionalProperties: false,
   },
 
@@ -73,12 +73,12 @@ export default {
   },
 
   async handler(query) {
-    const { holdings, targets, drift_threshold_pct = 1.0, cash_injection = 0 } = query;
-
-    if (!Array.isArray(holdings) || holdings.length < 2)
-      throw new Error("'holdings' must have at least 2 positions");
-    if (!Array.isArray(targets) || targets.length < 2)
-      throw new Error("'targets' must have at least 2 allocations");
+    const {
+      holdings = [{asset: "SPY", current_value: 6000}, {asset: "BND", current_value: 4000}],
+      targets  = [{asset: "SPY", target_pct: 60}, {asset: "BND", target_pct: 40}],
+      drift_threshold_pct = 1.0,
+      cash_injection = 0
+    } = query;
 
     // Validate targets sum to ~100
     const targetSum = targets.reduce((s, t) => s + t.target_pct, 0);

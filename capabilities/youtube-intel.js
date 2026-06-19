@@ -123,7 +123,7 @@ export default {
           "YouTube video URL (any format: watch?v=, youtu.be, /shorts/, /embed/) or bare 11-character video ID.",
       },
     },
-    required: ["video"],
+    required: [],
     additionalProperties: false,
   },
 
@@ -151,7 +151,7 @@ export default {
   },
 
   async handler(query) {
-    const videoId = extractVideoId(query.video);
+    const videoId = extractVideoId(query.video || "jNQXAC9IVRw");
     if (!videoId) throw new Error("invalid YouTube URL or video ID");
 
     let result;

@@ -153,7 +153,7 @@ export default {
         default: false,
       },
     },
-    required: ["institution"],
+    required: [],
   },
 
   outputSchema: {
@@ -185,10 +185,7 @@ export default {
     },
   },
 
-  async handler({ institution, limit = 25, include_options = false }) {
-    if (!institution || typeof institution !== "string") {
-      throw new Error("institution is required");
-    }
+  async handler({ institution = "Bridgewater Associates", limit = 25, include_options = false }) {
     const n = Math.min(Math.max(parseInt(limit, 10) || 25, 1), 100);
 
     // Step 1: find latest 13F filing

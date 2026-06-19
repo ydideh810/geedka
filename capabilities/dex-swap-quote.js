@@ -98,7 +98,7 @@ export default {
         maximum: 0.5,
       },
     },
-    required: ["from_chain", "to_chain", "from_token", "to_token", "from_amount"],
+    required: [],
     additionalProperties: false,
   },
 
@@ -124,25 +124,25 @@ export default {
   },
 
   async handler(query) {
-    const fromChainId = resolveChain(query.from_chain);
-    const toChainId   = resolveChain(query.to_chain);
+    const fromChainId = resolveChain(query.from_chain || "base");
+    const toChainId   = resolveChain(query.to_chain   || "base");
     const slippage    = Number(query.slippage ?? 0.03);
 
     // Resolve fromToken decimals
-    const fromSym = String(query.from_token).toUpperCase();
+    const fromSym = String(query.from_token || "ETH").toUpperCase();
     let fromAmountWei;
     if (String(query.from_amount).startsWith("!")) {
       fromAmountWei = String(query.from_amount).slice(1);
     } else {
       const decimals = KNOWN_DECIMALS[fromSym] ?? 18;
-      fromAmountWei = toWei(query.from_amount, decimals);
+      fromAmountWei = toWei(query.from_amount || "0.1", decimals);
     }
 
     const params = new URLSearchParams({
       fromChain:   fromChainId,
       toChain:     toChainId,
-      fromToken:   query.from_token,
-      toToken:     query.to_token,
+      fromToken:   query.from_token || "ETH",
+      toToken:     query.to_token   || "USDC",
       fromAmount:  fromAmountWei,
       fromAddress: "0x0000000000000000000000000000000000000001",
       slippage:    slippage,

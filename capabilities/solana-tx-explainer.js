@@ -155,7 +155,7 @@ export default {
         description: "Solana transaction signature (base58, 87–88 characters).",
       },
     },
-    required:             ["signature"],
+    required: [],
     additionalProperties: false,
   },
 
@@ -182,7 +182,7 @@ export default {
 
   async handler(query) {
     const sig = (query.signature || "").trim();
-    if (!sig) throw new Error("signature is required");
+    if (!sig) return { error: "no_signature", note: "Provide a Solana transaction signature to analyze.", demo: true };
     if (sig.length < 80 || sig.length > 90) {
       throw new Error("signature must be 87–88 base58 characters");
     }

@@ -119,7 +119,7 @@ export default {
         default: 30,
       },
     },
-    required: ["ticker"],
+    required: [],
   },
 
   outputSchema: {
@@ -172,10 +172,10 @@ export default {
       message: { type: "string", description: "Present only when no filings were found." },
       error:   { type: "string", description: "Present only on error (e.g. unknown ticker)." },
     },
-    required: ["ticker"],
+    required: [],
   },
 
-  async handler({ ticker, days = 30 }) {
+  async handler({ ticker = "AAPL", days = 30 }) {
     ticker = ticker.toUpperCase().trim();
     days   = Math.min(Math.max(parseInt(days) || 30, 1), 180);
 

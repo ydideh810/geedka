@@ -148,7 +148,7 @@ async function fetchGoogleNews(query, days) {
 }
 
 // ── Main handler ─────────────────────────────────────────────────────────────
-async function handler({ query, days = 3 }) {
+async function handler({ query = "artificial intelligence technology", days = 3 }) {
   const d   = Math.max(1, Math.min(30, Math.round(days)));
   const key = cacheKey(query, d);
 
@@ -195,7 +195,7 @@ export default {
         default: 3,
       },
     },
-    required: ["query"],
+    required: [],
   },
 
   outputSchema: {

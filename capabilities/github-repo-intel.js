@@ -42,7 +42,7 @@ export default {
 
   inputSchema: {
     type: "object",
-    required: ["repo"],
+    required: [],
     properties: {
       repo: {
         type: "string",

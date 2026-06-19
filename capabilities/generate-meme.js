@@ -63,7 +63,7 @@ export default {
         maximum: 800,
       },
     },
-    required: ["top"],
+    required: [],
     additionalProperties: false,
   },
 

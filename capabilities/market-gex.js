@@ -37,7 +37,7 @@ export default {
         description: "Number of top positive and negative GEX strikes to return. Default: 10.",
       },
     },
-    required:             ["ticker"],
+    required: [],
     additionalProperties: false,
   },
 
@@ -61,7 +61,7 @@ export default {
     },
   },
 
-  async handler({ ticker, days_out = 45, top_n = 10 }) {
+  async handler({ ticker = "SPY", days_out = 45, top_n = 10 }) {
     ticker = ticker.toUpperCase().trim();
 
     const url  = `${CBOE_BASE}/${encodeURIComponent(ticker)}.json`;

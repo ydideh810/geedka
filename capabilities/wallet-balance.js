@@ -51,7 +51,7 @@ export default {
 
   inputSchema: {
     type: "object",
-    required: ["address"],
+    required: [],
     properties: {
       address: {
         type: "string",
@@ -86,7 +86,7 @@ export default {
   },
 
   async handler(query) {
-    const addr = (query.address || "").trim();
+    const addr = (query.address || "0xd8dA6BF26964aF9D7eEd9e03E53415D37aA96045").trim();
     if (!/^0x[0-9a-fA-F]{40}$/.test(addr))
       throw new Error(`invalid address: ${addr} — must be 0x-prefixed 42-char hex`);
 

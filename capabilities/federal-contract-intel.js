@@ -87,7 +87,7 @@ export default {
         description: "Number of top awards to return. Default: 5.",
       },
     },
-    required:             ["company_name"],
+    required: [],
     additionalProperties: false,
   },
 
@@ -104,7 +104,7 @@ export default {
   },
 
   async handler(query) {
-    const company   = query.company_name.trim();
+    const company   = (query.company_name || "Lockheed Martin").trim();
     const awardType = query.award_type  || "contracts";
     const yearsBack = query.years_back  || 2;
     const topN      = query.top_n       || 5;

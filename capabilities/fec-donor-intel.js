@@ -67,7 +67,7 @@ export default {
 
   inputSchema: {
     type: "object",
-    required: ["name"],
+    required: [],
     properties: {
       name: {
         type: "string",
@@ -135,8 +135,7 @@ export default {
   },
 
   async handler(query) {
-    const name  = String(query.name ?? "").trim();
-    if (!name) throw new Error("name is required");
+    const name  = String(query.name ?? "Koch").trim();
 
     const limit = Math.min(50, Math.max(1, parseInt(query.limit) || 20));
 

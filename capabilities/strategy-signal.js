@@ -224,7 +224,7 @@ export default {
         description: "If true, include last 5 OHLCV bars in response. Default false.",
       },
     },
-    required: ["symbol"],
+    required: [],
     additionalProperties: false,
   },
 
@@ -250,7 +250,7 @@ export default {
   },
 
   async handler(query) {
-    const symbol  = (query.symbol || "").toUpperCase().trim();
+    const symbol  = (query.symbol || "AAPL").toUpperCase().trim();
     if (!symbol) throw new Error("'symbol' is required");
 
     let data;

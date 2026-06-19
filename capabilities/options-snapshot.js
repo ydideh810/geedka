@@ -49,7 +49,7 @@ export default {
         description: "Number of top calls and top puts to return (by volume). Default: 5.",
       },
     },
-    required:             ["ticker"],
+    required: [],
     additionalProperties: false,
   },
 
@@ -76,8 +76,7 @@ export default {
   },
 
   async handler(query) {
-    const raw    = (query.ticker || "").trim();
-    if (!raw) throw new Error("ticker is required");
+    const raw    = (query.ticker || "AAPL").trim();
     const ticker = raw.toUpperCase().replace(/[^A-Z0-9.\-^]/g, "");
     if (!ticker) throw new Error("invalid ticker symbol");
     const topN = Math.min(Math.max(query.top_n || 5, 1), 10);

@@ -87,7 +87,7 @@ export default {
         description: "ETF ticker symbol (e.g. SPY, VOO, QQQ, AGG, XLK, VTI). Case-insensitive.",
       },
     },
-    required: ["ticker"],
+    required: [],
   },
 
   outputSchema: {
@@ -150,8 +150,7 @@ export default {
     },
   },
 
-  async handler({ ticker }) {
-    if (!ticker || typeof ticker !== "string") throw new Error("ticker is required");
+  async handler({ ticker = "SPY" }) {
     const sym = ticker.trim().toUpperCase();
 
     const data = await fetchTopHoldings(sym);

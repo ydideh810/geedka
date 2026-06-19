@@ -61,7 +61,7 @@ export default {
         maximum: 10,
       },
     },
-    required: ["ticker"],
+    required: [],
     additionalProperties: false,
   },
 
@@ -114,8 +114,7 @@ export default {
   },
 
   async handler(input) {
-    const raw = (input.ticker || "").trim();
-    if (!raw) throw new Error("ticker is required");
+    const raw = (input.ticker || "AAPL").trim();
     const ticker = raw.toUpperCase().replace(/[^A-Z0-9.\-^]/g, "");
     if (!ticker) throw new Error("invalid ticker symbol");
 

@@ -17,7 +17,7 @@ export default {
 
   inputSchema: {
     type: "object",
-    required: ["package"],
+    required: [],
     properties: {
       package: {
         type: "string",
@@ -56,10 +56,8 @@ export default {
   },
 
   async handler(query) {
-    const pkg = (query.package || "").trim();
+    const pkg = (query.package || "lodash").trim();
     const ver = (query.version || "").trim();
-
-    if (!pkg) throw new Error("package is required");
 
     // For scoped packages, the URL needs encoding
     const encodedPkg = pkg.startsWith("@") ? pkg.replace("/", "%2F") : pkg;

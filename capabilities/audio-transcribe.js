@@ -109,7 +109,7 @@ export default {
 
   inputSchema: {
     type: "object",
-    required: ["url"],
+    required: [],
     additionalProperties: false,
     properties: {
       url: {
@@ -139,8 +139,7 @@ export default {
   },
 
   async handler(query) {
-    const { url, language } = query;
-    if (!url || typeof url !== "string") throw new Error("url is required");
+    const { url = "https://ia800305.us.archive.org/22/items/testmp3testfile/mpthreetest.mp3", language } = query;
 
     // Basic URL validation
     let parsed;

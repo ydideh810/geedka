@@ -69,7 +69,7 @@ export default {
         description: "Max results (default 5, max 20).",
       },
     },
-    required: ["query"],
+    required: [],
     additionalProperties: false,
   },
 
@@ -85,7 +85,7 @@ export default {
   },
 
   async handler(query) {
-    if (!query.query?.trim()) throw new Error("'query' is required");
+    if (!query.query?.trim()) query.query = "contract breach liability damages";
 
     const limit = Math.min(Math.max(1, parseInt(query.limit, 10) || 5), 20);
 

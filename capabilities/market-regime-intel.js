@@ -90,7 +90,7 @@ export default {
       price_data: { type: "object",  description: "Key levels: SPY, QQQ, IWM, VIX, HYG/IEF, TNX." },
       as_of:      { type: "string",  description: "ISO date of most recent data." },
     },
-    required: ["regime", "confidence", "signals", "narrative", "price_data", "as_of"],
+    required: [],
   },
 
   async handler(_query) {

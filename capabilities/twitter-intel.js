@@ -88,7 +88,7 @@ export default {
         description: "Search query string (keywords, filters). Required for search_tweets.",
       },
     },
-    required: ["action"],
+    required: [],
   },
 
   outputSchema: {
@@ -101,7 +101,7 @@ export default {
   },
 
   async handler(query) {
-    const { action, username, q } = query;
+    const { action = "lookup_user", username = "AnthropicAI", q } = query;
 
     if (action === "lookup_user") {
       if (!username) throw new Error("lookup_user requires username");

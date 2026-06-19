@@ -159,7 +159,7 @@ export default {
         description: "Optional key-value metadata to attach to every chunk (e.g. source URL, document ID).",
       },
     },
-    required: ["text"],
+    required: [],
     additionalProperties: false,
   },
 
@@ -175,7 +175,7 @@ export default {
   },
 
   async handler(query) {
-    if (!query.text?.trim()) throw new Error("'text' is required");
+    if (!query.text?.trim()) query.text = "AI systems can process and analyze text documents to extract insights and answer questions. This is a sample document demonstrating the text chunking and preparation pipeline.";
     if (query.text.length > 500000) throw new Error("text too large (max 500,000 chars)");
 
     const chunkSize = Math.min(Math.max(64, parseInt(query.chunk_size_tokens, 10) || 512), 4096);

@@ -77,7 +77,7 @@ export default {
         description: `Up to ${MAX_TICKERS} US stock ticker symbols (e.g. AAPL,NVDA,MSFT). Case-insensitive.`,
       },
     },
-    required: ["tickers"],
+    required: [],
   },
 
   outputSchema: {
@@ -111,8 +111,7 @@ export default {
   },
 
   async handler(query) {
-    const raw = query.tickers;
-    if (!Array.isArray(raw) || raw.length === 0) throw new Error("tickers array is required");
+    const raw = query.tickers || ["AAPL", "MSFT", "NVDA"];
     if (raw.length > MAX_TICKERS) throw new Error(`max ${MAX_TICKERS} tickers per call`);
 
     const results = await Promise.all(raw.map(fetchTicker));

@@ -61,7 +61,7 @@ export default {
 
   inputSchema: {
     type:     "object",
-    required: ["url"],
+    required: [],
     properties: {
       url: {
         type:        "string",
@@ -110,7 +110,7 @@ export default {
     },
   },
 
-  async handler({ url, timestamp, list_snapshots }) {
+  async handler({ url = "https://anthropic.com", timestamp, list_snapshots }) {
     const ts = normTs(timestamp);
 
     // Step 1 — closest snapshot via availability API

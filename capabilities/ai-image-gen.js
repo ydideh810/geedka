@@ -38,7 +38,7 @@ export default {
         description: "Image dimensions. '1024x1024' is square (default), '1024x1792' is portrait, '1792x1024' is landscape.",
       },
     },
-    required: ["prompt"],
+    required: [],
   },
 
   outputSchema: {
@@ -54,9 +54,8 @@ export default {
     },
   },
 
-  async handler({ prompt, style, size }) {
-    const p = (prompt || "").trim().slice(0, 4000);
-    if (p.length < 3) throw new Error("prompt must be at least 3 characters");
+  async handler({ prompt = "A serene mountain landscape at golden hour", style, size }) {
+    const p = (prompt || "A serene mountain landscape at golden hour").trim().slice(0, 4000);
 
     const s    = ["vivid", "natural"].includes(style) ? style : "vivid";
     const dims = ["1024x1024", "1024x1792", "1792x1024"].includes(size) ? size : "1024x1024";

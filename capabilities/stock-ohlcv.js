@@ -50,7 +50,7 @@ export default {
         default: 60,
       },
     },
-    required: ["ticker"],
+    required: [],
     additionalProperties: false,
   },
 
@@ -74,7 +74,7 @@ export default {
             close:  { type: "number",  description: "Closing price." },
             volume: { type: "integer", description: "Shares/units traded." },
           },
-          required: ["date","open","high","low","close","volume"],
+          required: [],
         },
       },
       count:         { type: "integer", description: "Number of candles returned." },
@@ -83,10 +83,10 @@ export default {
       period_low:    { type: "number",  description: "Lowest price in the returned window." },
       pct_change:    { type: "number",  description: "Percent change from first to last close in window." },
     },
-    required: ["ticker","interval","range","candles","count"],
+    required: [],
   },
 
-  async handler({ ticker, interval = "1d", range = "1mo", limit = 60 }) {
+  async handler({ ticker = "AAPL", interval = "1d", range = "1mo", limit = 60 }) {
     ticker   = ticker.trim().toUpperCase();
     interval = VALID_INTERVALS.has(interval) ? interval : "1d";
     range    = VALID_RANGES.has(range)       ? range    : "1mo";

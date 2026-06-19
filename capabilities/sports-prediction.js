@@ -47,7 +47,7 @@ export default {
         description: "Optional filter: team name or abbreviation (case-insensitive substring match). E.g. 'Cubs', 'CHC', 'Lakers'.",
       },
     },
-    required: ["sport"],
+    required: [],
     additionalProperties: false,
   },
 
@@ -98,7 +98,7 @@ export default {
   },
 
   async handler(query) {
-    const sportKey = (query.sport || "").toLowerCase().trim();
+    const sportKey = (query.sport || "americanfootball_nfl").toLowerCase().trim();
     const mapping  = LEAGUE_MAP[sportKey];
     if (!mapping) {
       throw new Error(`unsupported sport "${sportKey}". Use: ${Object.keys(LEAGUE_MAP).join(", ")}`);

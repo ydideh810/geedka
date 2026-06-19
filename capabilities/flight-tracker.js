@@ -64,7 +64,7 @@ export default {
 
   inputSchema: {
     type: "object",
-    required: ["airport"],
+    required: [],
     properties: {
       airport: {
         type: "string",
@@ -114,7 +114,7 @@ export default {
   },
 
   async handler(query) {
-    const icao      = resolveIcao(query.airport);
+    const icao      = resolveIcao(query.airport || "KJFK");
     const direction = query.direction === "arrivals" ? "arrivals" : "departures";
     const hours     = Math.min(24, Math.max(1, Number(query.hours) || 4));
 

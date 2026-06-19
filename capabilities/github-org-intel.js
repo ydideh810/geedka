@@ -129,7 +129,7 @@ export default {
         default: 10,
       },
     },
-    required: ["org"],
+    required: [],
     additionalProperties: false,
   },
 
@@ -174,8 +174,7 @@ export default {
   },
 
   async handler(query) {
-    const orgRaw  = (query.org || "").trim();
-    if (!orgRaw) throw new Error("org is required");
+    const orgRaw  = (query.org || "openai").trim();
     const org     = parseOrg(orgRaw);
     const topN    = Math.min(25, Math.max(1, parseInt(query.top_repos ?? 10, 10) || 10));
 

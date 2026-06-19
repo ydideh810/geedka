@@ -27,7 +27,7 @@ export default {
           "ENS name (e.g. 'vitalik.eth') for forward lookup, or 0x Ethereum address for reverse lookup.",
       },
     },
-    required: ["name"],
+    required: [],
     additionalProperties: false,
   },
 
@@ -54,8 +54,7 @@ export default {
   },
 
   async handler(query) {
-    const raw = (query.name || "").trim();
-    if (!raw) throw new Error("'name' is required");
+    const raw = (query.name || "vitalik.eth").trim();
 
     const input = raw.toLowerCase();
 

@@ -88,11 +88,7 @@ export default {
 
   inputSchema: {
     type: "object",
-    required: [
-      "entry_ebitda", "entry_multiple", "debt_multiple",
-      "hold_years", "entry_revenue", "revenue_growth_rates",
-      "ebitda_margins", "exit_multiple",
-    ],
+    required: [],
     properties: {
       entry_ebitda: {
         type: "number",
@@ -209,28 +205,23 @@ export default {
   },
 
   async handler(q) {
-    const entry_ebitda     = +q.entry_ebitda;
-    const entry_multiple   = +q.entry_multiple;
-    const debt_multiple    = +q.debt_multiple;
+    const entry_ebitda     = +(q.entry_ebitda    ?? 10);
+    const entry_multiple   = +(q.entry_multiple  ?? 8);
+    const debt_multiple    = +(q.debt_multiple   ?? 4);
     const cash_on_hand     = +(q.cash_on_hand     ?? 0);
     const existing_debt    = +(q.existing_debt    ?? 0);
     const fee_pct          = +(q.transaction_fee_pct ?? 0.04);
-    const hold_years       = Math.max(1, Math.min(10, Math.round(+q.hold_years)));
-    const entry_revenue    = +q.entry_revenue;
-    const exit_multiple    = +q.exit_multiple;
+    const hold_years       = Math.max(1, Math.min(10, Math.round(+(q.hold_years ?? 5))));
+    const entry_revenue    = +(q.entry_revenue   ?? 40);
+    const exit_multiple    = +(q.exit_multiple   ?? 10);
     const sweep_pct        = +(q.cash_sweep_pct  ?? 1.0);
     const interest_rate    = +(q.interest_rate   ?? 0.08);
     const da_pct           = +(q.da_pct          ?? 0.04);
     const capex_pct        = +(q.capex_pct       ?? 0.03);
     const tax_rate         = +(q.tax_rate        ?? 0.25);
 
-    const growth_rates  = (q.revenue_growth_rates || []).map(Number);
-    const margins       = (q.ebitda_margins      || []).map(Number);
-
-    if (growth_rates.length < hold_years)
-      throw new Error(`revenue_growth_rates must have at least ${hold_years} entries`);
-    if (margins.length < hold_years)
-      throw new Error(`ebitda_margins must have at least ${hold_years} entries`);
+    const growth_rates  = (q.revenue_growth_rates || [0.10, 0.10, 0.10, 0.10, 0.10]).map(Number);
+    const margins       = (q.ebitda_margins      || [0.25, 0.25, 0.25, 0.25, 0.25]).map(Number);
 
     for (const v of [entry_ebitda, entry_multiple, debt_multiple, entry_revenue, exit_multiple]) {
       if (!isFinite(v) || v <= 0) throw new Error("numeric inputs must be finite and positive");

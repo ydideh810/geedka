@@ -49,7 +49,7 @@ export default {
   },
 
   async handler(query) {
-    const raw = (query.ticker || "AAPL").trim();
+    const raw = (query.ticker?.trim() || "AAPL");
 
     const ticker = raw.toUpperCase().replace(/[^A-Z0-9.\-^]/g, "");
     if (!ticker) throw new Error("invalid ticker symbol");

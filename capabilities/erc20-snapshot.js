@@ -117,7 +117,7 @@ export default {
         description: "EVM chain. Default: ethereum.",
       },
     },
-    required: ["contract"],
+    required: [],
     additionalProperties: false,
   },
 
@@ -138,7 +138,7 @@ export default {
   },
 
   async handler(input) {
-    const contract = (input.contract || "").trim().toLowerCase();
+    const contract = (input.contract || "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48").trim().toLowerCase();
     const wallet   = (input.wallet   || "").trim().toLowerCase() || null;
     const spender  = (input.spender  || "").trim().toLowerCase() || null;
     const network  = (input.network  || "ethereum").toLowerCase();

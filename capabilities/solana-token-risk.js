@@ -90,7 +90,7 @@ export default {
         maxLength: 44,
       },
     },
-    required: ["mint"],
+    required: [],
     additionalProperties: false,
   },
 
@@ -150,7 +150,7 @@ export default {
   },
 
   async handler(query) {
-    const mint = String(query.mint || "").trim();
+    const mint = String(query.mint || "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v").trim();
     if (!mint || mint.length < 32 || mint.length > 44) {
       throw new Error("mint must be a valid base58 Solana address (32–44 chars)");
     }

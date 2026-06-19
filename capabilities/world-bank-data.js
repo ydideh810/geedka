@@ -116,7 +116,7 @@ export default {
         maximum: 10,
       },
     },
-    required: ["country", "indicator"],
+    required: [],
     additionalProperties: false,
   },
 
@@ -148,8 +148,8 @@ export default {
   },
 
   async handler(input) {
-    const countries   = String(input.country).toUpperCase().split(";").map(s => s.trim()).filter(Boolean);
-    const indicatorRaw = String(input.indicator);
+    const countries   = String(input.country || "US").toUpperCase().split(";").map(s => s.trim()).filter(Boolean);
+    const indicatorRaw = String(input.indicator || "NY.GDP.MKTP.CD");
     const indicator   = resolveIndicator(indicatorRaw);
     const nYears      = Math.min(10, Math.max(1, parseInt(input.years ?? 5)));
 

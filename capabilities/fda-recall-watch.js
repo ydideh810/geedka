@@ -119,7 +119,7 @@ export default {
         description: "Filter by recall classification. 'Class I' = most serious. Default: 'any'.",
       },
     },
-    required:             ["query"],
+    required: [],
     additionalProperties: false,
   },
 
@@ -136,12 +136,10 @@ export default {
   },
 
   async handler(input) {
-    const q           = (input.query         || "").trim();
+    const q           = (input.query         || "peanut butter").trim();
     const productType = input.product_type   || "all";
     const limit       = input.limit          || 5;
     const classFilter = input.class_filter   || "any";
-
-    if (!q) throw new Error("query is required and cannot be empty");
 
     // Determine which endpoints to hit
     const targets = productType === "all"

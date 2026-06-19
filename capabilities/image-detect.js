@@ -101,7 +101,7 @@ export default {
         description: "URL of the image to inspect. Must be publicly accessible. HTTP or HTTPS.",
       },
     },
-    required: ["url"],
+    required: [],
   },
 
   outputSchema: {
@@ -119,7 +119,7 @@ export default {
     },
   },
 
-  async handler({ url }) {
+  async handler({ url = "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3f/Bikesgray.jpg/640px-Bikesgray.jpg" }) {
     // Basic URL validation
     let parsed;
     try {

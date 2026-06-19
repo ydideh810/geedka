@@ -213,7 +213,7 @@ export default {
         description: "Target unit. If omitted, returns all units in the same category.",
       },
     },
-    required: ["value", "from"],
+    required: [],
     additionalProperties: false,
   },
 
@@ -231,8 +231,8 @@ export default {
   },
 
   async handler(query) {
-    const { value } = query;
-    const from = query.from.toLowerCase();
+    const value = query.value ?? 1;
+    const from = (query.from || "km").toLowerCase();
     const to   = query.to?.toLowerCase();
 
     if (!isFinite(value)) throw new Error("'value' must be a finite number");

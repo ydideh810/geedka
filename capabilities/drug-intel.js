@@ -85,7 +85,7 @@ export default {
         description: "Which FDA data to retrieve. 'all' returns label + adverse event summary + recent recalls. Default: 'label'.",
       },
     },
-    required:             ["drug_name"],
+    required: [],
     additionalProperties: false,
   },
 
@@ -101,7 +101,7 @@ export default {
   },
 
   async handler(query) {
-    const drug  = query.drug_name.trim();
+    const drug  = (query.drug_name || "ibuprofen").trim();
     const qtype = query.query_type || "label";
     const out   = { drug_name: drug, generated_at: new Date().toISOString() };
 

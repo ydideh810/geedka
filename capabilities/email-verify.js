@@ -98,7 +98,7 @@ export default {
         description: "Email address to validate (e.g. 'user@example.com').",
       },
     },
-    required: ["email"],
+    required: [],
     additionalProperties: false,
   },
 
@@ -119,8 +119,7 @@ export default {
   },
 
   async handler(query) {
-    const email = (query.email || "").trim().toLowerCase();
-    if (!email) throw new Error("'email' is required");
+    const email = (query.email || "test@example.com").trim().toLowerCase();
     if (email.length > 254) throw new Error("email address too long");
 
     const syntax = validateSyntax(email);

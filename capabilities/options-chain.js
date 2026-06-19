@@ -73,7 +73,7 @@ export default {
 
   inputSchema: {
     type:     "object",
-    required: ["ticker"],
+    required: [],
     properties: {
       ticker: {
         type:        "string",
@@ -147,7 +147,7 @@ export default {
     },
   },
 
-  async handler({ ticker, exp, type, near_atm_only = false, max_expirations = 4 }) {
+  async handler({ ticker = "AAPL", exp, type, near_atm_only = false, max_expirations = 4 }) {
     const sym = ticker.trim().toUpperCase();
     if (!/^[A-Z.$\^]{1,10}$/.test(sym)) {
       return { error: `Invalid ticker format: ${sym}` };

@@ -112,7 +112,7 @@ export default {
         description: "Resource URL (https://…) or operator wallet address (0x…40 hex chars). Type is auto-detected.",
       },
     },
-    required: ["target"],
+    required: [],
     additionalProperties: false,
   },
 
@@ -143,8 +143,7 @@ export default {
   },
 
   async handler(query) {
-    const raw = (query.target || "").trim();
-    if (!raw) throw new Error("'target' is required — provide a resource URL or operator wallet address");
+    const raw = (query.target || "https://the-stall.intuitek.ai").trim();
 
     const targetType = detectType(raw);
     if (!targetType) {

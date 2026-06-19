@@ -91,7 +91,7 @@ export default {
         description: "Crypto symbol to check, e.g. BTC, ETH, XRP, SOL, DOGE",
       },
     },
-    required: ["symbol"],
+    required: [],
   },
 
   outputSchema: {
@@ -110,7 +110,7 @@ export default {
   },
 
   async handler(query) {
-    const symbol = (query.symbol || "").toUpperCase().trim();
+    const symbol = (query.symbol || "BTC").toUpperCase().trim();
     if (!symbol) throw new Error("symbol is required");
     if (!/^[A-Z0-9]{2,10}$/.test(symbol)) throw new Error("invalid symbol format");
 

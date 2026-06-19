@@ -78,7 +78,7 @@ export default {
         maximum: 10,
       },
     },
-    required: ["ticker"],
+    required: [],
     additionalProperties: false,
   },
 
@@ -117,8 +117,7 @@ export default {
   },
 
   async handler(query) {
-    const raw = (query.ticker || "").trim().toUpperCase().replace(/[^A-Z0-9.\-]/g, "");
-    if (!raw) throw new Error("ticker is required");
+    const raw = (query.ticker || "AAPL").trim().toUpperCase().replace(/[^A-Z0-9.\-]/g, "");
 
     const days = Math.min(Math.max(Number(query.days) || 5, 1), 10);
     const dates = prevTradingDays(days + 2); // fetch extra to handle holidays
