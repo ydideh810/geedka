@@ -600,8 +600,29 @@ app.get("/llms.txt", (_req, res) => {
     { name: "On-chain Risk & Compliance", caps: capabilities.filter(c => /sanctions|wallet-credit|wallet-screener|address-security|agent-kya|kya|cve|drug-intel|npi|clinical|fda/i.test(c.name)).map(c => c.name) },
     { name: "Macro & Alternative Data", caps: capabilities.filter(c => /macro|imf|world-bank|commodity|energy|solar|earthquake|usgs|weather|air-quality|aviation|flight|legal|gov-vote|congressional|federal-contract|federal-register|country-info/i.test(c.name)).map(c => c.name) },
   ];
+  // Extract a short example value from a property description (looks for "e.g. X" patterns)
+  function exampleFromDesc(desc = '') {
+    const m = desc.match(/e\.g\.\s+['"]?([^'")\n,\.]{2,40})/i);
+    if (!m) return null;
+    return m[1].trim().replace(/['"]/g, '').split(/[,\s]+/)[0];
+  }
+  // Build a ?param=example hint string for caps that have required params
+  function paramHint(cap) {
+    const required = cap?.inputSchema?.required || [];
+    if (!required.length) return '';
+    const props = cap?.inputSchema?.properties || {};
+    const parts = required.map(p => {
+      const ex = exampleFromDesc(props[p]?.description || '') || p;
+      return `${p}=${ex}`;
+    });
+    return ` | ?${parts.join('&')}`;
+  }
   const capLines = cats.map(cat => {
-    const names = cat.caps.slice(0, 15).map(n => `  - [${n}](${BASE_URL}/cap/${n}): $${capabilities.find(c=>c.name===n)?.price?.replace('$','') || '?'} USDC`).join('\n');
+    const names = cat.caps.slice(0, 15).map(n => {
+      const cap = capabilities.find(c => c.name === n);
+      const price = cap?.price?.replace('$','') || '?';
+      return `  - [${n}](${BASE_URL}/cap/${n}): $${price} USDC${paramHint(cap)}`;
+    }).join('\n');
     return names ? `## ${cat.name}\n\n${names}` : null;
   }).filter(Boolean).join('\n\n');
   res.setHeader("Content-Type", "text/plain; charset=utf-8");
@@ -783,11 +804,21 @@ for (const cap of capabilities) {
         logPaidCall(cap.name, cap.price, params, 400, req.ip);
         logSettlement(cap.name, cap.price, params, 400, res, req.ip, xPayment);
         logCallAudit(req.method, req.path, 400, req.ip, req.get("user-agent"), xPayment);
+        // Build a ready-to-use example query string from inputSchema descriptions
+        const props = cap.inputSchema?.properties || {};
+        const exParts = missing.map(p => {
+          const desc = props[p]?.description || '';
+          const m = desc.match(/e\.g\.[\s,]+['"]?([^'")\n,\.]{2,40})/i);
+          const ex = m ? m[1].trim().replace(/['"]/g, '').split(/[,\s]+/)[0] : p;
+          return `${p}=${encodeURIComponent(ex)}`;
+        });
+        const exampleUrl = `${BASE_URL}/cap/${cap.name}?${exParts.join('&')}`;
         return res.status(400).json({
           error: "missing_required_params",
           capability: cap.name,
           missing,
           message: `Required parameters: ${missing.join(", ")}`,
+          example: exampleUrl,
           schema: cap.inputSchema,
           catalog: `${BASE_URL}/catalog`,
         });

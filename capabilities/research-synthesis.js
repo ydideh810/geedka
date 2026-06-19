@@ -178,21 +178,21 @@ export default {
   price: "$0.200",
 
   description:
-    "AI-synthesized intelligence report for any query — aggregates Hacker News, OpenAlex academic papers, Reddit, arXiv preprints, and DuckDuckGo in parallel, then distills into a structured report: executive summary, key findings, market sentiment, emerging trends, and recommendations. Useful for market research, competitive intelligence, technology landscape analysis, and due diligence. $0.200/call — 20% below nearest competitor. Up to 5 source categories queried per call.",
+    "AI-synthesized intelligence report — aggregates Hacker News, OpenAlex academic papers, Reddit, arXiv preprints, and DuckDuckGo in parallel, then distills into a structured report: executive summary, key findings, market sentiment, emerging trends, and recommendations. Pass ?query=your+topic for targeted research (e.g. 'AI agent payment protocols 2025'). Omit query for a default AI agents & autonomous systems report. $0.200/call — 20% below nearest competitor.",
 
   inputSchema: {
     type: "object",
     properties: {
       query: {
         type: "string",
-        description: "Research query or topic. Be specific for best results (e.g. 'AI agent payment protocols 2025' rather than 'AI').",
+        description: "Research query or topic (e.g. 'AI agent payment protocols 2025'). Omit for default AI agents report.",
       },
       focus: {
         type: "string",
         description: "Optional focus direction for synthesis (e.g. 'technical implementation details', 'market adoption', 'risks and challenges'). Narrows the analytical lens.",
       },
     },
-    required: ["query"],
+    required: [],
   },
 
   outputSchema: {
@@ -212,10 +212,8 @@ export default {
   },
 
   async handler({ query, focus }) {
-    if (!query || query.trim().length < 3) {
-      return { error: "invalid_query", message: "Query must be at least 3 characters." };
-    }
-    const q = query.trim().slice(0, 200);
+    const DEFAULT_QUERY = "AI agents autonomous systems 2025";
+    const q = (query && query.trim().length >= 3 ? query.trim() : DEFAULT_QUERY).slice(0, 200);
     const f = focus ? focus.trim().slice(0, 100) : null;
 
     // Fetch all sources in parallel, failing gracefully per source
