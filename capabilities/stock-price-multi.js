@@ -74,7 +74,7 @@ export default {
         items: { type: "string" },
         minItems: 1,
         maxItems: MAX_TICKERS,
-        description: `Up to ${MAX_TICKERS} US stock ticker symbols (e.g. ["STRC","AMD","MSTR"]). Case-insensitive.`,
+        description: `Up to ${MAX_TICKERS} US stock ticker symbols (e.g. AAPL,NVDA,MSFT). Case-insensitive.`,
       },
     },
     required: ["tickers"],

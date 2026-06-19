@@ -117,7 +117,7 @@ export default {
       },
       start_date: {
         type: "string",
-        description: "Start date YYYY-MM-DD (earliest: 1940-01-01).",
+        description: "Start date YYYY-MM-DD (e.g. 2024-01-01). Earliest: 1940-01-01.",
       },
       end_date: {
         type: "string",
