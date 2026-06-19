@@ -141,7 +141,7 @@ export default {
     properties: {
       expression: {
         type: "string",
-        description: "Cron expression (5 fields: minute hour day month weekday) or shortcut (@daily, @hourly, etc.). Example: '0 9 * * 1-5'.",
+        description: "Cron expression (5 fields: minute hour day month weekday) or shortcut (@daily, @hourly, etc.). Example: '0 9 * * 1-5'. Defaults to '@daily'.",
       },
       next_runs: {
         type: "number",
@@ -153,7 +153,7 @@ export default {
         description: "ISO 8601 reference timestamp to compute next runs from (default: now).",
       },
     },
-    required: ["expression"],
+    required: [],
   },
   outputSchema: {
     type: "object",
@@ -176,8 +176,7 @@ export default {
     },
   },
   handler({ expression, next_runs = 5, from_iso }) {
-    expression = (expression || "").trim();
-    if (!expression) throw new Error("expression is required");
+    expression = (expression || "@daily").trim();
 
     // Resolve shortcuts
     const normalized = SHORTCUTS[expression.toLowerCase()] || expression;

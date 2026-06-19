@@ -33,7 +33,7 @@ export default {
     properties: {
       query: {
         type: "string",
-        description: "Search query — model name, architecture, or keyword (e.g. 'bert', 'llama', 'sentiment').",
+        description: "Search query — model name, architecture, or keyword (e.g. 'bert', 'llama', 'sentiment'). Defaults to 'language model'.",
       },
       task: {
         type: "string",
@@ -51,7 +51,7 @@ export default {
         description: "Number of results to return (1–20). Default: 10.",
       },
     },
-    required: ["query"],
+    required: [],
     additionalProperties: false,
   },
 
@@ -83,8 +83,7 @@ export default {
   },
 
   async handler(query) {
-    const q = (query.query || "").trim();
-    if (!q) throw new Error("'query' is required");
+    const q = ((query.query || "").trim()) || "language model";
 
     const sort  = VALID_SORT.has(query.sort) ? query.sort : "downloads";
     const limit = Math.min(Math.max(parseInt(query.limit ?? 10, 10), 1), 20);

@@ -113,11 +113,11 @@ export default {
       location: {
         type: "string",
         description:
-          "City name (e.g. 'Phoenix, AZ') or 'lat,lng' (e.g. '33.45,-112.07'). Required.",
+          "City name (e.g. 'Phoenix, AZ') or 'lat,lng' (e.g. '33.45,-112.07'). Defaults to 'New York, NY'.",
       },
       start_date: {
         type: "string",
-        description: "Start date YYYY-MM-DD (e.g. 2024-01-01). Earliest: 1940-01-01.",
+        description: "Start date YYYY-MM-DD (e.g. 2024-01-01). Earliest: 1940-01-01. Defaults to 30 days ago.",
       },
       end_date: {
         type: "string",
@@ -137,7 +137,7 @@ export default {
           "Unit system. 'metric' = °C / mm / km/h (default). 'imperial' = °F / inch / mph.",
       },
     },
-    required: ["location", "start_date"],
+    required: [],
   },
 
   outputSchema: {
@@ -152,17 +152,22 @@ export default {
   },
 
   async handler(query) {
-    const { location, start_date, end_date, vars, units = "metric" } = query;
+    const { end_date, vars, units = "metric" } = query;
 
-    if (!location) throw new Error("'location' is required.");
-    if (!start_date) throw new Error("'start_date' is required (YYYY-MM-DD).");
-    if (!/^\d{4}-\d{2}-\d{2}$/.test(start_date))
-      throw new Error(`Invalid start_date "${start_date}". Use YYYY-MM-DD format.`);
-
-    // Resolve end_date default (yesterday)
+    // Defaults: last 30 days of weather for New York
     const today = new Date();
     today.setDate(today.getDate() - 1);
     const defaultEnd = today.toISOString().slice(0, 10);
+    const thirtyDaysAgo = new Date();
+    thirtyDaysAgo.setDate(thirtyDaysAgo.getDate() - 31);
+    const defaultStart = thirtyDaysAgo.toISOString().slice(0, 10);
+
+    const location = (query.location && query.location.trim()) || "New York, NY";
+    const start_date = (query.start_date && query.start_date.trim()) || defaultStart;
+
+    if (!/^\d{4}-\d{2}-\d{2}$/.test(start_date))
+      throw new Error(`Invalid start_date "${start_date}". Use YYYY-MM-DD format.`);
+
     const resolvedEnd = end_date || defaultEnd;
 
     if (!/^\d{4}-\d{2}-\d{2}$/.test(resolvedEnd))
