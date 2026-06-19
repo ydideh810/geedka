@@ -4,7 +4,7 @@
     "thebrierfox"
   ],
   "url": "https://the-stall.intuitek.ai",
-  "license": "Elastic-2.0",
+  "license": "MIT",
   "tools": [
     {
       "name": "address-security",
