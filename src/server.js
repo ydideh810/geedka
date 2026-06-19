@@ -788,6 +788,8 @@ for (const cap of capabilities) {
           capability: cap.name,
           missing,
           message: `Required parameters: ${missing.join(", ")}`,
+          schema: cap.inputSchema,
+          catalog: `${BASE_URL}/catalog`,
         });
       }
 
