@@ -133,7 +133,7 @@ export default {
 
   inputSchema: {
     type: "object",
-    required: ["airport"],
+    required: [],
     properties: {
       airport: {
         type: "string",
@@ -182,7 +182,7 @@ export default {
   },
 
   async handler(query) {
-    const icao = resolveIcao(query.airport);
+    const icao = resolveIcao(query.airport || "KJFK");
     const metarUrl = `${AWC_BASE}/metar?ids=${icao}&format=json`;
     const tafUrl   = `${AWC_BASE}/taf?ids=${icao}&format=json`;
 

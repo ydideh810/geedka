@@ -82,7 +82,7 @@ export default {
         description: "Domain or URL to check. Can be a bare domain (example.com) or full URL (https://example.com/path).",
       },
     },
-    required: ["url"],
+    required: [],
     additionalProperties: false,
   },
 
@@ -103,9 +103,7 @@ export default {
   },
 
   async handler(query) {
-    if (!query.url?.trim()) throw new Error("'url' is required");
-
-    let rawUrl = query.url.trim();
+    let rawUrl = (query.url || "https://intuitek.ai").trim();
     if (!rawUrl.startsWith("http://") && !rawUrl.startsWith("https://")) {
       rawUrl = "https://" + rawUrl;
     }

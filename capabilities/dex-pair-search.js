@@ -81,7 +81,7 @@ export default {
         default: 10000,
       },
     },
-    required: ["q"],
+    required: [],
     additionalProperties: false,
   },
 
@@ -115,12 +115,10 @@ export default {
   },
 
   async handler(query) {
-    const q      = (query.q || "").trim();
+    const q      = (query.q || "ETH USDC").trim();
     const chain  = (query.chain || "").toLowerCase().trim();
     const limit  = Math.min(Math.max(1, parseInt(query.limit || "10", 10)), 30);
     const minLiq = query.min_liquidity_usd ?? 10000;
-
-    if (!q) throw new Error("q is required");
 
     const url = `${DS_BASE}/search?q=${encodeURIComponent(q)}`;
     let data;

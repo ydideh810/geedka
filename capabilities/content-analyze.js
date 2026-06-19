@@ -113,7 +113,7 @@ export default {
         description: "Optional focus instruction. E.g. 'focus on financial claims', 'extract regulatory implications', 'identify risk factors'. Narrows the analysis.",
       },
     },
-    required: ["url"],
+    required: [],
     additionalProperties: false,
   },
 
@@ -132,9 +132,9 @@ export default {
   },
 
   async handler({ url, focus }) {
-    if (!url || typeof url !== "string") throw new Error("url is required");
-
-    const normalizedUrl = url.startsWith("http") ? url : `https://${url}`;
+    const normalizedUrl = (url && typeof url === "string")
+      ? (url.startsWith("http") ? url : `https://${url}`)
+      : "https://en.wikipedia.org/wiki/Artificial_intelligence";
     const content = await fetchContent(normalizedUrl);
     if (!content || content.trim().length < 50) {
       throw new Error("Could not extract readable content from URL (page may require JavaScript or authentication)");

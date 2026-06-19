@@ -74,7 +74,7 @@ export default {
         description: "DNS record type to query. 'ALL' queries A, MX, TXT, NS, and CNAME in parallel and returns all results. Default: 'A'.",
       },
     },
-    required: ["domain"],
+    required: [],
     additionalProperties: false,
   },
 
@@ -89,8 +89,7 @@ export default {
   },
 
   async handler(query) {
-    const domain = (query.domain || "").trim().toLowerCase();
-    if (!domain) throw new Error("domain is required");
+    const domain = (query.domain || "github.com").trim().toLowerCase();
     if (!/^[a-z0-9._-]+$/.test(domain)) throw new Error("invalid domain name");
 
     const recordType = (query.type || "A").toUpperCase();

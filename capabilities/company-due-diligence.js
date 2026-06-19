@@ -221,7 +221,7 @@ export default {
           "Optional company website domain or URL (e.g. 'stripe.com'). When provided, adds website-based intelligence to the report.",
       },
     },
-    required: ["company"],
+    required: [],
     additionalProperties: false,
   },
 
@@ -239,10 +239,8 @@ export default {
   },
 
   async handler(query) {
-    const companyName = String(query.company || "").trim().slice(0, 200);
+    const companyName = String(query.company || "Apple").trim().slice(0, 200);
     const domain      = query.domain ? String(query.domain).trim().replace(/^https?:\/\//i, "").replace(/\/.*$/, "") : null;
-
-    if (!companyName) throw new Error("company parameter is required");
 
     const [edgar, websiteHtml] = await Promise.all([
       edgarLookup(companyName),

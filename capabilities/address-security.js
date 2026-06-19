@@ -82,7 +82,7 @@ export default {
         default: "ethereum",
       },
     },
-    required: ["address"],
+    required: [],
   },
 
   outputSchema: {
@@ -124,9 +124,7 @@ export default {
   async handler(query) {
     const rawChain = (query.chain || "ethereum").toLowerCase().trim();
     const chainId  = CHAIN_ALIASES[rawChain] || rawChain;
-    const address  = (query.address || "").trim();
-
-    if (!address) throw new Error("address is required");
+    const address  = (query.address || "0xde0B295669a9FD93d5F28D9Ec85E40f4cb697BAe").trim();
     if (!/^0x[0-9a-fA-F]{40}$/.test(address)) throw new Error("Invalid EVM address format — expected 0x followed by 40 hex chars");
 
     const url = `${GOPLUS_URL}/${encodeURIComponent(address)}?chain_id=${encodeURIComponent(chainId)}`;

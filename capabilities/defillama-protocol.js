@@ -40,7 +40,7 @@ export default {
         description: "If true, include last 7 days of TVL history. Default false.",
       },
     },
-    required: ["protocol"],
+    required: [],
   },
 
   outputSchema: {
@@ -65,8 +65,7 @@ export default {
   },
 
   async handler(query) {
-    const slug = (query.protocol || "").trim().toLowerCase().replace(/\s+/g, "-");
-    if (!slug) throw new Error("protocol is required");
+    const slug = (query.protocol || "uniswap").trim().toLowerCase().replace(/\s+/g, "-");
 
     const resp = await fetch(`${LLAMA_BASE}/protocol/${encodeURIComponent(slug)}`, {
       headers: { "User-Agent": UA, Accept: "application/json" },

@@ -141,7 +141,7 @@ export default {
         description: "Number of papers to return (1–10). Default: 5.",
       },
     },
-    required: ["query"],
+    required: [],
     additionalProperties: false,
   },
 
@@ -173,6 +173,7 @@ export default {
   },
 
   async handler(input) {
+    if (!input.query) input.query = "AI agents 2024";
     const query    = String(input.query ?? "").trim();
     const sortBy   = input.sort ?? "relevance";
     const maxResults = Math.min(10, Math.max(1, parseInt(input.limit ?? 5)));

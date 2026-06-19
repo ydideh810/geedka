@@ -49,7 +49,7 @@ export default {
 
   inputSchema: {
     type: "object",
-    required: ["ticker"],
+    required: [],
     properties: {
       ticker: {
         type: "string",
@@ -86,8 +86,7 @@ export default {
   },
 
   async handler(query) {
-    const ticker = (query.ticker || "").toUpperCase().trim();
-    if (!ticker) throw new Error("ticker is required");
+    const ticker = (query.ticker || "AAPL").toUpperCase().trim();
 
     // Step 1: Locate CIK via EDGAR full-text search (10-K filings, last 5 years).
     // EDGAR display_names format: "Company Name  (TICKER)  (CIK 0000123456)"

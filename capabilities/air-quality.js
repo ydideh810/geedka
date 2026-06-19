@@ -45,7 +45,7 @@ export default {
 
   inputSchema: {
     type: "object",
-    required: ["lat", "lon"],
+    required: [],
     properties: {
       lat: {
         type: "number",
@@ -94,8 +94,8 @@ export default {
   },
 
   async handler(query) {
-    const lat = Number(query.lat);
-    const lon = Number(query.lon);
+    const lat = Number(query.lat ?? 40.7128);
+    const lon = Number(query.lon ?? -74.006);
     if (!isFinite(lat) || lat < -90 || lat > 90)
       throw new Error("lat must be a number between -90 and 90");
     if (!isFinite(lon) || lon < -180 || lon > 180)

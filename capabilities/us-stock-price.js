@@ -25,7 +25,7 @@ export default {
         description: "US stock ticker symbol (e.g. AMD, AAPL, NVDA). Case-insensitive.",
       },
     },
-    required: ["ticker"],
+    required: [],
   },
 
   outputSchema: {
@@ -49,8 +49,7 @@ export default {
   },
 
   async handler(query) {
-    const raw = (query.ticker || "").trim();
-    if (!raw) throw new Error("ticker is required");
+    const raw = (query.ticker || "AAPL").trim();
 
     const ticker = raw.toUpperCase().replace(/[^A-Z0-9.\-^]/g, "");
     if (!ticker) throw new Error("invalid ticker symbol");

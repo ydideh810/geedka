@@ -99,7 +99,7 @@ export default {
 
   async handler(query) {
     if (!query.title && !query.author && !query.isbn && !query.subject) {
-      throw new Error("provide at least one of: 'title', 'author', 'isbn', or 'subject'");
+      query.title = "Pride and Prejudice";
     }
 
     const limit = Math.min(Math.max(1, parseInt(query.limit, 10) || 5), 20);

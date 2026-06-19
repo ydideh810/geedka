@@ -57,7 +57,7 @@ export default {
         description: "Maximum results to return (1-50). Default 10.",
       },
     },
-    required: ["condition"],
+    required: [],
   },
 
   outputSchema: {
@@ -92,13 +92,11 @@ export default {
   },
 
   async handler(query) {
-    if (!query.condition?.trim()) throw new Error("condition is required");
-
     const limit      = Math.max(1, Math.min(50, query.limit ?? 10));
     const statusKey  = (query.status ?? "recruiting").toLowerCase();
     const statusVal  = STATUS_MAP[statusKey] ?? null;
 
-    let term = query.condition.trim();
+    let term = (query.condition || "cancer").trim();
     if (query.intervention?.trim()) term += " " + query.intervention.trim();
     if (query.sponsor?.trim())      term += " " + query.sponsor.trim();
 

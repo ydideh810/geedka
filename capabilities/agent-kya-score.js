@@ -39,7 +39,7 @@ export default {
 
   inputSchema: {
     type: "object",
-    required: ["address"],
+    required: [],
     properties: {
       address: {
         type: "string",
@@ -114,7 +114,7 @@ export default {
   },
 
   async handler(query) {
-    const raw = (query.address ?? "").trim();
+    const raw = (query.address || "0xde0B295669a9FD93d5F28D9Ec85E40f4cb697BAe").trim();
     if (!/^0x[0-9a-fA-F]{40}$/.test(raw))
       throw new Error("address must be a 42-character 0x EVM address");
 

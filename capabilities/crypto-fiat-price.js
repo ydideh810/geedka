@@ -45,7 +45,7 @@ export default {
         default: "usd,jpy,eur",
       },
     },
-    required: ["coin"],
+    required: [],
   },
 
   outputSchema: {
@@ -59,8 +59,7 @@ export default {
   },
 
   async handler(query) {
-    const coinInput = (query.coin || "").trim();
-    if (!coinInput) throw new Error("coin is required (e.g. bitcoin, btc, ethereum).");
+    const coinInput = (query.coin || "bitcoin").trim();
 
     const coinId = resolveId(coinInput);
     const currencyList = (query.currencies || "usd,jpy,eur")

@@ -116,7 +116,7 @@ export default {
     } else if (query.name) {
       data = await rcGet(`/name/${encodeURIComponent(query.name.trim())}`);
     } else {
-      throw new Error("provide 'name', 'code', 'capital', or 'region'");
+      data = await rcGet("/name/United%20States");
     }
 
     const results = (data || []).map(shape).slice(0, 20);

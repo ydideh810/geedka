@@ -46,7 +46,7 @@ export default {
         description: "Language code. Currently 'en' is best supported. Default: en.",
       },
     },
-    required: ["word"],
+    required: [],
     additionalProperties: false,
   },
 
@@ -85,10 +85,8 @@ export default {
   },
 
   async handler(input) {
-    const word = String(input.word ?? "").trim().toLowerCase();
+    const word = String(input.word || "intelligence").trim().toLowerCase();
     const lang = String(input.lang ?? "en").toLowerCase().trim();
-
-    if (!word) throw new Error("'word' is required");
 
     const url  = `${BASE}/${encodeURIComponent(lang)}/${encodeURIComponent(word)}`;
     const resp = await fetch(url, {

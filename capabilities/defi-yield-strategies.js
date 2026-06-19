@@ -96,7 +96,7 @@ export default {
 
   inputSchema: {
     type: "object",
-    required: ["amount_usd"],
+    required: [],
     properties: {
       amount_usd: {
         type: "number",
@@ -165,8 +165,8 @@ export default {
     },
   },
 
-  async handler({ amount_usd, risk_tolerance = "medium", chains, max_positions = 5 }) {
-    if (!amount_usd || amount_usd <= 0) {
+  async handler({ amount_usd = 1000, risk_tolerance = "medium", chains, max_positions = 5 }) {
+    if (amount_usd <= 0) {
       throw new Error("amount_usd must be a positive number.");
     }
 

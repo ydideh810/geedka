@@ -100,7 +100,7 @@ export default {
         default: 10,
       },
     },
-    required: ["keyword"],
+    required: [],
   },
   outputSchema: {
     type: "object",
@@ -126,8 +126,7 @@ export default {
   },
 
   async handler(query) {
-    const kw  = (query.keyword || "").trim();
-    if (!kw) throw new Error("keyword is required");
+    const kw  = (query.keyword || "New York").trim();
 
     const cc  = (query.country  || "").trim();
     const max = Math.min(parseInt(query.max) || 10, MAX_RESULTS);

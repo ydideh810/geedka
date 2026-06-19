@@ -150,7 +150,7 @@ export default {
         description: "Citation format. 'all' returns every format. Default: 'bibtex'.",
       },
     },
-    required: ["doi"],
+    required: [],
     additionalProperties: false,
   },
 
@@ -167,10 +167,8 @@ export default {
   },
 
   async handler(query) {
-    if (!query.doi?.trim()) throw new Error("'doi' is required");
-
     // Normalize DOI
-    let doi = query.doi.trim()
+    let doi = (query.doi || "10.5281/zenodo.18908920").trim()
       .replace(/^https?:\/\/(dx\.)?doi\.org\//i, "")
       .replace(/^doi:/i, "");
     if (!doi) throw new Error("'doi' is empty after normalization");

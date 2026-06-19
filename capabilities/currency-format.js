@@ -87,7 +87,7 @@ export default {
         default: "both",
       },
     },
-    required: ["currency"],
+    required: [],
     additionalProperties: false,
   },
 
@@ -106,8 +106,8 @@ export default {
   },
 
   async handler(query) {
-    const currency = (query.currency || "").trim().toUpperCase();
-    if (!currency || currency.length !== 3) {
+    const currency = (query.currency || "USD").trim().toUpperCase();
+    if (currency.length !== 3) {
       throw new Error("'currency' must be a 3-letter ISO 4217 code (e.g. USD, EUR, JPY)");
     }
 

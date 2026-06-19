@@ -102,7 +102,7 @@ export default {
         description: "US stock ticker symbol (e.g. AAPL, NVDA, MSFT). Case-insensitive.",
       },
     },
-    required: ["ticker"],
+    required: [],
   },
 
   outputSchema: {
@@ -140,8 +140,7 @@ export default {
   },
 
   async handler(query) {
-    const rawTicker = (query.ticker || "").trim();
-    if (!rawTicker) throw new Error("ticker is required");
+    const rawTicker = (query.ticker || "AAPL").trim();
 
     const ticker = rawTicker.toUpperCase().replace(/[^A-Z0-9.\-^]/g, "");
     if (!ticker) throw new Error("invalid ticker symbol");

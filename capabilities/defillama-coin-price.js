@@ -59,7 +59,7 @@ export default {
         maxItems: 10,
       },
     },
-    required: ["coins"],
+    required: [],
   },
 
   outputSchema: {
@@ -74,8 +74,7 @@ export default {
   },
 
   async handler(query) {
-    const rawIds = query.coins || [];
-    if (!rawIds.length) throw new Error("coins array is required");
+    const rawIds = query.coins || ["coingecko:bitcoin"];
     if (rawIds.length > 10) throw new Error("max 10 coins per call");
 
     const resolved = rawIds.map(resolveId);

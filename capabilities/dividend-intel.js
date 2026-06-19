@@ -60,7 +60,7 @@ export default {
         description: "US stock ticker (e.g. AAPL, JNJ, KO, T, SCHD). Case-insensitive.",
       },
     },
-    required: ["ticker"],
+    required: [],
     additionalProperties: false,
   },
 
@@ -123,8 +123,8 @@ export default {
   },
 
   async handler(query) {
-    const ticker = (query.ticker || "").trim().toUpperCase();
-    if (!ticker || !/^[A-Z0-9.\-^=]{1,12}$/.test(ticker)) {
+    const ticker = (query.ticker || "AAPL").trim().toUpperCase();
+    if (ticker.length > 12 || !/^[A-Z0-9.\-^=]+$/.test(ticker)) {
       throw new Error("ticker must be 1–12 uppercase alphanumeric characters");
     }
 

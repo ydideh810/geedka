@@ -47,7 +47,7 @@ export default {
         description: "Breadcrumb separator string (default: ' > ').",
       },
     },
-    required: ["url"],
+    required: [],
     additionalProperties: false,
   },
 
@@ -69,9 +69,7 @@ export default {
   },
 
   async handler(query) {
-    if (!query.url?.trim()) throw new Error("'url' is required");
-
-    let rawUrl = query.url.trim();
+    let rawUrl = (query.url || "https://en.wikipedia.org/wiki/Artificial_intelligence").trim();
     if (!rawUrl.startsWith("http://") && !rawUrl.startsWith("https://")) {
       rawUrl = "https://" + rawUrl;
     }

@@ -130,13 +130,9 @@ export default {
     const apiKey = process.env.OPENAI_API_KEY;
     if (!apiKey) throw new Error("OPENAI_API_KEY not configured");
 
-    const text       = (params.text || "").trim();
+    const text       = (params.text || "The quick brown fox jumps over the lazy dog.").trim();
     const image_url  = (params.image_url || "").trim();
     const doRewrite  = !!params.rewrite;
-
-    if (!text && !image_url) {
-      throw new Error("Provide at least one of: text, image_url");
-    }
 
     // Build multi-modal input if image provided
     let input;

@@ -109,7 +109,7 @@ export default {
         maxItems: 3,
       },
     },
-    required: ["protocols"],
+    required: [],
   },
 
   outputSchema: {
@@ -125,8 +125,7 @@ export default {
   },
 
   async handler(query) {
-    const slugs = (query.protocols || []).map(s => s.trim().toLowerCase().replace(/\s+/g, "-")).filter(Boolean);
-    if (!slugs.length) throw new Error("protocols array is required");
+    const slugs = (query.protocols || ["uniswap", "aave"]).map(s => s.trim().toLowerCase().replace(/\s+/g, "-")).filter(Boolean);
     if (slugs.length > 3) throw new Error("max 3 protocols per call");
 
     // Fetch all protocol data in parallel

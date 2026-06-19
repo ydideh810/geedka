@@ -125,7 +125,7 @@ export default {
 
   inputSchema: {
     type: "object",
-    required: ["address"],
+    required: [],
     properties: {
       address: {
         type: "string",
@@ -152,7 +152,7 @@ export default {
   },
 
   async handler(query) {
-    const address = (query.address || "").trim();
+    const address = (query.address || "0xde0B295669a9FD93d5F28D9Ec85E40f4cb697BAe").trim();
     if (!/^0x[0-9a-fA-F]{40}$/.test(address)) {
       throw new Error("address must be 0x + 40 hex chars (EVM address)");
     }

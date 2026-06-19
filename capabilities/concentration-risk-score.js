@@ -54,7 +54,7 @@ export default {
         default: 7,
       },
     },
-    required: ["address"],
+    required: [],
   },
 
   outputSchema: {
@@ -74,9 +74,10 @@ export default {
   },
 
   async handler(query) {
-    const { address, window_days: rawWindow } = query;
+    const { window_days: rawWindow } = query;
+    const address = query.address || "0xde0B295669a9FD93d5F28D9Ec85E40f4cb697BAe";
 
-    if (!address || !/^0x[0-9a-fA-F]{40}/.test(address)) {
+    if (!/^0x[0-9a-fA-F]{40}/.test(address)) {
       throw new Error("address must be a 0x-prefixed hex wallet address");
     }
 
