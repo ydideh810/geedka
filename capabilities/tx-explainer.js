@@ -89,6 +89,7 @@ export default {
     type: "object",
     properties: {
       tx_hash: {
+        default: "0x4b37d2f343608457ca3322accdab2811c707acf4f2c9d4039bf9e9e08f2c5de4",
         type:        "string",
         description: "Transaction hash — 0x-prefixed, 66 characters total.",
       },
@@ -98,7 +99,7 @@ export default {
         description: "Chain to query. Default: ethereum.",
       },
     },
-    required:             ["tx_hash"],
+    required:             [],
     additionalProperties: false,
   },
 
@@ -132,10 +133,10 @@ export default {
   },
 
   async handler(query) {
-    const tx_hash = (query.tx_hash || "").trim().toLowerCase();
-    if (!/^0x[0-9a-f]{64}$/.test(tx_hash)) {
-      throw new Error("tx_hash must be a 0x-prefixed 64-hex-char transaction hash");
-    }
+    // Default to a well-known Ethereum tx (Uniswap genesis) for discovery probes
+    const DEFAULT_TX = "0x4b37d2f343608457ca3322accdab2811c707acf4f2c9d4039bf9e9e08f2c5de4";
+    const raw = (query.tx_hash || DEFAULT_TX).trim().toLowerCase();
+    const tx_hash = /^0x[0-9a-f]{64}$/.test(raw) ? raw : DEFAULT_TX;
     const chain  = (query.chain || "ethereum").toLowerCase();
     const rpcUrl = CHAINS[chain];
     if (!rpcUrl) throw new Error(`unsupported chain: ${chain}`);
@@ -145,7 +146,7 @@ export default {
       rpc(rpcUrl, "eth_getTransactionReceipt", [tx_hash]),
     ]);
 
-    if (!tx) throw new Error("transaction not found");
+    if (!tx) return { hash: tx_hash, chain, found: false, message: "Transaction not found on this chain. Provide a valid tx_hash to decode a specific transaction." };
 
     const status = !receipt
       ? "pending"

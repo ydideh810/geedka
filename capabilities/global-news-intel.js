@@ -72,12 +72,12 @@ export default {
 
   inputSchema: {
     type:     "object",
-    required: ["query"],
+    required: [],
     properties: {
       query: {
         type:        "string",
-        description: "Search query — supports quoted phrases (e.g. '\"climate change\"') and boolean operators (AND, OR, NOT). Each keyword must be 3+ characters.",
-        minLength:   3,
+        description: "Search query — supports quoted phrases (e.g. '\"climate change\"') and boolean operators (AND, OR, NOT). Defaults to 'world news' if omitted.",
+        default:     "world news",
       },
       mode: {
         type:        "string",
@@ -147,8 +147,7 @@ export default {
   },
 
   async handler(input) {
-    const q = (input.query || "").trim();
-    if (!q || q.length < 3) throw new Error("query must be at least 3 characters");
+    const q = (input.query || "world news").trim();
 
     const mode = input.mode === "timeline" ? "timeline" : "artlist";
 

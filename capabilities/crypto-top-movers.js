@@ -15,6 +15,9 @@
 const CG_BASE    = "https://api.coingecko.com/api/v3";
 const UA         = "Mozilla/5.0 (compatible; the-stall/2.9; +https://intuitek.ai)";
 const TIMEOUT_MS = 15000;
+const CACHE_TTL_MS = 60_000; // CoinGecko updates every 1-5 min; cache prevents rate-limit 500s under concurrent payers
+
+let _cache = null; // { ts: Date, data: object }
 
 // Stablecoin symbols to exclude from movers ranking.
 const STABLECOINS = new Set([
@@ -108,6 +111,11 @@ export default {
   },
 
   async handler() {
+    const now = Date.now();
+    if (_cache && now - _cache.ts < CACHE_TTL_MS) {
+      return _cache.data;
+    }
+
     const [markets, globalData] = await Promise.all([
       fetchJson(`${CG_BASE}/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=100&page=1&price_change_percentage=24h&sparkline=false`),
       fetchJson(`${CG_BASE}/global`),
@@ -138,6 +146,8 @@ export default {
       active_coins:       gd.active_cryptocurrencies ?? null,
     };
 
-    return { top_gainers: topGainers, top_losers: topLosers, top_by_mcap: topByMcap, global, ts: new Date().toISOString() };
+    const result = { top_gainers: topGainers, top_losers: topLosers, top_by_mcap: topByMcap, global, ts: new Date().toISOString() };
+    _cache = { ts: now, data: result };
+    return result;
   },
 };
