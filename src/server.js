@@ -591,14 +591,14 @@ app.get("/", (_req, res) => {
 // ── llms.txt — agent/registry discovery file ─────────────────────────────────
 app.get("/llms.txt", (_req, res) => {
   const cats = [
-    { name: "Finance & Markets", caps: capabilities.filter(c => /stock|equity|market|earning|dividend|etf|option|insider|sector|treasury|credit|hedge|short|fec|ipo|form-144|fomc|fed|fiscal|econ|labor|consumer|housing|intl-stock|global-equity/i.test(c.name)).map(c => c.name) },
-    { name: "Crypto & DeFi", caps: capabilities.filter(c => /crypto|defi|btc|eth|token|wallet|nft|solana|dex|chain|block|tx|evm|erc20|ens|gas|defillama|kimchi|korean|stablecoin|yield-farm|whale|funding/i.test(c.name)).map(c => c.name) },
+    { name: "Finance & Markets", caps: capabilities.filter(c => /stock|equity|market|earning|dividend|etf|option|insider|sector|treasury|credit|hedge|short|fec|ipo|form-144|fomc|fed|fiscal|econ|labor|consumer|housing|intl-stock|global-equity|forex|analyst|income-state|company-|concentration|currency-format|lbo|manufacturing|job-search|intel-pack|limitless|analyst-rating/i.test(c.name)).map(c => c.name) },
+    { name: "Crypto & DeFi", caps: capabilities.filter(c => /crypto|defi|btc|eth|token|wallet|nft|solana|dex|chain|block|tx|evm|erc20|ens|gas|defillama|kimchi|korean|stablecoin|yield-farm|whale|funding|base-season/i.test(c.name)).map(c => c.name) },
     { name: "Prediction Markets", caps: capabilities.filter(c => /polymarket|prediction|sports/i.test(c.name)).map(c => c.name) },
-    { name: "News & Research", caps: capabilities.filter(c => /news|research|arxiv|reddit|hn|rss|social|fact-check|wikipedia|stackoverflow|github-repo|github-org/i.test(c.name)).map(c => c.name) },
-    { name: "AI & Compute", caps: capabilities.filter(c => /ai-image|audio|vision|meme|generate|hf-model|code|content-|roast/i.test(c.name)).map(c => c.name) },
-    { name: "Infrastructure & Data", caps: capabilities.filter(c => /dns|ip-intel|ssl|http|ping|agent-access|geo|city|place|domain|email-verify|npm|pypi|json|regex|unit|timezone|cron|page-intel|readable|web-scrape|web-change|web-company|wayback/i.test(c.name)).map(c => c.name) },
+    { name: "News & Research", caps: capabilities.filter(c => /news|research|arxiv|reddit|hn|rss|social|fact-check|wikipedia|stackoverflow|github-repo|github-org|citation/i.test(c.name)).map(c => c.name) },
+    { name: "AI & Compute", caps: capabilities.filter(c => /ai-image|audio|vision|meme|generate|hf-model|code|content-|roast|image-detect|document-qa|classic-novel/i.test(c.name)).map(c => c.name) },
+    { name: "Infrastructure & Data", caps: capabilities.filter(c => /dns|ip-intel|ssl|http|ping|agent-access|geo|city|place|domain|email-verify|npm|pypi|json|regex|unit|timezone|cron|page-intel|page-links|readable|web-scrape|web-change|web-company|wayback|breadcrumb|dictionary|changelog-gen|db-perf/i.test(c.name)).map(c => c.name) },
     { name: "On-chain Risk & Compliance", caps: capabilities.filter(c => /sanctions|wallet-credit|wallet-screener|address-security|agent-kya|kya|cve|drug-intel|npi|clinical|fda/i.test(c.name)).map(c => c.name) },
-    { name: "Macro & Alternative Data", caps: capabilities.filter(c => /macro|imf|world-bank|commodity|energy|solar|earthquake|usgs|weather|air-quality|aviation|flight|legal|gov-vote|congressional|federal-contract|federal-register|country-info/i.test(c.name)).map(c => c.name) },
+    { name: "Macro & Alternative Data", caps: capabilities.filter(c => /macro|imf|world-bank|commodity|energy|solar|earthquake|usgs|weather|air-quality|aviation|flight|legal|gov-vote|congressional|federal-contract|federal-register|country-info|chromatic|sport-predict/i.test(c.name)).map(c => c.name) },
   ];
   // Extract a short example value from a property description
   function exampleFromDesc(desc = '') {
@@ -701,6 +701,12 @@ app.get("/metrics", (_req, res) => {
     probesByCap[cap] = (probesByCap[cap] || 0) + 1;
   }
 
+  const paidByCap = {};
+  for (const r of payments) {
+    const cap = (r.cap || r.path?.replace("/cap/", "") || r.capability || "unknown");
+    paidByCap[cap] = (paidByCap[cap] || 0) + 1;
+  }
+
   const uaGroups = {};
   for (const r of requests) {
     const ua = r.ua?.slice(0, 60) || "unknown";
@@ -722,6 +728,7 @@ app.get("/metrics", (_req, res) => {
     unique_ips: uniqueIPs,
     unique_probe_ips: uniqueProbeIPs,
     top_probed_caps: Object.entries(probesByCap).sort((a, b) => b[1] - a[1]).slice(0, 15),
+    top_paid_caps: Object.entries(paidByCap).sort((a, b) => b[1] - a[1]).slice(0, 15),
     top_user_agents: Object.entries(uaGroups).sort((a, b) => b[1] - a[1]).slice(0, 10),
     request_total: requests.length,
     ts: new Date().toISOString(),
