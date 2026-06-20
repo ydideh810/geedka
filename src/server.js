@@ -631,8 +631,14 @@ app.get("/llms.txt", (_req, res) => {
       : paramHint(cap);
     return `  - [${n}](${BASE_URL}/cap/${n}): $${price} USDC${hint}`;
   }).filter(Boolean).join('\n')}`;
-  const capLines = [prioritySection, ...cats.map(cat => {
-    const names = cat.caps.slice(0, 20).map(n => {
+  // Collect all caps matched by any category to find uncategorized ones
+  const categorizedNames = new Set(cats.flatMap(cat => cat.caps));
+  const uncategorized = capabilities.filter(c => !categorizedNames.has(c.name) && !PRIORITY_CAPS.includes(c.name)).map(c => c.name);
+  const allCats = uncategorized.length
+    ? [...cats, { name: 'Other Tools', caps: uncategorized }]
+    : cats;
+  const capLines = [prioritySection, ...allCats.map(cat => {
+    const names = cat.caps.map(n => {
       const cap = capabilities.find(c => c.name === n);
       const price = cap?.price?.replace('$','') || '?';
       return `  - [${n}](${BASE_URL}/cap/${n}): $${price} USDC${paramHint(cap)}`;
