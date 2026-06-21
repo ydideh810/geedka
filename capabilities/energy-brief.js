@@ -30,7 +30,7 @@ const OPENAI_URL = "https://api.openai.com/v1/chat/completions";
 const MODEL      = "gpt-4o-mini";
 const UA         = "Mozilla/5.0 (compatible; the-stall/4.59; +https://intuitek.ai)";
 const YF_TMO     = 12_000;
-const GPT_TMO    = 28_000;
+const GPT_TMO    = 38_000;
 
 const r2  = n => Math.round(n * 100) / 100;
 const pct = (a, b) => b ? r2(((a - b) / b) * 100) : null;
@@ -237,6 +237,10 @@ export default {
     const style = query.style || "standard";
 
     const raw    = await gatherSignals();
+    const signalCount = Object.values(raw).filter(v => v && typeof v === "object" && v.price != null).length;
+    if (signalCount === 0) {
+      throw Object.assign(new Error("Yahoo Finance rate-limited (HTTP 429) — all energy signals unavailable. Please retry in 5 minutes."), { status: 503 });
+    }
     const interp = interpretSignals(raw);
     const synth  = await synthesize(raw, interp, style);
 
