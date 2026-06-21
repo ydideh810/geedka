@@ -50,7 +50,7 @@ async function geocode(location) {
 
 export default {
   name:  "weather",
-  price: "$0.008",
+  price: "$0.039",
 
   description:
     "Current weather conditions and 7-day daily forecast for any location worldwide. Input a city name, coordinates, or address. Returns temperature (°C), humidity, wind speed, precipitation, weather code, and a forecast with high/low temps and precipitation totals. Free upstream: Open-Meteo (no API key, no rate limits). Useful for DeFi agents tracking energy markets (cold → heating demand → gas prices), agricultural commodity prediction markets, or natural disaster risk assessment for on-chain insurance.",

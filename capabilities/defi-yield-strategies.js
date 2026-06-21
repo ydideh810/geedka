@@ -89,7 +89,7 @@ function allocate(candidates, totalUsd, maxPositions) {
 
 export default {
   name:  "defi-yield-strategies",
-  price: "$0.006",
+  price: "$0.039",
 
   description:
     "DeFi yield strategy planner. Given a portfolio size and risk tolerance, returns an optimized allocation across top DeFi yield opportunities. Risk tiers: low (stablecoins only, APY < 30%, TVL ≥ $50M), medium (TVL ≥ $10M, APY < 80%), high (TVL ≥ $1M, all assets). Output includes per-position allocation, APY, weekly yield estimate, chain, and 7-day APY trend. Covers 16K+ pools across 400+ DeFi protocols via DeFiLlama.",

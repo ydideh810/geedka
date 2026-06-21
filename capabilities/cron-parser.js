@@ -134,7 +134,7 @@ function nextRuns(fields, count, from) {
 
 export default {
   name: "cron-parser",
-  price: "$0.001",
+  price: "$0.014",
   description: "Parse and explain any Unix cron expression in plain English. Returns human-readable schedule description, field breakdown, and the next N run times (UTC). Supports @yearly/@monthly/@weekly/@daily/@hourly shortcuts. Zero external calls.",
   inputSchema: {
     type: "object",

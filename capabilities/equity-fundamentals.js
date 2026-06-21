@@ -85,7 +85,7 @@ function formatLargeNum(n) {
 
 export default {
   name:  "equity-fundamentals",
-  price: "$0.020",
+  price: "$0.039",
 
   description:
     "Fundamental valuation metrics for any US public company — P/E TTM, forward P/E, PEG, P/B, EV/EBITDA, margins, ROE, ROA, revenue TTM, earnings/revenue growth, free cash flow, market cap, beta. Raw data for valuation screening and DCF inputs. No API key. $0.020/call.",

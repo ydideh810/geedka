@@ -56,7 +56,7 @@ function hexToDecimal(hex) {
 
 export default {
   name:  "evm-log-events",
-  price: "$0.004",
+  price: "$0.039",
 
   description:
     "Query EVM contract event logs via eth_getLogs. Filter by contract address, event topic (signature hash), and block range. Returns up to 50 decoded log entries with topics, data, tx hash, block number. Supports Ethereum/Base/Polygon/Arbitrum via free DRPC. $0.004/call — 20% below comparable market rate.",

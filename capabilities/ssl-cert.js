@@ -56,7 +56,7 @@ function getCert(host, port, servername) {
 
 export default {
   name: "ssl-cert",
-  price: "$0.004",
+  price: "$0.014",
 
   description:
     "Inspects the TLS/SSL certificate of any HTTPS host. Returns validity window (not-before, not-after, days remaining), issuer (CA name, organization), subject (CN), Subject Alternative Names, SHA-256 fingerprint, serial number, and an expiry status (HEALTHY/OK/WARNING/CRITICAL/EXPIRED). Useful for monitoring certificate expiry, auditing TLS configuration, and verifying SAN coverage.",

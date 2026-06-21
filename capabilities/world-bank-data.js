@@ -92,7 +92,7 @@ function formatValue(val, indicatorCode) {
 
 export default {
   name:  "world-bank-data",
-  price: "$0.003",
+  price: "$0.014",
 
   description:
     "World Bank open data — 1600+ development indicators for 200+ countries. Returns most-recent values and 5-year trend for any indicator by country. Covers GDP, population, inflation, unemployment, FDI, debt, exports, CO₂, life expectancy, Gini, internet penetration, ease of doing business, and more. Accepts ticker-style aliases (gdp, inflation, unemployment) or full WB indicator codes. Sourced from api.worldbank.org — free, no key required. Use for country risk, macro comparisons, policy analysis, and development economics.",

@@ -72,7 +72,7 @@ function tryParse(str) {
 
 export default {
   name: "json-extract",
-  price: "$0.004",
+  price: "$0.014",
 
   description:
     "Extracts and parses JSON from mixed-content text. Handles LLM output with JSON embedded in prose, code fences (```json), trailing commas, single-quoted strings, JS-style comments, and bare object keys (JSON5-style). Returns the parsed data, a cleaned JSON string, extraction method used, and any repair applied. Pure text processing — zero external API calls.",

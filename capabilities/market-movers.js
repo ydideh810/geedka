@@ -47,7 +47,7 @@ async function fetchCG(order, count) {
 
 export default {
   name:  "market-movers",
-  price: "$0.006",
+  price: "$0.039",
 
   description:
     "Today's top market movers — equity gainers, losers, most-active, and crypto gainers/losers by 24h change. Sourced from Yahoo Finance screener and CoinGecko (free, no API key). Returns symbol, name, price, % change, volume, and market cap. Filter by asset class (equities, crypto, or both) and mover type (gainers, losers, active). Use for pre-trade context, on-chain event correlation, and market-regime detection.",

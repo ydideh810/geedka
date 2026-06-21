@@ -137,7 +137,7 @@ async function fetchGitHub(topic, windowHours, limit) {
 
 export default {
   name:  "social-momentum",
-  price: "$0.015",
+  price: "$0.039",
 
   description:
     "Cross-platform social momentum for any topic. Queries Reddit (recent top posts), Hacker News (recent stories), and GitHub (active repos) in parallel and returns a composite momentum score (0–100) plus raw results from each platform. Single call replaces three separate searches. Use before committing to research, writing, or trading: 'is this topic gaining traction right now?' No API keys required.",

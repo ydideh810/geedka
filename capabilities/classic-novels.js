@@ -55,7 +55,7 @@ function shapebook(doc) {
 
 export default {
   name: "classic-novels",
-  price: "$0.004",
+  price: "$0.014",
 
   description:
     "Looks up classic and contemporary books by title, author, or ISBN via Open Library (748M+ editions). Returns publication year, subjects/genres, page count, cover images, and links to read online via Project Gutenberg or Internet Archive. Useful for research agents, reading recommendation workflows, literature analysis, and bibliographic data enrichment.",

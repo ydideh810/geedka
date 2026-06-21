@@ -90,7 +90,7 @@ async function fetchJson(url) {
 
 export default {
   name:  "meme-generator",
-  price: "$0.005",
+  price: "$0.019",
 
   description:
     "Generate a meme image URL from text. Provide text_top and text_bottom (the two lines of the meme), and optionally a template name. If no template is given, supply a topic keyword and a fitting template will be chosen automatically. Returns a direct image URL you can embed in messages, posts, or web pages. 211 templates available including drake, doge, distracted, buzz, fry, success, gru, oprah, and more. Free upstream: memegen.link (no API key, unlimited requests). Common agent use cases: social media content generation, reaction images, marketing copy, presentation humor.",

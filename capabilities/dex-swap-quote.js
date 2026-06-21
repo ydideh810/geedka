@@ -63,7 +63,7 @@ function fromWei(weiStr, decimals) {
 
 export default {
   name: "dex-swap-quote",
-  price: "$0.012",
+  price: "$0.039",
 
   description:
     "Best-route DEX swap quote across 20+ chains via Li.Fi aggregator. Returns expected output, exchange rate, gas cost, price impact, and route (DEX/bridge names). Works for same-chain and cross-chain swaps. Use ETH/USDC/WBTC symbols or ERC-20 addresses. Chains: ethereum, base, polygon, arbitrum, optimism, bsc, avalanche, and more. $0.012/call — free upstream.",

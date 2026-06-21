@@ -57,7 +57,7 @@ function fmtAmount(n) {
 
 export default {
   name:  "federal-contract-intel",
-  price: "$0.008",
+  price: "$0.014",
 
   description:
     "US federal contract and grant intelligence for any company via USASpending.gov. Returns total obligated amount, award count, top awards (award ID, amount, agency, description, start date), and agency breakdown — covering $10T+ in federal spending. Useful for procurement research, competitive intelligence, vendor due diligence, and government contractor analysis. No API key required.",

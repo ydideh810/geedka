@@ -39,7 +39,7 @@ function parsePrices(outcomePricesStr) {
 
 export default {
   name:  "polymarket-accuracy-score",
-  price: "$0.004",
+  price: "$0.014",
 
   description:
     "Historical Polymarket crowd accuracy score: % of markets where the final crowd majority correctly predicted the outcome, plus Brier score (calibration quality). Breakdowns by category — crypto, politics, sports, macro, equities, ai. Filter by category and lookback days. $0.004/call — 20% below closest x402 competitor. Source: Polymarket public API (no key required).",

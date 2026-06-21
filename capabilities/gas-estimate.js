@@ -123,7 +123,7 @@ const VALID_CHAINS = Object.keys(RPCS);
 
 export default {
   name: "gas-estimate",
-  price: "$0.015",
+  price: "$0.039",
   description:
     "Multi-chain gas price oracle: fast/standard/slow Gwei + USD cost for a transfer. Chains: ethereum, base, polygon, arbitrum, bsc. Seam: x402node/myceliasignal gas feeds.",
 

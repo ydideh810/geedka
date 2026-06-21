@@ -37,7 +37,7 @@ function qualityScore(pair) {
 
 export default {
   name:  "meme-radar",
-  price: "$0.005",
+  price: "$0.019",
 
   description:
     "Solana meme coin quality-volume radar. Returns trending tokens ranked by a quality score that rewards organic buy pressure, liquidity depth, and volume consistency. Filters out low-liquidity rugs. Use for meme coin discovery, social-momentum confirmation, or pump detection. Data: DexScreener free API; no API key required.",

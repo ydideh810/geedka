@@ -131,7 +131,7 @@ function extractEntities(text) {
 
 export default {
   name: "policy-impact-mapper",
-  price: "$0.007",
+  price: "$0.014",
 
   description:
     "Analyzes regulatory and policy text to map its impact across industry sectors. Extracts compliance requirements, change types (new mandates, prohibitions, exemptions), effective dates, affected entities, and assigns sector-level impact scores (HIGH/MEDIUM/LOW). Pure pattern analysis — no LLM, instant results. Useful for compliance agents, regulatory monitoring workflows, and policy change digests.",

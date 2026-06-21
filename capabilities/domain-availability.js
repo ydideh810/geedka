@@ -49,7 +49,7 @@ async function checkTld(name, tld) {
 
 export default {
   name:  "domain-availability",
-  price: "$0.008",
+  price: "$0.014",
 
   description:
     "Check domain name availability across multiple TLDs (com, net, org, io, ai, co, app, dev by default). Returns per-TLD availability status, registrar, and expiry for registered domains. Uses RDAP — authoritative registry data, no API key. Ideal for brand research, startup naming, and domain portfolio work.",

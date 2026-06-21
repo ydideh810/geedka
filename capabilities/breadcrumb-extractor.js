@@ -30,7 +30,7 @@ function formatSegment(seg) {
 
 export default {
   name: "breadcrumb-extractor",
-  price: "$0.003",
+  price: "$0.014",
 
   description:
     "Extracts structured breadcrumb navigation from a URL. Returns domain, ordered path segments with human-readable labels, query parameters as key-value pairs, and a formatted breadcrumb trail string. Identifies numeric IDs vs. named path segments. Pure URL parsing — zero external calls. Useful for agents that process sitemaps, navigation menus, or need to understand page hierarchy.",

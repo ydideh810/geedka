@@ -28,7 +28,7 @@ const ASSET_KEYWORDS = {
 
 export default {
   name:  "polymarket-crypto-updown",
-  price: "$0.001",
+  price: "$0.039",
 
   description:
     "Crypto price direction prediction markets from Polymarket. Returns binary up/down markets for BTC, ETH, SOL, XRP and other assets — current market consensus on near-term price direction. Filter by asset symbol or get all active crypto markets. Use for directional sentiment, agent decision context, or signal feeds.",

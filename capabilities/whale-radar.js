@@ -37,7 +37,7 @@ function classifyWhale(trades) {
 
 export default {
   name:  "whale-radar",
-  price: "$0.010",
+  price: "$0.097",
 
   description:
     "Polymarket whale intelligence for a given proxy wallet address. Returns recent prediction-market trades (market title, outcome, side, size in USDC, price, timestamp) and current open positions (title, size, avg price, current value, unrealized PnL). Infers whale tier (whale/shark/dolphin/minnow) from trade sizes. Use for copy-trading signal generation, market-sentiment cross-reference, or on-chain agent behavior profiling. Free upstream: Polymarket public data API.",

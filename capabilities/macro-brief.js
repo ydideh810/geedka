@@ -131,7 +131,7 @@ Respond ONLY with a JSON object (no markdown, no text outside JSON):
 
 export default {
   name: "macro-brief",
-  price: "$0.350",
+  price: "$0.482",
 
   description:
     "AI-synthesized US macroeconomic situation briefing. Gathers 7 real-time signals — HY/IG credit spreads, yield curve (10Y-3M), initial jobless claims, JOLTS openings, core PCE, and Fed Funds rate — from FRED (free, no auth) then uses GPT-4o-mini to synthesize a structured briefing: regime label (expansion/contraction/late-cycle/recovery/uncertain), dominant risk, agent implication, and a 200-word narrative. Replaces a 5+ step data assembly + LLM chain. Priced below Bloomberg macro summaries.",

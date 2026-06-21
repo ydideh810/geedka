@@ -187,7 +187,7 @@ Respond ONLY with valid JSON:
 
 export default {
   name:  "labor-brief",
-  price: "$0.350",
+  price: "$0.482",
 
   description:
     "AI-synthesized US labor market briefing. Fetches 7 FRED signals (initial claims, continued claims, JOLTS openings, nonfarm payrolls MoM, unemployment rate, wage growth YoY, labor force participation) and uses GPT-4o-mini to produce labor regime, wage pressure, claims trend, Fed posture signal, 150-word narrative, dominant risk, and agent implication. One call collapses 7 FRED lookups + LLM synthesis for wage inflation models, recession probability, and Fed policy forecasting.",

@@ -69,7 +69,7 @@ function parseAiTxt(text) {
 
 export default {
   name: "agent-access-check",
-  price: "$0.006",
+  price: "$0.014",
 
   description:
     "Checks whether a website is accessible and agent-friendly. Fetches robots.txt, .well-known/ai.txt, and sitemap.xml; inspects HTTP headers (CORS, CSP, rate-limit); and returns a readiness verdict. Useful for agents that need to decide whether to scrape, crawl, or interact with a domain before committing to a workflow. Returns allowed/blocked status, disallowed paths, crawl delay, AI-specific rules, and sitemap URL if present.",

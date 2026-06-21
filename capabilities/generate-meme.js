@@ -26,7 +26,7 @@ function encodeText(text) {
 
 export default {
   name: "generate-meme",
-  price: "$0.005",
+  price: "$0.019",
 
   description:
     "Generates a meme image from 211 built-in templates. Returns a direct PNG URL and embed-ready markdown. Input: template ID (default: drake), top line, optional bottom line, optional middle line (for 3-line templates like panik-kalm-panik). Popular templates: drake, buzz (X Everywhere), fry, fine (This Is Fine), success, panik-kalm-panik, boat (I Should Buy a Boat), aag (Ancient Aliens), blb (Bad Luck Brian). $0.005/call — free upstream, no API key.",

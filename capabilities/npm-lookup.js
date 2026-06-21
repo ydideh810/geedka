@@ -10,7 +10,7 @@ const TIMEOUT_MS = 8000;
 
 export default {
   name:  "npm-lookup",
-  price: "$0.010",
+  price: "$0.014",
 
   description:
     "Node.js / JavaScript package metadata from the npm registry. Returns latest version, description, license, keywords, direct dependencies, weekly download count, publish date, GitHub repository, and all recent versions. Also supports looking up a specific version. Use before adding an npm package as a dependency: verify it's maintained, check its license, assess how many dependencies it pulls in. Free upstream: npm registry API (no key, public).",

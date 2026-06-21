@@ -15,7 +15,7 @@ function round(n, decimals = 4) {
 
 export default {
   name: "portfolio-rebalance",
-  price: "$0.005",
+  price: "$0.241",
 
   description:
     "Pure-math portfolio rebalancing calculator. Given current holdings (asset names and their current USD values) and target allocations (percentages summing to 100), returns the exact buy/sell dollar amounts needed to reach target weights. Handles partial rebalancing with a drift threshold. No external API — deterministic and instant. Useful for DeFi agents, robo-advisory flows, and automated rebalancing triggers.",

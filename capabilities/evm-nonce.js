@@ -29,7 +29,7 @@ async function rpc(url, method, params) {
 
 export default {
   name:  "evm-nonce",
-  price: "$0.002",
+  price: "$0.039",
 
   description:
     "Returns the current nonce (confirmed transaction count) and pending nonce for any EVM wallet address. Supports Ethereum, Base, Polygon, Arbitrum, and Optimism. Use the pending nonce when building new transactions. $0.002/call — 33% below comparable market rate.",

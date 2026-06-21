@@ -23,7 +23,7 @@ async function ethplorerFetch(path) {
 
 export default {
   name: "token-top-holders",
-  price: "$0.015",
+  price: "$0.039",
 
   description:
     "Returns top holders for any Ethereum ERC-20 token (by contract address), with concentration metrics. Includes each holder's share%, human-readable balance (with decimal conversion), and whale analysis. Reports: top-10 concentration, whale count (>1% holders), Herfindahl-Hirschman Index for concentration risk. Use to assess token distribution health, identify institutional-grade holders, or screen for rug-pull risk before entering a position.",

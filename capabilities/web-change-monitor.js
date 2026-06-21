@@ -17,7 +17,7 @@ const HASH_LIMIT = 32 * 1024; // 32 KB
 
 export default {
   name: "web-change-monitor",
-  price: "$0.005",
+  price: "$0.039",
 
   description:
     "Returns content-change signals for any public URL: ETag, Last-Modified, Content-Length, and Content-Type via HTTP HEAD. Falls back to GET + SHA-256 of the first 32 KB when the server returns no cache markers. Store the snapshot and re-call periodically to detect changes. Useful for monitoring competitor pricing, news, regulatory filings, or any public page.",

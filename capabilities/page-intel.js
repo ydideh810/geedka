@@ -100,7 +100,7 @@ function extract(html, url, limit) {
 
 export default {
   name: "page-intel",
-  price: "$0.004",
+  price: "$0.039",
 
   description:
     "Extracts structured content from any public URL: page title, meta description, H1-H3 headings, all links (with text and internal/external flag), and a 500-character text preview. Useful for research agents following link chains from on-chain data, auditing page structure, or seeding downstream text-generation calls.",

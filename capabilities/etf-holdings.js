@@ -74,7 +74,7 @@ async function fetchTopHoldings(ticker, retry = true) {
 
 export default {
   name:  "etf-holdings",
-  price: "$0.018",
+  price: "$0.039",
 
   description:
     "Top holdings, sector weights, and asset allocation for any US ETF (SPY, VOO, QQQ, AGG, XLK, etc.). Returns up to 25 positions with weights, sector breakdown, and equity/bond/cash split. No API key. $0.018/call.",

@@ -16,7 +16,7 @@ const MARKET_LIMIT   = 200; // cap Upbit batch to stay under URL length limits
 
 export default {
   name: "korean-crypto-movers",
-  price: "$0.008",
+  price: "$0.039",
 
   description:
     "Top movers and volume leaders on Korean exchanges (Upbit, 263 KRW markets). Returns biggest 24h price movers (% change from prev close), highest-volume tokens by KRW trade value, and optional raw snapshot. 20% cheaper than printmoneylab's market-movers endpoint at the same Upbit/Bithumb data layer.",

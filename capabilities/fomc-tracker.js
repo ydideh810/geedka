@@ -74,7 +74,7 @@ const r2 = n => Math.round(n * 100) / 100;
 
 export default {
   name: "fomc-tracker",
-  price: "$0.008",
+  price: "$0.014",
 
   description:
     "US Federal Funds Rate, next FOMC meeting date + countdown, rate trend (hiking/holding/cutting), and full 2026 schedule. FRED public CSV + static calendar. Pairs with treasury-yields and credit-spreads.",

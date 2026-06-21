@@ -62,7 +62,7 @@ function r2(n) { return Math.round(n * 100) / 100; }
 
 export default {
   name: "earthquake-intel",
-  price: "$0.005",
+  price: "$0.039",
   description:
     "Real-time earthquake intelligence from USGS. Fetch recent global significant quakes (M5.0+ last 7 days) or quakes near a lat/lon (M3.0+ within 500 km). Returns magnitude, depth, location, tsunami flag, and shake intensity. Free USGS FDSN API — no key required.",
 

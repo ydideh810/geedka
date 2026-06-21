@@ -47,7 +47,7 @@ async function fetchYield(symbol) {
 
 export default {
   name: "treasury-yields",
-  price: "$0.010",
+  price: "$0.039",
 
   description:
     "Returns current US Treasury yield curve at 3M, 5Y, 10Y, and 30Y nodes from CBOE interest-rate indices (free, no API key). Includes 10Y-3M spread and curve shape classification. Essential for DCF discount rates, bond pricing, and recession signal monitoring.",

@@ -60,7 +60,7 @@ function buildEdgarUrl(cik10, accessionRaw) {
 
 export default {
   name:  "sec-filing-intel",
-  price: "$0.018",
+  price: "$0.116",
 
   description:
     "Real-time SEC EDGAR filing lookup by ticker or CIK. Returns company profile plus recent filings (form type, date, description, EDGAR URL). Supports 8-K (material events), 10-K/10-Q (earnings), Form 4 (insider trades), DEF14A (proxy), and all other EDGAR form types. Authoritative US government data, no API key, updated within minutes of filing.",

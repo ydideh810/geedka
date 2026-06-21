@@ -184,7 +184,7 @@ async function parseForm4(cik, accession, primaryDoc) {
 
 export default {
   name:  "sec-insider-trades",
-  price: "$0.015",
+  price: "$0.097",
 
   description:
     "SEC EDGAR Form 4 insider trading data for any US public company — shows recent insider buys, sells, awards, and exercises with shares, price, and post-transaction ownership. No API key. EDGAR primary source.",

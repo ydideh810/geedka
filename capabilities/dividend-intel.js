@@ -47,7 +47,7 @@ function cagr(startVal, endVal, years) {
 
 export default {
   name: "dividend-intel",
-  price: "$0.015",
+  price: "$0.039",
 
   description:
     "Full dividend intelligence for any US equity: trailing 12-month yield, forward annual rate, payout frequency (monthly/quarterly/semi-annual/annual), 5-year dividend CAGR, consecutive years paid, consecutive years of growth, and complete 5-year dividend history with dates and amounts. Single call — no API key. Ideal for income screening, dividend safety analysis, and yield comparison across a portfolio.",

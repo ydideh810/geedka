@@ -36,7 +36,7 @@ async function fetchSeries(id) {
 
 export default {
   name: "macro-indicators",
-  price: "$0.010",
+  price: "$0.014",
 
   description:
     "Returns current US macroeconomic indicators: Fed Funds Rate, CPI (with year-over-year inflation %), Unemployment Rate, and Real GDP. Sourced from FRED (St. Louis Federal Reserve), updated monthly. One call establishes the policy and economic backdrop for any risk-pricing or multi-asset workflow. Pair with market-overview for the full macro picture.",

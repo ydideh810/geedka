@@ -52,7 +52,7 @@ function formatPair(p) {
 
 export default {
   name:  "dex-pair-search",
-  price: "$0.005",
+  price: "$0.039",
 
   description:
     "Search DEX trading pairs for any token (by symbol, name, or contract address) across 50+ chains including Ethereum, Solana, Base, BSC, Arbitrum, Polygon, and Avalanche. Returns top pairs by liquidity with real-time price, 24h volume, buy/sell transaction counts, price change %, and buy pressure metric. Free via DexScreener. Ideal for agents tracking on-chain trade flow, entry/exit signals, or multi-chain token prices without maintaining DEX integrations.",

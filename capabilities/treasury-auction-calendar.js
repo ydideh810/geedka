@@ -32,7 +32,7 @@ function parseBillions(val) {
 
 export default {
   name: "treasury-auction-calendar",
-  price: "$0.018",
+  price: "$0.116",
 
   description:
     "Returns upcoming US Treasury auction schedule (Bills, Notes, Bonds, TIPS, FRNs) from TreasuryDirect.gov. Filter by security type and look-ahead window. Shows auction date, issue date, term, offering amount, coupon rate, and reopening status. Official government data, no API key.",

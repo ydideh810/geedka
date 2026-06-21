@@ -64,7 +64,7 @@ function riskLabel(score) {
 
 export default {
   name:  "address-security",
-  price: "$0.010",
+  price: "$0.116",
 
   description:
     "Wallet/address security and reputation check. Detects phishing, sanctions, cybercrime, money laundering, dark-web activity, and blacklisted wallets using GoPlus Labs + SlowMist + BlockSec data. Returns risk score (0-100) and per-flag breakdown. Supports Ethereum, Base, BSC, Polygon, Arbitrum, Optimism, Avalanche, and more.",

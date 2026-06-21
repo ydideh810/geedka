@@ -65,7 +65,7 @@ function shapeTimeline(data) {
 
 export default {
   name:  "global-news-intel",
-  price: "$0.003",
+  price: "$0.039",
 
   description:
     "Searches global news coverage across 200+ languages and 100+ countries via GDELT. Returns recent articles with title, URL, publication date, source country, and language. Timeline mode returns coverage volume over time. Ideal for geopolitical risk monitoring, ESG screening, crisis detection, international market intelligence, and media trend analysis. Free upstream API, no auth required. Data window: ~3 days (artlist), ~3 months (timeline).",

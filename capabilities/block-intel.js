@@ -35,7 +35,7 @@ function normalizeBlockParam(raw) {
 
 export default {
   name: "block-intel",
-  price: "$0.002",
+  price: "$0.014",
 
   description:
     "Returns block header data (number, hash, timestamp, gas used/limit, base fee, tx count, validator address) for any block on Base, Ethereum, or Arbitrum. Accepts block tag (latest/safe/finalized) or number. Free-RPC alternative to skills.onesource.io at 33% lower price — $0.002 vs $0.003.",

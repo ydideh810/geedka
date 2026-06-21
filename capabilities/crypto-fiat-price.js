@@ -27,7 +27,7 @@ function resolveId(coin) {
 
 export default {
   name:  "crypto-fiat-price",
-  price: "$0.015",
+  price: "$0.039",
 
   description:
     "Cryptocurrency price in any fiat currency — JPY, EUR, CNY, GBP, KRW, INR, AUD, BRL, or 80+ more. Input a coin name or CoinGecko ID (bitcoin, ethereum, solana, btc, eth, sol, etc.) and one or more currency codes. Returns current price, 24h percent change per currency, and last updated timestamp. Free upstream: CoinGecko public API (no key). 85% below specialized fiat oracles. Useful for Asian/European market agents, cross-border DeFi pricing, and multi-currency portfolio valuation.",

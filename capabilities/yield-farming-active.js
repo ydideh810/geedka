@@ -13,7 +13,7 @@ const UA         = "Mozilla/5.0 (compatible; the-stall/0.7; +https://intuitek.ai
 
 export default {
   name:  "yield-farming-active",
-  price: "$0.005",
+  price: "$0.039",
 
   description:
     "Returns active DeFi yield farming pools sorted by 30-day average APY. Sourced from DeFiLlama (free, no key). Each pool includes protocol, chain, symbol, TVL, current APY, 30-day mean APY, impermanent-loss risk, and stablecoin flag. Filter by chain, protocol, minimum TVL, minimum APY, or stablecoin-only pools. Use for portfolio yield research, pre-trade DeFi reconnaissance, or capital allocation decisions.",

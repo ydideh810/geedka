@@ -63,7 +63,7 @@ function round2(v) {
 export default {
   name: "imf-country-outlook",
 
-  price: "$0.006",
+  price: "$0.014",
 
   description:
     "IMF World Economic Outlook forecasts — current year + 3-year horizon for 180+ countries. Returns GDP growth, CPI inflation, unemployment rate, current account balance (% GDP), government gross debt (% GDP), and fiscal balance (% GDP). Sourced from IMF DataMapper API (no key required). Distinct from World Bank data — these are IMF forward projections updated Apr/Oct. Use for sovereign risk, EM allocation, currency thesis, fiscal sustainability analysis.",

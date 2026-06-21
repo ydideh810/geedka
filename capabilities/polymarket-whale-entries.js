@@ -21,7 +21,7 @@ const POOL     = 500; // trades to fetch before filtering
 
 export default {
   name:  "polymarket-whale-entries",
-  price: "$0.008",
+  price: "$0.116",
 
   description:
     "Scans Polymarket for recent large-position trades. Returns whale entries filtered by minimum USDC value (size × entry price). Includes trader wallet, YES/NO side, USDC amount, entry price, market name, and on-chain tx hash. Use for smart-money signals, copy-trade detection, or market sentiment confirmation. Free upstream; no API keys.",

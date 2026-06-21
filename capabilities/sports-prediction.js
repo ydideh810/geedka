@@ -26,7 +26,7 @@ const LEAGUE_MAP = {
 
 export default {
   name: "sports-prediction",
-  price: "$0.005",
+  price: "$0.039",
 
   description:
     "Returns today's (or a given date's) sports games with team win-loss records, venue, scheduled time, and live score. Supports MLB, NBA, NFL, NHL, NCAAF, NCAAB. Sourced from ESPN public API — no key required. $0.005/call. Use before prediction-markets or sports-content tasks to get accurate team context.",

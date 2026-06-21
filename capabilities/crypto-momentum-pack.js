@@ -118,7 +118,7 @@ async function getTopYields(symbols, limit) {
 
 export default {
   name:  "crypto-momentum-pack",
-  price: "$0.007",
+  price: "$0.039",
 
   description:
     "Korean exchange volume leaders + global 24h movers + optional DeFi yield cross-reference in one call. Collapses the printmoneylab/market-movers → ottoai/yield-farming-active agent chain at 53% of the chain cost. Returns top gaining/losing/volume-leading tokens on Upbit (Korea's #1 exchange), global CoinGecko movers, and matching DeFi yield pools when include_yields is true. Korean volume often leads global crypto moves — use for pre-trade momentum confirmation, cross-exchange alpha identification, and DeFi capital allocation.",

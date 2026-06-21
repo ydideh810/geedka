@@ -32,7 +32,7 @@ async function kyaFetch(address) {
 
 export default {
   name: "agent-kya-score",
-  price: "$0.003",
+  price: "$0.116",
 
   description:
     "Know Your Agent (KYA) trust score for any EVM wallet. Returns a 0–100 score, tier (trusted/verified/unknown), sanctions screening result, per-dimension score breakdown (wallet age, activity, sanctions, ERC-8004 identity, KYB, tx history, trust bond, endpoint quality), on-chain attestations (Coinbase KYC, Gitcoin Passport, USDC balance), wallet stats (balance, tx count, estimated age), and per-transaction spending limits. Use before accepting payment from an agent or before dispatching a sub-agent with funds. Answers: is this agent wallet sanctioned? how established is it? has it passed KYC?",

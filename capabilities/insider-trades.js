@@ -101,7 +101,7 @@ function ownerRelationship(xml) {
 
 export default {
   name:  "insider-trades",
-  price: "$0.015",
+  price: "$0.097",
 
   description:
     "Recent SEC Form 4 insider trading activity for any US public company. Returns who bought or sold (director, officer, 10%+ owner), transaction date, shares, price per share, total value, and position after trade. Sourced from SEC EDGAR public API — authoritative, free, no API key. Use for investment analysis, governance checks, or flagging unusual insider selling before an event.",

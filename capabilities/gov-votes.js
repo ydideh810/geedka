@@ -161,7 +161,7 @@ function inferCategory(question) {
 
 export default {
   name: "gov-votes",
-  price: "$0.004",
+  price: "$0.014",
 
   description:
     "US Congressional vote records from official government XML sources (senate.gov + clerk.house.gov). Search by chamber (house/senate), category (passage, amendment, cloture, nomination, procedural, etc.), or limit. Returns vote question, result (Passed/Failed), yea/nay totals, bill number, and description. 119th Congress (2025–2026). No API key required.",

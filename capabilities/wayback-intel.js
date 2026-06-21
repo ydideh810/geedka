@@ -49,7 +49,7 @@ function normTs(input) {
 
 export default {
   name:  "wayback-intel",
-  price: "$0.003",
+  price: "$0.014",
 
   description:
     "Queries the Internet Archive Wayback Machine for historical snapshots of any public URL. " +

@@ -66,7 +66,7 @@ function getZoneInfo(tz, targetDate) {
 
 export default {
   name: "timezone",
-  price: "$0.002",
+  price: "$0.014",
 
   description:
     "Timezone intelligence using the IANA database (418 zones) built into Node.js. Returns current local time, UTC offset, DST status, and the long timezone name for any IANA timezone. Can also convert an ISO timestamp to one or more target timezones. Useful for scheduling agents, global operations, and time-aware data enrichment. Zero external API calls — instant response.",

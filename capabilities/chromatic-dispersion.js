@@ -96,7 +96,7 @@ function round4(n) { return Math.round(n * 10000) / 10000; }
 
 export default {
   name: "chromatic-dispersion",
-  price: "$0.004",
+  price: "$0.014",
 
   description:
     "Fiber optic chromatic dispersion calculator. Computes dispersion coefficient D(λ) in ps/(nm·km), accumulated dispersion (ps/nm) over a fiber span, and dispersion slope for SMF-28, NZDSF, DSF, LEAF, DCF, and ULLSF fiber types. Optionally sweeps a wavelength range (C-band, L-band, or custom). Pure math — instant, zero API calls. Useful for optical network design, DWDM link budget, and dispersion compensation planning.",

@@ -42,7 +42,7 @@ function attackCostPerHour(hash_rate_ehs, efficiency_w_per_th = 20, electricity_
 
 export default {
   name:  "btc-game-theory",
-  price: "$0.006",
+  price: "$0.116",
 
   description:
     "Bitcoin mining game theory and systems dynamics in one call. Returns: selfish-mining profitability threshold (Eyal-Sirer), 51%-attack electricity cost estimate, fee-vs-subsidy revenue split, difficulty epoch trajectory (expansion / contraction / neutral), Nash-equilibrium state for honest mining, and current epoch progress. Sourced from mempool.space and CoinGecko — no API key required. Use for miner-incentive analysis, network security assessment, and pre-investment regime detection.",

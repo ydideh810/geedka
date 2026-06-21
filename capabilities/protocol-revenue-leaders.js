@@ -12,7 +12,7 @@ const TIMEOUT  = 15_000;
 
 export default {
   name: "protocol-revenue-leaders",
-  price: "$0.001",
+  price: "$0.039",
 
   description:
     "Returns DeFi protocols ranked by daily fees (revenue generated). Covers 1000+ protocols across chains — DEXes, lending markets, derivatives, stablecoins. Includes 1d/7d/30d trend context, category breakdown, and chain presence. Use to identify which protocols are capturing the most economic activity, screen for fundamental DeFi strength, or compare protocol revenue trajectories.",
