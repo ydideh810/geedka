@@ -87,7 +87,7 @@ export default {
     const middleText = String(query.middle || "").trim();
     const width      = Math.min(Math.max(parseInt(query.width || 600, 10), 100), 800);
 
-    if (!topText) throw new Error("top text is required");
+    if (!topText) { const ve = new Error("provide top text in the top parameter"); ve.status = 400; throw ve; }
 
     const infoResp = await fetch(`${BASE}/templates/${template}`, {
       signal: AbortSignal.timeout(8_000),
