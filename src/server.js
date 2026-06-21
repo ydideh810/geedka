@@ -307,6 +307,91 @@ app.get("/openapi.json", (_req, res) => {
         responses: { "200": { description: "OpenAPI 3.1.0 spec", content: { "application/json": { schema: { type: "object" } } } } },
       },
     },
+    "/v1/fiat/checkout": {
+      post: {
+        operationId: "fiat_checkout",
+        summary: "Buy prepaid call credits with a card (Stripe)",
+        description: "Creates a Stripe Checkout Session for a prepaid credit bundle. Redirect the buyer to the returned checkout_url. After payment completes, retrieve the bearer token via GET /v1/fiat/token?session_id=. Credits are consumed at 1 per /cap/* call — no wallet, no gas, no per-call signing.",
+        tags: ["fiat"],
+        security: [],
+        requestBody: {
+          required: true,
+          content: {
+            "application/json": {
+              schema: {
+                type: "object",
+                properties: {
+                  bundle: {
+                    type: "string",
+                    enum: ["starter", "pro", "scale"],
+                    description: "Credit bundle to purchase. starter=$5/100 credits ($0.05/call), pro=$30/1,000 credits ($0.03/call), scale=$200/10,000 credits ($0.02/call).",
+                    default: "starter",
+                  },
+                },
+              },
+            },
+          },
+        },
+        responses: {
+          "200": {
+            description: "Stripe checkout session created",
+            content: {
+              "application/json": {
+                schema: {
+                  type: "object",
+                  properties: {
+                    checkout_url: { type: "string", description: "Redirect buyer to this URL to complete card payment." },
+                    session_id: { type: "string", description: "Pass to GET /v1/fiat/token?session_id= after payment to retrieve your bearer token." },
+                    bundle: { type: "string" },
+                    credits: { type: "integer", description: "Credits included in this bundle." },
+                    amount_usd: { type: "number", description: "Price in USD." },
+                  },
+                  required: ["checkout_url", "session_id", "bundle", "credits", "amount_usd"],
+                },
+              },
+            },
+          },
+          "400": { description: "Unknown bundle key — use starter, pro, or scale." },
+        },
+      },
+    },
+    "/v1/fiat/token": {
+      get: {
+        operationId: "fiat_token",
+        summary: "Retrieve bearer token after Stripe payment",
+        description: "Poll after the buyer completes checkout. Returns a bearer token for use as Authorization: Bearer <token> on any /cap/* call. Each call consumes 1 credit.",
+        tags: ["fiat"],
+        security: [],
+        parameters: [
+          {
+            name: "session_id",
+            in: "query",
+            required: true,
+            schema: { type: "string" },
+            description: "Stripe session_id returned by POST /v1/fiat/checkout.",
+          },
+        ],
+        responses: {
+          "200": {
+            description: "Token ready",
+            content: {
+              "application/json": {
+                schema: {
+                  type: "object",
+                  properties: {
+                    token: { type: "string", description: "Bearer token — use as Authorization: Bearer <token> on any /cap/* endpoint." },
+                    credits: { type: "integer", description: "Remaining call credits." },
+                    jti: { type: "string" },
+                  },
+                  required: ["token", "credits"],
+                },
+              },
+            },
+          },
+          "404": { description: "Payment not yet confirmed. Retry in 2-5 seconds." },
+        },
+      },
+    },
   };
 
   const capPaths = {};
@@ -329,10 +414,11 @@ app.get("/openapi.json", (_req, res) => {
         operationId: cap.name,
         summary: cap.description,
         tags: ["capabilities"],
-        security: [{ x402Payment: [] }],
+        security: [{ x402Payment: [] }, { bearerToken: [] }],
         "x-payment-info": {
-          protocols: ["x402"],
+          protocols: ["x402", "fiat-bearer"],
           price: { mode: "fixed", currency: "USD", amount: cap.price.replace("$", "") },
+          fiatBundles: { starter: { usd: 5, credits: 100 }, pro: { usd: 30, credits: 1000 }, scale: { usd: 200, credits: 10000 } },
         },
         parameters: params,
         ...(requestBody ? { requestBody } : {}),
@@ -378,6 +464,11 @@ app.get("/openapi.json", (_req, res) => {
           type: "http",
           scheme: "x402",
           description: "Attach X-PAYMENT header containing a signed EIP-3009 USDC transfer authorization on Base mainnet. Payment is verified and settled by the x402 facilitator before the capability handler runs.",
+        },
+        bearerToken: {
+          type: "http",
+          scheme: "bearer",
+          description: "Bearer token issued after a Stripe card purchase. Buy credits via POST /v1/fiat/checkout, then GET /v1/fiat/token to retrieve your token. Send as Authorization: Bearer <token> on any /cap/* endpoint — 1 credit consumed per call.",
         },
       },
     },
