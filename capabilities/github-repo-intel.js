@@ -10,9 +10,10 @@
 //   - Deciding whether to fork vs build from scratch
 //   - Identifying maintainer activity
 
-const GH_API = "https://api.github.com";
-const UA     = "Mozilla/5.0 (compatible; the-stall/1.9; +https://intuitek.ai)";
+const GH_API    = "https://api.github.com";
+const UA         = "Mozilla/5.0 (compatible; the-stall/1.9; +https://intuitek.ai)";
 const TIMEOUT_MS = 10000;
+const GH_TOKEN   = process.env.GITHUB_TOKEN;
 
 function parseRepo(input) {
   // Accept: "owner/repo" or full GitHub URL
@@ -23,12 +24,11 @@ function parseRepo(input) {
 }
 
 async function fetchJson(url) {
-  const resp = await fetch(url, {
-    headers: { "User-Agent": UA, Accept: "application/vnd.github+json" },
-    signal: AbortSignal.timeout(TIMEOUT_MS),
-  });
+  const headers = { "User-Agent": UA, Accept: "application/vnd.github+json" };
+  if (GH_TOKEN) headers["Authorization"] = `Bearer ${GH_TOKEN}`;
+  const resp = await fetch(url, { headers, signal: AbortSignal.timeout(TIMEOUT_MS) });
   if (resp.status === 404) throw new Error(`Repository not found: ${url}`);
-  if (resp.status === 403) throw new Error(`GitHub rate limit reached. Retry in ~1 hour, or use a GitHub token.`);
+  if (resp.status === 403) throw new Error(`GitHub rate limit reached. Retry in ~1 hour.`);
   if (!resp.ok) throw new Error(`GitHub API HTTP ${resp.status}`);
   return resp.json();
 }
