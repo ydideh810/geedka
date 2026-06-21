@@ -24,6 +24,8 @@ import { buildPaymentMiddleware } from "./payment.js";
 import { makeMcpHandler, makeSSEHandlers } from "./mcp.js";
 import { mountRetainer } from "./retainer/index.js";
 import { makeLiveProvider } from "./retainer/risk.js";
+import { mountStripeRail } from "./stripe-rail.js";
+import { loadSigner } from "./retainer/token.js";
 
 function parseJsonlLog(filePath) {
   try {
@@ -159,7 +161,7 @@ function extractPayerFromHeader(xPayment) {
   } catch { return null; }
 }
 
-function logCallAudit(method, path, statusCode, ip, ua, xPayment) {
+function logCallAudit(method, path, statusCode, ip, ua, xPayment, rail = "x402") {
   try {
     const payer = extractPayerFromHeader(xPayment);
     const paymentStatus = statusCode === 200 ? "paid" : statusCode === 400 ? "paid_bad_params" : "paid_error";
@@ -171,6 +173,7 @@ function logCallAudit(method, path, statusCode, ip, ua, xPayment) {
       path,
       payment_status: paymentStatus,
       payer_wallet: payer,
+      rail,
       status: statusCode,
     });
     appendFileSync(CALL_AUDIT_LOG, entry + "\n");
@@ -184,7 +187,13 @@ const FACILITATOR = process.env.FACILITATOR_URL || "https://x402.org/facilitator
 
 const app = express();
 app.set("trust proxy", 1);
-app.use(express.json());
+// Stripe webhook needs the RAW request body for signature verification, so it must
+// NOT be pre-parsed by express.json(). Skip JSON parsing for that one path; the
+// fiat rail mounts express.raw() on it instead.
+app.use((req, res, next) => {
+  if (req.path === "/v1/fiat/webhook") return next();
+  return express.json()(req, res, next);
+});
 app.use((_req, res, next) => {
   res.header("Access-Control-Allow-Origin", "*");
   res.header("Access-Control-Allow-Methods", "GET, POST, OPTIONS");
@@ -809,7 +818,21 @@ app.use((_req, res, next) => {
   next();
 });
 
-app.use(buildPaymentMiddleware({ payTo: PAY_TO, network: NETWORK, facilitator: FACILITATOR, capabilities }));
+// ── FIAT RAIL (Stripe) ────────────────────────────────────────────────────────
+// Mounts /v1/fiat/* routes and returns a gate middleware. The gate runs BEFORE the
+// x402 paywall: a valid fiat bearer token with remaining credits sets req.fiatPaid,
+// which causes the x402 middleware below to be skipped. Self-disables if no key.
+const tokenSigner = loadSigner();
+const stripeRail = mountStripeRail(app, {
+  signer: tokenSigner,
+  baseUrl: BASE_URL,
+  ledgerPath: join(LOG_DIR, "fiat_credits.json"),
+});
+app.use(stripeRail.fiatGate);
+
+// x402 paywall — bypassed when the fiat gate already authorized this request.
+const x402Middleware = buildPaymentMiddleware({ payTo: PAY_TO, network: NETWORK, facilitator: FACILITATOR, capabilities });
+app.use((req, res, next) => (req.fiatPaid ? next() : x402Middleware(req, res, next)));
 
 // ── Retainer mount (subscription shape — POST /v1/subscribe/:plan + GET /v1/risk/:address) ──
 const { plans } = mountRetainer(app, {
@@ -833,7 +856,7 @@ for (const cap of capabilities) {
       if (missing.length > 0) {
         logPaidCall(cap.name, cap.price, params, 400, req.ip);
         logSettlement(cap.name, cap.price, params, 400, res, req.ip, xPayment);
-        logCallAudit(req.method, req.path, 400, req.ip, req.get("user-agent"), xPayment);
+        logCallAudit(req.method, req.path, 400, req.ip, req.get("user-agent"), xPayment, req.fiatPaid ? "fiat" : "x402");
         // Build a ready-to-use example query string from inputSchema descriptions
         const props = cap.inputSchema?.properties || {};
         const exParts = missing.map(p => {
@@ -858,7 +881,7 @@ for (const cap of capabilities) {
         const out = await cap.handler(coerceQuery(params, cap.inputSchema), { req });
         logPaidCall(cap.name, cap.price, params, 200, req.ip);
         logSettlement(cap.name, cap.price, params, 200, res, req.ip, xPayment);
-        logCallAudit(req.method, req.path, 200, req.ip, req.get("user-agent"), xPayment);
+        logCallAudit(req.method, req.path, 200, req.ip, req.get("user-agent"), xPayment, req.fiatPaid ? "fiat" : "x402");
         res.json(out);
       } catch (err) {
         const isValidationError = err.status === 400 ||
@@ -866,7 +889,7 @@ for (const cap of capabilities) {
         const status = isValidationError ? 400 : 500;
         logPaidCall(cap.name, cap.price, params, status, req.ip);
         logSettlement(cap.name, cap.price, params, status, res, req.ip, xPayment);
-        logCallAudit(req.method, req.path, status, req.ip, req.get("user-agent"), xPayment);
+        logCallAudit(req.method, req.path, status, req.ip, req.get("user-agent"), xPayment, req.fiatPaid ? "fiat" : "x402");
         res.status(status).json({ error: isValidationError ? "bad_request" : "capability_error", capability: cap.name, message: String(err?.message || err) });
       }
     };
