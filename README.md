@@ -1,10 +1,11 @@
 # The Stall
 
-**Live x402 capability chassis** — pay-per-call AI data services for USDC on Base mainnet.
+**210 pay-per-call AI data tools** — no subscriptions, no API keys. Pay with crypto (x402/USDC on Base) or card (Stripe prepaid credits).
 
 [![Live](https://img.shields.io/badge/status-LIVE-brightgreen)](https://the-stall.intuitek.ai/health)
 [![Network](https://img.shields.io/badge/network-Base%20mainnet-0052FF)](https://base.org)
-[![Currency](https://img.shields.io/badge/payment-USDC%20%C2%B7%20x402-26A17B)](https://x402.org)
+[![x402](https://img.shields.io/badge/payment-USDC%20%C2%B7%20x402-26A17B)](https://x402.org)
+[![Stripe](https://img.shields.io/badge/payment-card%20%C2%B7%20Stripe-635BFF)](https://the-stall.intuitek.ai/v1/fiat/checkout)
 [![Provider](https://img.shields.io/badge/provider-IntuiTek%C2%B9-5A1AE5)](https://intuitek.ai)
 [![thebrierfox/the-stall MCP server](https://glama.ai/mcp/servers/thebrierfox/the-stall/badges/score.svg)](https://glama.ai/mcp/servers/thebrierfox/the-stall)
 
@@ -17,9 +18,23 @@
 
 ---
 
+## Payment options
+
+Two rails, same capabilities, no accounts required:
+
+**Option A — Crypto (x402, agents and wallets):** Call any `/cap/<name>` endpoint → receive `402 Payment Required` with the USDC price → pay on Base mainnet via the x402 facilitator → result returned automatically. No signup.
+
+**Option B — Card (Stripe, humans and devs):** Buy prepaid credits once, then call any cap with `Authorization: Bearer <token>` — 1 credit per call, no gas, no per-call signing.
+1. `POST https://the-stall.intuitek.ai/v1/fiat/checkout` with `{"bundle":"starter"}` → returns a Stripe checkout URL.
+   - `starter` $5 / 100 credits · `pro` $30 / 1,000 credits · `scale` $200 / 10,000 credits
+2. After paying: `GET https://the-stall.intuitek.ai/v1/fiat/token?session_id=<id>` → returns your bearer token.
+3. Add `Authorization: Bearer <token>` to any `/cap/<name>` call.
+
+---
+
 ## Current capabilities — 210 live tools (v4.64.0)
 
-Full catalog at `/catalog`. Each capability is behind a per-call x402 paywall — no API keys, no accounts, no monthly fees. Pay USDC on Base mainnet per call.
+Full catalog at `/catalog`. Each capability supports both payment rails — x402 (USDC on Base) and card/Bearer. No API keys, no accounts, no monthly fees.
 
 | Capability | Price | Description |
 |---|---|---|
