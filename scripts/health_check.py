@@ -69,6 +69,11 @@ CAP_TEST_INPUTS = {
     "code-api-surface":      {"code": "app.get('/users', (req, res) => res.json([]))"},
     "code-test-detector":    {"repo": "anthropics/anthropic-sdk-python"},
     "research-synthesis":    {"topic": "x402 payment protocol"},
+    "evm-token-security":    {"address": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913", "chain": "base"},
+    "global-news-intel":     {"query": "AI technology"},
+    "solar-intel":           {"location": "Phoenix, AZ"},
+    "sports-prediction":     {"sport": "NBA"},
+    "erc20-snapshot":        {"contract": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913", "network": "base"},
 }
 
 

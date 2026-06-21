@@ -95,13 +95,18 @@ const ALL_CAPS = [
 // Cap-specific query params for caps that require non-empty inputs to succeed.
 // These are appended to the GET URL so the handler receives valid test data.
 const SEEDER_CAP_INPUTS = {
-  "generate-meme":     { template: "drake", top: "seeder health check" },
-  "github-repo-intel": { repo: "anthropics/anthropic-sdk-python" },
-  "roast":             { target: "Python developers who avoid type hints" },
-  "meme-generator":    { topic: "seeder health check" },
-  "document-qa-prep":  { text: "The quick brown fox jumps over the lazy dog." },
-  "code-api-surface":  { code: "app.get('/ping', (req, res) => res.json({ok:true}))" },
+  "generate-meme":        { template: "drake", top: "seeder health check" },
+  "github-repo-intel":    { repo: "anthropics/anthropic-sdk-python" },
+  "roast":                { target: "Python developers who avoid type hints" },
+  "meme-generator":       { topic: "seeder health check" },
+  "document-qa-prep":     { text: "The quick brown fox jumps over the lazy dog." },
+  "code-api-surface":     { code: "app.get('/ping', (req, res) => res.json({ok:true}))" },
   "policy-impact-mapper": { policy_text: "Congress passed a new infrastructure bill." },
+  "evm-token-security":   { address: "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913", chain: "base" },
+  "global-news-intel":    { query: "AI technology" },
+  "solar-intel":          { location: "Phoenix, AZ" },
+  "sports-prediction":    { sport: "NBA" },
+  "erc20-snapshot":       { contract: "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913", network: "base" },
 };
 
 // ──────────────────────────────────────────────────────────────────────────────
