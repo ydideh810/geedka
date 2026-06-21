@@ -175,10 +175,10 @@ Respond ONLY with a JSON object (no markdown, no prose outside the JSON) with th
 
 export default {
   name:  "research-synthesis",
-  price: "$0.200",
+  price: "$5.000",
 
   description:
-    "AI-synthesized intelligence report — aggregates Hacker News, OpenAlex academic papers, Reddit, arXiv preprints, and DuckDuckGo in parallel, then distills into a structured report: executive summary, key findings, market sentiment, emerging trends, and recommendations. Pass ?query=your+topic for targeted research (e.g. 'AI agent payment protocols 2025'). Omit query for a default AI agents & autonomous systems report. $0.200/call — 20% below nearest competitor.",
+    "AI-synthesized intelligence report — aggregates Hacker News, OpenAlex academic papers, Reddit, arXiv preprints, and DuckDuckGo in parallel, then distills into a structured report: executive summary, key findings, market sentiment, emerging trends, and recommendations. Pass ?query=your+topic for targeted research (e.g. 'AI agent payment protocols 2025'). Omit query for a default AI agents & autonomous systems report.",
 
   inputSchema: {
     type: "object",

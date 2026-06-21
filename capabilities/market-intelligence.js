@@ -24,7 +24,7 @@ export default {
   price: "$0.200",
 
   description:
-    "Returns settlement-verified x402 endpoint intelligence. Shows which endpoints have genuine organic payer breadth and live pricing — sourced from on-chain USDC settlements, not just catalog listings. Filter by category, price range, and minimum unique payers. Useful before wiring a workflow to an external x402 endpoint: confirms it is active with multiple independent payers, not private infrastructure or a dead listing.",
+    "Discovers active x402 APIs with verified organic USDC settlements — shows which endpoints have genuine payer breadth across the ecosystem. Sourced from on-chain settlements, not catalog listings. Filter by category, price range, and minimum unique payers. Useful before wiring a workflow to an external x402 endpoint: confirms it is active with multiple independent payers, not private infrastructure or a dead listing.",
 
   inputSchema: {
     type: "object",

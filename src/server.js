@@ -618,10 +618,11 @@ app.get("/llms.txt", (_req, res) => {
     });
     return ` | ?${parts.join('&')}`;
   }
-  // High-traffic caps that must always appear in llms.txt regardless of category ordering
-  const PRIORITY_CAPS = ['us-stock-price','stock-price-multi','crypto-top-movers',
-    'crypto-news-impact','research-synthesis','weather-history','hf-model-search','cron-parser'];
-  const prioritySection = `## Most Requested\n\n${PRIORITY_CAPS.map(n => {
+  // Revenue-proven caps — ordered by actual USDC earnings, not probe volume.
+  // Guides x402-capable agents to synthesis caps with demonstrated conversion history.
+  const PRIORITY_CAPS = ['energy-brief','market-intelligence','macro-brief','manufacturing-brief',
+    'research-synthesis','stock-price-multi','lbo-model','market-overview'];
+  const prioritySection = `## Highest-Value Caps — Proven x402 Conversions\n\n${PRIORITY_CAPS.map(n => {
     const cap = capabilities.find(c => c.name === n);
     if (!cap) return null;
     const price = cap.price?.replace('$','') || '?';
@@ -629,7 +630,9 @@ app.get("/llms.txt", (_req, res) => {
     const hint = n === 'research-synthesis'
       ? ' | ?query=AI+agents+2025 (query optional — defaults to AI agents report)'
       : paramHint(cap);
-    return `  - [${n}](${BASE_URL}/cap/${n}): $${price} USDC${hint}`;
+    // Add a short description for value clarity on high-ticket synthesis caps
+    const shortDesc = cap.description ? ` — ${cap.description.split('.')[0].slice(0, 85)}` : '';
+    return `  - [${n}](${BASE_URL}/cap/${n}): $${price} USDC${hint}${shortDesc}`;
   }).filter(Boolean).join('\n')}`;
   // Collect all caps matched by any category to find uncategorized ones
   const categorizedNames = new Set(cats.flatMap(cat => cat.caps));
