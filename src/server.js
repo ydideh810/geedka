@@ -664,6 +664,10 @@ app.get("/llms.txt", (_req, res) => {
 
 The Stall is an x402-native capability chassis by IntuiTek¹. Every capability is a GET endpoint — agents probe, receive a 402 Payment Required with the exact USDC price, pay on Base mainnet via the Coinbase CDP facilitator, and receive the result. No accounts, no subscriptions required.
 
+**Prefer to pay by card (no crypto wallet)?** Buy prepaid credits and call any cap with an "Authorization: Bearer <token>" header — 1 credit per call, no gas, no per-call signing:
+- Buy credits: POST ${BASE_URL}/v1/fiat/checkout with JSON body {"bundle":"starter"} → returns a Stripe checkout URL. Bundles: starter $5 (100 credits), pro $30 (1,000 credits), scale $200 (10,000 credits).
+- After paying: GET ${BASE_URL}/v1/fiat/token?session_id=... returns your bearer token; send it as "Authorization: Bearer <token>" on any /cap/<name> call.
+
 - MCP endpoint: ${BASE_URL}/mcp (streamable-http)
 - SSE endpoint: ${BASE_URL}/sse
 - x402 manifest: ${BASE_URL}/.well-known/x402
