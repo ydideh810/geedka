@@ -92,6 +92,18 @@ const ALL_CAPS = [
   "x402-endpoint-intel","yield-farming-active","youtube-intel",
 ];
 
+// Cap-specific query params for caps that require non-empty inputs to succeed.
+// These are appended to the GET URL so the handler receives valid test data.
+const SEEDER_CAP_INPUTS = {
+  "generate-meme":     { template: "drake", top: "seeder health check" },
+  "github-repo-intel": { repo: "anthropics/anthropic-sdk-python" },
+  "roast":             { target: "Python developers who avoid type hints" },
+  "meme-generator":    { topic: "seeder health check" },
+  "document-qa-prep":  { text: "The quick brown fox jumps over the lazy dog." },
+  "code-api-surface":  { code: "app.get('/ping', (req, res) => res.json({ok:true}))" },
+  "policy-impact-mapper": { policy_text: "Congress passed a new infrastructure bill." },
+};
+
 // ──────────────────────────────────────────────────────────────────────────────
 // HELPERS
 // ──────────────────────────────────────────────────────────────────────────────
@@ -138,7 +150,9 @@ async function probeCap(capName) {
 }
 
 async function seedCap(evmScheme, capName, requirements, payReq) {
-  const url = `${BASE_URL}/cap/${capName}?seed=continuous_seeder`;
+  const extraParams = SEEDER_CAP_INPUTS[capName] || {};
+  const qs = new URLSearchParams({ ...extraParams, seed: "continuous_seeder" }).toString();
+  const url = `${BASE_URL}/cap/${capName}?${qs}`;
   try {
     const partialPayload = await evmScheme.createPaymentPayload(requirements.x402Version, payReq);
     const paymentPayload = {
