@@ -104,7 +104,8 @@ const SEEDER_CAP_INPUTS = {
   "policy-impact-mapper": { policy_text: "Congress passed a new infrastructure bill." },
   "evm-token-security":   { address: "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913", chain: "base" },
   "global-news-intel":    { query: "AI technology" },
-  "solar-intel":          { location: "Phoenix, AZ" },
+  "social-intel":         { platform: "github", username: "torvalds" },
+  "solar-intel":          { latitude: 33.4484, longitude: -112.0740 },
   "sports-prediction":    { sport: "NBA" },
   "erc20-snapshot":       { contract: "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913", network: "base" },
 };

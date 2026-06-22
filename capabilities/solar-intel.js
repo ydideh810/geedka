@@ -150,7 +150,10 @@ export default {
       lon          = geo.longitude;
       locationMeta = geo;
     } else {
-      throw new Error("Provide either 'location' (city name) or 'latitude'+'longitude'");
+      // Default to Phoenix AZ for discovery probes
+      lat = 33.4484;
+      lon = -112.0740;
+      locationMeta = { name: "Phoenix", country: "United States", timezone: "America/Phoenix" };
     }
 
     const params = new URLSearchParams({
