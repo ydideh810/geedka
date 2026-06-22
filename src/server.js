@@ -981,11 +981,14 @@ for (const cap of capabilities) {
       } catch (err) {
         const isValidationError = err.status === 400 ||
           /^(provide |at least one|lat and lon are required)/i.test(err.message || "");
-        const status = isValidationError ? 400 : 500;
+        const isUpstreamUnavailable = err.status === 503;
+        const status = isValidationError ? 400 : isUpstreamUnavailable ? 503 : 500;
+        const errorCode = isValidationError ? "bad_request" : isUpstreamUnavailable ? "upstream_unavailable" : "capability_error";
         logPaidCall(cap.name, cap.price, params, status, req.ip);
         logSettlement(cap.name, cap.price, params, status, res, req.ip, xPayment);
         logCallAudit(req.method, req.path, status, req.ip, req.get("user-agent"), xPayment, req.fiatPaid ? "fiat" : "x402");
-        res.status(status).json({ error: isValidationError ? "bad_request" : "capability_error", capability: cap.name, message: String(err?.message || err) });
+        if (isUpstreamUnavailable) res.setHeader("Retry-After", "5");
+        res.status(status).json({ error: errorCode, capability: cap.name, message: String(err?.message || err) });
       }
     };
   }

@@ -25,7 +25,9 @@ async function gdeltQuery(params) {
     signal:  AbortSignal.timeout(TIMEOUT),
   });
   if (resp.status === 429) {
-    throw new Error("GDELT rate limit — retry after 5 seconds");
+    const e = new Error("GDELT rate limit — upstream allows one request per 5 seconds; retry shortly");
+    e.status = 503;
+    throw e;
   }
   if (!resp.ok) throw new Error(`GDELT HTTP ${resp.status}`);
   const text = await resp.text();
@@ -34,7 +36,9 @@ async function gdeltQuery(params) {
     throw new Error("Query too short — each keyword must be 3+ characters");
   }
   if (text.startsWith("Please limit")) {
-    throw new Error("GDELT rate limit — retry after 5 seconds");
+    const e = new Error("GDELT rate limit — upstream allows one request per 5 seconds; retry shortly");
+    e.status = 503;
+    throw e;
   }
   try {
     return JSON.parse(text);
