@@ -93,7 +93,7 @@ export default {
   },
 
   async handler(query) {
-    const { owner, repo } = parseRepo(query.repo || "");
+    const { owner, repo } = parseRepo(query.repo || "vercel/next.js");
     const inclRelease     = query.include_release !== false;
 
     const [repoData, releaseData] = await Promise.all([

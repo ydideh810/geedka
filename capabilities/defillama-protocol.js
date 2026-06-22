@@ -8,7 +8,7 @@
 
 const LLAMA_BASE = "https://api.llama.fi";
 const UA         = "Mozilla/5.0 (compatible; the-stall/defillama-protocol; +https://intuitek.ai)";
-const TIMEOUT    = 15_000;
+const TIMEOUT    = 20_000;
 
 // Chain TVL keys to exclude from "clean" TVL total
 const EXCL = new Set(["staking", "pool2", "borrowed", "Plasma", "offers"]);
