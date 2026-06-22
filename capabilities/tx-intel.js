@@ -12,8 +12,8 @@
 
 const CHAINS = {
   base:      "https://mainnet.base.org",
-  ethereum:  "https://eth.drpc.org",
-  eth:       "https://eth.drpc.org",
+  ethereum:  "https://ethereum.publicnode.com",
+  eth:       "https://ethereum.publicnode.com",
   arbitrum:  "https://arb1.arbitrum.io/rpc",
   optimism:  "https://mainnet.optimism.io",
   polygon:   "https://polygon-bor-rpc.publicnode.com",
@@ -282,7 +282,7 @@ export default {
     const rpcUrl = CHAINS[chain];
     if (!rpcUrl) throw new Error(`Unsupported chain: ${chain}`);
 
-    const txHash = (input.tx_hash || "0xbe6c8a362d24e50e7bdada68bccfc65676d572aa0b09ca87e06b79adb69b1ab6").toLowerCase();
+    const txHash = (input.tx_hash || "0x34b0204a1b6095816252517acff4e8d94ba2a71c2e3f180c6fe4e6530c021d8d").toLowerCase();
     if (!/^0x[0-9a-f]{64}$/.test(txHash)) {
       throw new Error("tx_hash must be 0x-prefixed and 64 hex characters");
     }
@@ -293,7 +293,7 @@ export default {
       rpcCall(rpcUrl, "eth_getTransactionReceipt", [txHash]),
     ]);
 
-    if (!tx) throw new Error(`Transaction ${txHash} not found on ${chain}`);
+    if (!tx) return { tx_hash: txHash, chain: chain === "eth" ? "ethereum" : chain, found: false, message: `Transaction not found on ${chain}. Provide a valid tx_hash to decode a specific transaction.` };
 
     const pending = !receipt;
     const status  = pending ? "pending"

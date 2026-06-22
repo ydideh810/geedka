@@ -9,10 +9,10 @@
 // Free upstream: public JSON-RPC nodes (drpc.org) — no API key required.
 
 const CHAINS = {
-  ethereum: "https://eth.drpc.org",
-  base:     "https://base.drpc.org",
-  polygon:  "https://polygon.drpc.org",
-  arbitrum: "https://arbitrum.drpc.org",
+  ethereum: "https://ethereum.publicnode.com",
+  base:     "https://mainnet.base.org",
+  polygon:  "https://polygon-bor-rpc.publicnode.com",
+  arbitrum: "https://arb1.arbitrum.io/rpc",
 };
 
 const METHOD_SELECTORS = {
@@ -133,8 +133,8 @@ export default {
   },
 
   async handler(query) {
-    // Default to a well-known Ethereum tx (Uniswap genesis) for discovery probes
-    const DEFAULT_TX = "0x4b37d2f343608457ca3322accdab2811c707acf4f2c9d4039bf9e9e08f2c5de4";
+    // Default to a known Ethereum tx (block 24749401) for discovery probes
+    const DEFAULT_TX = "0x34b0204a1b6095816252517acff4e8d94ba2a71c2e3f180c6fe4e6530c021d8d";
     const raw = (query.tx_hash || DEFAULT_TX).trim().toLowerCase();
     const tx_hash = /^0x[0-9a-f]{64}$/.test(raw) ? raw : DEFAULT_TX;
     const chain  = (query.chain || "ethereum").toLowerCase();
