@@ -1,5 +1,7 @@
 {
   "$schema": "https://glama.ai/mcp/schemas/server.json",
+  "name": "The Stall",
+  "description": "209 pay-per-call AI data tools via MCP and x402 \u2014 no API keys, no accounts. Covers US/global equities, DeFi analytics, crypto intel, prediction markets, weather, aviation, company intelligence, congressional trades, arXiv research, on-chain wallet security, OSINT, news synthesis, and 190+ more. Pay USDC on Base (x402) or Stripe prepaid credits. Remote MCP: https://the-stall.intuitek.ai/mcp.",
   "maintainers": [
     "thebrierfox"
   ],
