@@ -484,7 +484,7 @@ app.get("/.well-known/x402", (_req, res) =>
   res.json({
     version: "1.0.0",
     name: "The Stall",
-    description: "Domain-agnostic x402 capability chassis by IntuiTek¹. AI-callable data services for USDC on Base mainnet. No API keys or accounts required.",
+    description: `${capabilities.length} pay-per-call AI data tools via MCP + x402 on Base mainnet. Finance, crypto, DeFi, prediction markets, macro, OSINT, research, weather, aviation. No API keys or accounts required — pay USDC per call.`,
     url: BASE_URL,
     network: "base",
     currency: "USDC",
