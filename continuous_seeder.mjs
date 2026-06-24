@@ -88,7 +88,7 @@ const ALL_CAPS = [
   "strategy-signal","supply-chain-brief","tech-brief","timezone","token-top-holders",
   "treasury-auction-calendar","treasury-yields","twitter-intel","tx-explainer","tx-intel",
   "unit-converter","us-stock-history","us-stock-price","usgs-earthquake","vision-analyze",
-  "wallet-balance","wallet-credit-score","wallet-screener","wayback-intel","weather",
+  "wacc-calculator","wallet-balance","wallet-credit-score","wallet-screener","wayback-intel","weather",
   "weather-alerts","weather-history","web-change-monitor","web-company-intel","web-scrape-links",
   "whale-radar","wikipedia-intel","world-bank-data","x402-endpoint-intel","yield-farming-active",
   "youtube-channel-intel","youtube-comments","youtube-intel","youtube-playlist","youtube-search","youtube-transcript",
@@ -125,6 +125,7 @@ const SEEDER_CAP_INPUTS = {
   "institutional-ownership":   { symbol: "AAPL" },
   "pre-earnings-brief":        { ticker: "NVDA" },
   "options-iv-snapshot":       { ticker: "NVDA" },
+  "wacc-calculator":           { ticker: "NVDA" },
 };
 
 // ──────────────────────────────────────────────────────────────────────────────
