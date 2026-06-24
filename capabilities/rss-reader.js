@@ -110,7 +110,7 @@ function parseAtom(xml) {
 
 export default {
   name: "rss-reader",
-  price: "$0.116",
+  price: "$0.005",
 
   description:
     "Fetches and parses any public RSS 2.0 or Atom 1.0 feed. Returns feed metadata (title, description, language, last updated) and structured items (title, link, 400-char summary, author, published date, GUID). Useful for monitoring news, blog posts, GitHub release notes, Reddit RSS, arXiv category feeds, or security advisories.",
