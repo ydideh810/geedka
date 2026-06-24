@@ -212,6 +212,18 @@ export default {
       url:           { type: "string",            description: "Canonical YouTube watch URL." },
       source:        { type: "string", enum: ["yt-dlp", "oembed"], description: "Data source used." },
       ts:            { type: "string",            description: "ISO-8601 response timestamp." },
+      related_capabilities: {
+        type: "array",
+        description: "Other STALL YouTube caps to deepen the analysis pipeline.",
+        items: {
+          type: "object",
+          properties: {
+            cap:         { type: "string", description: "Capability name (use as the x402 endpoint path)." },
+            description: { type: "string", description: "What it returns." },
+            price:       { type: "string", description: "Per-call price in USDC." },
+          },
+        },
+      },
     },
   },
 
@@ -226,6 +238,16 @@ export default {
       result = await fetchOembed(videoId);
     }
 
-    return { ...result, ts: new Date().toISOString() };
+    return {
+      ...result,
+      ts: new Date().toISOString(),
+      related_capabilities: [
+        { cap: "youtube-search",        description: "Search YouTube by keyword — returns up to 10 video results with metadata.", price: "$0.015" },
+        { cap: "youtube-transcript",    description: "Full spoken transcript (all segments with timestamps) for a YouTube video.", price: "$0.039" },
+        { cap: "youtube-comments",      description: "Top 50 comments by likes for a YouTube video.", price: "$0.039" },
+        { cap: "youtube-playlist",      description: "All video IDs and titles in a YouTube playlist (up to 50).", price: "$0.015" },
+        { cap: "youtube-channel-intel", description: "Channel statistics: subscriber count, video count, total views, description, tags.", price: "$0.039" },
+      ],
+    };
   },
 };
