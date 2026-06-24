@@ -699,7 +699,7 @@ app.get("/llms.txt", (_req, res) => {
     { name: "Infrastructure & Data", caps: capabilities.filter(c => /dns|ip-intel|ssl|http|ping|agent-access|geo|city|place|domain|email-verify|npm|pypi|json|regex|unit|timezone|cron|page-intel|page-links|readable|web-scrape|web-change|web-company|wayback|breadcrumb|dictionary|changelog-gen|db-perf/i.test(c.name)).map(c => c.name) },
     { name: "On-chain Risk & Compliance", caps: capabilities.filter(c => /sanctions|wallet-credit|wallet-screener|address-security|agent-kya|kya|cve|drug-intel|npi|clinical|fda/i.test(c.name)).map(c => c.name) },
     { name: "Macro & Alternative Data", caps: capabilities.filter(c => /macro|imf|world-bank|commodity|energy|solar|earthquake|usgs|weather|air-quality|aviation|flight|legal|gov-vote|congressional|federal-contract|federal-register|country-info|chromatic|sport-predict/i.test(c.name)).map(c => c.name) },
-    { name: "Social & Video Intelligence", caps: capabilities.filter(c => /youtube|twitter-intel|github-trending/i.test(c.name)).map(c => c.name) },
+    { name: "Social & Video Intelligence", caps: capabilities.filter(c => /youtube|twitter-intel|github-trending|podcast/i.test(c.name)).map(c => c.name) },
   ];
   // Extract a short example value from a property description
   function exampleFromDesc(desc = '') {
