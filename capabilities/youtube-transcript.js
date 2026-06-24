@@ -129,7 +129,7 @@ export default {
   },
 
   async handler(query) {
-    const videoId = extractVideoId(query.video || "jNQXAC9IVRw");
+    const videoId = extractVideoId(query.video || "dQw4w9WgXcQ");
     if (!videoId) throw new Error("invalid YouTube URL or video ID");
 
     const fmt     = query.format || "segments";
@@ -157,7 +157,7 @@ export default {
       if (!vttFile) {
         throw Object.assign(
           new Error("No English transcript available for this video (auto-captions disabled or private)."),
-          { status: 404 }
+          { status: 400 }
         );
       }
 
