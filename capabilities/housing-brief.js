@@ -164,7 +164,7 @@ Respond ONLY with valid JSON:
 
 export default {
   name:  "housing-brief",
-  price: "$0.482",
+  price: "$0.350",
 
   description:
     "AI-synthesized US housing market briefing. Fetches 8 FRED signals (starts, permits, existing/new sales, months supply, 30Y mortgage rate, Case-Shiller HPI, median price) and uses gpt-4o-mini to produce market phase, direction, supply posture, affordability regime, 150-word narrative, dominant risk, and agent implication. One call collapses 8 FRED lookups + LLM synthesis for REIT analysis, mortgage exposure, consumer wealth, and macro housing drag.",
