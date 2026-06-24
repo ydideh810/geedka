@@ -75,7 +75,7 @@ const ALL_CAPS = [
   "labor-brief","labor-market","legal-search","limitless-markets","macro-brief",
   "macro-indicators","manufacturing-brief","market-gex","market-intelligence","market-movers",
   "market-overview","market-regime-intel","market-sentiment","meme-generator","meme-radar",
-  "news-sentiment","nft-metadata","npi-lookup","npm-lookup","options-chain","options-snapshot",
+  "news-sentiment","nft-metadata","npi-lookup","npm-lookup","npm-trends","options-chain","options-snapshot",
   "page-intel","page-links","ping","place-details","policy-impact-mapper",
   "polymarket-accuracy-score","polymarket-category-performance","polymarket-crypto-updown",
   "polymarket-intel","polymarket-sentiment-shift","polymarket-whale-entries","portfolio-rebalance",
@@ -113,6 +113,7 @@ const SEEDER_CAP_INPUTS = {
   "solar-intel":          { latitude: 33.4484, longitude: -112.0740 },
   "sports-prediction":    { sport: "NBA" },
   "erc20-snapshot":       { contract: "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913", network: "base" },
+  "npm-trends":           { packages: ["express","fastify","hono"], period: "last-month" },
 };
 
 // ──────────────────────────────────────────────────────────────────────────────

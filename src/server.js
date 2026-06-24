@@ -719,10 +719,10 @@ app.get("/llms.txt", (_req, res) => {
     });
     return ` | ?${parts.join('&')}`;
   }
-  // Revenue-proven caps — ordered by actual USDC earnings, not probe volume.
-  // Guides x402-capable agents to synthesis caps with demonstrated conversion history.
-  const PRIORITY_CAPS = ['youtube-intel','energy-brief','market-intelligence','macro-brief',
-    'research-synthesis','stock-price-multi','sector-rotation','market-overview'];
+  // Revenue-proven caps — ordered by actual USDC organic earnings (settlement.jsonl).
+  // Last updated: 2026-06-24. youtube-intel #1 (30/day), then finance/research cluster.
+  const PRIORITY_CAPS = ['youtube-intel','earnings-calendar','credit-spreads','crypto-top-movers',
+    'research-synthesis','market-overview','macro-brief','market-intelligence'];
   const prioritySection = `## Highest-Value Caps — Proven x402 Conversions\n\n${PRIORITY_CAPS.map(n => {
     const cap = capabilities.find(c => c.name === n);
     if (!cap) return null;
