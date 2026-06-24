@@ -3,7 +3,7 @@
 // StableEnrich play: "six sources, one API call" applied to STALL's three strongest
 // signal streams. One x402 payment returns structured context across equities, DeFi,
 // and prediction markets — useful for position-sizing, yield routing, or pre-decision
-// sentiment. $0.15 vs $0.175 bought individually.
+// sentiment. $0.09 vs $0.109 bought individually.
 
 import marketOverview from "./market-overview.js";
 import defiYields from "./defi-yields.js";
@@ -11,10 +11,10 @@ import predictionMarkets from "./prediction-markets.js";
 
 export default {
   name: "intel-pack",
-  price: "$0.531",
+  price: "$0.090",
 
   description:
-    "Three-source intelligence pack in one x402 call: equity market snapshot (SPY/QQQ/IWM/VIX/risk signal) + top DeFi yield pools by APY + top prediction markets by volume. Replaces three separate calls. $0.175 purchased individually; $0.15 as a pack. No inputs required.",
+    "Three-source intelligence pack in one x402 call: equity market snapshot (SPY/QQQ/IWM/VIX/risk signal) + top DeFi yield pools by APY + top prediction markets by volume. Replaces three separate calls. $0.109 purchased individually; $0.09 as a pack. No inputs required.",
 
   inputSchema: {
     type: "object",
