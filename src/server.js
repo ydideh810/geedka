@@ -699,6 +699,7 @@ app.get("/llms.txt", (_req, res) => {
     { name: "Infrastructure & Data", caps: capabilities.filter(c => /dns|ip-intel|ssl|http|ping|agent-access|geo|city|place|domain|email-verify|npm|pypi|json|regex|unit|timezone|cron|page-intel|page-links|readable|web-scrape|web-change|web-company|wayback|breadcrumb|dictionary|changelog-gen|db-perf/i.test(c.name)).map(c => c.name) },
     { name: "On-chain Risk & Compliance", caps: capabilities.filter(c => /sanctions|wallet-credit|wallet-screener|address-security|agent-kya|kya|cve|drug-intel|npi|clinical|fda/i.test(c.name)).map(c => c.name) },
     { name: "Macro & Alternative Data", caps: capabilities.filter(c => /macro|imf|world-bank|commodity|energy|solar|earthquake|usgs|weather|air-quality|aviation|flight|legal|gov-vote|congressional|federal-contract|federal-register|country-info|chromatic|sport-predict/i.test(c.name)).map(c => c.name) },
+    { name: "Social & Video Intelligence", caps: capabilities.filter(c => /youtube|twitter-intel|github-trending/i.test(c.name)).map(c => c.name) },
   ];
   // Extract a short example value from a property description
   function exampleFromDesc(desc = '') {
@@ -720,8 +721,8 @@ app.get("/llms.txt", (_req, res) => {
   }
   // Revenue-proven caps — ordered by actual USDC earnings, not probe volume.
   // Guides x402-capable agents to synthesis caps with demonstrated conversion history.
-  const PRIORITY_CAPS = ['energy-brief','market-intelligence','macro-brief','manufacturing-brief',
-    'research-synthesis','stock-price-multi','lbo-model','market-overview'];
+  const PRIORITY_CAPS = ['youtube-intel','energy-brief','market-intelligence','macro-brief',
+    'research-synthesis','stock-price-multi','sector-rotation','market-overview'];
   const prioritySection = `## Highest-Value Caps — Proven x402 Conversions\n\n${PRIORITY_CAPS.map(n => {
     const cap = capabilities.find(c => c.name === n);
     if (!cap) return null;
