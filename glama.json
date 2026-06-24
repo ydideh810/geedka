@@ -1773,7 +1773,9 @@
             "maximum": 16
           }
         },
-        "required": ["ticker"]
+        "required": [
+          "ticker"
+        ]
       }
     },
     {
@@ -5750,6 +5752,34 @@
           "format": {
             "type": "string",
             "description": "Output format: 'segments' (timestamped array + text, default) or 'text' (plain string only)."
+          }
+        },
+        "required": []
+      }
+    },
+    {
+      "name": "cash-flow-statement",
+      "description": "Full cash flow statement history for any US public stock \u2014 operating, investing, and financing sections. Returns: D&A, stock-based comp, working capital changes, operating CF, capex, acquisitions, investing CF, debt issuance/repayment, share buybacks, dividends paid, financing CF, free cash flow, beginning/ending cash, owner earnings (net income + D&A - capex), and cash conversion ratio. Quarterly default (up to 8 periods); annual returns up to 4 fiscal years. Completes the financial statement trilogy alongside income-statements and balance-sheet. Source: Yahoo Finance (free, no API key).",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "ticker": {
+            "type": "string",
+            "description": "US equity ticker symbol (e.g. AAPL, MSFT, NVDA, TSLA)."
+          },
+          "period": {
+            "type": "string",
+            "enum": [
+              "quarterly",
+              "annual"
+            ],
+            "description": "Period type. Default: quarterly."
+          },
+          "limit": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 8,
+            "description": "Max periods to return (1-8 quarterly; 1-4 annual). Default: 4."
           }
         },
         "required": []
