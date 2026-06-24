@@ -3676,6 +3676,22 @@
       }
     },
     {
+      "name": "options-iv-snapshot",
+      "description": "Options IV snapshot: CBOE IV30, expected move from ATM straddle (1st + 2nd expiry), P/C ratio. Completes pre-earnings decision workflow.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "ticker": {
+            "type": "string",
+            "description": "US equity ticker symbol (e.g. AAPL, NVDA, TSLA)."
+          }
+        },
+        "required": [
+          "ticker"
+        ]
+      }
+    },
+    {
       "name": "options-snapshot",
       "description": "Options intelligence snapshot for any US equity \u2014 IV30, put/call volume ratio, top calls and puts by trading volume, and unusual-volume flags. Free CBOE delayed data (15-min delay during trading hours), no API key required. Complements us-stock-price and equity-technicals with the options-layer sentiment layer agents need for complete trade context. $0.015/call.",
       "inputSchema": {
