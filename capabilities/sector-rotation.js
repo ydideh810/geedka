@@ -31,7 +31,7 @@
 // Price: $0.020/call — parallel fetch of 12 symbols (11 sectors + SPY).
 
 const YF_BASE = "https://query2.finance.yahoo.com/v8/finance/chart";
-const UA      = "Mozilla/5.0 (compatible; the-stall/4.4; +https://intuitek.ai)";
+const UA      = "Mozilla/5.0 (compatible; the-stall/5.0; +https://intuitek.ai)";
 const TMO     = 14_000;
 
 const SECTORS = {
@@ -82,7 +82,7 @@ function rotationSignal(rel1m, rel5d) {
 
 export default {
   name:  "sector-rotation",
-  price: "$0.434",
+  price: "$0.020",
 
   description:
     "S&P 500 sector rotation: relative performance of all 11 GICS sectors (XLK XLF XLE XLV XLI XLY XLP XLB XLRE XLU XLC) vs SPY benchmark. Returns 1D, 5D, 1M, and 3M absolute and relative returns, a rotation signal per sector (LEADING, CATCHING_UP, FALLING_BEHIND, LAGGING), and 1M leadership ranking. Parameterizable: sort by any timeframe. Free Yahoo Finance source, no API keys. Use for sector allocation, macro-regime interpretation, or screening rotation momentum.",
