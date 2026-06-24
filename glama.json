@@ -57,6 +57,24 @@
       }
     },
     {
+      "name": "agriculture-brief",
+      "description": "AI-synthesized US agricultural commodities market intelligence brief. Assembles 9 real-time signals: corn (ZC=F), wheat (ZW=F), soybeans (ZS=F), live cattle (LE=F), lean hogs (HE=F), coffee arabica (KC=F), cotton (CT=F), agribusiness ETF (MOO), Deere & Co (DE). Returns soy/corn ratio, wheat/corn spread, grain and livestock regime classification, plus 200-word GPT-4o-mini narrative for food-sector equity, commodity-trading, and inflation-modeling pipelines.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "style": {
+            "type": "string",
+            "enum": [
+              "standard",
+              "concise"
+            ],
+            "description": "Output length. standard = 200-word narrative (default). concise = 100-word summary."
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    {
       "name": "ai-image-gen",
       "description": "Generate an AI image from a text prompt using DALL-E 3. Returns a public URL for the image (hosted for 1 hour) plus the model's revised prompt. Supports vivid or natural style, and three aspect ratios: square (1024\u00d71024), portrait (1024\u00d71792), or landscape (1792\u00d71024). $0.080/image \u2014 20% below closest x402 competitor. Output is base64-encoded PNG or a direct URL depending on response_format.",
       "inputSchema": {
@@ -2567,6 +2585,27 @@
       }
     },
     {
+      "name": "fred-query",
+      "description": "Pull any FRED (St. Louis Fed) economic series by ID. Returns recent observations, trend, and summary stats. Covers 800,000+ series: M2, Fed balance sheet, truck tonnage, payrolls, yields, CPI, consumer credit, and more. Free public data, no API key.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "series_id": {
+            "type": "string",
+            "description": "FRED series ID (e.g. M2SL, WALCL, PAYEMS, TRUCKD11, T10YIE). Find series at fred.stlouisfed.org."
+          },
+          "limit": {
+            "type": "integer",
+            "description": "Number of most recent observations to return (1-60). Default: 12.",
+            "default": 12
+          }
+        },
+        "required": [
+          "series_id"
+        ]
+      }
+    },
+    {
       "name": "funding-rates",
       "description": "Returns current perpetual funding rates for 200+ assets on Hyperliquid DEX, sorted by absolute funding magnitude. Includes 8-hour and annualized rates, open interest, mark price, and directional signal (longs-pay or shorts-pay). Use before entering a perpetual position to factor funding cost/income into strategy ROI, or to scan for high-rate short-bias opportunities in delta-neutral strategies.",
       "inputSchema": {
@@ -3372,6 +3411,15 @@
             "description": "Output length. 'standard' = 200-word narrative (default). 'concise' = 100-word summary."
           }
         },
+        "additionalProperties": false
+      }
+    },
+    {
+      "name": "market-breadth",
+      "description": "US equity market breadth dashboard via institutional ETF-ratio breadth proxies. Measures participation across equal-weight (RSP/SPY divergence), small-caps (IWM/SPY), risk appetite (SPHB/SPLV), and mid-caps (MDY/SPY). Returns per-pair ratios, 20-day average, divergence%, 5-day momentum, and OUTPERFORMING/NEUTRAL/UNDERPERFORMING signal for each. Composite breadth_score (\u2212100..+100) and breadth_regime (STRONGLY_BULLISH \u2192 STRONGLY_BEARISH). No API key required.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {},
         "additionalProperties": false
       }
     },
@@ -5143,6 +5191,22 @@
       }
     },
     {
+      "name": "technical-indicators",
+      "description": "Full technical analysis for any US equity, ETF, or index. Returns RSI(14), MACD(12,26,9), SMA(20/50/200), EMA(20), Bollinger Bands, volume trend, golden/death cross status, and a composite tech_signal (STRONG_BULLISH/BULLISH/NEUTRAL/BEARISH/STRONG_BEARISH). One call replaces raw price history fetch and indicator math. Pairs with stock-screener, equity-fundamentals, and earnings-reaction. Yahoo Finance, no API key.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "ticker": {
+            "type": "string",
+            "description": "Equity ticker symbol (e.g. AAPL, SPY, QQQ)."
+          }
+        },
+        "required": [
+          "ticker"
+        ]
+      }
+    },
+    {
       "name": "timezone",
       "description": "Timezone intelligence using the IANA database (418 zones) built into Node.js. Returns current local time, UTC offset, DST status, and the long timezone name for any IANA timezone. Can also convert an ISO timestamp to one or more target timezones. Useful for scheduling agents, global operations, and time-aware data enrichment. Zero external API calls \u2014 instant response.",
       "inputSchema": {
@@ -6017,49 +6081,6 @@
           }
         },
         "required": []
-      }
-    },
-    {
-      "name": "technical-indicators",
-      "description": "Full technical analysis for any US equity, ETF, or index. Returns RSI(14), MACD(12,26,9), SMA(20/50/200), EMA(20), Bollinger Bands, volume trend, golden/death cross status, and a composite tech_signal (STRONG_BULLISH/BULLISH/NEUTRAL/BEARISH/STRONG_BEARISH). One call replaces raw price history fetch and indicator math. Pairs with stock-screener, equity-fundamentals, and earnings-reaction. Yahoo Finance, no API key.",
-      "inputSchema": {
-        "type": "object",
-        "properties": {
-          "ticker": {
-            "type": "string",
-            "description": "Equity ticker symbol (e.g. AAPL, SPY, QQQ)."
-          }
-        },
-        "required": [
-          "ticker"
-        ]
-      }
-    },
-    {
-      "name": "agriculture-brief",
-      "description": "AI-synthesized US agricultural commodities market intelligence brief. Assembles 9 real-time signals: corn (ZC=F), wheat (ZW=F), soybeans (ZS=F), live cattle (LE=F), lean hogs (HE=F), coffee arabica (KC=F), cotton (CT=F), agribusiness ETF (MOO), Deere & Co (DE). Returns soy/corn ratio, wheat/corn spread, grain and livestock regime classification, plus 200-word GPT-4o-mini narrative for food-sector equity, commodity-trading, and inflation-modeling pipelines.",
-      "inputSchema": {
-        "type": "object",
-        "properties": {
-          "style": {
-            "type": "string",
-            "enum": [
-              "standard",
-              "concise"
-            ],
-            "description": "Output length. standard = 200-word narrative (default). concise = 100-word summary."
-          }
-        },
-        "additionalProperties": false
-      }
-    },
-    {
-      "name": "market-breadth",
-      "description": "US equity market breadth dashboard via institutional ETF-ratio breadth proxies. Measures participation across equal-weight (RSP/SPY divergence), small-caps (IWM/SPY), risk appetite (SPHB/SPLV), and mid-caps (MDY/SPY). Returns per-pair ratios, 20-day average, divergence%, 5-day momentum, and OUTPERFORMING/NEUTRAL/UNDERPERFORMING signal for each. Composite breadth_score (\u2212100..+100) and breadth_regime (STRONGLY_BULLISH \u2192 STRONGLY_BEARISH). No API key required.",
-      "inputSchema": {
-        "type": "object",
-        "properties": {},
-        "additionalProperties": false
       }
     }
   ]
