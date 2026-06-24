@@ -70,7 +70,7 @@ const ALL_CAPS = [
   "geopolitical-brief","github-org-intel","github-repo-intel","github-trending",
   "global-equity-indices","gov-votes","healthcare-brief","hedge-fund-holdings","hf-model-search",
   "hn-search","housing-brief","http-headers","image-detect","imf-country-outlook",
-  "income-statements","insider-trades","intel-pack","intl-stock-price","ip-intel","ipo-calendar",
+  "income-statements","insider-trades","institutional-ownership","intel-pack","intl-stock-price","ip-intel","ipo-calendar",
   "json-extract","kimchi-premium","korean-crypto-movers","korean-market-movers",
   "labor-brief","labor-market","legal-search","limitless-markets","macro-brief",
   "macro-indicators","manufacturing-brief","market-gex","market-intelligence","market-movers",
@@ -121,7 +121,8 @@ const SEEDER_CAP_INPUTS = {
   "cash-flow-statement":    { ticker: "AAPL", period: "quarterly", limit: 4 },
   "analyst-upgrades":       { ticker: "NVDA", days: 90 },
   "stock-screener":         { screen: "day_gainers", limit: 10 },
-  "earnings-reaction":      { ticker: "NVDA", periods: 8 },
+  "earnings-reaction":         { ticker: "NVDA", periods: 8 },
+  "institutional-ownership":   { symbol: "AAPL" },
 };
 
 // ──────────────────────────────────────────────────────────────────────────────
