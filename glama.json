@@ -205,24 +205,39 @@
       }
     },
     {
-      "name": "base-season",
-      "description": "Base chain season snapshot: total chain TVL, top 10 protocols by Base-native TVL, category breakdown, 7d trend, and top Base ecosystem tokens by market cap. No input required \u2014 agents use this for pre-trade orientation before DeFi, lending, or liquidity calls on Base.",
-      "inputSchema": {
-        "type": "object",
-        "properties": {},
-        "required": []
-      }
-    },
-    {
       "name": "balance-sheet",
       "description": "Quarterly or annual balance sheet history for any US public stock. Returns cash, total debt, net debt, total assets, liabilities, stockholders' equity, book value, retained earnings, goodwill & intangibles, tangible book value, working capital, and shares outstanding. Critical for EV calculation (market cap + net debt) and leverage screening. Pairs with income-statements to complete the financial statement trilogy. Source: Yahoo Finance (free, no API key).",
       "inputSchema": {
         "type": "object",
         "properties": {
-          "ticker": { "type": "string", "description": "US equity ticker symbol (e.g. 'AAPL', 'MSFT', 'NVDA', 'TSLA')." },
-          "period": { "type": "string", "enum": ["quarterly", "annual"], "description": "Period type. Default: quarterly." },
-          "limit":  { "type": "integer", "minimum": 1, "maximum": 8, "description": "Max periods to return (1-8 quarterly; 1-4 annual). Default: 4." }
+          "ticker": {
+            "type": "string",
+            "description": "US equity ticker symbol (e.g. 'AAPL', 'MSFT', 'NVDA', 'TSLA')."
+          },
+          "period": {
+            "type": "string",
+            "enum": [
+              "quarterly",
+              "annual"
+            ],
+            "description": "Period type. Default: quarterly."
+          },
+          "limit": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 8,
+            "description": "Max periods to return (1-8 quarterly; 1-4 annual). Default: 4."
+          }
         },
+        "required": []
+      }
+    },
+    {
+      "name": "base-season",
+      "description": "Base chain season snapshot: total chain TVL, top 10 protocols by Base-native TVL, category breakdown, 7d trend, and top Base ecosystem tokens by market cap. No input required \u2014 agents use this for pre-trade orientation before DeFi, lending, or liquidity calls on Base.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {},
         "required": []
       }
     },
@@ -1692,6 +1707,22 @@
       }
     },
     {
+      "name": "earnings-estimates",
+      "description": "Forward analyst consensus EPS and revenue estimates for any US equity. Returns current-quarter, next-quarter, current-year, and next-year forecasts with avg/low/high EPS, revenue estimates, YoY growth, analyst count, estimate revision momentum (revisions up/down last 7 and 30 days), and EPS trend drift vs 30/60/90 days ago. Bridges historical earnings-surprises and trailing equity-fundamentals for DCF inputs and estimate-revision screens. Free upstream: Yahoo Finance (no key required).",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "symbol": {
+            "type": "string",
+            "description": "US equity ticker symbol (e.g. 'AAPL', 'MSFT', 'NVDA')."
+          }
+        },
+        "required": [
+          "symbol"
+        ]
+      }
+    },
+    {
       "name": "earnings-surprises",
       "description": "Historical EPS beat/miss data for any US equity: actual EPS, consensus estimate, surprise %, beat rate, estimate revisions (30-day EPS drift), and next earnings date. Free Yahoo Finance data, no API key. Pairs with analyst-ratings and equity-fundamentals for a complete earnings intelligence stack.",
       "inputSchema": {
@@ -1710,22 +1741,6 @@
           }
         },
         "required": []
-      }
-    },
-    {
-      "name": "earnings-estimates",
-      "description": "Forward analyst consensus EPS and revenue estimates for any US equity. Returns current-quarter, next-quarter, current-year, and next-year forecasts with avg/low/high EPS, revenue estimates, YoY growth, analyst count, estimate revision momentum (revisions up/down last 7 and 30 days), and EPS trend drift vs 30/60/90 days ago. Bridges historical earnings-surprises and trailing equity-fundamentals for DCF inputs and estimate-revision screens. Free upstream: Yahoo Finance (no key required).",
-      "inputSchema": {
-        "type": "object",
-        "properties": {
-          "symbol": {
-            "type": "string",
-            "description": "US equity ticker symbol (e.g. 'AAPL', 'MSFT', 'NVDA')."
-          }
-        },
-        "required": [
-          "symbol"
-        ]
       }
     },
     {
@@ -3491,6 +3506,33 @@
       }
     },
     {
+      "name": "npm-trends",
+      "description": "Compare npm package download trends for up to 5 packages. Returns total downloads and week-over-week trend for the requested period (last-week, last-month, last-year). Useful for evaluating package adoption before adding a dependency, comparing competing libraries (express vs fastify, react-query vs tanstack-query), or tracking whether a package is growing or declining. Free upstream: api.npmjs.org (no key required).",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "packages": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "npm package names to compare (up to 5). e.g. ['express','fastify','hono']."
+          },
+          "period": {
+            "type": "string",
+            "enum": [
+              "last-day",
+              "last-week",
+              "last-month",
+              "last-year"
+            ],
+            "description": "Download period. Defaults to last-month."
+          }
+        },
+        "required": []
+      }
+    },
+    {
       "name": "options-chain",
       "description": "CBOE delayed options chain for any US equity or index \u2014 returns stock price, per-contract IV, greeks (delta/gamma/theta/vega), OI, volume, and bid/ask. Filterable by expiration date and call/put. Free CBOE data, no API key.",
       "inputSchema": {
@@ -4729,6 +4771,34 @@
             "minItems": 1,
             "maxItems": 5,
             "description": "Up to 5 US stock ticker symbols (e.g. AAPL,NVDA,MSFT). Case-insensitive."
+          }
+        },
+        "required": []
+      }
+    },
+    {
+      "name": "stock-screener",
+      "description": "Run a Yahoo Finance predefined equity screen (day_gainers, day_losers, most_actives, undervalued_growth_stocks, undervalued_large_caps, growth_technology_stocks, aggressive_small_caps, small_cap_gainers). Returns up to 50 stocks with price, % change, volume, market cap, P/E (trailing + forward), 52-week high/low, sector, and industry. Top-of-funnel discovery for equity-research pipelines \u2014 pair with peer-benchmarking, analyst-ratings, or earnings-estimates for full analysis.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "screen": {
+            "type": "string",
+            "enum": [
+              "day_gainers",
+              "day_losers",
+              "most_actives",
+              "undervalued_growth_stocks",
+              "undervalued_large_caps",
+              "growth_technology_stocks",
+              "aggressive_small_caps",
+              "small_cap_gainers"
+            ],
+            "description": "Which predefined screen to run. Defaults to most_actives."
+          },
+          "count": {
+            "type": "integer",
+            "description": "Number of results to return (1-50, default 25)."
           }
         },
         "required": []
