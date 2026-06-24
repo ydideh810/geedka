@@ -5531,6 +5531,29 @@
         },
         "required": []
       }
+    },
+    {
+      "name": "youtube-playlist",
+      "description": "Fetch up to 50 videos from a YouTube playlist. Returns title, channel, duration, view count, and video URL for each entry. No API key required. Pair with youtube-intel to analyze individual videos from the list.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "playlist_id": {
+            "type": "string",
+            "description": "YouTube playlist ID (e.g. PLrAXtmErZgOeiKm4sgNOknc9TTnufFTL) or full playlist URL."
+          },
+          "limit": {
+            "type": "integer",
+            "description": "Max videos to return (1-50, default 25).",
+            "minimum": 1,
+            "maximum": 50
+          }
+        },
+        "required": [
+          "playlist_id"
+        ],
+        "additionalProperties": false
+      }
     }
   ]
 }
