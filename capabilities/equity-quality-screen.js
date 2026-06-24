@@ -209,7 +209,7 @@ export default {
     "and Altman Z-Score (distress predictor) for any US public company. One call replaces " +
     "manual assembly of 3 years of annual statements. $0.025/call.",
 
-  input_schema: {
+  inputSchema: {
     type: "object",
     properties: {
       ticker: {
@@ -220,7 +220,7 @@ export default {
     required: ["ticker"],
   },
 
-  output_schema: {
+  outputSchema: {
     type: "object",
     properties: {
       ticker:        { type: "string",  description: "Canonical ticker." },
@@ -264,7 +264,7 @@ export default {
     },
   },
 
-  async call({ ticker }) {
+  async handler({ ticker }) {
     if (!ticker) throw new Error("ticker is required");
     ticker = ticker.toUpperCase().trim().replace(/[^A-Z0-9.\-]/g, "");
 
