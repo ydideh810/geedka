@@ -79,7 +79,7 @@ const ALL_CAPS = [
   "page-intel","page-links","peer-benchmarking","ping","place-details","policy-impact-mapper",
   "polymarket-accuracy-score","polymarket-category-performance","polymarket-crypto-updown",
   "polymarket-intel","polymarket-sentiment-shift","polymarket-whale-entries","portfolio-rebalance",
-  "prediction-markets","prediction-stock-pulse","protocol-revenue-leaders","pypi-lookup",
+  "pre-earnings-brief","prediction-markets","prediction-stock-pulse","protocol-revenue-leaders","pypi-lookup",
   "readable-content","reddit-intel","regex-tester","research-paper-search","research-synthesis",
   "rss-reader","sanctions-screening","sec-filing-intel","sec-full-text-search","sec-insider-trades",
   "sector-rotation","short-volume-intel","social-intel","social-momentum","solana-token-risk",
@@ -123,6 +123,7 @@ const SEEDER_CAP_INPUTS = {
   "stock-screener":         { screen: "day_gainers", limit: 10 },
   "earnings-reaction":         { ticker: "NVDA", periods: 8 },
   "institutional-ownership":   { symbol: "AAPL" },
+  "pre-earnings-brief":        { ticker: "NVDA" },
 };
 
 // ──────────────────────────────────────────────────────────────────────────────
