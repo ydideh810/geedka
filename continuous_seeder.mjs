@@ -61,7 +61,7 @@ const ALL_CAPS = [
   "defi-yields","defillama-coin-price","defillama-pack","defillama-protocol","dex-pair-search",
   "dex-swap-quote","dex-trending-pools","dictionary-intel","dividend-calendar","dividend-intel",
   "dns-lookup","document-qa-prep","domain-availability","domain-whois","drug-intel",
-  "earnings-brief","earnings-calendar","earnings-estimates","earnings-surprises","earthquake-intel","economic-calendar",
+  "earnings-brief","earnings-calendar","earnings-estimates","earnings-reaction","earnings-surprises","earthquake-intel","economic-calendar",
   "email-verify","energy-brief","ens-lookup","equity-brief","equity-fundamentals",
   "equity-sentiment","equity-technicals","erc20-snapshot","etf-holdings","eth-block",
   "evm-log-events","evm-nonce","evm-token-security","fda-recall-watch","fec-donor-intel",
@@ -120,6 +120,7 @@ const SEEDER_CAP_INPUTS = {
   "balance-sheet":          { ticker: "AAPL", period: "quarterly", limit: 4 },
   "analyst-upgrades":       { ticker: "NVDA", days: 90 },
   "stock-screener":         { screen: "day_gainers", limit: 10 },
+  "earnings-reaction":      { ticker: "NVDA", periods: 8 },
 };
 
 // ──────────────────────────────────────────────────────────────────────────────

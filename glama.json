@@ -1756,6 +1756,27 @@
       }
     },
     {
+      "name": "earnings-reaction",
+      "description": "Stock price reaction to past earnings events for any US equity. Returns report-day and next-day price move % for each recent quarterly earnings date, paired with EPS beat/miss magnitude and reaction_class (beat_and_up, beat_selloff, miss_and_down, miss_rally, neutral). Surfaces contrarian signals where price moved opposite to the EPS surprise. Pairs with earnings-calendar and earnings-surprises. Yahoo Finance, no API key. $0.025/call.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "ticker": {
+            "type": "string",
+            "description": "US equity ticker symbol (e.g. AAPL, MSFT, NVDA)."
+          },
+          "periods": {
+            "type": "integer",
+            "description": "Number of past earnings periods to return (default 8, max 16).",
+            "default": 8,
+            "minimum": 1,
+            "maximum": 16
+          }
+        },
+        "required": ["ticker"]
+      }
+    },
+    {
       "name": "earnings-surprises",
       "description": "Historical EPS beat/miss data for any US equity: actual EPS, consensus estimate, surprise %, beat rate, estimate revisions (30-day EPS drift), and next earnings date. Free Yahoo Finance data, no API key. Pairs with analyst-ratings and equity-fundamentals for a complete earnings intelligence stack.",
       "inputSchema": {
