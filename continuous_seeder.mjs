@@ -91,7 +91,7 @@ const ALL_CAPS = [
   "wallet-balance","wallet-credit-score","wallet-screener","wayback-intel","weather",
   "weather-alerts","weather-history","web-change-monitor","web-company-intel","web-scrape-links",
   "whale-radar","wikipedia-intel","world-bank-data","x402-endpoint-intel","yield-farming-active",
-  "youtube-channel-intel","youtube-comments","youtube-intel","youtube-search","youtube-transcript",
+  "youtube-channel-intel","youtube-comments","youtube-intel","youtube-playlist","youtube-search","youtube-transcript",
 ];
 
 // Cap-specific query params for caps that require non-empty inputs to succeed.
@@ -104,6 +104,7 @@ const SEEDER_CAP_INPUTS = {
   "policy-impact-mapper":   { policy_text: "Congress passed a new infrastructure bill." },
   "youtube-channel-intel":  { channel: "@3blue1brown" },
   "youtube-comments":       { video: "dQw4w9WgXcQ", max_comments: 5 },
+  "youtube-playlist":       { playlist_id: "PLv3TTBr1W_9tppikBxAE_G6qjWdBljBHJ", limit: 5 },
   "youtube-search":         { query: "bitcoin price analysis", max_results: 3 },
   "evm-token-security":   { address: "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913", chain: "base" },
   "social-intel":         { platform: "github", username: "torvalds" },
