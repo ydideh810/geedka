@@ -61,7 +61,7 @@ const ALL_CAPS = [
   "defi-yields","defillama-coin-price","defillama-pack","defillama-protocol","dex-pair-search",
   "dex-swap-quote","dex-trending-pools","dictionary-intel","dividend-calendar","dividend-intel",
   "dns-lookup","document-qa-prep","domain-availability","domain-whois","drug-intel",
-  "earnings-brief","earnings-calendar","earnings-surprises","earthquake-intel","economic-calendar",
+  "earnings-brief","earnings-calendar","earnings-estimates","earnings-surprises","earthquake-intel","economic-calendar",
   "email-verify","energy-brief","ens-lookup","equity-brief","equity-fundamentals",
   "equity-sentiment","equity-technicals","erc20-snapshot","etf-holdings","eth-block",
   "evm-log-events","evm-nonce","evm-token-security","fda-recall-watch","fec-donor-intel",
@@ -115,7 +115,8 @@ const SEEDER_CAP_INPUTS = {
   "erc20-snapshot":       { contract: "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913", network: "base" },
   "npm-trends":           { packages: ["express","fastify","hono"], period: "last-month" },
   "sec-full-text-search": { query: "artificial intelligence", forms: "10-K,10-Q", days: 90, limit: 5 },
-  "peer-benchmarking":    { ticker: "NVDA" },
+  "peer-benchmarking":      { ticker: "NVDA" },
+  "earnings-estimates":     { symbol: "NVDA" },
 };
 
 // ──────────────────────────────────────────────────────────────────────────────

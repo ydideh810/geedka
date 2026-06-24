@@ -1700,6 +1700,22 @@
       }
     },
     {
+      "name": "earnings-estimates",
+      "description": "Forward analyst consensus EPS and revenue estimates for any US equity. Returns current-quarter, next-quarter, current-year, and next-year forecasts with avg/low/high EPS, revenue estimates, YoY growth, analyst count, estimate revision momentum (revisions up/down last 7 and 30 days), and EPS trend drift vs 30/60/90 days ago. Bridges historical earnings-surprises and trailing equity-fundamentals for DCF inputs and estimate-revision screens. Free upstream: Yahoo Finance (no key required).",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "symbol": {
+            "type": "string",
+            "description": "US equity ticker symbol (e.g. 'AAPL', 'MSFT', 'NVDA')."
+          }
+        },
+        "required": [
+          "symbol"
+        ]
+      }
+    },
+    {
       "name": "earthquake-intel",
       "description": "Real-time earthquake intelligence from USGS. Fetch recent global significant quakes (M5.0+ last 7 days) or quakes near a lat/lon (M3.0+ within 500 km). Returns magnitude, depth, location, tsunami flag, and shake intensity. Free USGS FDSN API \u2014 no key required.",
       "inputSchema": {
