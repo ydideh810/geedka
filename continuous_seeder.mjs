@@ -81,7 +81,7 @@ const ALL_CAPS = [
   "polymarket-intel","polymarket-sentiment-shift","polymarket-whale-entries","portfolio-rebalance",
   "prediction-markets","prediction-stock-pulse","protocol-revenue-leaders","pypi-lookup",
   "readable-content","reddit-intel","regex-tester","research-paper-search","research-synthesis",
-  "rss-reader","sanctions-screening","sec-filing-intel","sec-insider-trades",
+  "rss-reader","sanctions-screening","sec-filing-intel","sec-full-text-search","sec-insider-trades",
   "sector-rotation","short-volume-intel","social-intel","social-momentum","solana-token-risk",
   "solana-tx-explainer","solar-intel","sports-prediction","sports-scores","ssl-cert",
   "stablecoin-watch","stackoverflow-intel","stock-brief","stock-ohlcv","stock-price-multi",
@@ -114,6 +114,7 @@ const SEEDER_CAP_INPUTS = {
   "sports-prediction":    { sport: "NBA" },
   "erc20-snapshot":       { contract: "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913", network: "base" },
   "npm-trends":           { packages: ["express","fastify","hono"], period: "last-month" },
+  "sec-full-text-search": { query: "artificial intelligence", forms: "10-K,10-Q", days: 90, limit: 5 },
 };
 
 // ──────────────────────────────────────────────────────────────────────────────
