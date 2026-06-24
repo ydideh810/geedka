@@ -847,6 +847,20 @@
       }
     },
     {
+      "name": "crypto-brief",
+      "description": "AI-synthesized cryptocurrency market intelligence brief. Assembles 12 real-time signals from CoinGecko (BTC, ETH, SOL, BNB, XRP, DOGE, ADA, AVAX, LINK, UNI, MATIC, ATOM) plus the Alternative.me Fear and Greed Index. Returns crypto regime classification and a 200-word GPT-4o-mini narrative covering market sentiment, dominant signal, and agent decision implications.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "style": {
+            "type": "string",
+            "description": "'standard' = 200-word narrative (default). 'concise' = 100-word summary."
+          }
+        },
+        "required": []
+      }
+    },
+    {
       "name": "crypto-fear-greed",
       "description": "Crypto Fear & Greed Index \u2014 current score (0=extreme fear, 100=extreme greed), 7-day trend, 30-day min/max/avg, and trading regime signal. Free alternative.me data updated daily. $0.005/call.",
       "inputSchema": {
@@ -1616,6 +1630,24 @@
         },
         "required": [],
         "additionalProperties": false
+      }
+    },
+    {
+      "name": "earnings-brief",
+      "description": "AI-synthesized earnings catalyst brief for the next 7 days (configurable 1-14). Fetches Alpha Vantage earnings calendar, identifies S&P 500 bellwether events, and uses gpt-4o-mini to produce a 150-200 word forward-looking assessment: most important event, sector concentration, and agent decision implications.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "days": {
+            "type": "integer",
+            "description": "Look-ahead window in days (default 7, max 14)."
+          },
+          "style": {
+            "type": "string",
+            "description": "'standard' = 150-200 word narrative (default). 'concise' = 80-100 words."
+          }
+        },
+        "required": []
       }
     },
     {
@@ -5459,6 +5491,24 @@
           "query"
         ],
         "additionalProperties": false
+      }
+    },
+    {
+      "name": "youtube-transcript",
+      "description": "Full transcript extraction for any YouTube video. Downloads auto-generated English subtitles via yt-dlp (no auth), parses VTT into timestamped segments with deduplication, and returns both segment array and plain-text transcript. Format 'text' returns only the text string. Accepts any YouTube URL format or bare 11-character video ID.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "video": {
+            "type": "string",
+            "description": "YouTube video URL (any format: watch?v=, youtu.be, /shorts/) or bare 11-character video ID."
+          },
+          "format": {
+            "type": "string",
+            "description": "Output format: 'segments' (timestamped array + text, default) or 'text' (plain string only)."
+          }
+        },
+        "required": []
       }
     }
   ]
