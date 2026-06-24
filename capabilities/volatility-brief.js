@@ -134,7 +134,7 @@ export default {
     additionalProperties: false,
   },
 
-  async run({ history_days = 252 } = {}) {
+  async handler({ history_days = 252 } = {}) {
     const [vixRows, vxmtRows, vvixRows, skewRows] = await Promise.all([
       fetchCBOE("_VIX"),
       fetchCBOE("_VXMT").catch(() => null),
