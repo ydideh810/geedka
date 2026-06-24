@@ -49,7 +49,7 @@ const RESEED_AFTER_HOURS = 84;
 // All active STALL caps (sync with capabilities/*.js — excludes _retired/)
 const ALL_CAPS = [
   "address-security","agent-access-check","agent-kya-score","ai-image-gen","air-quality",
-  "analyst-ratings","arxiv-intel","audio-transcribe","aviation-weather","base-season",
+  "analyst-ratings","analyst-upgrades","arxiv-intel","audio-transcribe","aviation-weather","base-season",
   "block-intel","breadcrumb-extractor","btc-game-theory","btc-miner-econ","btc-systems-theory",
   "chain-pulse","changelog-generate","chromatic-dispersion","city-lookup",
   "classic-novels","clinical-trials","code-api-surface","code-test-detector","commodity-futures",
@@ -84,7 +84,7 @@ const ALL_CAPS = [
   "rss-reader","sanctions-screening","sec-filing-intel","sec-full-text-search","sec-insider-trades",
   "sector-rotation","short-volume-intel","social-intel","social-momentum","solana-token-risk",
   "solana-tx-explainer","solar-intel","sports-prediction","sports-scores","ssl-cert",
-  "stablecoin-watch","stackoverflow-intel","stock-brief","stock-ohlcv","stock-price-multi",
+  "stablecoin-watch","stackoverflow-intel","stock-brief","stock-ohlcv","stock-price-multi","stock-screener",
   "strategy-signal","supply-chain-brief","tech-brief","timezone","token-top-holders",
   "treasury-auction-calendar","treasury-yields","twitter-intel","tx-explainer","tx-intel",
   "unit-converter","us-stock-history","us-stock-price","usgs-earthquake","vision-analyze",
@@ -118,6 +118,8 @@ const SEEDER_CAP_INPUTS = {
   "peer-benchmarking":      { ticker: "NVDA" },
   "earnings-estimates":     { symbol: "NVDA" },
   "balance-sheet":          { ticker: "AAPL", period: "quarterly", limit: 4 },
+  "analyst-upgrades":       { ticker: "NVDA", days: 90 },
+  "stock-screener":         { screen: "day_gainers", limit: 10 },
 };
 
 // ──────────────────────────────────────────────────────────────────────────────

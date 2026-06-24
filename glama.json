@@ -125,6 +125,39 @@
       }
     },
     {
+      "name": "analyst-upgrades",
+      "description": "Analyst rating change history (upgrades, downgrades, initiations) for any US equity. Returns each firm, action, from/to grade, and date \u2014 up to 365 days back. Computes net_sentiment (upgrades minus downgrades): positive = bullish analyst momentum building. Pairs with analyst-ratings (current consensus) and earnings-estimates (forward EPS). Yahoo Finance, no API key. $0.012/call.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "ticker": {
+            "type": "string",
+            "description": "US stock ticker symbol (e.g. AAPL, NVDA, MSFT). Case-insensitive."
+          },
+          "days": {
+            "type": "integer",
+            "description": "How many calendar days back to include. Default 90, max 365."
+          },
+          "action": {
+            "type": "string",
+            "enum": [
+              "all",
+              "upgrade",
+              "downgrade",
+              "initiate"
+            ],
+            "description": "Filter by action type. Default 'all'."
+          },
+          "limit": {
+            "type": "integer",
+            "description": "Max entries to return. Default 20, max 50."
+          }
+        },
+        "required": [],
+        "additionalProperties": false
+      }
+    },
+    {
       "name": "arxiv-intel",
       "description": "Search arXiv preprints by query, filtered by field (title/abstract/author/all) and category. Returns title, authors (up to 6), abstract (first 600 chars), arXiv ID, PDF link, publish date, and subject categories. arXiv is the canonical source for AI/ML, CS, physics, math, and quantitative biology preprints \u2014 typically months ahead of peer-reviewed journals. Useful for AI research agents, literature scouts, competitive technique tracking, and grant-writing support. No API key required.",
       "inputSchema": {
