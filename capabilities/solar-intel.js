@@ -25,20 +25,37 @@ async function fetchJson(url) {
   return resp.json();
 }
 
-async function geocode(location) {
+// US state abbreviation pattern: trailing " AZ" / " CA" / ", Arizona" etc.
+const US_STATE_ABBREV = /\s+[A-Z]{2}(?:\s*,.*)?$/;
+const COMMA_SUFFIX    = /\s*,.*$/;
+
+async function geocodeQuery(q) {
   const data = await fetchJson(
-    `${GEOCODE_URL}?name=${encodeURIComponent(location)}&count=1&language=en&format=json`
+    `${GEOCODE_URL}?name=${encodeURIComponent(q)}&count=1&language=en&format=json`
   );
-  const result = (data.results || [])[0];
-  if (!result) throw new Error(`Location "${location}" not found`);
-  return {
-    name:      result.name,
-    country:   result.country,
-    latitude:  result.latitude,
-    longitude: result.longitude,
-    timezone:  result.timezone,
-    elevation: result.elevation,
-  };
+  return (data.results || [])[0] || null;
+}
+
+async function geocode(location) {
+  // Try raw input first, then strip state abbrev, then strip comma suffix
+  const queries = [location];
+  if (US_STATE_ABBREV.test(location)) queries.push(location.replace(US_STATE_ABBREV, "").trim());
+  if (COMMA_SUFFIX.test(location))    queries.push(location.replace(COMMA_SUFFIX, "").trim());
+
+  for (const q of [...new Set(queries)]) {
+    const result = await geocodeQuery(q);
+    if (result) {
+      return {
+        name:      result.name,
+        country:   result.country,
+        latitude:  result.latitude,
+        longitude: result.longitude,
+        timezone:  result.timezone,
+        elevation: result.elevation,
+      };
+    }
+  }
+  throw new Error(`Location "${location}" not found`);
 }
 
 // MJ/m² per day → kWh/m² (peak sun hours); 1 MJ = 0.2778 kWh
