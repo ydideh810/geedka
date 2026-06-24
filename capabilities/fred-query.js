@@ -153,6 +153,21 @@ export default {
   description:
     "Pull any FRED (St. Louis Fed) economic series by ID. Returns recent observations, trend, and summary stats. Covers 800,000+ series: M2, Fed balance sheet, truck tonnage, payrolls, yields, CPI, consumer credit, and more. Free public data, no API key.",
 
+  outputSchema: {
+    type: "object",
+    properties: {
+      series_id:    { type: "string",  description: "FRED series ID queried (uppercased)." },
+      frequency:    { type: "string",  description: "Detected data frequency: daily, weekly, monthly, quarterly, or annual." },
+      date_range:   { type: "object",  description: "First/last available dates and total observation count for the series." },
+      returned:     { type: "integer", description: "Number of observations returned in this response." },
+      observations: { type: "array",   description: "Array of {date, value} objects for the most recent N observations." },
+      stats:        { type: "object",  description: "Summary: current, previous, change, pct_change, min, max, mean, trend over the returned window." },
+      source:       { type: "string",  description: "Data source attribution." },
+      coverage:     { type: "string",  description: "Scope of available FRED data." },
+      tip:          { type: "string",  description: "How to find additional FRED series IDs." },
+    },
+  },
+
   inputSchema: {
     type: "object",
     properties: {
@@ -171,7 +186,7 @@ export default {
     required: ["series_id"],
   },
 
-  async run({ series_id, limit = 12 }) {
+  async handler({ series_id, limit = 12 }) {
     if (!series_id || !series_id.trim()) {
       throw Object.assign(new Error("series_id is required. Example: 'M2SL', 'PAYEMS', 'WALCL'."), { status: 400 });
     }
