@@ -245,7 +245,60 @@ export default {
     },
   },
 
-  async run({ action = "trending", query, model_id, task, library, sort, limit }) {
+  outputSchema: {
+    type: "object",
+    properties: {
+      action:   { type: "string", description: "Action that was performed." },
+      count:    { type: "number", description: "Number of results returned." },
+      models:   {
+        type: "array",
+        description: "List of model objects (search_models and trending actions).",
+        items: {
+          type: "object",
+          properties: {
+            id:            { type: "string",  description: "HuggingFace model ID (e.g. 'meta-llama/Llama-3-8B-Instruct')." },
+            pipeline_task: { type: ["string","null"], description: "Inference pipeline task (e.g. 'text-generation', 'feature-extraction')." },
+            library:       { type: ["string","null"], description: "ML library (e.g. 'transformers', 'diffusers')." },
+            downloads:     { type: ["number","null"], description: "Total downloads from HuggingFace Hub." },
+            likes:         { type: ["number","null"], description: "Community likes (endorsement signal)." },
+            license:       { type: ["string","null"], description: "SPDX license identifier (e.g. 'apache-2.0', 'mit', 'llama3')." },
+            languages:     { type: "array",   description: "Supported language codes (e.g. ['en', 'fr'])." },
+            tags:          { type: "array",   description: "Model tags (framework, architecture, task, etc.)." },
+            last_modified: { type: ["string","null"], description: "ISO 8601 last modification date." },
+            created_at:    { type: ["string","null"], description: "ISO 8601 creation date." },
+          },
+        },
+      },
+      datasets: {
+        type: "array",
+        description: "List of dataset objects (search_datasets action).",
+        items: {
+          type: "object",
+          properties: {
+            id:          { type: "string",  description: "HuggingFace dataset ID." },
+            description: { type: "string",  description: "Short dataset description (≤200 chars)." },
+            downloads:   { type: ["number","null"] },
+            likes:       { type: ["number","null"] },
+            gated:       { type: "boolean", description: "Whether dataset requires access approval." },
+            license:     { type: ["string","null"] },
+            tags:        { type: "array" },
+          },
+        },
+      },
+      model_id:        { type: "string",          description: "Requested model ID (model_info action)." },
+      total_params:    { type: ["number","null"],  description: "Total parameter count (from safetensors metadata, model_info only)." },
+      param_breakdown: { type: ["object","null"],  description: "Parameter count per dtype (model_info only)." },
+      model_card_url:  { type: "string",           description: "URL to model card on HuggingFace Hub (model_info only)." },
+      siblings:        { type: "array",            description: "Key files in the model repo (model_info only)." },
+      note:            { type: "string",           description: "Contextual note about the result." },
+      query:           { type: ["string","null"] },
+      task:            { type: ["string","null"] },
+      sort:            { type: "string" },
+      ranked_by:       { type: "string" },
+    },
+  },
+
+  async handler({ action = "trending", query, model_id, task, library, sort, limit }) {
     switch (action) {
       case "search_models":   return searchModels({ query, task, library, sort, limit });
       case "model_info":      return modelInfo({ model_id });
