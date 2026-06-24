@@ -57,7 +57,7 @@ const ALL_CAPS = [
   "consumer-brief","content-analyze","content-moderation","country-info","credit-spreads",
   "cron-parser","crypto-brief","crypto-fear-greed","crypto-fiat-price","crypto-momentum-pack",
   "crypto-news-impact","crypto-pulse","crypto-top-movers","currency-format","cve-intel",
-  "db-perf-intel","defi-market-pulse","defi-portfolio","defi-state-pack","defi-yield-strategies",
+  "balance-sheet","db-perf-intel","defi-market-pulse","defi-portfolio","defi-state-pack","defi-yield-strategies",
   "defi-yields","defillama-coin-price","defillama-pack","defillama-protocol","dex-pair-search",
   "dex-swap-quote","dex-trending-pools","dictionary-intel","dividend-calendar","dividend-intel",
   "dns-lookup","document-qa-prep","domain-availability","domain-whois","drug-intel",
@@ -117,6 +117,7 @@ const SEEDER_CAP_INPUTS = {
   "sec-full-text-search": { query: "artificial intelligence", forms: "10-K,10-Q", days: 90, limit: 5 },
   "peer-benchmarking":      { ticker: "NVDA" },
   "earnings-estimates":     { symbol: "NVDA" },
+  "balance-sheet":          { ticker: "AAPL", period: "quarterly", limit: 4 },
 };
 
 // ──────────────────────────────────────────────────────────────────────────────
