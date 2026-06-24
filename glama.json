@@ -3605,6 +3605,10 @@
       }
     },
     {
+      "name": "podcast-intel",
+      "description": "Podcast intelligence: show metadata and recent episodes. Search by name via iTunes or supply a direct RSS feed URL. Returns title, author, description, artwork, categories, and up to 20 recent episodes with titles, dates, durations, and audio URLs."
+    },
+    {
       "name": "policy-impact-mapper",
       "description": "Analyzes regulatory and policy text to map its impact across industry sectors. Extracts compliance requirements, change types (new mandates, prohibitions, exemptions), effective dates, affected entities, and assigns sector-level impact scores (HIGH/MEDIUM/LOW). Pure pattern analysis \u2014 no LLM, instant results. Useful for compliance agents, regulatory monitoring workflows, and policy change digests.",
       "inputSchema": {
@@ -5478,7 +5482,7 @@
     },
     {
       "name": "youtube-intel",
-      "description": "YouTube video metadata: title, author, description (2000-char cap), view count, duration, upload date, thumbnail URL, tags (20 max), and categories. Accepts any YouTube URL format or bare 11-character video ID. Uses yt-dlp for full metadata with YouTube oembed as fallback. $0.012/call.",
+      "description": "YouTube video intelligence: title, author, channel stats (subscriber count, channel ID), description, view/like/comment counts, duration, upload date, thumbnail, tags, categories, structured chapters (timestamps), replay heatmap (top-20 most-replayed segments), live status, and availability. Accepts any YouTube URL or bare video ID. Powered by yt-dlp.",
       "inputSchema": {
         "type": "object",
         "properties": {
@@ -5488,6 +5492,29 @@
           }
         },
         "required": [],
+        "additionalProperties": false
+      }
+    },
+    {
+      "name": "youtube-playlist",
+      "description": "Fetch up to 50 videos from a YouTube playlist. Returns title, channel, duration, view count, and video URL for each entry. No API key required. Pair with youtube-intel to analyze individual videos from the list.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "playlist_id": {
+            "type": "string",
+            "description": "YouTube playlist ID (e.g. PLrAXtmErZgOeiKm4sgNOknc9TTnufFTL) or full playlist URL."
+          },
+          "limit": {
+            "type": "integer",
+            "description": "Max videos to return (1-50, default 25).",
+            "minimum": 1,
+            "maximum": 50
+          }
+        },
+        "required": [
+          "playlist_id"
+        ],
         "additionalProperties": false
       }
     },
@@ -5530,29 +5557,6 @@
           }
         },
         "required": []
-      }
-    },
-    {
-      "name": "youtube-playlist",
-      "description": "Fetch up to 50 videos from a YouTube playlist. Returns title, channel, duration, view count, and video URL for each entry. No API key required. Pair with youtube-intel to analyze individual videos from the list.",
-      "inputSchema": {
-        "type": "object",
-        "properties": {
-          "playlist_id": {
-            "type": "string",
-            "description": "YouTube playlist ID (e.g. PLrAXtmErZgOeiKm4sgNOknc9TTnufFTL) or full playlist URL."
-          },
-          "limit": {
-            "type": "integer",
-            "description": "Max videos to return (1-50, default 25).",
-            "minimum": 1,
-            "maximum": 50
-          }
-        },
-        "required": [
-          "playlist_id"
-        ],
-        "additionalProperties": false
       }
     }
   ]
