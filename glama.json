@@ -1,7 +1,7 @@
 {
   "$schema": "https://glama.ai/mcp/schemas/server.json",
   "name": "The Stall",
-  "description": "265 pay-per-call AI data tools via MCP + x402 \u2014 no API keys, no accounts. Finance: SEC Form 4 insider trades (open-market buys, net sentiment), institutional fund holdings (top holders by position, % float, concentration signal), 13D/13G activist holders, M&A tender offers, Form D VC fundraising, options flow unusual sweep detection, earnings quality Beneish M-Score, equity fundamentals, macro indicators. Crypto: DeFi yields, Base on-chain address intelligence, wallet risk, token security. Developer: iOS App Store competitive intel (search+lookup+top-charts, iTunes free API), npm, PyPI, GitHub, HuggingFace. Research: arXiv, news synthesis, OSINT, YouTube niche analysis, TV shows, weather, aviation, and 245+ more. Pay USDC on Base (x402) or Stripe credits. Remote MCP: https://the-stall.intuitek.ai/mcp.",
+  "description": "268 pay-per-call AI data tools via MCP + x402 \u2014 no API keys, no accounts. Finance: SEC Form 4 insider trades (open-market buys, net sentiment), institutional fund holdings (top holders by position, % float, concentration signal), 13D/13G activist holders, M&A tender offers, Form D VC fundraising, options flow unusual sweep detection, earnings quality Beneish M-Score, equity fundamentals, macro indicators, CPI inflation (headline+core+energy+food MoM/YoY trend+Fed implication). Crypto: DeFi yields, Base on-chain address intelligence, wallet risk, token security. Developer: iOS App Store competitive intel (search+lookup+top-charts, iTunes free API), npm, PyPI, GitHub, HuggingFace. Research: arXiv, news synthesis, OSINT, YouTube niche analysis, TV shows, weather, aviation, and 247+ more. Pay USDC on Base (x402) or Stripe credits. Remote MCP: https://the-stall.intuitek.ai/mcp.",
   "maintainers": [
     "thebrierfox"
   ],
@@ -3516,6 +3516,15 @@
           }
         },
         "required": []
+      }
+    },
+    {
+      "name": "inflation-intel",
+      "description": "US CPI inflation: headline (all-items), core (less food & energy), energy, and food \u2014 MoM and YoY % changes, ACCELERATING/DECELERATING/STABLE trend signal, and Fed policy implication. BLS data via FRED public CSV, no API key needed. Pairs with fomc-tracker, credit-spreads, treasury-yields, sector-rotation.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {},
+        "additionalProperties": false
       }
     },
     {
@@ -7054,5 +7063,5 @@
       }
     }
   ],
-  "version": "4.77.0"
+  "version": "4.78.0"
 }
