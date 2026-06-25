@@ -1,7 +1,7 @@
 {
   "$schema": "https://glama.ai/mcp/schemas/server.json",
   "name": "The Stall",
-  "description": "263 pay-per-call AI data tools via MCP + x402 \u2014 no API keys, no accounts. Finance: SEC Form 4 insider trades (open-market buys, net sentiment), institutional fund holdings (top holders by position, % float, concentration signal), 13D/13G activist holders, M&A tender offers, Form D VC fundraising, options flow unusual sweep detection, earnings quality Beneish M-Score, equity fundamentals, macro indicators. Crypto: DeFi yields, Base on-chain address intelligence, wallet risk, token security. Research: arXiv, news synthesis, OSINT, YouTube niche analysis, TV shows, weather, aviation, and 240+ more. Pay USDC on Base (x402) or Stripe credits. Remote MCP: https://the-stall.intuitek.ai/mcp.",
+  "description": "265 pay-per-call AI data tools via MCP + x402 \u2014 no API keys, no accounts. Finance: SEC Form 4 insider trades (open-market buys, net sentiment), institutional fund holdings (top holders by position, % float, concentration signal), 13D/13G activist holders, M&A tender offers, Form D VC fundraising, options flow unusual sweep detection, earnings quality Beneish M-Score, equity fundamentals, macro indicators. Crypto: DeFi yields, Base on-chain address intelligence, wallet risk, token security. Developer: iOS App Store competitive intel (search+lookup+top-charts, iTunes free API), npm, PyPI, GitHub, HuggingFace. Research: arXiv, news synthesis, OSINT, YouTube niche analysis, TV shows, weather, aviation, and 245+ more. Pay USDC on Base (x402) or Stripe credits. Remote MCP: https://the-stall.intuitek.ai/mcp.",
   "maintainers": [
     "thebrierfox"
   ],
@@ -135,6 +135,52 @@
               "concise"
             ],
             "description": "Output length. 'standard' = 200-word narrative (default). 'concise' = 100-word summary."
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    {
+      "name": "app-store-intel",
+      "description": "iOS App Store competitive intelligence via the free iTunes Search API. Actions: search (find apps by keyword, returns ratings/price/developer/install-tier/market snapshot), lookup (detailed profile for a specific app by name or Apple ID — rating health, freshness signal, description excerpt, release notes), top_charts (top free or paid apps in a category: finance, productivity, games, health-fitness, developer-tools, etc.). No API key required. Pairs with npm-trends, pypi-intel, github-intel, and huggingface-intel in the developer-ecosystem cluster.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "action": {
+            "type": "string",
+            "enum": ["search", "lookup", "top_charts"],
+            "description": "Action to perform: search apps by keyword, lookup a specific app, or fetch top-charts for a category. Default: search."
+          },
+          "query": {
+            "type": "string",
+            "description": "(search) Keyword or topic to search, e.g. 'budget tracker', 'AI assistant', 'meditation'."
+          },
+          "app": {
+            "type": "string",
+            "description": "(lookup) App name to look up, e.g. 'Notion', 'Robinhood', 'Duolingo'."
+          },
+          "app_id": {
+            "type": ["string", "number"],
+            "description": "(lookup) Apple numeric App ID, e.g. 1234567890."
+          },
+          "category": {
+            "type": "string",
+            "description": "(top_charts) Category slug: all, finance, productivity, business, developer-tools, games, health-fitness, education, social, utilities, news, music, travel, shopping, lifestyle, weather, photo-video, entertainment, sports, medical, food-drink, reference, navigation, graphics-design. Default: all."
+          },
+          "chart": {
+            "type": "string",
+            "enum": ["free", "paid"],
+            "description": "(top_charts) Chart type: free or paid. Default: free."
+          },
+          "limit": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 100,
+            "description": "Max results. Default: 10 for search, 25 for top_charts."
+          },
+          "country": {
+            "type": "string",
+            "description": "(search/lookup) ISO 2-letter country code for App Store region. Default: us."
           }
         },
         "additionalProperties": false
@@ -6970,5 +7016,5 @@
       }
     }
   ],
-  "version": "4.74.0"
+  "version": "4.76.0"
 }
