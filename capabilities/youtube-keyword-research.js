@@ -108,7 +108,7 @@ export default {
     },
   },
 
-  async run({ query, expand = false, language = "en", country = "us" }) {
+  async handler({ query, expand = false, language = "en", country = "us" }) {
     if (!query?.trim()) throw new Error("query is required");
 
     const q   = query.trim().toLowerCase();
