@@ -6759,6 +6759,65 @@
         },
         "required": []
       }
+    },
+    {
+      "name": "tvmaze-intel",
+      "description": "TV show intelligence via TVMaze \u2014 90,000+ shows worldwide. Four modes: search shows by name (returns name, network, genres, rating, status), full show profile with cast/schedule/season count, episode guide filtered by season, and US/global broadcast schedule by date. Free, no API key. Ideal for entertainment research agents, content recommendation, TV trivia, and scheduling assistants.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "mode": {
+            "type": "string",
+            "enum": [
+              "search",
+              "show",
+              "episodes",
+              "schedule"
+            ],
+            "description": "search=find shows | show=full profile+cast | episodes=episode list | schedule=what's on TV by date"
+          },
+          "query": {
+            "type": "string",
+            "description": "Show name or TVMaze numeric ID (search/show/episodes modes)"
+          },
+          "season": {
+            "type": "integer",
+            "description": "episodes mode: filter to this season number"
+          },
+          "country": {
+            "type": "string",
+            "description": "schedule mode: ISO 3166-1 alpha-2 code (default US)"
+          },
+          "date": {
+            "type": "string",
+            "description": "schedule mode: YYYY-MM-DD (default today)"
+          },
+          "limit": {
+            "type": "integer",
+            "description": "search mode: max results (default 8, max 20)"
+          }
+        },
+        "required": [
+          "mode"
+        ]
+      },
+      "outputSchema": {
+        "type": "object",
+        "properties": {
+          "mode": {
+            "type": "string"
+          },
+          "results": {
+            "type": "array"
+          },
+          "show": {
+            "type": "object"
+          },
+          "count": {
+            "type": "integer"
+          }
+        }
+      }
     }
   ]
 }
