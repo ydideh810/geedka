@@ -420,6 +420,20 @@
       }
     },
     {
+      "name": "capital-allocation-score",
+      "description": "Capital allocation quality assessment for any US public company. Returns ROIC (Return on Invested Capital), FCF yield, total shareholder yield (dividends + buybacks), CapEx intensity, and reinvestment rate. Synthesizes into a letter grade A–F: is management good at deploying capital? Chains after equity-fundamentals and wacc-calculator to qualify management before setting DCF terminal growth assumptions. Source: Yahoo Finance (free, no API key). $0.020/call.",
+      "inputSchema": {
+        "type": "object",
+        "required": ["ticker"],
+        "properties": {
+          "ticker": {
+            "type": "string",
+            "description": "US stock ticker symbol (e.g. AAPL, MSFT, AMZN). Case-insensitive."
+          }
+        }
+      }
+    },
+    {
       "name": "cash-flow-statement",
       "description": "Full cash flow statement history for any US public stock \u2014 operating, investing, and financing sections. Returns: D&A, stock-based comp, working capital changes, operating CF, capex, acquisitions, investing CF, debt issuance/repayment, share buybacks, dividends paid, financing CF, free cash flow, beginning/ending cash, owner earnings (net income + D&A - capex), and cash conversion ratio. Quarterly default (up to 8 periods); annual returns up to 4 fiscal years. Completes the financial statement trilogy alongside income-statements and balance-sheet. Source: Yahoo Finance (free, no API key).",
       "inputSchema": {
