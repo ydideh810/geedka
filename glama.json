@@ -9,6 +9,64 @@
   "license": "MIT",
   "tools": [
     {
+      "name": "activist-investor-intel",
+      "description": "SEC EDGAR Schedule 13D/13G beneficial ownership disclosures for any US public company. Mode 'company' (ticker): returns all 5%+ shareholders \u2014 activist funds (Schedule 13D) vs passive holders (Schedule 13G) \u2014 with investor name, ownership %, share count, filing date, and EDGAR URL. Mode 'recent': returns market-wide Schedule 13D disclosures filed in the last N days. Authoritative SEC government data, updated within minutes of filing acceptance. $0.020/call.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "ticker": {
+            "type": "string",
+            "description": "US public company ticker symbol (e.g. TSLA, AAPL, CRM). Case-insensitive. Provide to get 5%+ holders for that specific company."
+          },
+          "mode": {
+            "type": "string",
+            "enum": [
+              "company",
+              "recent"
+            ],
+            "description": "'company' returns 5%+ shareholders for that ticker. 'recent' returns market-wide Schedule 13D filings in the last N days."
+          },
+          "days": {
+            "type": "integer",
+            "description": "For mode=recent: how many calendar days back to search (default 30, max 365).",
+            "minimum": 1,
+            "maximum": 365
+          },
+          "limit": {
+            "type": "integer",
+            "description": "Max results to return (default 20, max 50).",
+            "minimum": 1,
+            "maximum": 50
+          }
+        },
+        "additionalProperties": false
+      },
+      "outputSchema": {
+        "type": "object",
+        "properties": {
+          "ticker": {
+            "type": "string"
+          },
+          "company": {
+            "type": "string"
+          },
+          "holders": {
+            "type": "array"
+          },
+          "filings": {
+            "type": "array"
+          },
+          "activist_count": {
+            "type": "integer"
+          },
+          "total_disclosures": {
+            "type": "integer"
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    {
       "name": "address-security",
       "description": "Wallet/address security and reputation check. Detects phishing, sanctions, cybercrime, money laundering, dark-web activity, and blacklisted wallets using GoPlus Labs + SlowMist + BlockSec data. Returns risk score (0-100) and per-flag breakdown. Supports Ethereum, Base, BSC, Polygon, Arbitrum, Optimism, Avalanche, and more.",
       "inputSchema": {
@@ -421,10 +479,12 @@
     },
     {
       "name": "capital-allocation-score",
-      "description": "Capital allocation quality assessment for any US public company. Returns ROIC (Return on Invested Capital), FCF yield, total shareholder yield (dividends + buybacks), CapEx intensity, and reinvestment rate. Synthesizes into a letter grade A–F: is management good at deploying capital? Chains after equity-fundamentals and wacc-calculator to qualify management before setting DCF terminal growth assumptions. Source: Yahoo Finance (free, no API key). $0.020/call.",
+      "description": "Capital allocation quality assessment for any US public company. Returns ROIC (Return on Invested Capital), FCF yield, total shareholder yield (dividends + buybacks), CapEx intensity, and reinvestment rate. Synthesizes into a letter grade A\u2013F: is management good at deploying capital? Chains after equity-fundamentals and wacc-calculator to qualify management before setting DCF terminal growth assumptions. Source: Yahoo Finance (free, no API key). $0.020/call.",
       "inputSchema": {
         "type": "object",
-        "required": ["ticker"],
+        "required": [
+          "ticker"
+        ],
         "properties": {
           "ticker": {
             "type": "string",
