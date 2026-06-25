@@ -1,7 +1,7 @@
 {
   "$schema": "https://glama.ai/mcp/schemas/server.json",
   "name": "The Stall",
-  "description": "265 pay-per-call AI data tools via MCP + x402 \u2014 no API keys, no accounts. Finance: SEC Form 4 insider trades (open-market buys, net sentiment), institutional fund holdings (top holders by position, % float, concentration signal), 13D/13G activist holders, M&A tender offers, Form D VC fundraising, options flow unusual sweep detection, earnings quality Beneish M-Score, equity fundamentals, macro indicators. Crypto: DeFi yields, Base on-chain address intelligence, wallet risk, token security. Developer: iOS App Store competitive intel (search+lookup+top-charts, iTunes free API), npm, PyPI, GitHub, HuggingFace. Research: arXiv, news synthesis, OSINT, YouTube niche analysis, TV shows, weather, aviation, and 245+ more. Pay USDC on Base (x402) or Stripe credits. Remote MCP: https://the-stall.intuitek.ai/mcp.",
+  "description": "265 pay-per-call AI data tools via MCP + x402 — no API keys, no accounts. Finance: SEC Form 4 insider trades (open-market buys, net sentiment), institutional fund holdings (top holders by position, % float, concentration signal), 13D/13G activist holders, M&A tender offers, Form D VC fundraising, options flow unusual sweep detection, earnings quality Beneish M-Score, equity fundamentals, macro indicators. Crypto: DeFi yields, Base on-chain address intelligence, wallet risk, token security. Developer: iOS App Store competitive intel (search+lookup+top-charts, iTunes free API), npm, PyPI, GitHub, HuggingFace. Research: arXiv, news synthesis, OSINT, YouTube niche analysis, TV shows, weather, aviation, and 245+ more. Pay USDC on Base (x402) or Stripe credits. Remote MCP: https://the-stall.intuitek.ai/mcp.",
   "maintainers": [
     "thebrierfox"
   ],
@@ -10,7 +10,7 @@
   "tools": [
     {
       "name": "activist-investor-intel",
-      "description": "SEC EDGAR Schedule 13D/13G beneficial ownership disclosures for US equities. Mode 1 (ticker): returns all 5%+ shareholders for a company \u2014 activist funds (13D) vs passive holders (13G), with ownership %, share count, and EDGAR filing URL. Mode 2 (recent): returns market-wide Schedule 13D disclosures in the last N days. Authoritative US government data, updated within minutes of SEC acceptance.",
+      "description": "SEC EDGAR Schedule 13D/13G beneficial ownership disclosures for US equities. Mode 1 (ticker): returns all 5%+ shareholders for a company — activist funds (13D) vs passive holders (13G), with ownership %, share count, and EDGAR filing URL. Mode 2 (recent): returns market-wide Schedule 13D disclosures in the last N days. Authoritative US government data, updated within minutes of SEC acceptance.",
       "inputSchema": {
         "type": "object",
         "properties": {
@@ -43,7 +43,7 @@
     },
     {
       "name": "address-intel",
-      "description": "On-chain intelligence for any Base network wallet. Classifies EOA vs contract, profiles USDC transfer activity over a configurable block window, scores payer diversity (distinct counterparties / total transfers, 0\u2013100), detects sybil vanity-lookalike address clusters (same first-4 + last-4 hex chars), identifies x402 facilitator SKIM legs (same-block receive+re-send), and assigns a risk label (ORGANIC / ORGANIC_LIKELY / SEEDER_PATTERN / FACILITATOR_SKIM / SYBIL_CLUSTER / FRESH_WALLET / INACTIVE). Three modes: quick (address type+balance+24h USDC summary), standard (+full transfer history+diversity score), deep (+sybil/SKIM detection+risk label). Zero data COGS \u2014 Base public RPC only.",
+      "description": "On-chain intelligence for any Base network wallet. Classifies EOA vs contract, profiles USDC transfer activity over a configurable block window, scores payer diversity (distinct counterparties / total transfers, 0–100), detects sybil vanity-lookalike address clusters (same first-4 + last-4 hex chars), identifies x402 facilitator SKIM legs (same-block receive+re-send), and assigns a risk label (ORGANIC / ORGANIC_LIKELY / SEEDER_PATTERN / FACILITATOR_SKIM / SYBIL_CLUSTER / FRESH_WALLET / INACTIVE). Three modes: quick (address type+balance+24h USDC summary), standard (+full transfer history+diversity score), deep (+sybil/SKIM detection+risk label). Zero data COGS — Base public RPC only.",
       "inputSchema": {
         "type": "object",
         "properties": {
@@ -64,7 +64,7 @@
           },
           "lookback_blocks": {
             "type": "integer",
-            "description": "Block window for USDC transfer history (standard and deep modes). Base \u2248 2s/block: 43200 \u2248 24h, 302400 \u2248 7d. Default 43200. Max 302400.",
+            "description": "Block window for USDC transfer history (standard and deep modes). Base ≈ 2s/block: 43200 ≈ 24h, 302400 ≈ 7d. Default 43200. Max 302400.",
             "default": 43200,
             "minimum": 1000,
             "maximum": 302400
@@ -110,14 +110,14 @@
     },
     {
       "name": "agent-kya-score",
-      "description": "Know Your Agent (KYA) trust score for any EVM wallet. Returns a 0\u2013100 score, tier (trusted/verified/unknown), sanctions screening result, per-dimension score breakdown (wallet age, activity, sanctions, ERC-8004 identity, KYB, tx history, trust bond, endpoint quality), on-chain attestations (Coinbase KYC, Gitcoin Passport, USDC balance), wallet stats (balance, tx count, estimated age), and per-transaction spending limits. Use before accepting payment from an agent or before dispatching a sub-agent with funds. Answers: is this agent wallet sanctioned? how established is it? has it passed KYC?",
+      "description": "Know Your Agent (KYA) trust score for any EVM wallet. Returns a 0–100 score, tier (trusted/verified/unknown), sanctions screening result, per-dimension score breakdown (wallet age, activity, sanctions, ERC-8004 identity, KYB, tx history, trust bond, endpoint quality), on-chain attestations (Coinbase KYC, Gitcoin Passport, USDC balance), wallet stats (balance, tx count, estimated age), and per-transaction spending limits. Use before accepting payment from an agent or before dispatching a sub-agent with funds. Answers: is this agent wallet sanctioned? how established is it? has it passed KYC?",
       "inputSchema": {
         "type": "object",
         "required": [],
         "properties": {
           "address": {
             "type": "string",
-            "description": "EVM wallet address to score (0x-prefixed, 42 chars). Works on any EVM chain \u2014 score is chain-agnostic."
+            "description": "EVM wallet address to score (0x-prefixed, 42 chars). Works on any EVM chain — score is chain-agnostic."
           }
         }
       }
@@ -148,7 +148,11 @@
         "properties": {
           "action": {
             "type": "string",
-            "enum": ["search", "lookup", "top_charts"],
+            "enum": [
+              "search",
+              "lookup",
+              "top_charts"
+            ],
             "description": "Action to perform: search apps by keyword, lookup a specific app, or fetch top-charts for a category. Default: search."
           },
           "query": {
@@ -160,7 +164,10 @@
             "description": "(lookup) App name to look up, e.g. 'Notion', 'Robinhood', 'Duolingo'."
           },
           "app_id": {
-            "type": ["string", "number"],
+            "type": [
+              "string",
+              "number"
+            ],
             "description": "(lookup) Apple numeric App ID, e.g. 1234567890."
           },
           "category": {
@@ -169,7 +176,10 @@
           },
           "chart": {
             "type": "string",
-            "enum": ["free", "paid"],
+            "enum": [
+              "free",
+              "paid"
+            ],
             "description": "(top_charts) Chart type: free or paid. Default: free."
           },
           "limit": {
@@ -188,13 +198,13 @@
     },
     {
       "name": "ai-image-gen",
-      "description": "Generate an AI image from a text prompt using DALL-E 3. Returns a public URL for the image (hosted for 1 hour) plus the model's revised prompt. Supports vivid or natural style, and three aspect ratios: square (1024\u00d71024), portrait (1024\u00d71792), or landscape (1792\u00d71024). $0.080/image \u2014 20% below closest x402 competitor. Output is base64-encoded PNG or a direct URL depending on response_format.",
+      "description": "Generate an AI image from a text prompt using DALL-E 3. Returns a public URL for the image (hosted for 1 hour) plus the model's revised prompt. Supports vivid or natural style, and three aspect ratios: square (1024×1024), portrait (1024×1792), or landscape (1792×1024). $0.080/image — 20% below closest x402 competitor. Output is base64-encoded PNG or a direct URL depending on response_format.",
       "inputSchema": {
         "type": "object",
         "properties": {
           "prompt": {
             "type": "string",
-            "description": "Text description of the image to generate. Be specific \u2014 include subject, style, lighting, mood, and composition for best results. Max 4000 characters.",
+            "description": "Text description of the image to generate. Be specific — include subject, style, lighting, mood, and composition for best results. Max 4000 characters.",
             "maxLength": 4000
           },
           "style": {
@@ -256,7 +266,7 @@
     },
     {
       "name": "analyst-upgrades",
-      "description": "Analyst rating change history (upgrades, downgrades, initiations) for any US equity. Returns each firm, action, from/to grade, and date \u2014 up to 365 days back. Computes net sentiment (upgrades minus downgrades): positive = bullish momentum building. Pairs with analyst-ratings (current consensus) and earnings-estimates (forward EPS). Yahoo Finance, no API key.",
+      "description": "Analyst rating change history (upgrades, downgrades, initiations) for any US equity. Returns each firm, action, from/to grade, and date — up to 365 days back. Computes net sentiment (upgrades minus downgrades): positive = bullish momentum building. Pairs with analyst-ratings (current consensus) and earnings-estimates (forward EPS). Yahoo Finance, no API key.",
       "inputSchema": {
         "type": "object",
         "properties": {
@@ -289,7 +299,7 @@
     },
     {
       "name": "arxiv-intel",
-      "description": "Search arXiv preprints by query, filtered by field (title/abstract/author/all) and category. Returns title, authors (up to 6), abstract (first 600 chars), arXiv ID, PDF link, publish date, and subject categories. arXiv is the canonical source for AI/ML, CS, physics, math, and quantitative biology preprints \u2014 typically months ahead of peer-reviewed journals. Useful for AI research agents, literature scouts, competitive technique tracking, and grant-writing support. No API key required.",
+      "description": "Search arXiv preprints by query, filtered by field (title/abstract/author/all) and category. Returns title, authors (up to 6), abstract (first 600 chars), arXiv ID, PDF link, publish date, and subject categories. arXiv is the canonical source for AI/ML, CS, physics, math, and quantitative biology preprints — typically months ahead of peer-reviewed journals. Useful for AI research agents, literature scouts, competitive technique tracking, and grant-writing support. No API key required.",
       "inputSchema": {
         "type": "object",
         "properties": {
@@ -327,7 +337,7 @@
             "default": 5,
             "minimum": 1,
             "maximum": 10,
-            "description": "Number of papers to return (1\u201310). Default: 5."
+            "description": "Number of papers to return (1–10). Default: 5."
           }
         },
         "required": [],
@@ -355,7 +365,7 @@
     },
     {
       "name": "aviation-weather",
-      "description": "Aviation weather (METAR + TAF) for any airport. Returns current conditions (temp, wind, visibility, ceiling, flight category VFR/MVFR/IFR/LIFR) plus 24\u201330 hour TAF forecast periods. Accepts IATA (JFK) or ICAO (KJFK) codes. Source: NOAA Aviation Weather Center \u2014 official, real-time, no API key.",
+      "description": "Aviation weather (METAR + TAF) for any airport. Returns current conditions (temp, wind, visibility, ceiling, flight category VFR/MVFR/IFR/LIFR) plus 24–30 hour TAF forecast periods. Accepts IATA (JFK) or ICAO (KJFK) codes. Source: NOAA Aviation Weather Center — official, real-time, no API key.",
       "inputSchema": {
         "type": "object",
         "required": [],
@@ -389,7 +399,7 @@
             "type": "integer",
             "minimum": 1,
             "maximum": 8,
-            "description": "Max periods to return (1\u20138 for quarterly; 1\u20134 for annual). Default: 4."
+            "description": "Max periods to return (1–8 for quarterly; 1–4 for annual). Default: 4."
           }
         },
         "required": []
@@ -397,7 +407,7 @@
     },
     {
       "name": "base-season",
-      "description": "Base chain season snapshot: total chain TVL, top 10 protocols by Base-native TVL, category breakdown, 7d trend, and top Base ecosystem tokens by market cap. No input required \u2014 agents use this for pre-trade orientation before DeFi, lending, or liquidity calls on Base.",
+      "description": "Base chain season snapshot: total chain TVL, top 10 protocols by Base-native TVL, category breakdown, 7d trend, and top Base ecosystem tokens by market cap. No input required — agents use this for pre-trade orientation before DeFi, lending, or liquidity calls on Base.",
       "inputSchema": {
         "type": "object",
         "properties": {},
@@ -406,7 +416,7 @@
     },
     {
       "name": "block-intel",
-      "description": "Returns block header data (number, hash, timestamp, gas used/limit, base fee, tx count, validator address) for any block on Base, Ethereum, or Arbitrum. Accepts block tag (latest/safe/finalized) or number. Free-RPC alternative to skills.onesource.io at 33% lower price \u2014 $0.002 vs $0.003.",
+      "description": "Returns block header data (number, hash, timestamp, gas used/limit, base fee, tx count, validator address) for any block on Base, Ethereum, or Arbitrum. Accepts block tag (latest/safe/finalized) or number. Free-RPC alternative to skills.onesource.io at 33% lower price — $0.002 vs $0.003.",
       "inputSchema": {
         "type": "object",
         "properties": {
@@ -442,7 +452,7 @@
     },
     {
       "name": "breadcrumb-extractor",
-      "description": "Extracts structured breadcrumb navigation from a URL. Returns domain, ordered path segments with human-readable labels, query parameters as key-value pairs, and a formatted breadcrumb trail string. Identifies numeric IDs vs. named path segments. Pure URL parsing \u2014 zero external calls. Useful for agents that process sitemaps, navigation menus, or need to understand page hierarchy.",
+      "description": "Extracts structured breadcrumb navigation from a URL. Returns domain, ordered path segments with human-readable labels, query parameters as key-value pairs, and a formatted breadcrumb trail string. Identifies numeric IDs vs. named path segments. Pure URL parsing — zero external calls. Useful for agents that process sitemaps, navigation menus, or need to understand page hierarchy.",
       "inputSchema": {
         "type": "object",
         "properties": {
@@ -461,13 +471,13 @@
     },
     {
       "name": "btc-game-theory",
-      "description": "Bitcoin mining game theory and systems dynamics in one call. Returns: selfish-mining profitability threshold (Eyal-Sirer), 51%-attack electricity cost estimate, fee-vs-subsidy revenue split, difficulty epoch trajectory (expansion / contraction / neutral), Nash-equilibrium state for honest mining, and current epoch progress. Sourced from mempool.space and CoinGecko \u2014 no API key required. Use for miner-incentive analysis, network security assessment, and pre-investment regime detection.",
+      "description": "Bitcoin mining game theory and systems dynamics in one call. Returns: selfish-mining profitability threshold (Eyal-Sirer), 51%-attack electricity cost estimate, fee-vs-subsidy revenue split, difficulty epoch trajectory (expansion / contraction / neutral), Nash-equilibrium state for honest mining, and current epoch progress. Sourced from mempool.space and CoinGecko — no API key required. Use for miner-incentive analysis, network security assessment, and pre-investment regime detection.",
       "inputSchema": {
         "type": "object",
         "properties": {
           "connectivity_gamma": {
             "type": "number",
-            "description": "Assumed fraction of honest miners who extend the selfish chain when block heights are equal (0\u20131). Higher \u03b3 means better-connected selfish miner. Default 0 (worst-case for honest miners).",
+            "description": "Assumed fraction of honest miners who extend the selfish chain when block heights are equal (0–1). Higher γ means better-connected selfish miner. Default 0 (worst-case for honest miners).",
             "default": 0,
             "minimum": 0,
             "maximum": 1
@@ -512,7 +522,7 @@
     },
     {
       "name": "btc-systems-theory",
-      "description": "Seven-lens systems theory analysis of the Bitcoin network. Returns: (1) difficulty feedback loop state + regulator lag, (2) mempool stock-flow ratio and queue depth, (3) confirmation delay at economy/priority fee tiers, (4) fee nonlinearity index and hash-rate growth curvature, (5) Nakamoto coefficient (min pools for 51% consensus), (6) self-organization score for fee market equilibrium, (7) HHI mining concentration index and decentralization grade A\u2013F. Sourced from mempool.space \u2014 no API key required. Pairs with btc-game-theory for full Bitcoin systems and incentive analysis.",
+      "description": "Seven-lens systems theory analysis of the Bitcoin network. Returns: (1) difficulty feedback loop state + regulator lag, (2) mempool stock-flow ratio and queue depth, (3) confirmation delay at economy/priority fee tiers, (4) fee nonlinearity index and hash-rate growth curvature, (5) Nakamoto coefficient (min pools for 51% consensus), (6) self-organization score for fee market equilibrium, (7) HHI mining concentration index and decentralization grade A–F. Sourced from mempool.space — no API key required. Pairs with btc-game-theory for full Bitcoin systems and incentive analysis.",
       "inputSchema": {
         "type": "object",
         "properties": {
@@ -533,7 +543,7 @@
     },
     {
       "name": "capital-allocation-score",
-      "description": "Capital allocation quality assessment for any US public company. Returns ROIC (Return on Invested Capital), FCF yield, total shareholder yield (dividends + buybacks), CapEx intensity, and reinvestment rate. Synthesizes these into a letter grade (A\u2013F) that answers: is management good at deploying the capital they generate? Designed to chain after equity-fundamentals and wacc-calculator to qualify management quality before setting DCF terminal growth assumptions.",
+      "description": "Capital allocation quality assessment for any US public company. Returns ROIC (Return on Invested Capital), FCF yield, total shareholder yield (dividends + buybacks), CapEx intensity, and reinvestment rate. Synthesizes these into a letter grade (A–F) that answers: is management good at deploying the capital they generate? Designed to chain after equity-fundamentals and wacc-calculator to qualify management quality before setting DCF terminal growth assumptions.",
       "inputSchema": {
         "type": "object",
         "properties": {
@@ -549,7 +559,7 @@
     },
     {
       "name": "cash-flow-statement",
-      "description": "Full cash flow statement history for any US public stock \u2014 operating, investing, and financing sections. Returns: D&A, stock-based comp, working capital changes, operating CF, capex, acquisitions, investing CF, debt issuance/repayment, share buybacks, dividends paid, financing CF, free cash flow, beginning/ending cash, owner earnings (net income + D&A \u2013 capex), and cash conversion ratio. Quarterly default (up to 8 periods); annual returns up to 4 fiscal years. Completes the financial statement trilogy alongside income-statements and balance-sheet. Critical for FCF quality analysis, capital allocation review, and buyback/dividend tracking. Source: Yahoo Finance fundamentals timeseries (free, no API key required).",
+      "description": "Full cash flow statement history for any US public stock — operating, investing, and financing sections. Returns: D&A, stock-based comp, working capital changes, operating CF, capex, acquisitions, investing CF, debt issuance/repayment, share buybacks, dividends paid, financing CF, free cash flow, beginning/ending cash, owner earnings (net income + D&A – capex), and cash conversion ratio. Quarterly default (up to 8 periods); annual returns up to 4 fiscal years. Completes the financial statement trilogy alongside income-statements and balance-sheet. Critical for FCF quality analysis, capital allocation review, and buyback/dividend tracking. Source: Yahoo Finance fundamentals timeseries (free, no API key required).",
       "inputSchema": {
         "type": "object",
         "properties": {
@@ -569,7 +579,7 @@
             "type": "integer",
             "minimum": 1,
             "maximum": 8,
-            "description": "Max periods to return (1\u20138 for quarterly; 1\u20134 for annual). Default: 4."
+            "description": "Max periods to return (1–8 for quarterly; 1–4 for annual). Default: 4."
           }
         },
         "required": []
@@ -577,7 +587,7 @@
     },
     {
       "name": "chain-pulse",
-      "description": "Returns an Ethereum block header + current stablecoin depeg status in one call. Collapses the eth-block \u2192 stablecoin-watch 2-hop chain. Block fields: number, hash, miner, timestamp, gas_used, tx_count. Stablecoin fields: symbol, price, peg_deviation, depeg_status, composite alert level. Supports Ethereum, Base, Polygon, Arbitrum. Free upstreams (DRPC + DeFiLlama), no API key required.",
+      "description": "Returns an Ethereum block header + current stablecoin depeg status in one call. Collapses the eth-block → stablecoin-watch 2-hop chain. Block fields: number, hash, miner, timestamp, gas_used, tx_count. Stablecoin fields: symbol, price, peg_deviation, depeg_status, composite alert level. Supports Ethereum, Base, Polygon, Arbitrum. Free upstreams (DRPC + DeFiLlama), no API key required.",
       "inputSchema": {
         "type": "object",
         "properties": {
@@ -617,7 +627,7 @@
     },
     {
       "name": "changelog-generate",
-      "description": "Converts commit messages to a keep-a-changelog release block. Groups feat/fix/perf/docs/security commits into Added/Fixed/Changed/Security sections. Returns versioned markdown or structured JSON. No API key \u2014 pure transform.",
+      "description": "Converts commit messages to a keep-a-changelog release block. Groups feat/fix/perf/docs/security commits into Added/Fixed/Changed/Security sections. Returns versioned markdown or structured JSON. No API key — pure transform.",
       "inputSchema": {
         "type": "object",
         "properties": {
@@ -653,7 +663,7 @@
     },
     {
       "name": "chromatic-dispersion",
-      "description": "Fiber optic chromatic dispersion calculator. Computes dispersion coefficient D(\u03bb) in ps/(nm\u00b7km), accumulated dispersion (ps/nm) over a fiber span, and dispersion slope for SMF-28, NZDSF, DSF, LEAF, DCF, and ULLSF fiber types. Optionally sweeps a wavelength range (C-band, L-band, or custom). Pure math \u2014 instant, zero API calls. Useful for optical network design, DWDM link budget, and dispersion compensation planning.",
+      "description": "Fiber optic chromatic dispersion calculator. Computes dispersion coefficient D(λ) in ps/(nm·km), accumulated dispersion (ps/nm) over a fiber span, and dispersion slope for SMF-28, NZDSF, DSF, LEAF, DCF, and ULLSF fiber types. Optionally sweeps a wavelength range (C-band, L-band, or custom). Pure math — instant, zero API calls. Useful for optical network design, DWDM link budget, and dispersion compensation planning.",
       "inputSchema": {
         "type": "object",
         "properties": {
@@ -671,7 +681,7 @@
           },
           "wavelength_nm": {
             "type": "number",
-            "description": "Operating wavelength in nanometers (default 1550). Range: 1260\u20131675 nm."
+            "description": "Operating wavelength in nanometers (default 1550). Range: 1260–1675 nm."
           },
           "fiber_length_km": {
             "type": "number",
@@ -701,7 +711,7 @@
     },
     {
       "name": "city-lookup",
-      "description": "Search airports and cities by keyword, IATA code, or city name. Returns IATA/ICAO codes, coordinates, country, and timezone for each match \u2014 useful for travel planning, routing, and geographic enrichment.",
+      "description": "Search airports and cities by keyword, IATA code, or city name. Returns IATA/ICAO codes, coordinates, country, and timezone for each match — useful for travel planning, routing, and geographic enrichment.",
       "inputSchema": {
         "type": "object",
         "properties": {
@@ -754,7 +764,7 @@
     },
     {
       "name": "clinical-trials",
-      "description": "Search ClinicalTrials.gov for clinical studies by condition, intervention, or keyword. Returns phase, status, enrollment, sponsor, and dates. NIH primary source \u2014 no markup. $0.005/call.",
+      "description": "Search ClinicalTrials.gov for clinical studies by condition, intervention, or keyword. Returns phase, status, enrollment, sponsor, and dates. NIH primary source — no markup. $0.005/call.",
       "inputSchema": {
         "type": "object",
         "properties": {
@@ -806,7 +816,7 @@
     },
     {
       "name": "code-api-surface",
-      "description": "Analyzes a code snippet and returns its API surface: HTTP routes (method + path), exported symbols, and middleware. Supports Express, FastAPI, Flask, Django, Spring Boot, ASP.NET, Rails, Gin. Pure static analysis \u2014 no code execution. Returns JSON with routes[], exports[], middleware[], lang, framework, and a plain-English summary. $0.10/call.",
+      "description": "Analyzes a code snippet and returns its API surface: HTTP routes (method + path), exported symbols, and middleware. Supports Express, FastAPI, Flask, Django, Spring Boot, ASP.NET, Rails, Gin. Pure static analysis — no code execution. Returns JSON with routes[], exports[], middleware[], lang, framework, and a plain-English summary. $0.10/call.",
       "inputSchema": {
         "type": "object",
         "properties": {
@@ -830,7 +840,7 @@
     },
     {
       "name": "code-test-detector",
-      "description": "Detects testing frameworks and test coverage presence in a code snippet or GitHub repository. For code snippets: identifies test functions, assertions, mocks, fixtures, and frameworks (Jest, pytest, go test, JUnit, RSpec, etc.). For GitHub repos: counts test files vs source files, surfaces config files, and gives a coverage verdict. No code execution \u2014 pure static analysis.",
+      "description": "Detects testing frameworks and test coverage presence in a code snippet or GitHub repository. For code snippets: identifies test functions, assertions, mocks, fixtures, and frameworks (Jest, pytest, go test, JUnit, RSpec, etc.). For GitHub repos: counts test files vs source files, surfaces config files, and gives a coverage verdict. No code execution — pure static analysis.",
       "inputSchema": {
         "type": "object",
         "properties": {
@@ -840,7 +850,7 @@
           },
           "filename": {
             "type": "string",
-            "description": "Optional filename for the code snippet (e.g. 'utils.test.js') \u2014 helps confirm test file naming conventions."
+            "description": "Optional filename for the code snippet (e.g. 'utils.test.js') — helps confirm test file naming conventions."
           },
           "github_repo": {
             "type": "string",
@@ -852,7 +862,7 @@
     },
     {
       "name": "commodity-futures",
-      "description": "Returns live price and intraday metrics for major commodity futures: crude oil, natural gas, gold, silver, copper, platinum, wheat, corn, soybeans, and coffee. Includes price, day high/low, 52-week range, previous close, exchange, and contract name. Filter by commodity name or category (energy/metals/agricultural). $0.010/call \u2014 Yahoo Finance free API, no key required.",
+      "description": "Returns live price and intraday metrics for major commodity futures: crude oil, natural gas, gold, silver, copper, platinum, wheat, corn, soybeans, and coffee. Includes price, day high/low, 52-week range, previous close, exchange, and contract name. Filter by commodity name or category (energy/metals/agricultural). $0.010/call — Yahoo Finance free API, no key required.",
       "inputSchema": {
         "type": "object",
         "properties": {
@@ -917,7 +927,7 @@
         "properties": {
           "ticker": {
             "type": "string",
-            "description": "US stock ticker symbol (e.g. 'AAPL', 'MSFT', 'TSLA'). Case-insensitive. Standard tickers only \u2014 class-suffix tickers like BRK.A may need to be submitted as BRKA."
+            "description": "US stock ticker symbol (e.g. 'AAPL', 'MSFT', 'TSLA'). Case-insensitive. Standard tickers only — class-suffix tickers like BRK.A may need to be submitted as BRKA."
           }
         },
         "additionalProperties": false
@@ -944,7 +954,7 @@
     },
     {
       "name": "congressional-trades",
-      "description": "US Congressional stock trades (STOCK Act disclosures). Two modes: supply a ticker to get all congress member trades in that stock (with excess-return-vs-SPY performance), or omit ticker for recent market-wide congressional activity. Returns representative, party, chamber, transaction type, dollar range, dates, and historical performance vs. SPY. Sourced from Quiver Quant's STOCK Act aggregator \u2014 no API key required. $0.022/call.",
+      "description": "US Congressional stock trades (STOCK Act disclosures). Two modes: supply a ticker to get all congress member trades in that stock (with excess-return-vs-SPY performance), or omit ticker for recent market-wide congressional activity. Returns representative, party, chamber, transaction type, dollar range, dates, and historical performance vs. SPY. Sourced from Quiver Quant's STOCK Act aggregator — no API key required. $0.022/call.",
       "inputSchema": {
         "type": "object",
         "properties": {
@@ -993,7 +1003,7 @@
     },
     {
       "name": "content-analyze",
-      "description": "AI-powered URL content analysis. Fetches a URL, extracts the readable article text, and returns structured intelligence: 2\u20133 sentence summary, key points, named entities with types, sentiment score, topic tags, content type classification, and credibility signals (has author/date/sources). Use for content intelligence pipelines, research synthesis, or automated brief generation. $0.012/call.",
+      "description": "AI-powered URL content analysis. Fetches a URL, extracts the readable article text, and returns structured intelligence: 2–3 sentence summary, key points, named entities with types, sentiment score, topic tags, content type classification, and credibility signals (has author/date/sources). Use for content intelligence pipelines, research synthesis, or automated brief generation. $0.012/call.",
       "inputSchema": {
         "type": "object",
         "properties": {
@@ -1012,7 +1022,7 @@
     },
     {
       "name": "content-moderation",
-      "description": "Classify text (and optional image URLs) for harmful content \u2014 hate speech, harassment, self-harm, sexual content, violence, and illicit instructions. Returns flagged status, risk level (NONE/LOW/MEDIUM/HIGH), flagged categories, per-category confidence scores, and an optional AI-generated safe rewrite.",
+      "description": "Classify text (and optional image URLs) for harmful content — hate speech, harassment, self-harm, sexual content, violence, and illicit instructions. Returns flagged status, risk level (NONE/LOW/MEDIUM/HIGH), flagged categories, per-category confidence scores, and an optional AI-generated safe rewrite.",
       "inputSchema": {
         "type": "object",
         "properties": {
@@ -1051,7 +1061,7 @@
     },
     {
       "name": "country-info",
-      "description": "Country information lookup by name, ISO code (alpha-2 or alpha-3), or capital city. Returns: official name, ISO codes, capital, population, area (km\u00b2), region, languages, currencies (code + symbol), borders, calling code, timezones, and flag image URL. Useful for international business agents, geographic enrichment, currency identification, and compliance workflows.",
+      "description": "Country information lookup by name, ISO code (alpha-2 or alpha-3), or capital city. Returns: official name, ISO codes, capital, population, area (km²), region, languages, currencies (code + symbol), borders, calling code, timezones, and flag image URL. Useful for international business agents, geographic enrichment, currency identification, and compliance workflows.",
       "inputSchema": {
         "type": "object",
         "properties": {
@@ -1117,7 +1127,7 @@
     },
     {
       "name": "crypto-brief",
-      "description": "AI-synthesized cryptocurrency market intelligence brief. Assembles 12 real-time signals from CoinGecko (BTC, ETH, SOL, BNB, XRP, DOGE, ADA, AVAX, LINK, UNI, MATIC, ATOM \u2014 price, 24h change, market cap, volume) plus the Alternative.me Fear & Greed Index. Returns crypto regime classification and a 200-word GPT-4o-mini narrative covering market sentiment, dominant signal, and agent decision implications.",
+      "description": "AI-synthesized cryptocurrency market intelligence brief. Assembles 12 real-time signals from CoinGecko (BTC, ETH, SOL, BNB, XRP, DOGE, ADA, AVAX, LINK, UNI, MATIC, ATOM — price, 24h change, market cap, volume) plus the Alternative.me Fear & Greed Index. Returns crypto regime classification and a 200-word GPT-4o-mini narrative covering market sentiment, dominant signal, and agent decision implications.",
       "inputSchema": {
         "type": "object",
         "properties": {
@@ -1135,7 +1145,7 @@
     },
     {
       "name": "crypto-fear-greed",
-      "description": "Crypto Fear & Greed Index \u2014 current score (0=extreme fear, 100=extreme greed), 7-day trend, 30-day min/max/avg, and trading regime signal. Free alternative.me data updated daily. $0.005/call.",
+      "description": "Crypto Fear & Greed Index — current score (0=extreme fear, 100=extreme greed), 7-day trend, 30-day min/max/avg, and trading regime signal. Free alternative.me data updated daily. $0.005/call.",
       "inputSchema": {
         "type": "object",
         "properties": {
@@ -1143,7 +1153,7 @@
             "type": "integer",
             "minimum": 1,
             "maximum": 30,
-            "description": "History depth for trend and summary (1\u201330). Default: 7."
+            "description": "History depth for trend and summary (1–30). Default: 7."
           }
         },
         "required": []
@@ -1151,7 +1161,7 @@
     },
     {
       "name": "crypto-fiat-price",
-      "description": "Cryptocurrency price in any fiat currency \u2014 JPY, EUR, CNY, GBP, KRW, INR, AUD, BRL, or 80+ more. Input a coin name or CoinGecko ID (bitcoin, ethereum, solana, btc, eth, sol, etc.) and one or more currency codes. Returns current price, 24h percent change per currency, and last updated timestamp. Free upstream: CoinGecko public API (no key). 85% below specialized fiat oracles. Useful for Asian/European market agents, cross-border DeFi pricing, and multi-currency portfolio valuation.",
+      "description": "Cryptocurrency price in any fiat currency — JPY, EUR, CNY, GBP, KRW, INR, AUD, BRL, or 80+ more. Input a coin name or CoinGecko ID (bitcoin, ethereum, solana, btc, eth, sol, etc.) and one or more currency codes. Returns current price, 24h percent change per currency, and last updated timestamp. Free upstream: CoinGecko public API (no key). 85% below specialized fiat oracles. Useful for Asian/European market agents, cross-border DeFi pricing, and multi-currency portfolio valuation.",
       "inputSchema": {
         "type": "object",
         "properties": {
@@ -1170,7 +1180,7 @@
     },
     {
       "name": "crypto-momentum-pack",
-      "description": "Korean exchange volume leaders + global 24h movers + optional DeFi yield cross-reference in one call. Collapses the printmoneylab/market-movers \u2192 ottoai/yield-farming-active agent chain at 53% of the chain cost. Returns top gaining/losing/volume-leading tokens on Upbit (Korea's #1 exchange), global CoinGecko movers, and matching DeFi yield pools when include_yields is true. Korean volume often leads global crypto moves \u2014 use for pre-trade momentum confirmation, cross-exchange alpha identification, and DeFi capital allocation.",
+      "description": "Korean exchange volume leaders + global 24h movers + optional DeFi yield cross-reference in one call. Collapses the printmoneylab/market-movers → ottoai/yield-farming-active agent chain at 53% of the chain cost. Returns top gaining/losing/volume-leading tokens on Upbit (Korea's #1 exchange), global CoinGecko movers, and matching DeFi yield pools when include_yields is true. Korean volume often leads global crypto moves — use for pre-trade momentum confirmation, cross-exchange alpha identification, and DeFi capital allocation.",
       "inputSchema": {
         "type": "object",
         "properties": {
@@ -1186,7 +1196,7 @@
           },
           "limit": {
             "type": "integer",
-            "description": "Number of tokens to return per source (1\u201320). Default 10.",
+            "description": "Number of tokens to return per source (1–20). Default 10.",
             "default": 10,
             "minimum": 1,
             "maximum": 20
@@ -1207,13 +1217,13 @@
     },
     {
       "name": "crypto-news-impact",
-      "description": "Latest cryptocurrency news headlines from CoinDesk with live price correlation for mentioned assets. Returns up to 10 recent articles \u2014 each with title, URL, published timestamp, primary category, and a keyword-derived sentiment signal (bullish/bearish/neutral). For each article, identified crypto assets (BTC, ETH, SOL, etc.) are enriched with current USD price and 24h price change. Use before any crypto research, portfolio review, or market sentiment task to understand what news is driving the market right now. Data: CoinDesk RSS (TTL 5 min) + CoinGecko prices.",
+      "description": "Latest cryptocurrency news headlines from CoinDesk with live price correlation for mentioned assets. Returns up to 10 recent articles — each with title, URL, published timestamp, primary category, and a keyword-derived sentiment signal (bullish/bearish/neutral). For each article, identified crypto assets (BTC, ETH, SOL, etc.) are enriched with current USD price and 24h price change. Use before any crypto research, portfolio review, or market sentiment task to understand what news is driving the market right now. Data: CoinDesk RSS (TTL 5 min) + CoinGecko prices.",
       "inputSchema": {
         "type": "object",
         "properties": {
           "limit": {
             "type": "integer",
-            "description": "Number of headlines to return (1\u201320). Default: 10.",
+            "description": "Number of headlines to return (1–20). Default: 10.",
             "default": 10
           }
         },
@@ -1222,7 +1232,7 @@
     },
     {
       "name": "crypto-pulse",
-      "description": "Crypto market pulse \u2014 latest Ethereum (or Base) block context plus top crypto gainers and losers by 24h change, in a single call. Returns: block_number, timestamp, gas info (base_fee_gwei, gas_used/limit, tx_count), and top movers (symbol, name, price_usd, change_24h, volume_24h, market_cap). Use for crypto portfolio context, on-chain/market correlation, or pre-trade situational awareness. Free upstream: DRPC + CoinGecko. $0.007/call \u2014 30% below the comparable two-endpoint chain.",
+      "description": "Crypto market pulse — latest Ethereum (or Base) block context plus top crypto gainers and losers by 24h change, in a single call. Returns: block_number, timestamp, gas info (base_fee_gwei, gas_used/limit, tx_count), and top movers (symbol, name, price_usd, change_24h, volume_24h, market_cap). Use for crypto portfolio context, on-chain/market correlation, or pre-trade situational awareness. Free upstream: DRPC + CoinGecko. $0.007/call — 30% below the comparable two-endpoint chain.",
       "inputSchema": {
         "type": "object",
         "properties": {
@@ -1237,7 +1247,7 @@
           },
           "movers_limit": {
             "type": "integer",
-            "description": "Number of gainers + losers each (1\u201320). Default 5.",
+            "description": "Number of gainers + losers each (1–20). Default 5.",
             "default": 5,
             "minimum": 1,
             "maximum": 20
@@ -1248,7 +1258,7 @@
     },
     {
       "name": "crypto-top-movers",
-      "description": "Real-time cryptocurrency market snapshot: top 5 gainers and top 5 losers by 24-hour percentage change (among the top 100 coins by market cap), plus the 10 largest coins by market cap with current prices and 24h change. Also returns global market statistics: total market cap (USD), BTC dominance percentage, and 24h trading volume. Stablecoins excluded from movers ranking. Use before any crypto portfolio, trading, or market analysis task to get a current regime read. Data: CoinGecko public API (refreshes every 1\u20135 minutes).",
+      "description": "Real-time cryptocurrency market snapshot: top 5 gainers and top 5 losers by 24-hour percentage change (among the top 100 coins by market cap), plus the 10 largest coins by market cap with current prices and 24h change. Also returns global market statistics: total market cap (USD), BTC dominance percentage, and 24h trading volume. Stablecoins excluded from movers ranking. Use before any crypto portfolio, trading, or market analysis task to get a current regime read. Data: CoinGecko public API (refreshes every 1–5 minutes).",
       "inputSchema": {
         "type": "object",
         "properties": {},
@@ -1257,7 +1267,7 @@
     },
     {
       "name": "currency-format",
-      "description": "Locale-aware currency formatting and symbol lookup for any ISO 4217 currency. Formats numbers as currency strings (e.g. 1234.56 USD \u2192 '$1,234.56', EUR in German locale \u2192 '1.234,56 \u20ac'), returns currency symbol, decimal separator, grouping separator, and currency name. Pure computation \u2014 no API key, no upstream latency. Supports 150+ currencies and custom locale overrides. Use for: financial report generation, invoice display, DeFi amount formatting, cross-regional price display.",
+      "description": "Locale-aware currency formatting and symbol lookup for any ISO 4217 currency. Formats numbers as currency strings (e.g. 1234.56 USD → '$1,234.56', EUR in German locale → '1.234,56 €'), returns currency symbol, decimal separator, grouping separator, and currency name. Pure computation — no API key, no upstream latency. Supports 150+ currencies and custom locale overrides. Use for: financial report generation, invoice display, DeFi amount formatting, cross-regional price display.",
       "inputSchema": {
         "type": "object",
         "properties": {
@@ -1267,7 +1277,7 @@
           },
           "currency": {
             "type": "string",
-            "description": "ISO 4217 currency code (e.g. 'USD', 'EUR', 'JPY', 'KRW', 'BTC is not supported \u2014 ISO only)."
+            "description": "ISO 4217 currency code (e.g. 'USD', 'EUR', 'JPY', 'KRW', 'BTC is not supported — ISO only)."
           },
           "locale": {
             "type": "string",
@@ -1350,7 +1360,7 @@
     },
     {
       "name": "dcf-scenario",
-      "description": "Three-scenario DCF model (bear / base / bull) for any US public company plus a sensitivity grid. Runs five-year FCF projections and Gordon Growth terminal value for each growth assumption in parallel, returns margin of safety and upside % per scenario, a probability-weighted composite intrinsic value, and a 5\u00d75 sensitivity table across growth rates and WACC offsets. No API key required.",
+      "description": "Three-scenario DCF model (bear / base / bull) for any US public company plus a sensitivity grid. Runs five-year FCF projections and Gordon Growth terminal value for each growth assumption in parallel, returns margin of safety and upside % per scenario, a probability-weighted composite intrinsic value, and a 5×5 sensitivity table across growth rates and WACC offsets. No API key required.",
       "inputSchema": {
         "type": "object",
         "properties": {
@@ -1372,11 +1382,11 @@
           },
           "terminal_growth_pct": {
             "type": "number",
-            "description": "Perpetuity growth rate after year 5 in % (default 3.0). Use 2.0\u20133.5 for mature companies."
+            "description": "Perpetuity growth rate after year 5 in % (default 3.0). Use 2.0–3.5 for mature companies."
           },
           "erp": {
             "type": "number",
-            "description": "Equity risk premium in % (default 5.5 \u2014 Damodaran mature market ERP)."
+            "description": "Equity risk premium in % (default 5.5 — Damodaran mature market ERP)."
           },
           "bear_weight_pct": {
             "type": "number",
@@ -1411,11 +1421,11 @@
           },
           "terminal_growth_rate": {
             "type": "number",
-            "description": "Perpetuity growth rate after year 5 in % (default 3.0 \u2014 long-run GDP growth). Use 2.0\u20133.5 for mature companies, 0\u20132.0 for declining businesses."
+            "description": "Perpetuity growth rate after year 5 in % (default 3.0 — long-run GDP growth). Use 2.0–3.5 for mature companies, 0–2.0 for declining businesses."
           },
           "erp": {
             "type": "number",
-            "description": "Equity risk premium in % (default 5.5 \u2014 Damodaran mature market ERP). Override for emerging market exposure."
+            "description": "Equity risk premium in % (default 5.5 — Damodaran mature market ERP). Override for emerging market exposure."
           }
         },
         "required": [],
@@ -1424,7 +1434,7 @@
     },
     {
       "name": "defi-market-pulse",
-      "description": "Combined DeFi yield intelligence and market momentum in one call \u2014 33% cheaper than separate yield-farming-active + market-movers calls ($0.009). Returns top yield pools from DeFiLlama, crypto and equity market movers, and a cross-signal layer that flags 'boosted' pools (high APY + rising token) vs 'at_risk' pools (high APY + falling token). Use for capital allocation decisions, pre-trade DeFi context, and portfolio rebalancing signals.",
+      "description": "Combined DeFi yield intelligence and market momentum in one call — 33% cheaper than separate yield-farming-active + market-movers calls ($0.009). Returns top yield pools from DeFiLlama, crypto and equity market movers, and a cross-signal layer that flags 'boosted' pools (high APY + rising token) vs 'at_risk' pools (high APY + falling token). Use for capital allocation decisions, pre-trade DeFi context, and portfolio rebalancing signals.",
       "inputSchema": {
         "type": "object",
         "properties": {
@@ -1454,21 +1464,21 @@
           },
           "yield_limit": {
             "type": "integer",
-            "description": "Number of yield pools to return (1\u201330, default 15).",
+            "description": "Number of yield pools to return (1–30, default 15).",
             "default": 15,
             "minimum": 1,
             "maximum": 30
           },
           "market_limit": {
             "type": "integer",
-            "description": "Number of market movers per category (1\u201320, default 10).",
+            "description": "Number of market movers per category (1–20, default 10).",
             "default": 10,
             "minimum": 1,
             "maximum": 20
           },
           "include_equity": {
             "type": "boolean",
-            "description": "Include equity market movers (US stocks). Default false \u2014 crypto only for speed.",
+            "description": "Include equity market movers (US stocks). Default false — crypto only for speed.",
             "default": false
           }
         },
@@ -1477,7 +1487,7 @@
     },
     {
       "name": "defi-portfolio",
-      "description": "Multi-chain DeFi portfolio scanner. Returns token holdings and USD values for any EVM wallet across Ethereum, Base, Polygon, and Arbitrum mainnet. Covers ETH, major stablecoins (USDC, USDT, DAI), WBTC, ARB, cbETH, and chain-native assets. Collapses the defi.hugen.tokyo/defi/address seam \u2014 41 payers. $0.010/call.",
+      "description": "Multi-chain DeFi portfolio scanner. Returns token holdings and USD values for any EVM wallet across Ethereum, Base, Polygon, and Arbitrum mainnet. Covers ETH, major stablecoins (USDC, USDT, DAI), WBTC, ARB, cbETH, and chain-native assets. Collapses the defi.hugen.tokyo/defi/address seam — 41 payers. $0.010/call.",
       "inputSchema": {
         "type": "object",
         "required": [],
@@ -1506,7 +1516,7 @@
     },
     {
       "name": "defi-state-pack",
-      "description": "Returns Ethereum block header + stablecoin depeg status + top DeFi yield farming pools in one call. Collapses the 3-hop eth-block \u2192 stablecoin-watch \u2192 yield-farming chain into a single call. All three upstreams fetched in parallel. Supports Ethereum, Base, Polygon, Arbitrum. Filter yield pools by chain, protocol, min TVL, min APY. Free upstreams \u2014 DRPC + DeFiLlama \u2014 no API key required.",
+      "description": "Returns Ethereum block header + stablecoin depeg status + top DeFi yield farming pools in one call. Collapses the 3-hop eth-block → stablecoin-watch → yield-farming chain into a single call. All three upstreams fetched in parallel. Supports Ethereum, Base, Polygon, Arbitrum. Filter yield pools by chain, protocol, min TVL, min APY. Free upstreams — DRPC + DeFiLlama — no API key required.",
       "inputSchema": {
         "type": "object",
         "properties": {
@@ -1577,7 +1587,7 @@
     },
     {
       "name": "defi-yield-strategies",
-      "description": "DeFi yield strategy planner. Given a portfolio size and risk tolerance, returns an optimized allocation across top DeFi yield opportunities. Risk tiers: low (stablecoins only, APY < 30%, TVL \u2265 $50M), medium (TVL \u2265 $10M, APY < 80%), high (TVL \u2265 $1M, all assets). Output includes per-position allocation, APY, weekly yield estimate, chain, and 7-day APY trend. Covers 16K+ pools across 400+ DeFi protocols via DeFiLlama.",
+      "description": "DeFi yield strategy planner. Given a portfolio size and risk tolerance, returns an optimized allocation across top DeFi yield opportunities. Risk tiers: low (stablecoins only, APY < 30%, TVL ≥ $50M), medium (TVL ≥ $10M, APY < 80%), high (TVL ≥ $1M, all assets). Output includes per-position allocation, APY, weekly yield estimate, chain, and 7-day APY trend. Covers 16K+ pools across 400+ DeFi protocols via DeFiLlama.",
       "inputSchema": {
         "type": "object",
         "required": [],
@@ -1615,7 +1625,7 @@
     },
     {
       "name": "defi-yields",
-      "description": "Returns top DeFi yield pools ranked by APY from DeFiLlama. Covers 16,000+ pools across 400+ protocols and 50+ chains (Ethereum, Base, Solana, Arbitrum, Polygon, etc.). Filter by chain, minimum APY, minimum TVL, or stablecoin-only. Each pool includes APY breakdown (base + reward), TVL, 7-day APY change, and a direct DeFiLlama link. Sourced from DeFiLlama public API \u2014 no key required, updated continuously.",
+      "description": "Returns top DeFi yield pools ranked by APY from DeFiLlama. Covers 16,000+ pools across 400+ protocols and 50+ chains (Ethereum, Base, Solana, Arbitrum, Polygon, etc.). Filter by chain, minimum APY, minimum TVL, or stablecoin-only. Each pool includes APY breakdown (base + reward), TVL, 7-day APY change, and a direct DeFiLlama link. Sourced from DeFiLlama public API — no key required, updated continuously.",
       "inputSchema": {
         "type": "object",
         "properties": {
@@ -1664,7 +1674,7 @@
     },
     {
       "name": "defillama-pack",
-      "description": "DeFi research pack: returns TVL, chain breakdown, fees, and native token price for 1\u20133 protocols in one call. Collapses the defillama-protocol + defillama-coin-price 2-call chain at 70% of combined cost ($0.034\u2192$0.024). Same DefiLlama upstreams, zero auth.",
+      "description": "DeFi research pack: returns TVL, chain breakdown, fees, and native token price for 1–3 protocols in one call. Collapses the defillama-protocol + defillama-coin-price 2-call chain at 70% of combined cost ($0.034→$0.024). Same DefiLlama upstreams, zero auth.",
       "inputSchema": {
         "type": "object",
         "properties": {
@@ -1716,7 +1726,7 @@
           },
           "limit": {
             "type": "integer",
-            "description": "Max pairs to return (1\u201330). Default 10.",
+            "description": "Max pairs to return (1–30). Default 10.",
             "default": 10,
             "minimum": 1,
             "maximum": 30
@@ -1733,13 +1743,13 @@
     },
     {
       "name": "dex-swap-quote",
-      "description": "Best-route DEX swap quote across 20+ chains via Li.Fi aggregator. Returns expected output, exchange rate, gas cost, price impact, and route (DEX/bridge names). Works for same-chain and cross-chain swaps. Use ETH/USDC/WBTC symbols or ERC-20 addresses. Chains: ethereum, base, polygon, arbitrum, optimism, bsc, avalanche, and more. $0.012/call \u2014 free upstream.",
+      "description": "Best-route DEX swap quote across 20+ chains via Li.Fi aggregator. Returns expected output, exchange rate, gas cost, price impact, and route (DEX/bridge names). Works for same-chain and cross-chain swaps. Use ETH/USDC/WBTC symbols or ERC-20 addresses. Chains: ethereum, base, polygon, arbitrum, optimism, bsc, avalanche, and more. $0.012/call — free upstream.",
       "inputSchema": {
         "type": "object",
         "properties": {
           "from_chain": {
             "type": "string",
-            "description": "Source chain \u2014 name (ethereum, base, polygon, arbitrum, optimism, bsc, avalanche) or chain ID integer."
+            "description": "Source chain — name (ethereum, base, polygon, arbitrum, optimism, bsc, avalanche) or chain ID integer."
           },
           "to_chain": {
             "type": "string",
@@ -1747,11 +1757,11 @@
           },
           "from_token": {
             "type": "string",
-            "description": "Source token \u2014 symbol (ETH, USDC, WBTC, USDT, MATIC, LINK) or ERC-20 contract address."
+            "description": "Source token — symbol (ETH, USDC, WBTC, USDT, MATIC, LINK) or ERC-20 contract address."
           },
           "to_token": {
             "type": "string",
-            "description": "Destination token \u2014 symbol or ERC-20 contract address."
+            "description": "Destination token — symbol or ERC-20 contract address."
           },
           "from_amount": {
             "type": "string",
@@ -1770,7 +1780,7 @@
     },
     {
       "name": "dex-trending-pools",
-      "description": "Trending DEX liquidity pools with buy/sell pressure data across multiple timeframes (5m, 1h, 6h, 24h). Sourced from GeckoTerminal (free, no key). Supports 100+ networks: eth, base, bsc, arbitrum, polygon_pos, solana, etc. Returns pool name, price, price change %, volume, buy vs sell transaction counts, and a buy_pressure_24h_pct metric (% of transactions that are buys \u2014 above 50% = net accumulation, below 50% = net distribution). Useful for spotting early momentum, identifying which on-chain tokens agents are accumulating, and validating signals from price feeds with raw flow data.",
+      "description": "Trending DEX liquidity pools with buy/sell pressure data across multiple timeframes (5m, 1h, 6h, 24h). Sourced from GeckoTerminal (free, no key). Supports 100+ networks: eth, base, bsc, arbitrum, polygon_pos, solana, etc. Returns pool name, price, price change %, volume, buy vs sell transaction counts, and a buy_pressure_24h_pct metric (% of transactions that are buys — above 50% = net accumulation, below 50% = net distribution). Useful for spotting early momentum, identifying which on-chain tokens agents are accumulating, and validating signals from price feeds with raw flow data.",
       "inputSchema": {
         "type": "object",
         "properties": {
@@ -1823,7 +1833,7 @@
     },
     {
       "name": "dividend-calendar",
-      "description": "Upcoming dividend ex-dates from NASDAQ \u2014 all stocks going ex-dividend on a given date (default: today) or in the next 1\u20137 days. Returns symbol, company name, ex-date, record date, payment date, dividend amount, and annual indicated dividend. $0.008/call.",
+      "description": "Upcoming dividend ex-dates from NASDAQ — all stocks going ex-dividend on a given date (default: today) or in the next 1–7 days. Returns symbol, company name, ex-date, record date, payment date, dividend amount, and annual indicated dividend. $0.008/call.",
       "inputSchema": {
         "type": "object",
         "properties": {
@@ -1847,7 +1857,7 @@
     },
     {
       "name": "dividend-intel",
-      "description": "Full dividend intelligence for any US equity: trailing 12-month yield, forward annual rate, payout frequency (monthly/quarterly/semi-annual/annual), 5-year dividend CAGR, consecutive years paid, consecutive years of growth, and complete 5-year dividend history with dates and amounts. Single call \u2014 no API key. Ideal for income screening, dividend safety analysis, and yield comparison across a portfolio.",
+      "description": "Full dividend intelligence for any US equity: trailing 12-month yield, forward annual rate, payout frequency (monthly/quarterly/semi-annual/annual), 5-year dividend CAGR, consecutive years paid, consecutive years of growth, and complete 5-year dividend history with dates and amounts. Single call — no API key. Ideal for income screening, dividend safety analysis, and yield comparison across a portfolio.",
       "inputSchema": {
         "type": "object",
         "properties": {
@@ -1892,7 +1902,7 @@
     },
     {
       "name": "document-qa-prep",
-      "description": "Prepares a document for question-answering and RAG pipelines. Chunks the input text at paragraph/sentence boundaries, assigns deterministic chunk IDs, estimates token counts, and extracts document metadata (word count, type, headings). Returns ready-to-embed chunks with overlap support. No LLM or external API \u2014 pure text processing. Use mid-task when you've fetched a document and need it split before querying a vector store.",
+      "description": "Prepares a document for question-answering and RAG pipelines. Chunks the input text at paragraph/sentence boundaries, assigns deterministic chunk IDs, estimates token counts, and extracts document metadata (word count, type, headings). Returns ready-to-embed chunks with overlap support. No LLM or external API — pure text processing. Use mid-task when you've fetched a document and need it split before querying a vector store.",
       "inputSchema": {
         "type": "object",
         "properties": {
@@ -1919,13 +1929,13 @@
     },
     {
       "name": "domain-availability",
-      "description": "Check domain name availability across multiple TLDs (com, net, org, io, ai, co, app, dev by default). Returns per-TLD availability status, registrar, and expiry for registered domains. Uses RDAP \u2014 authoritative registry data, no API key. Ideal for brand research, startup naming, and domain portfolio work.",
+      "description": "Check domain name availability across multiple TLDs (com, net, org, io, ai, co, app, dev by default). Returns per-TLD availability status, registrar, and expiry for registered domains. Uses RDAP — authoritative registry data, no API key. Ideal for brand research, startup naming, and domain portfolio work.",
       "inputSchema": {
         "type": "object",
         "properties": {
           "name": {
             "type": "string",
-            "description": "Base domain name to check, without TLD (e.g. 'acme', 'my-startup'). Can also be a full domain like 'acme.com' \u2014 the TLD will be stripped and checked alongside others unless tlds is set."
+            "description": "Base domain name to check, without TLD (e.g. 'acme', 'my-startup'). Can also be a full domain like 'acme.com' — the TLD will be stripped and checked alongside others unless tlds is set."
           },
           "tlds": {
             "type": "array",
@@ -1941,7 +1951,7 @@
     },
     {
       "name": "domain-whois",
-      "description": "Domain WHOIS/RDAP lookup. Returns registration date, expiration date, last updated, registrar, nameservers, status flags, and registrant/admin contact info (where available). Uses RDAP \u2014 the structured JSON replacement for WHOIS. Useful for domain due diligence, expiry monitoring, and identifying registrar/owner changes.",
+      "description": "Domain WHOIS/RDAP lookup. Returns registration date, expiration date, last updated, registrar, nameservers, status flags, and registrant/admin contact info (where available). Uses RDAP — the structured JSON replacement for WHOIS. Useful for domain due diligence, expiry monitoring, and identifying registrar/owner changes.",
       "inputSchema": {
         "type": "object",
         "properties": {
@@ -1956,13 +1966,13 @@
     },
     {
       "name": "drug-intel",
-      "description": "FDA drug intelligence: labeling (warnings, dosage, drug interactions, contraindications, indications), adverse event report summary (top reactions + total count), and recent recall history. Accepts brand or generic name. Data from openFDA \u2014 no API key. Useful for pharmaceutical research, clinical AI, drug safety due diligence.",
+      "description": "FDA drug intelligence: labeling (warnings, dosage, drug interactions, contraindications, indications), adverse event report summary (top reactions + total count), and recent recall history. Accepts brand or generic name. Data from openFDA — no API key. Useful for pharmaceutical research, clinical AI, drug safety due diligence.",
       "inputSchema": {
         "type": "object",
         "properties": {
           "drug_name": {
             "type": "string",
-            "description": "Drug name \u2014 brand or generic (e.g. 'ibuprofen', 'Tylenol', 'metformin', 'Lipitor')."
+            "description": "Drug name — brand or generic (e.g. 'ibuprofen', 'Tylenol', 'metformin', 'Lipitor')."
           },
           "query_type": {
             "type": "string",
@@ -1981,7 +1991,7 @@
     },
     {
       "name": "earnings-brief",
-      "description": "AI-synthesized earnings catalyst brief for the next 7 days (configurable 1\u201314). Fetches the Alpha Vantage earnings calendar, identifies S&P 500 bellwether events, and uses gpt-4o-mini to produce a 150-200 word forward-looking assessment: most important event, sector concentration, and agent decision implications. One call replaces manual calendar review + synthesis.",
+      "description": "AI-synthesized earnings catalyst brief for the next 7 days (configurable 1–14). Fetches the Alpha Vantage earnings calendar, identifies S&P 500 bellwether events, and uses gpt-4o-mini to produce a 150-200 word forward-looking assessment: most important event, sector concentration, and agent decision implications. One call replaces manual calendar review + synthesis.",
       "inputSchema": {
         "type": "object",
         "properties": {
@@ -2005,7 +2015,7 @@
     },
     {
       "name": "earnings-calendar",
-      "description": "Upcoming US stock earnings \u2014 report date, EPS estimate, pre/post-market timing. Filter by ticker or look N days ahead (1\u201390). Data: Alpha Vantage 3-month calendar, cached 2 hr.",
+      "description": "Upcoming US stock earnings — report date, EPS estimate, pre/post-market timing. Filter by ticker or look N days ahead (1–90). Data: Alpha Vantage 3-month calendar, cached 2 hr.",
       "inputSchema": {
         "type": "object",
         "properties": {
@@ -2015,7 +2025,7 @@
           },
           "days_ahead": {
             "type": "integer",
-            "description": "Calendar days ahead to include (1\u201390, default 7).",
+            "description": "Calendar days ahead to include (1–90, default 7).",
             "minimum": 1,
             "maximum": 90,
             "default": 7
@@ -2033,7 +2043,7 @@
     },
     {
       "name": "earnings-estimates",
-      "description": "Forward analyst consensus EPS and revenue estimates for any US equity. Returns current-quarter, next-quarter, current-year, and next-year forecasts \u2014 avg/low/high EPS and revenue, YoY growth, analyst count, estimate revision momentum (revisions up vs down last 7/30 days), and EPS trend drift (current vs 30/60/90 days ago). Bridges the gap between historical earnings-surprises and trailing equity-fundamentals for DCF inputs and estimate-revision momentum screens. Free upstream: Yahoo Finance (no API key required).",
+      "description": "Forward analyst consensus EPS and revenue estimates for any US equity. Returns current-quarter, next-quarter, current-year, and next-year forecasts — avg/low/high EPS and revenue, YoY growth, analyst count, estimate revision momentum (revisions up vs down last 7/30 days), and EPS trend drift (current vs 30/60/90 days ago). Bridges the gap between historical earnings-surprises and trailing equity-fundamentals for DCF inputs and estimate-revision momentum screens. Free upstream: Yahoo Finance (no API key required).",
       "inputSchema": {
         "type": "object",
         "required": [
@@ -2110,7 +2120,7 @@
     },
     {
       "name": "earthquake-intel",
-      "description": "Real-time earthquake intelligence from USGS. Fetch recent global significant quakes (M5.0+ last 7 days) or quakes near a lat/lon (M3.0+ within 500 km). Returns magnitude, depth, location, tsunami flag, and shake intensity. Free USGS FDSN API \u2014 no key required.",
+      "description": "Real-time earthquake intelligence from USGS. Fetch recent global significant quakes (M5.0+ last 7 days) or quakes near a lat/lon (M3.0+ within 500 km). Returns magnitude, depth, location, tsunami flag, and shake intensity. Free USGS FDSN API — no key required.",
       "inputSchema": {
         "type": "object",
         "properties": {
@@ -2124,7 +2134,7 @@
           },
           "days": {
             "type": "number",
-            "description": "Look-back window in days (1\u201330). Default: 7."
+            "description": "Look-back window in days (1–30). Default: 7."
           },
           "min_magnitude": {
             "type": "number",
@@ -2140,11 +2150,11 @@
           },
           "radius_km": {
             "type": "number",
-            "description": "Search radius in km for location mode (10\u20131000). Default: 500."
+            "description": "Search radius in km for location mode (10–1000). Default: 500."
           },
           "limit": {
             "type": "number",
-            "description": "Maximum results to return (5\u201350). Default: 20."
+            "description": "Maximum results to return (5–50). Default: 20."
           }
         }
       }
@@ -2215,7 +2225,7 @@
     },
     {
       "name": "energy-brief",
-      "description": "AI-synthesized US energy market intelligence brief. Assembles 9 real-time signals from Yahoo Finance: WTI crude futures, Brent crude (with spread), natural gas (Henry Hub proxy), energy sector ETF (XLE), oil services ETF (OIH), ExxonMobil, Chevron, Marathon Petroleum, and Baker Hughes. Returns 52-week context, Brent/WTI spread, market-regime classification, and a 200-word GPT-4o-mini narrative covering oil regime, dominant risk, and agent decision implications. Seam: crownblock upstream $1.00/call \u2014 STALL at $0.65 with real-time futures data vs monthly averages.",
+      "description": "AI-synthesized US energy market intelligence brief. Assembles 9 real-time signals from Yahoo Finance: WTI crude futures, Brent crude (with spread), natural gas (Henry Hub proxy), energy sector ETF (XLE), oil services ETF (OIH), ExxonMobil, Chevron, Marathon Petroleum, and Baker Hughes. Returns 52-week context, Brent/WTI spread, market-regime classification, and a 200-word GPT-4o-mini narrative covering oil regime, dominant risk, and agent decision implications. Seam: crownblock upstream $1.00/call — STALL at $0.65 with real-time futures data vs monthly averages.",
       "inputSchema": {
         "type": "object",
         "properties": {
@@ -2233,7 +2243,7 @@
     },
     {
       "name": "ens-lookup",
-      "description": "ENS name \u2194 Ethereum address resolution. Forward: pass a .eth name to get the address, avatar, and social profile records. Reverse: pass a 0x address to get its primary ENS name and profile. Returns address, ens_primary, avatar_url, description, twitter, github, discord, telegram, url, and content_hash.",
+      "description": "ENS name ↔ Ethereum address resolution. Forward: pass a .eth name to get the address, avatar, and social profile records. Reverse: pass a 0x address to get its primary ENS name and profile. Returns address, ens_primary, avatar_url, description, twitter, github, discord, telegram, url, and content_hash.",
       "inputSchema": {
         "type": "object",
         "properties": {
@@ -2248,7 +2258,7 @@
     },
     {
       "name": "equity-brief",
-      "description": "AI-synthesized equity situation brief for any US stock. Gathers five signal layers in parallel \u2014 current price/52w range, RSI-14 + SMA20/50/200 trend regime, insider buy/sell activity (SEC EDGAR Form 4, last 60 days), options IV30 + put/call ratio (CBOE), and next earnings date + EPS estimate (Yahoo Finance) \u2014 then uses GPT-4o-mini to produce a structured brief: regime label, bull/bear case, dominant risk, agent implication, and a 160-word narrative. Replaces a 4-call agent chain (equity-technicals + us-stock-price + insider-trades + options-snapshot) at $0.350. Free upstreams (no API keys required for data gathering).",
+      "description": "AI-synthesized equity situation brief for any US stock. Gathers five signal layers in parallel — current price/52w range, RSI-14 + SMA20/50/200 trend regime, insider buy/sell activity (SEC EDGAR Form 4, last 60 days), options IV30 + put/call ratio (CBOE), and next earnings date + EPS estimate (Yahoo Finance) — then uses GPT-4o-mini to produce a structured brief: regime label, bull/bear case, dominant risk, agent implication, and a 160-word narrative. Replaces a 4-call agent chain (equity-technicals + us-stock-price + insider-trades + options-snapshot) at $0.350. Free upstreams (no API keys required for data gathering).",
       "inputSchema": {
         "type": "object",
         "required": [],
@@ -2271,7 +2281,7 @@
     },
     {
       "name": "equity-fundamentals",
-      "description": "Fundamental valuation metrics for any US public company \u2014 P/E TTM, forward P/E, PEG, P/B, EV/EBITDA, margins, ROE, ROA, revenue TTM, earnings/revenue growth, free cash flow, market cap, beta. Raw data for valuation screening and DCF inputs. No API key. $0.020/call.",
+      "description": "Fundamental valuation metrics for any US public company — P/E TTM, forward P/E, PEG, P/B, EV/EBITDA, margins, ROE, ROA, revenue TTM, earnings/revenue growth, free cash flow, market cap, beta. Raw data for valuation screening and DCF inputs. No API key. $0.020/call.",
       "inputSchema": {
         "type": "object",
         "properties": {
@@ -2285,7 +2295,7 @@
     },
     {
       "name": "equity-quality-screen",
-      "description": "Piotroski F-Score (0\u20139 quality composite: profitability+leverage+efficiency trends) and Altman Z-Score (distress predictor) for any US public company. One call replaces manual assembly of 3 years of annual statements. $0.025/call.",
+      "description": "Piotroski F-Score (0–9 quality composite: profitability+leverage+efficiency trends) and Altman Z-Score (distress predictor) for any US public company. One call replaces manual assembly of 3 years of annual statements. $0.025/call.",
       "inputSchema": {
         "type": "object",
         "properties": {
@@ -2301,7 +2311,7 @@
     },
     {
       "name": "equity-sentiment",
-      "description": "Equity market Fear & Greed composite. Four signals: VIX vs 90-day percentile, SPY vs 200-day moving average, US high-yield credit spread vs 90-day range (FRED BAMLH0A0HYM2), SPY RSI-14. Returns composite score 0\u2013100 (0=extreme greed, 100=extreme fear) with regime label and per-signal breakdown. Distinct from market-sentiment (crypto). Use before sizing positions, adjusting portfolio risk, or routing capital. Free sources, no API keys.",
+      "description": "Equity market Fear & Greed composite. Four signals: VIX vs 90-day percentile, SPY vs 200-day moving average, US high-yield credit spread vs 90-day range (FRED BAMLH0A0HYM2), SPY RSI-14. Returns composite score 0–100 (0=extreme greed, 100=extreme fear) with regime label and per-signal breakdown. Distinct from market-sentiment (crypto). Use before sizing positions, adjusting portfolio risk, or routing capital. Free sources, no API keys.",
       "inputSchema": {
         "type": "object",
         "properties": {},
@@ -2310,7 +2320,7 @@
     },
     {
       "name": "equity-technicals",
-      "description": "Returns a complete technical analysis package for any US stock: RSI(14) with oversold/overbought signal, MACD(12/26/9) with histogram, Bollinger Bands(20,2\u03c3) with price position, SMA 20/50/200 with crossover state, 20-day volume ratio, and a consensus signal (BULLISH/BEARISH/NEUTRAL) based on indicator agreement. Sourced from 1-year Yahoo Finance daily OHLCV \u2014 no API key, live data. Richer than a simple price endpoint: agents use this for entry/exit signal confirmation, momentum screening, and pre-trade context without managing their own TA library.",
+      "description": "Returns a complete technical analysis package for any US stock: RSI(14) with oversold/overbought signal, MACD(12/26/9) with histogram, Bollinger Bands(20,2σ) with price position, SMA 20/50/200 with crossover state, 20-day volume ratio, and a consensus signal (BULLISH/BEARISH/NEUTRAL) based on indicator agreement. Sourced from 1-year Yahoo Finance daily OHLCV — no API key, live data. Richer than a simple price endpoint: agents use this for entry/exit signal confirmation, momentum screening, and pre-trade context without managing their own TA library.",
       "inputSchema": {
         "type": "object",
         "properties": {
@@ -2325,7 +2335,7 @@
     },
     {
       "name": "erc20-snapshot",
-      "description": "Complete ERC20 token state in one call: name, symbol, decimals, total supply (raw + formatted), wallet balance, and allowance. Collapses four onesource chain calls (total-supply + erc20-balance + allowance + contract \u2014 155\u2013229 payers each) into one $0.007 payment \u2014 36% below the $0.011 combined chain. Supports Ethereum (default), Base, Polygon, Arbitrum. No API key required.",
+      "description": "Complete ERC20 token state in one call: name, symbol, decimals, total supply (raw + formatted), wallet balance, and allowance. Collapses four onesource chain calls (total-supply + erc20-balance + allowance + contract — 155–229 payers each) into one $0.007 payment — 36% below the $0.011 combined chain. Supports Ethereum (default), Base, Polygon, Arbitrum. No API key required.",
       "inputSchema": {
         "type": "object",
         "properties": {
@@ -2408,7 +2418,7 @@
     },
     {
       "name": "evm-log-events",
-      "description": "Query EVM contract event logs via eth_getLogs. Filter by contract address, event topic (signature hash), and block range. Returns up to 50 decoded log entries with topics, data, tx hash, block number. Supports Ethereum/Base/Polygon/Arbitrum via free DRPC. $0.004/call \u2014 20% below comparable market rate.",
+      "description": "Query EVM contract event logs via eth_getLogs. Filter by contract address, event topic (signature hash), and block range. Returns up to 50 decoded log entries with topics, data, tx hash, block number. Supports Ethereum/Base/Polygon/Arbitrum via free DRPC. $0.004/call — 20% below comparable market rate.",
       "inputSchema": {
         "type": "object",
         "properties": {
@@ -2422,11 +2432,11 @@
           },
           "from_block": {
             "type": "string",
-            "description": "Start block \u2014 integer, hex string, or tag (latest/earliest). Default: 100 blocks before latest."
+            "description": "Start block — integer, hex string, or tag (latest/earliest). Default: 100 blocks before latest."
           },
           "to_block": {
             "type": "string",
-            "description": "End block \u2014 integer, hex string, or tag. Default: latest."
+            "description": "End block — integer, hex string, or tag. Default: latest."
           },
           "chain": {
             "type": "string",
@@ -2443,7 +2453,7 @@
           },
           "limit": {
             "type": "integer",
-            "description": "Max number of log entries to return (1\u201350). Default: 20.",
+            "description": "Max number of log entries to return (1–50). Default: 20.",
             "minimum": 1,
             "maximum": 50
           }
@@ -2453,7 +2463,7 @@
     },
     {
       "name": "evm-nonce",
-      "description": "Returns the current nonce (confirmed transaction count) and pending nonce for any EVM wallet address. Supports Ethereum, Base, Polygon, Arbitrum, and Optimism. Use the pending nonce when building new transactions. $0.002/call \u2014 33% below comparable market rate.",
+      "description": "Returns the current nonce (confirmed transaction count) and pending nonce for any EVM wallet address. Supports Ethereum, Base, Polygon, Arbitrum, and Optimism. Use the pending nonce when building new transactions. $0.002/call — 33% below comparable market rate.",
       "inputSchema": {
         "type": "object",
         "required": [],
@@ -2479,7 +2489,7 @@
     },
     {
       "name": "evm-token-security",
-      "description": "Honeypot, rug-pull, and scam detection for any EVM token. Returns a 0\u2013100 risk score with labeled flags: honeypot status, hidden ownership, mint authority, self-destruct, buy/sell tax rates, creator wallet concentration, and open-source status. Covers 40+ chains (Ethereum, Base, BSC, Arbitrum, Polygon, Solana, etc.) via GoPlusLabs. Useful pre-trade before buying unknown tokens, before routing payments through new contracts, or when validating DeFi protocol addresses. Pairs with solana-token-risk (Solana-native rug detection) and market-intelligence (endpoint verification).",
+      "description": "Honeypot, rug-pull, and scam detection for any EVM token. Returns a 0–100 risk score with labeled flags: honeypot status, hidden ownership, mint authority, self-destruct, buy/sell tax rates, creator wallet concentration, and open-source status. Covers 40+ chains (Ethereum, Base, BSC, Arbitrum, Polygon, Solana, etc.) via GoPlusLabs. Useful pre-trade before buying unknown tokens, before routing payments through new contracts, or when validating DeFi protocol addresses. Pairs with solana-token-risk (Solana-native rug detection) and market-intelligence (endpoint verification).",
       "inputSchema": {
         "type": "object",
         "required": [],
@@ -2521,7 +2531,7 @@
             "type": "integer",
             "minimum": 1,
             "maximum": 10,
-            "description": "Maximum recalls to return per category (1\u201310). Default: 5."
+            "description": "Maximum recalls to return per category (1–10). Default: 5."
           },
           "class_filter": {
             "type": "string",
@@ -2540,7 +2550,7 @@
     },
     {
       "name": "fdic-bank-intel",
-      "description": "FDIC BankFind Suite: US bank financial health, regulatory capital ratios, and historical bank failure data. search mode: find institutions by name with asset size and state. profile mode: quarterly Call Report data \u2014 ROA, ROE, risk-based capital ratio, net income, loans, deposits (input: bank name or FDIC certificate number). failures mode: recent/historical bank closures with fail date, assets, resolution type. Covers 10,000+ institutions and 4,100+ failures since 1934. No API key.",
+      "description": "FDIC BankFind Suite: US bank financial health, regulatory capital ratios, and historical bank failure data. search mode: find institutions by name with asset size and state. profile mode: quarterly Call Report data — ROA, ROE, risk-based capital ratio, net income, loans, deposits (input: bank name or FDIC certificate number). failures mode: recent/historical bank closures with fail date, assets, resolution type. Covers 10,000+ institutions and 4,100+ failures since 1934. No API key.",
       "inputSchema": {
         "type": "object",
         "properties": {
@@ -2577,7 +2587,7 @@
     },
     {
       "name": "fec-donor-intel",
-      "description": "FEC campaign finance lookup \u2014 search all US federal political donations by individual or organization name. Returns recent contributions (sorted newest-first) with committee names, donation amounts, election cycles, employer/occupation, and aggregate totals (total donated, number of contributions, committees supported). Official FEC Open Data, updated daily. Use for executive due diligence, political affiliation screening, ESG analysis, or investigative research.",
+      "description": "FEC campaign finance lookup — search all US federal political donations by individual or organization name. Returns recent contributions (sorted newest-first) with committee names, donation amounts, election cycles, employer/occupation, and aggregate totals (total donated, number of contributions, committees supported). Official FEC Open Data, updated daily. Use for executive due diligence, political affiliation screening, ESG analysis, or investigative research.",
       "inputSchema": {
         "type": "object",
         "required": [],
@@ -2592,7 +2602,7 @@
           },
           "limit": {
             "type": "integer",
-            "description": "Max results to return (1\u201350, default 20).",
+            "description": "Max results to return (1–50, default 20).",
             "minimum": 1,
             "maximum": 50,
             "default": 20
@@ -2602,7 +2612,7 @@
     },
     {
       "name": "federal-contract-intel",
-      "description": "US federal contract and grant intelligence for any company via USASpending.gov. Returns total obligated amount, award count, top awards (award ID, amount, agency, description, start date), and agency breakdown \u2014 covering $10T+ in federal spending. Useful for procurement research, competitive intelligence, vendor due diligence, and government contractor analysis. No API key required.",
+      "description": "US federal contract and grant intelligence for any company via USASpending.gov. Returns total obligated amount, award count, top awards (award ID, amount, agency, description, start date), and agency breakdown — covering $10T+ in federal spending. Useful for procurement research, competitive intelligence, vendor due diligence, and government contractor analysis. No API key required.",
       "inputSchema": {
         "type": "object",
         "properties": {
@@ -2638,7 +2648,7 @@
     },
     {
       "name": "federal-register-search",
-      "description": "Search the Federal Register for Rules, Proposed Rules, and Notices matching a keyword \u2014 returns title, abstract, document type, agencies, significance, effective date, and links. No API key. $0.002/call.",
+      "description": "Search the Federal Register for Rules, Proposed Rules, and Notices matching a keyword — returns title, abstract, document type, agencies, significance, effective date, and links. No API key. $0.002/call.",
       "inputSchema": {
         "type": "object",
         "properties": {
@@ -2678,7 +2688,7 @@
     },
     {
       "name": "flight-tracker",
-      "description": "Real-time global flight positions via OpenSky Network ADS-B. icao24 mode: locate any aircraft by its 6-hex transponder code \u2014 returns altitude (ft), speed (kts), heading, vertical rate, squawk. callsign mode: find a flight by ICAO callsign (e.g. 'AAL123', 'UAL456') across CONUS or globally. area mode: all flights near an airport (IATA code) or within a lat/lon bounding box \u2014 returns up to 50 flights sorted by altitude. No API key. Coverage: US/Europe near-complete, oceans partial.",
+      "description": "Real-time global flight positions via OpenSky Network ADS-B. icao24 mode: locate any aircraft by its 6-hex transponder code — returns altitude (ft), speed (kts), heading, vertical rate, squawk. callsign mode: find a flight by ICAO callsign (e.g. 'AAL123', 'UAL456') across CONUS or globally. area mode: all flights near an airport (IATA code) or within a lat/lon bounding box — returns up to 50 flights sorted by altitude. No API key. Coverage: US/Europe near-complete, oceans partial.",
       "inputSchema": {
         "type": "object",
         "properties": {
@@ -2747,7 +2757,7 @@
     },
     {
       "name": "forex-historical",
-      "description": "Historical ECB exchange rates \u2014 single date lookup or time-series range. Returns rates for up to 30 major currencies (EUR, GBP, JPY, CAD, CHF, CNY, AUD, KRW, etc.) from 1999-01-04 to present. Free, no key, sourced from Frankfurter/ECB. Use for: tax-date FX rates, historical expense reconciliation, multi-year trend analysis, point-in-time currency conversion. Weekends and holidays return the nearest prior business day. Complements forex-rates (real-time) with retrospective data.",
+      "description": "Historical ECB exchange rates — single date lookup or time-series range. Returns rates for up to 30 major currencies (EUR, GBP, JPY, CAD, CHF, CNY, AUD, KRW, etc.) from 1999-01-04 to present. Free, no key, sourced from Frankfurter/ECB. Use for: tax-date FX rates, historical expense reconciliation, multi-year trend analysis, point-in-time currency conversion. Weekends and holidays return the nearest prior business day. Complements forex-rates (real-time) with retrospective data.",
       "inputSchema": {
         "type": "object",
         "required": [],
@@ -2794,7 +2804,7 @@
     },
     {
       "name": "forex-rates",
-      "description": "Real-time fiat foreign exchange rates. Base currency defaults to USD; returns rates for all 166 supported currencies, or a filtered subset. Sourced from open.er-api.com (free, no key, daily updates ~00:00 UTC). Supports any ISO 4217 base: EUR, GBP, JPY, KRW, CNY, AUD, etc. Use for: USD\u2192KRW conversion when reading Korean exchange data, cross-border payment amounts, international price normalization, or any multi-currency DeFi workflow.",
+      "description": "Real-time fiat foreign exchange rates. Base currency defaults to USD; returns rates for all 166 supported currencies, or a filtered subset. Sourced from open.er-api.com (free, no key, daily updates ~00:00 UTC). Supports any ISO 4217 base: EUR, GBP, JPY, KRW, CNY, AUD, etc. Use for: USD→KRW conversion when reading Korean exchange data, cross-border payment amounts, international price normalization, or any multi-currency DeFi workflow.",
       "inputSchema": {
         "type": "object",
         "properties": {
@@ -2836,7 +2846,7 @@
     },
     {
       "name": "form-144-intel",
-      "description": "Retrieves SEC Form 144 planned insider sale filings for a US public company \u2014 earlier signal than Form 4 (post-trade). Returns seller name, role, shares planned for sale, market value, approximate sale date, and acquisition type (RSU, open market, etc.).",
+      "description": "Retrieves SEC Form 144 planned insider sale filings for a US public company — earlier signal than Form 4 (post-trade). Returns seller name, role, shares planned for sale, market value, approximate sale date, and acquisition type (RSU, open market, etc.).",
       "inputSchema": {
         "type": "object",
         "properties": {
@@ -2865,7 +2875,7 @@
           },
           "limit": {
             "type": "integer",
-            "description": "Number of most recent observations to return (1\u201360). Default: 12.",
+            "description": "Number of most recent observations to return (1–60). Default: 12.",
             "minimum": 1,
             "maximum": 60,
             "default": 12
@@ -2939,7 +2949,7 @@
     },
     {
       "name": "gas-prices",
-      "description": "Current gas prices and EIP-1559 fee recommendations across 6 major EVM chains: Ethereum, Base, Arbitrum, Optimism, Polygon, BNB Chain. Returns base fee, priority fee percentiles (slow/standard/fast), and estimated ETH/MATIC/BNB cost for a standard 21k-gas transfer. All sourced from free public RPC endpoints \u2014 no API key needed. Use before sending on-chain transactions, estimating agent operating costs, or comparing chain fees for routing decisions.",
+      "description": "Current gas prices and EIP-1559 fee recommendations across 6 major EVM chains: Ethereum, Base, Arbitrum, Optimism, Polygon, BNB Chain. Returns base fee, priority fee percentiles (slow/standard/fast), and estimated ETH/MATIC/BNB cost for a standard 21k-gas transfer. All sourced from free public RPC endpoints — no API key needed. Use before sending on-chain transactions, estimating agent operating costs, or comparing chain fees for routing decisions.",
       "inputSchema": {
         "type": "object",
         "properties": {
@@ -3026,7 +3036,7 @@
               "compare",
               "search"
             ],
-            "description": "repo: full metadata. contributors: top 30 committers. releases: latest 10 releases + download counts. issues: 10 recent open issues. commit_activity: 52-week weekly commit trend. compare: side-by-side metrics for \u22644 repos. search: find repos by keyword."
+            "description": "repo: full metadata. contributors: top 30 committers. releases: latest 10 releases + download counts. issues: 10 recent open issues. commit_activity: 52-week weekly commit trend. compare: side-by-side metrics for ≤4 repos. search: find repos by keyword."
           },
           "repo": {
             "type": "string",
@@ -3038,7 +3048,7 @@
               "type": "string"
             },
             "maxItems": 4,
-            "description": "Array of owner/repo strings for compare action (2\u20134 repos)."
+            "description": "Array of owner/repo strings for compare action (2–4 repos)."
           },
           "query": {
             "type": "string",
@@ -3106,7 +3116,7 @@
     },
     {
       "name": "github-trending",
-      "description": "Top trending GitHub repositories by star velocity \u2014 new repos gaining the most stars today, this week, or this month. Filter by programming language and/or topic tag.",
+      "description": "Top trending GitHub repositories by star velocity — new repos gaining the most stars today, this week, or this month. Filter by programming language and/or topic tag.",
       "inputSchema": {
         "type": "object",
         "properties": {
@@ -3131,7 +3141,7 @@
           "limit": {
             "type": "number",
             "default": 10,
-            "description": "Number of repositories to return (1\u201325, default 10)."
+            "description": "Number of repositories to return (1–25, default 10)."
           }
         },
         "required": []
@@ -3161,7 +3171,7 @@
     },
     {
       "name": "gov-votes",
-      "description": "US Congressional vote records from official government XML sources (senate.gov + clerk.house.gov). Search by chamber (house/senate), category (passage, amendment, cloture, nomination, procedural, etc.), or limit. Returns vote question, result (Passed/Failed), yea/nay totals, bill number, and description. 119th Congress (2025\u20132026). No API key required.",
+      "description": "US Congressional vote records from official government XML sources (senate.gov + clerk.house.gov). Search by chamber (house/senate), category (passage, amendment, cloture, nomination, procedural, etc.), or limit. Returns vote question, result (Passed/Failed), yea/nay totals, bill number, and description. 119th Congress (2025–2026). No API key required.",
       "inputSchema": {
         "type": "object",
         "properties": {
@@ -3198,7 +3208,7 @@
     },
     {
       "name": "government-contract-intel",
-      "description": "Federal government contract award tracker via USASpending.gov (no API key). The U.S. government awards $700B+ annually \u2014 this cap surfaces who wins the money, how much, and for what. Mode 'company' (company_name): all federal contracts awarded to a named company \u2014 which agencies, what amounts, optional last-N-days filter. Essential for defense/aerospace (Lockheed, Raytheon, Northrop), tech government contractors (Palantir, Leidos, SAIC, Booz Allen), and healthcare (McKesson, UnitedHealth). Mode 'recent' (days, min_amount_millions): market-wide feed of largest new awards in the last N days, optional floor filter. Mode 'agency' (agency_name, days): what contracts has a federal agency (DoD, HHS, NASA, DHS) awarded recently and to whom. All data from FPDS-NG via USASpending.gov, updated daily. $0.015/call.",
+      "description": "Federal government contract award tracker via USASpending.gov (no API key). The U.S. government awards $700B+ annually — this cap surfaces who wins the money, how much, and for what. Mode 'company' (company_name): all federal contracts awarded to a named company — which agencies, what amounts, optional last-N-days filter. Essential for defense/aerospace (Lockheed, Raytheon, Northrop), tech government contractors (Palantir, Leidos, SAIC, Booz Allen), and healthcare (McKesson, UnitedHealth). Mode 'recent' (days, min_amount_millions): market-wide feed of largest new awards in the last N days, optional floor filter. Mode 'agency' (agency_name, days): what contracts has a federal agency (DoD, HHS, NASA, DHS) awarded recently and to whom. All data from FPDS-NG via USASpending.gov, updated daily. $0.015/call.",
       "inputSchema": {
         "type": "object",
         "properties": {
@@ -3238,6 +3248,11 @@
           }
         }
       }
+    },
+    {
+      "name": "guidance-quality",
+      "description": "Earnings guidance quality and predictability scoring for any US equity. Converts the historical EPS beat/miss record into a label (SUPER_BEATER / RELIABLE_BEATER / INCONSISTENT / GUIDANCE_RISK), a predictability score (0-100), trend signal (IMPROVING / STABLE / DETERIORATING), and a DCF implication. Answers how much should I trust this company forward guidance before modeling. Slots between earnings-surprises and earnings-estimates in a DCF pipeline. Source: Yahoo Finance no API key.",
+      "price": "$0.012"
     },
     {
       "name": "healthcare-brief",
@@ -3289,7 +3304,7 @@
         "properties": {
           "query": {
             "type": "string",
-            "description": "Search query \u2014 model name, architecture, or keyword (e.g. 'bert', 'llama', 'sentiment'). Defaults to 'language model'."
+            "description": "Search query — model name, architecture, or keyword (e.g. 'bert', 'llama', 'sentiment'). Defaults to 'language model'."
           },
           "task": {
             "type": "string",
@@ -3308,7 +3323,7 @@
             "type": "integer",
             "minimum": 1,
             "maximum": 20,
-            "description": "Number of results to return (1\u201320). Default: 10."
+            "description": "Number of results to return (1–20). Default: 10."
           }
         },
         "required": [],
@@ -3338,7 +3353,7 @@
             "type": "integer",
             "minimum": 1,
             "maximum": 20,
-            "description": "Number of results (1\u201320). Default: 10."
+            "description": "Number of results (1–20). Default: 10."
           },
           "sort": {
             "type": "string",
@@ -3346,7 +3361,7 @@
               "relevance",
               "date"
             ],
-            "description": "Sort order \u2014 relevance (default) or date (newest first)."
+            "description": "Sort order — relevance (default) or date (newest first)."
           },
           "date_range": {
             "type": "string",
@@ -3375,7 +3390,7 @@
     },
     {
       "name": "http-headers",
-      "description": "HTTP response headers inspector and security grader. Fetches headers from any public URL and evaluates OWASP-recommended security headers: HSTS, CSP, X-Frame-Options, X-Content-Type-Options, Referrer-Policy, Permissions-Policy. Returns raw headers, per-header security findings, overall grade (A\u2013F), and actionable recommendations. Useful for web app security audits, CDN configuration verification, and compliance checks.",
+      "description": "HTTP response headers inspector and security grader. Fetches headers from any public URL and evaluates OWASP-recommended security headers: HSTS, CSP, X-Frame-Options, X-Content-Type-Options, Referrer-Policy, Permissions-Policy. Returns raw headers, per-header security findings, overall grade (A–F), and actionable recommendations. Useful for web app security audits, CDN configuration verification, and compliance checks.",
       "inputSchema": {
         "type": "object",
         "properties": {
@@ -3442,7 +3457,7 @@
     },
     {
       "name": "image-detect",
-      "description": "Detects the true image format of any URL via magic byte inspection \u2014 works even when the file extension or Content-Type header lies (common with proxied or CDN-hosted images). Returns: format (png/jpeg/gif/webp/avif/bmp/tiff/svg/ico/unknown), detected MIME type, whether Content-Type header matches, file size (bytes), and pixel dimensions for PNG and JPEG. No API key required. $0.050/call.",
+      "description": "Detects the true image format of any URL via magic byte inspection — works even when the file extension or Content-Type header lies (common with proxied or CDN-hosted images). Returns: format (png/jpeg/gif/webp/avif/bmp/tiff/svg/ico/unknown), detected MIME type, whether Content-Type header matches, file size (bytes), and pixel dimensions for PNG and JPEG. No API key required. $0.050/call.",
       "inputSchema": {
         "type": "object",
         "properties": {
@@ -3456,7 +3471,7 @@
     },
     {
       "name": "imf-country-outlook",
-      "description": "IMF World Economic Outlook forecasts \u2014 current year + 3-year horizon for 180+ countries. Returns GDP growth, CPI inflation, unemployment rate, current account balance (% GDP), government gross debt (% GDP), and fiscal balance (% GDP). Sourced from IMF DataMapper API (no key required). Distinct from World Bank data \u2014 these are IMF forward projections updated Apr/Oct. Use for sovereign risk, EM allocation, currency thesis, fiscal sustainability analysis.",
+      "description": "IMF World Economic Outlook forecasts — current year + 3-year horizon for 180+ countries. Returns GDP growth, CPI inflation, unemployment rate, current account balance (% GDP), government gross debt (% GDP), and fiscal balance (% GDP). Sourced from IMF DataMapper API (no key required). Distinct from World Bank data — these are IMF forward projections updated Apr/Oct. Use for sovereign risk, EM allocation, currency thesis, fiscal sustainability analysis.",
       "inputSchema": {
         "type": "object",
         "properties": {
@@ -3466,7 +3481,7 @@
           },
           "horizon": {
             "type": "integer",
-            "description": "Forecast years ahead to include (1\u20135). Default: 3.",
+            "description": "Forecast years ahead to include (1–5). Default: 3.",
             "default": 3,
             "minimum": 1,
             "maximum": 5
@@ -3497,7 +3512,7 @@
             "type": "integer",
             "minimum": 1,
             "maximum": 8,
-            "description": "Max periods to return (1\u20138 for quarterly; 1\u20134 for annual). Default: 4."
+            "description": "Max periods to return (1–8 for quarterly; 1–4 for annual). Default: 4."
           }
         },
         "required": []
@@ -3505,7 +3520,7 @@
     },
     {
       "name": "insider-trades",
-      "description": "Recent SEC Form 4 insider trading activity for any US public company. Returns who bought or sold (director, officer, 10%+ owner), transaction date, shares, price per share, total value, and position after trade. Sourced from SEC EDGAR public API \u2014 authoritative, free, no API key. Use for investment analysis, governance checks, or flagging unusual insider selling before an event.",
+      "description": "Recent SEC Form 4 insider trading activity for any US public company. Returns who bought or sold (director, officer, 10%+ owner), transaction date, shares, price per share, total value, and position after trade. Sourced from SEC EDGAR public API — authoritative, free, no API key. Use for investment analysis, governance checks, or flagging unusual insider selling before an event.",
       "inputSchema": {
         "type": "object",
         "properties": {
@@ -3524,7 +3539,7 @@
     },
     {
       "name": "insider-trading-intel",
-      "description": "SEC Form 4 insider transaction intelligence. Mode get_insider_trades: all Form 4 filings for a ticker in the last N days \u2014 insider name, role, buy/sell transaction type, shares, price per share, total value, and net buy/sell sentiment score. Mode recent_insider_buys: market-wide open-market purchase events (code P, acquired=true) above a minimum dollar threshold, sorted by value descending. The highest-conviction insider signal \u2014 insiders spending personal capital at market price. Source: SEC EDGAR public API, no auth required.",
+      "description": "SEC Form 4 insider transaction intelligence. Mode get_insider_trades: all Form 4 filings for a ticker in the last N days — insider name, role, buy/sell transaction type, shares, price per share, total value, and net buy/sell sentiment score. Mode recent_insider_buys: market-wide open-market purchase events (code P, acquired=true) above a minimum dollar threshold, sorted by value descending. The highest-conviction insider signal — insiders spending personal capital at market price. Source: SEC EDGAR public API, no auth required.",
       "inputSchema": {
         "type": "object",
         "properties": {
@@ -3564,7 +3579,7 @@
     },
     {
       "name": "institutional-ownership",
-      "description": "Institutional and insider ownership snapshot for any US equity. Returns: (1) major holders breakdown \u2014 % insiders, % institutions, float coverage, total institution count; (2) up to 10 largest institutional holders \u2014 name, pct of shares held, share count, total value (USD), pct change since prior 13F quarter, reporting date; (3) up to 10 insider holders \u2014 officer/director name, relation, shares held directly, latest transaction description and date. Inverts hedge-fund-holdings: given a ticker, who are the owners? Institutional momentum (pct change) and insider alignment are standard inputs to equity research and conviction scoring. Free upstream: Yahoo Finance.",
+      "description": "Institutional and insider ownership snapshot for any US equity. Returns: (1) major holders breakdown — % insiders, % institutions, float coverage, total institution count; (2) up to 10 largest institutional holders — name, pct of shares held, share count, total value (USD), pct change since prior 13F quarter, reporting date; (3) up to 10 insider holders — officer/director name, relation, shares held directly, latest transaction description and date. Inverts hedge-fund-holdings: given a ticker, who are the owners? Institutional momentum (pct change) and insider alignment are standard inputs to equity research and conviction scoring. Free upstream: Yahoo Finance.",
       "inputSchema": {
         "type": "object",
         "required": [
@@ -3590,7 +3605,7 @@
     },
     {
       "name": "intl-stock-price",
-      "description": "Returns current price and intraday metrics for international equities (EU, UK, Swiss, Japan, Australia, Canada, Hong Kong, India). Accepts exchange-suffixed tickers (MC.PA for LVMH, SAP.DE for SAP, AZN.L for AstraZeneca) or market shorthand (market=fr, ticker=MC). Sourced from Yahoo Finance \u2014 no API key, live during market hours. $0.020/call.",
+      "description": "Returns current price and intraday metrics for international equities (EU, UK, Swiss, Japan, Australia, Canada, Hong Kong, India). Accepts exchange-suffixed tickers (MC.PA for LVMH, SAP.DE for SAP, AZN.L for AstraZeneca) or market shorthand (market=fr, ticker=MC). Sourced from Yahoo Finance — no API key, live during market hours. $0.020/call.",
       "inputSchema": {
         "type": "object",
         "properties": {
@@ -3629,7 +3644,7 @@
     },
     {
       "name": "ipo-calendar",
-      "description": "Returns live IPO calendar from Nasdaq \u2014 upcoming deals with expected pricing dates, recently priced offerings, new S-1 filings, and withdrawn deals. Covers all major US exchanges. Includes company name, ticker, exchange, price range, share count, and total offer amount. Structured extraction WITH summary analytics AND deal counts \u2014 richer than raw scraped calendars. Use section='upcoming' for near-term deal flow, section='priced' for post-IPO watchlist setup, section='all' for complete week view.",
+      "description": "Returns live IPO calendar from Nasdaq — upcoming deals with expected pricing dates, recently priced offerings, new S-1 filings, and withdrawn deals. Covers all major US exchanges. Includes company name, ticker, exchange, price range, share count, and total offer amount. Structured extraction WITH summary analytics AND deal counts — richer than raw scraped calendars. Use section='upcoming' for near-term deal flow, section='priced' for post-IPO watchlist setup, section='all' for complete week view.",
       "inputSchema": {
         "type": "object",
         "properties": {
@@ -3657,7 +3672,7 @@
     },
     {
       "name": "json-extract",
-      "description": "Extracts and parses JSON from mixed-content text. Handles LLM output with JSON embedded in prose, code fences (```json), trailing commas, single-quoted strings, JS-style comments, and bare object keys (JSON5-style). Returns the parsed data, a cleaned JSON string, extraction method used, and any repair applied. Pure text processing \u2014 zero external API calls.",
+      "description": "Extracts and parses JSON from mixed-content text. Handles LLM output with JSON embedded in prose, code fences (```json), trailing commas, single-quoted strings, JS-style comments, and bare object keys (JSON5-style). Returns the parsed data, a cleaned JSON string, extraction method used, and any repair applied. Pure text processing — zero external API calls.",
       "inputSchema": {
         "type": "object",
         "properties": {
@@ -3705,7 +3720,7 @@
           },
           "limit": {
             "type": "integer",
-            "description": "Number of tokens to return per section (1\u201350). Default: 20.",
+            "description": "Number of tokens to return per section (1–50). Default: 20.",
             "minimum": 1,
             "maximum": 50
           }
@@ -3715,7 +3730,7 @@
     },
     {
       "name": "korean-market-movers",
-      "description": "Real-time movers and volume-spike leaders across all KRW-denominated markets on Upbit (South Korea's largest crypto exchange). Returns top risers, top fallers, and top volume leaders ranked by 24h change or accumulated trade value. Korean exchange data is a leading indicator frequently observed by institutional agents \u2014 the 'kimchi premium' and local retail sentiment often precede global price moves. Free upstream source (Upbit public API), covers 260+ KRW markets.",
+      "description": "Real-time movers and volume-spike leaders across all KRW-denominated markets on Upbit (South Korea's largest crypto exchange). Returns top risers, top fallers, and top volume leaders ranked by 24h change or accumulated trade value. Korean exchange data is a leading indicator frequently observed by institutional agents — the 'kimchi premium' and local retail sentiment often precede global price moves. Free upstream source (Upbit public API), covers 260+ KRW markets.",
       "inputSchema": {
         "type": "object",
         "properties": {
@@ -3765,7 +3780,7 @@
         "properties": {
           "query": {
             "type": "string",
-            "description": "Search query \u2014 can be a legal concept, case name, statute, or citation (e.g. 'miranda rights', 'negligence per se', 'Title VII', '410 U.S. 113')."
+            "description": "Search query — can be a legal concept, case name, statute, or citation (e.g. 'miranda rights', 'negligence per se', 'Title VII', '410 U.S. 113')."
           },
           "court": {
             "type": "string",
@@ -3790,13 +3805,13 @@
     },
     {
       "name": "limitless-markets",
-      "description": "Returns active prediction markets from Limitless Exchange with current Yes/No probabilities. Covers short-duration crypto markets (5-min, 15-min BTC/ETH direction), plus longer-term markets. Returns title, implied yes/no prices, expiration, volume, categories, and slug. $0.006/call \u2014 free upstream, no API key.",
+      "description": "Returns active prediction markets from Limitless Exchange with current Yes/No probabilities. Covers short-duration crypto markets (5-min, 15-min BTC/ETH direction), plus longer-term markets. Returns title, implied yes/no prices, expiration, volume, categories, and slug. $0.006/call — free upstream, no API key.",
       "inputSchema": {
         "type": "object",
         "properties": {
           "limit": {
             "type": "integer",
-            "description": "Number of markets to return (1\u201320, default 10).",
+            "description": "Number of markets to return (1–20, default 10).",
             "default": 10,
             "minimum": 1,
             "maximum": 20
@@ -3829,7 +3844,7 @@
     },
     {
       "name": "macro-brief",
-      "description": "AI-synthesized US macroeconomic situation briefing. Gathers 7 real-time signals \u2014 HY/IG credit spreads, yield curve (10Y-3M), initial jobless claims, JOLTS openings, core PCE, and Fed Funds rate \u2014 from FRED (free, no auth) then uses GPT-4o-mini to synthesize a structured briefing: regime label (expansion/contraction/late-cycle/recovery/uncertain), dominant risk, agent implication, and a 200-word narrative. Replaces a 5+ step data assembly + LLM chain. Priced below Bloomberg macro summaries.",
+      "description": "AI-synthesized US macroeconomic situation briefing. Gathers 7 real-time signals — HY/IG credit spreads, yield curve (10Y-3M), initial jobless claims, JOLTS openings, core PCE, and Fed Funds rate — from FRED (free, no auth) then uses GPT-4o-mini to synthesize a structured briefing: regime label (expansion/contraction/late-cycle/recovery/uncertain), dominant risk, agent implication, and a 200-word narrative. Replaces a 5+ step data assembly + LLM chain. Priced below Bloomberg macro summaries.",
       "inputSchema": {
         "type": "object",
         "properties": {
@@ -3874,7 +3889,7 @@
     },
     {
       "name": "market-breadth",
-      "description": "US equity market breadth dashboard via institutional ETF-ratio breadth proxies. Measures participation across equal-weight (RSP/SPY divergence), small-caps (IWM/SPY), risk appetite (SPHB/SPLV), and mid-caps (MDY/SPY). Returns per-pair ratios, 20-day average, divergence%, 5-day momentum, and OUTPERFORMING/NEUTRAL/UNDERPERFORMING signal for each. Composite breadth_score (\u2212100..+100) and breadth_regime (STRONGLY_BULLISH \u2192 STRONGLY_BEARISH). Use to confirm whether a market rally has broad participation or is driven by narrow mega-cap leadership. Complements sector-rotation (sector allocation) and volatility-brief (VIX regime). No API key required.",
+      "description": "US equity market breadth dashboard via institutional ETF-ratio breadth proxies. Measures participation across equal-weight (RSP/SPY divergence), small-caps (IWM/SPY), risk appetite (SPHB/SPLV), and mid-caps (MDY/SPY). Returns per-pair ratios, 20-day average, divergence%, 5-day momentum, and OUTPERFORMING/NEUTRAL/UNDERPERFORMING signal for each. Composite breadth_score (−100..+100) and breadth_regime (STRONGLY_BULLISH → STRONGLY_BEARISH). Use to confirm whether a market rally has broad participation or is driven by narrow mega-cap leadership. Complements sector-rotation (sector allocation) and volatility-brief (VIX regime). No API key required.",
       "inputSchema": {
         "type": "object",
         "properties": {},
@@ -3884,7 +3899,7 @@
     },
     {
       "name": "market-gex",
-      "description": "Dealer gamma exposure (GEX) analysis for any US equity or ETF \u2014 returns aggregate GEX, gamma flip level, key pinning strikes, and vol regime signal (positive GEX = pinning, negative = acceleration). Free CBOE delayed data, no API key. Standard SpotGamma-style calculation: calls subtract gamma, puts add gamma. Use with options-snapshot for full options context.",
+      "description": "Dealer gamma exposure (GEX) analysis for any US equity or ETF — returns aggregate GEX, gamma flip level, key pinning strikes, and vol regime signal (positive GEX = pinning, negative = acceleration). Free CBOE delayed data, no API key. Standard SpotGamma-style calculation: calls subtract gamma, puts add gamma. Use with options-snapshot for full options context.",
       "inputSchema": {
         "type": "object",
         "properties": {
@@ -3911,7 +3926,7 @@
     },
     {
       "name": "market-intelligence",
-      "description": "Discovers active x402 APIs with verified organic USDC settlements \u2014 shows which endpoints have genuine payer breadth across the ecosystem. Sourced from on-chain settlements, not catalog listings. Filter by category, price range, and minimum unique payers. Useful before wiring a workflow to an external x402 endpoint: confirms it is active with multiple independent payers, not private infrastructure or a dead listing.",
+      "description": "Discovers active x402 APIs with verified organic USDC settlements — shows which endpoints have genuine payer breadth across the ecosystem. Sourced from on-chain settlements, not catalog listings. Filter by category, price range, and minimum unique payers. Useful before wiring a workflow to an external x402 endpoint: confirms it is active with multiple independent payers, not private infrastructure or a dead listing.",
       "inputSchema": {
         "type": "object",
         "properties": {
@@ -3955,7 +3970,7 @@
     },
     {
       "name": "market-movers",
-      "description": "Today's top market movers \u2014 equity gainers, losers, most-active, and crypto gainers/losers by 24h change. Sourced from Yahoo Finance screener and CoinGecko (free, no API key). Returns symbol, name, price, % change, volume, and market cap. Filter by asset class (equities, crypto, or both) and mover type (gainers, losers, active). Use for pre-trade context, on-chain event correlation, and market-regime detection.",
+      "description": "Today's top market movers — equity gainers, losers, most-active, and crypto gainers/losers by 24h change. Sourced from Yahoo Finance screener and CoinGecko (free, no API key). Returns symbol, name, price, % change, volume, and market cap. Filter by asset class (equities, crypto, or both) and mover type (gainers, losers, active). Use for pre-trade context, on-chain event correlation, and market-regime detection.",
       "inputSchema": {
         "type": "object",
         "properties": {
@@ -3982,7 +3997,7 @@
           },
           "limit": {
             "type": "integer",
-            "description": "Number of results per category (1\u201320, default 10).",
+            "description": "Number of results per category (1–20, default 10).",
             "default": 10,
             "minimum": 1,
             "maximum": 20
@@ -3993,7 +4008,7 @@
     },
     {
       "name": "market-overview",
-      "description": "Single-call market snapshot: SPY, QQQ, IWM, and DIA price + intraday % change, VIX fear gauge, 10-year Treasury yield (^TNX), and a derived risk-posture signal (RISK_ON / NEUTRAL / RISK_OFF / RISK_OFF_ELEVATED). Replaces 5\u20136 individual price calls with one structured payload useful for position-sizing, regime detection, or pre-trade context. Sourced from Yahoo Finance public data \u2014 live during market hours.",
+      "description": "Single-call market snapshot: SPY, QQQ, IWM, and DIA price + intraday % change, VIX fear gauge, 10-year Treasury yield (^TNX), and a derived risk-posture signal (RISK_ON / NEUTRAL / RISK_OFF / RISK_OFF_ELEVATED). Replaces 5–6 individual price calls with one structured payload useful for position-sizing, regime detection, or pre-trade context. Sourced from Yahoo Finance public data — live during market hours.",
       "inputSchema": {
         "type": "object",
         "properties": {},
@@ -4011,13 +4026,13 @@
     },
     {
       "name": "market-sentiment",
-      "description": "Combined crypto market sentiment signal: Crypto Fear & Greed Index (alternative.me, 0\u2013100, 30-day trend) plus BTC and ETH Implied Volatility from Deribit options market (annualized %). Free upstream sources, no keys. Returns current FGI value, classification (Extreme Fear to Extreme Greed), 7-day FGI trend, IV trend (RISING/FALLING/FLAT), and a composite regime label (CAPITULATION_ZONE, OVERHEATED, COMPLACENT_GREED, CALM_MARKET, etc.). Use before making large DeFi positions, calibrating yield farming risk, or routing agent spend in volatile conditions.",
+      "description": "Combined crypto market sentiment signal: Crypto Fear & Greed Index (alternative.me, 0–100, 30-day trend) plus BTC and ETH Implied Volatility from Deribit options market (annualized %). Free upstream sources, no keys. Returns current FGI value, classification (Extreme Fear to Extreme Greed), 7-day FGI trend, IV trend (RISING/FALLING/FLAT), and a composite regime label (CAPITULATION_ZONE, OVERHEATED, COMPLACENT_GREED, CALM_MARKET, etc.). Use before making large DeFi positions, calibrating yield farming risk, or routing agent spend in volatile conditions.",
       "inputSchema": {
         "type": "object",
         "properties": {
           "history_days": {
             "type": "integer",
-            "description": "Number of past daily FGI readings to include in response (1\u201330). Default 7.",
+            "description": "Number of past daily FGI readings to include in response (1–30). Default 7.",
             "default": 7,
             "minimum": 1,
             "maximum": 30
@@ -4085,7 +4100,7 @@
             "type": "integer",
             "minimum": 1,
             "maximum": 30,
-            "description": "Max tokens to return (1\u201330). Default: 10."
+            "description": "Max tokens to return (1–30). Default: 10."
           },
           "min_liquidity_usd": {
             "type": "number",
@@ -4114,7 +4129,7 @@
     },
     {
       "name": "merger-acquisition-intel",
-      "description": "SEC EDGAR M&A activity tracker for US public companies. Mode 'company' (ticker): returns all M&A-related EDGAR filings for that company \u2014 incoming tender offers (SC TO-T), going-private transactions (SC 13E-3), merger proxies (DEFM14A/PREM14A), and issuer self-tenders (SC TO-I) \u2014 with EDGAR URLs. Mode 'recent': market-wide feed of tender offers, going-private filings, and definitive merger proxies in the last N days. Authoritative SEC government data, updated within minutes of filing acceptance. $0.020/call.",
+      "description": "SEC EDGAR M&A activity tracker for US public companies. Mode 'company' (ticker): returns all M&A-related EDGAR filings for that company — incoming tender offers (SC TO-T), going-private transactions (SC 13E-3), merger proxies (DEFM14A/PREM14A), and issuer self-tenders (SC TO-I) — with EDGAR URLs. Mode 'recent': market-wide feed of tender offers, going-private filings, and definitive merger proxies in the last N days. Authoritative SEC government data, updated within minutes of filing acceptance. $0.020/call.",
       "inputSchema": {
         "type": "object",
         "properties": {
@@ -4165,7 +4180,7 @@
     },
     {
       "name": "news-sentiment",
-      "description": "Returns global news coverage and sentiment for any company, stock ticker, or topic. Primary source: GDELT Project v2 (250M+ articles, ML tone scoring). Fallback: Google News RSS with keyword heuristic. Returns article count, avg sentiment tone (\u2212100 negative \u2192 +100 positive), top positive/negative headlines, and top news domains. Lookback: 1\u201330 days (default 3). Results cached 10 min.",
+      "description": "Returns global news coverage and sentiment for any company, stock ticker, or topic. Primary source: GDELT Project v2 (250M+ articles, ML tone scoring). Fallback: Google News RSS with keyword heuristic. Returns article count, avg sentiment tone (−100 negative → +100 positive), top positive/negative headlines, and top news domains. Lookback: 1–30 days (default 3). Results cached 10 min.",
       "inputSchema": {
         "type": "object",
         "properties": {
@@ -4175,7 +4190,7 @@
           },
           "days": {
             "type": "number",
-            "description": "Lookback window in days (1\u201330). Default: 3.",
+            "description": "Lookback window in days (1–30). Default: 3.",
             "default": 3
           }
         },
@@ -4254,7 +4269,7 @@
     },
     {
       "name": "npi-lookup",
-      "description": "US NPI registry lookup \u2014 find any licensed US healthcare provider or organization by NPI number, name, state, or specialty. Returns NPI, entity type, name, credentials, specialty/taxonomy, license states, practice address, and active status. 7M+ records from CMS. Use for provider credentialing, healthcare due diligence, billing verification, or AML/KYB screening on medical payments.",
+      "description": "US NPI registry lookup — find any licensed US healthcare provider or organization by NPI number, name, state, or specialty. Returns NPI, entity type, name, credentials, specialty/taxonomy, license states, practice address, and active status. 7M+ records from CMS. Use for provider credentialing, healthcare due diligence, billing verification, or AML/KYB screening on medical payments.",
       "inputSchema": {
         "type": "object",
         "properties": {
@@ -4288,7 +4303,7 @@
           },
           "limit": {
             "type": "integer",
-            "description": "Max results to return (1\u201350, default 10).",
+            "description": "Max results to return (1–50, default 10).",
             "minimum": 1,
             "maximum": 50,
             "default": 10
@@ -4347,7 +4362,7 @@
     },
     {
       "name": "open-food-intel",
-      "description": "Open Food Facts nutritional intelligence \u2014 3M+ consumer food products. Two modes: (1) search: keyword search returning Nutri-Score (A\u2013E), NOVA processing level (1\u20134), macronutrients per 100g, allergens, eco-score, and popularity rank. (2) barcode: exact UPC/EAN lookup with full nutritional profile per 100g and per serving, complete ingredients list, and packaging info. Useful for meal-planning agents, dietary restriction checkers, grocery comparison tools, and food compliance research. No API key required.",
+      "description": "Open Food Facts nutritional intelligence — 3M+ consumer food products. Two modes: (1) search: keyword search returning Nutri-Score (A–E), NOVA processing level (1–4), macronutrients per 100g, allergens, eco-score, and popularity rank. (2) barcode: exact UPC/EAN lookup with full nutritional profile per 100g and per serving, complete ingredients list, and packaging info. Useful for meal-planning agents, dietary restriction checkers, grocery comparison tools, and food compliance research. No API key required.",
       "inputSchema": {
         "type": "object",
         "properties": {
@@ -4357,7 +4372,7 @@
               "search",
               "barcode"
             ],
-            "description": "search \u2014 keyword query across 3M+ products. barcode \u2014 exact UPC/EAN lookup."
+            "description": "search — keyword query across 3M+ products. barcode — exact UPC/EAN lookup."
           },
           "query": {
             "type": "string",
@@ -4371,7 +4386,7 @@
             "type": "integer",
             "minimum": 1,
             "maximum": 20,
-            "description": "Number of results for search mode (1\u201320). Default: 10."
+            "description": "Number of results for search mode (1–20). Default: 10."
           },
           "nutrition_grade": {
             "type": "string",
@@ -4398,7 +4413,7 @@
     },
     {
       "name": "options-chain",
-      "description": "CBOE delayed options chain for any US equity or index \u2014 returns stock price, per-contract IV, greeks (delta/gamma/theta/vega), OI, volume, and bid/ask. Filterable by expiration date and call/put. Free CBOE data, no API key.",
+      "description": "CBOE delayed options chain for any US equity or index — returns stock price, per-contract IV, greeks (delta/gamma/theta/vega), OI, volume, and bid/ask. Filterable by expiration date and call/put. Free CBOE data, no API key.",
       "inputSchema": {
         "type": "object",
         "required": [],
@@ -4456,7 +4471,7 @@
     },
     {
       "name": "options-snapshot",
-      "description": "Options intelligence snapshot for any US equity \u2014 IV30, put/call volume ratio, top calls and puts by trading volume, and unusual-volume flags. Free CBOE delayed data (15-min delay during trading hours), no API key required. Complements us-stock-price and equity-technicals with the options-layer sentiment layer agents need for complete trade context. $0.015/call.",
+      "description": "Options intelligence snapshot for any US equity — IV30, put/call volume ratio, top calls and puts by trading volume, and unusual-volume flags. Free CBOE delayed data (15-min delay during trading hours), no API key required. Complements us-stock-price and equity-technicals with the options-layer sentiment layer agents need for complete trade context. $0.015/call.",
       "inputSchema": {
         "type": "object",
         "properties": {
@@ -4496,7 +4511,7 @@
     },
     {
       "name": "page-links",
-      "description": "Extracts all hyperlinks from a webpage. Fetches the target URL, resolves relative links to absolute URLs, and classifies each as internal (same domain) or external. Filter by all/external/internal, cap results with limit. Returns page title, total link count before filtering, and a structured array of {href, text, is_external, domain}. Priced at $0.004 \u2014 20% below orbisapi web-scrape-links ($0.005/call). Upstream: direct HTTP fetch, no API key.",
+      "description": "Extracts all hyperlinks from a webpage. Fetches the target URL, resolves relative links to absolute URLs, and classifies each as internal (same domain) or external. Filter by all/external/internal, cap results with limit. Returns page title, total link count before filtering, and a structured array of {href, text, is_external, domain}. Priced at $0.004 — 20% below orbisapi web-scrape-links ($0.005/call). Upstream: direct HTTP fetch, no API key.",
       "inputSchema": {
         "type": "object",
         "properties": {
@@ -4515,7 +4530,7 @@
           },
           "limit": {
             "type": "integer",
-            "description": "Max links to return (1\u2013200). Default: 100.",
+            "description": "Max links to return (1–200). Default: 100.",
             "minimum": 1,
             "maximum": 200
           }
@@ -4525,7 +4540,7 @@
     },
     {
       "name": "patent-intel",
-      "description": "USPTO patent intelligence for any company or keyword. Mode 'company' (ticker or company name): recent granted patents assigned to that company \u2014 accepts US stock ticker (resolved via SEC EDGAR) or free-form assignee name. Returns title, abstract excerpt (\u2264400 chars), grant date, filing date, CPC technology section labels (e.g., 'H \u2013 Electricity', 'G \u2013 Physics'), CPC group codes, inventor names, and a Google Patents link. Mode 'search' (query): full-text keyword search across all USPTO patent titles and abstracts \u2014 useful for finding who is innovating in a technology area (e.g., 'transformer neural network', 'solid state battery'). Covers all US granted patents from 1976 to within ~2 weeks of present. Data source: USPTO PatentsView API (public domain, no API key). $0.008/call.",
+      "description": "USPTO patent intelligence for any company or keyword. Mode 'company' (ticker or company name): recent granted patents assigned to that company — accepts US stock ticker (resolved via SEC EDGAR) or free-form assignee name. Returns title, abstract excerpt (≤400 chars), grant date, filing date, CPC technology section labels (e.g., 'H – Electricity', 'G – Physics'), CPC group codes, inventor names, and a Google Patents link. Mode 'search' (query): full-text keyword search across all USPTO patent titles and abstracts — useful for finding who is innovating in a technology area (e.g., 'transformer neural network', 'solid state battery'). Covers all US granted patents from 1976 to within ~2 weeks of present. Data source: USPTO PatentsView API (public domain, no API key). $0.008/call.",
       "inputSchema": {
         "type": "object",
         "properties": {
@@ -4556,7 +4571,7 @@
     },
     {
       "name": "peer-benchmarking",
-      "description": "Comparable-company analysis for any US equity. Returns target vs. 5 sector-peer median on P/E, EV/EBITDA, revenue growth, and profit margin \u2014 with explicit premium/discount %. Replaces manual comps-table research. No API key required.",
+      "description": "Comparable-company analysis for any US equity. Returns target vs. 5 sector-peer median on P/E, EV/EBITDA, revenue growth, and profit margin — with explicit premium/discount %. Replaces manual comps-table research. No API key required.",
       "inputSchema": {
         "type": "object",
         "properties": {
@@ -4584,7 +4599,7 @@
     },
     {
       "name": "place-details",
-      "description": "Enriched place and business details by name (OSM Nominatim). Returns website, phone, email, opening hours, operator, brand, cuisine, social media links, full address, and coordinates. Use when you need the business metadata behind a location \u2014 not just where it is, but who runs it and how to reach it. Cheaper than Google Maps place details.",
+      "description": "Enriched place and business details by name (OSM Nominatim). Returns website, phone, email, opening hours, operator, brand, cuisine, social media links, full address, and coordinates. Use when you need the business metadata behind a location — not just where it is, but who runs it and how to reach it. Cheaper than Google Maps place details.",
       "inputSchema": {
         "type": "object",
         "properties": {
@@ -4626,7 +4641,7 @@
     },
     {
       "name": "policy-impact-mapper",
-      "description": "Analyzes regulatory and policy text to map its impact across industry sectors. Extracts compliance requirements, change types (new mandates, prohibitions, exemptions), effective dates, affected entities, and assigns sector-level impact scores (HIGH/MEDIUM/LOW). Pure pattern analysis \u2014 no LLM, instant results. Useful for compliance agents, regulatory monitoring workflows, and policy change digests.",
+      "description": "Analyzes regulatory and policy text to map its impact across industry sectors. Extracts compliance requirements, change types (new mandates, prohibitions, exemptions), effective dates, affected entities, and assigns sector-level impact scores (HIGH/MEDIUM/LOW). Pure pattern analysis — no LLM, instant results. Useful for compliance agents, regulatory monitoring workflows, and policy change digests.",
       "inputSchema": {
         "type": "object",
         "properties": {
@@ -4645,7 +4660,7 @@
     },
     {
       "name": "polymarket-accuracy-score",
-      "description": "Historical Polymarket crowd accuracy score: % of markets where the final crowd majority correctly predicted the outcome, plus Brier score (calibration quality). Breakdowns by category \u2014 crypto, politics, sports, macro, equities, ai. Filter by category and lookback days. $0.004/call \u2014 20% below closest x402 competitor. Source: Polymarket public API (no key required).",
+      "description": "Historical Polymarket crowd accuracy score: % of markets where the final crowd majority correctly predicted the outcome, plus Brier score (calibration quality). Breakdowns by category — crypto, politics, sports, macro, equities, ai. Filter by category and lookback days. $0.004/call — 20% below closest x402 competitor. Source: Polymarket public API (no key required).",
       "inputSchema": {
         "type": "object",
         "properties": {
@@ -4664,7 +4679,7 @@
           },
           "days_back": {
             "type": "integer",
-            "description": "Lookback window in days for resolved markets (1\u201390, default 30).",
+            "description": "Lookback window in days for resolved markets (1–90, default 30).",
             "minimum": 1,
             "maximum": 90,
             "default": 30
@@ -4681,7 +4696,7 @@
     },
     {
       "name": "polymarket-category-performance",
-      "description": "Polymarket category activity breakdown: volume, liquidity, market count, and top market per category (crypto, politics, sports, ai, macro, equities). Shows where trading activity is concentrated. Optionally filter to one category. $0.004/call \u2014 20% below closest x402 competitor. Source: Polymarket public API (no key required).",
+      "description": "Polymarket category activity breakdown: volume, liquidity, market count, and top market per category (crypto, politics, sports, ai, macro, equities). Shows where trading activity is concentrated. Optionally filter to one category. $0.004/call — 20% below closest x402 competitor. Source: Polymarket public API (no key required).",
       "inputSchema": {
         "type": "object",
         "properties": {
@@ -4710,7 +4725,7 @@
     },
     {
       "name": "polymarket-crypto-updown",
-      "description": "Crypto price direction prediction markets from Polymarket. Returns binary up/down markets for BTC, ETH, SOL, XRP and other assets \u2014 current market consensus on near-term price direction. Filter by asset symbol or get all active crypto markets. Use for directional sentiment, agent decision context, or signal feeds.",
+      "description": "Crypto price direction prediction markets from Polymarket. Returns binary up/down markets for BTC, ETH, SOL, XRP and other assets — current market consensus on near-term price direction. Filter by asset symbol or get all active crypto markets. Use for directional sentiment, agent decision context, or signal feeds.",
       "inputSchema": {
         "type": "object",
         "properties": {
@@ -4722,7 +4737,7 @@
             "type": "integer",
             "minimum": 1,
             "maximum": 50,
-            "description": "Max markets to return (1\u201350). Default: 20."
+            "description": "Max markets to return (1–50). Default: 20."
           }
         },
         "required": []
@@ -4742,7 +4757,7 @@
             "type": "integer",
             "minimum": 1,
             "maximum": 25,
-            "description": "Number of markets to return (1\u201325). Default: 10."
+            "description": "Number of markets to return (1–25). Default: 10."
           },
           "period": {
             "type": "string",
@@ -4763,7 +4778,7 @@
     },
     {
       "name": "polymarket-sentiment-shift",
-      "description": "Returns Polymarket prediction markets with the biggest recent probability shifts \u2014 useful for detecting sudden consensus changes on elections, crypto prices, and macro outcomes. Sorted by absolute 1-week change by default. Each result includes current probability, price change, volume, and resolution date. $0.008/call \u2014 free upstream.",
+      "description": "Returns Polymarket prediction markets with the biggest recent probability shifts — useful for detecting sudden consensus changes on elections, crypto prices, and macro outcomes. Sorted by absolute 1-week change by default. Each result includes current probability, price change, volume, and resolution date. $0.008/call — free upstream.",
       "inputSchema": {
         "type": "object",
         "properties": {
@@ -4791,7 +4806,7 @@
           },
           "limit": {
             "type": "integer",
-            "description": "Max markets to return (1\u201320, default 10).",
+            "description": "Max markets to return (1–20, default 10).",
             "minimum": 1,
             "maximum": 20
           }
@@ -4801,7 +4816,7 @@
     },
     {
       "name": "polymarket-whale-entries",
-      "description": "Scans Polymarket for recent large-position trades. Returns whale entries filtered by minimum USDC value (size \u00d7 entry price). Includes trader wallet, YES/NO side, USDC amount, entry price, market name, and on-chain tx hash. Use for smart-money signals, copy-trade detection, or market sentiment confirmation. Free upstream; no API keys.",
+      "description": "Scans Polymarket for recent large-position trades. Returns whale entries filtered by minimum USDC value (size × entry price). Includes trader wallet, YES/NO side, USDC amount, entry price, market name, and on-chain tx hash. Use for smart-money signals, copy-trade detection, or market sentiment confirmation. Free upstream; no API keys.",
       "inputSchema": {
         "type": "object",
         "properties": {
@@ -4809,13 +4824,13 @@
             "type": "number",
             "minimum": 10,
             "maximum": 100000,
-            "description": "Minimum USDC value per trade (size \u00d7 price). Default: 500."
+            "description": "Minimum USDC value per trade (size × price). Default: 500."
           },
           "limit": {
             "type": "integer",
             "minimum": 1,
             "maximum": 50,
-            "description": "Maximum whale trades to return (1\u201350). Default: 10."
+            "description": "Maximum whale trades to return (1–50). Default: 10."
           },
           "side": {
             "type": "string",
@@ -4836,7 +4851,7 @@
     },
     {
       "name": "portfolio-rebalance",
-      "description": "Pure-math portfolio rebalancing calculator. Given current holdings (asset names and their current USD values) and target allocations (percentages summing to 100), returns the exact buy/sell dollar amounts needed to reach target weights. Handles partial rebalancing with a drift threshold. No external API \u2014 deterministic and instant. Useful for DeFi agents, robo-advisory flows, and automated rebalancing triggers.",
+      "description": "Pure-math portfolio rebalancing calculator. Given current holdings (asset names and their current USD values) and target allocations (percentages summing to 100), returns the exact buy/sell dollar amounts needed to reach target weights. Handles partial rebalancing with a drift threshold. No external API — deterministic and instant. Useful for DeFi agents, robo-advisory flows, and automated rebalancing triggers.",
       "inputSchema": {
         "type": "object",
         "properties": {
@@ -4912,7 +4927,7 @@
     },
     {
       "name": "prediction-markets",
-      "description": "Returns top active Polymarket prediction markets sorted by trading volume. Includes crowd-sourced outcome probabilities (0\u20131), USDC volume, liquidity, and resolution date. Filter by keyword. Use this to gauge market consensus on events before making decisions. $0.05/call \u2014 free upstream, no API key.",
+      "description": "Returns top active Polymarket prediction markets sorted by trading volume. Includes crowd-sourced outcome probabilities (0–1), USDC volume, liquidity, and resolution date. Filter by keyword. Use this to gauge market consensus on events before making decisions. $0.05/call — free upstream, no API key.",
       "inputSchema": {
         "type": "object",
         "properties": {
@@ -4927,7 +4942,7 @@
           },
           "limit": {
             "type": "integer",
-            "description": "Max markets to return (1\u201325, default 10).",
+            "description": "Max markets to return (1–25, default 10).",
             "default": 10,
             "minimum": 1,
             "maximum": 25
@@ -4938,7 +4953,7 @@
     },
     {
       "name": "prediction-stock-pulse",
-      "description": "One call returns prediction market sentiment (Limitless Exchange) + live equity price for a specified ticker. Collapses the prediction-market \u2192 stock-price agent chain into a single x402 payment. $0.016 vs $0.024 bought individually. Inputs: ticker (required), query (optional keyword filter for prediction markets).",
+      "description": "One call returns prediction market sentiment (Limitless Exchange) + live equity price for a specified ticker. Collapses the prediction-market → stock-price agent chain into a single x402 payment. $0.016 vs $0.024 bought individually. Inputs: ticker (required), query (optional keyword filter for prediction markets).",
       "inputSchema": {
         "type": "object",
         "properties": {
@@ -4952,7 +4967,7 @@
           },
           "market_limit": {
             "type": "integer",
-            "description": "Number of prediction markets to return (1\u201310, default 5).",
+            "description": "Number of prediction markets to return (1–10, default 5).",
             "default": 5,
             "minimum": 1,
             "maximum": 10
@@ -4964,7 +4979,7 @@
     },
     {
       "name": "price-target-consensus",
-      "description": "Analyst price target consensus for any US public company: current price, 12-month consensus target (mean, median, high, low), buy/hold/sell analyst count, implied upside %, and recommendation trend. Pulled from Yahoo Finance \u2014 no API key required.",
+      "description": "Analyst price target consensus for any US public company: current price, 12-month consensus target (mean, median, high, low), buy/hold/sell analyst count, implied upside %, and recommendation trend. Pulled from Yahoo Finance — no API key required.",
       "inputSchema": {
         "type": "object",
         "properties": {
@@ -4979,7 +4994,7 @@
     },
     {
       "name": "protocol-revenue-leaders",
-      "description": "Returns DeFi protocols ranked by daily fees (revenue generated). Covers 1000+ protocols across chains \u2014 DEXes, lending markets, derivatives, stablecoins. Includes 1d/7d/30d trend context, category breakdown, and chain presence. Use to identify which protocols are capturing the most economic activity, screen for fundamental DeFi strength, or compare protocol revenue trajectories.",
+      "description": "Returns DeFi protocols ranked by daily fees (revenue generated). Covers 1000+ protocols across chains — DEXes, lending markets, derivatives, stablecoins. Includes 1d/7d/30d trend context, category breakdown, and chain presence. Use to identify which protocols are capturing the most economic activity, screen for fundamental DeFi strength, or compare protocol revenue trajectories.",
       "inputSchema": {
         "type": "object",
         "properties": {
@@ -5013,7 +5028,7 @@
     },
     {
       "name": "pubmed-intel",
-      "description": "PubMed biomedical literature search and article retrieval across 36M+ NCBI/MEDLINE citations. search mode: find papers by keyword with optional year range and article type filter (clinical_trial, review, meta_analysis, systematic_review, randomized_trial, case_report) \u2014 returns PMID, title, authors, journal, date, DOI. article mode: full article details for a PMID \u2014 structured abstract, author affiliations, MeSH terms, keywords, DOI, PMC open-access link. No API key. Covers all biomedical and life science literature since 1946.",
+      "description": "PubMed biomedical literature search and article retrieval across 36M+ NCBI/MEDLINE citations. search mode: find papers by keyword with optional year range and article type filter (clinical_trial, review, meta_analysis, systematic_review, randomized_trial, case_report) — returns PMID, title, authors, journal, date, DOI. article mode: full article details for a PMID — structured abstract, author affiliations, MeSH terms, keywords, DOI, PMC open-access link. No API key. Covers all biomedical and life science literature since 1946.",
       "inputSchema": {
         "type": "object",
         "properties": {
@@ -5082,7 +5097,7 @@
               "version_history",
               "compare"
             ],
-            "description": "Action to perform. 'package_info': full metadata for one package (license, deps, dev status, vulnerabilities). 'download_stats': last day/week/month pip download counts. 'version_history': all published versions with release dates, newest first. 'compare': package_info + download_stats for 2\u20134 packages side-by-side. Default: 'package_info'."
+            "description": "Action to perform. 'package_info': full metadata for one package (license, deps, dev status, vulnerabilities). 'download_stats': last day/week/month pip download counts. 'version_history': all published versions with release dates, newest first. 'compare': package_info + download_stats for 2–4 packages side-by-side. Default: 'package_info'."
           },
           "package": {
             "type": "string",
@@ -5093,7 +5108,7 @@
             "items": {
               "type": "string"
             },
-            "description": "List of 2\u20134 package names for the 'compare' action. Example: ['aiohttp', 'httpx', 'requests'] to compare HTTP client libraries."
+            "description": "List of 2–4 package names for the 'compare' action. Example: ['aiohttp', 'httpx', 'requests'] to compare HTTP client libraries."
           },
           "limit": {
             "type": "number",
@@ -5146,7 +5161,7 @@
     },
     {
       "name": "reddit-intel",
-      "description": "Searches Reddit posts and/or comments by keyword. Returns top results with score, comment count, author, subreddit, URL, and timestamp. Filter by subreddit, sort by score or date. Supports separate post and comment search. Sourced from PullPush public API \u2014 no auth required. Ideal for competitive sentiment analysis, trend detection, and community research.",
+      "description": "Searches Reddit posts and/or comments by keyword. Returns top results with score, comment count, author, subreddit, URL, and timestamp. Filter by subreddit, sort by score or date. Supports separate post and comment search. Sourced from PullPush public API — no auth required. Ideal for competitive sentiment analysis, trend detection, and community research.",
       "inputSchema": {
         "type": "object",
         "properties": {
@@ -5178,7 +5193,7 @@
           },
           "limit": {
             "type": "integer",
-            "description": "Max results per mode (1\u201325). Default: 10.",
+            "description": "Max results per mode (1–25). Default: 10.",
             "minimum": 1,
             "maximum": 25
           }
@@ -5188,7 +5203,7 @@
     },
     {
       "name": "regex-tester",
-      "description": "Safe regex testing and extraction. Validates a pattern, finds all matches (with capture groups), replaces text, and explains what the pattern matches. Zero external API calls \u2014 instant, deterministic. Useful for agents generating or debugging regex patterns mid-task, validating extracted data, or transforming text with precision.",
+      "description": "Safe regex testing and extraction. Validates a pattern, finds all matches (with capture groups), replaces text, and explains what the pattern matches. Zero external API calls — instant, deterministic. Useful for agents generating or debugging regex patterns mid-task, validating extracted data, or transforming text with precision.",
       "inputSchema": {
         "type": "object",
         "properties": {
@@ -5225,7 +5240,7 @@
           },
           "limit": {
             "type": "integer",
-            "description": "Number of papers to return (1\u201310). Default: 5.",
+            "description": "Number of papers to return (1–10). Default: 5.",
             "default": 5,
             "minimum": 1,
             "maximum": 10
@@ -5256,7 +5271,7 @@
     },
     {
       "name": "research-synthesis",
-      "description": "AI-synthesized intelligence report \u2014 aggregates Hacker News, OpenAlex academic papers, Reddit, arXiv preprints, and DuckDuckGo in parallel, then distills into a structured report: executive summary, key findings, market sentiment, emerging trends, and recommendations. Pass ?query=your+topic for targeted research (e.g. 'AI agent payment protocols 2025'). Omit query for a default AI agents & autonomous systems report.",
+      "description": "AI-synthesized intelligence report — aggregates Hacker News, OpenAlex academic papers, Reddit, arXiv preprints, and DuckDuckGo in parallel, then distills into a structured report: executive summary, key findings, market sentiment, emerging trends, and recommendations. Pass ?query=your+topic for targeted research (e.g. 'AI agent payment protocols 2025'). Omit query for a default AI agents & autonomous systems report.",
       "inputSchema": {
         "type": "object",
         "properties": {
@@ -5274,7 +5289,7 @@
     },
     {
       "name": "revenue-growth-intel",
-      "description": "Revenue growth quality analysis for any US public company. Computes 1/3/5-year revenue CAGRs, growth consistency (coefficient of variation), acceleration vs long-run trend, gross margin direction, and operating leverage. Returns a composite letter grade (A\u2013F) that anchors DCF growth rate assumptions. Chain after income-statements and before dcf-valuation.",
+      "description": "Revenue growth quality analysis for any US public company. Computes 1/3/5-year revenue CAGRs, growth consistency (coefficient of variation), acceleration vs long-run trend, gross margin direction, and operating leverage. Returns a composite letter grade (A–F) that anchors DCF growth rate assumptions. Chain after income-statements and before dcf-valuation.",
       "inputSchema": {
         "type": "object",
         "properties": {
@@ -5309,7 +5324,7 @@
     },
     {
       "name": "sanctions-screening",
-      "description": "OFAC SDN sanctions screening \u2014 checks whether a person, company, vessel, or aircraft appears on the US Treasury Specially Designated Nationals list. Returns match score, sanctions program(s), and entity type. Covers ~19,000 entries including RUSSIA-EO14024, SDGT, IRAN, DPRK, TCO, and 30+ programs. Use for payment compliance, KYB/KYC, AML checks, and counterparty due diligence.",
+      "description": "OFAC SDN sanctions screening — checks whether a person, company, vessel, or aircraft appears on the US Treasury Specially Designated Nationals list. Returns match score, sanctions program(s), and entity type. Covers ~19,000 entries including RUSSIA-EO14024, SDGT, IRAN, DPRK, TCO, and 30+ programs. Use for payment compliance, KYB/KYC, AML checks, and counterparty due diligence.",
       "inputSchema": {
         "type": "object",
         "required": [],
@@ -5399,7 +5414,7 @@
     },
     {
       "name": "sec-insider-trades",
-      "description": "SEC EDGAR Form 4 insider trading data for any US public company \u2014 shows recent insider buys, sells, awards, and exercises with shares, price, and post-transaction ownership. No API key. EDGAR primary source.",
+      "description": "SEC EDGAR Form 4 insider trading data for any US public company — shows recent insider buys, sells, awards, and exercises with shares, price, and post-transaction ownership. No API key. EDGAR primary source.",
       "inputSchema": {
         "type": "object",
         "required": [],
@@ -5459,7 +5474,7 @@
           },
           "days": {
             "type": "integer",
-            "description": "Number of recent trading days to fetch (1\u201310, default 5).",
+            "description": "Number of recent trading days to fetch (1–10, default 5).",
             "default": 5,
             "minimum": 1,
             "maximum": 10
@@ -5471,7 +5486,7 @@
     },
     {
       "name": "social-intel",
-      "description": "Returns public profile data for any social platform account. Pass a profile URL (platform auto-detected) or platform + username. Supports GitHub, Reddit, HackerNews, Twitter/X, npm, and Open Graph fallback for any URL. Returns name, bio, follower/karma counts, creation date, and platform-specific metrics. Priced at $0.004 \u2014 20% below comparable endpoints.",
+      "description": "Returns public profile data for any social platform account. Pass a profile URL (platform auto-detected) or platform + username. Supports GitHub, Reddit, HackerNews, Twitter/X, npm, and Open Graph fallback for any URL. Returns name, bio, follower/karma counts, creation date, and platform-specific metrics. Priced at $0.004 — 20% below comparable endpoints.",
       "inputSchema": {
         "type": "object",
         "properties": {
@@ -5500,7 +5515,7 @@
     },
     {
       "name": "social-momentum",
-      "description": "Cross-platform social momentum for any topic. Queries Reddit (recent top posts), Hacker News (recent stories), and GitHub (active repos) in parallel and returns a composite momentum score (0\u2013100) plus raw results from each platform. Single call replaces three separate searches. Use before committing to research, writing, or trading: 'is this topic gaining traction right now?' No API keys required.",
+      "description": "Cross-platform social momentum for any topic. Queries Reddit (recent top posts), Hacker News (recent stories), and GitHub (active repos) in parallel and returns a composite momentum score (0–100) plus raw results from each platform. Single call replaces three separate searches. Use before committing to research, writing, or trading: 'is this topic gaining traction right now?' No API keys required.",
       "inputSchema": {
         "type": "object",
         "properties": {
@@ -5510,7 +5525,7 @@
           },
           "window_hours": {
             "type": "integer",
-            "description": "Lookback window in hours (default 24, min 1, max 168 = 7 days). Shorter windows are more noise-sensitive; 24\u201372h gives the most stable signal.",
+            "description": "Lookback window in hours (default 24, min 1, max 168 = 7 days). Shorter windows are more noise-sensitive; 24–72h gives the most stable signal.",
             "default": 24,
             "minimum": 1,
             "maximum": 168
@@ -5525,21 +5540,21 @@
           },
           "reddit_limit": {
             "type": "integer",
-            "description": "Max Reddit posts to return (1\u201320, default 10).",
+            "description": "Max Reddit posts to return (1–20, default 10).",
             "default": 10,
             "minimum": 1,
             "maximum": 20
           },
           "hn_limit": {
             "type": "integer",
-            "description": "Max HN stories to return (1\u201320, default 10).",
+            "description": "Max HN stories to return (1–20, default 10).",
             "default": 10,
             "minimum": 1,
             "maximum": 20
           },
           "github_limit": {
             "type": "integer",
-            "description": "Max GitHub repos to return (1\u201320, default 10).",
+            "description": "Max GitHub repos to return (1–20, default 10).",
             "default": 10,
             "minimum": 1,
             "maximum": 20
@@ -5551,13 +5566,13 @@
     },
     {
       "name": "solana-token-risk",
-      "description": "Rug-pull and risk scanner for Solana SPL tokens. Input a mint address; returns mint/freeze authority status, top-10 holder concentration, liquidity depth, token age, and a composite safety score (0\u2013100, higher = safer) with risk level (safe/moderate/risky/danger) and green/warning flags. Uses Solana public RPC and DexScreener \u2014 no API keys required. Useful for agents vetting a memecoin or new token before trading, swapping, or recommending.",
+      "description": "Rug-pull and risk scanner for Solana SPL tokens. Input a mint address; returns mint/freeze authority status, top-10 holder concentration, liquidity depth, token age, and a composite safety score (0–100, higher = safer) with risk level (safe/moderate/risky/danger) and green/warning flags. Uses Solana public RPC and DexScreener — no API keys required. Useful for agents vetting a memecoin or new token before trading, swapping, or recommending.",
       "inputSchema": {
         "type": "object",
         "properties": {
           "mint": {
             "type": "string",
-            "description": "Solana SPL token mint address (base58, 32\u201344 chars).",
+            "description": "Solana SPL token mint address (base58, 32–44 chars).",
             "minLength": 32,
             "maxLength": 44
           }
@@ -5568,13 +5583,13 @@
     },
     {
       "name": "solana-tx-explainer",
-      "description": "Given a Solana transaction signature, returns a decoded breakdown: fee payer, programs invoked (Jupiter, Raydium, Pump.fun, SPL Token, etc.), SPL token balance changes with deltas, transaction fee in SOL and USD, block time, and a one-sentence human-readable summary. Uses public Solana mainnet RPC \u2014 no API key required. $0.07/call.",
+      "description": "Given a Solana transaction signature, returns a decoded breakdown: fee payer, programs invoked (Jupiter, Raydium, Pump.fun, SPL Token, etc.), SPL token balance changes with deltas, transaction fee in SOL and USD, block time, and a one-sentence human-readable summary. Uses public Solana mainnet RPC — no API key required. $0.07/call.",
       "inputSchema": {
         "type": "object",
         "properties": {
           "signature": {
             "type": "string",
-            "description": "Solana transaction signature (base58, 87\u201388 characters)."
+            "description": "Solana transaction signature (base58, 87–88 characters)."
           }
         },
         "required": [],
@@ -5601,7 +5616,7 @@
           },
           "forecast_days": {
             "type": "integer",
-            "description": "Number of forecast days (1\u201316). Default 7.",
+            "description": "Number of forecast days (1–16). Default 7.",
             "default": 7,
             "minimum": 1,
             "maximum": 16
@@ -5612,7 +5627,7 @@
     },
     {
       "name": "sports-prediction",
-      "description": "Returns today's (or a given date's) sports games with team win-loss records, venue, scheduled time, and live score. Supports MLB, NBA, NFL, NHL, NCAAF, NCAAB. Sourced from ESPN public API \u2014 no key required. $0.005/call. Use before prediction-markets or sports-content tasks to get accurate team context.",
+      "description": "Returns today's (or a given date's) sports games with team win-loss records, venue, scheduled time, and live score. Supports MLB, NBA, NFL, NHL, NCAAF, NCAAB. Sourced from ESPN public API — no key required. $0.005/call. Use before prediction-markets or sports-content tasks to get accurate team context.",
       "inputSchema": {
         "type": "object",
         "properties": {
@@ -5695,7 +5710,7 @@
     },
     {
       "name": "stablecoin-watch",
-      "description": "Real-time depeg monitor for top USD stablecoins (USDT, USDC, DAI, USDS, and others ranked by market cap). Returns current price, peg deviation %, depeg status (PARITY / MILD_DEPEG / MODERATE_DEPEG / SEVERE_DEPEG), supply trend, and a composite alert level (GREEN / YELLOW / ORANGE / RED). Sourced from DeFiLlama public API \u2014 no key required, updates every call. Useful for DeFi risk management, collateral health checks, and pre-trade regime detection.",
+      "description": "Real-time depeg monitor for top USD stablecoins (USDT, USDC, DAI, USDS, and others ranked by market cap). Returns current price, peg deviation %, depeg status (PARITY / MILD_DEPEG / MODERATE_DEPEG / SEVERE_DEPEG), supply trend, and a composite alert level (GREEN / YELLOW / ORANGE / RED). Sourced from DeFiLlama public API — no key required, updates every call. Useful for DeFi risk management, collateral health checks, and pre-trade regime detection.",
       "inputSchema": {
         "type": "object",
         "properties": {
@@ -5745,7 +5760,7 @@
             "type": "integer",
             "minimum": 1,
             "maximum": 10,
-            "description": "Number of results (1\u201310). Default: 5."
+            "description": "Number of results (1–10). Default: 5."
           },
           "accepted_only": {
             "type": "boolean",
@@ -5758,7 +5773,7 @@
     },
     {
       "name": "stock-brief",
-      "description": "US equity snapshot + Limitless prediction market sentiment in one call. Returns current price, intraday change, volume, 52-week range for any NYSE/NASDAQ ticker, plus any active Limitless prediction markets matching the ticker keyword (direction bets, price level markets). Single-call alternative to separate limitless-markets + us-stock-price calls. Free upstream \u2014 no API key required. $0.015/call.",
+      "description": "US equity snapshot + Limitless prediction market sentiment in one call. Returns current price, intraday change, volume, 52-week range for any NYSE/NASDAQ ticker, plus any active Limitless prediction markets matching the ticker keyword (direction bets, price level markets). Single-call alternative to separate limitless-markets + us-stock-price calls. Free upstream — no API key required. $0.015/call.",
       "inputSchema": {
         "type": "object",
         "properties": {
@@ -5768,7 +5783,7 @@
           },
           "market_limit": {
             "type": "integer",
-            "description": "Max Limitless prediction markets to return (1\u201310, default 5). Markets are filtered by ticker keyword.",
+            "description": "Max Limitless prediction markets to return (1–10, default 5). Markets are filtered by ticker keyword.",
             "default": 5,
             "minimum": 1,
             "maximum": 10
@@ -5780,7 +5795,7 @@
     },
     {
       "name": "stock-ohlcv",
-      "description": "Returns historical OHLCV (open/high/low/close/volume) candlestick data for a stock, ETF, or index. Supports intervals from 1-minute to monthly and ranges from 1 day to max history. Use for chart analysis, trend detection, and quantitative backtesting. $0.010/call \u2014 free upstream, no API key.",
+      "description": "Returns historical OHLCV (open/high/low/close/volume) candlestick data for a stock, ETF, or index. Supports intervals from 1-minute to monthly and ranges from 1 day to max history. Use for chart analysis, trend detection, and quantitative backtesting. $0.010/call — free upstream, no API key.",
       "inputSchema": {
         "type": "object",
         "properties": {
@@ -5800,7 +5815,7 @@
               "1wk",
               "1mo"
             ],
-            "description": "Candlestick interval. Intraday ('1m'\u2013'1h') limited to last 60 days. Default: '1d'.",
+            "description": "Candlestick interval. Intraday ('1m'–'1h') limited to last 60 days. Default: '1d'.",
             "default": "1d"
           },
           "range": {
@@ -5823,7 +5838,7 @@
           },
           "limit": {
             "type": "integer",
-            "description": "Max candles to return (1\u2013500, default 60). Applied from most recent.",
+            "description": "Max candles to return (1–500, default 60). Applied from most recent.",
             "minimum": 1,
             "maximum": 500,
             "default": 60
@@ -5835,7 +5850,7 @@
     },
     {
       "name": "stock-price-multi",
-      "description": "Returns current US equity prices for up to 5 tickers in one call \u2014 STRC, AMD, MSTR, SLV, USO, or any NYSE/NASDAQ symbol. Each call returns price, change %, volume, day range, and 52-week range per ticker. Sourced from Yahoo Finance public data, no API key. A single $0.025 call replaces 3-5 separate blockrun.ai queries.",
+      "description": "Returns current US equity prices for up to 5 tickers in one call — STRC, AMD, MSTR, SLV, USO, or any NYSE/NASDAQ symbol. Each call returns price, change %, volume, day range, and 52-week range per ticker. Sourced from Yahoo Finance public data, no API key. A single $0.025 call replaces 3-5 separate blockrun.ai queries.",
       "inputSchema": {
         "type": "object",
         "properties": {
@@ -5854,7 +5869,7 @@
     },
     {
       "name": "stock-screener",
-      "description": "Run a Yahoo Finance predefined equity screen (day_gainers, day_losers, most_actives, undervalued_growth_stocks, undervalued_large_caps, growth_technology_stocks, aggressive_small_caps, small_cap_gainers). Returns up to 50 stocks with price, % change, volume, market cap, P/E (trailing + forward), 52-week high/low, sector, and industry. Top-of-funnel discovery for equity-research pipelines \u2014 pair with peer-benchmarking, analyst-ratings, or earnings-estimates for full analysis.",
+      "description": "Run a Yahoo Finance predefined equity screen (day_gainers, day_losers, most_actives, undervalued_growth_stocks, undervalued_large_caps, growth_technology_stocks, aggressive_small_caps, small_cap_gainers). Returns up to 50 stocks with price, % change, volume, market cap, P/E (trailing + forward), 52-week high/low, sector, and industry. Top-of-funnel discovery for equity-research pipelines — pair with peer-benchmarking, analyst-ratings, or earnings-estimates for full analysis.",
       "inputSchema": {
         "type": "object",
         "properties": {
@@ -5878,7 +5893,7 @@
             "minimum": 1,
             "maximum": 50,
             "default": 25,
-            "description": "Number of results to return (1\u201350, default 25)."
+            "description": "Number of results to return (1–50, default 25)."
           }
         },
         "required": [],
@@ -5958,7 +5973,7 @@
     },
     {
       "name": "timezone",
-      "description": "Timezone intelligence using the IANA database (418 zones) built into Node.js. Returns current local time, UTC offset, DST status, and the long timezone name for any IANA timezone. Can also convert an ISO timestamp to one or more target timezones. Useful for scheduling agents, global operations, and time-aware data enrichment. Zero external API calls \u2014 instant response.",
+      "description": "Timezone intelligence using the IANA database (418 zones) built into Node.js. Returns current local time, UTC offset, DST status, and the long timezone name for any IANA timezone. Can also convert an ISO timestamp to one or more target timezones. Useful for scheduling agents, global operations, and time-aware data enrichment. Zero external API calls — instant response.",
       "inputSchema": {
         "type": "object",
         "properties": {
@@ -6017,7 +6032,7 @@
           },
           "days_ahead": {
             "type": "integer",
-            "description": "How many calendar days ahead to include auctions for (1\u2013365). Default: 30.",
+            "description": "How many calendar days ahead to include auctions for (1–365). Default: 30.",
             "default": 30
           },
           "limit": {
@@ -6108,14 +6123,14 @@
     },
     {
       "name": "tx-explainer",
-      "description": "Given a transaction hash and chain, returns a decoded breakdown: sender, recipient, ETH value transferred, gas used, transaction fee, decoded method name (transfer/approve/swap/deposit/etc.), ERC-20 token transfer details if applicable, block number, block timestamp, and a one-sentence agent-readable summary. Supports Ethereum (default), Base, Polygon, and Arbitrum mainnet. Uses free public JSON-RPC nodes \u2014 no API key required, results in ~1-2s.",
+      "description": "Given a transaction hash and chain, returns a decoded breakdown: sender, recipient, ETH value transferred, gas used, transaction fee, decoded method name (transfer/approve/swap/deposit/etc.), ERC-20 token transfer details if applicable, block number, block timestamp, and a one-sentence agent-readable summary. Supports Ethereum (default), Base, Polygon, and Arbitrum mainnet. Uses free public JSON-RPC nodes — no API key required, results in ~1-2s.",
       "inputSchema": {
         "type": "object",
         "properties": {
           "tx_hash": {
             "default": "0x4b37d2f343608457ca3322accdab2811c707acf4f2c9d4039bf9e9e08f2c5de4",
             "type": "string",
-            "description": "Transaction hash \u2014 0x-prefixed, 66 characters total."
+            "description": "Transaction hash — 0x-prefixed, 66 characters total."
           },
           "chain": {
             "type": "string",
@@ -6134,7 +6149,7 @@
     },
     {
       "name": "tx-intel",
-      "description": "Decode and explain any EVM transaction \u2014 in one x402 payment. Returns: transaction status, type (ETH transfer / ERC20 transfer / swap / approval / contract call), human-readable summary, token transfers parsed from logs, gas cost, block context, and explorer URL. Collapses the observed tx-explainer + onesource/block agent seam (18 wallets, 8-day persistence). Supports Base (default), Ethereum, Arbitrum, Optimism, Polygon, Avalanche, BSC. Free upstream: DRPC + public RPC nodes. $0.006/call \u2014 40% below the x402.ottoai.services tx-explainer.",
+      "description": "Decode and explain any EVM transaction — in one x402 payment. Returns: transaction status, type (ETH transfer / ERC20 transfer / swap / approval / contract call), human-readable summary, token transfers parsed from logs, gas cost, block context, and explorer URL. Collapses the observed tx-explainer + onesource/block agent seam (18 wallets, 8-day persistence). Supports Base (default), Ethereum, Arbitrum, Optimism, Polygon, Avalanche, BSC. Free upstream: DRPC + public RPC nodes. $0.006/call — 40% below the x402.ottoai.services tx-explainer.",
       "inputSchema": {
         "type": "object",
         "properties": {
@@ -6170,7 +6185,7 @@
     },
     {
       "name": "unit-converter",
-      "description": "Converts between 100+ units across 12 categories: length, weight, temperature, volume, speed, area, energy, pressure, data, time, angle, frequency. Handles mixed-case inputs (km, KM, Km all work). Returns the converted value plus all common units in the same category. Zero external calls \u2014 pure math.",
+      "description": "Converts between 100+ units across 12 categories: length, weight, temperature, volume, speed, area, energy, pressure, data, time, angle, frequency. Handles mixed-case inputs (km, KM, Km all work). Returns the converted value plus all common units in the same category. Zero external calls — pure math.",
       "inputSchema": {
         "type": "object",
         "properties": {
@@ -6193,7 +6208,7 @@
     },
     {
       "name": "us-stock-history",
-      "description": "Historical OHLCV bars for any US stock, ETF, or index. TradingView-compatible resolution (D, W, M, 60, 15, 5, 1). Pass Unix timestamps for from/to. $0.005/call \u2014 no API key required. Use us-stock-price for live quotes; equity-technicals for indicators.",
+      "description": "Historical OHLCV bars for any US stock, ETF, or index. TradingView-compatible resolution (D, W, M, 60, 15, 5, 1). Pass Unix timestamps for from/to. $0.005/call — no API key required. Use us-stock-price for live quotes; equity-technicals for indicators.",
       "inputSchema": {
         "type": "object",
         "properties": {
@@ -6231,7 +6246,7 @@
     },
     {
       "name": "us-stock-price",
-      "description": "Returns current US equity price and intraday metrics (change %, volume, day high/low, 52-week range) for any NYSE/NASDAQ ticker. Sourced from Yahoo Finance public data \u2014 no API key, live during market hours. $0.005/call.",
+      "description": "Returns current US equity price and intraday metrics (change %, volume, day high/low, 52-week range) for any NYSE/NASDAQ ticker. Sourced from Yahoo Finance public data — no API key, live during market hours. $0.005/call.",
       "inputSchema": {
         "type": "object",
         "properties": {
@@ -6245,7 +6260,7 @@
     },
     {
       "name": "usgs-earthquake",
-      "description": "Real-time global earthquake events from USGS. Filter by magnitude, depth, location radius, or time window. Returns location, magnitude, depth, PAGER alert, and USGS event URL. Free primary source \u2014 no API key.",
+      "description": "Real-time global earthquake events from USGS. Filter by magnitude, depth, location radius, or time window. Returns location, magnitude, depth, PAGER alert, and USGS event URL. Free primary source — no API key.",
       "inputSchema": {
         "type": "object",
         "properties": {
@@ -6255,11 +6270,11 @@
           },
           "days_back": {
             "type": "number",
-            "description": "How many days of events to fetch (1\u201330). Default 7."
+            "description": "How many days of events to fetch (1–30). Default 7."
           },
           "limit": {
             "type": "number",
-            "description": "Maximum number of events to return (1\u2013100). Default 20."
+            "description": "Maximum number of events to return (1–100). Default 20."
           },
           "latitude": {
             "type": "number",
@@ -6279,7 +6294,7 @@
     },
     {
       "name": "vc-funding-intel",
-      "description": "Private fundraising round tracker via SEC Form D EDGAR filings. Regulation D offerings (Rule 506(b)/506(c)/504) must be reported within 15 days of first sale \u2014 a near-real-time window into VC rounds, PE buyouts, startup raises, hedge fund raises, and real estate syndicates. Mode 'company' (company_name): all Form D filings for that company with amount raised, industry group, exemption type (506b/506c/504), investor count, and state. Mode 'recent': market-wide feed of new Reg D offerings in the last N days (max 90), filterable by minimum raise amount in millions. Free SEC government data, no API key. $0.015/call.",
+      "description": "Private fundraising round tracker via SEC Form D EDGAR filings. Regulation D offerings (Rule 506(b)/506(c)/504) must be reported within 15 days of first sale — a near-real-time window into VC rounds, PE buyouts, startup raises, hedge fund raises, and real estate syndicates. Mode 'company' (company_name): all Form D filings for that company with amount raised, industry group, exemption type (506b/506c/504), investor count, and state. Mode 'recent': market-wide feed of new Reg D offerings in the last N days (max 90), filterable by minimum raise amount in millions. Free SEC government data, no API key. $0.015/call.",
       "inputSchema": {
         "type": "object",
         "properties": {
@@ -6336,7 +6351,7 @@
               "qa"
             ],
             "default": "describe",
-            "description": "Analysis mode: describe (full scene description), ocr (text extraction), chart (data/chart analysis), ui (UI screenshot analysis), identify (object/subject identification), qa (answer a specific question about the image \u2014 requires the 'question' parameter)."
+            "description": "Analysis mode: describe (full scene description), ocr (text extraction), chart (data/chart analysis), ui (UI screenshot analysis), identify (object/subject identification), qa (answer a specific question about the image — requires the 'question' parameter)."
           },
           "question": {
             "type": "string",
@@ -6359,7 +6374,7 @@
     },
     {
       "name": "volatility-brief",
-      "description": "US equity volatility regime brief \u2014 VIX (30-day), VXMT (93-day), VVIX (vol-of-vol), and SKEW index assembled into a single vol dashboard. Outputs term structure (CONTANGO/FLAT/BACKWARDATION), VIX percentile rank, vol regime (CALM/MODERATE/ELEVATED/CRISIS), and composite signal (RISK_OFF/CAUTION/NEUTRAL/COMPLACENCY). Free CBOE delayed data, no API key. Use with market-regime-intel for full macro context.",
+      "description": "US equity volatility regime brief — VIX (30-day), VXMT (93-day), VVIX (vol-of-vol), and SKEW index assembled into a single vol dashboard. Outputs term structure (CONTANGO/FLAT/BACKWARDATION), VIX percentile rank, vol regime (CALM/MODERATE/ELEVATED/CRISIS), and composite signal (RISK_OFF/CAUTION/NEUTRAL/COMPLACENCY). Free CBOE delayed data, no API key. Use with market-regime-intel for full macro context.",
       "inputSchema": {
         "type": "object",
         "properties": {
@@ -6376,7 +6391,7 @@
     },
     {
       "name": "wacc-calculator",
-      "description": "Computes WACC (Weighted Average Cost of Capital) for any US public company using CAPM cost of equity (live 10Y Treasury + beta \u00d7 ERP), after-tax cost of debt (interest expense / total debt), and market-value capital structure weights. The discount rate needed to run a DCF model.",
+      "description": "Computes WACC (Weighted Average Cost of Capital) for any US public company using CAPM cost of equity (live 10Y Treasury + beta × ERP), after-tax cost of debt (interest expense / total debt), and market-value capital structure weights. The discount rate needed to run a DCF model.",
       "inputSchema": {
         "type": "object",
         "properties": {
@@ -6386,7 +6401,7 @@
           },
           "erp": {
             "type": "number",
-            "description": "Equity risk premium assumption in % (default 5.5 \u2014 Damodaran mature market estimate). Override for emerging markets or sector adjustments."
+            "description": "Equity risk premium assumption in % (default 5.5 — Damodaran mature market estimate). Override for emerging markets or sector adjustments."
           }
         },
         "required": []
@@ -6425,13 +6440,13 @@
     },
     {
       "name": "wallet-credit-score",
-      "description": "Composite credit score (0\u2013100) for any EVM wallet. Aggregates Ethereum and Base transaction count, account balance, USDC holdings, and multi-chain footprint into a single trustworthiness score with tier label (PRIME / ESTABLISHED / ACTIVE / SPARSE / DORMANT). Use before sending payments, routing agent transactions, or assessing counterparty risk in automated workflows. Priced 46% below x402node.dev equivalent.",
+      "description": "Composite credit score (0–100) for any EVM wallet. Aggregates Ethereum and Base transaction count, account balance, USDC holdings, and multi-chain footprint into a single trustworthiness score with tier label (PRIME / ESTABLISHED / ACTIVE / SPARSE / DORMANT). Use before sending payments, routing agent transactions, or assessing counterparty risk in automated workflows. Priced 46% below x402node.dev equivalent.",
       "inputSchema": {
         "type": "object",
         "properties": {
           "address": {
             "type": "string",
-            "description": "EVM wallet address (0x\u2026, 40 hex chars). Checksummed or lowercase accepted."
+            "description": "EVM wallet address (0x…, 40 hex chars). Checksummed or lowercase accepted."
           }
         },
         "required": [],
@@ -6440,14 +6455,14 @@
     },
     {
       "name": "wallet-screener",
-      "description": "Risk screening for EVM wallet addresses. Returns a 0\u2013100 risk score and individual flags: sanctions (OFAC/other), phishing activity, cybercrime, money laundering, darkweb transactions, mixer usage, stolen funds, fake KYC, and 12 more categories. Sourced from GoPlusLabs (free, no key, chain_id optional \u2014 defaults to checking cross-chain). Use before sending funds to an unknown address, before accepting a payment, or when validating a counterparty wallet in a DeFi workflow. Distinct from evm-token-security (which screens TOKEN contracts \u2014 this screens WALLETS).",
+      "description": "Risk screening for EVM wallet addresses. Returns a 0–100 risk score and individual flags: sanctions (OFAC/other), phishing activity, cybercrime, money laundering, darkweb transactions, mixer usage, stolen funds, fake KYC, and 12 more categories. Sourced from GoPlusLabs (free, no key, chain_id optional — defaults to checking cross-chain). Use before sending funds to an unknown address, before accepting a payment, or when validating a counterparty wallet in a DeFi workflow. Distinct from evm-token-security (which screens TOKEN contracts — this screens WALLETS).",
       "inputSchema": {
         "type": "object",
         "required": [],
         "properties": {
           "address": {
             "type": "string",
-            "description": "Wallet address to screen (EVM hex address, e.g. '0x1234...'). Does not need to be a contract \u2014 any wallet address."
+            "description": "Wallet address to screen (EVM hex address, e.g. '0x1234...'). Does not need to be a contract — any wallet address."
           },
           "chain_id": {
             "type": "string",
@@ -6482,7 +6497,7 @@
     },
     {
       "name": "weather",
-      "description": "Current weather conditions and 7-day daily forecast for any location worldwide. Input a city name, coordinates, or address. Returns temperature (\u00b0C), humidity, wind speed, precipitation, weather code, and a forecast with high/low temps and precipitation totals. Free upstream: Open-Meteo (no API key, no rate limits). Useful for DeFi agents tracking energy markets (cold \u2192 heating demand \u2192 gas prices), agricultural commodity prediction markets, or natural disaster risk assessment for on-chain insurance.",
+      "description": "Current weather conditions and 7-day daily forecast for any location worldwide. Input a city name, coordinates, or address. Returns temperature (°C), humidity, wind speed, precipitation, weather code, and a forecast with high/low temps and precipitation totals. Free upstream: Open-Meteo (no API key, no rate limits). Useful for DeFi agents tracking energy markets (cold → heating demand → gas prices), agricultural commodity prediction markets, or natural disaster risk assessment for on-chain insurance.",
       "inputSchema": {
         "type": "object",
         "properties": {
@@ -6500,7 +6515,7 @@
           },
           "forecast_days": {
             "type": "integer",
-            "description": "Number of forecast days (1\u201316). Default 7.",
+            "description": "Number of forecast days (1–16). Default 7.",
             "default": 7,
             "minimum": 1,
             "maximum": 16
@@ -6511,7 +6526,7 @@
     },
     {
       "name": "weather-alerts",
-      "description": "Active NOAA weather alerts for any US state \u2014 tornado warnings, flash flood watches, hurricane warnings, blizzard advisories, heat alerts, and 80+ other NWS event types. Real-time data from api.weather.gov; no API key. Filterable by state, event type, or severity. Returns event, severity, certainty, urgency, affected areas, onset/expiry, headline, and protective action instructions. Complements weather.js (forecasts) \u2014 this cap covers active emergencies.",
+      "description": "Active NOAA weather alerts for any US state — tornado warnings, flash flood watches, hurricane warnings, blizzard advisories, heat alerts, and 80+ other NWS event types. Real-time data from api.weather.gov; no API key. Filterable by state, event type, or severity. Returns event, severity, certainty, urgency, affected areas, onset/expiry, headline, and protective action instructions. Complements weather.js (forecasts) — this cap covers active emergencies.",
       "inputSchema": {
         "type": "object",
         "properties": {
@@ -6521,7 +6536,7 @@
           },
           "event": {
             "type": "string",
-            "description": "Filter by event type (e.g. 'Tornado Warning', 'Flash Flood Watch', 'Hurricane Warning'). Partial matches not supported \u2014 use exact NWS event names."
+            "description": "Filter by event type (e.g. 'Tornado Warning', 'Flash Flood Watch', 'Hurricane Warning'). Partial matches not supported — use exact NWS event names."
           },
           "severity": {
             "type": "string",
@@ -6535,7 +6550,7 @@
           },
           "limit": {
             "type": "integer",
-            "description": "Max alerts to return (1\u2013100, default 25). Sorted by severity descending.",
+            "description": "Max alerts to return (1–100, default 25). Sorted by severity descending.",
             "minimum": 1,
             "maximum": 100,
             "default": 25
@@ -6571,7 +6586,7 @@
               "metric",
               "imperial"
             ],
-            "description": "Unit system. 'metric' = \u00b0C / mm / km/h (default). 'imperial' = \u00b0F / inch / mph."
+            "description": "Unit system. 'metric' = °C / mm / km/h (default). 'imperial' = °F / inch / mph."
           }
         },
         "required": []
@@ -6593,7 +6608,7 @@
     },
     {
       "name": "web-company-intel",
-      "description": "Extract structured company intelligence from any public website. Returns company name, description, logo, emails, phones, address, founded date, social links (Twitter/LinkedIn/GitHub/etc.), and raw OpenGraph + schema.org/Organization data. Pure HTML extraction \u2014 no external APIs. $0.003 hedge against orbisapi web-scrape-company at $0.005.",
+      "description": "Extract structured company intelligence from any public website. Returns company name, description, logo, emails, phones, address, founded date, social links (Twitter/LinkedIn/GitHub/etc.), and raw OpenGraph + schema.org/Organization data. Pure HTML extraction — no external APIs. $0.003 hedge against orbisapi web-scrape-company at $0.005.",
       "inputSchema": {
         "type": "object",
         "properties": {
@@ -6650,14 +6665,14 @@
           },
           "activity_limit": {
             "type": "integer",
-            "description": "Max recent trades to return (1\u201350, default 10).",
+            "description": "Max recent trades to return (1–50, default 10).",
             "default": 10,
             "minimum": 1,
             "maximum": 50
           },
           "positions_limit": {
             "type": "integer",
-            "description": "Max open positions to return (1\u201350, default 10).",
+            "description": "Max open positions to return (1–50, default 10).",
             "default": 10,
             "minimum": 1,
             "maximum": 50
@@ -6692,7 +6707,7 @@
             "default": 3,
             "minimum": 1,
             "maximum": 8,
-            "description": "Number of articles to return when exact=false (1\u20138). Default: 3."
+            "description": "Number of articles to return when exact=false (1–8). Default: 3."
           },
           "lang": {
             "type": "string",
@@ -6706,7 +6721,7 @@
     },
     {
       "name": "world-bank-data",
-      "description": "World Bank open data \u2014 1600+ development indicators for 200+ countries. Returns most-recent values and 5-year trend for any indicator by country. Covers GDP, population, inflation, unemployment, FDI, debt, exports, CO\u2082, life expectancy, Gini, internet penetration, ease of doing business, and more. Accepts ticker-style aliases (gdp, inflation, unemployment) or full WB indicator codes. Sourced from api.worldbank.org \u2014 free, no key required. Use for country risk, macro comparisons, policy analysis, and development economics.",
+      "description": "World Bank open data — 1600+ development indicators for 200+ countries. Returns most-recent values and 5-year trend for any indicator by country. Covers GDP, population, inflation, unemployment, FDI, debt, exports, CO₂, life expectancy, Gini, internet penetration, ease of doing business, and more. Accepts ticker-style aliases (gdp, inflation, unemployment) or full WB indicator codes. Sourced from api.worldbank.org — free, no key required. Use for country risk, macro comparisons, policy analysis, and development economics.",
       "inputSchema": {
         "type": "object",
         "properties": {
@@ -6720,7 +6735,7 @@
           },
           "years": {
             "type": "integer",
-            "description": "Number of most-recent years to return (1\u201310). Default: 5.",
+            "description": "Number of most-recent years to return (1–10). Default: 5.",
             "default": 5,
             "minimum": 1,
             "maximum": 10
@@ -6732,13 +6747,13 @@
     },
     {
       "name": "x402-endpoint-intel",
-      "description": "Market intelligence for any x402 endpoint or operator wallet. Returns settlement volume, unique payer count, price range, reputation tier, activity window, and endpoint description \u2014 drawn from 4.1M+ Base mainnet settlements in the Stall's proprietary on-chain dataset. Use before routing agent spend, vetting a counterparty operator, or benchmarking competitor pricing. No external API. Covers 80,000+ operators across 10+ days of live traffic.",
+      "description": "Market intelligence for any x402 endpoint or operator wallet. Returns settlement volume, unique payer count, price range, reputation tier, activity window, and endpoint description — drawn from 4.1M+ Base mainnet settlements in the Stall's proprietary on-chain dataset. Use before routing agent spend, vetting a counterparty operator, or benchmarking competitor pricing. No external API. Covers 80,000+ operators across 10+ days of live traffic.",
       "inputSchema": {
         "type": "object",
         "properties": {
           "target": {
             "type": "string",
-            "description": "Resource URL (https://\u2026) or operator wallet address (0x\u202640 hex chars). Type is auto-detected."
+            "description": "Resource URL (https://…) or operator wallet address (0x…40 hex chars). Type is auto-detected."
           }
         },
         "required": [],
@@ -6767,7 +6782,7 @@
           },
           "min_apy": {
             "type": "number",
-            "description": "Minimum APY percentage to include (based on 30-day mean). Default 0. E.g. 5 returns pools yielding \u22655% annualized.",
+            "description": "Minimum APY percentage to include (based on 30-day mean). Default 0. E.g. 5 returns pools yielding ≥5% annualized.",
             "default": 0,
             "minimum": 0
           },
@@ -6787,7 +6802,7 @@
           },
           "limit": {
             "type": "integer",
-            "description": "Number of pools to return (1\u201350, default 20).",
+            "description": "Number of pools to return (1–50, default 20).",
             "default": 20,
             "minimum": 1,
             "maximum": 50
@@ -6881,7 +6896,7 @@
           },
           "limit": {
             "type": "integer",
-            "description": "Max videos to return (1\u201350, default 25).",
+            "description": "Max videos to return (1–50, default 25).",
             "minimum": 1,
             "maximum": 50
           }
@@ -6904,7 +6919,7 @@
           },
           "max_results": {
             "type": "integer",
-            "description": "Number of results to return (1\u201310, default 5).",
+            "description": "Number of results to return (1–10, default 5).",
             "minimum": 1,
             "maximum": 10
           }
@@ -6940,7 +6955,7 @@
     },
     {
       "name": "options-flow-unusual",
-      "description": "Detects unusual options activity via CBOE delayed data (free, no auth). Computes volume-to-open-interest ratio for every contract within a DTE window \u2014 ratios >= 5x flag institutional sweep orders. Returns top unusual calls and puts by ratio, top flows by raw volume, aggregate put/call ratio, IV30, and a BULLISH_SWEEP/BEARISH_SWEEP/CALL_HEAVY/PUT_HEAVY/NEUTRAL interpretation.",
+      "description": "Detects unusual options activity via CBOE delayed data (free, no auth). Computes volume-to-open-interest ratio for every contract within a DTE window — ratios >= 5x flag institutional sweep orders. Returns top unusual calls and puts by ratio, top flows by raw volume, aggregate put/call ratio, IV30, and a BULLISH_SWEEP/BEARISH_SWEEP/CALL_HEAVY/PUT_HEAVY/NEUTRAL interpretation.",
       "inputSchema": {
         "type": "object",
         "properties": {
@@ -7016,5 +7031,5 @@
       }
     }
   ],
-  "version": "4.76.0"
+  "version": "4.76.1"
 }
