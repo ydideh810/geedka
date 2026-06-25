@@ -1,7 +1,7 @@
 {
   "name": "the-stall",
-  "version": "4.76.1",
-  "description": "265 pay-per-call AI data tools via MCP and x402 — no API keys required. iOS App Store competitive intelligence (search+lookup+top-charts, free iTunes API), outstanding short interest % float + days-to-cover + squeeze risk, SEC insider trading Form 4, institutional fund holdings, activist investors 13D/13G, M&A intel, VC funding Form D, equity fundamentals, options flow unusual sweep detection, earnings quality Beneish M-Score, YouTube niche analysis, on-chain address intelligence, and 255+ more. USDC on Base.",
+  "version": "4.77.0",
+  "description": "265 pay-per-call AI data tools via MCP and x402 \u2014 no API keys required. iOS App Store competitive intelligence (search+lookup+top-charts, free iTunes API), outstanding short interest % float + days-to-cover + squeeze risk, SEC insider trading Form 4, institutional fund holdings, activist investors 13D/13G, M&A intel, VC funding Form D, equity fundamentals, options flow unusual sweep detection, earnings quality Beneish M-Score, YouTube niche analysis, on-chain address intelligence, and 255+ more. USDC on Base.",
   "type": "module",
   "main": "src/server.js",
   "scripts": {
