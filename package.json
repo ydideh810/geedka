@@ -1,6 +1,6 @@
 {
   "name": "the-stall",
-  "version": "4.67.0",
+  "version": "4.67.1",
   "description": "247 pay-per-call AI data tools via MCP and x402 \u2014 no API keys required. Historical weather (ERA5/1940-present), Stack Overflow, aviation weather, YouTube metadata, historical FX rates, Wayback Machine, CVE intel, US stocks, DeFi yields, global news, and 202+ more. USDC on Base.",
   "type": "module",
   "main": "src/server.js",

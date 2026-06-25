@@ -6310,7 +6310,7 @@
     },
     {
       "name": "vc-funding-intel",
-      "description": "Private fundraising round tracker via SEC Form D EDGAR filings. Regulation D (Rule 506(b)/506(c)/504) offerings must be reported within 15 days of first sale — a near-real-time window into VC rounds, PE buyouts, startup raises, hedge fund raises, and real estate syndicates. Mode 'company' (company_name): all Form D filings for that company with amount raised, industry group, exemption type (506b/506c/504), investor count, and state. Mode 'recent': market-wide feed of new Reg D offerings in the last N days (max 90), filterable by minimum raise amount in millions. Free SEC government data, no API key. $0.015/call.",
+      "description": "Private fundraising round tracker via SEC Form D EDGAR filings. Regulation D (Rule 506(b)/506(c)/504) offerings must be reported within 15 days of first sale \u2014 a near-real-time window into VC rounds, PE buyouts, startup raises, hedge fund raises, and real estate syndicates. Mode 'company' (company_name): all Form D filings for that company with amount raised, industry group, exemption type (506b/506c/504), investor count, and state. Mode 'recent': market-wide feed of new Reg D offerings in the last N days (max 90), filterable by minimum raise amount in millions. Free SEC government data, no API key. $0.015/call.",
       "inputSchema": {
         "type": "object",
         "properties": {
@@ -6320,7 +6320,10 @@
           },
           "mode": {
             "type": "string",
-            "enum": ["company", "recent"],
+            "enum": [
+              "company",
+              "recent"
+            ],
             "description": "'company' (default when company_name given): Form D filings for that company with full detail. 'recent': market-wide Form D feed in last N days."
           },
           "days": {
@@ -6343,6 +6346,37 @@
         },
         "required": [],
         "additionalProperties": false
+      }
+    },
+    {
+      "name": "patent-intel",
+      "description": "USPTO patent intelligence for any company or keyword. Mode 'company' (ticker or company name): recent granted patents assigned to that company \u2014 accepts US stock ticker (resolved via SEC EDGAR) or free-form assignee name. Returns title, abstract excerpt, grant date, filing date, CPC technology section labels (e.g., 'H - Electricity', 'G - Physics'), CPC group codes, inventor names, and a Google Patents link. Mode 'search' (query): full-text keyword search across all USPTO patent titles and abstracts \u2014 useful for finding who is innovating in a technology area. Covers all US granted patents from 1976 to within ~2 weeks of present. Data source: USPTO PatentsView API (public domain, no API key). $0.008/call.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "company": {
+            "type": "string",
+            "description": "US stock ticker (e.g., AAPL, NVDA, MSFT) or company/assignee name for patent search. Used in mode=company."
+          },
+          "query": {
+            "type": "string",
+            "description": "Keyword search string for mode=search (searches patent titles and abstracts)."
+          },
+          "mode": {
+            "type": "string",
+            "enum": [
+              "company",
+              "search"
+            ],
+            "description": "'company' (default when company is given): recent patents by assignee name. 'search': keyword search across all US patents."
+          },
+          "limit": {
+            "type": "integer",
+            "description": "Max patents to return (default 15, max 50).",
+            "minimum": 1,
+            "maximum": 50
+          }
+        }
       }
     }
   ]
