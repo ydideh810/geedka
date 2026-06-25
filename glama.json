@@ -1,7 +1,7 @@
 {
   "$schema": "https://glama.ai/mcp/schemas/server.json",
   "name": "The Stall",
-  "description": "258 pay-per-call AI data tools via MCP + x402 \u2014 no API keys, no accounts. Finance: US/global equities, options chains, earnings calendars, analyst ratings, SEC/EDGAR filings, congressional trades, macro indicators, private fundraising (Form D). Crypto: DeFi yields, wallet risk scoring, token security, gas prices, on-chain intel, prediction markets. Research & Intel: arXiv papers, news synthesis, company intelligence, OSINT, weather, aviation, historical climate (ERA5), and 200+ more. Pay USDC on Base (x402) or Stripe prepaid credits. Remote MCP: https://the-stall.intuitek.ai/mcp.",
+  "description": "261 pay-per-call AI data tools via MCP + x402 \u2014 no API keys, no accounts. Finance: SEC Form 4 insider trades (open-market buys, net sentiment), 13D/13G activist holders, M&A tender offers, Form D VC fundraising, earnings quality Beneish M-Score, equity fundamentals, options chains, macro indicators. Crypto: DeFi yields, Base on-chain address intelligence, wallet risk, token security. Research: arXiv, news synthesis, OSINT, YouTube niche analysis, TV shows, weather, aviation, and 230+ more. Pay USDC on Base (x402) or Stripe credits. Remote MCP: https://the-stall.intuitek.ai/mcp.",
   "maintainers": [
     "thebrierfox"
   ],

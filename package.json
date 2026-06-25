@@ -1,7 +1,7 @@
 {
   "name": "the-stall",
-  "version": "4.71.0",
-  "description": "257 pay-per-call AI data tools via MCP and x402 — no API keys required. TV show intel (TVMaze 90k+ shows, cast, episodes, schedules), food/nutrition (Open Food Facts 3M+ products), nonprofit 990 financials, GitHub repo intel, USPTO patents, government contracts, VC funding, US stocks, DeFi yields, prediction markets, and 249+ more. USDC on Base.",
+  "version": "4.72.0",
+  "description": "261 pay-per-call AI data tools via MCP and x402 — no API keys required. SEC insider trading Form 4 (open-market buys + net sentiment), activist investors 13D/13G, M&A intel, VC funding Form D, equity fundamentals, earnings quality Beneish M-Score, YouTube niche analysis, on-chain address intelligence, TV show intel, nonprofit 990s, and 251+ more. USDC on Base.",
   "type": "module",
   "main": "src/server.js",
   "scripts": {
