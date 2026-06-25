@@ -6951,6 +6951,23 @@
         },
         "additionalProperties": false
       }
+    },
+    {
+      "name": "short-interest-intel",
+      "description": "Outstanding short interest intelligence for US equities: shares sold short, short % of float, days-to-cover (covering pressure), and last FINRA report date. Includes heuristic squeeze risk scoring: EXTREME/HIGH/MODERATE/LOW based on float short % and days-to-cover. Closes the equity ownership trifecta alongside institutional-ownership-intel and insider-trading-intel. Distinct from short-volume-intel (daily FINRA trading volume). Source: Yahoo Finance, no API key.",
+      "inputSchema": {
+        "type": "object",
+        "required": [
+          "ticker"
+        ],
+        "properties": {
+          "ticker": {
+            "type": "string",
+            "description": "US equity ticker symbol (e.g. AAPL, TSLA, GME). Case-insensitive."
+          }
+        },
+        "additionalProperties": false
+      }
     }
   ],
   "version": "4.74.0"

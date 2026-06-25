@@ -1,7 +1,7 @@
 {
   "name": "the-stall",
-  "version": "4.74.0",
-  "description": "263 pay-per-call AI data tools via MCP and x402 — no API keys required. SEC insider trading Form 4 (open-market buys + net sentiment), institutional fund holdings (top holders, % float, concentration signal), activist investors 13D/13G, M&A intel, VC funding Form D, equity fundamentals, options flow unusual sweep detection, earnings quality Beneish M-Score, YouTube niche analysis, on-chain address intelligence, TV show intel, nonprofit 990s, and 253+ more. USDC on Base.",
+  "version": "4.75.0",
+  "description": "264 pay-per-call AI data tools via MCP and x402 — no API keys required. Outstanding short interest % float + days-to-cover + squeeze risk (EXTREME/HIGH/MODERATE/LOW), SEC insider trading Form 4 (open-market buys + net sentiment), institutional fund holdings (top holders, % float, concentration signal), activist investors 13D/13G, M&A intel, VC funding Form D, equity fundamentals, options flow unusual sweep detection, earnings quality Beneish M-Score, YouTube niche analysis, on-chain address intelligence, and 254+ more. USDC on Base.",
   "type": "module",
   "main": "src/server.js",
   "scripts": {
