@@ -6477,6 +6477,10 @@
         },
         "additionalProperties": false
       }
+    },
+    {
+      "name": "nonprofit-intel",
+      "description": "Nonprofit financial intelligence from IRS Form 990 filings via ProPublica Nonprofit Explorer. Search by name, look up by EIN for full financial history (revenue/expenses/assets/officer compensation/expense ratios up to 10 years), or browse by NTEE sector. Covers 2M+ US nonprofits. Free public IRS data. $0.008/call."
     }
   ]
 }
