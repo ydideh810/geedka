@@ -1,6 +1,6 @@
 {
   "name": "the-stall",
-  "version": "4.68.5",
+  "version": "4.69.0",
   "description": "257 pay-per-call AI data tools via MCP and x402 — no API keys required. TV show intel (TVMaze 90k+ shows, cast, episodes, schedules), food/nutrition (Open Food Facts 3M+ products), nonprofit 990 financials, GitHub repo intel, USPTO patents, government contracts, VC funding, US stocks, DeFi yields, prediction markets, and 249+ more. USDC on Base.",
   "type": "module",
   "main": "src/server.js",
