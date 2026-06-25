@@ -6378,6 +6378,49 @@
           }
         }
       }
+    },
+    {
+      "name": "government-contract-intel",
+      "description": "Federal government contract award tracker via USASpending.gov (no API key). The U.S. government awards $700B+ annually \u2014 this cap surfaces who wins the money, how much, and for what. Mode company (company_name): all federal contracts awarded to a named company \u2014 which agencies, what amounts, optional last-N-days filter. Essential for defense/aerospace (Lockheed, Raytheon, Northrop), tech government contractors (Palantir, Leidos, SAIC, Booz Allen), and healthcare (McKesson, UnitedHealth). Mode recent (days, min_amount_millions): market-wide feed of largest new awards in the last N days, optional floor filter. Mode agency (agency_name, days): what contracts has a federal agency (DoD, HHS, NASA, DHS) awarded recently and to whom. All data from FPDS-NG via USASpending.gov, updated daily. $0.015/call.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "mode": {
+            "type": "string",
+            "enum": [
+              "company",
+              "recent",
+              "agency"
+            ],
+            "description": "'company': contracts awarded to a named company. 'recent': market-wide largest new awards. 'agency': contracts awarded by a federal agency. Default: 'company' if company_name provided, else 'recent'."
+          },
+          "company_name": {
+            "type": "string",
+            "description": "Company or contractor name to search (partial match OK). Examples: Lockheed Martin, Palantir, Raytheon, General Dynamics, Leidos."
+          },
+          "agency_name": {
+            "type": "string",
+            "description": "Federal agency name for agency mode. Official USASpending names: Department of Defense, Department of Health and Human Services, NASA, Department of Homeland Security."
+          },
+          "days": {
+            "type": "integer",
+            "description": "Calendar days back to search (default 90, max 180).",
+            "minimum": 1,
+            "maximum": 180
+          },
+          "min_amount_millions": {
+            "type": "number",
+            "description": "For mode=recent: only return awards >= this amount in USD millions (e.g., 100 = $100M+). Default 0 = no filter.",
+            "minimum": 0
+          },
+          "limit": {
+            "type": "integer",
+            "description": "Max results to return (default 25, max 100).",
+            "minimum": 1,
+            "maximum": 100
+          }
+        }
+      }
     }
   ]
 }
