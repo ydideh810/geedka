@@ -1910,6 +1910,22 @@
       }
     },
     {
+      "name": "earnings-quality",
+      "description": "Earnings quality and manipulation-risk screen for US stocks. Beneish M-Score (8-component detector; M > -1.78 = manipulation risk), Sloan Accrual Ratio, cash conversion ratio, AR vs revenue divergence. Returns HIGH/MEDIUM/LOW verdict + risk flags. Chains after equity-fundamentals and income-statements. $0.020/call.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "ticker": {
+            "type": "string",
+            "description": "US stock ticker symbol (e.g. AAPL, MSFT, ENRN). Case-insensitive."
+          }
+        },
+        "required": [
+          "ticker"
+        ]
+      }
+    },
+    {
       "name": "earnings-reaction",
       "description": "Stock price reaction to past earnings events for any US equity. Returns report-day and next-day price move % for each recent quarterly earnings date, paired with EPS beat/miss magnitude and reaction_class (beat_and_up, beat_selloff, miss_and_down, miss_rally, neutral). Surfaces contrarian signals where price moved opposite to the EPS surprise. Pairs with earnings-calendar and earnings-surprises. Yahoo Finance, no API key. $0.025/call.",
       "inputSchema": {
@@ -2126,6 +2142,22 @@
           }
         },
         "required": []
+      }
+    },
+    {
+      "name": "equity-quality-screen",
+      "description": "Piotroski F-Score (0-9 quality composite: profitability+leverage+efficiency trends) and Altman Z-Score (distress predictor) for any US public company. One call replaces manual assembly of 3 years of annual statements. $0.025/call.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "ticker": {
+            "type": "string",
+            "description": "US stock ticker symbol (e.g. AAPL, NVDA, MSFT). Case-insensitive."
+          }
+        },
+        "required": [
+          "ticker"
+        ]
       }
     },
     {
@@ -3020,6 +3052,53 @@
         },
         "required": [],
         "additionalProperties": false
+      }
+    },
+    {
+      "name": "huggingface-intel",
+      "description": "HuggingFace Hub intelligence: search AI models and datasets, get detailed model metadata, find trending models by task. Returns downloads, likes, license, pipeline task, languages, and tags. Actions: search_models, model_info, trending, search_datasets. Use to evaluate open-source models (Llama vs Qwen vs Mistral vs Whisper) or discover fine-tuning datasets. Free upstream: HuggingFace public API. $0.010/call.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "action": {
+            "type": "string",
+            "enum": [
+              "search_models",
+              "model_info",
+              "trending",
+              "search_datasets"
+            ],
+            "description": "Action: search_models, model_info (full metadata by ID), trending (top liked), search_datasets. Default: trending."
+          },
+          "query": {
+            "type": "string",
+            "description": "Search keyword for search_models or search_datasets (e.g. 'bert embedding', 'llama instruction')."
+          },
+          "model_id": {
+            "type": "string",
+            "description": "Full HuggingFace model ID for model_info (e.g. 'meta-llama/Llama-3-8B-Instruct', 'openai/whisper-large-v3')."
+          },
+          "task": {
+            "type": "string",
+            "description": "Filter by pipeline task (e.g. 'text-generation', 'feature-extraction', 'image-classification', 'automatic-speech-recognition'). Omit for all tasks."
+          },
+          "library": {
+            "type": "string",
+            "description": "Filter models by library (e.g. 'transformers', 'diffusers', 'sentence-transformers', 'peft'). Omit for all libraries."
+          },
+          "sort": {
+            "type": "string",
+            "enum": [
+              "downloads",
+              "likes"
+            ],
+            "description": "Sort: downloads (most widely used, default) or likes (community buzz / trending)."
+          },
+          "limit": {
+            "type": "number",
+            "description": "Max results (default 10 for search/datasets, 15 for trending, max 30)."
+          }
+        }
       }
     },
     {
@@ -4374,6 +4453,45 @@
             "type": "number",
             "description": "Minimum 24h fees in USD to include a protocol (e.g. 10000 for $10K+). Filters out noise.",
             "default": 1000
+          }
+        }
+      }
+    },
+    {
+      "name": "pypi-intel",
+      "description": "Python package intelligence from PyPI and pypistats.org. Returns metadata (author, license, dev status, dependencies, Python version support, recent versions, known vulnerabilities) plus download velocity (last day/week/month) and full version history. Compare up to 4 packages side-by-side. Actions: package_info, download_stats, version_history, compare. No API key required. $0.008/call.",
+      "inputSchema": {
+        "type": "object",
+        "required": [],
+        "properties": {
+          "action": {
+            "type": "string",
+            "enum": [
+              "package_info",
+              "download_stats",
+              "version_history",
+              "compare"
+            ],
+            "description": "Action to perform. 'package_info': full metadata for one package. 'download_stats': last day/week/month download counts. 'version_history': all published versions with release dates. 'compare': side-by-side comparison of 2-4 packages. Default: 'package_info'."
+          },
+          "package": {
+            "type": "string",
+            "description": "PyPI package name (e.g. 'requests', 'numpy', 'fastapi', 'langchain'). Required for package_info, download_stats, version_history."
+          },
+          "packages": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "List of 2-4 package names for the 'compare' action (e.g. ['aiohttp', 'httpx', 'requests'])."
+          },
+          "limit": {
+            "type": "number",
+            "description": "Max versions to return in version_history (default 20, max 50)."
+          },
+          "include_downloads": {
+            "type": "boolean",
+            "description": "Whether to include download stats in compare action (default true)."
           }
         }
       }
@@ -6081,85 +6199,6 @@
           }
         },
         "required": []
-      }
-    },
-    {
-      "name": "equity-quality-screen",
-      "description": "Piotroski F-Score (0-9 quality composite: profitability+leverage+efficiency trends) and Altman Z-Score (distress predictor) for any US public company. One call replaces manual assembly of 3 years of annual statements. $0.025/call.",
-      "inputSchema": {
-        "type": "object",
-        "properties": {
-          "ticker": {
-            "type": "string",
-            "description": "US stock ticker symbol (e.g. AAPL, NVDA, MSFT). Case-insensitive."
-          }
-        },
-        "required": [
-          "ticker"
-        ]
-      }
-    },
-    {
-      "name": "huggingface-intel",
-      "description": "HuggingFace Hub intelligence: search AI models and datasets, get detailed model metadata, find trending models by task. Returns downloads, likes, license, pipeline task, languages, and tags. Actions: search_models, model_info, trending, search_datasets. Use to evaluate open-source models (Llama vs Qwen vs Mistral vs Whisper) or discover fine-tuning datasets. Free upstream: HuggingFace public API. $0.010/call.",
-      "inputSchema": {
-        "type": "object",
-        "properties": {
-          "action": {
-            "type": "string",
-            "enum": [
-              "search_models",
-              "model_info",
-              "trending",
-              "search_datasets"
-            ],
-            "description": "Action: search_models, model_info (full metadata by ID), trending (top liked), search_datasets. Default: trending."
-          },
-          "query": {
-            "type": "string",
-            "description": "Search keyword for search_models or search_datasets (e.g. 'bert embedding', 'llama instruction')."
-          },
-          "model_id": {
-            "type": "string",
-            "description": "Full HuggingFace model ID for model_info (e.g. 'meta-llama/Llama-3-8B-Instruct', 'openai/whisper-large-v3')."
-          },
-          "task": {
-            "type": "string",
-            "description": "Filter by pipeline task (e.g. 'text-generation', 'feature-extraction', 'image-classification', 'automatic-speech-recognition'). Omit for all tasks."
-          },
-          "library": {
-            "type": "string",
-            "description": "Filter models by library (e.g. 'transformers', 'diffusers', 'sentence-transformers', 'peft'). Omit for all libraries."
-          },
-          "sort": {
-            "type": "string",
-            "enum": [
-              "downloads",
-              "likes"
-            ],
-            "description": "Sort: downloads (most widely used, default) or likes (community buzz / trending)."
-          },
-          "limit": {
-            "type": "number",
-            "description": "Max results (default 10 for search/datasets, 15 for trending, max 30)."
-          }
-        }
-      }
-    },
-    {
-      "name": "earnings-quality",
-      "description": "Earnings quality and manipulation-risk screen for US stocks. Beneish M-Score (8-component detector; M > -1.78 = manipulation risk), Sloan Accrual Ratio, cash conversion ratio, AR vs revenue divergence. Returns HIGH/MEDIUM/LOW verdict + risk flags. Chains after equity-fundamentals and income-statements. $0.020/call.",
-      "inputSchema": {
-        "type": "object",
-        "properties": {
-          "ticker": {
-            "type": "string",
-            "description": "US stock ticker symbol (e.g. AAPL, MSFT, ENRN). Case-insensitive."
-          }
-        },
-        "required": [
-          "ticker"
-        ]
       }
     }
   ]
