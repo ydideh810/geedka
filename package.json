@@ -1,7 +1,7 @@
 {
   "name": "the-stall",
-  "version": "4.68.1",
-  "description": "252 pay-per-call AI data tools via MCP and x402 — no API keys required. Nonprofit 990 financials, GitHub repo intel, USPTO patents, government contracts, VC funding, M&A filings, US stocks, DeFi yields, prediction markets, global news, and 240+ more. USDC on Base.",
+  "version": "4.68.2",
+  "description": "252 pay-per-call AI data tools via MCP and x402 \u2014 no API keys required. Nonprofit 990 financials, GitHub repo intel, USPTO patents, government contracts, VC funding, M&A filings, US stocks, DeFi yields, prediction markets, global news, and 240+ more. USDC on Base.",
   "type": "module",
   "main": "src/server.js",
   "scripts": {

@@ -1,7 +1,7 @@
 {
   "$schema": "https://glama.ai/mcp/schemas/server.json",
   "name": "The Stall",
-  "description": "248 pay-per-call AI data tools via MCP + x402 — no API keys, no accounts. Finance: US/global equities, options chains, earnings calendars, analyst ratings, SEC/EDGAR filings, congressional trades, macro indicators, private fundraising (Form D). Crypto: DeFi yields, wallet risk scoring, token security, gas prices, on-chain intel, prediction markets. Research & Intel: arXiv papers, news synthesis, company intelligence, OSINT, weather, aviation, historical climate (ERA5), and 200+ more. Pay USDC on Base (x402) or Stripe prepaid credits. Remote MCP: https://the-stall.intuitek.ai/mcp.",
+  "description": "254 pay-per-call AI data tools via MCP + x402 — no API keys, no accounts. Finance: US/global equities, options chains, earnings calendars, analyst ratings, SEC/EDGAR filings, congressional trades, macro indicators, private fundraising (Form D). Crypto: DeFi yields, wallet risk scoring, token security, gas prices, on-chain intel, prediction markets. Research & Intel: arXiv papers, news synthesis, company intelligence, OSINT, weather, aviation, historical climate (ERA5), and 200+ more. Pay USDC on Base (x402) or Stripe prepaid credits. Remote MCP: https://the-stall.intuitek.ai/mcp.",
   "maintainers": [
     "thebrierfox"
   ],
@@ -2474,6 +2474,10 @@
       }
     },
     {
+      "name": "fdic-bank-intel",
+      "description": "FDIC BankFind Suite: US bank financial health, regulatory capital ratios, and historical bank failure data. search mode: find institutions by name with asset size and state. profile mode: quarterly Call Report data — ROA, ROE, risk-based capital ratio, net income, loans, deposits (input: bank name or FDIC certificate number). failures mode: recent/historical bank closures with fail date, assets, resolution type. Covers 10,000+ institutions and 4,100+ failures since 1934. No API key."
+    },
+    {
       "name": "fec-donor-intel",
       "description": "FEC campaign finance lookup — search all US federal political donations by individual or organization name. Returns recent contributions (sorted newest-first) with committee names, donation amounts, election cycles, employer/occupation, and aggregate totals (total donated, number of contributions, committees supported). Official FEC Open Data, updated daily. Use for executive due diligence, political affiliation screening, ESG analysis, or investigative research.",
       "inputSchema": {
@@ -2842,6 +2846,62 @@
       }
     },
     {
+      "name": "github-intel",
+      "description": "GitHub repository intelligence: stars, forks, contributors, releases, open issues, and weekly commit activity. Compare up to 4 repos side-by-side or search GitHub for repos by keyword, language, and topic. Use to evaluate library health before adopting a dependency, find the top maintainers of a project, track release cadence, or benchmark competing frameworks. Authenticated (5000 req/hr). Actions: repo | contributors | releases | issues | commit_activity | compare | search.",
+      "inputSchema": {
+        "type": "object",
+        "required": [
+          "action"
+        ],
+        "properties": {
+          "action": {
+            "type": "string",
+            "enum": [
+              "repo",
+              "contributors",
+              "releases",
+              "issues",
+              "commit_activity",
+              "compare",
+              "search"
+            ],
+            "description": "repo: full metadata. contributors: top 30 committers. releases: latest 10 releases + download counts. issues: 10 recent open issues. commit_activity: 52-week weekly commit trend. compare: side-by-side metrics for ≤4 repos. search: find repos by keyword."
+          },
+          "repo": {
+            "type": "string",
+            "description": "Repository in owner/repo format (e.g. 'facebook/react', 'anthropics/claude-code'). Full GitHub URLs also accepted. Required for repo, contributors, releases, issues, commit_activity."
+          },
+          "repos": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "maxItems": 4,
+            "description": "Array of owner/repo strings for compare action (2–4 repos)."
+          },
+          "query": {
+            "type": "string",
+            "description": "Search query for search action (e.g. 'vector database', 'llm agent framework')."
+          },
+          "language": {
+            "type": "string",
+            "description": "Filter search results by programming language (e.g. 'Python', 'TypeScript')."
+          },
+          "topic": {
+            "type": "string",
+            "description": "Filter search results by GitHub topic (e.g. 'machine-learning', 'mcp')."
+          },
+          "limit": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 30,
+            "description": "Max search results to return (default 10, max 30)."
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    {
       "name": "github-org-intel",
       "description": "Comprehensive GitHub organization intelligence. Returns org profile (members, followers, website, location), top public repositories by stars with activity and language data, tech stack distribution, and recent activity signals. Covers up to 25 top repos per call. Useful for due diligence, competitive analysis, investment research, and talent sourcing. Data cached 1 hour. Powered by GitHub public API.",
       "inputSchema": {
@@ -2973,6 +3033,49 @@
           }
         },
         "additionalProperties": false
+      }
+    },
+    {
+      "name": "government-contract-intel",
+      "description": "Federal government contract award tracker via USASpending.gov (no API key). The U.S. government awards $700B+ annually — this cap surfaces who wins the money, how much, and for what. Mode company (company_name): all federal contracts awarded to a named company — which agencies, what amounts, optional last-N-days filter. Essential for defense/aerospace (Lockheed, Raytheon, Northrop), tech government contractors (Palantir, Leidos, SAIC, Booz Allen), and healthcare (McKesson, UnitedHealth). Mode recent (days, min_amount_millions): market-wide feed of largest new awards in the last N days, optional floor filter. Mode agency (agency_name, days): what contracts has a federal agency (DoD, HHS, NASA, DHS) awarded recently and to whom. All data from FPDS-NG via USASpending.gov, updated daily. $0.015/call.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "mode": {
+            "type": "string",
+            "enum": [
+              "company",
+              "recent",
+              "agency"
+            ],
+            "description": "'company': contracts awarded to a named company. 'recent': market-wide largest new awards. 'agency': contracts awarded by a federal agency. Default: 'company' if company_name provided, else 'recent'."
+          },
+          "company_name": {
+            "type": "string",
+            "description": "Company or contractor name to search (partial match OK). Examples: Lockheed Martin, Palantir, Raytheon, General Dynamics, Leidos."
+          },
+          "agency_name": {
+            "type": "string",
+            "description": "Federal agency name for agency mode. Official USASpending names: Department of Defense, Department of Health and Human Services, NASA, Department of Homeland Security."
+          },
+          "days": {
+            "type": "integer",
+            "description": "Calendar days back to search (default 90, max 180).",
+            "minimum": 1,
+            "maximum": 180
+          },
+          "min_amount_millions": {
+            "type": "number",
+            "description": "For mode=recent: only return awards >= this amount in USD millions (e.g., 100 = $100M+). Default 0 = no filter.",
+            "minimum": 0
+          },
+          "limit": {
+            "type": "integer",
+            "description": "Max results to return (default 25, max 100).",
+            "minimum": 1,
+            "maximum": 100
+          }
+        }
       }
     },
     {
@@ -3913,6 +4016,10 @@
       }
     },
     {
+      "name": "nonprofit-intel",
+      "description": "Nonprofit financial intelligence from IRS Form 990 filings via ProPublica Nonprofit Explorer. Search by name, look up by EIN for full financial history (revenue/expenses/assets/officer compensation/expense ratios up to 10 years), or browse by NTEE sector. Covers 2M+ US nonprofits. Free public IRS data. $0.008/call."
+    },
+    {
       "name": "npi-lookup",
       "description": "US NPI registry lookup — find any licensed US healthcare provider or organization by NPI number, name, state, or specialty. Returns NPI, entity type, name, credentials, specialty/taxonomy, license states, practice address, and active status. 7M+ records from CMS. Use for provider credentialing, healthcare due diligence, billing verification, or AML/KYB screening on medical payments.",
       "inputSchema": {
@@ -4127,6 +4234,37 @@
           }
         },
         "required": []
+      }
+    },
+    {
+      "name": "patent-intel",
+      "description": "USPTO patent intelligence for any company or keyword. Mode 'company' (ticker or company name): recent granted patents assigned to that company — accepts US stock ticker (resolved via SEC EDGAR) or free-form assignee name. Returns title, abstract excerpt, grant date, filing date, CPC technology section labels (e.g., 'H - Electricity', 'G - Physics'), CPC group codes, inventor names, and a Google Patents link. Mode 'search' (query): full-text keyword search across all USPTO patent titles and abstracts — useful for finding who is innovating in a technology area. Covers all US granted patents from 1976 to within ~2 weeks of present. Data source: USPTO PatentsView API (public domain, no API key). $0.008/call.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "company": {
+            "type": "string",
+            "description": "US stock ticker (e.g., AAPL, NVDA, MSFT) or company/assignee name for patent search. Used in mode=company."
+          },
+          "query": {
+            "type": "string",
+            "description": "Keyword search string for mode=search (searches patent titles and abstracts)."
+          },
+          "mode": {
+            "type": "string",
+            "enum": [
+              "company",
+              "search"
+            ],
+            "description": "'company' (default when company is given): recent patents by assignee name. 'search': keyword search across all US patents."
+          },
+          "limit": {
+            "type": "integer",
+            "description": "Max patents to return (default 15, max 50).",
+            "minimum": 1,
+            "maximum": 50
+          }
+        }
       }
     },
     {
@@ -4560,6 +4698,118 @@
             "type": "number",
             "description": "Minimum 24h fees in USD to include a protocol (e.g. 10000 for $10K+). Filters out noise.",
             "default": 1000
+          }
+        }
+      }
+    },
+    {
+      "name": "pubmed-intel",
+      "description": "PubMed biomedical literature search and article retrieval across 36M+ NCBI/MEDLINE citations. search mode: find papers by keyword with optional year range and article type filter (clinical_trial, review, meta_analysis, systematic_review, randomized_trial, case_report) — returns PMID, title, authors, journal, date, DOI. article mode: full article details for a PMID — structured abstract, author affiliations, MeSH terms, keywords, DOI, PMC open-access link. No API key. Covers all biomedical and life science literature since 1946.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "mode": {
+            "type": "string",
+            "enum": [
+              "search",
+              "article"
+            ],
+            "description": "search: find papers by query | article: full details for a specific PMID"
+          },
+          "query": {
+            "type": "string",
+            "description": "Search query for search mode. Supports PubMed syntax: e.g. 'CRISPR cancer[Title]', 'Alzheimer treatment', 'COVID-19 mRNA vaccine efficacy'."
+          },
+          "pmid": {
+            "type": [
+              "string",
+              "number"
+            ],
+            "description": "PubMed ID for article mode. Example: '38650234' or 38650234."
+          },
+          "limit": {
+            "type": "number",
+            "description": "Max results to return in search mode. Default 10, max 50."
+          },
+          "year_start": {
+            "type": "number",
+            "description": "Filter search results to this year or later. Example: 2020."
+          },
+          "year_end": {
+            "type": "number",
+            "description": "Filter search results to this year or earlier. Example: 2024."
+          },
+          "article_type": {
+            "type": "string",
+            "enum": [
+              "journal_article",
+              "clinical_trial",
+              "review",
+              "meta_analysis",
+              "case_report",
+              "systematic_review",
+              "randomized_trial"
+            ],
+            "description": "Filter by article type. clinical_trial: FDA-registered trials. review: narrative reviews. meta_analysis: quantitative evidence synthesis. systematic_review: PRISMA-style. randomized_trial: RCTs."
+          }
+        },
+        "required": [
+          "mode"
+        ]
+      },
+      "outputSchema": {
+        "type": "object",
+        "properties": {
+          "query": {
+            "type": "string"
+          },
+          "total_found": {
+            "type": "integer"
+          },
+          "returned": {
+            "type": "integer"
+          },
+          "articles": {
+            "type": "array"
+          },
+          "pmid": {
+            "type": "string"
+          },
+          "title": {
+            "type": "string"
+          },
+          "authors": {
+            "type": "array"
+          },
+          "journal": {
+            "type": "string"
+          },
+          "pub_date": {
+            "type": "string"
+          },
+          "abstract": {
+            "type": "string"
+          },
+          "keywords": {
+            "type": "array"
+          },
+          "mesh_terms": {
+            "type": "array"
+          },
+          "doi": {
+            "type": "string"
+          },
+          "pmc_id": {
+            "type": "string"
+          },
+          "pubmed_url": {
+            "type": "string"
+          },
+          "full_text_url": {
+            "type": "string"
+          },
+          "source": {
+            "type": "string"
           }
         }
       }
@@ -5711,6 +5961,46 @@
       }
     },
     {
+      "name": "vc-funding-intel",
+      "description": "Private fundraising round tracker via SEC Form D EDGAR filings. Regulation D (Rule 506(b)/506(c)/504) offerings must be reported within 15 days of first sale — a near-real-time window into VC rounds, PE buyouts, startup raises, hedge fund raises, and real estate syndicates. Mode 'company' (company_name): all Form D filings for that company with amount raised, industry group, exemption type (506b/506c/504), investor count, and state. Mode 'recent': market-wide feed of new Reg D offerings in the last N days (max 90), filterable by minimum raise amount in millions. Free SEC government data, no API key. $0.015/call.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "company_name": {
+            "type": "string",
+            "description": "Company or fund name to search (partial match OK). Used in company mode."
+          },
+          "mode": {
+            "type": "string",
+            "enum": [
+              "company",
+              "recent"
+            ],
+            "description": "'company' (default when company_name given): Form D filings for that company with full detail. 'recent': market-wide Form D feed in last N days."
+          },
+          "days": {
+            "type": "integer",
+            "description": "For mode=recent: calendar days back to search (default 14, max 90).",
+            "minimum": 1,
+            "maximum": 90
+          },
+          "min_amount_millions": {
+            "type": "number",
+            "description": "For mode=recent: filter to raises with total_amount_sold >= this many USD millions (e.g., 5 = $5M+ only). Default 0 = no filter.",
+            "minimum": 0
+          },
+          "limit": {
+            "type": "integer",
+            "description": "Max results to return (default 20, max 50).",
+            "minimum": 1,
+            "maximum": 50
+          }
+        },
+        "required": [],
+        "additionalProperties": false
+      }
+    },
+    {
       "name": "vision-analyze",
       "description": "Analyze any image URL using GPT-4o-mini vision. Returns structured analysis based on the mode: describe (full description), ocr (text extraction), chart (data/trend extraction), ui (interface analysis), identify (object/subject ID), or qa (answer a specific question about the image). Input must be a publicly accessible image URL (JPEG, PNG, GIF, WebP). $0.050/call.",
       "inputSchema": {
@@ -6307,184 +6597,6 @@
         },
         "required": []
       }
-    },
-    {
-      "name": "vc-funding-intel",
-      "description": "Private fundraising round tracker via SEC Form D EDGAR filings. Regulation D (Rule 506(b)/506(c)/504) offerings must be reported within 15 days of first sale — a near-real-time window into VC rounds, PE buyouts, startup raises, hedge fund raises, and real estate syndicates. Mode 'company' (company_name): all Form D filings for that company with amount raised, industry group, exemption type (506b/506c/504), investor count, and state. Mode 'recent': market-wide feed of new Reg D offerings in the last N days (max 90), filterable by minimum raise amount in millions. Free SEC government data, no API key. $0.015/call.",
-      "inputSchema": {
-        "type": "object",
-        "properties": {
-          "company_name": {
-            "type": "string",
-            "description": "Company or fund name to search (partial match OK). Used in company mode."
-          },
-          "mode": {
-            "type": "string",
-            "enum": [
-              "company",
-              "recent"
-            ],
-            "description": "'company' (default when company_name given): Form D filings for that company with full detail. 'recent': market-wide Form D feed in last N days."
-          },
-          "days": {
-            "type": "integer",
-            "description": "For mode=recent: calendar days back to search (default 14, max 90).",
-            "minimum": 1,
-            "maximum": 90
-          },
-          "min_amount_millions": {
-            "type": "number",
-            "description": "For mode=recent: filter to raises with total_amount_sold >= this many USD millions (e.g., 5 = $5M+ only). Default 0 = no filter.",
-            "minimum": 0
-          },
-          "limit": {
-            "type": "integer",
-            "description": "Max results to return (default 20, max 50).",
-            "minimum": 1,
-            "maximum": 50
-          }
-        },
-        "required": [],
-        "additionalProperties": false
-      }
-    },
-    {
-      "name": "patent-intel",
-      "description": "USPTO patent intelligence for any company or keyword. Mode 'company' (ticker or company name): recent granted patents assigned to that company — accepts US stock ticker (resolved via SEC EDGAR) or free-form assignee name. Returns title, abstract excerpt, grant date, filing date, CPC technology section labels (e.g., 'H - Electricity', 'G - Physics'), CPC group codes, inventor names, and a Google Patents link. Mode 'search' (query): full-text keyword search across all USPTO patent titles and abstracts — useful for finding who is innovating in a technology area. Covers all US granted patents from 1976 to within ~2 weeks of present. Data source: USPTO PatentsView API (public domain, no API key). $0.008/call.",
-      "inputSchema": {
-        "type": "object",
-        "properties": {
-          "company": {
-            "type": "string",
-            "description": "US stock ticker (e.g., AAPL, NVDA, MSFT) or company/assignee name for patent search. Used in mode=company."
-          },
-          "query": {
-            "type": "string",
-            "description": "Keyword search string for mode=search (searches patent titles and abstracts)."
-          },
-          "mode": {
-            "type": "string",
-            "enum": [
-              "company",
-              "search"
-            ],
-            "description": "'company' (default when company is given): recent patents by assignee name. 'search': keyword search across all US patents."
-          },
-          "limit": {
-            "type": "integer",
-            "description": "Max patents to return (default 15, max 50).",
-            "minimum": 1,
-            "maximum": 50
-          }
-        }
-      }
-    },
-    {
-      "name": "government-contract-intel",
-      "description": "Federal government contract award tracker via USASpending.gov (no API key). The U.S. government awards $700B+ annually — this cap surfaces who wins the money, how much, and for what. Mode company (company_name): all federal contracts awarded to a named company — which agencies, what amounts, optional last-N-days filter. Essential for defense/aerospace (Lockheed, Raytheon, Northrop), tech government contractors (Palantir, Leidos, SAIC, Booz Allen), and healthcare (McKesson, UnitedHealth). Mode recent (days, min_amount_millions): market-wide feed of largest new awards in the last N days, optional floor filter. Mode agency (agency_name, days): what contracts has a federal agency (DoD, HHS, NASA, DHS) awarded recently and to whom. All data from FPDS-NG via USASpending.gov, updated daily. $0.015/call.",
-      "inputSchema": {
-        "type": "object",
-        "properties": {
-          "mode": {
-            "type": "string",
-            "enum": [
-              "company",
-              "recent",
-              "agency"
-            ],
-            "description": "'company': contracts awarded to a named company. 'recent': market-wide largest new awards. 'agency': contracts awarded by a federal agency. Default: 'company' if company_name provided, else 'recent'."
-          },
-          "company_name": {
-            "type": "string",
-            "description": "Company or contractor name to search (partial match OK). Examples: Lockheed Martin, Palantir, Raytheon, General Dynamics, Leidos."
-          },
-          "agency_name": {
-            "type": "string",
-            "description": "Federal agency name for agency mode. Official USASpending names: Department of Defense, Department of Health and Human Services, NASA, Department of Homeland Security."
-          },
-          "days": {
-            "type": "integer",
-            "description": "Calendar days back to search (default 90, max 180).",
-            "minimum": 1,
-            "maximum": 180
-          },
-          "min_amount_millions": {
-            "type": "number",
-            "description": "For mode=recent: only return awards >= this amount in USD millions (e.g., 100 = $100M+). Default 0 = no filter.",
-            "minimum": 0
-          },
-          "limit": {
-            "type": "integer",
-            "description": "Max results to return (default 25, max 100).",
-            "minimum": 1,
-            "maximum": 100
-          }
-        }
-      }
-    },
-    {
-      "name": "github-intel",
-      "description": "GitHub repository intelligence: stars, forks, contributors, releases, open issues, and weekly commit activity. Compare up to 4 repos side-by-side or search GitHub for repos by keyword, language, and topic. Use to evaluate library health before adopting a dependency, find the top maintainers of a project, track release cadence, or benchmark competing frameworks. Authenticated (5000 req/hr). Actions: repo | contributors | releases | issues | commit_activity | compare | search.",
-      "inputSchema": {
-        "type": "object",
-        "required": [
-          "action"
-        ],
-        "properties": {
-          "action": {
-            "type": "string",
-            "enum": [
-              "repo",
-              "contributors",
-              "releases",
-              "issues",
-              "commit_activity",
-              "compare",
-              "search"
-            ],
-            "description": "repo: full metadata. contributors: top 30 committers. releases: latest 10 releases + download counts. issues: 10 recent open issues. commit_activity: 52-week weekly commit trend. compare: side-by-side metrics for ≤4 repos. search: find repos by keyword."
-          },
-          "repo": {
-            "type": "string",
-            "description": "Repository in owner/repo format (e.g. 'facebook/react', 'anthropics/claude-code'). Full GitHub URLs also accepted. Required for repo, contributors, releases, issues, commit_activity."
-          },
-          "repos": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            },
-            "maxItems": 4,
-            "description": "Array of owner/repo strings for compare action (2–4 repos)."
-          },
-          "query": {
-            "type": "string",
-            "description": "Search query for search action (e.g. 'vector database', 'llm agent framework')."
-          },
-          "language": {
-            "type": "string",
-            "description": "Filter search results by programming language (e.g. 'Python', 'TypeScript')."
-          },
-          "topic": {
-            "type": "string",
-            "description": "Filter search results by GitHub topic (e.g. 'machine-learning', 'mcp')."
-          },
-          "limit": {
-            "type": "integer",
-            "minimum": 1,
-            "maximum": 30,
-            "description": "Max search results to return (default 10, max 30)."
-          }
-        },
-        "additionalProperties": false
-      }
-    },
-    {
-      "name": "nonprofit-intel",
-      "description": "Nonprofit financial intelligence from IRS Form 990 filings via ProPublica Nonprofit Explorer. Search by name, look up by EIN for full financial history (revenue/expenses/assets/officer compensation/expense ratios up to 10 years), or browse by NTEE sector. Covers 2M+ US nonprofits. Free public IRS data. $0.008/call."
-    },
-    {
-      "name": "fdic-bank-intel",
-      "description": "FDIC BankFind Suite: US bank financial health, regulatory capital ratios, and historical bank failure data. search mode: find institutions by name with asset size and state. profile mode: quarterly Call Report data — ROA, ROE, risk-based capital ratio, net income, loans, deposits (input: bank name or FDIC certificate number). failures mode: recent/historical bank closures with fail date, assets, resolution type. Covers 10,000+ institutions and 4,100+ failures since 1934. No API key."
     }
   ]
 }
