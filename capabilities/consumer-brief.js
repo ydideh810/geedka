@@ -187,7 +187,7 @@ Respond ONLY with valid JSON:
 
 export default {
   name:  "consumer-brief",
-  price: "$0.350",
+  price: "$0.370",
 
   description:
     "AI-synthesized US consumer health briefing. Fetches 8 FRED signals (Michigan sentiment, retail sales MoM, real PCE, real disposable income, savings rate, total/revolving consumer credit) and uses GPT-4o-mini to produce consumer posture, spending regime, confidence level, savings stress, credit dependency, 150-word narrative, dominant risk, and agent implication. One call collapses 8 FRED lookups + LLM synthesis for retail sector exposure, recession probability, and consumer credit risk.",

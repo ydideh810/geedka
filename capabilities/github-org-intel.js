@@ -109,7 +109,7 @@ function activitySignal(repos) {
 
 export default {
   name:  "github-org-intel",
-  price: "$0.015",
+  price: "$0.035",
 
   description:
     "Comprehensive GitHub organization intelligence. Returns org profile (members, followers, website, location), top public repositories by stars with activity and language data, tech stack distribution, and recent activity signals. Covers up to 25 top repos per call. Useful for due diligence, competitive analysis, investment research, and talent sourcing. Data cached 1 hour. Powered by GitHub public API.",

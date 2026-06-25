@@ -80,7 +80,7 @@ function decodeTransferTo(input) {
 
 export default {
   name:  "tx-explainer",
-  price: "$0.014",
+  price: "$0.034",
 
   description:
     "Given a transaction hash and chain, returns a decoded breakdown: sender, recipient, ETH value transferred, gas used, transaction fee, decoded method name (transfer/approve/swap/deposit/etc.), ERC-20 token transfer details if applicable, block number, block timestamp, and a one-sentence agent-readable summary. Supports Ethereum (default), Base, Polygon, and Arbitrum mainnet. Uses free public JSON-RPC nodes — no API key required, results in ~1-2s.",

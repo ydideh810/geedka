@@ -13,7 +13,7 @@ const UA          = "Mozilla/5.0 (compatible; the-stall/0.7; +https://intuitek.a
 
 export default {
   name: "defi-yields",
-  price: "$0.039",
+  price: "$0.059",
 
   description:
     "Returns top DeFi yield pools ranked by APY from DeFiLlama. Covers 16,000+ pools across 400+ protocols and 50+ chains (Ethereum, Base, Solana, Arbitrum, Polygon, etc.). Filter by chain, minimum APY, minimum TVL, or stablecoin-only. Each pool includes APY breakdown (base + reward), TVL, 7-day APY change, and a direct DeFiLlama link. Sourced from DeFiLlama public API — no key required, updated continuously.",

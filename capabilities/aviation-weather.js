@@ -122,7 +122,7 @@ function parseTAF(t) {
 export default {
   name: "aviation-weather",
 
-  price: "$0.039",
+  price: "$0.059",
 
   description:
     "Aviation weather (METAR + TAF) for any airport. " +

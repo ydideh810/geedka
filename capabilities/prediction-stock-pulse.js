@@ -10,7 +10,7 @@ import usStockPrice from "./us-stock-price.js";
 
 export default {
   name: "prediction-stock-pulse",
-  price: "$0.039",
+  price: "$0.059",
 
   description:
     "One call returns prediction market sentiment (Limitless Exchange) + live equity price for a specified ticker. Collapses the prediction-market → stock-price agent chain into a single x402 payment. $0.016 vs $0.024 bought individually. Inputs: ticker (required), query (optional keyword filter for prediction markets).",

@@ -177,7 +177,7 @@ async function handler({ query = "artificial intelligence technology", days = 3 
 
 export default {
   name: "news-sentiment",
-  price: "$0.039",
+  price: "$0.059",
 
   description:
     "Returns global news coverage and sentiment for any company, stock ticker, or topic. Primary source: GDELT Project v2 (250M+ articles, ML tone scoring). Fallback: Google News RSS with keyword heuristic. Returns article count, avg sentiment tone (−100 negative → +100 positive), top positive/negative headlines, and top news domains. Lookback: 1–30 days (default 3). Results cached 10 min.",

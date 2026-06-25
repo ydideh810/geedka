@@ -32,7 +32,7 @@ const NETWORK_MAP = {
 
 export default {
   name: "nft-metadata",
-  price: "$0.039",
+  price: "$0.059",
 
   description:
     "Fetch NFT metadata, traits, image URL, and collection floor price for any ERC-721 or ERC-1155 token. Returns name, description, all attributes/traits, cached image CDN URL, collection name, OpenSea floor price, token type, and mint block. Supports Ethereum, Polygon, Base, Arbitrum mainnet. Useful for NFT valuation research, portfolio analysis, content generation, and collection intelligence. Free upstream: Alchemy NFT API.",

@@ -230,7 +230,7 @@ async function getDatabaseIntel(slug) {
 
 export default {
   name: "db-perf-intel",
-  price: "$0.014",
+  price: "$0.034",
 
   description:
     "Database performance intelligence: current versions, EOL status, and benchmark-grounded performance profiles for PostgreSQL, MySQL, MariaDB, MongoDB, Redis, Elasticsearch, SQLite, Cassandra, CockroachDB, and SQL Server. Useful mid-task for infrastructure audits, database selection, and upgrade urgency checks. Live EOL data from endoflife.date; performance profiles from TPC-C, pgbench, sysbench, and YCSB benchmarks.",

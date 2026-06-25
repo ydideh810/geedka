@@ -40,7 +40,7 @@ function shapeOpinion(r) {
 
 export default {
   name: "legal-search",
-  price: "$0.014",
+  price: "$0.034",
 
   description:
     "Searches 5M+ US court opinions (SCOTUS, federal circuits, district courts, state courts) via CourtListener. Returns case name, court, date, citation, docket number, and a text snippet. Filter by court level, date range, or judge name. Useful for legal research agents, contract risk analysis, precedent lookup, and regulatory compliance workflows.",

@@ -27,7 +27,7 @@ function compositeAlert(coins) {
 
 export default {
   name:  "stablecoin-watch",
-  price: "$0.05",
+  price: "$0.07",
 
   description:
     "Real-time depeg monitor for top USD stablecoins (USDT, USDC, DAI, USDS, and others ranked by market cap). Returns current price, peg deviation %, depeg status (PARITY / MILD_DEPEG / MODERATE_DEPEG / SEVERE_DEPEG), supply trend, and a composite alert level (GREEN / YELLOW / ORANGE / RED). Sourced from DeFiLlama public API — no key required, updates every call. Useful for DeFi risk management, collateral health checks, and pre-trade regime detection.",

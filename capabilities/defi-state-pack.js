@@ -59,7 +59,7 @@ function compositeAlert(coins) {
 
 export default {
   name:  "defi-state-pack",
-  price: "$0.039",
+  price: "$0.059",
 
   description:
     "Returns Ethereum block header + stablecoin depeg status + top DeFi yield farming pools in one call. Collapses the 3-hop eth-block → stablecoin-watch → yield-farming chain into a single call. All three upstreams fetched in parallel. Supports Ethereum, Base, Polygon, Arbitrum. Filter yield pools by chain, protocol, min TVL, min APY. Free upstreams — DRPC + DeFiLlama — no API key required.",

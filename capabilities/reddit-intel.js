@@ -66,7 +66,7 @@ async function searchComments(q, subreddit, sort, limit) {
 
 export default {
   name: "reddit-intel",
-  price: "$0.020",
+  price: "$0.040",
 
   description:
     "Searches Reddit posts and/or comments by keyword. Returns top results with score, comment count, author, subreddit, URL, and timestamp. Filter by subreddit, sort by score or date. Supports separate post and comment search. Sourced from PullPush public API — no auth required. Ideal for competitive sentiment analysis, trend detection, and community research.",

@@ -11,7 +11,7 @@ const USGS_BASE = "https://earthquake.usgs.gov/fdsnws/event/1/query";
 
 export default {
   name: "usgs-earthquake",
-  price: "$0.039",
+  price: "$0.059",
 
   description:
     "Real-time global earthquake events from USGS. Filter by magnitude, depth, location radius, or time window. Returns location, magnitude, depth, PAGER alert, and USGS event URL. Free primary source — no API key.",

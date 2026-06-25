@@ -83,7 +83,7 @@ function computeGrade(findings) {
 
 export default {
   name: "http-headers",
-  price: "$0.003",
+  price: "$0.023",
 
   description:
     "HTTP response headers inspector and security grader. Fetches headers from any public URL and evaluates OWASP-recommended security headers: HSTS, CSP, X-Frame-Options, X-Content-Type-Options, Referrer-Policy, Permissions-Policy. Returns raw headers, per-header security findings, overall grade (A–F), and actionable recommendations. Useful for web app security audits, CDN configuration verification, and compliance checks.",

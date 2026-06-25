@@ -128,7 +128,7 @@ async function fetchJson(url) {
 
 export default {
   name: "crypto-news-impact",
-  price: "$0.039",
+  price: "$0.059",
 
   description:
     "Latest cryptocurrency news headlines from CoinDesk with live price correlation for mentioned assets. Returns up to 10 recent articles — each with title, URL, published timestamp, primary category, and a keyword-derived sentiment signal (bullish/bearish/neutral). For each article, identified crypto assets (BTC, ETH, SOL, etc.) are enriched with current USD price and 24h price change. Use before any crypto research, portfolio review, or market sentiment task to understand what news is driving the market right now. Data: CoinDesk RSS (TTL 5 min) + CoinGecko prices.",

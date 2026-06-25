@@ -77,7 +77,7 @@ function parseJinaResponse(raw) {
 
 export default {
   name: "readable-content",
-  price: "$0.014",
+  price: "$0.034",
 
   description:
     "Fetches any public URL and returns the full readable article text as clean Markdown, stripped of navigation, ads, and boilerplate. Returns title, published date (if available), and the complete body ready for LLM summarization, analysis, or RAG ingestion. A $0.004 alternative to exa.ai/contents ($0.007) and web-read ($0.016) for the same full-text extraction primitive.",

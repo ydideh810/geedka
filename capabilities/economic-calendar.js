@@ -197,7 +197,7 @@ const STATIC_EVENTS_2026 = [
 // ── Main ───────────────────────────────────────────────────────────────────
 export default {
   name:  "economic-calendar",
-  price: "$0.014",
+  price: "$0.034",
 
   description:
     "Upcoming US macro data release schedule: CPI, NFP, FOMC, GDP, PCE, PPI, JOLTS, Retail Sales, Housing Starts, and 20+ more releases with exact dates, times (ET), and market-impact priority. BLS live calendar + Fed/BEA/Census static 2026 schedule. Essential for agents timing trades or building macro-regime signals.",

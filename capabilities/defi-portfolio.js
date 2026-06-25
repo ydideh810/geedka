@@ -118,7 +118,7 @@ async function getPrices(cgIds) {
 
 export default {
   name:  "defi-portfolio",
-  price: "$0.039",
+  price: "$0.059",
 
   description:
     "Multi-chain DeFi portfolio scanner. Returns token holdings and USD values for any EVM wallet across Ethereum, Base, Polygon, and Arbitrum mainnet. Covers ETH, major stablecoins (USDC, USDT, DAI), WBTC, ARB, cbETH, and chain-native assets. Collapses the defi.hugen.tokyo/defi/address seam — 41 payers. $0.010/call.",

@@ -13,7 +13,7 @@
 
 export default {
   name: "limitless-markets",
-  price: "$0.014",
+  price: "$0.034",
 
   description:
     "Returns active prediction markets from Limitless Exchange with current Yes/No probabilities. Covers short-duration crypto markets (5-min, 15-min BTC/ETH direction), plus longer-term markets. Returns title, implied yes/no prices, expiration, volume, categories, and slug. $0.006/call — free upstream, no API key.",

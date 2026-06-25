@@ -39,7 +39,7 @@ function filterRates(rates, symbols) {
 
 export default {
   name:  "forex-historical",
-  price: "$0.039",
+  price: "$0.059",
 
   description:
     "Historical ECB exchange rates — single date lookup or time-series range. Returns rates for up to 30 major currencies (EUR, GBP, JPY, CAD, CHF, CNY, AUD, KRW, etc.) from 1999-01-04 to present. Free, no key, sourced from Frankfurter/ECB. Use for: tax-date FX rates, historical expense reconciliation, multi-year trend analysis, point-in-time currency conversion. Weekends and holidays return the nearest prior business day. Complements forex-rates (real-time) with retrospective data.",

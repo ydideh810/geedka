@@ -42,7 +42,7 @@ function resolveId(id) {
 
 export default {
   name:  "defillama-coin-price",
-  price: "$0.039",
+  price: "$0.059",
 
   description:
     "Returns on-chain aggregated token prices via DefiLlama coins API. Accepts coingecko IDs, contract addresses, or shorthand (eth, btc, sol). Up to 10 tokens per call. Undercuts blockrun.ai's $0.021/call by 24%.",

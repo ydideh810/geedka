@@ -18,7 +18,7 @@ const VALID_RANGES    = new Set(["1d","5d","1mo","3mo","6mo","1y","2y","5y","10y
 
 export default {
   name: "stock-ohlcv",
-  price: "$0.039",
+  price: "$0.059",
 
   description:
     "Returns historical OHLCV (open/high/low/close/volume) candlestick data for a stock, ETF, or index. Supports intervals from 1-minute to monthly and ranges from 1 day to max history. Use for chart analysis, trend detection, and quantitative backtesting. $0.010/call — free upstream, no API key.",

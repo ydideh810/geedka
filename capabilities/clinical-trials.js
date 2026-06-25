@@ -22,7 +22,7 @@ const STATUS_MAP = {
 
 export default {
   name: "clinical-trials",
-  price: "$0.014",
+  price: "$0.034",
 
   description:
     "Search ClinicalTrials.gov for clinical studies by condition, intervention, or keyword. Returns phase, status, enrollment, sponsor, and dates. NIH primary source — no markup. $0.005/call.",

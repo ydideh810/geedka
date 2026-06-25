@@ -30,7 +30,7 @@ function parseOptionSymbol(sym, tickerLen) {
 
 export default {
   name:  "options-snapshot",
-  price: "$0.015",
+  price: "$0.035",
 
   description:
     "Options intelligence snapshot for any US equity — IV30, put/call volume ratio, top calls and puts by trading volume, and unusual-volume flags. Free CBOE delayed data (15-min delay during trading hours), no API key required. Complements us-stock-price and equity-technicals with the options-layer sentiment layer agents need for complete trade context. $0.015/call.",

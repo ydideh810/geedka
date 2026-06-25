@@ -78,7 +78,7 @@ const round2 = (n) => Math.round(n * 100) / 100;
 
 export default {
   name: "labor-market",
-  price: "$0.014",
+  price: "$0.034",
 
   description:
     "Returns US labor market leading indicators from FRED (free, no API key): initial jobless claims (weekly), continued claims, JOLTS job openings, nonfarm payrolls, labor force participation rate, average hourly earnings with YoY wage growth, and the openings-per-unemployed Beveridge curve ratio. Pairs with macro-indicators for the complete employment picture.",

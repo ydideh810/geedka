@@ -52,7 +52,7 @@ function riskLabel(score) {
 
 export default {
   name:  "wallet-screener",
-  price: "$0.116",
+  price: "$0.136",
 
   description:
     "Risk screening for EVM wallet addresses. Returns a 0–100 risk score and individual flags: sanctions (OFAC/other), phishing activity, cybercrime, money laundering, darkweb transactions, mixer usage, stolen funds, fake KYC, and 12 more categories. Sourced from GoPlusLabs (free, no key, chain_id optional — defaults to checking cross-chain). Use before sending funds to an unknown address, before accepting a payment, or when validating a counterparty wallet in a DeFi workflow. Distinct from evm-token-security (which screens TOKEN contracts — this screens WALLETS).",

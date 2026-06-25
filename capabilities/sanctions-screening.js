@@ -161,7 +161,7 @@ function findMatches(query, typeFilter, limit) {
 
 export default {
   name:  "sanctions-screening",
-  price: "$0.145",
+  price: "$0.165",
 
   description:
     "OFAC SDN sanctions screening — checks whether a person, company, vessel, or aircraft appears on the US Treasury Specially Designated Nationals list. Returns match score, sanctions program(s), and entity type. Covers ~19,000 entries including RUSSIA-EO14024, SDGT, IRAN, DPRK, TCO, and 30+ programs. Use for payment compliance, KYB/KYC, AML checks, and counterparty due diligence.",

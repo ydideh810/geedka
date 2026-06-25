@@ -59,7 +59,7 @@ const round3 = (n) => Math.round(n * 1000) / 1000;
 
 export default {
   name: "credit-spreads",
-  price: "$0.014",
+  price: "$0.034",
 
   description:
     "Returns current US corporate credit spreads from ICE BofA indices via FRED (free, no API key): High Yield OAS, Investment Grade OAS, and BBB (lowest IG tier) OAS. Includes HY-IG differential and risk regime classification. Pairs with treasury-yields for complete fixed-income discount rate construction.",

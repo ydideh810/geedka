@@ -27,7 +27,7 @@ function extractEntity(entities, role) {
 
 export default {
   name: "domain-whois",
-  price: "$0.014",
+  price: "$0.034",
 
   description:
     "Domain WHOIS/RDAP lookup. Returns registration date, expiration date, last updated, registrar, nameservers, status flags, and registrant/admin contact info (where available). Uses RDAP — the structured JSON replacement for WHOIS. Useful for domain due diligence, expiry monitoring, and identifying registrar/owner changes.",

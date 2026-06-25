@@ -85,7 +85,7 @@ function scoreQuality(syntax, isDisposable, mx) {
 
 export default {
   name: "email-verify",
-  price: "$0.014",
+  price: "$0.034",
 
   description:
     "Email address validation and quality scoring. Checks RFC-5322 syntax, detects disposable/throwaway domains (via Kickbox free API), and verifies DNS MX record presence (via Cloudflare DoH). Returns a quality score (0-100) and verdict: DELIVERABLE | RISKY | UNDELIVERABLE | INVALID. Useful for lead qualification, form validation, and filtering bot signups.",

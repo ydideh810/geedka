@@ -90,7 +90,7 @@ async function blockNumber(rpcUrl) {
 
 export default {
   name:  "erc20-snapshot",
-  price: "$0.014",
+  price: "$0.034",
 
   description:
     "Complete ERC20 token state in one call: name, symbol, decimals, total supply (raw + formatted), wallet balance, and allowance. Collapses four onesource chain calls (total-supply + erc20-balance + allowance + contract — 155–229 payers each) into one $0.007 payment — 36% below the $0.011 combined chain. Supports Ethereum (default), Base, Polygon, Arbitrum. No API key required.",

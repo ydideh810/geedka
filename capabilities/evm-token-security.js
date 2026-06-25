@@ -55,7 +55,7 @@ function riskLabel(score) {
 
 export default {
   name:  "evm-token-security",
-  price: "$0.116",
+  price: "$0.136",
 
   description:
     "Honeypot, rug-pull, and scam detection for any EVM token. Returns a 0–100 risk score with labeled flags: honeypot status, hidden ownership, mint authority, self-destruct, buy/sell tax rates, creator wallet concentration, and open-source status. Covers 40+ chains (Ethereum, Base, BSC, Arbitrum, Polygon, Solana, etc.) via GoPlusLabs. Useful pre-trade before buying unknown tokens, before routing payments through new contracts, or when validating DeFi protocol addresses. Pairs with solana-token-risk (Solana-native rug detection) and market-intelligence (endpoint verification).",

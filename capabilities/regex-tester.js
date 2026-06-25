@@ -37,7 +37,7 @@ function safeExec(fn) {
 
 export default {
   name: "regex-tester",
-  price: "$0.014",
+  price: "$0.034",
 
   description:
     "Safe regex testing and extraction. Validates a pattern, finds all matches (with capture groups), replaces text, and explains what the pattern matches. Zero external API calls — instant, deterministic. Useful for agents generating or debugging regex patterns mid-task, validating extracted data, or transforming text with precision.",

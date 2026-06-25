@@ -90,7 +90,7 @@ function normalizeRecord(rec, sourceType) {
 
 export default {
   name:  "fda-recall-watch",
-  price: "$0.014",
+  price: "$0.034",
 
   description:
     "FDA recall and enforcement search across drugs, food/cosmetics, and medical devices (85,000+ actions). Returns classification (Class I/II/III), recall reason, product description, status, and distribution pattern. Seam cap: fills the product-safety layer missing from drug-intel + company-due-diligence chains. No API key required.",

@@ -21,7 +21,7 @@ function cleanTvl(chainTvls) {
 
 export default {
   name:  "defillama-protocol",
-  price: "$0.039",
+  price: "$0.059",
 
   description:
     "Returns current TVL, chain breakdown, 24h/7d TVL change, fees, and metadata for any DeFi protocol slug (aave, uniswap-v3, lido, etc.) via DefiLlama. Undercuts blockrun.ai's $0.022/call by 18%.",

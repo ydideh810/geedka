@@ -57,7 +57,7 @@ async function fetchDay(dateStr) {
 
 export default {
   name:  "dividend-calendar",
-  price: "$0.039",
+  price: "$0.059",
 
   description:
     "Upcoming dividend ex-dates from NASDAQ — all stocks going ex-dividend on a given date (default: today) or in the next 1–7 days. Returns symbol, company name, ex-date, record date, payment date, dividend amount, and annual indicated dividend. $0.008/call.",

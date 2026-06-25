@@ -30,7 +30,7 @@ const TYPE_TIER = {
 
 export default {
   name:  "federal-register-search",
-  price: "$0.014",
+  price: "$0.034",
 
   description:
     "Search the Federal Register for Rules, Proposed Rules, and Notices matching a keyword — returns title, abstract, document type, agencies, significance, effective date, and links. No API key. $0.002/call.",

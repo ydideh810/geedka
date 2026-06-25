@@ -67,7 +67,7 @@ async function fetchRecalls(drug) {
 
 export default {
   name:  "drug-intel",
-  price: "$0.014",
+  price: "$0.034",
 
   description:
     "FDA drug intelligence: labeling (warnings, dosage, drug interactions, contraindications, indications), adverse event report summary (top reactions + total count), and recent recall history. Accepts brand or generic name. Data from openFDA — no API key. Useful for pharmaceutical research, clinical AI, drug safety due diligence.",

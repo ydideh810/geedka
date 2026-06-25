@@ -99,7 +99,7 @@ function queryByWallet(db, wallet) {
 
 export default {
   name: "x402-endpoint-intel",
-  price: "$0.020",
+  price: "$0.040",
 
   description:
     "Market intelligence for any x402 endpoint or operator wallet. Returns settlement volume, unique payer count, price range, reputation tier, activity window, and endpoint description — drawn from 4.1M+ Base mainnet settlements in the Stall's proprietary on-chain dataset. Use before routing agent spend, vetting a counterparty operator, or benchmarking competitor pricing. No external API. Covers 80,000+ operators across 10+ days of live traffic.",

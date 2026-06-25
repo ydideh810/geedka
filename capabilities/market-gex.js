@@ -13,7 +13,7 @@ const TIMEOUT   = 15000;
 
 export default {
   name: "market-gex",
-  price: "$0.020",
+  price: "$0.040",
   description:
     "Dealer gamma exposure (GEX) analysis for any US equity or ETF — returns aggregate GEX, gamma flip level, key pinning strikes, and vol regime signal (positive GEX = pinning, negative = acceleration). Free CBOE delayed data, no API key. Standard SpotGamma-style calculation: calls subtract gamma, puts add gamma. Use with options-snapshot for full options context.",
 

@@ -74,7 +74,7 @@ function parseCommit(msg) {
 
 export default {
   name:  "changelog-generate",
-  price: "$0.003",
+  price: "$0.023",
 
   description:
     "Converts commit messages to a keep-a-changelog release block. Groups feat/fix/perf/docs/security commits into Added/Fixed/Changed/Security sections. Returns versioned markdown or structured JSON. No API key — pure transform.",

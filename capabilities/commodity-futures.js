@@ -64,7 +64,7 @@ async function fetchQuote(symbol) {
 
 export default {
   name: "commodity-futures",
-  price: "$0.039",
+  price: "$0.059",
 
   description:
     "Returns live price and intraday metrics for major commodity futures: crude oil, natural gas, gold, silver, copper, platinum, wheat, corn, soybeans, and coffee. Includes price, day high/low, 52-week range, previous close, exchange, and contract name. Filter by commodity name or category (energy/metals/agricultural). $0.010/call — Yahoo Finance free API, no key required.",

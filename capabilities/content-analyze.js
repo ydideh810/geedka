@@ -96,7 +96,7 @@ Rules:
 
 export default {
   name:  "content-analyze",
-  price: "$0.145",
+  price: "$0.165",
 
   description:
     "AI-powered URL content analysis. Fetches a URL, extracts the readable article text, and returns structured intelligence: 2–3 sentence summary, key points, named entities with types, sentiment score, topic tags, content type classification, and credibility signals (has author/date/sources). Use for content intelligence pipelines, research synthesis, or automated brief generation. $0.012/call.",

@@ -78,7 +78,7 @@ async function getUsdKrwRate() {
 
 export default {
   name: "kimchi-premium",
-  price: "$0.014",
+  price: "$0.034",
 
   description:
     "Real-time Kimchi Premium for any Upbit-listed token: KRW price on Upbit vs USD price on global exchange (Kraken/OKX), FX-adjusted. Returns premium_percent and premium_direction. Matches printmoneylab endpoint at 1/1 price.",

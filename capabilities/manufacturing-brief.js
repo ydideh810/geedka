@@ -213,7 +213,7 @@ Respond ONLY with a JSON object (no markdown, no text outside JSON):
 
 export default {
   name:  "manufacturing-brief",
-  price: "$0.350",
+  price: "$0.370",
 
   description:
     "AI-synthesized US manufacturing & industrial sector briefing. Gathers 7 FRED signals (free, no auth): Industrial Production, Capacity Utilization, Durable Goods Orders, Manufacturing Output, Manufacturing Employment, Inventory/Sales Ratio, and PPI All Commodities. Uses GPT-4o-mini to synthesize: manufacturing regime (expanding/growing/stagnant/contracting), dominant risk, agent implication, and 200-word narrative. Completes the macro intelligence suite alongside energy-brief, labor-brief, and consumer-brief.",

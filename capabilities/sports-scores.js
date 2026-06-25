@@ -71,7 +71,7 @@ function shapeEvent(event) {
 
 export default {
   name: "sports-scores",
-  price: "$0.039",
+  price: "$0.059",
 
   description:
     "Live and recent sports scores for NBA, NFL, MLB, NHL, MLS, EPL, La Liga, Bundesliga, Serie A, Champions League, and more. Returns game status, current score, venue, period/clock, and broadcast info. Uses ESPN's free public scoreboard API. Optional date filter (YYYYMMDD) for historical or upcoming schedule.",

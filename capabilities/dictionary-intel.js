@@ -28,7 +28,7 @@ function shapeMeaning(m) {
 
 export default {
   name:  "dictionary-intel",
-  price: "$0.014",
+  price: "$0.034",
 
   description:
     "English word lookup: definitions (up to 4 per part of speech), phonetic transcription, audio pronunciation URL, synonyms, antonyms, and example sentences. Supports multiple parts of speech per word (noun, verb, adjective, etc.). Useful for writing agents, NLP preprocessing, vocabulary enrichment, content generation, and semantic pre-flight checks. No API key required.",

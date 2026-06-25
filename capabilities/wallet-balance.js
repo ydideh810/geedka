@@ -44,7 +44,7 @@ async function fetchUsdPrice(cgId) {
 
 export default {
   name:  "wallet-balance",
-  price: "$0.039",
+  price: "$0.059",
 
   description:
     "Returns the native token balance (ETH, POL, BNB) for any EVM wallet address. Supports Ethereum, Base, Polygon, Arbitrum, Optimism, and BSC. Includes optional USD value. $0.010/call. Free upstreams: DRPC + CoinGecko, no API key required.",

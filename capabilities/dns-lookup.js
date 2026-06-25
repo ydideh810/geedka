@@ -56,7 +56,7 @@ function extractTxtIntel(records) {
 
 export default {
   name: "dns-lookup",
-  price: "$0.003",
+  price: "$0.023",
 
   description:
     "DNS record lookup for any domain via Cloudflare DoH. Supports A, AAAA, MX, TXT, CNAME, NS, SOA, CAA, or ALL record types. TXT lookups include SPF/DMARC/DKIM email security signal extraction. Useful for domain audits, email configuration verification, CDN setup checks, and infrastructure reconnaissance.",

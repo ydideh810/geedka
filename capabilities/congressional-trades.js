@@ -78,7 +78,7 @@ function buildSummary(trades, filterType, filterChamber) {
 
 export default {
   name:  "congressional-trades",
-  price: "$0.097",
+  price: "$0.117",
 
   description:
     "US Congressional stock trades (STOCK Act disclosures). Two modes: supply a ticker to get all congress member trades in that stock (with excess-return-vs-SPY performance), or omit ticker for recent market-wide congressional activity. Returns representative, party, chamber, transaction type, dollar range, dates, and historical performance vs. SPY. Sourced from Quiver Quant's STOCK Act aggregator — no API key required. $0.022/call.",

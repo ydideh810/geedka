@@ -235,7 +235,7 @@ async function fetchOpenGraph(targetUrl) {
 
 export default {
   name: "social-intel",
-  price: "$0.039",
+  price: "$0.059",
 
   description:
     "Returns public profile data for any social platform account. Pass a profile URL (platform auto-detected) or platform + username. Supports GitHub, Reddit, HackerNews, Twitter/X, npm, and Open Graph fallback for any URL. Returns name, bio, follower/karma counts, creation date, and platform-specific metrics. Priced at $0.004 — 20% below comparable endpoints.",

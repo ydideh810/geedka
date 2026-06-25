@@ -81,7 +81,7 @@ function parseLinks(html, pageUrl) {
 
 export default {
   name:  "page-links",
-  price: "$0.014",
+  price: "$0.034",
 
   description:
     "Extracts all hyperlinks from a webpage. Fetches the target URL, resolves relative links to absolute URLs, and classifies each as internal (same domain) or external. Filter by all/external/internal, cap results with limit. Returns page title, total link count before filtering, and a structured array of {href, text, is_external, domain}. Priced at $0.004 — 20% below orbisapi web-scrape-links ($0.005/call). Upstream: direct HTTP fetch, no API key.",

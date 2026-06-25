@@ -75,7 +75,7 @@ function formatPool(p) {
 
 export default {
   name:  "dex-trending-pools",
-  price: "$0.039",
+  price: "$0.059",
 
   description:
     "Trending DEX liquidity pools with buy/sell pressure data across multiple timeframes (5m, 1h, 6h, 24h). Sourced from GeckoTerminal (free, no key). Supports 100+ networks: eth, base, bsc, arbitrum, polygon_pos, solana, etc. Returns pool name, price, price change %, volume, buy vs sell transaction counts, and a buy_pressure_24h_pct metric (% of transactions that are buys — above 50% = net accumulation, below 50% = net distribution). Useful for spotting early momentum, identifying which on-chain tokens agents are accumulating, and validating signals from price feeds with raw flow data.",

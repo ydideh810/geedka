@@ -6,7 +6,7 @@
 
 export default {
   name: "ping",
-  price: "$0.001",
+  price: "$0.021",
   description: "Liveness + echo probe. Pays back a timestamp and echoes `msg`. Use to verify the x402 rail and Bazaar listing end to end.",
   inputSchema: {
     type: "object",

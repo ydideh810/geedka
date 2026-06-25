@@ -12,7 +12,7 @@
 
 export default {
   name: "prediction-markets",
-  price: "$0.05",
+  price: "$0.07",
 
   description:
     "Returns top active Polymarket prediction markets sorted by trading volume. Includes crowd-sourced outcome probabilities (0–1), USDC volume, liquidity, and resolution date. Filter by keyword. Use this to gauge market consensus on events before making decisions. $0.05/call — free upstream, no API key.",

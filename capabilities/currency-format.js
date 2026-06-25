@@ -60,7 +60,7 @@ function getCurrencyInfo(currency, locale) {
 
 export default {
   name:  "currency-format",
-  price: "$0.014",
+  price: "$0.034",
 
   description:
     "Locale-aware currency formatting and symbol lookup for any ISO 4217 currency. Formats numbers as currency strings (e.g. 1234.56 USD → '$1,234.56', EUR in German locale → '1.234,56 €'), returns currency symbol, decimal separator, grouping separator, and currency name. Pure computation — no API key, no upstream latency. Supports 150+ currencies and custom locale overrides. Use for: financial report generation, invoice display, DeFi amount formatting, cross-regional price display.",

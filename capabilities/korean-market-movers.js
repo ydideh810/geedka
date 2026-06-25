@@ -65,7 +65,7 @@ function formatTicker(t, usdPerKrw) {
 
 export default {
   name:  "korean-market-movers",
-  price: "$0.039",
+  price: "$0.059",
 
   description:
     "Real-time movers and volume-spike leaders across all KRW-denominated markets on Upbit (South Korea's largest crypto exchange). Returns top risers, top fallers, and top volume leaders ranked by 24h change or accumulated trade value. Korean exchange data is a leading indicator frequently observed by institutional agents — the 'kimchi premium' and local retail sentiment often precede global price moves. Free upstream source (Upbit public API), covers 260+ KRW markets.",

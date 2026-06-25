@@ -80,7 +80,7 @@ function score(ap, kw, cc) {
 
 export default {
   name: "city-lookup",
-  price: "$0.014",
+  price: "$0.034",
   description:
     "Search airports and cities by keyword, IATA code, or city name. Returns IATA/ICAO codes, coordinates, country, and timezone for each match — useful for travel planning, routing, and geographic enrichment.",
   inputSchema: {

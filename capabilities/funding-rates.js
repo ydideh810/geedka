@@ -15,7 +15,7 @@ const UA     = "Mozilla/5.0 (compatible; the-stall/1.1; +https://intuitek.ai)";
 
 export default {
   name: "funding-rates",
-  price: "$0.039",
+  price: "$0.059",
 
   description:
     "Returns current perpetual funding rates for 200+ assets on Hyperliquid DEX, sorted by absolute funding magnitude. Includes 8-hour and annualized rates, open interest, mark price, and directional signal (longs-pay or shorts-pay). Use before entering a perpetual position to factor funding cost/income into strategy ROI, or to scan for high-rate short-bias opportunities in delta-neutral strategies.",

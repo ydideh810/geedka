@@ -14,7 +14,7 @@ const TIMEOUT_MS = 8000;
 
 export default {
   name:  "pypi-lookup",
-  price: "$0.014",
+  price: "$0.034",
 
   description:
     "Python package metadata from PyPI. Returns latest version, summary, author, license, Python version requirement, install dependencies, release date, and download URLs. Also supports fetching a specific version. Use before integrating a Python library: check if it's actively maintained, what license it uses, and whether it's compatible with your Python version. Free upstream: PyPI JSON API (no key, no rate limit for normal use).",

@@ -192,7 +192,7 @@ function round8(n) {
 
 export default {
   name: "unit-converter",
-  price: "$0.014",
+  price: "$0.034",
 
   description:
     "Converts between 100+ units across 12 categories: length, weight, temperature, volume, speed, area, energy, pressure, data, time, angle, frequency. Handles mixed-case inputs (km, KM, Km all work). Returns the converted value plus all common units in the same category. Zero external calls — pure math.",

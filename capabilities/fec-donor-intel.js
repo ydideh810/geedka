@@ -60,7 +60,7 @@ function normalizeDonation(item) {
 
 export default {
   name: "fec-donor-intel",
-  price: "$0.014",
+  price: "$0.034",
 
   description:
     "FEC campaign finance lookup — search all US federal political donations by individual or organization name. Returns recent contributions (sorted newest-first) with committee names, donation amounts, election cycles, employer/occupation, and aggregate totals (total donated, number of contributions, committees supported). Official FEC Open Data, updated daily. Use for executive due diligence, political affiliation screening, ESG analysis, or investigative research.",

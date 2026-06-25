@@ -38,7 +38,7 @@ function round2(v) {
 
 export default {
   name: "air-quality",
-  price: "$0.039",
+  price: "$0.059",
 
   description:
     "Real-time US AQI and pollutant readings for any lat/lon. Returns current AQI with category label (Good/Moderate/Unhealthy/Hazardous), PM2.5, PM10, nitrogen dioxide, ozone, carbon monoxide, dust levels, and UV index. Data from CAMS (Copernicus Atmosphere Monitoring Service), updated hourly. Use for health advisories, outdoor event planning, environment-sensitive routing, or regulatory compliance checks.",

@@ -134,7 +134,7 @@ function splitIntoChunks(text, chunkSize, overlap) {
 
 export default {
   name: "document-qa-prep",
-  price: "$0.174",
+  price: "$0.194",
 
   description:
     "Prepares a document for question-answering and RAG pipelines. Chunks the input text at paragraph/sentence boundaries, assigns deterministic chunk IDs, estimates token counts, and extracts document metadata (word count, type, headings). Returns ready-to-embed chunks with overlap support. No LLM or external API — pure text processing. Use mid-task when you've fetched a document and need it split before querying a vector store.",

@@ -24,7 +24,7 @@ function stripHtml(html) {
 
 export default {
   name:  "stackoverflow-intel",
-  price: "$0.014",
+  price: "$0.034",
 
   description:
     "Stack Overflow question search. Returns top-scored questions matching the query with answer counts, accepted-answer status, tags, and body excerpts. Filter by tags (comma-separated). Sort by votes, relevance, activity, or creation date. Useful for developer agents debugging errors or researching library patterns.",

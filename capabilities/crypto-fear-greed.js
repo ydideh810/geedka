@@ -37,7 +37,7 @@ function regime(score) {
 
 export default {
   name:  "crypto-fear-greed",
-  price: "$0.039",
+  price: "$0.059",
 
   description:
     "Crypto Fear & Greed Index — current score (0=extreme fear, 100=extreme greed), 7-day trend, 30-day min/max/avg, and trading regime signal. Free alternative.me data updated daily. $0.005/call.",

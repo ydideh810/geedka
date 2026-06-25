@@ -48,7 +48,7 @@ async function fetchPage(pageNum) {
 
 export default {
   name:  "polymarket-category-performance",
-  price: "$0.014",
+  price: "$0.034",
 
   description:
     "Polymarket category activity breakdown: volume, liquidity, market count, and top market per category (crypto, politics, sports, ai, macro, equities). Shows where trading activity is concentrated. Optionally filter to one category. $0.004/call — 20% below closest x402 competitor. Source: Polymarket public API (no key required).",

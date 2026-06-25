@@ -89,7 +89,7 @@ function parseForm144Xml(xml) {
 
 export default {
   name: "form-144-intel",
-  price: "$0.077",
+  price: "$0.097",
   description: "Retrieves SEC Form 144 planned insider sale filings for a US public company — earlier signal than Form 4 (post-trade). Returns seller name, role, shares planned for sale, market value, approximate sale date, and acquisition type (RSU, open market, etc.).",
   inputSchema: {
     type: "object",

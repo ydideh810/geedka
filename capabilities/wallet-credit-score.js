@@ -147,7 +147,7 @@ function recommendation(t) {
 
 export default {
   name: "wallet-credit-score",
-  price: "$0.039",
+  price: "$0.059",
 
   description:
     "Composite credit score (0–100) for any EVM wallet. Aggregates Ethereum and Base transaction count, account balance, USDC holdings, and multi-chain footprint into a single trustworthiness score with tier label (PRIME / ESTABLISHED / ACTIVE / SPARSE / DORMANT). Use before sending payments, routing agent transactions, or assessing counterparty risk in automated workflows. Priced 46% below x402node.dev equivalent.",

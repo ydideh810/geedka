@@ -130,7 +130,7 @@ function parseInfoTable(xmlText) {
 
 export default {
   name: "hedge-fund-holdings",
-  price: "$0.097",
+  price: "$0.117",
 
   description:
     "Returns top stock holdings from any institution's latest SEC 13F filing. Input: institution name (e.g. 'Renaissance Technologies', 'Bridgewater Associates'). Output: top 25 positions by market value with shares, value, and portfolio weight. No API key. SEC EDGAR source. $0.025 vs $25-50/mo Quiver Quant subscription.",

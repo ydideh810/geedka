@@ -42,7 +42,7 @@ function formatFiscalYearEnd(mmdd) {
 
 export default {
   name:  "company-intel",
-  price: "$0.039",
+  price: "$0.059",
 
   description:
     "Returns SEC EDGAR due diligence data for any US public company by ticker symbol: legal name, CIK, SIC industry code and description, state of incorporation, fiscal year end, SEC filer category, primary business location, and 2-year filing history (10-K/10-Q/8-K counts and most-recent dates). Use before any agent task involving US public company identification, regulatory filing assessment, financial analysis, or industry classification. Free upstream: SEC EDGAR public API (US government data, no key required, always current).",

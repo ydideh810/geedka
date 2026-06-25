@@ -233,7 +233,7 @@ async function byArea({ airport, lamin, lomin, lamax, lomax, radius_deg = 0.5, l
 
 export default {
   name: "flight-tracker",
-  price: "$0.010",
+  price: "$0.030",
 
   description:
     "Real-time global flight positions via OpenSky Network ADS-B. icao24 mode: locate any aircraft by its 6-hex transponder code — returns altitude (ft), speed (kts), heading, vertical rate, squawk. callsign mode: find a flight by ICAO callsign (e.g. 'AAL123', 'UAL456') across CONUS or globally. area mode: all flights near an airport (IATA code) or within a lat/lon bounding box — returns up to 50 flights sorted by altitude. No API key. Coverage: US/Europe near-complete, oceans partial.",

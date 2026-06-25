@@ -11,7 +11,7 @@ import predictionMarkets from "./prediction-markets.js";
 
 export default {
   name: "intel-pack",
-  price: "$0.090",
+  price: "$0.110",
 
   description:
     "Three-source intelligence pack in one x402 call: equity market snapshot (SPY/QQQ/IWM/VIX/risk signal) + top DeFi yield pools by APY + top prediction markets by volume. Replaces three separate calls. $0.109 purchased individually; $0.09 as a pack. No inputs required.",

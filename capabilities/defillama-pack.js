@@ -92,7 +92,7 @@ async function fetchTokenPrices(geckoIds) {
 
 export default {
   name:  "defillama-pack",
-  price: "$0.039",
+  price: "$0.059",
 
   description:
     "DeFi research pack: returns TVL, chain breakdown, fees, and native token price for 1–3 protocols in one call. Collapses the defillama-protocol + defillama-coin-price 2-call chain at 70% of combined cost ($0.034→$0.024). Same DefiLlama upstreams, zero auth.",

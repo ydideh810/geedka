@@ -63,7 +63,7 @@ async function fetchMovers(limit, order) {
 
 export default {
   name:  "crypto-pulse",
-  price: "$0.039",
+  price: "$0.059",
 
   description:
     "Crypto market pulse — latest Ethereum (or Base) block context plus top crypto gainers and losers by 24h change, in a single call. Returns: block_number, timestamp, gas info (base_fee_gwei, gas_used/limit, tx_count), and top movers (symbol, name, price_usd, change_24h, volume_24h, market_cap). Use for crypto portfolio context, on-chain/market correlation, or pre-trade situational awareness. Free upstream: DRPC + CoinGecko. $0.007/call — 30% below the comparable two-endpoint chain.",

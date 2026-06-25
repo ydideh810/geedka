@@ -122,7 +122,7 @@ export default {
     "offer amount. Structured extraction WITH summary analytics AND deal counts — richer than " +
     "raw scraped calendars. Use section='upcoming' for near-term deal flow, section='priced' " +
     "for post-IPO watchlist setup, section='all' for complete week view.",
-  price: "$0.020",
+  price: "$0.040",
   inputSchema: {
     type: "object",
     properties: {

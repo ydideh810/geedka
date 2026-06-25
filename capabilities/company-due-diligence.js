@@ -203,7 +203,7 @@ function buildRiskFlags(edgar, website, domain) {
 
 export default {
   name: "company-due-diligence",
-  price: "$0.338",
+  price: "$0.358",
 
   description:
     "AI-agent due diligence on any company. Queries SEC EDGAR for public company data (CIK, ticker, SIC, address, filing history) and optionally analyzes the company website for contact details, social profiles, and legitimacy signals. Returns a structured report with risk flags. Accepts company name plus optional domain.",

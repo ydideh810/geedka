@@ -123,7 +123,7 @@ async function getChainGas(chain) {
 
 export default {
   name:  "gas-prices",
-  price: "$0.039",
+  price: "$0.059",
 
   description:
     "Current gas prices and EIP-1559 fee recommendations across 6 major EVM chains: Ethereum, Base, Arbitrum, Optimism, Polygon, BNB Chain. Returns base fee, priority fee percentiles (slow/standard/fast), and estimated ETH/MATIC/BNB cost for a standard 21k-gas transfer. All sourced from free public RPC endpoints — no API key needed. Use before sending on-chain transactions, estimating agent operating costs, or comparing chain fees for routing decisions.",

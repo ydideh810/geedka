@@ -29,7 +29,7 @@ async function fetchJSON(url) {
 
 export default {
   name: "base-season",
-  price: "$0.014",
+  price: "$0.034",
 
   description:
     "Base chain season snapshot: total chain TVL, top 10 protocols by Base-native TVL, category breakdown, 7d trend, and top Base ecosystem tokens by market cap. No input required — agents use this for pre-trade orientation before DeFi, lending, or liquidity calls on Base.",

@@ -32,7 +32,7 @@ function innerText(html) {
 
 export default {
   name: "web-scrape-links",
-  price: "$0.039",
+  price: "$0.059",
 
   description:
     "Extracts all hyperlinks from any public webpage. Returns href URLs normalized to absolute URLs with visible link text. Filters out javascript:, mailto:, data: schemes. Optionally restrict to same-domain links, deduplicate, or include #anchor links. Useful for crawlers, sitemap builders, link graph analysis, and content audits.",

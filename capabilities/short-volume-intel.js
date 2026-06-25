@@ -58,7 +58,7 @@ async function fetchShortForDate(dateStr, ticker) {
 
 export default {
   name: "short-volume-intel",
-  price: "$0.014",
+  price: "$0.034",
 
   description:
     "Daily FINRA consolidated short-sale volume for any US equity ticker: short volume, total volume, and short ratio (short/total) for the last N trading days. Useful for detecting crowded short positions and short-squeeze setups. Free FINRA CDN upstream, no API key.",

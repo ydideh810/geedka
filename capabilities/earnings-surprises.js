@@ -76,7 +76,7 @@ function isoDate(epochSec) {
 
 export default {
   name: "earnings-surprises",
-  price: "$0.039",
+  price: "$0.059",
 
   description:
     "Historical EPS beat/miss data for any US equity: actual EPS, consensus estimate, surprise %, beat rate, estimate revisions (30-day EPS drift), and next earnings date. Free Yahoo Finance data, no API key. Pairs with analyst-ratings and equity-fundamentals for a complete earnings intelligence stack.",

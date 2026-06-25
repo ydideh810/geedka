@@ -42,7 +42,7 @@ function toBlockParam(number) {
 
 export default {
   name:  "eth-block",
-  price: "$0.039",
+  price: "$0.059",
 
   description:
     "Returns an Ethereum block header and transaction hashes by block number, hex string, or tag (latest/pending/earliest/safe/finalized). Fields: block_number, hash, parent_hash, miner, timestamp_iso, gas_used, gas_limit, base_fee_gwei (EIP-1559), tx_count, transaction_hashes. Supports Ethereum (default), Base, Polygon, and Arbitrum. $0.004/call.",
