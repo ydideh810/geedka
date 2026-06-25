@@ -2579,6 +2579,117 @@
       }
     },
     {
+      "name": "flight-tracker",
+      "description": "Real-time global flight positions via OpenSky Network ADS-B. icao24 mode: locate any aircraft by its 6-hex transponder code \u2014 returns altitude (ft), speed (kts), heading, vertical rate, squawk. callsign mode: find a flight by ICAO callsign (e.g. 'AAL123', 'UAL456') across CONUS or globally. area mode: all flights near an airport (IATA code) or within a lat/lon bounding box \u2014 returns up to 50 flights sorted by altitude. No API key. Coverage: US/Europe near-complete, oceans partial.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "mode": {
+            "type": "string",
+            "enum": [
+              "icao24",
+              "callsign",
+              "area"
+            ],
+            "description": "icao24: lookup by transponder hex | callsign: find flight by ICAO callsign | area: all flights near a location"
+          },
+          "icao24": {
+            "type": "string",
+            "description": "6-hex ICAO24 transponder code for icao24 mode. Example: 'a6a7ad'."
+          },
+          "callsign": {
+            "type": "string",
+            "description": "ICAO airline callsign for callsign mode. Use 3-letter ICAO codes: 'AAL123' (American), 'UAL456' (United), 'DAL789' (Delta), 'SWA101' (Southwest), 'BAW7' (British Airways)."
+          },
+          "global": {
+            "type": "boolean",
+            "description": "For callsign mode: search globally instead of CONUS-only. Default false."
+          },
+          "airport": {
+            "type": "string",
+            "description": "IATA airport code for area mode. Examples: 'ORD', 'LAX', 'JFK', 'LHR', 'DXB'."
+          },
+          "radius_deg": {
+            "type": "number",
+            "description": "Radius in degrees for area mode with airport. Default 0.5 (~30 nmi)."
+          },
+          "lamin": {
+            "type": "number",
+            "description": "Min latitude for area mode bounding box."
+          },
+          "lomin": {
+            "type": "number",
+            "description": "Min longitude for area mode bounding box."
+          },
+          "lamax": {
+            "type": "number",
+            "description": "Max latitude for area mode bounding box."
+          },
+          "lomax": {
+            "type": "number",
+            "description": "Max longitude for area mode bounding box."
+          },
+          "limit": {
+            "type": "number",
+            "description": "Max flights to return in area mode. Default 50, max 100."
+          }
+        },
+        "required": [
+          "mode"
+        ]
+      },
+      "outputSchema": {
+        "type": "object",
+        "properties": {
+          "found": {
+            "type": "boolean"
+          },
+          "icao24": {
+            "type": "string"
+          },
+          "callsign": {
+            "type": "string"
+          },
+          "flight": {
+            "type": "object"
+          },
+          "matches": {
+            "type": "array"
+          },
+          "partial_matches": {
+            "type": "array"
+          },
+          "area": {
+            "type": "string"
+          },
+          "total_flights": {
+            "type": "integer"
+          },
+          "airborne": {
+            "type": "integer"
+          },
+          "on_ground": {
+            "type": "integer"
+          },
+          "flights": {
+            "type": "array"
+          },
+          "search_area": {
+            "type": "string"
+          },
+          "total_flights_in_search": {
+            "type": "integer"
+          },
+          "source": {
+            "type": "string"
+          },
+          "note": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    {
       "name": "fomc-tracker",
       "description": "US Federal Funds Rate, next FOMC meeting date + countdown, rate trend (hiking/holding/cutting), and full 2026 schedule. FRED public CSV + static calendar. Pairs with treasury-yields and credit-spreads.",
       "inputSchema": {
