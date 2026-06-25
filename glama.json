@@ -1,7 +1,7 @@
 {
   "$schema": "https://glama.ai/mcp/schemas/server.json",
   "name": "The Stall",
-  "description": "237 pay-per-call AI data tools via MCP + x402 \u2014 no API keys, no accounts. Finance: US/global equities, options chains, earnings calendars, analyst ratings, SEC/EDGAR filings, congressional trades, macro indicators. Crypto: DeFi yields, wallet risk scoring, token security, gas prices, on-chain intel, prediction markets. Research & Intel: arXiv papers, news synthesis, company intelligence, OSINT, weather, aviation, historical climate (ERA5), and 200+ more. Pay USDC on Base (x402) or Stripe prepaid credits. Remote MCP: https://the-stall.intuitek.ai/mcp.",
+  "description": "247 pay-per-call AI data tools via MCP + x402 \u2014 no API keys, no accounts. Finance: US/global equities, options chains, earnings calendars, analyst ratings, SEC/EDGAR filings, congressional trades, macro indicators. Crypto: DeFi yields, wallet risk scoring, token security, gas prices, on-chain intel, prediction markets. Research & Intel: arXiv papers, news synthesis, company intelligence, OSINT, weather, aviation, historical climate (ERA5), and 200+ more. Pay USDC on Base (x402) or Stripe prepaid credits. Remote MCP: https://the-stall.intuitek.ai/mcp.",
   "maintainers": [
     "thebrierfox"
   ],
@@ -3804,6 +3804,39 @@
         },
         "required": [],
         "additionalProperties": false
+      }
+    },
+    {
+      "name": "merger-acquisition-intel",
+      "description": "SEC EDGAR M&A activity tracker for US public companies. Mode company (ticker): returns all M&A-related EDGAR filings \u2014 incoming tender offers (SC TO-T), going-private (SC 13E-3), merger proxies (DEFM14A/PREM14A), issuer self-tenders (SC TO-I). Mode recent: market-wide feed of tender offers, going-private transactions, and definitive merger proxies in the last N days. Authoritative SEC data, updated within minutes of filing. Pairs with activist-investor-intel. $0.020/call.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "ticker": {
+            "type": "string",
+            "description": "US public company ticker symbol (e.g. TSLA, AAPL). Check if a specific company has M&A filings."
+          },
+          "mode": {
+            "type": "string",
+            "enum": [
+              "company",
+              "recent"
+            ],
+            "description": "'company' returns M&A filings for that ticker. 'recent' returns market-wide M&A activity in the last N days."
+          },
+          "days": {
+            "type": "integer",
+            "description": "For mode=recent: calendar days back to search (default 30, max 365).",
+            "minimum": 1,
+            "maximum": 365
+          },
+          "limit": {
+            "type": "integer",
+            "description": "Max results to return (default 20, max 50).",
+            "minimum": 1,
+            "maximum": 50
+          }
+        }
       }
     },
     {
