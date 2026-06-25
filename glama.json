@@ -6421,6 +6421,62 @@
           }
         }
       }
+    },
+    {
+      "name": "github-intel",
+      "description": "GitHub repository intelligence: stars, forks, contributors, releases, open issues, and weekly commit activity. Compare up to 4 repos side-by-side or search GitHub for repos by keyword, language, and topic. Use to evaluate library health before adopting a dependency, find the top maintainers of a project, track release cadence, or benchmark competing frameworks. Authenticated (5000 req/hr). Actions: repo | contributors | releases | issues | commit_activity | compare | search.",
+      "inputSchema": {
+        "type": "object",
+        "required": [
+          "action"
+        ],
+        "properties": {
+          "action": {
+            "type": "string",
+            "enum": [
+              "repo",
+              "contributors",
+              "releases",
+              "issues",
+              "commit_activity",
+              "compare",
+              "search"
+            ],
+            "description": "repo: full metadata. contributors: top 30 committers. releases: latest 10 releases + download counts. issues: 10 recent open issues. commit_activity: 52-week weekly commit trend. compare: side-by-side metrics for \u22644 repos. search: find repos by keyword."
+          },
+          "repo": {
+            "type": "string",
+            "description": "Repository in owner/repo format (e.g. 'facebook/react', 'anthropics/claude-code'). Full GitHub URLs also accepted. Required for repo, contributors, releases, issues, commit_activity."
+          },
+          "repos": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "maxItems": 4,
+            "description": "Array of owner/repo strings for compare action (2\u20134 repos)."
+          },
+          "query": {
+            "type": "string",
+            "description": "Search query for search action (e.g. 'vector database', 'llm agent framework')."
+          },
+          "language": {
+            "type": "string",
+            "description": "Filter search results by programming language (e.g. 'Python', 'TypeScript')."
+          },
+          "topic": {
+            "type": "string",
+            "description": "Filter search results by GitHub topic (e.g. 'machine-learning', 'mcp')."
+          },
+          "limit": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 30,
+            "description": "Max search results to return (default 10, max 30)."
+          }
+        },
+        "additionalProperties": false
+      }
     }
   ]
 }
