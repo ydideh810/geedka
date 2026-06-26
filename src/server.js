@@ -720,9 +720,9 @@ app.get("/llms.txt", (_req, res) => {
     return ` | ?${parts.join('&')}`;
   }
   // Revenue-proven caps — ordered by actual USDC organic earnings (settlement.jsonl).
-  // Last updated: 2026-06-24. youtube-intel #1 (30/day), then finance/research cluster.
-  const PRIORITY_CAPS = ['youtube-intel','earnings-calendar','credit-spreads','crypto-top-movers',
-    'research-synthesis','market-overview','macro-brief','market-intelligence'];
+  // Last updated: 2026-06-26. youtube-intel #1 (82 organic), stock-price-multi #2 (58), earnings-calendar #3 (39), us-stock-price #4 (23), crypto-top-movers #5 (22).
+  const PRIORITY_CAPS = ['youtube-intel','stock-price-multi','earnings-calendar','crypto-top-movers',
+    'research-synthesis','us-stock-price','equity-fundamentals','dex-swap-quote'];
   const prioritySection = `## Highest-Value Caps — Proven x402 Conversions\n\n${PRIORITY_CAPS.map(n => {
     const cap = capabilities.find(c => c.name === n);
     if (!cap) return null;
