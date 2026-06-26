@@ -7109,6 +7109,66 @@
         },
         "additionalProperties": false
       }
+    },
+    {
+      "name": "llm-proxy",
+      "description": "LLM inference proxy \u2014 pay USDC, get AI responses without managing API keys. Accepts a prompt and optional system instruction, forwards to OpenAI, returns the completion. Supports gpt-4o-mini (default, fast and cost-efficient) or gpt-4o (more capable). Agents that already hold USDC on Base can call this to run one-off LLM tasks without onboarding to OpenAI. Max 2,000 output tokens per call. Price: $0.010/call.",
+      "inputSchema": {
+        "type": "object",
+        "required": [
+          "prompt"
+        ],
+        "properties": {
+          "prompt": {
+            "type": "string",
+            "description": "The user message / task to send to the LLM."
+          },
+          "system": {
+            "type": "string",
+            "description": "Optional system prompt. Sets the persona or role for the model."
+          },
+          "model": {
+            "type": "string",
+            "enum": [
+              "gpt-4o-mini",
+              "gpt-4o"
+            ],
+            "description": "Model to use. Default: gpt-4o-mini."
+          },
+          "max_tokens": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 2000,
+            "description": "Maximum output tokens. Default: 500."
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    {
+      "name": "youtube-revenue-estimate",
+      "description": "Estimates a YouTube channel's monthly ad revenue using public view data + industry CPM benchmarks. Returns a low/mid/high monthly revenue range, detected content category (finance, crypto, tech, gaming, etc.), estimated monthly views, RPM tier, and confidence level. Accepts @handle, channel URL, or UCxxxxxxxx channel ID. No API key required. Price: $0.025/call.",
+      "inputSchema": {
+        "type": "object",
+        "required": [
+          "channel"
+        ],
+        "properties": {
+          "channel": {
+            "type": "string",
+            "description": "YouTube channel @handle (e.g. @MrBeast), full URL, or UC... channel ID."
+          },
+          "currency": {
+            "type": "string",
+            "enum": [
+              "USD"
+            ],
+            "description": "Output currency. Only USD supported.",
+            "default": "USD"
+          }
+        },
+        "additionalProperties": false
+      }
     }
   ],
   "version": "4.80.0"
