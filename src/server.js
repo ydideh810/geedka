@@ -926,9 +926,15 @@ const stripeRail = mountStripeRail(app, {
 });
 app.use(stripeRail.fiatGate);
 
-// x402 paywall — bypassed when the fiat gate already authorized this request.
+// x402 paywall — bypassed when the fiat gate already authorized this request,
+// or when the caller presents the internal service key (provider self-calls).
 const x402Middleware = buildPaymentMiddleware({ payTo: PAY_TO, network: NETWORK, facilitator: FACILITATOR, capabilities });
-app.use((req, res, next) => (req.fiatPaid ? next() : x402Middleware(req, res, next)));
+const STALL_INTERNAL_KEY = process.env.STALL_INTERNAL_KEY || null;
+app.use((req, res, next) => {
+  if (req.fiatPaid) return next();
+  if (STALL_INTERNAL_KEY && req.headers["x-internal-key"] === STALL_INTERNAL_KEY) return next();
+  return x402Middleware(req, res, next);
+});
 
 // ── Retainer mount (subscription shape — POST /v1/subscribe/:plan + GET /v1/risk/:address) ──
 const { plans } = mountRetainer(app, {
