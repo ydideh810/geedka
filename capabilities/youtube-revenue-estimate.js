@@ -78,10 +78,12 @@ function channelUrl(input) {
   return `https://www.youtube.com/@${s}/videos`;
 }
 
+import { execFile } from "node:child_process";
+import { promisify } from "node:util";
+const execFileAsync = promisify(execFile);
+
 async function runYtDlp(args) {
-  const { execFile } = await import("node:child_process");
-  const { promisify } = await import("node:util");
-  return promisify(execFile)(YTDLP, args, { timeout: 60_000, maxBuffer: 8 * 1024 * 1024 });
+  return execFileAsync(YTDLP, args, { timeout: 90_000, maxBuffer: 50 * 1024 * 1024, encoding: "utf8" });
 }
 
 export default {
@@ -141,40 +143,50 @@ export default {
     const { channel } = query;
     const url = channelUrl(channel);
 
-    // Fetch channel metadata + recent videos with one yt-dlp call.
+    // Fetch video metadata as NDJSON (one JSON per line, includes view_count).
+    // --dump-json --no-download matches the youtube-channel-analytics seam.
     const { stdout } = await runYtDlp([
-      "--flat-playlist",
+      "--dump-json", "--no-download", "--no-warnings", "-q",
       "--playlist-end", String(VIDEO_LIMIT),
-      "--dump-single-json",
-      "--no-warnings",
       url,
     ]);
 
-    const data = JSON.parse(stdout);
+    // Parse NDJSON — each line is a full video object.
+    const entries = [];
+    for (const line of stdout.split("\n")) {
+      const t = line.trim();
+      if (!t) continue;
+      try { entries.push(JSON.parse(t)); } catch { /* skip */ }
+    }
 
-    const channelName = data.channel ?? data.title ?? data.uploader ?? null;
-    const channelId   = data.channel_id ?? data.id ?? null;
-    const subscribers = data.channel_follower_count ?? null;
+    if (entries.length === 0) {
+      throw new Error("No videos found. Check the channel handle/URL. Private or terminated channels return no results.");
+    }
+
+    // Channel info lives on any video entry.
+    const first = entries[0];
+    const channelName = first.channel ?? first.uploader ?? null;
+    const channelId   = first.channel_id ?? null;
+    const subscribers = first.channel_follower_count ?? null;
 
     // Build profile text for category detection.
     const profileText = [
       channelName ?? "",
-      data.description ?? "",
-      ...(data.tags ?? []),
-      ...(data.entries?.slice(0, 5).map(e => e.title ?? "") ?? []),
+      first.description ?? "",
+      ...(first.tags ?? []),
+      ...entries.slice(0, 8).map(e => e.title ?? ""),
     ].join(" ");
 
     const category = detectCategory(profileText);
     const cpmBracket = CPM[category] ?? CPM.general;
 
-    // Estimate uploads per month from recent video timestamps.
-    const entries = (data.entries ?? []).filter(e => e.view_count != null || e.timestamp != null);
-    const views   = entries.map(e => e.view_count).filter(v => v != null && v > 0);
+    // View counts per video.
+    const views = entries.map(e => e.view_count).filter(v => v != null && v > 0);
     const avgViews = views.length > 0
       ? Math.round(views.reduce((a, b) => a + b, 0) / views.length)
       : null;
 
-    // Use upload timestamps to estimate cadence (videos per month).
+    // Upload cadence from video timestamps.
     const timestamps = entries.map(e => e.timestamp ?? e.release_timestamp).filter(Boolean);
     let videosPerMonth = null;
     if (timestamps.length >= 2) {
