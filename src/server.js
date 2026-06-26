@@ -14,7 +14,7 @@
 
 import "dotenv/config";
 import express from "express";
-import { appendFileSync, mkdirSync, readFileSync } from "fs";
+import { appendFileSync, mkdirSync, readFileSync, existsSync } from "fs";
 import { join, dirname } from "path";
 import { fileURLToPath } from "url";
 import { loadCapabilities } from "./registry.js";
@@ -221,6 +221,30 @@ let retainerPlans = {}; // populated by mountRetainer after payment middleware b
 app.get("/health", (_req, res) =>
   res.json({ ok: true, network: NETWORK, capabilities: capabilities.map((c) => c.name) })
 );
+
+app.get("/logo.png", (_req, res) => {
+  const logoPath = join(__dir, "../assets/logo.png");
+  try {
+    const data = readFileSync(logoPath);
+    res.setHeader("Content-Type", "image/png");
+    res.setHeader("Cache-Control", "public, max-age=86400");
+    res.end(data);
+  } catch (_) {
+    res.status(404).end();
+  }
+});
+
+app.get("/avatar.png", (_req, res) => {
+  const avatarPath = join(__dir, "../assets/avatar.png");
+  try {
+    const data = readFileSync(avatarPath);
+    res.setHeader("Content-Type", "image/png");
+    res.setHeader("Cache-Control", "public, max-age=86400");
+    res.end(data);
+  } catch (_) {
+    res.status(404).end();
+  }
+});
 
 app.get("/catalog", (_req, res) =>
   res.json({
