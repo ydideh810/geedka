@@ -586,6 +586,31 @@
       }
     },
     {
+      "name": "cdp-market-depth",
+      "description": "Real-time Coinbase order book depth and market microstructure for any crypto trading pair (BTC-USD, ETH-USD, SOL-USD, etc.). Returns best bid/ask spread, 24h price stats (high, low, volume, % change), top-N bids and asks with cumulative notional, order pressure ratio (bid vs ask volume), and the last 5 executed trades. Sourced direct from Coinbase Advanced Trade API \u2014 exchange-native, not CoinGecko aggregator delay. Ideal for pre-execution analysis, spread-cost estimation, and market timing.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "product_id": {
+            "type": "string",
+            "description": "Coinbase product ID in BASE-QUOTE format, e.g. BTC-USD, ETH-USD, SOL-USD, ETH-BTC, CBBTC-USDC. Case-insensitive.",
+            "default": "BTC-USD"
+          },
+          "depth": {
+            "type": "integer",
+            "description": "Number of order book levels to return on each side (bids + asks). 3, 5, or 10. Default 5.",
+            "enum": [
+              3,
+              5,
+              10
+            ],
+            "default": 5
+          }
+        },
+        "required": []
+      }
+    },
+    {
       "name": "chain-pulse",
       "description": "Returns an Ethereum block header + current stablecoin depeg status in one call. Collapses the eth-block \u2192 stablecoin-watch 2-hop chain. Block fields: number, hash, miner, timestamp, gas_used, tx_count. Stablecoin fields: symbol, price, peg_deviation, depeg_status, composite alert level. Supports Ethereum, Base, Polygon, Arbitrum. Free upstreams (DRPC + DeFiLlama), no API key required.",
       "inputSchema": {
@@ -7171,5 +7196,5 @@
       }
     }
   ],
-  "version": "4.80.0"
+  "version": "4.81.2"
 }
