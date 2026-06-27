@@ -7194,7 +7194,25 @@
         },
         "additionalProperties": false
       }
+    },
+    {
+      "name": "retail-sector-brief",
+      "description": "AI-synthesized US retail sector briefing: XRT/XLY/XLP ETF signals, major retailer stock performance (AMZN/WMT/TGT/COST/HD/LOW), derived risk-appetite and sector-alpha scores, and GPT-4o-mini synthesis into regime classification + narrative. Companion to consumer-brief (macro signals) \u2014 this covers real-time equity signals. $0.35/call vs assembling 10+ Yahoo Finance lookups manually.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "style": {
+            "type": "string",
+            "enum": [
+              "standard",
+              "concise"
+            ],
+            "description": "Output length. 'standard' = 160-200 word narrative (default). 'concise' = 110-130 word summary."
+          }
+        },
+        "additionalProperties": false
+      }
     }
   ],
-  "version": "4.81.2"
+  "version": "4.82.0"
 }

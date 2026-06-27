@@ -1,7 +1,7 @@
 {
   "name": "the-stall",
-  "version": "4.81.1",
-  "description": "270 pay-per-call AI data tools via MCP and x402 \u2014 no API keys required. YouTube video analytics (engagement rate, view velocity, VIRAL/HIGH_PERFORMING/AVERAGE/UNDERPERFORMING tier), YouTube keyword research (autocomplete + intent clusters), iOS App Store intel, CPI inflation trend signal, short interest squeeze risk, SEC insider trading, institutional ownership, activist investors, M&A intel, VC funding, equity fundamentals, options flow unusual sweep detection, earnings quality Beneish M-Score, on-chain address intelligence, and 258+ more. USDC on Base.",
+  "version": "4.82.0",
+  "description": "277 pay-per-call AI data tools via MCP and x402 \u2014 no API keys required. YouTube video analytics (engagement rate, view velocity, VIRAL/HIGH_PERFORMING/AVERAGE/UNDERPERFORMING tier), YouTube keyword research (autocomplete + intent clusters), iOS App Store intel, CPI inflation trend signal, short interest squeeze risk, SEC insider trading, institutional ownership, activist investors, M&A intel, VC funding, equity fundamentals, options flow unusual sweep detection, earnings quality Beneish M-Score, on-chain address intelligence, retail sector brief (XRT/XLY/XLP/AMZN/WMT/TGT/COST/HD/LOW with regime classification), and 267+ more. USDC on Base.",
   "type": "module",
   "main": "src/server.js",
   "scripts": {
