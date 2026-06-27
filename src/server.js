@@ -184,6 +184,9 @@ const PORT = process.env.PORT || 4021;
 const PAY_TO = process.env.WALLET_ADDRESS;
 const NETWORK = process.env.X402_NETWORK || "base-sepolia";
 const FACILITATOR = process.env.FACILITATOR_URL || "https://x402.org/facilitator";
+// DISCOVERY_FACILITATOR is what external agents see in /.well-known/x402.
+// Kept pointing at CDP even when FACILITATOR_URL is the local bypass proxy.
+const DISCOVERY_FACILITATOR = process.env.DISCOVERY_FACILITATOR_URL || FACILITATOR;
 
 const app = express();
 app.set("trust proxy", 1);
@@ -512,7 +515,7 @@ app.get("/.well-known/x402", (_req, res) =>
     url: BASE_URL,
     network: "base",
     currency: "USDC",
-    facilitator: FACILITATOR,
+    facilitator: DISCOVERY_FACILITATOR,
     paymentAddress: PAY_TO || null,
     payTo: PAY_TO || null,
     accepts: PAY_TO ? [{
@@ -645,6 +648,45 @@ app.get("/.well-known/mcp.json", (_req, res) =>
     contact: "kyle@intuitek.ai",
   })
 );
+
+// ── Hermes Agent skill discovery (/.well-known/skills/) ───────────────────────
+// Serves the stall-market-data skill for `hermes skills install well-known:URL`.
+// Files live at skills/stall-market-data/ and are read from disk so they can be
+// updated independently of this server.
+const SKILLS_DIR = join(__dir, "..", "skills");
+const SKILL_NAME = "stall-market-data";
+const SKILL_MD_PATH = join(SKILLS_DIR, SKILL_NAME, "SKILL.md");
+const SKILL_PY_PATH = join(SKILLS_DIR, SKILL_NAME, "scripts", "stall_client.py");
+
+app.get("/.well-known/skills/index.json", (_req, res) =>
+  res.json({
+    skills: [{
+      name: SKILL_NAME,
+      description: `Live multi-source equity, crypto & market data via STALL — ${capabilities.length}+ paid caps, no rate limits.`,
+      files: ["SKILL.md"],
+    }],
+  })
+);
+
+app.get(`/.well-known/skills/${SKILL_NAME}/SKILL.md`, (_req, res) => {
+  try {
+    const content = readFileSync(SKILL_MD_PATH, "utf8");
+    res.setHeader("Content-Type", "text/markdown; charset=utf-8");
+    res.send(content);
+  } catch (_) {
+    res.status(404).json({ error: "SKILL.md not found" });
+  }
+});
+
+app.get(`/.well-known/skills/${SKILL_NAME}/scripts/stall_client.py`, (_req, res) => {
+  try {
+    const content = readFileSync(SKILL_PY_PATH, "utf8");
+    res.setHeader("Content-Type", "text/plain; charset=utf-8");
+    res.send(content);
+  } catch (_) {
+    res.status(404).json({ error: "stall_client.py not found" });
+  }
+});
 
 // ── Public landing page — live traction signal ────────────────────────────────
 app.get("/", (_req, res) => {
