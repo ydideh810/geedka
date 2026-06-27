@@ -662,7 +662,7 @@ app.get("/.well-known/skills/index.json", (_req, res) =>
   res.json({
     skills: [{
       name: SKILL_NAME,
-      description: `Stock prices, earnings, crypto & market data — live, ${capabilities.length}+`,
+      description: `Live stock, earnings, analyst & crypto market data — no limits`,
       files: ["SKILL.md"],
     }],
   })
