@@ -753,7 +753,7 @@ app.get("/llms.txt", (_req, res) => {
     const price = cap.price?.replace('$','') || '?';
     // research-synthesis: special hint since query is optional
     const hint = n === 'research-synthesis'
-      ? ' | ?query=AI+agents+2025 (query optional — defaults to AI agents report)'
+      ? ' | ?query=your+topic (query optional — finance, macro, tech, research; defaults to AI agents report)'
       : paramHint(cap);
     // Add a short description for value clarity on high-ticket synthesis caps
     const shortDesc = cap.description ? ` — ${cap.description.split('.')[0].slice(0, 85)}` : '';

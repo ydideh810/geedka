@@ -178,14 +178,14 @@ export default {
   price: "$0.309",
 
   description:
-    "AI-synthesized intelligence report — aggregates Hacker News, OpenAlex academic papers, Reddit, arXiv preprints, and DuckDuckGo in parallel, then distills into a structured report: executive summary, key findings, market sentiment, emerging trends, and recommendations. Pass ?query=your+topic for targeted research (e.g. 'AI agent payment protocols 2025'). Omit query for a default AI agents & autonomous systems report.",
+    "AI-synthesized intelligence report on any topic — aggregates Hacker News, OpenAlex academic papers, Reddit, arXiv preprints, and DuckDuckGo in parallel, then distills into a structured report: executive summary, key findings, market sentiment, emerging trends, and recommendations. Works across domains: financial markets, macroeconomics, technology, life sciences, geopolitics, and more. Pass ?query=your+topic for targeted research. Omit query for a default AI agents & autonomous systems report.",
 
   inputSchema: {
     type: "object",
     properties: {
       query: {
         type: "string",
-        description: "Research query or topic (e.g. 'AI agent payment protocols 2025'). Omit for default AI agents report.",
+        description: "Research query or topic — works across any domain: financial markets (e.g. 'S&P 500 earnings outlook Q3 2026'), macroeconomics ('Fed rate policy impact on equities'), technology ('AI agent protocols 2025'), and more. Omit for default AI agents report.",
       },
       focus: {
         type: "string",
