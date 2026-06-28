@@ -42,12 +42,20 @@ const SCOPE = "cap:*"; // a fiat credit pass is valid against every /cap/* endpo
 const TOKEN_WINDOW_SECONDS = 60 * 60 * 24 * 30; // token validity 30d; credits are the real limit
 
 export function mountStripeRail(app, { signer, baseUrl, ledgerPath, log = console }) {
-  const secretKey = process.env.STRIPE_SECRET_KEY;
+  // Test key takes priority over live key — enables test mode with no real charges.
+  // STRIPE_SECRET_KEY_TEST=sk_test_... activates test mode; test webhook secret goes in STRIPE_WEBHOOK_SECRET_TEST.
+  const testKey = process.env.STRIPE_SECRET_KEY_TEST;
+  const liveKey = process.env.STRIPE_SECRET_KEY;
+  const secretKey = testKey || liveKey;
+  const isTestMode = testKey ? true : (liveKey?.startsWith("sk_test_") ?? false);
+
   if (!secretKey) {
-    log.warn?.("  [stripe-rail] STRIPE_SECRET_KEY not set — fiat rail DISABLED (x402 rail unaffected).");
-    return { enabled: false, fiatGate: (_req, _res, next) => next() };
+    log.warn?.("  [stripe-rail] No Stripe key — fiat rail DISABLED (x402 rail unaffected). Set STRIPE_SECRET_KEY_TEST (test) or STRIPE_SECRET_KEY (live) to enable.");
+    return { enabled: false, isTestMode: false, fiatGate: (_req, _res, next) => next(), getStripeChallenge: () => null };
   }
-  const webhookSecret = process.env.STRIPE_WEBHOOK_SECRET || null;
+  const webhookSecret = testKey
+    ? (process.env.STRIPE_WEBHOOK_SECRET_TEST || null)
+    : (process.env.STRIPE_WEBHOOK_SECRET || null);
   const stripe = new Stripe(secretKey);
 
   // ── Credit ledger (token jti -> remaining credits) ────────────────────────────
@@ -180,8 +188,18 @@ export function mountStripeRail(app, { signer, baseUrl, ledgerPath, log = consol
     return next();
   }
 
-  log.log?.("  [stripe-rail] ENABLED — fiat rail mounted at /v1/fiat/* (bundles: " + Object.keys(FIAT_BUNDLES).join(", ") + ")");
-  return { enabled: true, fiatGate, _stripe: stripe, _loadLedger: loadLedger };
+  // Returns a WWW-Authenticate challenge string for Stripe payment discovery.
+  // MPP-aware agents (e.g. Hermes stripe-link-cli) parse this to find the checkout endpoint.
+  function getStripeChallenge() {
+    return (
+      `Stripe realm="the-stall" checkout_url="${baseUrl}/v1/fiat/checkout"` +
+      ` bundles="starter:100calls:$5.00,pro:1000calls:$30.00,scale:10000calls:$200.00"` +
+      ` mode="${isTestMode ? "test" : "live"}"`
+    );
+  }
+
+  log.log?.(`  [stripe-rail] ENABLED (${isTestMode ? "TEST" : "LIVE"} mode) — fiat rail mounted at /v1/fiat/* (bundles: ${Object.keys(FIAT_BUNDLES).join(", ")})`);
+  return { enabled: true, isTestMode, fiatGate, getStripeChallenge, _stripe: stripe, _loadLedger: loadLedger };
 }
 
 // Local helpers so the webhook gets raw body while checkout gets JSON, without

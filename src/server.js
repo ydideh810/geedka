@@ -201,7 +201,7 @@ app.use((_req, res, next) => {
   res.header("Access-Control-Allow-Origin", "*");
   res.header("Access-Control-Allow-Methods", "GET, POST, OPTIONS");
   res.header("Access-Control-Allow-Headers", "Content-Type, X-PAYMENT, X-PAYMENT-RESPONSE, PAYMENT-REQUIRED, Authorization");
-  res.header("Access-Control-Expose-Headers", "X-PAYMENT-RESPONSE, PAYMENT-REQUIRED");
+  res.header("Access-Control-Expose-Headers", "X-PAYMENT-RESPONSE, PAYMENT-REQUIRED, WWW-Authenticate");
   next();
 });
 
@@ -222,7 +222,17 @@ let retainerPlans = {}; // populated by mountRetainer after payment middleware b
 
 // ── FREE introspection routes (not paywalled) ────────────────────────────────
 app.get("/health", (_req, res) =>
-  res.json({ ok: true, network: NETWORK, capabilities: capabilities.map((c) => c.name) })
+  res.json({
+    ok: true,
+    network: NETWORK,
+    capabilities: capabilities.map((c) => c.name),
+    rails: {
+      x402: true,
+      stripe: stripeRail?.enabled
+        ? { enabled: true, mode: stripeRail.isTestMode ? "test" : "live" }
+        : { enabled: false },
+    },
+  })
 );
 
 app.get("/logo.png", (_req, res) => {
@@ -967,6 +977,18 @@ app.use((_req, res, next) => {
   const _origJson = res.json.bind(res);
   res.json = function (body) {
     if (res.statusCode === 402) {
+      // Inject WWW-Authenticate advertising both payment rails to MPP-aware agents.
+      // Stripe (primary): credit bundles via /v1/fiat/checkout (no wallet/gas required).
+      // x402 (secondary): EIP-3009 USDC on Base — full challenge in PAYMENT-REQUIRED header.
+      if (!res.getHeader('WWW-Authenticate')) {
+        const parts = [];
+        if (stripeRail?.enabled) parts.push(stripeRail.getStripeChallenge());
+        if (PAY_TO) {
+          const chainId = (NETWORK === "base" || NETWORK === "eip155:8453") ? "eip155:8453" : "eip155:84532";
+          parts.push(`x402 network="${chainId}" to="${PAY_TO}" scheme="exact"`);
+        }
+        if (parts.length) res.setHeader('WWW-Authenticate', parts.join(', '));
+      }
       const prHeader = res.getHeader('PAYMENT-REQUIRED') || res.getHeader('payment-required');
       if (prHeader) {
         try {
