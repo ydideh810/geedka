@@ -76,7 +76,7 @@ export function mountStripeRail(app, { signer, baseUrl, ledgerPath, log = consol
       secretKey: mppSecret,
       methods: [ stripeServer.charge({
         secretKey,
-        networkId: "the-stall",
+        networkId: "profile_61UweIRyI13QlCJT9A6UweIQ4CSQFeBjk7GvJeOxUAzg",
         paymentMethodTypes: ["card"],
         amount: "5.00", currency: "usd", decimals: 2,
         description: "The Stall — 100 API credits ($5 bundle)",
