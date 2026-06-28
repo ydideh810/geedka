@@ -1,7 +1,7 @@
 {
   "name": "the-stall",
   "version": "4.82.0",
-  "description": "277 pay-per-call AI data tools via MCP and x402 \u2014 no API keys required. YouTube video analytics (engagement rate, view velocity, VIRAL/HIGH_PERFORMING/AVERAGE/UNDERPERFORMING tier), YouTube keyword research (autocomplete + intent clusters), iOS App Store intel, CPI inflation trend signal, short interest squeeze risk, SEC insider trading, institutional ownership, activist investors, M&A intel, VC funding, equity fundamentals, options flow unusual sweep detection, earnings quality Beneish M-Score, on-chain address intelligence, retail sector brief (XRT/XLY/XLP/AMZN/WMT/TGT/COST/HD/LOW with regime classification), and 267+ more. USDC on Base.",
+  "description": "277 pay-per-call AI data tools via MCP and x402 — no API keys required. YouTube video analytics (engagement rate, view velocity, VIRAL/HIGH_PERFORMING/AVERAGE/UNDERPERFORMING tier), YouTube keyword research (autocomplete + intent clusters), iOS App Store intel, CPI inflation trend signal, short interest squeeze risk, SEC insider trading, institutional ownership, activist investors, M&A intel, VC funding, equity fundamentals, options flow unusual sweep detection, earnings quality Beneish M-Score, on-chain address intelligence, retail sector brief (XRT/XLY/XLP/AMZN/WMT/TGT/COST/HD/LOW with regime classification), and 267+ more. USDC on Base.",
   "type": "module",
   "main": "src/server.js",
   "scripts": {
@@ -23,6 +23,7 @@
     "franc": "^6.2.0",
     "franc-all": "^7.2.0",
     "franc-min": "^6.2.0",
+    "mppx": "0.8.1",
     "stripe": "^22.2.2",
     "viem": "2.51.3",
     "zod": "3.25.76"

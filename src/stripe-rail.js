@@ -28,6 +28,9 @@ import { existsSync, readFileSync, writeFileSync, mkdirSync } from "node:fs";
 import { dirname } from "node:path";
 import { randomUUID } from "node:crypto";
 import { mintToken, verifyToken } from "./retainer/token.js";
+import { Mppx } from "mppx/server";
+import * as stripeServer from "mppx/stripe/server";
+import { Challenge } from "mppx";
 
 // Credit bundles purchasable via Stripe. Priced with a deliberate margin over the
 // blended ~ $0.01-0.02/call x402 price: fiat buyers pay a convenience premium and
@@ -51,12 +54,73 @@ export function mountStripeRail(app, { signer, baseUrl, ledgerPath, log = consol
 
   if (!secretKey) {
     log.warn?.("  [stripe-rail] No Stripe key — fiat rail DISABLED (x402 rail unaffected). Set STRIPE_SECRET_KEY_TEST (test) or STRIPE_SECRET_KEY (live) to enable.");
-    return { enabled: false, isTestMode: false, fiatGate: (_req, _res, next) => next(), getStripeChallenge: () => null };
+    return { enabled: false, isTestMode: false, fiatGate: (_req, _res, next) => next(), getStripeChallenge: () => null, getMppChallenge: () => null, mppGate: (_req, _res, next) => next() };
   }
   const webhookSecret = testKey
     ? (process.env.STRIPE_WEBHOOK_SECRET_TEST || null)
     : (process.env.STRIPE_WEBHOOK_SECRET || null);
   const stripe = new Stripe(secretKey);
+
+  // ── MPP (Machine Payment Protocol) — agent-payable Stripe via Shared Payment Tokens ──
+  // Hermes link-cli / mppx agents settle headlessly: decode a `Payment` challenge, mint an
+  // SPT (one human Link approval covers a capped budget), present it in `x-payment-info`.
+  // verifyCredential checks HMAC provenance + expiry, then charges the SPT via Stripe
+  // (replay-protected). On success we mint a 100-credit bundle token (mirrors the webhook
+  // fulfilment path) so the agent reuses it via Bearer for the remaining calls.
+  const mppSecret = process.env.MPP_SECRET_KEY;
+  let mpp = null;
+  let _mppChallenge = null; // cached serialized `Payment` challenge (refreshed below)
+  if (mppSecret) {
+    mpp = Mppx.create({
+      realm: "the-stall",
+      secretKey: mppSecret,
+      methods: [ stripeServer.charge({
+        secretKey,
+        networkId: "the-stall",
+        paymentMethodTypes: ["card"],
+        amount: "5.00", currency: "usd", decimals: 2,
+        description: "The Stall — 100 API credits ($5 bundle)",
+      }) ],
+    });
+    const refreshMppChallenge = async () => {
+      try {
+        const ch = await mpp.challenge.stripe.charge({ amount: "5.00", currency: "usd", decimals: 2 });
+        _mppChallenge = Challenge.serialize(ch);
+      } catch (e) { log.error?.("  [stripe-rail] MPP challenge refresh failed:", e.message); }
+    };
+    refreshMppChallenge();
+    const _t = setInterval(refreshMppChallenge, 60 * 1000); _t.unref?.();
+  }
+  function getMppChallenge() { return _mppChallenge; }
+  async function mppGate(req, res, next) {
+    if (!mpp || !req.path.startsWith("/cap/")) return next();
+    const credential = req.headers["x-payment-info"];
+    if (!credential) return next();
+    let receipt;
+    try {
+      receipt = await mpp.verifyCredential(String(credential));
+    } catch (e) {
+      log.warn?.("  [stripe-rail] MPP verify failed:", e.message);
+      return res.status(402).json({ error: "mpp_settlement_failed", message: e.message });
+    }
+    const bundle = FIAT_BUNDLES.starter;
+    const jti = randomUUID();
+    const token = mintToken(signer, {
+      payer: receipt?.reference || "mpp-stripe",
+      plan: "fiat:starter:mpp",
+      scope: [SCOPE],
+      windowSeconds: TOKEN_WINDOW_SECONDS,
+      jti,
+    });
+    const ledger = loadLedger();
+    ledger[jti] = { credits: bundle.credits - 1, granted: bundle.credits, created: Date.now(), mpp: receipt?.reference || null };
+    saveLedger(ledger);
+    req.fiatPaid = true;
+    res.setHeader("X-Stall-Token", token);
+    res.setHeader("X-Fiat-Credits-Remaining", String(bundle.credits - 1));
+    log.log?.(`  [stripe-rail] MPP settled (ref ${String(receipt?.reference || "").slice(0,12)}): +${bundle.credits} credits (jti ${jti.slice(0,8)})`);
+    return next();
+  }
 
   // ── Credit ledger (token jti -> remaining credits) ────────────────────────────
   // Small JSON file; fine for current volume. Swap for SQLite if it grows hot.
@@ -199,7 +263,7 @@ export function mountStripeRail(app, { signer, baseUrl, ledgerPath, log = consol
   }
 
   log.log?.(`  [stripe-rail] ENABLED (${isTestMode ? "TEST" : "LIVE"} mode) — fiat rail mounted at /v1/fiat/* (bundles: ${Object.keys(FIAT_BUNDLES).join(", ")})`);
-  return { enabled: true, isTestMode, fiatGate, getStripeChallenge, _stripe: stripe, _loadLedger: loadLedger };
+  return { enabled: true, isTestMode, fiatGate, getStripeChallenge, getMppChallenge, mppGate, _stripe: stripe, _loadLedger: loadLedger };
 }
 
 // Local helpers so the webhook gets raw body while checkout gets JSON, without

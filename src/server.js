@@ -987,6 +987,7 @@ app.use((_req, res, next) => {
           const chainId = (NETWORK === "base" || NETWORK === "eip155:8453") ? "eip155:8453" : "eip155:84532";
           parts.push(`x402 network="${chainId}" to="${PAY_TO}" scheme="exact"`);
         }
+        if (stripeRail?.getMppChallenge) { const _mppCh = stripeRail.getMppChallenge(); if (_mppCh) parts.push(_mppCh); }
         if (parts.length) res.setHeader('WWW-Authenticate', parts.join(', '));
       }
       const prHeader = res.getHeader('PAYMENT-REQUIRED') || res.getHeader('payment-required');
@@ -1012,6 +1013,7 @@ const stripeRail = mountStripeRail(app, {
   baseUrl: BASE_URL,
   ledgerPath: join(LOG_DIR, "fiat_credits.json"),
 });
+app.use(stripeRail.mppGate);
 app.use(stripeRail.fiatGate);
 
 // x402 paywall — bypassed when the fiat gate already authorized this request,
