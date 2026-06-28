@@ -70,14 +70,16 @@ export function mountStripeRail(app, { signer, baseUrl, ledgerPath, log = consol
   const mppSecret = process.env.MPP_SECRET_KEY;
   let mpp = null;
   let _mppChallenge = null; // cached serialized `Payment` challenge (refreshed below)
+  // Dedicated Stripe client pinned to the SPT preview API version for the SPT PaymentIntent.
+  const stripeMpp = mppSecret ? new Stripe(secretKey, { apiVersion: "2026-04-22.preview" }) : null;
   if (mppSecret) {
     mpp = Mppx.create({
       realm: "the-stall",
       secretKey: mppSecret,
       methods: [ stripeServer.charge({
-        secretKey,
+        client: stripeMpp,
         networkId: "profile_61UweIRyI13QlCJT9A6UweIQ4CSQFeBjk7GvJeOxUAzg",
-        paymentMethodTypes: ["card"],
+        paymentMethodTypes: ["card", "link"],
         amount: "5.00", currency: "usd", decimals: 2,
         description: "The Stall — 100 API credits ($5 bundle)",
       }) ],
@@ -94,31 +96,41 @@ export function mountStripeRail(app, { signer, baseUrl, ledgerPath, log = consol
   function getMppChallenge() { return _mppChallenge; }
   async function mppGate(req, res, next) {
     if (!mpp || !req.path.startsWith("/cap/")) return next();
-    const credential = req.headers["x-payment-info"];
-    if (!credential) return next();
-    let receipt;
+    // MPP credential arrives as `Authorization: Payment <base64url>` (Bearer = fiat token, fiatGate).
+    const auth = req.headers["authorization"] || "";
+    if (!/^payment\s/i.test(auth)) return next();
+    // Official SDK flow: extract credential from Authorization, verify provenance + expiry,
+    // create the Stripe PaymentIntent (SPT charge) via the version-pinned client.
+    let result;
     try {
-      receipt = await mpp.verifyCredential(String(credential));
+      const webReq = new Request(`${baseUrl}${req.originalUrl}`, { method: req.method, headers: new Headers(req.headers) });
+      result = await mpp.stripe.charge({ amount: "5.00", currency: "usd", decimals: 2 })(webReq);
     } catch (e) {
-      log.warn?.("  [stripe-rail] MPP verify failed:", e.message);
-      return res.status(402).json({ error: "mpp_settlement_failed", message: e.message });
+      log.warn?.("  [stripe-rail] MPP charge error:", e.message);
+      return next();
     }
+    if (!result || result.status === 402) return next();
+    try {
+      const wrapped = result.withReceipt(Response.json({}));
+      const rcpt = wrapped.headers.get("Payment-Receipt");
+      if (rcpt) res.setHeader("Payment-Receipt", rcpt);
+    } catch (_) { /* receipt header optional */ }
     const bundle = FIAT_BUNDLES.starter;
     const jti = randomUUID();
     const token = mintToken(signer, {
-      payer: receipt?.reference || "mpp-stripe",
+      payer: "mpp-stripe",
       plan: "fiat:starter:mpp",
       scope: [SCOPE],
       windowSeconds: TOKEN_WINDOW_SECONDS,
       jti,
     });
     const ledger = loadLedger();
-    ledger[jti] = { credits: bundle.credits - 1, granted: bundle.credits, created: Date.now(), mpp: receipt?.reference || null };
+    ledger[jti] = { credits: bundle.credits - 1, granted: bundle.credits, created: Date.now(), mpp: true };
     saveLedger(ledger);
     req.fiatPaid = true;
     res.setHeader("X-Stall-Token", token);
     res.setHeader("X-Fiat-Credits-Remaining", String(bundle.credits - 1));
-    log.log?.(`  [stripe-rail] MPP settled (ref ${String(receipt?.reference || "").slice(0,12)}): +${bundle.credits} credits (jti ${jti.slice(0,8)})`);
+    log.log?.(`  [stripe-rail] MPP settled via SDK: +${bundle.credits} credits (jti ${jti.slice(0,8)})`);
     return next();
   }
 
