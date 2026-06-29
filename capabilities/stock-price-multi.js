@@ -74,7 +74,7 @@ export default {
         items: { type: "string" },
         minItems: 1,
         maxItems: MAX_TICKERS,
-        description: `Up to ${MAX_TICKERS} US stock ticker symbols (e.g. AAPL,NVDA,MSFT). Case-insensitive.`,
+        description: `Up to ${MAX_TICKERS} US stock ticker symbols as an array (e.g. ["AAPL","NVDA","MSFT"]). Case-insensitive. A comma-separated string is also accepted.`,
       },
     },
     required: [],
@@ -111,7 +111,8 @@ export default {
   },
 
   async handler(query) {
-    const raw = query.tickers || ["AAPL", "MSFT", "NVDA"];
+    let raw = query.tickers || ["AAPL", "MSFT", "NVDA"];
+    if (typeof raw === "string") raw = raw.split(",").map(s => s.trim()).filter(Boolean);
     if (raw.length > MAX_TICKERS) throw new Error(`max ${MAX_TICKERS} tickers per call`);
 
     const results = await Promise.all(raw.map(fetchTicker));
