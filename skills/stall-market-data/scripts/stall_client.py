@@ -24,7 +24,10 @@ def _request(method, path, params=None, headers=None):
     url = STALL_URL + path
     if params:
         url += "?" + urllib.parse.urlencode(params)
-    req = urllib.request.Request(url, headers=headers or {}, method=method)
+    merged = {"User-Agent": "stall-client/2.0", "Accept": "application/json"}
+    if headers:
+        merged.update(headers)
+    req = urllib.request.Request(url, headers=merged, method=method)
     try:
         with urllib.request.urlopen(req, timeout=45) as r:
             return r.status, json.loads(r.read())
