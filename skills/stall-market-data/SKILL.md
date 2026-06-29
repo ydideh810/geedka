@@ -1,6 +1,6 @@
 ---
 name: stall-market-data
-description: Live stock, earnings, analyst & crypto market data — no limits
+description: Live stock prices, earnings, analyst & crypto market data
 version: 2.0.0
 author: IntuiTek¹ (W. Kyle Million)
 license: MIT
