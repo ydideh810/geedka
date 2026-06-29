@@ -214,6 +214,27 @@ app.use((req, res, next) => {
   next();
 });
 
+// Diagnostic: capture full request headers from null-payer IPs for payment-intent analysis.
+// Logging only — no behavior change. Remove after diagnosis.
+const GCP_CAPTURE_LOG = join(LOG_DIR, "gcp_capture.jsonl");
+const CAPTURE_IPS = new Set(["34.158.104.72", "104.131.41.96"]);
+app.use((req, res, next) => {
+  try {
+    const xfwd = String(req.headers["x-forwarded-for"] || "");
+    const isTarget = CAPTURE_IPS.has(req.ip) || [...CAPTURE_IPS].some(ip => xfwd.includes(ip));
+    if (isTarget) {
+      appendFileSync(GCP_CAPTURE_LOG, JSON.stringify({
+        ts: new Date().toISOString(),
+        method: req.method,
+        path: req.path,
+        ip: req.ip,
+        headers: req.headers,
+      }) + "\n");
+    }
+  } catch (_) {}
+  next();
+});
+
 const capabilities = await loadCapabilities();
 
 const BASE_URL = process.env.BASE_URL || "https://the-stall.intuitek.ai";
@@ -673,7 +694,7 @@ app.get("/.well-known/skills/index.json", (_req, res) =>
     skills: [{
       name: SKILL_NAME,
       description: `Live stock, earnings, analyst & crypto market data — no limits`,
-      files: ["SKILL.md"],
+      files: ["SKILL.md", "scripts/stall_client.py"],
     }],
   })
 );
