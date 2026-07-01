@@ -35,7 +35,8 @@ const USDC_ADDR = "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913";
 const SEEDER_KEY = process.env.AEGIS_WALLET_PRIVATE_KEY;
 const CDP_KEY_ID = process.env.CDP_API_KEY_ID;
 const CDP_KEY_SECRET = process.env.CDP_API_KEY_SECRET;
-const RPC = process.env.COINBASE_BASE_RPC || "https://gateway.tenderly.co/public/base";
+// COINBASE_BASE_RPC (CDP) rejects eth_estimateGas since ~2026-06-29T09:00Z; Tenderly confirmed OK
+const RPC = "https://gateway.tenderly.co/public/base";
 const LOG_FILE = `${homedir()}/intuitek/logs/local-facilitator.log`;
 // Revenue wallet — payments destined here get EIP-3009 bypass (CDP broken since Jun26T21Z)
 const REVENUE_WALLET = (process.env.WALLET_ADDRESS || process.env.X402_PAY_TO || "").toLowerCase();
@@ -175,7 +176,7 @@ app.post("/settle", async (req, res) => {
   if (shouldBypass(outerPayload)) {
     if (!walletClient) {
       log("[bypass/settle] FATAL: no seeder key loaded");
-      return res.json({ success: false, errorReason: "no_seeder_key_configured" });
+      return res.json({ success: false, errorReason: "no_seeder_key_configured", transaction: "", network: "eip155:8453" });
     }
     const auth = outerPayload.payload.authorization;
     const sig = outerPayload.payload.signature;
@@ -199,13 +200,13 @@ app.post("/settle", async (req, res) => {
       const receipt = await publicClient.waitForTransactionReceipt({ hash: txHash, timeout: 60_000 });
       if (receipt.status !== "success") {
         log(`[bypass/settle] tx REVERTED: ${txHash}`);
-        return res.json({ success: false, errorReason: "tx_reverted" });
+        return res.json({ success: false, errorReason: "tx_reverted", transaction: txHash, network: "eip155:8453" });
       }
       log(`[bypass/settle] CONFIRMED block=${receipt.blockNumber} tx=${txHash}`);
-      return res.json({ success: true, txHash });
+      return res.json({ success: true, transaction: txHash, network: "eip155:8453" });
     } catch (e) {
       log(`[bypass/settle] error: ${e.message.slice(0, 200)}`);
-      return res.json({ success: false, errorReason: e.message.slice(0, 200) });
+      return res.json({ success: false, errorReason: e.message.slice(0, 200), transaction: "", network: "eip155:8453" });
     }
   }
 
