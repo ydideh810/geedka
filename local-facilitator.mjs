@@ -223,40 +223,52 @@ app.post("/settle", async (req, res) => {
 
     return enqueueOnChainSettle(async () => {
       log(`[bypass/settle] executing on-chain: $${(Number(auth.value) / 1e6).toFixed(6)} USDC from ${getAddress(auth.from)} → ${getAddress(auth.to)}`);
-      try {
-        // Fetch nonce from chain inside the serial queue to prevent stale-nonce collisions
-        // when Tenderly rate-limits cause multiple retries that advance the on-chain counter.
-        const txNonce = await publicClient.getTransactionCount({ address: seederAccount.address, blockTag: 'pending' });
-        const txHash = await walletClient.writeContract({
-          address: USDC_ADDR,
-          abi: EIP3009_ABI,
-          functionName: "transferWithAuthorization",
-          args: [
-            getAddress(auth.from),
-            getAddress(auth.to),
-            BigInt(auth.value),
-            BigInt(auth.validAfter),
-            BigInt(auth.validBefore),
-            auth.nonce,
-            sig,
-          ],
-          nonce: txNonce,
-        });
-        log(`[bypass/settle] tx submitted: ${txHash}`);
-        const receipt = await publicClient.waitForTransactionReceipt({ hash: txHash, timeout: 60_000 });
-        if (receipt.status !== "success") {
-          log(`[bypass/settle] tx REVERTED: ${txHash}`);
+      const RETRY_DELAYS_MS = [1000, 2000, 4000];
+      let lastErr;
+      for (let attempt = 0; attempt <= RETRY_DELAYS_MS.length; attempt++) {
+        try {
+          // Fetch nonce from chain inside the serial queue to prevent stale-nonce collisions
+          // when Tenderly rate-limits cause multiple retries that advance the on-chain counter.
+          const txNonce = await publicClient.getTransactionCount({ address: seederAccount.address, blockTag: 'pending' });
+          const txHash = await walletClient.writeContract({
+            address: USDC_ADDR,
+            abi: EIP3009_ABI,
+            functionName: "transferWithAuthorization",
+            args: [
+              getAddress(auth.from),
+              getAddress(auth.to),
+              BigInt(auth.value),
+              BigInt(auth.validAfter),
+              BigInt(auth.validBefore),
+              auth.nonce,
+              sig,
+            ],
+            nonce: txNonce,
+          });
+          log(`[bypass/settle] tx submitted: ${txHash}`);
+          const receipt = await publicClient.waitForTransactionReceipt({ hash: txHash, timeout: 60_000 });
+          if (receipt.status !== "success") {
+            log(`[bypass/settle] tx REVERTED: ${txHash}`);
+            releaseNonce(nonceKey);
+            return res.json({ success: false, errorReason: "tx_reverted", transaction: txHash, network: "eip155:8453" });
+          }
+          log(`[bypass/settle] CONFIRMED block=${receipt.blockNumber} tx=${txHash}`);
           releaseNonce(nonceKey);
-          return res.json({ success: false, errorReason: "tx_reverted", transaction: txHash, network: "eip155:8453" });
+          return res.json({ success: true, transaction: txHash, network: "eip155:8453" });
+        } catch (e) {
+          lastErr = e;
+          if (e.message.includes("Request exceeds defined limit") && attempt < RETRY_DELAYS_MS.length) {
+            const delay = RETRY_DELAYS_MS[attempt];
+            log(`[bypass/settle] Tenderly rate-limit, retry ${attempt + 1}/${RETRY_DELAYS_MS.length} in ${delay}ms`);
+            await new Promise(r => setTimeout(r, delay));
+            continue;
+          }
+          break;
         }
-        log(`[bypass/settle] CONFIRMED block=${receipt.blockNumber} tx=${txHash}`);
-        releaseNonce(nonceKey);
-        return res.json({ success: true, transaction: txHash, network: "eip155:8453" });
-      } catch (e) {
-        log(`[bypass/settle] error: ${e.message.slice(0, 200)}`);
-        releaseNonce(nonceKey);
-        return res.json({ success: false, errorReason: e.message.slice(0, 200), transaction: "", network: "eip155:8453" });
       }
+      log(`[bypass/settle] error: ${lastErr.message.slice(0, 200)}`);
+      releaseNonce(nonceKey);
+      return res.json({ success: false, errorReason: lastErr.message.slice(0, 200), transaction: "", network: "eip155:8453" });
     });
   }
 
