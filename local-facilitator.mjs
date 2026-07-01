@@ -22,8 +22,6 @@ import { createWalletClient, createPublicClient, http, getAddress, parseAbi } fr
 import { base } from "viem/chains";
 import { privateKeyToAccount } from "viem/accounts";
 import { getAuthHeaders } from "@coinbase/cdp-sdk/auth";
-import { appendFileSync } from "fs";
-import { homedir } from "os";
 
 const PORT = 4099;
 const CDP_URL = "https://api.cdp.coinbase.com/platform/v2/x402";
@@ -37,7 +35,6 @@ const CDP_KEY_ID = process.env.CDP_API_KEY_ID;
 const CDP_KEY_SECRET = process.env.CDP_API_KEY_SECRET;
 // COINBASE_BASE_RPC (CDP) rejects eth_estimateGas since ~2026-06-29T09:00Z; Tenderly confirmed OK
 const RPC = "https://gateway.tenderly.co/public/base";
-const LOG_FILE = `${homedir()}/intuitek/logs/local-facilitator.log`;
 // Revenue wallet — payments destined here get EIP-3009 bypass (CDP broken since Jun26T21Z)
 const REVENUE_WALLET = (process.env.WALLET_ADDRESS || process.env.X402_PAY_TO || "").toLowerCase();
 
@@ -49,9 +46,8 @@ const EIP3009_ABI = parseAbi([
 ]);
 
 function log(msg) {
-  const line = `${new Date().toISOString()} ${msg}`;
-  console.log(line);
-  try { appendFileSync(LOG_FILE, line + "\n"); } catch {}
+  // systemd StandardOutput=append:...log captures console.log — do not double-write with appendFileSync
+  console.log(`${new Date().toISOString()} ${msg}`);
 }
 
 // Seeder wallet client — used to execute on-chain transferWithAuthorization
