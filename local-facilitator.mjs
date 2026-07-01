@@ -224,6 +224,9 @@ app.post("/settle", async (req, res) => {
     return enqueueOnChainSettle(async () => {
       log(`[bypass/settle] executing on-chain: $${(Number(auth.value) / 1e6).toFixed(6)} USDC from ${getAddress(auth.from)} → ${getAddress(auth.to)}`);
       try {
+        // Fetch nonce from chain inside the serial queue to prevent stale-nonce collisions
+        // when Tenderly rate-limits cause multiple retries that advance the on-chain counter.
+        const txNonce = await publicClient.getTransactionCount({ address: seederAccount.address, blockTag: 'pending' });
         const txHash = await walletClient.writeContract({
           address: USDC_ADDR,
           abi: EIP3009_ABI,
@@ -237,6 +240,7 @@ app.post("/settle", async (req, res) => {
             auth.nonce,
             sig,
           ],
+          nonce: txNonce,
         });
         log(`[bypass/settle] tx submitted: ${txHash}`);
         const receipt = await publicClient.waitForTransactionReceipt({ hash: txHash, timeout: 60_000 });
