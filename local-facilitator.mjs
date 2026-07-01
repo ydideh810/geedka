@@ -112,6 +112,43 @@ async function proxyToCdp(endpoint, body, method = "POST") {
 const app = express();
 app.use(express.json({ limit: "2mb" }));
 
+// ── Serial on-chain transaction queue ─────────────────────────────────────────
+// Concurrent settle requests cause two problems:
+//   1. Tenderly public RPC rate-limits burst eth_sendRawTransaction calls.
+//   2. Parallel viem writeContract calls race on eth_getTransactionCount → nonce collisions.
+// Solution: serialize all on-chain settles through a promise chain with a minimum
+// inter-transaction delay. 600ms yields ~1.6 tx/s — below Tenderly burst threshold.
+let _txChain = Promise.resolve();
+const TX_MIN_DELAY_MS = 600;
+
+function enqueueOnChainSettle(settleFn) {
+  const next = _txChain.then(async () => {
+    try {
+      return await settleFn();
+    } finally {
+      await new Promise(r => setTimeout(r, TX_MIN_DELAY_MS));
+    }
+  });
+  _txChain = next.catch(() => Promise.resolve());
+  return next;
+}
+
+// ── Nonce dedup guard ─────────────────────────────────────────────────────────
+// The x402 middleware can retry /settle on timeout, producing duplicate requests
+// with the same EIP-3009 authorization nonce. Track in-flight nonces to skip dups.
+const _pendingNonces = new Set();
+
+function acquireNonce(from, nonce) {
+  const key = `${from}_${nonce}`;
+  if (_pendingNonces.has(key)) return null; // duplicate
+  _pendingNonces.add(key);
+  return key;
+}
+
+function releaseNonce(key, delayMs = 30_000) {
+  setTimeout(() => _pendingNonces.delete(key), delayMs);
+}
+
 // ── GET /supported ───────────────────────────────────────────────────────────
 app.get("/supported", async (_req, res) => {
   try {
@@ -180,34 +217,47 @@ app.post("/settle", async (req, res) => {
     }
     const auth = outerPayload.payload.authorization;
     const sig = outerPayload.payload.signature;
-    log(`[bypass/settle] executing on-chain: $${(Number(auth.value) / 1e6).toFixed(6)} USDC from ${getAddress(auth.from)} → ${getAddress(auth.to)}`);
-    try {
-      const txHash = await walletClient.writeContract({
-        address: USDC_ADDR,
-        abi: EIP3009_ABI,
-        functionName: "transferWithAuthorization",
-        args: [
-          getAddress(auth.from),
-          getAddress(auth.to),
-          BigInt(auth.value),
-          BigInt(auth.validAfter),
-          BigInt(auth.validBefore),
-          auth.nonce,
-          sig,
-        ],
-      });
-      log(`[bypass/settle] tx submitted: ${txHash}`);
-      const receipt = await publicClient.waitForTransactionReceipt({ hash: txHash, timeout: 60_000 });
-      if (receipt.status !== "success") {
-        log(`[bypass/settle] tx REVERTED: ${txHash}`);
-        return res.json({ success: false, errorReason: "tx_reverted", transaction: txHash, network: "eip155:8453" });
-      }
-      log(`[bypass/settle] CONFIRMED block=${receipt.blockNumber} tx=${txHash}`);
-      return res.json({ success: true, transaction: txHash, network: "eip155:8453" });
-    } catch (e) {
-      log(`[bypass/settle] error: ${e.message.slice(0, 200)}`);
-      return res.json({ success: false, errorReason: e.message.slice(0, 200), transaction: "", network: "eip155:8453" });
+
+    // Nonce dedup: reject duplicate settle requests for the same authorization
+    const nonceKey = acquireNonce(getAddress(auth.from), auth.nonce);
+    if (!nonceKey) {
+      log(`[bypass/settle] DEDUP: nonce already in-flight ${auth.nonce?.slice?.(0,10)} from ${getAddress(auth.from)}`);
+      return res.json({ success: false, errorReason: "duplicate_nonce_in_flight", transaction: "", network: "eip155:8453" });
     }
+
+    return enqueueOnChainSettle(async () => {
+      log(`[bypass/settle] executing on-chain: $${(Number(auth.value) / 1e6).toFixed(6)} USDC from ${getAddress(auth.from)} → ${getAddress(auth.to)}`);
+      try {
+        const txHash = await walletClient.writeContract({
+          address: USDC_ADDR,
+          abi: EIP3009_ABI,
+          functionName: "transferWithAuthorization",
+          args: [
+            getAddress(auth.from),
+            getAddress(auth.to),
+            BigInt(auth.value),
+            BigInt(auth.validAfter),
+            BigInt(auth.validBefore),
+            auth.nonce,
+            sig,
+          ],
+        });
+        log(`[bypass/settle] tx submitted: ${txHash}`);
+        const receipt = await publicClient.waitForTransactionReceipt({ hash: txHash, timeout: 60_000 });
+        if (receipt.status !== "success") {
+          log(`[bypass/settle] tx REVERTED: ${txHash}`);
+          releaseNonce(nonceKey);
+          return res.json({ success: false, errorReason: "tx_reverted", transaction: txHash, network: "eip155:8453" });
+        }
+        log(`[bypass/settle] CONFIRMED block=${receipt.blockNumber} tx=${txHash}`);
+        releaseNonce(nonceKey);
+        return res.json({ success: true, transaction: txHash, network: "eip155:8453" });
+      } catch (e) {
+        log(`[bypass/settle] error: ${e.message.slice(0, 200)}`);
+        releaseNonce(nonceKey);
+        return res.json({ success: false, errorReason: e.message.slice(0, 200), transaction: "", network: "eip155:8453" });
+      }
+    });
   }
 
   // Payments to other recipients → proxy to CDP (fallback, not expected in practice)
