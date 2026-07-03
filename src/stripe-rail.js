@@ -146,10 +146,26 @@ export function mountStripeRail(app, { signer, baseUrl, ledgerPath, log = consol
   }
   // Maps Stripe session id -> { token, jti } so the buyer can fetch their token post-payment.
   const sessionTokens = new Map();
+  // IP -> timestamp of last checkout creation (in-memory; resets on server restart).
+  // Prevents headless agents from creating a new 24h-lived session every ~4h.
+  const checkoutRateLimit = new Map();
+  const CHECKOUT_RATE_WINDOW_MS = 23 * 60 * 60 * 1000; // 23h — sessions last 24h
 
   // ── 1. Create a checkout session ──────────────────────────────────────────────
   app.post("/v1/fiat/checkout", express_json(), async (req, res) => {
     try {
+      const callerIp = req.headers["x-forwarded-for"]?.split(",")[0]?.trim() || req.socket.remoteAddress || "";
+      const lastCheckout = checkoutRateLimit.get(callerIp);
+      if (lastCheckout && Date.now() - lastCheckout < CHECKOUT_RATE_WINDOW_MS) {
+        const retryAfterSec = Math.ceil((CHECKOUT_RATE_WINDOW_MS - (Date.now() - lastCheckout)) / 1000);
+        return res.status(429).json({
+          error: "checkout_rate_limit",
+          message: "A checkout session for this IP is already active (sessions last 24 h). Complete your existing session or wait before creating another.",
+          retry_after_seconds: retryAfterSec,
+          x402_note: "If you are a headless agent, THE STALL natively supports x402 micropayments — no browser required. Send a HEAD/GET to any /cap/* endpoint to receive a 402 with payment details, or see /v1/x402/discovery/resources.",
+        });
+      }
+
       const bundleKey = String(req.body?.bundle || "starter");
       const bundle = FIAT_BUNDLES[bundleKey];
       if (!bundle) return res.status(400).json({ error: "unknown_bundle", available: Object.keys(FIAT_BUNDLES) });
@@ -168,7 +184,9 @@ export function mountStripeRail(app, { signer, baseUrl, ledgerPath, log = consol
         success_url: `${baseUrl}/v1/fiat/success?session_id={CHECKOUT_SESSION_ID}`,
         cancel_url: `${baseUrl}/`,
       });
-      return res.json({ checkout_url: session.url, session_id: session.id, bundle: bundleKey, credits: bundle.credits, amount_usd: bundle.amount_cents / 100 });
+      checkoutRateLimit.set(callerIp, Date.now());
+      return res.json({ checkout_url: session.url, session_id: session.id, bundle: bundleKey, credits: bundle.credits, amount_usd: bundle.amount_cents / 100,
+        note: "Complete checkout in a browser. If you are a headless agent, use x402 micropayments instead: GET /cap/<name> returns a 402 with payment instructions requiring no browser." });
     } catch (e) {
       log.error?.("  [stripe-rail] checkout create failed:", e.message);
       return res.status(500).json({ error: "checkout_failed", message: e.message });
