@@ -150,6 +150,27 @@ export function mountStripeRail(app, { signer, baseUrl, ledgerPath, log = consol
   // Prevents headless agents from creating a new 24h-lived session every ~4h.
   const checkoutRateLimit = new Map();
   const CHECKOUT_RATE_WINDOW_MS = 23 * 60 * 60 * 1000; // 23h — sessions last 24h
+  // IP -> consecutive 429 count for headless callers. After 3 hits we skip Stripe
+  // and return an x402 pointer directly (agent clearly cannot do browser checkout).
+  const headlessRedirectCount = new Map();
+
+  // True if the caller has no UA or lacks browser signals — indicates a headless agent.
+  function isHeadlessCaller(req) {
+    const ua = req.headers["user-agent"] || "";
+    if (!ua) return true;
+    return !/mozilla|chrome|safari|firefox|opera|edge|webkit/i.test(ua);
+  }
+
+  // x402 alternative block included in checkout responses for headless callers.
+  function x402Alt() {
+    return {
+      method: "x402",
+      description: "For headless callers: pay per-call via x402 micropayments — no browser, no session, no waiting.",
+      discovery: `${baseUrl}/v1/x402/discovery/resources`,
+      quickstart: `GET ${baseUrl}/cap/<name> — receive 402 with payment header → pay → retry`,
+      pricing: "From $0.001/call. Full cap list at /v1/x402/discovery/resources.",
+    };
+  }
 
   // ── 1. Create a checkout session ──────────────────────────────────────────────
   app.post("/v1/fiat/checkout", express_json(), async (req, res) => {
@@ -158,6 +179,19 @@ export function mountStripeRail(app, { signer, baseUrl, ledgerPath, log = consol
       const lastCheckout = checkoutRateLimit.get(callerIp);
       if (lastCheckout && Date.now() - lastCheckout < CHECKOUT_RATE_WINDOW_MS) {
         const retryAfterSec = Math.ceil((CHECKOUT_RATE_WINDOW_MS - (Date.now() - lastCheckout)) / 1000);
+        if (isHeadlessCaller(req)) {
+          const count = (headlessRedirectCount.get(callerIp) || 0) + 1;
+          headlessRedirectCount.set(callerIp, count);
+          if (count >= 3) {
+            headlessRedirectCount.set(callerIp, 0); // reset so next window is fresh
+            log.log?.(`  [stripe-rail] headless agent ${callerIp} hit ${count} consecutive 429s — auto-redirecting to x402`);
+            return res.status(200).json({
+              x402_redirect: true,
+              message: "Detected headless agent unable to complete browser checkout after repeated attempts. Redirecting to x402 micropayments — no browser required.",
+              x402_alternative: x402Alt(),
+            });
+          }
+        }
         return res.status(429).json({
           error: "checkout_rate_limit",
           message: "A checkout session for this IP is already active (sessions last 24 h). Complete your existing session or wait before creating another.",
@@ -185,8 +219,14 @@ export function mountStripeRail(app, { signer, baseUrl, ledgerPath, log = consol
         cancel_url: `${baseUrl}/`,
       });
       checkoutRateLimit.set(callerIp, Date.now());
-      return res.json({ checkout_url: session.url, session_id: session.id, bundle: bundleKey, credits: bundle.credits, amount_usd: bundle.amount_cents / 100,
-        note: "Complete checkout in a browser. If you are a headless agent, use x402 micropayments instead: GET /cap/<name> returns a 402 with payment instructions requiring no browser." });
+      headlessRedirectCount.set(callerIp, 0); // reset consecutive-429 counter on successful creation
+      const responseBody = {
+        checkout_url: session.url, session_id: session.id, bundle: bundleKey,
+        credits: bundle.credits, amount_usd: bundle.amount_cents / 100,
+        note: "Complete checkout in a browser. If you are a headless agent, use x402 micropayments instead: GET /cap/<name> returns a 402 with payment instructions requiring no browser.",
+      };
+      if (isHeadlessCaller(req)) responseBody.x402_alternative = x402Alt();
+      return res.json(responseBody);
     } catch (e) {
       log.error?.("  [stripe-rail] checkout create failed:", e.message);
       return res.status(500).json({ error: "checkout_failed", message: e.message });
