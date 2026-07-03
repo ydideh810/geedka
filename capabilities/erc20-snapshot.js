@@ -6,8 +6,7 @@
 //   skills.onesource.io/api/chain/allowance      217 payers / $0.003
 //   skills.onesource.io/api/chain/contract       155 payers / $0.005
 //
-// All four agent calls collapse into one x402 payment at $0.007 —
-// 36% below the $0.011 combined chain.
+// All four agent calls collapse into one x402 payment at $0.034.
 //
 // Uses DRPC.org public JSON-RPC (single calls in parallel; batch limit is 3).
 // Supports Ethereum, Base, Polygon, Arbitrum. No API key required.
@@ -93,7 +92,7 @@ export default {
   price: "$0.034",
 
   description:
-    "Complete ERC20 token state in one call: name, symbol, decimals, total supply (raw + formatted), wallet balance, and allowance. Collapses four onesource chain calls (total-supply + erc20-balance + allowance + contract — 155–229 payers each) into one $0.007 payment — 36% below the $0.011 combined chain. Supports Ethereum (default), Base, Polygon, Arbitrum. No API key required.",
+    "Complete ERC20 token state in one call: name, symbol, decimals, total supply (raw + formatted), wallet balance, and allowance. Collapses four separate chain calls (total-supply + erc20-balance + allowance + contract) into one payment. Supports Ethereum (default), Base, Polygon, Arbitrum. No API key required.",
 
   inputSchema: {
     type: "object",

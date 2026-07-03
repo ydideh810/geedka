@@ -12,7 +12,7 @@
 //
 // Upstream: Yahoo Finance quoteSummary (crumb-auth, free, no API key).
 // Modules: defaultKeyStatistics + financialData + summaryDetail.
-// Priced at $0.020.
+// Priced at $0.059.
 
 const UA           = "Mozilla/5.0 (compatible; the-stall/4.7; +https://intuitek.ai)";
 const YF_CRUMB_SRC = "https://fc.yahoo.com";
@@ -88,7 +88,7 @@ export default {
   price: "$0.059",
 
   description:
-    "Fundamental valuation metrics for any US public company — P/E TTM, forward P/E, PEG, P/B, EV/EBITDA, margins, ROE, ROA, revenue TTM, earnings/revenue growth, free cash flow, market cap, beta. Raw data for valuation screening and DCF inputs. No API key. $0.020/call.",
+    "Fundamental valuation metrics for any US public company — P/E TTM, forward P/E, PEG, P/B, EV/EBITDA, margins, ROE, ROA, revenue TTM, earnings/revenue growth, free cash flow, market cap, beta. Raw data for valuation screening and DCF inputs. No API key.",
 
   inputSchema: {
     type: "object",

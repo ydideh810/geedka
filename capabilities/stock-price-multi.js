@@ -1,11 +1,8 @@
 // stock-price-multi.js
 //
 // Returns current US equity prices for up to 5 tickers in a single call.
-// Priced at $0.025 flat — agents querying blockrun.ai individually for
-// STRC ($0.022), AMD ($0.044), MSTR ($0.041) pay $0.107 total; this endpoint
-// returns all three for $0.025. signal-intel signal: blockrun
-// aggregator wallet received 153k STRC + 23k AMD + 1.9k MSTR settlements
-// in 72 hours (2026-06-06 concentration signal).
+// Priced at $0.059. signal-intel signal: blockrun aggregator wallet received
+// 153k STRC + 23k AMD + 1.9k MSTR settlements in 72 hours (2026-06-06 concentration signal).
 //
 // Free upstream: Yahoo Finance v8/finance/chart (public, no auth, no crumb).
 // Concurrent fetches: all tickers resolve in parallel, response in ≤ 8s.
@@ -64,7 +61,7 @@ export default {
 
   description:
     "Returns current US equity prices for up to 5 tickers in one call — STRC, AMD, MSTR, SLV, USO, or any NYSE/NASDAQ symbol. Each call returns price, change %, volume, day range, and 52-week range per ticker. " +
-    "Sourced from Yahoo Finance public data, no API key. A single $0.025 call replaces 3-5 separate blockrun.ai queries.",
+    "Sourced from Yahoo Finance public data, no API key.",
 
   inputSchema: {
     type: "object",

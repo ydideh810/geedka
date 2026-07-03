@@ -1,7 +1,7 @@
 // us-stock-price.js
 //
 // Returns current US equity price + intraday metrics from Yahoo Finance public
-// chart API (no API key required). Priced at $0.005.
+// chart API (no API key required). Priced at $0.059.
 //
 // Data source: Yahoo Finance v8/finance/chart (public, no auth, no crumb).
 // Updates on each call — live market data during trading hours, last-close
@@ -15,7 +15,7 @@ export default {
   price: "$0.059",
 
   description:
-    "Returns current US equity price and intraday metrics (change %, volume, day high/low, 52-week range) for any NYSE/NASDAQ ticker. Sourced from Yahoo Finance public data — no API key, live during market hours. $0.005/call.",
+    "Returns current US equity price and intraday metrics (change %, volume, day high/low, 52-week range) for any NYSE/NASDAQ ticker. Sourced from Yahoo Finance public data — no API key, live during market hours.",
 
   inputSchema: {
     type: "object",

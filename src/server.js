@@ -280,6 +280,18 @@ app.get("/avatar.png", (_req, res) => {
   }
 });
 
+app.get("/glama.json", (_req, res) => {
+  const glamaPath = join(__dir, "../glama.json");
+  try {
+    const data = readFileSync(glamaPath, "utf-8");
+    res.setHeader("Content-Type", "application/json");
+    res.setHeader("Cache-Control", "public, max-age=3600");
+    res.end(data);
+  } catch (_) {
+    res.status(404).end();
+  }
+});
+
 app.get("/catalog", (_req, res) =>
   res.json({
     stall: "the-stall",
@@ -816,10 +828,10 @@ app.get("/llms.txt", (_req, res) => {
     });
     return ` | ?${parts.join('&')}`;
   }
-  // Revenue-proven caps — ordered by actual USDC organic earnings (settlement.jsonl).
-  // Last updated: 2026-06-26. youtube-intel #1 (82 organic), stock-price-multi #2 (58), earnings-calendar #3 (39), us-stock-price #4 (23), crypto-top-movers #5 (22).
-  const PRIORITY_CAPS = ['youtube-intel','stock-price-multi','earnings-calendar','crypto-top-movers',
-    'research-synthesis','us-stock-price','equity-fundamentals','dex-swap-quote'];
+  // Revenue-proven caps — ordered by actual USDC organic earnings (settlement.jsonl, automaton-filtered per gate-zero 2026-06-27).
+  // Last updated: 2026-07-02. youtube-intel DROPPED (single automaton, 0 organic). stock-price-multi #1 (64), earnings-calendar #2 (41), research-synthesis #3 (32), us-stock-price #4 (27), crypto-top-movers #5 (26), equity-brief #6 (5/$1.83), earnings-surprises #7 (5), equity-fundamentals #8 (5), fomc-tracker #9 (4), credit-spreads #10 (3), fact-check #11 (2), sector-rotation #12 (2).
+  const PRIORITY_CAPS = ['stock-price-multi','earnings-calendar','research-synthesis','us-stock-price','crypto-top-movers',
+    'equity-brief','earnings-surprises','equity-fundamentals','fomc-tracker','credit-spreads','fact-check','sector-rotation'];
   const prioritySection = `## Highest-Value Caps — Proven x402 Conversions\n\n${PRIORITY_CAPS.map(n => {
     const cap = capabilities.find(c => c.name === n);
     if (!cap) return null;
@@ -829,7 +841,8 @@ app.get("/llms.txt", (_req, res) => {
       ? ' | ?query=your+topic (query optional — finance, macro, tech, research; defaults to AI agents report)'
       : paramHint(cap);
     // Add a short description for value clarity on high-ticket synthesis caps
-    const shortDesc = cap.description ? ` — ${cap.description.split('.')[0].slice(0, 85)}` : '';
+    const firstSentence = (cap.description || '').split(/(?<=[.!?])\s+/)[0] || '';
+    const shortDesc = firstSentence ? ` — ${firstSentence.length > 220 ? firstSentence.slice(0, firstSentence.lastIndexOf(' ', 220)) + '…' : firstSentence}` : '';
     return `  - [${n}](${BASE_URL}/cap/${n}): $${price} USDC${hint}${shortDesc}`;
   }).filter(Boolean).join('\n')}`;
   // Collect all caps matched by any category to find uncategorized ones
