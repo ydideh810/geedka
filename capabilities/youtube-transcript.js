@@ -130,27 +130,38 @@ export default {
 
   async handler(query) {
     const videoId = extractVideoId(query.video || "dQw4w9WgXcQ");
-    if (!videoId) throw new Error("invalid YouTube URL or video ID");
+    if (!videoId) throw Object.assign(new Error("invalid YouTube URL or video ID"), { status: 400 });
 
     const fmt     = query.format || "segments";
     const workDir = await mkdtemp(join(tmpdir(), `yttrans-${videoId}-`));
 
     try {
-      await execFileAsync(
-        YTDLP,
-        [
-          "--write-auto-sub",
-          "--sub-langs",   "en",
-          "--sub-format",  "vtt",
-          "--skip-download",
-          "--no-warnings",
-          "-q",
-          "--no-playlist",
-          "-o", join(workDir, "video.%(ext)s"),
-          `https://www.youtube.com/watch?v=${videoId}`,
-        ],
-        { timeout: 35000, encoding: "utf8" }
-      );
+      try {
+        await execFileAsync(
+          YTDLP,
+          [
+            "--write-auto-sub",
+            "--sub-langs",   "en",
+            "--sub-format",  "vtt",
+            "--skip-download",
+            "--no-warnings",
+            "-q",
+            "--no-playlist",
+            "-o", join(workDir, "video.%(ext)s"),
+            `https://www.youtube.com/watch?v=${videoId}`,
+          ],
+          { timeout: 35000, encoding: "utf8" }
+        );
+      } catch (ytErr) {
+        const stderr = String(ytErr.stderr || ytErr.message || "");
+        const isUnavailable = /unavailable|private|not available|members.only|age.restrict|sign in|copyright|geo.block/i.test(stderr);
+        const errLine = stderr.trim().split("\n").pop() || "yt-dlp exited non-zero";
+        if (isUnavailable) {
+          throw Object.assign(new Error(`Video unavailable or access-restricted: ${errLine}`), { status: 400 });
+        }
+        // Transient failure (rate limit / network) — 503 triggers Retry-After header
+        throw Object.assign(new Error(`Transcript fetch failed (transient): ${errLine}`), { status: 503 });
+      }
 
       const files   = await readdir(workDir);
       const vttFile = files.find(f => f.endsWith(".vtt"));
