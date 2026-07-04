@@ -9,6 +9,56 @@
   "license": "MIT",
   "tools": [
     {
+      "name": "action-receipt",
+      "description": "Issue a self-verifying action receipt: sha256-chained record binding actor, action, subject, and result hash to a timestamp and nonce. Returns the receipt plus the exact recompute recipe so any third party can verify it offline. Durable proof for agent actions, dispute defense, and audit trails.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "action": {
+            "type": "string",
+            "description": "what was done, e.g. 'sent_quote', 'published_listing', 'completed_job'"
+          },
+          "actor": {
+            "type": "string",
+            "description": "who/what did it \u2014 agent id, wallet, or name"
+          },
+          "subject": {
+            "type": "string",
+            "description": "what it was done to/for (optional)"
+          },
+          "result_hash": {
+            "type": "string",
+            "description": "sha256 of the work product, if any (optional)"
+          },
+          "meta": {
+            "type": "string",
+            "description": "freeform context, max 500 chars (optional)"
+          }
+        },
+        "required": [
+          "action",
+          "actor"
+        ]
+      },
+      "outputSchema": {
+        "type": "object",
+        "properties": {
+          "receipt_id": {
+            "type": "string"
+          },
+          "chain_hash": {
+            "type": "string"
+          },
+          "issued_at": {
+            "type": "string"
+          },
+          "verify_recipe": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    {
       "name": "activist-investor-intel",
       "description": "SEC EDGAR Schedule 13D/13G beneficial ownership disclosures for US equities. Mode 1 (ticker): returns all 5%+ shareholders for a company \u2014 activist funds (13D) vs passive holders (13G), with ownership %, share count, and EDGAR filing URL. Mode 2 (recent): returns market-wide Schedule 13D disclosures in the last N days. Authoritative US government data, updated within minutes of SEC acceptance.",
       "inputSchema": {
@@ -141,62 +191,6 @@
       }
     },
     {
-      "name": "app-store-intel",
-      "description": "iOS App Store competitive intelligence via the free iTunes Search API. Actions: search (find apps by keyword, returns ratings/price/developer/install-tier/market snapshot), lookup (detailed profile for a specific app by name or Apple ID \u2014 rating health, freshness signal, description excerpt, release notes), top_charts (top free or paid apps in a category: finance, productivity, games, health-fitness, developer-tools, etc.). No API key required. Pairs with npm-trends, pypi-intel, github-intel, and huggingface-intel in the developer-ecosystem cluster.",
-      "inputSchema": {
-        "type": "object",
-        "properties": {
-          "action": {
-            "type": "string",
-            "enum": [
-              "search",
-              "lookup",
-              "top_charts"
-            ],
-            "description": "Action to perform: search apps by keyword, lookup a specific app, or fetch top-charts for a category. Default: search."
-          },
-          "query": {
-            "type": "string",
-            "description": "(search) Keyword or topic to search, e.g. 'budget tracker', 'AI assistant', 'meditation'."
-          },
-          "app": {
-            "type": "string",
-            "description": "(lookup) App name to look up, e.g. 'Notion', 'Robinhood', 'Duolingo'."
-          },
-          "app_id": {
-            "type": [
-              "string",
-              "number"
-            ],
-            "description": "(lookup) Apple numeric App ID, e.g. 1234567890."
-          },
-          "category": {
-            "type": "string",
-            "description": "(top_charts) Category slug: all, finance, productivity, business, developer-tools, games, health-fitness, education, social, utilities, news, music, travel, shopping, lifestyle, weather, photo-video, entertainment, sports, medical, food-drink, reference, navigation, graphics-design. Default: all."
-          },
-          "chart": {
-            "type": "string",
-            "enum": [
-              "free",
-              "paid"
-            ],
-            "description": "(top_charts) Chart type: free or paid. Default: free."
-          },
-          "limit": {
-            "type": "integer",
-            "minimum": 1,
-            "maximum": 100,
-            "description": "Max results. Default: 10 for search, 25 for top_charts."
-          },
-          "country": {
-            "type": "string",
-            "description": "(search/lookup) ISO 2-letter country code for App Store region. Default: us."
-          }
-        },
-        "additionalProperties": false
-      }
-    },
-    {
       "name": "ai-image-gen",
       "description": "Generate an AI image from a text prompt using DALL-E 3. Returns a public URL for the image (hosted for 1 hour) plus the model's revised prompt. Supports vivid or natural style, and three aspect ratios: square (1024\u00d71024), portrait (1024\u00d71792), or landscape (1792\u00d71024). $0.080/image \u2014 20% below closest x402 competitor. Output is base64-encoded PNG or a direct URL depending on response_format.",
       "inputSchema": {
@@ -294,6 +288,62 @@
           }
         },
         "required": [],
+        "additionalProperties": false
+      }
+    },
+    {
+      "name": "app-store-intel",
+      "description": "iOS App Store competitive intelligence via the free iTunes Search API. Actions: search (find apps by keyword, returns ratings/price/developer/install-tier/market snapshot), lookup (detailed profile for a specific app by name or Apple ID \u2014 rating health, freshness signal, description excerpt, release notes), top_charts (top free or paid apps in a category: finance, productivity, games, health-fitness, developer-tools, etc.). No API key required. Pairs with npm-trends, pypi-intel, github-intel, and huggingface-intel in the developer-ecosystem cluster.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "action": {
+            "type": "string",
+            "enum": [
+              "search",
+              "lookup",
+              "top_charts"
+            ],
+            "description": "Action to perform: search apps by keyword, lookup a specific app, or fetch top-charts for a category. Default: search."
+          },
+          "query": {
+            "type": "string",
+            "description": "(search) Keyword or topic to search, e.g. 'budget tracker', 'AI assistant', 'meditation'."
+          },
+          "app": {
+            "type": "string",
+            "description": "(lookup) App name to look up, e.g. 'Notion', 'Robinhood', 'Duolingo'."
+          },
+          "app_id": {
+            "type": [
+              "string",
+              "number"
+            ],
+            "description": "(lookup) Apple numeric App ID, e.g. 1234567890."
+          },
+          "category": {
+            "type": "string",
+            "description": "(top_charts) Category slug: all, finance, productivity, business, developer-tools, games, health-fitness, education, social, utilities, news, music, travel, shopping, lifestyle, weather, photo-video, entertainment, sports, medical, food-drink, reference, navigation, graphics-design. Default: all."
+          },
+          "chart": {
+            "type": "string",
+            "enum": [
+              "free",
+              "paid"
+            ],
+            "description": "(top_charts) Chart type: free or paid. Default: free."
+          },
+          "limit": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 100,
+            "description": "Max results. Default: 10 for search, 25 for top_charts."
+          },
+          "country": {
+            "type": "string",
+            "description": "(search/lookup) ISO 2-letter country code for App Store region. Default: us."
+          }
+        },
         "additionalProperties": false
       }
     },
@@ -1148,6 +1198,27 @@
           }
         },
         "required": []
+      }
+    },
+    {
+      "name": "cross-chain-bridge-status",
+      "description": "Live cross-chain bridge availability and route discovery. Given a from/to chain pair, returns all active bridges (Stargate, Across, CCTP, Relay, Squid, etc.), chain metadata, and bridge coverage breadth. Use before any cross-chain transfer or arbitrage to identify available routes. Free \u2014 powered by Li.Fi aggregator.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "from_chain": {
+            "type": "string",
+            "description": "Source chain name or ID (default: base). Examples: ethereum, base, arbitrum, polygon, bsc, optimism, avalanche, zksync, 8453, 1."
+          },
+          "to_chain": {
+            "type": "string",
+            "description": "Destination chain name or ID (default: ethereum). Same options as from_chain."
+          },
+          "show_all_bridges": {
+            "type": "boolean",
+            "description": "If true, return all 32 bridges with their chain coverage (ignores from/to filter). Default false."
+          }
+        }
       }
     },
     {
@@ -2084,6 +2155,62 @@
       }
     },
     {
+      "name": "earnings-intel-bundle",
+      "description": "Full earnings intelligence for a US stock in one call: next earnings date + EPS estimates, historical EPS beat/miss data, fundamental valuations (P/E, EV/EBITDA, margins), and current FOMC rate context. Replaces 4 separate cap calls at ~37% discount.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "ticker": {
+            "type": "string",
+            "description": "US stock ticker symbol (e.g. AAPL, MSFT, NVDA)."
+          },
+          "days_ahead": {
+            "type": "integer",
+            "description": "Look-ahead window for earnings calendar (1\u201390 days, default 30).",
+            "default": 30
+          }
+        },
+        "required": [
+          "ticker"
+        ]
+      },
+      "outputSchema": {
+        "type": "object",
+        "properties": {
+          "ticker": {
+            "type": "string"
+          },
+          "earnings_calendar": {
+            "type": "object",
+            "description": "Upcoming earnings dates from earnings-calendar (filtered to ticker)."
+          },
+          "earnings_surprises": {
+            "type": "object",
+            "description": "EPS beat/miss history from earnings-surprises."
+          },
+          "fundamentals": {
+            "type": "object",
+            "description": "Valuation metrics from equity-fundamentals."
+          },
+          "fomc": {
+            "type": "object",
+            "description": "Current fed funds rate and next meeting from fomc-tracker."
+          },
+          "errors": {
+            "type": "object",
+            "description": "Any per-source errors (non-fatal; other fields still populated)."
+          },
+          "as_of": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "ticker",
+          "as_of"
+        ]
+      }
+    },
+    {
       "name": "earnings-quality",
       "description": "Earnings quality and manipulation-risk screen for any US public company. Returns Beneish M-Score (8-component manipulation detector: M > -1.78 = manipulation risk), Sloan Accrual Ratio, cash conversion ratio, and AR vs revenue quality signal. Designed to chain after income-statements and equity-fundamentals to gate on earnings integrity before valuation.",
       "inputSchema": {
@@ -2279,6 +2406,59 @@
         },
         "required": [],
         "additionalProperties": false
+      }
+    },
+    {
+      "name": "entity-clearance",
+      "description": "Clearance check on a business/entity before an agent acts on it: live-site probe, domain/contact consistency, name corroboration, graded evidence (E0-E2), risk flags, recommended_action, and a self-verifying sha256 receipt. Turns 'found' into 'safe enough to proceed'.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "entity name as claimed"
+          },
+          "website": {
+            "type": "string",
+            "description": "claimed website URL or domain"
+          },
+          "email": {
+            "type": "string",
+            "description": "claimed contact email (optional)"
+          },
+          "intended_action": {
+            "type": "string",
+            "description": "what the agent wants to do next (optional; sharpens recommended_action)"
+          }
+        },
+        "required": [
+          "name",
+          "website"
+        ]
+      },
+      "outputSchema": {
+        "type": "object",
+        "properties": {
+          "verification_status": {
+            "type": "string",
+            "description": "verified_live | partially_verified | unverified"
+          },
+          "verified_fields": {
+            "type": "object"
+          },
+          "evidence": {
+            "type": "array"
+          },
+          "risk_flags": {
+            "type": "array"
+          },
+          "recommended_action": {
+            "type": "string"
+          },
+          "receipt": {
+            "type": "object"
+          }
+        }
       }
     },
     {
@@ -2529,6 +2709,23 @@
             "default": "base"
           }
         },
+        "additionalProperties": false
+      }
+    },
+    {
+      "name": "fact-check",
+      "description": "Factual claim verification using Wikipedia evidence + AI synthesis. Extracts search terms from the claim, queries Wikipedia for relevant articles, and returns a structured verdict (LIKELY_TRUE / LIKELY_FALSE / MIXED / UNVERIFIABLE) with confidence score, explanation, and source citations.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "claim": {
+            "type": "string",
+            "description": "The factual statement to verify (e.g. 'The Eiffel Tower is 330 meters tall' or 'Apple was founded in 1976')."
+          }
+        },
+        "required": [
+          "claim"
+        ],
         "additionalProperties": false
       }
     },
@@ -3629,6 +3826,36 @@
       }
     },
     {
+      "name": "institutional-ownership-intel",
+      "description": "Institutional fund holdings intelligence for US equities. Returns which funds own the stock (Vanguard, Blackrock, Fidelity, etc.), their position sizes, % of shares outstanding, and market value. Breakdown mode shows % institutional vs insider vs public float and top-5 concentration signal (HIGH/MODERATE/DISTRIBUTED). Closes the equity-research stack alongside insider-trading-intel (Form 4) and activist-investor-intel (13D/13G). Source: Yahoo Finance, no API key.",
+      "inputSchema": {
+        "type": "object",
+        "required": [
+          "ticker"
+        ],
+        "properties": {
+          "ticker": {
+            "type": "string",
+            "description": "US equity ticker symbol (e.g. AAPL, TSLA, NVDA). Case-insensitive."
+          },
+          "mode": {
+            "type": "string",
+            "enum": [
+              "holders",
+              "summary",
+              "full"
+            ],
+            "description": "'holders' (default) returns top institutional funds with shares and value. 'summary' returns aggregate breakdown: % institutional, % insider, float size, concentration. 'full' returns both in one call."
+          },
+          "limit": {
+            "type": "integer",
+            "description": "Max number of institutional holders to return in holders/full mode (default 15, max 30)."
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    {
       "name": "intel-pack",
       "description": "Three-source intelligence pack in one x402 call: equity market snapshot (SPY/QQQ/IWM/VIX/risk signal) + top DeFi yield pools by APY + top prediction markets by volume. Replaces three separate calls. $0.109 purchased individually; $0.09 as a pack. No inputs required.",
       "inputSchema": {
@@ -3807,6 +4034,43 @@
       }
     },
     {
+      "name": "lbo-model",
+      "description": "Full leveraged buyout model for any US public company: entry valuation, debt structure, 5-year operating model with FCF-driven debt paydown, exit waterfall, IRR and MOIC. Includes sensitivity table across entry/exit EV/EBITDA multiples and AI-synthesized deal brief with verdict, investment thesis, and key risks.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "ticker": {
+            "type": "string",
+            "description": "US stock ticker (e.g. AAPL, NVDA). Case-insensitive."
+          },
+          "entry_ev_ebitda": {
+            "type": "number",
+            "description": "Entry EV/EBITDA purchase multiple. Default: current market EV/EBITDA."
+          },
+          "exit_ev_ebitda": {
+            "type": "number",
+            "description": "Exit EV/EBITDA multiple at end of hold period. Default: same as entry."
+          },
+          "debt_pct": {
+            "type": "number",
+            "description": "Total debt as % of entry EV (default 60 = 60% leverage). Typical range 50\u201370%."
+          },
+          "ebitda_growth_pct": {
+            "type": "number",
+            "description": "Annual EBITDA growth assumption in % (default: analyst 5Y consensus or historical)."
+          },
+          "hold_years": {
+            "type": "number",
+            "description": "Investment hold period in years (default 5)."
+          }
+        },
+        "required": [
+          "ticker"
+        ],
+        "additionalProperties": false
+      }
+    },
+    {
       "name": "legal-search",
       "description": "Searches 5M+ US court opinions (SCOTUS, federal circuits, district courts, state courts) via CourtListener. Returns case name, court, date, citation, docket number, and a text snippet. Filter by court level, date range, or judge name. Useful for legal research agents, contract risk analysis, precedent lookup, and regulatory compliance workflows.",
       "inputSchema": {
@@ -3871,6 +4135,41 @@
           "slug": {
             "type": "string",
             "description": "If provided, fetch a specific market by its Limitless slug (e.g. 'btc-up-or-down-5-min-1780703750051'). Overrides other filters."
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    {
+      "name": "llm-proxy",
+      "description": "LLM inference proxy \u2014 pay USDC, get AI responses without managing API keys. Accepts a prompt and optional system instruction, forwards to OpenAI, returns the completion. Supports gpt-4o-mini (default, fast and cost-efficient) or gpt-4o (more capable). Agents that already hold USDC on Base can call this to run one-off LLM tasks without onboarding to OpenAI. Max 2,000 output tokens per call. Price: $0.010/call.",
+      "inputSchema": {
+        "type": "object",
+        "required": [
+          "prompt"
+        ],
+        "properties": {
+          "prompt": {
+            "type": "string",
+            "description": "The user message / task to send to the LLM."
+          },
+          "system": {
+            "type": "string",
+            "description": "Optional system prompt. Sets the persona or role for the model."
+          },
+          "model": {
+            "type": "string",
+            "enum": [
+              "gpt-4o-mini",
+              "gpt-4o"
+            ],
+            "description": "Model to use. Default: gpt-4o-mini."
+          },
+          "max_tokens": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 2000,
+            "description": "Maximum output tokens. Default: 500."
           }
         },
         "additionalProperties": false
@@ -4482,6 +4781,36 @@
             "default": 4,
             "minimum": 1,
             "maximum": 12
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    {
+      "name": "options-flow-unusual",
+      "description": "Detects unusual options activity via CBOE delayed data (free, no auth). Computes volume-to-open-interest ratio for every contract within a DTE window \u2014 ratios >= 5x flag institutional sweep orders. Returns top unusual calls and puts by ratio, top flows by raw volume, aggregate put/call ratio, IV30, and a BULLISH_SWEEP/BEARISH_SWEEP/CALL_HEAVY/PUT_HEAVY/NEUTRAL interpretation.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "ticker": {
+            "type": "string",
+            "description": "US equity or index ticker. Examples: AAPL, SPY, TSLA, NVDA. Default: SPY."
+          },
+          "min_ratio": {
+            "type": "number",
+            "description": "Minimum volume/OI ratio to flag as unusual. Default 5.0."
+          },
+          "min_volume": {
+            "type": "integer",
+            "description": "Minimum volume to include a contract. Default 100."
+          },
+          "top_n": {
+            "type": "integer",
+            "description": "Top N unusual contracts to return per side. Default 5."
+          },
+          "days_to_exp": {
+            "type": "integer",
+            "description": "Only consider options expiring within N days. Default 60."
           }
         },
         "additionalProperties": false
@@ -5322,6 +5651,24 @@
       }
     },
     {
+      "name": "retail-sector-brief",
+      "description": "AI-synthesized US retail sector briefing: XRT/XLY/XLP ETF signals, major retailer stock performance (AMZN/WMT/TGT/COST/HD/LOW), derived risk-appetite and sector-alpha scores, and GPT-4o-mini synthesis into regime classification + narrative. Companion to consumer-brief (macro signals) \u2014 this covers real-time equity signals. $0.35/call vs assembling 10+ Yahoo Finance lookups manually.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "style": {
+            "type": "string",
+            "enum": [
+              "standard",
+              "concise"
+            ],
+            "description": "Output length. 'standard' = 160-200 word narrative (default). 'concise' = 110-130 word summary."
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    {
       "name": "revenue-growth-intel",
       "description": "Revenue growth quality analysis for any US public company. Computes 1/3/5-year revenue CAGRs, growth consistency (coefficient of variation), acceleration vs long-run trend, gross margin direction, and operating leverage. Returns a composite letter grade (A\u2013F) that anchors DCF growth rate assumptions. Chain after income-statements and before dcf-valuation.",
       "inputSchema": {
@@ -5494,6 +5841,23 @@
           }
         },
         "required": []
+      }
+    },
+    {
+      "name": "short-interest-intel",
+      "description": "Outstanding short interest intelligence for US equities: shares sold short, short % of float, days-to-cover (covering pressure), and last FINRA report date. Includes heuristic squeeze risk scoring: EXTREME/HIGH/MODERATE/LOW based on float short % and days-to-cover. Closes the equity ownership trifecta alongside institutional-ownership-intel and insider-trading-intel. Distinct from short-volume-intel (daily FINRA trading volume). Source: Yahoo Finance, no API key.",
+      "inputSchema": {
+        "type": "object",
+        "required": [
+          "ticker"
+        ],
+        "properties": {
+          "ticker": {
+            "type": "string",
+            "description": "US equity ticker symbol (e.g. AAPL, TSLA, GME). Case-insensitive."
+          }
+        },
+        "additionalProperties": false
       }
     },
     {
@@ -6922,6 +7286,37 @@
       }
     },
     {
+      "name": "youtube-keyword-research",
+      "description": "YouTube keyword research using Google's autocomplete API. Returns keyword suggestions and intent clusters (questions, tutorials, comparisons, year-tagged trending) for a seed topic. Expand mode probes query+a\u2013z for comprehensive coverage. No API key. Upstream of youtube-niche-intel (competition scoring) and youtube-intel (video search). Use when mapping YouTube content strategy or finding keyword gaps.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "query": {
+            "type": "string",
+            "description": "Seed keyword or topic (e.g. 'passive income', 'python tutorial')."
+          },
+          "expand": {
+            "type": "boolean",
+            "description": "Probe query+a through query+z for deeper coverage. Default false.",
+            "default": false
+          },
+          "language": {
+            "type": "string",
+            "description": "BCP-47 language code. Default 'en'.",
+            "default": "en"
+          },
+          "country": {
+            "type": "string",
+            "description": "ISO 3166-1 alpha-2 country code. Default 'us'.",
+            "default": "us"
+          }
+        },
+        "required": [
+          "query"
+        ]
+      }
+    },
+    {
       "name": "youtube-niche-intel",
       "description": "YouTube competitive intelligence for a keyword or niche: channel concentration, view velocity, saturation signal (SATURATED/MODERATE/OPEN), opportunity grade (A-F), and dominant channels by view share. $0.025/call.",
       "inputSchema": {
@@ -6961,6 +7356,31 @@
         "required": [
           "playlist_id"
         ],
+        "additionalProperties": false
+      }
+    },
+    {
+      "name": "youtube-revenue-estimate",
+      "description": "Estimates a YouTube channel's monthly ad revenue using public view data + industry CPM benchmarks. Returns a low/mid/high monthly revenue range, detected content category (finance, crypto, tech, gaming, etc.), estimated monthly views, RPM tier, and confidence level. Accepts @handle, channel URL, or UCxxxxxxxx channel ID. No API key required. Price: $0.025/call.",
+      "inputSchema": {
+        "type": "object",
+        "required": [
+          "channel"
+        ],
+        "properties": {
+          "channel": {
+            "type": "string",
+            "description": "YouTube channel @handle (e.g. @MrBeast), full URL, or UC... channel ID."
+          },
+          "currency": {
+            "type": "string",
+            "enum": [
+              "USD"
+            ],
+            "description": "Output currency. Only USD supported.",
+            "default": "USD"
+          }
+        },
         "additionalProperties": false
       }
     },
@@ -7011,114 +7431,6 @@
       }
     },
     {
-      "name": "youtube-keyword-research",
-      "description": "YouTube keyword research using Google's autocomplete API. Returns keyword suggestions and intent clusters (questions, tutorials, comparisons, year-tagged trending) for a seed topic. Expand mode probes query+a\u2013z for comprehensive coverage. No API key. Upstream of youtube-niche-intel (competition scoring) and youtube-intel (video search). Use when mapping YouTube content strategy or finding keyword gaps.",
-      "inputSchema": {
-        "type": "object",
-        "properties": {
-          "query": {
-            "type": "string",
-            "description": "Seed keyword or topic (e.g. 'passive income', 'python tutorial')."
-          },
-          "expand": {
-            "type": "boolean",
-            "description": "Probe query+a through query+z for deeper coverage. Default false.",
-            "default": false
-          },
-          "language": {
-            "type": "string",
-            "description": "BCP-47 language code. Default 'en'.",
-            "default": "en"
-          },
-          "country": {
-            "type": "string",
-            "description": "ISO 3166-1 alpha-2 country code. Default 'us'.",
-            "default": "us"
-          }
-        },
-        "required": [
-          "query"
-        ]
-      }
-    },
-    {
-      "name": "options-flow-unusual",
-      "description": "Detects unusual options activity via CBOE delayed data (free, no auth). Computes volume-to-open-interest ratio for every contract within a DTE window \u2014 ratios >= 5x flag institutional sweep orders. Returns top unusual calls and puts by ratio, top flows by raw volume, aggregate put/call ratio, IV30, and a BULLISH_SWEEP/BEARISH_SWEEP/CALL_HEAVY/PUT_HEAVY/NEUTRAL interpretation.",
-      "inputSchema": {
-        "type": "object",
-        "properties": {
-          "ticker": {
-            "type": "string",
-            "description": "US equity or index ticker. Examples: AAPL, SPY, TSLA, NVDA. Default: SPY."
-          },
-          "min_ratio": {
-            "type": "number",
-            "description": "Minimum volume/OI ratio to flag as unusual. Default 5.0."
-          },
-          "min_volume": {
-            "type": "integer",
-            "description": "Minimum volume to include a contract. Default 100."
-          },
-          "top_n": {
-            "type": "integer",
-            "description": "Top N unusual contracts to return per side. Default 5."
-          },
-          "days_to_exp": {
-            "type": "integer",
-            "description": "Only consider options expiring within N days. Default 60."
-          }
-        },
-        "additionalProperties": false
-      }
-    },
-    {
-      "name": "institutional-ownership-intel",
-      "description": "Institutional fund holdings intelligence for US equities. Returns which funds own the stock (Vanguard, Blackrock, Fidelity, etc.), their position sizes, % of shares outstanding, and market value. Breakdown mode shows % institutional vs insider vs public float and top-5 concentration signal (HIGH/MODERATE/DISTRIBUTED). Closes the equity-research stack alongside insider-trading-intel (Form 4) and activist-investor-intel (13D/13G). Source: Yahoo Finance, no API key.",
-      "inputSchema": {
-        "type": "object",
-        "required": [
-          "ticker"
-        ],
-        "properties": {
-          "ticker": {
-            "type": "string",
-            "description": "US equity ticker symbol (e.g. AAPL, TSLA, NVDA). Case-insensitive."
-          },
-          "mode": {
-            "type": "string",
-            "enum": [
-              "holders",
-              "summary",
-              "full"
-            ],
-            "description": "'holders' (default) returns top institutional funds with shares and value. 'summary' returns aggregate breakdown: % institutional, % insider, float size, concentration. 'full' returns both in one call."
-          },
-          "limit": {
-            "type": "integer",
-            "description": "Max number of institutional holders to return in holders/full mode (default 15, max 30)."
-          }
-        },
-        "additionalProperties": false
-      }
-    },
-    {
-      "name": "short-interest-intel",
-      "description": "Outstanding short interest intelligence for US equities: shares sold short, short % of float, days-to-cover (covering pressure), and last FINRA report date. Includes heuristic squeeze risk scoring: EXTREME/HIGH/MODERATE/LOW based on float short % and days-to-cover. Closes the equity ownership trifecta alongside institutional-ownership-intel and insider-trading-intel. Distinct from short-volume-intel (daily FINRA trading volume). Source: Yahoo Finance, no API key.",
-      "inputSchema": {
-        "type": "object",
-        "required": [
-          "ticker"
-        ],
-        "properties": {
-          "ticker": {
-            "type": "string",
-            "description": "US equity ticker symbol (e.g. AAPL, TSLA, GME). Case-insensitive."
-          }
-        },
-        "additionalProperties": false
-      }
-    },
-    {
       "name": "youtube-video-analytics",
       "description": "Heuristic performance analysis for a single YouTube video: view velocity (views/day since publish), engagement rate (likes+comments/views), view-to-sub ratio, and performance tier: VIRAL / HIGH_PERFORMING / AVERAGE / UNDERPERFORMING. Age-bucket context (FRESH/RECENT/ESTABLISHED/MATURE) calibrates interpretation. Extends youtube-intel (raw metadata) with the scored interpretation layer that content strategy and competitive research pipelines need. Source: yt-dlp, free.",
       "inputSchema": {
@@ -7130,84 +7442,6 @@
           "video": {
             "type": "string",
             "description": "YouTube video URL (youtube.com/watch?v=...), youtu.be short link, Shorts URL, or bare 11-character video ID."
-          }
-        },
-        "additionalProperties": false
-      }
-    },
-    {
-      "name": "llm-proxy",
-      "description": "LLM inference proxy \u2014 pay USDC, get AI responses without managing API keys. Accepts a prompt and optional system instruction, forwards to OpenAI, returns the completion. Supports gpt-4o-mini (default, fast and cost-efficient) or gpt-4o (more capable). Agents that already hold USDC on Base can call this to run one-off LLM tasks without onboarding to OpenAI. Max 2,000 output tokens per call. Price: $0.010/call.",
-      "inputSchema": {
-        "type": "object",
-        "required": [
-          "prompt"
-        ],
-        "properties": {
-          "prompt": {
-            "type": "string",
-            "description": "The user message / task to send to the LLM."
-          },
-          "system": {
-            "type": "string",
-            "description": "Optional system prompt. Sets the persona or role for the model."
-          },
-          "model": {
-            "type": "string",
-            "enum": [
-              "gpt-4o-mini",
-              "gpt-4o"
-            ],
-            "description": "Model to use. Default: gpt-4o-mini."
-          },
-          "max_tokens": {
-            "type": "integer",
-            "minimum": 1,
-            "maximum": 2000,
-            "description": "Maximum output tokens. Default: 500."
-          }
-        },
-        "additionalProperties": false
-      }
-    },
-    {
-      "name": "youtube-revenue-estimate",
-      "description": "Estimates a YouTube channel's monthly ad revenue using public view data + industry CPM benchmarks. Returns a low/mid/high monthly revenue range, detected content category (finance, crypto, tech, gaming, etc.), estimated monthly views, RPM tier, and confidence level. Accepts @handle, channel URL, or UCxxxxxxxx channel ID. No API key required. Price: $0.025/call.",
-      "inputSchema": {
-        "type": "object",
-        "required": [
-          "channel"
-        ],
-        "properties": {
-          "channel": {
-            "type": "string",
-            "description": "YouTube channel @handle (e.g. @MrBeast), full URL, or UC... channel ID."
-          },
-          "currency": {
-            "type": "string",
-            "enum": [
-              "USD"
-            ],
-            "description": "Output currency. Only USD supported.",
-            "default": "USD"
-          }
-        },
-        "additionalProperties": false
-      }
-    },
-    {
-      "name": "retail-sector-brief",
-      "description": "AI-synthesized US retail sector briefing: XRT/XLY/XLP ETF signals, major retailer stock performance (AMZN/WMT/TGT/COST/HD/LOW), derived risk-appetite and sector-alpha scores, and GPT-4o-mini synthesis into regime classification + narrative. Companion to consumer-brief (macro signals) \u2014 this covers real-time equity signals. $0.35/call vs assembling 10+ Yahoo Finance lookups manually.",
-      "inputSchema": {
-        "type": "object",
-        "properties": {
-          "style": {
-            "type": "string",
-            "enum": [
-              "standard",
-              "concise"
-            ],
-            "description": "Output length. 'standard' = 160-200 word narrative (default). 'concise' = 110-130 word summary."
           }
         },
         "additionalProperties": false
