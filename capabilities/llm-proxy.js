@@ -81,7 +81,8 @@ export default {
       throw new Error("OPENAI_API_KEY not set — llm-proxy cannot route requests.");
     }
 
-    const { prompt, system, model = "gpt-4o-mini", max_tokens = 500 } = query;
+    const { prompt, system, model = "gpt-4o-mini", max_tokens: rawMaxTokens = 500 } = query;
+    const max_tokens = Math.min(2000, Math.max(1, Number(rawMaxTokens) || 500));
 
     if (!prompt?.trim()) {
       const err = new Error("prompt is required and cannot be empty.");
