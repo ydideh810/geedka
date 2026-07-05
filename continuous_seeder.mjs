@@ -35,12 +35,13 @@ const STATE_FILE   = `${process.env.HOME}/intuitek/logs/seeder_rotation_state.js
 const LOG_FILE     = `${process.env.HOME}/intuitek/logs/continuous_seeder.log`;
 const NOTIFY_SH    = `${process.env.HOME}/intuitek/notify.sh`;
 
-// Caps to seed per run (modest cadence — full rotation ~every 3 days at 6h intervals)
-const CAPS_PER_RUN      = 15;
+// Caps to seed per run — reduced 2026-07-01 to cut Tenderly burst rate-limit hits
+// and extend ETH runway while gas topup is pending (was 15)
+const CAPS_PER_RUN      = 8;
 // Max price to pay per cap (skip expensive AI/synthesis caps — not worth seeder budget)
 const PER_CAP_MAX_USD   = 0.10;
-// Max total spend per run
-const RUN_BUDGET_USD    = 0.25;
+// Max total spend per run — reduced 2026-07-01 to limit ETH gas burn per cycle (was 0.25)
+const RUN_BUDGET_USD    = 0.15;
 // Halt seeder if wallet falls below this floor
 const WALLET_FLOOR_USD  = 0.50;
 // Re-seed a cap after this many hours (keeps "verified-live" status fresh)
@@ -191,7 +192,7 @@ async function seedCap(evmScheme, capName, requirements, payReq) {
       headers: { "X-PAYMENT": paymentHeader, "PAYMENT-SIGNATURE": paymentHeader },
       signal: AbortSignal.timeout(25000),
     });
-    return { status: resp.status, ok: resp.status < 500 };
+    return { status: resp.status, ok: resp.status === 200 };
   } catch (e) {
     return { status: 0, ok: false, err: e.message.slice(0, 80) };
   }

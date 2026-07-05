@@ -175,7 +175,7 @@ Respond ONLY with a JSON object (no markdown, no prose outside the JSON) with th
 
 export default {
   name:  "research-synthesis",
-  price: "$0.309",
+  price: "$2.50",
 
   description:
     "AI-synthesized intelligence report on any topic — aggregates Hacker News, OpenAlex academic papers, Reddit, arXiv preprints, and DuckDuckGo in parallel, then distills into a structured report: executive summary, key findings, market sentiment, emerging trends, and recommendations. Works across domains: financial markets, macroeconomics, technology, life sciences, geopolitics, and more. Pass ?query=your+topic for targeted research. Omit query for a default AI agents & autonomous systems report.",

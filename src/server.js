@@ -55,7 +55,38 @@ mkdirSync(LOG_DIR, { recursive: true });
 const PAYMENT_LOG = join(LOG_DIR, "payments.jsonl");
 const REQUEST_LOG = join(LOG_DIR, "requests.jsonl");
 const SETTLEMENT_LOG = join(LOG_DIR, "settlement.jsonl");
+const SETTLEMENT_CORRECTIONS_LOG = join(LOG_DIR, "settlement_corrections.jsonl");
 const CALL_AUDIT_LOG = join(LOG_DIR, "call_audit.jsonl");
+
+// Async post-settlement RPC enrichment: when payer=null but tx_hash is present
+// (seeder-relay path), look up Transfer.from on-chain and write a correction entry.
+// Section F fix — resolves EIP-3009 authorizer attribution bug (audit 2026-07-03).
+const _RPC_BASE = "https://gateway.tenderly.co/public/base";
+const _USDC_BASE = "0x833589fcd6edb6e08f4c7c32d4f71b54bda02913";
+const _TRANSFER_T0 = "0xddf252ad1be2c89b69c2b068fc378daa952ba7f163c4a11628f55a4df523b3ef";
+function enrichPayerAsync(txHash, ts) {
+  // Fire after 20s to ensure tx is indexed by Tenderly
+  setTimeout(async () => {
+    try {
+      const res = await fetch(_RPC_BASE, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ jsonrpc: "2.0", id: 1, method: "eth_getTransactionReceipt", params: [txHash] }),
+        signal: AbortSignal.timeout(8000)
+      });
+      const data = await res.json();
+      const logs = data?.result?.logs ?? [];
+      const transfer = logs.find(l =>
+        l.address?.toLowerCase() === _USDC_BASE &&
+        l.topics?.[0] === _TRANSFER_T0
+      );
+      if (!transfer?.topics?.[1]) return;
+      const authorizer = "0x" + transfer.topics[1].slice(26);
+      const correction = JSON.stringify({ ts, tx_hash: txHash, authorizer, _source: "Transfer.from_rpc" });
+      appendFileSync(SETTLEMENT_CORRECTIONS_LOG, correction + "\n");
+    } catch { /* never crash on enrichment */ }
+  }, 20000);
+}
 
 function logPaidCall(capName, price, query, statusCode, ip) {
   try {
@@ -139,6 +170,8 @@ function logSettlement(capName, price, query, statusCode, res, ip, xPayment) {
           ...(rawXPaymentCapture ? { _raw_xpayment_debug: rawXPaymentCapture } : {}),
         });
         appendFileSync(SETTLEMENT_LOG, entry + "\n");
+        // If payer still null but tx_hash known: schedule async RPC enrichment.
+        if (!payer && txHash) enrichPayerAsync(txHash, ts);
       } catch (_) { /* never crash on log failure */ }
     });
   } catch (_) { /* never crash on log failure */ }

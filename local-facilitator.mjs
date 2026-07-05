@@ -33,8 +33,11 @@ const USDC_ADDR = "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913";
 const SEEDER_KEY = process.env.AEGIS_WALLET_PRIVATE_KEY;
 const CDP_KEY_ID = process.env.CDP_API_KEY_ID;
 const CDP_KEY_SECRET = process.env.CDP_API_KEY_SECRET;
-// COINBASE_BASE_RPC (CDP) rejects eth_estimateGas since ~2026-06-29T09:00Z; Tenderly confirmed OK
-const RPC = "https://gateway.tenderly.co/public/base";
+// Prefer Coinbase keyed RPC (avoids Tenderly public rate limits); gas: is specified on writeContract
+// so eth_estimateGas is never called (CDP rejects estimateGas since 2026-06-29 — skip it entirely).
+// Tenderly stays as a constant for reference but is no longer the default.
+const TENDERLY_RPC = "https://gateway.tenderly.co/public/base";
+const RPC = process.env.COINBASE_BASE_RPC || TENDERLY_RPC;
 // Revenue wallet — payments destined here get EIP-3009 bypass (CDP broken since Jun26T21Z)
 const REVENUE_WALLET = (process.env.WALLET_ADDRESS || process.env.X402_PAY_TO || "").toLowerCase();
 
@@ -109,13 +112,10 @@ const app = express();
 app.use(express.json({ limit: "2mb" }));
 
 // ── Serial on-chain transaction queue ─────────────────────────────────────────
-// Concurrent settle requests cause two problems:
-//   1. Tenderly public RPC rate-limits burst eth_sendRawTransaction calls.
-//   2. Parallel viem writeContract calls race on eth_getTransactionCount → nonce collisions.
-// Solution: serialize all on-chain settles through a promise chain with a minimum
-// inter-transaction delay. 600ms yields ~1.6 tx/s — below Tenderly burst threshold.
+// Concurrent settle requests cause nonce collisions; serialise all on-chain settles
+// through a promise chain with a minimum inter-transaction delay.
 let _txChain = Promise.resolve();
-const TX_MIN_DELAY_MS = 600;
+const TX_MIN_DELAY_MS = 1000;
 
 function enqueueOnChainSettle(settleFn) {
   const next = _txChain.then(async () => {
@@ -223,7 +223,7 @@ app.post("/settle", async (req, res) => {
 
     return enqueueOnChainSettle(async () => {
       log(`[bypass/settle] executing on-chain: $${(Number(auth.value) / 1e6).toFixed(6)} USDC from ${getAddress(auth.from)} → ${getAddress(auth.to)}`);
-      const RETRY_DELAYS_MS = [1000, 2000, 4000];
+      const RETRY_DELAYS_MS = [2000, 5000, 15000];
       let lastErr;
       for (let attempt = 0; attempt <= RETRY_DELAYS_MS.length; attempt++) {
         try {
@@ -244,6 +244,7 @@ app.post("/settle", async (req, res) => {
               sig,
             ],
             nonce: txNonce,
+            gas: 90000n, // fixed gas — skips eth_estimateGas (CDP RPC rejects estimateGas)
           });
           log(`[bypass/settle] tx submitted: ${txHash}`);
           const receipt = await publicClient.waitForTransactionReceipt({ hash: txHash, timeout: 60_000 });
@@ -257,9 +258,9 @@ app.post("/settle", async (req, res) => {
           return res.json({ success: true, transaction: txHash, network: "eip155:8453" });
         } catch (e) {
           lastErr = e;
-          if (e.message.includes("Request exceeds defined limit") && attempt < RETRY_DELAYS_MS.length) {
+          if ((e.message.includes("Request exceeds defined limit") || e.message.includes("Too Many Requests") || e.message.includes("rate limit")) && attempt < RETRY_DELAYS_MS.length) {
             const delay = RETRY_DELAYS_MS[attempt];
-            log(`[bypass/settle] Tenderly rate-limit, retry ${attempt + 1}/${RETRY_DELAYS_MS.length} in ${delay}ms`);
+            log(`[bypass/settle] RPC rate-limit, retry ${attempt + 1}/${RETRY_DELAYS_MS.length} in ${delay}ms`);
             await new Promise(r => setTimeout(r, delay));
             continue;
           }
