@@ -7702,7 +7702,60 @@
         },
         "additionalProperties": false
       }
+    },
+    {
+      "name": "stock-compare",
+      "description": "Compare a primary US equity against up to 4 peers in a single call. Returns live price, change %, volume, and day/52-week range for each ticker, plus a performance ranking showing leader, laggard, and the primary stock's relative rank. Replaces separate us-stock-price + stock-price-multi calls.",
+      "inputSchema": {
+        "type": "object",
+        "required": [],
+        "properties": {
+          "primary": {
+            "type": "string",
+            "description": "The main stock to focus on (e.g. 'NVDA'). Case-insensitive."
+          },
+          "compare": {
+            "type": "array",
+            "items": { "type": "string" },
+            "minItems": 1,
+            "maxItems": 4,
+            "description": "Up to 4 peer tickers to compare against (e.g. ['AMD','INTC','QCOM']). Case-insensitive."
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    {
+      "name": "stock-monitor-builder",
+      "description": "Build a complete stock monitoring job in one call. Validates your cron schedule (returns human description + next run times) AND fetches current prices for the stocks you want to watch. Returns a ready-to-use monitoring config combining both. Replaces separate cron-parser + stock-price-multi calls.",
+      "inputSchema": {
+        "type": "object",
+        "required": [],
+        "properties": {
+          "cron": {
+            "type": "string",
+            "description": "Cron expression (5 fields) or shortcut (@daily, @hourly, etc.) for when to run the monitor. Example: '0 9 * * 1-5' for weekdays at 9am UTC."
+          },
+          "tickers": {
+            "type": "array",
+            "items": { "type": "string" },
+            "minItems": 1,
+            "maxItems": 5,
+            "description": "Up to 5 US stock ticker symbols to monitor (e.g. ['AAPL','NVDA','MSFT'])."
+          },
+          "next_runs": {
+            "type": "number",
+            "description": "Number of upcoming schedule run times to include (default 5, max 20).",
+            "default": 5
+          },
+          "monitor_name": {
+            "type": "string",
+            "description": "Optional name for this monitoring job (e.g. 'morning-tech-check')."
+          }
+        },
+        "additionalProperties": false
+      }
     }
   ],
-  "version": "4.91.0"
+  "version": "4.93.0"
 }
