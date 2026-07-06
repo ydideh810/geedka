@@ -254,7 +254,7 @@ const CAPTURE_IPS = new Set(["34.158.104.72", "104.131.41.96"]);
 app.use((req, res, next) => {
   try {
     const xfwd = String(req.headers["x-forwarded-for"] || "");
-    const isTarget = CAPTURE_IPS.has(req.ip) || [...CAPTURE_IPS].some(ip => xfwd.includes(ip));
+    const isTarget = CAPTURE_IPS.has(req.ip) || xfwd.split(',').map(s => s.trim()).some(ip => CAPTURE_IPS.has(ip));
     if (isTarget) {
       appendFileSync(GCP_CAPTURE_LOG, JSON.stringify({
         ts: new Date().toISOString(),
