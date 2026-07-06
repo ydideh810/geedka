@@ -7598,7 +7598,27 @@
         "required": [],
         "additionalProperties": false
       }
+    },
+    {
+      "name": "equity-watchlist-brief",
+      "description": "Portfolio watchlist snapshot with technical analysis and AI brief. Accepts up to 8 US equity tickers, returns price, change %, RSI(14), 52-week positioning, volume vs 20-day average, and trend regime (above/below SMA50) for each. AI synthesizes a portfolio mood assessment, focus analysis on the biggest mover, risk flags, and next-watch guidance. Replaces stock-price-multi + us-stock-price + manual technical review in one call.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "tickers": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Up to 8 US stock ticker symbols (e.g. [\"AAPL\",\"NVDA\",\"MSFT\"]). Case-insensitive.",
+            "minItems": 1,
+            "maxItems": 8
+          }
+        },
+        "required": [],
+        "additionalProperties": false
+      }
     }
   ],
-  "version": "4.87.0"
+  "version": "4.88.0"
 }
