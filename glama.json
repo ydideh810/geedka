@@ -1269,6 +1269,30 @@
       }
     },
     {
+      "name": "crypto-stock-pulse",
+      "description": "Crypto movers + single stock: correlation regime, key driver, risk signals, watch level. $1.25/call.",
+      "inputSchema": {
+        "type": "object",
+        "required": [],
+        "properties": {
+          "ticker": {
+            "type": "string",
+            "description": "US stock ticker vs crypto backdrop (e.g. COIN, MSTR, NVDA). Default: SPY."
+          },
+          "crypto_limit": {
+            "type": "integer",
+            "minimum": 3,
+            "maximum": 12,
+            "description": "Top crypto movers to include (default 5)."
+          },
+          "focus": {
+            "type": "string",
+            "description": "Optional analytical focus (e.g. BTC dominance effect on MSTR)."
+          }
+        }
+      }
+    },
+    {
       "name": "crypto-fear-greed",
       "description": "Crypto Fear & Greed Index — current score (0=extreme fear, 100=extreme greed), 7-day trend, 30-day min/max/avg, and trading regime signal. Free alternative.me data updated daily. $0.005/call.",
       "inputSchema": {
@@ -7553,5 +7577,5 @@
       }
     }
   ],
-  "version": "4.85.0"
+  "version": "4.86.0"
 }
