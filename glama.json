@@ -7618,7 +7618,37 @@
         "required": [],
         "additionalProperties": false
       }
+    },
+    {
+      "name": "model-research-brief",
+      "description": "AI/ML domain intelligence in one call: discover top HuggingFace models for a task or domain plus a synthesized research brief from HN, OpenAlex, Reddit, and arXiv. Returns model rankings, landscape summary, research trends, and a deployment recommendation.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "domain": {
+            "type": "string",
+            "description": "AI/ML domain or task to investigate (e.g. 'code generation', 'image segmentation', 'protein folding', 'multimodal reasoning')."
+          },
+          "task_filter": {
+            "type": "string",
+            "description": "Optional HuggingFace pipeline task filter (e.g. 'text-generation', 'image-classification', 'token-classification')."
+          },
+          "sort": {
+            "type": "string",
+            "enum": [
+              "downloads",
+              "likes",
+              "lastModified"
+            ],
+            "description": "Model sort order. Default: downloads."
+          }
+        },
+        "required": [
+          "domain"
+        ],
+        "additionalProperties": false
+      }
     }
   ],
-  "version": "4.88.0"
+  "version": "4.89.0"
 }
