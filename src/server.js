@@ -1119,6 +1119,7 @@ app.use((req, res, next) => {
   if (STALL_INTERNAL_KEY && req.headers["x-internal-key"] === STALL_INTERNAL_KEY) return next();
   // PayAI canary intercepts /cap/ping only; falls through to next() for all other paths
   payAICanaryMiddleware(req, res, () => {
+    if (req.payment) return next(); // PayAI canary already verified + settling — skip downstream paywalls
     solanaRailMiddleware(req, res, () => {
       if (req._solanaRail) return next(); // Solana payment verified upstream
       return x402Middleware(req, res, next);
