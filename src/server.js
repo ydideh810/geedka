@@ -59,6 +59,7 @@ const REQUEST_LOG = join(LOG_DIR, "requests.jsonl");
 const SETTLEMENT_LOG = join(LOG_DIR, "settlement.jsonl");
 const SETTLEMENT_CORRECTIONS_LOG = join(LOG_DIR, "settlement_corrections.jsonl");
 const CALL_AUDIT_LOG = join(LOG_DIR, "call_audit.jsonl");
+const BOUNCE_LOG = join(LOG_DIR, "402_bounces.jsonl");
 
 // Async post-settlement RPC enrichment: when payer=null but tx_hash is present
 // (seeder-relay path), look up Transfer.from on-chain and write a correction entry.
@@ -213,6 +214,33 @@ function logCallAudit(method, path, statusCode, ip, ua, xPayment, rail = "x402")
     });
     appendFileSync(CALL_AUDIT_LOG, entry + "\n");
   } catch (_) {}
+}
+
+// 402 bounce logger — fires when X-PAYMENT is present but payment was rejected (demand sensor).
+// Appends to logs/402_bounces.jsonl. Zero behavior change to the 402 response itself.
+function log402Bounce(req) {
+  try {
+    const xPayment = req.headers['x-payment'] || null;
+    if (!xPayment) return;
+    let attempted_chain = "unknown";
+    try {
+      const decoded = JSON.parse(Buffer.from(xPayment, 'base64').toString('utf8'));
+      if (decoded?.network) attempted_chain = decoded.network;
+      else if (decoded?.payload?.network) attempted_chain = decoded.payload.network;
+    } catch { /* not base64 JSON — leave chain as unknown */ }
+    const attempted_rail = attempted_chain.startsWith("solana") ? "solana"
+      : attempted_chain.startsWith("eip155") ? "evm"
+      : "unknown";
+    const payer = extractPayerFromHeader(xPayment);
+    appendFileSync(BOUNCE_LOG, JSON.stringify({
+      ts: new Date().toISOString(),
+      cap: req.path,
+      attempted_rail,
+      attempted_chain,
+      payer: payer || null,
+      rejection_reason: "payment_rejected",
+    }) + "\n");
+  } catch { /* never throw from bounce logger */ }
 }
 
 const PORT = process.env.PORT || 4021;
@@ -1081,6 +1109,8 @@ app.use((_req, res, next) => {
         if (stripeRail?.getMppChallenge) { const _mppCh = stripeRail.getMppChallenge(); if (_mppCh) parts.push(_mppCh); }
         if (parts.length) res.setHeader('WWW-Authenticate', parts.join(', '));
       }
+      // Log bounce if X-PAYMENT was present — payer attempted a rejected rail (demand sensor)
+      if (_req.headers['x-payment']) log402Bounce(_req);
       const prHeader = res.getHeader('PAYMENT-REQUIRED') || res.getHeader('payment-required');
       if (prHeader) {
         try {
