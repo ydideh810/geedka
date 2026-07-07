@@ -676,7 +676,7 @@ app.get("/.well-known/agent.json", (_req, res) =>
         description: c.description,
         inputModes: ["data"],
         outputModes: ["data"],
-        tags: ["x402", "mcp", "data", "finance", "base", "usdc"],
+        tags: ["x402", "mcp", "data", "finance", "base", "solana", "usdc"],
         examples: [],
       })),
       ...Object.entries(retainerPlans).map(([id, cfg]) => ({
@@ -907,9 +907,9 @@ app.get("/llms.txt", (_req, res) => {
   res.setHeader("Content-Type", "text/plain; charset=utf-8");
   res.send(`# The Stall
 
-> ${capabilities.length} AI-callable pay-per-call data tools. No API keys. Pay USDC on Base. MCP + REST.
+> ${capabilities.length} AI-callable pay-per-call data tools. No API keys. Pay USDC on Base or Solana. MCP + REST.
 
-The Stall is an x402-native capability chassis by IntuiTek¹. Every capability is a GET endpoint — agents probe, receive a 402 Payment Required with the exact USDC price, pay on Base mainnet via the Coinbase CDP facilitator, and receive the result. No accounts, no subscriptions required.
+The Stall is an x402-native capability chassis by IntuiTek¹. Every capability is a GET endpoint — agents probe, receive a 402 Payment Required with the exact USDC price, pay on Base mainnet (Coinbase CDP facilitator) or Solana mainnet (direct USDC transfer to EairXDfN79D5cw8tYuqmSfFKjYr4jmpPezXCxmd9nztF), and receive the result. No accounts, no subscriptions required.
 
 **Prefer to pay by card (no crypto wallet)?** Buy prepaid credits and call any cap with an "Authorization: Bearer <token>" header — 1 credit per call, no gas, no per-call signing:
 - Buy credits: POST ${BASE_URL}/v1/fiat/checkout with JSON body {"bundle":"starter"} → returns a Stripe checkout URL. Bundles: starter $5 (100 credits), pro $30 (1,000 credits), scale $200 (10,000 credits).
