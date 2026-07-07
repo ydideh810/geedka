@@ -216,11 +216,13 @@ function logCallAudit(method, path, statusCode, ip, ua, xPayment, rail = "x402")
   } catch (_) {}
 }
 
-// 402 bounce logger — fires when X-PAYMENT is present but payment was rejected (demand sensor).
+// 402 bounce logger — fires when a payment header is present but payment was rejected (demand sensor).
+// Handles both x402 v1 (X-PAYMENT) and v2 (PAYMENT-SIGNATURE) header names.
 // Appends to logs/402_bounces.jsonl. Zero behavior change to the 402 response itself.
 function log402Bounce(req) {
   try {
-    const xPayment = req.headers['x-payment'] || null;
+    // v2 uses "Payment-Signature"; v1 used "X-PAYMENT"
+    const xPayment = req.headers['payment-signature'] || req.headers['x-payment'] || null;
     if (!xPayment) return;
     let attempted_chain = "unknown";
     try {
@@ -263,8 +265,8 @@ app.use((req, res, next) => {
 app.use((_req, res, next) => {
   res.header("Access-Control-Allow-Origin", "*");
   res.header("Access-Control-Allow-Methods", "GET, POST, OPTIONS");
-  res.header("Access-Control-Allow-Headers", "Content-Type, X-PAYMENT, X-PAYMENT-RESPONSE, PAYMENT-REQUIRED, Authorization");
-  res.header("Access-Control-Expose-Headers", "X-PAYMENT-RESPONSE, PAYMENT-REQUIRED, WWW-Authenticate");
+  res.header("Access-Control-Allow-Headers", "Content-Type, X-PAYMENT, PAYMENT-SIGNATURE, X-PAYMENT-RESPONSE, PAYMENT-REQUIRED, Authorization");
+  res.header("Access-Control-Expose-Headers", "X-PAYMENT-RESPONSE, PAYMENT-RESPONSE, PAYMENT-REQUIRED, WWW-Authenticate");
   next();
 });
 
@@ -1109,8 +1111,8 @@ app.use((_req, res, next) => {
         if (stripeRail?.getMppChallenge) { const _mppCh = stripeRail.getMppChallenge(); if (_mppCh) parts.push(_mppCh); }
         if (parts.length) res.setHeader('WWW-Authenticate', parts.join(', '));
       }
-      // Log bounce if X-PAYMENT was present — payer attempted a rejected rail (demand sensor)
-      if (_req.headers['x-payment']) log402Bounce(_req);
+      // Log bounce if payment header present — payer attempted a rejected rail (demand sensor)
+      if (_req.headers['x-payment'] || _req.headers['payment-signature']) log402Bounce(_req);
       const prHeader = res.getHeader('PAYMENT-REQUIRED') || res.getHeader('payment-required');
       if (prHeader) {
         try {
@@ -1171,7 +1173,7 @@ for (const cap of capabilities) {
   // (body takes precedence so structured JSON clients can pass params naturally).
   function makeCapHandler(paramSource) {
     return async (req, res) => {
-      const xPayment = req.headers["x-payment"] || null;
+      const xPayment = req.headers["payment-signature"] || req.headers["x-payment"] || null;
       const params = paramSource(req);
 
       const required = cap.inputSchema?.required || [];

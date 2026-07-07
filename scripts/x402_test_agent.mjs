@@ -15,9 +15,7 @@
  */
 
 import { privateKeyToAccount } from "viem/accounts";
-import { createWalletClient, http } from "viem";
-import { base } from "viem/chains";
-import { createPaymentHeader } from "x402/client";
+import { ExactEvmScheme } from "@x402/evm/exact/client";
 import { readFileSync } from "fs";
 import { exec } from "child_process";
 
@@ -92,7 +90,7 @@ async function main() {
     console.error("No payment requirements in 402 response:", JSON.stringify(requirements));
     process.exit(1);
   }
-  const priceUsdc = Number(paymentReq.maxAmountRequired) / 1e6;
+  const priceUsdc = Number(paymentReq.amount ?? paymentReq.maxAmountRequired) / 1e6;
   console.log(`  Payment required: ${priceUsdc.toFixed(6)} USDC`);
   console.log(`  payTo: ${paymentReq.payTo}`);
   console.log(`  network: ${paymentReq.network}`);
@@ -102,23 +100,27 @@ async function main() {
   const account = privateKeyToAccount(`0x${PRIVATE_KEY}`);
   console.log(`  Signer: ${account.address}`);
 
-  const walletClient = createWalletClient({
-    account,
-    chain: base,
-    transport: http(RPC_URL),
-  });
-
-  const paymentHeader = await createPaymentHeader(
-    walletClient,
-    requirements.x402Version ?? 1,
+  const scheme = new ExactEvmScheme(account);
+  const partialPayload = await scheme.createPaymentPayload(
+    requirements.x402Version ?? 2,
     paymentReq
   );
+  // @x402/core client wraps the partial payload with resource + accepted fields.
+  // We call the low-level API directly, so we must add them manually.
+  const fullPayload = {
+    x402Version: partialPayload.x402Version,
+    payload: partialPayload.payload,
+    resource: requirements.resource ?? { url: CAP_URL },
+    accepted: paymentReq,
+  };
+  const paymentHeader = Buffer.from(JSON.stringify(fullPayload)).toString("base64");
   console.log(`  Payment header: ${paymentHeader.length} chars, signed.`);
 
   // Step 5: Submit paid request
   console.log(`\nStep 5: Submitting paid request...`);
+  // x402 v2 uses "PAYMENT-SIGNATURE" header; v1 used "X-PAYMENT"
   const paidResp = await fetch(CAP_URL, {
-    headers: { "X-PAYMENT": paymentHeader },
+    headers: { "PAYMENT-SIGNATURE": paymentHeader },
   });
 
   const status = paidResp.status;
