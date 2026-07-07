@@ -12,9 +12,10 @@
   },
   "dependencies": {
     "@coinbase/cdp-sdk": "^1.51.0",
+    "@modelcontextprotocol/sdk": "^1.29.0",
+    "@payai/agentic-payments": "^0.1.6",
     "@x402-solana/core": "^0.3.2",
     "@x402-solana/server": "^0.2.1",
-    "@modelcontextprotocol/sdk": "^1.29.0",
     "@x402/core": "^2.14.0",
     "@x402/evm": "^2.14.0",
     "@x402/express": "^2.14.0",
