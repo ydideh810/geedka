@@ -26,6 +26,7 @@ import { mountRetainer } from "./retainer/index.js";
 import { makeLiveProvider } from "./retainer/risk.js";
 import { mountStripeRail } from "./stripe-rail.js";
 import { loadSigner } from "./retainer/token.js";
+import { buildSolanaRailMiddleware, SOLANA_WALLET } from "./solana-rail.js";
 
 function parseJsonlLog(filePath) {
   try {
@@ -285,6 +286,7 @@ app.get("/health", (_req, res) =>
       stripe: stripeRail?.enabled
         ? { enabled: true, mode: stripeRail.isTestMode ? "test" : "live" }
         : { enabled: false },
+      solana: SOLANA_WALLET ? { enabled: true, address: SOLANA_WALLET } : { enabled: false },
     },
   })
 );
@@ -594,13 +596,22 @@ app.get("/.well-known/x402", (_req, res) =>
     facilitator: DISCOVERY_FACILITATOR,
     paymentAddress: PAY_TO || null,
     payTo: PAY_TO || null,
-    accepts: PAY_TO ? [{
-      scheme: "exact",
-      network: "base",
-      asset: USDC_BASE,
-      payTo: PAY_TO,
-      maxTimeoutSeconds: 300,
-    }] : [],
+    accepts: [
+      ...(PAY_TO ? [{
+        scheme: "exact",
+        network: "base",
+        asset: USDC_BASE,
+        payTo: PAY_TO,
+        maxTimeoutSeconds: 300,
+      }] : []),
+      ...(SOLANA_WALLET ? [{
+        scheme: "exact",
+        network: "solana:mainnet-beta",
+        asset: "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v",
+        payTo: SOLANA_WALLET,
+        maxTimeoutSeconds: 300,
+      }] : []),
+    ],
     resources: capabilities.map((c) => `${BASE_URL}/cap/${c.name}`),
     endpoints: capabilities.map((c) => ({
       path: `/cap/${c.name}`,
@@ -1095,14 +1106,18 @@ const stripeRail = mountStripeRail(app, {
 app.use(stripeRail.mppGate);
 app.use(stripeRail.fiatGate);
 
-// x402 paywall — bypassed when the fiat gate already authorized this request,
-// or when the caller presents the internal service key (provider self-calls).
+// x402 paywall — fiat-gated or internal-key requests bypass entirely.
+// Solana payments are intercepted first; remaining requests fall to the EVM paywall.
 const x402Middleware = buildPaymentMiddleware({ payTo: PAY_TO, network: NETWORK, facilitator: FACILITATOR, capabilities });
+const solanaRailMiddleware = buildSolanaRailMiddleware(capabilities);
 const STALL_INTERNAL_KEY = process.env.STALL_INTERNAL_KEY || null;
 app.use((req, res, next) => {
   if (req.fiatPaid) return next();
   if (STALL_INTERNAL_KEY && req.headers["x-internal-key"] === STALL_INTERNAL_KEY) return next();
-  return x402Middleware(req, res, next);
+  solanaRailMiddleware(req, res, () => {
+    if (req._solanaRail) return next(); // Solana payment verified upstream
+    return x402Middleware(req, res, next);
+  });
 });
 
 // ── Retainer mount (subscription shape — POST /v1/subscribe/:plan + GET /v1/risk/:address) ──
@@ -1127,7 +1142,7 @@ for (const cap of capabilities) {
       if (missing.length > 0) {
         logPaidCall(cap.name, cap.price, params, 400, req.ip);
         logSettlement(cap.name, cap.price, params, 400, res, req.ip, xPayment);
-        logCallAudit(req.method, req.path, 400, req.ip, req.get("user-agent"), xPayment, req.fiatPaid ? "fiat" : "x402");
+        logCallAudit(req.method, req.path, 400, req.ip, req.get("user-agent"), xPayment, req.fiatPaid ? "fiat" : req._solanaRail ? "solana" : "x402");
         // Build a ready-to-use example query string from inputSchema descriptions
         const props = cap.inputSchema?.properties || {};
         const exParts = missing.map(p => {
@@ -1152,7 +1167,7 @@ for (const cap of capabilities) {
         const out = await cap.handler(coerceQuery(params, cap.inputSchema), { req });
         logPaidCall(cap.name, cap.price, params, 200, req.ip);
         logSettlement(cap.name, cap.price, params, 200, res, req.ip, xPayment);
-        logCallAudit(req.method, req.path, 200, req.ip, req.get("user-agent"), xPayment, req.fiatPaid ? "fiat" : "x402");
+        logCallAudit(req.method, req.path, 200, req.ip, req.get("user-agent"), xPayment, req.fiatPaid ? "fiat" : req._solanaRail ? "solana" : "x402");
         res.json(out);
       } catch (err) {
         const isValidationError = err.status === 400 ||
@@ -1162,7 +1177,7 @@ for (const cap of capabilities) {
         const errorCode = isValidationError ? "bad_request" : isUpstreamUnavailable ? "upstream_unavailable" : "capability_error";
         logPaidCall(cap.name, cap.price, params, status, req.ip);
         logSettlement(cap.name, cap.price, params, status, res, req.ip, xPayment);
-        logCallAudit(req.method, req.path, status, req.ip, req.get("user-agent"), xPayment, req.fiatPaid ? "fiat" : "x402");
+        logCallAudit(req.method, req.path, status, req.ip, req.get("user-agent"), xPayment, req.fiatPaid ? "fiat" : req._solanaRail ? "solana" : "x402");
         if (isUpstreamUnavailable) res.setHeader("Retry-After", "5");
         res.status(status).json({ error: errorCode, capability: cap.name, message: String(err?.message || err) });
       }
