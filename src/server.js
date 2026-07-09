@@ -27,6 +27,7 @@ import { makeLiveProvider } from "./retainer/risk.js";
 import { mountStripeRail } from "./stripe-rail.js";
 import { loadSigner } from "./retainer/token.js";
 import { buildSolanaRailMiddleware, SOLANA_WALLET } from "./solana-rail.js";
+import { buildPolygonRailMiddleware, POLYGON_WALLET, POLYGON_USDC } from "./polygon-rail.js";
 import { buildPayAICanaryMiddleware } from "./payai-canary.js";
 
 function parseJsonlLog(filePath) {
@@ -642,6 +643,13 @@ app.get("/.well-known/x402", (_req, res) =>
         payTo: SOLANA_WALLET,
         maxTimeoutSeconds: 300,
       }] : []),
+      ...(POLYGON_WALLET ? [{
+        scheme: "exact",
+        network: "eip155:137",
+        asset: POLYGON_USDC,
+        payTo: POLYGON_WALLET,
+        maxTimeoutSeconds: 300,
+      }] : []),
     ],
     resources: capabilities.map((c) => `${BASE_URL}/cap/${c.name}`),
     endpoints: capabilities.map((c) => ({
@@ -1140,9 +1148,11 @@ app.use(stripeRail.mppGate);
 app.use(stripeRail.fiatGate);
 
 // x402 paywall — fiat-gated or internal-key requests bypass entirely.
-// Order: PayAI canary (ping only) → Solana rail → EVM x402 paywall.
+// Order: PayAI canary (ping only) → Polygon rail → Solana rail → EVM x402 paywall.
+// POLYGON-PILOT-01 (003-B, 2026-07-08): Polygon rail added; kill window 2026-08-08.
 const x402Middleware = buildPaymentMiddleware({ payTo: PAY_TO, network: NETWORK, facilitator: FACILITATOR, capabilities });
 const solanaRailMiddleware = buildSolanaRailMiddleware(capabilities);
+const polygonRailMiddleware = buildPolygonRailMiddleware(capabilities);
 // T3-1 Move #3: PayAI facilitator canary (ping cap, 30d window 2026-07-07→2026-08-06)
 const payAICanaryMiddleware = buildPayAICanaryMiddleware(capabilities, SOLANA_WALLET, PAY_TO);
 const STALL_INTERNAL_KEY = process.env.STALL_INTERNAL_KEY || null;
@@ -1152,9 +1162,12 @@ app.use((req, res, next) => {
   // PayAI canary intercepts /cap/ping only; falls through to next() for all other paths
   payAICanaryMiddleware(req, res, () => {
     if (req.payment) return next(); // PayAI canary already verified + settling — skip downstream paywalls
-    solanaRailMiddleware(req, res, () => {
-      if (req._solanaRail) return next(); // Solana payment verified upstream
-      return x402Middleware(req, res, next);
+    polygonRailMiddleware(req, res, () => {
+      if (req._polygonRail) return next(); // Polygon payment verified upstream
+      solanaRailMiddleware(req, res, () => {
+        if (req._solanaRail) return next(); // Solana payment verified upstream
+        return x402Middleware(req, res, next);
+      });
     });
   });
 });
@@ -1181,7 +1194,7 @@ for (const cap of capabilities) {
       if (missing.length > 0) {
         logPaidCall(cap.name, cap.price, params, 400, req.ip);
         logSettlement(cap.name, cap.price, params, 400, res, req.ip, xPayment);
-        logCallAudit(req.method, req.path, 400, req.ip, req.get("user-agent"), xPayment, req.fiatPaid ? "fiat" : req._solanaRail ? "solana" : "x402");
+        logCallAudit(req.method, req.path, 400, req.ip, req.get("user-agent"), xPayment, req.fiatPaid ? "fiat" : req._polygonRail ? "polygon" : req._solanaRail ? "solana" : "x402");
         // Build a ready-to-use example query string from inputSchema descriptions
         const props = cap.inputSchema?.properties || {};
         const exParts = missing.map(p => {
@@ -1206,7 +1219,7 @@ for (const cap of capabilities) {
         const out = await cap.handler(coerceQuery(params, cap.inputSchema), { req });
         logPaidCall(cap.name, cap.price, params, 200, req.ip);
         logSettlement(cap.name, cap.price, params, 200, res, req.ip, xPayment);
-        logCallAudit(req.method, req.path, 200, req.ip, req.get("user-agent"), xPayment, req.fiatPaid ? "fiat" : req._solanaRail ? "solana" : "x402");
+        logCallAudit(req.method, req.path, 200, req.ip, req.get("user-agent"), xPayment, req.fiatPaid ? "fiat" : req._polygonRail ? "polygon" : req._solanaRail ? "solana" : "x402");
         res.json(out);
       } catch (err) {
         const isValidationError = err.status === 400 ||
@@ -1216,7 +1229,7 @@ for (const cap of capabilities) {
         const errorCode = isValidationError ? "bad_request" : isUpstreamUnavailable ? "upstream_unavailable" : "capability_error";
         logPaidCall(cap.name, cap.price, params, status, req.ip);
         logSettlement(cap.name, cap.price, params, status, res, req.ip, xPayment);
-        logCallAudit(req.method, req.path, status, req.ip, req.get("user-agent"), xPayment, req.fiatPaid ? "fiat" : req._solanaRail ? "solana" : "x402");
+        logCallAudit(req.method, req.path, status, req.ip, req.get("user-agent"), xPayment, req.fiatPaid ? "fiat" : req._polygonRail ? "polygon" : req._solanaRail ? "solana" : "x402");
         if (isUpstreamUnavailable) res.setHeader("Retry-After", "5");
         res.status(status).json({ error: errorCode, capability: cap.name, message: String(err?.message || err) });
       }
