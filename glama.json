@@ -7784,7 +7784,29 @@
         },
         "additionalProperties": false
       }
+    },
+    {
+      "name": "polygon-defi-price",
+      "description": "Real-time Polygon DeFi token price with 24h change and on-chain confidence score. Inputs: symbol (MATIC, WETH, WBTC, USDC, USDT, LINK, AAVE, QUICK, stMATIC) or polygon:0x... address for any Polygon ERC-20. Returns spot price in USD, 24h % change, DeFiLlama confidence (>0.9 = high), and cache staleness. Purpose-built for Polygon DEX agents, trade-sizing bots, and DeFi automation requiring network-native real-time prices. Data: DeFiLlama on-chain oracle (free, no key). No CEX dependency.",
+      "inputSchema": {
+        "type": "object",
+        "required": [
+          "token"
+        ],
+        "properties": {
+          "token": {
+            "type": "string",
+            "description": "Token symbol (MATIC, WETH, WBTC, USDC, USDT, LINK, AAVE, QUICK, stMATIC, USDC.e) or Polygon contract address as polygon:0x... or raw 0x..."
+          },
+          "include_change": {
+            "type": "boolean",
+            "description": "Include 24h price change (adds ~200ms if not cached). Default: true.",
+            "default": true
+          }
+        },
+        "additionalProperties": false
+      }
     }
   ],
-  "version": "4.94.0"
+  "version": "4.95.0"
 }
