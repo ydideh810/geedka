@@ -7716,7 +7716,9 @@
           },
           "compare": {
             "type": "array",
-            "items": { "type": "string" },
+            "items": {
+              "type": "string"
+            },
             "minItems": 1,
             "maxItems": 4,
             "description": "Up to 4 peer tickers to compare against (e.g. ['AMD','INTC','QCOM']). Case-insensitive."
@@ -7738,7 +7740,9 @@
           },
           "tickers": {
             "type": "array",
-            "items": { "type": "string" },
+            "items": {
+              "type": "string"
+            },
             "minItems": 1,
             "maxItems": 5,
             "description": "Up to 5 US stock ticker symbols to monitor (e.g. ['AAPL','NVDA','MSFT'])."
@@ -7755,7 +7759,32 @@
         },
         "additionalProperties": false
       }
+    },
+    {
+      "name": "weather-research-brief",
+      "description": "Weather-contextualized research intelligence \u2014 pulls historical weather for any location (ERA5 reanalysis via Open-Meteo) and multi-source research on any topic (Hacker News, OpenAlex academic papers, Reddit, arXiv, DuckDuckGo), then synthesizes them into a unified brief showing how weather conditions amplify or inform the research findings. Ideal for agricultural commodity analysis, climate/energy positioning, supply chain risk, insurance/actuarial, and environmental due diligence.",
+      "inputSchema": {
+        "type": "object",
+        "required": [],
+        "properties": {
+          "query": {
+            "type": "string",
+            "description": "Research topic to investigate (e.g. 'drought impact on corn yields', 'extreme heat energy demand', 'hurricane insurance market risk', 'climate adaptation agriculture'). Omit for a default climate-markets report."
+          },
+          "location": {
+            "type": "string",
+            "description": "City or region for weather history (default \"Chicago\"). Accepts city names like \"Kansas City\", \"Miami\", \"Phoenix\", \"Des Moines\"."
+          },
+          "days": {
+            "type": "integer",
+            "minimum": 7,
+            "maximum": 30,
+            "description": "Days of weather history to analyse (default 14, max 30). ERA5 data lags ~5 days, so the period ends 5 days before today."
+          }
+        },
+        "additionalProperties": false
+      }
     }
   ],
-  "version": "4.93.0"
+  "version": "4.94.0"
 }
