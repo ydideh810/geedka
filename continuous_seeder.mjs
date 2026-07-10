@@ -46,6 +46,8 @@ const RUN_BUDGET_USD    = 0.15;
 const WALLET_FLOOR_USD  = 0.50;
 // Re-seed a cap after this many hours (keeps "verified-live" status fresh)
 const RESEED_AFTER_HOURS = 84;
+// Skip a cap from seeding queue after it fails, for this many hours
+const FAIL_COOLDOWN_HOURS = 24;
 
 // All active STALL caps (sync with capabilities/*.js — excludes _retired/)
 const ALL_CAPS = [
@@ -94,6 +96,20 @@ const ALL_CAPS = [
   "whale-radar","wikipedia-intel","world-bank-data","x402-endpoint-intel","yield-farming-active",
   "youtube-channel-intel","youtube-comments","youtube-intel","youtube-playlist","youtube-search","youtube-transcript",
   "podcast-intel",
+  // 63 caps added 2026-07-09 — were on disk but missing from rotation list
+  "action-receipt","activist-investor-intel","address-intel","agriculture-brief","ai-pipeline-brief",
+  "app-store-intel","bonds-brief","capital-allocation-score","cdp-market-depth","cot-positioning",
+  "cross-chain-bridge-status","crypto-equity-brief","crypto-news-equity-brief","crypto-stock-pulse",
+  "dcf-scenario","earnings-intel-bundle","earnings-quality","entity-clearance","equity-quality-screen",
+  "equity-watchlist-brief","fact-check","fdic-bank-intel","flight-tracker","fred-query","github-intel",
+  "government-contract-intel","guidance-quality","huggingface-intel","inflation-intel","insider-trading-intel",
+  "institutional-ownership-intel","lbo-model","llm-proxy","market-breadth","merger-acquisition-intel",
+  "metals-brief","model-research-brief","nonprofit-intel","open-food-intel","options-flow-unusual",
+  "patent-intel","polygon-defi-price","portfolio-synthesis","price-target-consensus","pubmed-intel",
+  "pypi-intel","research-automation-brief","retail-sector-brief","revenue-growth-intel","short-interest-intel",
+  "stock-compare","stock-monitor-builder","technical-indicators","tvmaze-intel","vc-funding-intel",
+  "volatility-brief","weather-equity-brief","weather-research-brief","youtube-channel-analytics",
+  "youtube-keyword-research","youtube-niche-intel","youtube-revenue-estimate","youtube-video-analytics",
 ];
 
 // Cap-specific query params for caps that require non-empty inputs to succeed.
@@ -128,6 +144,29 @@ const SEEDER_CAP_INPUTS = {
   "pre-earnings-brief":        { ticker: "NVDA" },
   "options-iv-snapshot":       { ticker: "NVDA" },
   "wacc-calculator":           { ticker: "NVDA" },
+  // Required-param caps that failed HTTP_400 without inputs (2026-07-09)
+  "geocode":                   { query: "Statue of Liberty, New York" },
+  "ip-intel":                  { target: "8.8.8.8" },
+  "npi-lookup":                { organization: "Mayo Clinic" },
+  "weather":                   { location: "New York" },
+  // New caps added 2026-07-09 — required params
+  "action-receipt":            { action: "seeder_health_check", actor: "continuous_seeder" },
+  "activist-investor-intel":   { ticker: "AAPL" },
+  "fact-check":                { claim: "The Earth orbits the Sun." },
+  "flight-tracker":            { mode: "area", airport: "ORD" },
+  "github-intel":              { action: "repo", repo: "anthropics/anthropic-sdk-python" },
+  "lbo-model":                 { ticker: "AAPL" },
+  "polygon-defi-price":        { token: "MATIC" },
+  "pubmed-intel":              { mode: "search", query: "cancer immunotherapy", limit: 5 },
+  // Unblocked 2026-07-10 — were head-of-line stalling due to missing required params
+  "app-store-intel":           { query: "productivity", limit: 5 },
+  "capital-allocation-score":  { ticker: "AAPL" },
+  "cot-positioning":           { commodity: "crude oil" },
+  "earnings-intel-bundle":     { ticker: "AAPL" },
+  "earnings-quality":          { ticker: "AAPL" },
+  "equity-quality-screen":     { ticker: "AAPL" },
+  "fdic-bank-intel":           { mode: "search", query: "JPMorgan", limit: 3 },
+  "address-intel":             { address: "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913" },
 };
 
 // ──────────────────────────────────────────────────────────────────────────────
@@ -231,12 +270,16 @@ async function main() {
   const reseedMs = RESEED_AFTER_HOURS * 3600 * 1000;
 
   // Pick caps due for seeding: unseeded first, then oldest last_seeded
+  // Skip caps that failed recently (FAIL_COOLDOWN_HOURS) to prevent head-of-line blocking
+  const failCooldownMs = FAIL_COOLDOWN_HOURS * 3600 * 1000;
   const due = ALL_CAPS
     .map(cap => ({
       cap,
       lastMs: state[cap]?.last_seeded_ms || 0,
+      lastFailedMs: state[cap]?.last_failed_ms || 0,
     }))
     .filter(({ lastMs }) => (nowMs - lastMs) >= reseedMs)
+    .filter(({ lastFailedMs }) => (nowMs - lastFailedMs) >= failCooldownMs)
     .sort((a, b) => a.lastMs - b.lastMs)
     .slice(0, CAPS_PER_RUN)
     .map(x => x.cap);
@@ -302,7 +345,9 @@ async function main() {
       log(`    ✓ HTTP_${result.status} | run_spent=$${spent.toFixed(4)}`);
     } else {
       failed++;
-      log(`    ✗ HTTP_${result.status}: ${result.err || ""}`);
+      const prevFails = state[cap]?.consecutive_failures || 0;
+      state[cap] = { ...(state[cap] || {}), last_failed_ms: nowMs, consecutive_failures: prevFails + 1, last_status: `HTTP_${result.status}` };
+      log(`    ✗ HTTP_${result.status}: ${result.err || ""} (fail #${prevFails + 1}, cooling down ${FAIL_COOLDOWN_HOURS}h)`);
     }
 
     await sleep(400);
