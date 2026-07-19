@@ -846,11 +846,11 @@ app.get("/", (_req, res) => {
       --dim: #53649a;
       --dim-dark: #2d3b70;
 
-      --line: rgba(64, 95, 255, 0.42);
-      --line-soft: rgba(64, 95, 255, 0.11);
+      --line: rgba(255, 255, 255, 0.42);
+      --line-soft: rgba(209, 209, 209, 0.11);
 
-      --glow: rgba(55, 87, 255, 0.72);
-      --glow-soft: rgba(55, 87, 255, 0.22);
+      --glow: rgba(244, 246, 255, 0.72);
+      --glow-soft: rgba(255, 255, 255, 0.22);
     }
 
     * {
