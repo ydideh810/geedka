@@ -30,7 +30,7 @@
 //   - rate_environment: composite signal for AI agent decision context
 //
 // Seam: Bloomberg Terminal charges $2,000+/mo for structured rate data.
-//       STALL delivers real-time multi-source fixed-income intelligence at $0.40/call.
+//       MYRIAD delivers real-time multi-source fixed-income intelligence at $0.40/call.
 //
 // Upstreams: Yahoo Finance v8 chart (free) + FRED CSV (free) + gpt-4o-mini (OPENAI_API_KEY).
 

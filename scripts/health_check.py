@@ -20,7 +20,7 @@ import time
 import urllib.request
 from datetime import datetime
 
-BASE_URL = os.environ.get("STALL_BASE_URL", "http://localhost:4021")
+BASE_URL = os.environ.get("MYRIAD_BASE_URL", "http://localhost:4021")
 
 # Minimal test inputs per cap — fall through to empty {} for caps with no required fields
 CAP_TEST_INPUTS = {
@@ -136,7 +136,7 @@ def check_x402_gate(cap_name: str) -> tuple[bool, str]:
 
 def main():
     start = datetime.utcnow()
-    print(f"[{start.isoformat()}Z] Starting STALL health check against {BASE_URL}")
+    print(f"[{start.isoformat()}Z] Starting MYRIAD health check against {BASE_URL}")
 
     # Fetch cap list
     try:
@@ -204,10 +204,10 @@ def main():
     # Telegram notification
     notify_path = os.path.expanduser("~/intuitek/notify.sh")
     if total_failed == 0:
-        msg = f"✅ [STALL Health] {total_passed}/{total_tested} caps healthy ({elapsed:.0f}s)"
+        msg = f"✅ [MYRIAD Health] {total_passed}/{total_tested} caps healthy ({elapsed:.0f}s)"
     else:
         fail_list = ", ".join([c for c, _ in gate_failures[:3]] + [c for c, _ in handler_failures[:3]])
-        msg = f"⚠️ [STALL Health] {total_failed} caps failing: {fail_list}"
+        msg = f"⚠️ [MYRIAD Health] {total_failed} caps failing: {fail_list}"
 
     subprocess.run(["bash", notify_path, msg], check=False)
 

@@ -6,7 +6,7 @@
 //
 // Seam: orbisapi.com/proxy/audio-transcription-api-7042e6
 //       532 calls/day · 8 payers · ~$0.0079/call
-//       STALL prices at $0.006 — 24% undercut
+//       MYRIAD prices at $0.006 — 24% undercut
 //
 // Upstream: OpenAI Whisper-1 ($0.006/min) via OPENAI_API_KEY.
 // No local GPU required. In-memory fetch + forward — no temp files.

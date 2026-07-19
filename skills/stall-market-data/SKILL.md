@@ -14,13 +14,13 @@ metadata:
     config:
       stall.endpoint:
         default: "https://myriad.synaptiic.org"
-        description: "STALL API base URL"
+        description: "MYRIAD API base URL"
       stall.account:
         description: "Funding pointer / account handle (NOT a private key)"
         required: false
 ---
 
-# STALL Market Data
+# MYRIAD Market Data
 
 Authoritative multi-source market data through [MYRIAD](https://myriad.synaptiic.org) — 200+ paid caps via standard HTTP-402 payment. Payment is handled by your agent's own wallet/payment skill (stripe-link-cli or mpp-agent) — this skill holds no credentials.
 

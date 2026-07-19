@@ -3,8 +3,8 @@
 // because the Base RPC caps getLogs range at 1000 blocks (-32005). Bounded scan.
 const BASE_RPC = process.env.BASE_RPC_URL || "https://mainnet.base.org";
 const TRANSFER_TOPIC = "0xddf252ad1be2c89b69c2b068fc378daa952ba7f163c4a11628f55a4df523b3ef";
-const CHUNK = parseInt(process.env.STALL_RISK_CHUNK_BLOCKS || "1000", 10); // RPC hard cap
-const MAX_CHUNKS = parseInt(process.env.STALL_RISK_MAX_CHUNKS || "15", 10); // ~15k blocks ~8h bounded
+const CHUNK = parseInt(process.env.MYRIAD_RISK_CHUNK_BLOCKS || "1000", 10); // RPC hard cap
+const MAX_CHUNKS = parseInt(process.env.MYRIAD_RISK_MAX_CHUNKS || "15", 10); // ~15k blocks ~8h bounded
 const PAGE_CAP = 150;
 
 const OFAC_SET = new Set([

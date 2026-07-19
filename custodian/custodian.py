@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-STALL Custodian — authoritative live state + claim gate
+MYRIAD Custodian — authoritative live state + claim gate
 Built per Cowork/Kyle directive 2026-06-08.
 
 INVARIANT (non-negotiable, from Cowork):
@@ -52,7 +52,7 @@ from pathlib import Path
 NOTIFY_SH = os.path.expanduser('~/intuitek/notify.sh')
 
 STATE_FILE = Path(__file__).parent / 'state.json'
-STALL_URL  = 'https://myriad.synaptiic.org'
+MYRIAD_URL  = 'https://myriad.synaptiic.org'
 
 
 def _now_iso() -> str:
@@ -135,7 +135,7 @@ def record_blocked(channel_id: str, reason: str) -> dict:
     blocked.setdefault(channel_id, []).append(entry)
     result = write_state({'blocked_claims': blocked})
     try:
-        msg = f'⚠️ [STALL gate] Blocked claim to {channel_id}: {reason}'
+        msg = f'⚠️ [MYRIAD gate] Blocked claim to {channel_id}: {reason}'
         subprocess.run(
             ['bash', NOTIFY_SH, msg],
             timeout=10,
@@ -156,7 +156,7 @@ def assert_claim_safe(channel_id: str) -> dict:
     """
     counts = get_live_counts()
     if not counts['tunnel_alive']:
-        reason = 'STALL tunnel is DOWN — liveness claim would be false'
+        reason = 'MYRIAD tunnel is DOWN — liveness claim would be false'
         record_blocked(channel_id, reason)
         raise RuntimeError(
             f'{reason}. Tunnel must be alive before emitting any liveness claim. '
@@ -186,10 +186,10 @@ def refresh_cap_count() -> int:
 
 
 def _probe_tunnel() -> bool:
-    """Return True if STALL tunnel responds to /health within 5 seconds."""
+    """Return True if MYRIAD tunnel responds to /health within 5 seconds."""
     try:
         req = urllib.request.Request(
-            f'{STALL_URL}/health',
+            f'{MYRIAD_URL}/health',
             headers={'User-Agent': 'aegis-custodian/1.0'},
         )
         resp = urllib.request.urlopen(req, timeout=5)

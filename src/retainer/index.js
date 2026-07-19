@@ -20,7 +20,7 @@ function toCAIP2(network) {
 export function mountRetainer(app, { payTo, network, facilitator, provider }) {
   const signer = loadSigner();
   if (signer.ephemeral) {
-    console.warn("  [retainer] WARN: STALL_TOKEN_SK not set — using ephemeral key (tokens invalidated on restart)");
+    console.warn("  [retainer] WARN: MYRIAD_TOKEN_SK not set — using ephemeral key (tokens invalidated on restart)");
   }
 
   const replayGuard = createReplayGuard();
@@ -33,7 +33,7 @@ export function mountRetainer(app, { payTo, network, facilitator, provider }) {
   for (const [plan, cfg] of Object.entries(PLANS)) {
     routeConfig[`POST /v1/subscribe/${plan}`] = {
       accepts: { scheme: "exact", price: cfg.price, network: caip2Network, payTo },
-      description: `STALL risk retainer (${plan}) — ${cfg.windowSeconds / 86400}d access to /v1/risk/:address`,
+      description: `MYRIAD risk retainer (${plan}) — ${cfg.windowSeconds / 86400}d access to /v1/risk/:address`,
       mimeType: "application/json",
     };
   }

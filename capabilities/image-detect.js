@@ -6,7 +6,7 @@
 // match flag, file size, and basic dimensions where readable from header bytes.
 //
 // Seam: api.x402node.dev/image/detect — 20 unique payers, 44 settlements/7d,
-// $0.050/call. STALL prices at $0.040 (20% below).
+// $0.050/call. MYRIAD prices at $0.040 (20% below).
 //
 // Upstream cost: zero — pure fetch + byte inspection, no external API.
 

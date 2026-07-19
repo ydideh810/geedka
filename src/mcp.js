@@ -1,6 +1,6 @@
 // mcp.js — MCP transport integration for MYRIAD
 //
-// Exposes all STALL capabilities as MCP tools via two transports:
+// Exposes all MYRIAD capabilities as MCP tools via two transports:
 //   - Streamable HTTP (POST /mcp) — stateless, preferred
 //   - SSE (GET /sse + POST /messages) — legacy, for clients that require it
 // Handlers are called directly — no x402 payment required for MCP callers.
@@ -40,7 +40,7 @@ function buildZodShape(inputSchema) {
   return shape;
 }
 
-// Build a fresh McpServer with all STALL capabilities registered as tools.
+// Build a fresh McpServer with all MYRIAD capabilities registered as tools.
 // Called once per request (stateless transport requires fresh server per request).
 function buildServer(capabilities) {
   const server = new McpServer({ name: "MYRIAD", version: PKG_VERSION });

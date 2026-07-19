@@ -7,7 +7,7 @@
 //
 // Seam: orbisapi.com/proxy/polymarket-accuracy-score-api-27861e — 398 sett,
 //   8 payers, $0.005/call (2-day snapshot, first_seen 2026-06-05).
-// STALL prices at $0.004 (20% below). Upstream: Polymarket gamma API (free, no key).
+// MYRIAD prices at $0.004 (20% below). Upstream: Polymarket gamma API (free, no key).
 //
 // Brier score reference: 0.00 = perfect, 0.25 = random, 1.00 = systematically wrong.
 

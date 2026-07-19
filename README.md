@@ -334,7 +334,7 @@ Standard Node service. Set env vars (`WALLET_ADDRESS`, `X402_NETWORK=base`,
 
 Several orbisapi proxy endpoints went offline in June 2026. MYRIAD covers all of them at lower prices with no x402 configuration required beyond a Base USDC wallet:
 
-| Dead orbisapi endpoint | MYRIAD replacement | STALL price | Orbisapi price |
+| Dead orbisapi endpoint | MYRIAD replacement | MYRIAD price | Orbisapi price |
 |---|---|---|---|
 | `orbisapi.com/proxy/cryptocurrency-news-api-456a6a` | [`crypto-news-impact`](https://myriad.synaptiic.org/cap/crypto-news-impact) | $0.008 | $0.005 |
 | `orbisapi.com/proxy/web-scrape-links-api-4e3ed0` | [`page-links`](https://myriad.synaptiic.org/cap/page-links) | $0.004 | $0.005 |

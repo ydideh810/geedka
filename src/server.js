@@ -982,7 +982,7 @@ Counterparty-risk monitoring subscribers get unlimited /v1/risk/{address} calls:
 // ── Integrator guide — production workflow patterns for agent builders ────────
 app.get("/integrators", (_req, res) => {
   try {
-    const content = readFileSync(new URL("../STALL_INTEGRATORS.md", import.meta.url), "utf8");
+    const content = readFileSync(new URL("../MYRIAD_INTEGRATORS.md", import.meta.url), "utf8");
     res.setHeader("Content-Type", "text/markdown; charset=utf-8");
     res.send(content);
   } catch {
@@ -1166,7 +1166,7 @@ const payAICanaryMiddleware = buildPayAICanaryMiddleware(capabilities, SOLANA_WA
 const MYRIAD_INTERNAL_KEY = process.env.MYRIAD_INTERNAL_KEY || null;
 app.use((req, res, next) => {
   if (req.fiatPaid) return next();
-  if (STALL_INTERNAL_KEY && req.headers["x-internal-key"] === STALL_INTERNAL_KEY) return next();
+  if (MYRIAD_INTERNAL_KEY && req.headers["x-internal-key"] === MYRIAD_INTERNAL_KEY) return next();
   // PayAI canary intercepts /cap/ping only; falls through to next() for all other paths
   payAICanaryMiddleware(req, res, () => {
     if (req.payment) return next(); // PayAI canary already verified + settling — skip downstream paywalls

@@ -4,7 +4,7 @@
 // and activity stats for profiles on GitHub, Reddit, Hacker News, and Twitter/X.
 //
 // Seam: orbisapi.com/proxy/web-scrape-social-api-eeb761 — 4,502 sett/wk,
-// ~26 payers, $0.005/call. STALL prices at $0.004 (20% undercut).
+// ~26 payers, $0.005/call. MYRIAD prices at $0.004 (20% undercut).
 // All upstreams are free public APIs — zero per-call cost.
 //
 // Input: provide a profile URL (platform auto-detected) OR platform + username.

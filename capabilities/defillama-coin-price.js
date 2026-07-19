@@ -2,7 +2,7 @@
 //
 // On-chain aggregated token prices via DefiLlama coins API.
 // Seam: blockrun.ai/api/v1/defillama/prices/coingecko:ethereum — 31 payers,
-// 16K calls, $360 in 14d at $0.021/call. STALL undercuts at $0.016 (24% discount).
+// 16K calls, $360 in 14d at $0.021/call. MYRIAD undercuts at $0.016 (24% discount).
 //
 // Upstream: https://coins.llama.fi/prices/current/... (free, no auth)
 // Supports coingecko:ID, ethereum:0xADDRESS, solana:MINT, etc. coin IDs.

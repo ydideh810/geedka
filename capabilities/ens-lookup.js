@@ -5,7 +5,7 @@
 // Reverse: 0x{address} → primary ENS name + same profile data.
 //
 // Seam: skills.onesource.io/api/chain/ens — 373 payers, $0.005/call.
-// STALL price: $0.004 (20% undercut). Upstream: api.ensdata.net (free, no auth).
+// MYRIAD price: $0.004 (20% undercut). Upstream: api.ensdata.net (free, no auth).
 
 const ENS_API = "https://api.ensdata.net";
 const UA = "myriad/3.76 (https://synaptiic.org)";

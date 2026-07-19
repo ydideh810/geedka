@@ -4,7 +4,7 @@
 // Returns keyword suggestions and intent clusters (questions, tutorials,
 // comparisons, trending) for a seed topic.
 //
-// Demand signal: youtube-intel is STALL's #1 organic cap (59 calls / 72h,
+// Demand signal: youtube-intel is MYRIAD's #1 organic cap (59 calls / 72h,
 // 12 wallets). These callers do YouTube content and competitive research;
 // keyword discovery is the natural upstream step before youtube-niche-intel
 // (competition check) and youtube-channel-intel (competitor deep-dive).

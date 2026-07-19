@@ -1,6 +1,6 @@
 // stdio-mcp.js — Stdio MCP entrypoint for Glama / mcp-proxy compatibility.
 //
-// Exposes all STALL capabilities as MCP tools over StdioServerTransport.
+// Exposes all MYRIAD capabilities as MCP tools over StdioServerTransport.
 // stdout is reserved exclusively for JSON-RPC frames — no banner, no logging.
 // All diagnostic output goes to stderr so the mcp-proxy handshake succeeds.
 //

@@ -5,7 +5,7 @@
 // subscriber count, replay heatmap, and availability.
 //
 // Seam: hirescrape.com/api/tools/youtube — 134 calls/day, 6 payers, $0.028/call.
-// STALL prices at $0.039 — adds chapters + heatmap competitors don't surface.
+// MYRIAD prices at $0.039 — adds chapters + heatmap competitors don't surface.
 // Upstream: yt-dlp (local binary, free) with YouTube oembed fallback.
 
 import { execFile } from "child_process";
@@ -214,7 +214,7 @@ export default {
       ts:            { type: "string",            description: "ISO-8601 response timestamp." },
       related_capabilities: {
         type: "array",
-        description: "Other STALL YouTube caps to deepen the analysis pipeline.",
+        description: "Other MYRIAD YouTube caps to deepen the analysis pipeline.",
         items: {
           type: "object",
           properties: {

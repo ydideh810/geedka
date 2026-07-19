@@ -1,6 +1,6 @@
 // intel-pack.js — Bundled intelligence: market overview + top DeFi yields + prediction markets.
 //
-// StableEnrich play: "six sources, one API call" applied to STALL's three strongest
+// StableEnrich play: "six sources, one API call" applied to MYRIAD's three strongest
 // signal streams. One x402 payment returns structured context across equities, DeFi,
 // and prediction markets — useful for position-sizing, yield routing, or pre-decision
 // sentiment. $0.09 vs $0.109 bought individually.

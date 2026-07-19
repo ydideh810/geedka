@@ -4,7 +4,7 @@
 // a hosted image URL (valid for 1 hour) plus generation metadata.
 //
 // Seam: api.imgzen.dev/v1/models/gpt-image-1/generate — $0.100/image.
-// STALL prices at $0.080 (20% below). Upstream cost: $0.040 (DALL-E 3 std).
+// MYRIAD prices at $0.080 (20% below). Upstream cost: $0.040 (DALL-E 3 std).
 //
 // Upstream: OpenAI Images API via OPENAI_API_KEY.
 

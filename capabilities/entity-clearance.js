@@ -16,7 +16,7 @@ async function probe(url) {
       method: "GET",
       redirect: "follow",
       signal: ctl.signal,
-      headers: { "user-agent": "STALL-entity-clearance/1.0 (+https://myriad.synaptiic.org)" },
+      headers: { "user-agent": "MYRIAD-entity-clearance/1.0 (+https://myriad.synaptiic.org)" },
     });
     const text = await res.text().catch(() => "");
     const m = text.match(/<title[^>]*>([^<]{0,300})<\/title>/i);
@@ -130,7 +130,7 @@ export default {
       ...body,
       receipt: {
         receipt_id,
-        issuer: "STALL Clearance Layer (IntuiTek¹)",
+        issuer: "MYRIAD Clearance Layer (IntuiTek¹)",
         result_hash,
         verify: "sha256 of the response body minus this receipt object",
         issued_at: checkedAt,

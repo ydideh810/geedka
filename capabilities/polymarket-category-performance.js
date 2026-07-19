@@ -6,7 +6,7 @@
 // Useful for agents deciding which category of markets to trade or monitor.
 //
 // Seam: orbisapi.com/proxy/polymarket-category-performance-api-701ccb — 591 sett,
-//   5 payers, $0.005/call (7d). STALL prices at $0.004 (20% below).
+//   5 payers, $0.005/call (7d). MYRIAD prices at $0.004 (20% below).
 //   Distinct from polymarket-accuracy-score (which scores calibration quality)
 //   and polymarket-sentiment-shift (which tracks weekly price changes).
 //

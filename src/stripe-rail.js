@@ -9,7 +9,7 @@
 //   1. POST /v1/fiat/checkout  -> creates a Stripe Checkout Session for a credit bundle,
 //                                 returns { url } to send the buyer to Stripe-hosted checkout.
 //   2. POST /v1/fiat/webhook   -> Stripe calls this on payment success
-//                                 (checkout.session.completed). We mint a STALL access token
+//                                 (checkout.session.completed). We mint a MYRIAD access token
 //                                 (EdDSA JWT, same signer as retainer) and credit a ledger.
 //   3. GET  /v1/fiat/token?session_id=...  -> buyer polls to retrieve their token + credits.
 //   4. fiatGate(...) middleware -> runs BEFORE the x402 paywall. If a valid Bearer token

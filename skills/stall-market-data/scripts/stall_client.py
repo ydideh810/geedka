@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-stall_client.py v2 — STALL market-data skill client for Hermes agents.
+stall_client.py v2 — MYRIAD market-data skill client for Hermes agents.
 
 Usage:
   python3 stall_client.py caps                                    # list all caps + prices
@@ -17,11 +17,11 @@ import urllib.request
 import urllib.parse
 import urllib.error
 
-STALL_URL = "https://myriad.synaptiic.org"
+MYRIAD_URL = "https://myriad.synaptiic.org"
 
 
 def _request(method, path, params=None, headers=None):
-    url = STALL_URL + path
+    url = MYRIAD_URL + path
     if params:
         url += "?" + urllib.parse.urlencode(params)
     merged = {"User-Agent": "stall-client/2.0", "Accept": "application/json"}

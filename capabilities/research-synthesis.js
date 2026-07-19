@@ -5,7 +5,7 @@
 // DuckDuckGo, then distills them into structured findings via OpenAI.
 //
 // Seam: scout.hugen.tokyo/scout/research — 17+ payers, $0.25/call.
-// STALL prices at $0.200 (20% below). Upstream cost: ~$0.001 (gpt-4o-mini).
+// MYRIAD prices at $0.200 (20% below). Upstream cost: ~$0.001 (gpt-4o-mini).
 //
 // Upstream: HN Algolia (free), OpenAlex (free), Reddit JSON (free),
 //           arXiv (free), DDG Instant Answer (free)

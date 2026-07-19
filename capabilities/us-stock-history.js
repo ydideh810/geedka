@@ -5,7 +5,7 @@
 //
 // Demand basis: blockrun.ai /api/v1/stocks/us/history saw 48,360 settlements
 // (~$48) in 72h in archive.db — highest-volume external endpoint observed.
-// Blockrun charges $0.0010/call. STALL priced at $0.005/call.
+// Blockrun charges $0.0010/call. MYRIAD priced at $0.005/call.
 //
 // Upstream: Yahoo Finance v8/finance/chart — free, no API key, no rate limit.
 

@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-stall-mcp — FastMCP server wrapping STALL market-data caps.
+stall-mcp — FastMCP server wrapping MYRIAD market-data caps.
 
 Runs as stdio MCP server. Adds to Hermes mcp_servers config:
   {"stall-mcp": {"command": "python3", "args": ["/path/to/stall-mcp/server.py"]}}
@@ -19,13 +19,13 @@ try:
 except ImportError:
     raise SystemExit("pip install mcp")
 
-STALL_URL = os.environ.get("STALL_ENDPOINT", "https://myriad.synaptiic.org")
+MYRIAD_URL = os.environ.get("MYRIAD_ENDPOINT", "https://myriad.synaptiic.org")
 
 mcp = FastMCP("stall-mcp")
 
 
 def _get(path, params=None, headers=None):
-    url = STALL_URL + path
+    url = MYRIAD_URL + path
     if params:
         url += "?" + urllib.parse.urlencode({k: v for k, v in params.items() if v is not None})
     req = urllib.request.Request(url, headers=headers or {}, method="GET")
@@ -42,7 +42,7 @@ def _get(path, params=None, headers=None):
 
 @mcp.tool()
 def list_caps() -> str:
-    """List all available STALL market-data caps with names and prices."""
+    """List all available MYRIAD market-data caps with names and prices."""
     status, data = _get("/catalog")
     if status != 200:
         return json.dumps({"error": f"HTTP {status}", "detail": data})
@@ -65,7 +65,7 @@ def call_cap(
     extra_params: str = "",
 ) -> str:
     """
-    Call a STALL market-data cap. Returns data on success or a 402 payment challenge.
+    Call a MYRIAD market-data cap. Returns data on success or a 402 payment challenge.
 
     Args:
         cap_name: Cap identifier (e.g. us-stock-price, earnings-calendar)
@@ -122,7 +122,7 @@ def call_cap(
 
 @mcp.tool()
 def get_cap_info(cap_name: str) -> str:
-    """Get metadata for a specific STALL cap including price and description."""
+    """Get metadata for a specific MYRIAD cap including price and description."""
     status, data = _get("/catalog")
     if status != 200:
         return json.dumps({"error": f"HTTP {status}"})

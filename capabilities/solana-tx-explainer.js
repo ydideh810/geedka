@@ -3,7 +3,7 @@
 // Decodes and explains a Solana transaction in one call.
 // signal-intel signal: api.oatp.cc/tools/tx_explainer — 25 calls, 6 distinct
 // payer wallets, $0.10/call (100,000 USDC micro-units), 30-day window ending
-// 2026-06-01. Gap: their cap covers Solana; STALL tx-explainer covers EVM only.
+// 2026-06-01. Gap: their cap covers Solana; MYRIAD tx-explainer covers EVM only.
 // Priced at $0.07 (70% of OATP's $0.10 per signal-intel pricing doctrine).
 //
 // Free upstream: api.mainnet-beta.solana.com (public, no API key).

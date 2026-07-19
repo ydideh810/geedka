@@ -3,7 +3,7 @@
 // Solana meme coin quality-volume radar via DexScreener free API.
 //
 // Seam origin: api.seerium.xyz/v1/meme-radar/quality-volume — 6 distinct wallets,
-// confirmed organic demand. STALL had no Solana meme coverage; seerium charges
+// confirmed organic demand. MYRIAD had no Solana meme coverage; seerium charges
 // x402 per call. This cap sources the same data tier via DexScreener (free, no key).
 //
 // Returns trending Solana tokens ranked by a quality score that rewards organic

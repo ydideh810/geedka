@@ -2,7 +2,7 @@
 //
 // DefiLlama protocol TVL, chain breakdown, fees, and metadata for any DeFi protocol.
 // Seam: blockrun.ai/api/v1/defillama/protocol/:slug — 28 payers, 33K calls, $724 in 14d
-// at $0.022/call. STALL undercuts at $0.018 (18% discount), same DefiLlama upstream.
+// at $0.022/call. MYRIAD undercuts at $0.018 (18% discount), same DefiLlama upstream.
 //
 // Upstream: https://api.llama.fi/protocol/:slug (free, no auth)
 

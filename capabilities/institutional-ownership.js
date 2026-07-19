@@ -8,7 +8,7 @@
 //   3. Top insider holders: officers/directors with name, relation, shares direct,
 //      latest transaction description and date.
 //
-// Seam: hedge-fund-holdings (this STALL) answers "given a manager, what do they own?"
+// Seam: hedge-fund-holdings (this MYRIAD) answers "given a manager, what do they own?"
 // This cap inverts the query — given a ticker, who are the current owners? Standard
 // equity research step before any fundamental analysis: insider alignment (skin in game),
 // concentration risk (top-5 institutions > 30% = squeeze/overhang risk), and smart-money

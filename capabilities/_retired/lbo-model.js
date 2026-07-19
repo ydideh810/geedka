@@ -5,7 +5,7 @@
 // IRR + MOIC, and 3×3 sensitivity tables on entry/exit multiples.
 //
 // Competitor: financial-analyst.ai/lbo/model at $5.00/call (13 calls in 30d).
-// STALL prices at $4.50 — 10% below — with richer output: full operating model,
+// MYRIAD prices at $4.50 — 10% below — with richer output: full operating model,
 // full debt schedule, and dual sensitivity tables (IRR + MOIC).
 
 function round2(n) { return Math.round(n * 100) / 100; }

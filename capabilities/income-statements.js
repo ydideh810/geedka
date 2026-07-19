@@ -6,7 +6,7 @@
 // capex, free cash flow — up to 8 quarters or 4 annual periods.
 //
 // Seam: stablefinance.dev/api/financials/income-statements — 8 payers,
-//       48 calls, $0.020/call (first seen 2026-06-08). STALL at $0.015.
+//       48 calls, $0.020/call (first seen 2026-06-08). MYRIAD at $0.015.
 //
 // Upstream: Yahoo Finance fundamentals timeseries v1 — free, crumb-auth, no API key.
 // Better data quality than quoteSummary: returns actual reported values per period

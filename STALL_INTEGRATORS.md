@@ -1,4 +1,4 @@
-# STALL Integrator Guide
+# MYRIAD Integrator Guide
 
 **Building production agent workflows on MYRIAD**
 
@@ -65,7 +65,7 @@ GET /cap/research-synthesis?query=S%26P+500+earnings+outlook+Q3+2026
 
 Returns a structured intelligence report: executive summary, key findings, market implications, and source attribution — assembled from HN, OpenAlex, Reddit, arXiv, and DuckDuckGo in one $0.309 call.
 
-Comparable research synthesis services charge $1.40+ per call. STALL research-synthesis delivers comparable output at ~1/5th the cost.
+Comparable research synthesis services charge $1.40+ per call. MYRIAD research-synthesis delivers comparable output at ~1/5th the cost.
 
 ### Enriched research pipeline
 
@@ -80,7 +80,7 @@ Comparable research synthesis services charge $1.40+ per call. STALL research-sy
 
 ## x402 Integration
 
-Every STALL endpoint follows the x402 protocol:
+Every MYRIAD endpoint follows the x402 protocol:
 
 1. Agent calls `GET /cap/<name>?param=value` — receives `402 Payment Required`
 2. Response body contains `{ "x402Version": "1", "accepts": [{ "network": "base-mainnet", "asset": "USDC", "amount": "...", "payTo": "0x..." }] }`

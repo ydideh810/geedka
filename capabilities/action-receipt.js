@@ -48,7 +48,7 @@ export default {
     const chain_hash = crypto.createHash("sha256").update(canonical).digest("hex");
     return {
       receipt_id: "act_" + crypto.randomBytes(6).toString("hex"),
-      issuer: "STALL Clearance Layer (IntuiTek¹)",
+      issuer: "MYRIAD Clearance Layer (IntuiTek¹)",
       record,
       chain_hash,
       verify_recipe:

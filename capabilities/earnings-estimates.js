@@ -172,7 +172,7 @@ export default {
       },
       related_capabilities: {
         type: "array",
-        description: "Other STALL caps for equity research workflows.",
+        description: "Other MYRIAD caps for equity research workflows.",
         items: {
           type: "object",
           properties: {

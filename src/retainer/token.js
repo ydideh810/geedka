@@ -3,7 +3,7 @@ const b64url = (buf) => Buffer.from(buf).toString("base64url");
 const b64urlJson = (obj) => b64url(JSON.stringify(obj));
 const fromB64urlJson = (s) => JSON.parse(Buffer.from(s, "base64url").toString("utf8"));
 export function loadSigner(){
-  const skB64 = process.env.STALL_TOKEN_SK;
+  const skB64 = process.env.MYRIAD_TOKEN_SK;
   if (skB64) {
     const privateKey = createPrivateKey({ key: Buffer.from(skB64,"base64"), format:"der", type:"pkcs8" });
     const publicKey = createPublicKey(privateKey);

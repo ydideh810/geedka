@@ -6,7 +6,7 @@
 //
 // Seam: orbisapi.com/proxy/web-scrape-links-api-4e3ed0 — $0.005/call,
 //       signal_id 57541, strength 80%, 6 wallets × 5 days persistence.
-// STALL prices at $0.004 — 20% below competitor.
+// MYRIAD prices at $0.004 — 20% below competitor.
 // Upstream: direct HTTP fetch — no API key, no cost.
 //
 // Distinct from web-scrape-links: adds filter (internal/external/all),

@@ -20,7 +20,7 @@
 // Derived: Brent/WTI spread, WTI vs 52-week range, market regime classification.
 //
 // Seam: crownblock.lonestaroracle.xyz/report — $1.00/call, ~40 settlements/wk,
-// 2 payers (energy/trading agents). STALL prices at $0.65 — 35% undercut,
+// 2 payers (energy/trading agents). MYRIAD prices at $0.65 — 35% undercut,
 // real-time data (not monthly FRED averages), broader equity coverage.
 //
 // Upstreams: Yahoo Finance v8 chart (free, no auth) + gpt-4o-mini (OPENAI_API_KEY).
@@ -185,7 +185,7 @@ export default {
   price: "$0.67",
 
   description:
-    "AI-synthesized US energy market intelligence brief. Assembles 9 real-time signals from Yahoo Finance: WTI crude futures, Brent crude (with spread), natural gas (Henry Hub proxy), energy sector ETF (XLE), oil services ETF (OIH), ExxonMobil, Chevron, Marathon Petroleum, and Baker Hughes. Returns 52-week context, Brent/WTI spread, market-regime classification, and a 200-word GPT-4o-mini narrative covering oil regime, dominant risk, and agent decision implications. Seam: crownblock upstream $1.00/call — STALL at $0.65 with real-time futures data vs monthly averages.",
+    "AI-synthesized US energy market intelligence brief. Assembles 9 real-time signals from Yahoo Finance: WTI crude futures, Brent crude (with spread), natural gas (Henry Hub proxy), energy sector ETF (XLE), oil services ETF (OIH), ExxonMobil, Chevron, Marathon Petroleum, and Baker Hughes. Returns 52-week context, Brent/WTI spread, market-regime classification, and a 200-word GPT-4o-mini narrative covering oil regime, dominant risk, and agent decision implications. Seam: crownblock upstream $1.00/call — MYRIAD at $0.65 with real-time futures data vs monthly averages.",
 
   inputSchema: {
     type: "object",

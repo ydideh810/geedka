@@ -5,7 +5,7 @@
 // sentiment, topics, content type, and credibility signals.
 //
 // Seam: content.hugen.tokyo/content/analyze — 182 calls / 14 payers on day 1
-// (2026-06-09), $0.0200/call. STALL prices at $0.012.
+// (2026-06-09), $0.0200/call. MYRIAD prices at $0.012.
 //
 // Upstreams:
 //   r.jina.ai  — free URL-to-Markdown reader (proven in readable-content.js)

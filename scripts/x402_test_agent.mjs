@@ -2,7 +2,7 @@
  * x402_test_agent.mjs — End-to-end x402 verification loop.
  *
  * Simulates a real agent:
- *  1. Discovers STALL via /.well-known/x402 (agent discovery document)
+ *  1. Discovers MYRIAD via /.well-known/x402 (agent discovery document)
  *  2. Selects a data capability (not just ping)
  *  3. Sends a paid GET request
  *  4. Verifies the response contains real data
@@ -19,7 +19,7 @@ import { ExactEvmScheme } from "@x402/evm/exact/client";
 import { readFileSync } from "fs";
 import { exec } from "child_process";
 
-const BASE_URL = process.env.STALL_BASE_URL || "https://myriad.synaptiic.org";
+const BASE_URL = process.env.MYRIAD_BASE_URL || "https://myriad.synaptiic.org";
 const RPC_URL = process.env.BASE_RPC_URL || "https://api.developer.coinbase.com/rpc/v1/base/SH2ERnua9qjQ08v2clFSDgG5c91RTcds";
 
 // Load private key — from env or from credentials file
@@ -43,12 +43,12 @@ function notify(msg) {
 }
 
 async function main() {
-  console.log(`\n=== STALL x402 Test Agent ===`);
+  console.log(`\n=== MYRIAD x402 Test Agent ===`);
   console.log(`Target: ${BASE_URL}`);
   console.log(`Timestamp: ${new Date().toISOString()}\n`);
 
-  // Step 1: Discover STALL
-  console.log("Step 1: Discovering STALL via /.well-known/x402...");
+  // Step 1: Discover MYRIAD
+  console.log("Step 1: Discovering MYRIAD via /.well-known/x402...");
   const discoverResp = await fetch(`${BASE_URL}/.well-known/x402`);
   if (!discoverResp.ok) {
     console.error(`Discovery failed: ${discoverResp.status}`);
@@ -132,7 +132,7 @@ async function main() {
 
   if (status !== 200) {
     console.error(`  FAILED: ${bodyText.slice(0, 300)}`);
-    notify(`⚠️ [STALL x402 Test] FAILED: ${TARGET_CAP} returned ${status}`);
+    notify(`⚠️ [MYRIAD x402 Test] FAILED: ${TARGET_CAP} returned ${status}`);
     process.exit(1);
   }
 
@@ -177,8 +177,8 @@ async function main() {
   console.log(`Timestamp: ${new Date().toISOString()}`);
 
   const resultMsg = status === 200 && hasRealData
-    ? `✅ [STALL x402 Test] PASS — ${TARGET_CAP} called, ${priceUsdc.toFixed(4)} USDC settled, real data verified`
-    : `⚠️ [STALL x402 Test] PARTIAL — status ${status}, data ${hasRealData ? "ok" : "suspect"}`;
+    ? `✅ [MYRIAD x402 Test] PASS — ${TARGET_CAP} called, ${priceUsdc.toFixed(4)} USDC settled, real data verified`
+    : `⚠️ [MYRIAD x402 Test] PARTIAL — status ${status}, data ${hasRealData ? "ok" : "suspect"}`;
 
   notify(resultMsg);
   console.log(`\n${resultMsg}`);
@@ -186,6 +186,6 @@ async function main() {
 
 main().catch(err => {
   console.error("Fatal:", err);
-  exec(`bash ~/intuitek/notify.sh "⚠️ [STALL x402 Test] FATAL: ${String(err.message).slice(0, 100)}"`, () => {});
+  exec(`bash ~/intuitek/notify.sh "⚠️ [MYRIAD x402 Test] FATAL: ${String(err.message).slice(0, 100)}"`, () => {});
   process.exitCode = 1;
 });

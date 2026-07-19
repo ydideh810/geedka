@@ -20,7 +20,7 @@
 // Derived: Gold/Silver ratio, metals regime classification, 52-week positioning.
 //
 // Seam: Bloomberg/Refinitiv charge $50-200/mo for structured metals data.
-//       STALL delivers real-time Yahoo Finance + GPT synthesis at $0.35/call.
+//       MYRIAD delivers real-time Yahoo Finance + GPT synthesis at $0.35/call.
 //
 // Upstreams: Yahoo Finance v8 chart (free, no auth) + gpt-4o-mini (OPENAI_API_KEY).
 

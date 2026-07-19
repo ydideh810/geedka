@@ -5,9 +5,9 @@
 // no-key replacement for WHOIS. Returns per-TLD availability in one call.
 //
 // Seam: orbisapi.com/proxy/domain-availability-checker-api-8bccfb/check
-//       323 calls/day, $0.005/call — STALL priced at $0.008/call.
+//       323 calls/day, $0.005/call — MYRIAD priced at $0.008/call.
 //       Agents doing brand research, startup naming, or domain portfolio work
-//       currently route through orbisapi. STALL collapses to one cheaper hop.
+//       currently route through orbisapi. MYRIAD collapses to one cheaper hop.
 //
 // Upstream: rdap.org (universal RDAP bootstrap, free, no auth, Cloudflare-cached)
 //           TLD-specific: Verisign (.com/.net), IANA, and registry-hosted RDAP servers.
