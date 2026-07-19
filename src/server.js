@@ -589,7 +589,7 @@ app.get("/openapi.json", (_req, res) => {
     openapi: "3.1.0",
     info: {
       title: "MYRIAD",
-      description: `Domain-agnostic x402 capability chassis by IntuiTek¹. ${capabilities.length} AI-callable data services — pay USDC on Base mainnet. No accounts or API keys required.`,
+      description: `Domain-agnostic x402 capability chassis by SYNAPTIIC. ${capabilities.length} AI-callable data services — pay USDC on Base mainnet. No accounts or API keys required.`,
       version: PKG_VERSION,
       contact: { url: BASE_URL },
     },
@@ -674,7 +674,7 @@ app.get("/.well-known/x402.json", (_req, res) =>
   res.json({
     version: 1,
     name: "MYRIAD",
-    description: `Domain-agnostic x402 capability chassis by IntuiTek¹. ${capabilities.length} AI-callable data services on Base mainnet. No API keys or accounts required.`,
+    description: `Domain-agnostic x402 capability chassis by SYNAPTIIC. ${capabilities.length} AI-callable data services on Base mainnet. No API keys or accounts required.`,
     network: "base",
     currency: "USDC",
     payTo: PAY_TO || null,
@@ -695,11 +695,11 @@ app.get("/.well-known/x402.json", (_req, res) =>
 app.get("/.well-known/agent.json", (_req, res) =>
   res.json({
     name: "MYRIAD",
-    description: `Domain-agnostic x402 capability chassis by IntuiTek¹. ${capabilities.length} AI-callable data services for USDC on Base — stock prices, DeFi analytics, token security, prediction markets, macro indicators, research papers, domain WHOIS, company intelligence, weather, flight tracking, and more. MCP interface at /mcp — no wallet, no API keys.`,
+    description: `Domain-agnostic x402 capability chassis by SYNAPTIIC. ${capabilities.length} AI-callable data services for USDC on Base — stock prices, DeFi analytics, token security, prediction markets, macro indicators, research papers, domain WHOIS, company intelligence, weather, flight tracking, and more. MCP interface at /mcp — no wallet, no API keys.`,
     url: BASE_URL,
     version: PKG_VERSION,
     provider: {
-      organization: "IntuiTek¹",
+      organization: "SYNAPTIIC",
       url: "https://synaptiic.org",
     },
     capabilities: {
@@ -753,7 +753,7 @@ app.get("/.well-known/agent.json", (_req, res) =>
 app.get("/.well-known/mcp/server-card.json", (_req, res) =>
   res.json({
     name: "MYRIAD",
-    description: `Domain-agnostic x402 capability chassis by IntuiTek¹. ${capabilities.length} AI-callable data tools: stock prices, market overview, DeFi yields, token security, wallet screening, gas prices, macro indicators, prediction markets, company due diligence, research papers, domain WHOIS, email verification, flight tracking, weather, and more. MCP over Streamable HTTP — no wallet, no API keys, no accounts.`,
+    description: `Domain-agnostic x402 capability chassis by SYNAPTIIC. ${capabilities.length} AI-callable data tools: stock prices, market overview, DeFi yields, token security, wallet screening, gas prices, macro indicators, prediction markets, company due diligence, research papers, domain WHOIS, email verification, flight tracking, weather, and more. MCP over Streamable HTTP — no wallet, no API keys, no accounts.`,
     version: PKG_VERSION,
     tools: capabilities.map((c) => ({
       name: c.name,
@@ -770,7 +770,7 @@ app.get("/.well-known/mcp.json", (_req, res) =>
     mcp_endpoint: `${BASE_URL}/mcp`,
     version: PKG_VERSION,
     description: `${capabilities.length} pay-per-call AI capabilities via x402 on Base mainnet. Finance, crypto, DeFi, macro, compliance, OSINT. No API keys.`,
-    provider: "IntuiTek¹",
+    provider: "SYNAPTIIC",
     contact: "kyle@synaptiic.org",
   })
 );
@@ -826,57 +826,638 @@ app.get("/", (_req, res) => {
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>MYRIAD — x402 Intelligence Marketplace</title>
+
+  <title>MYRIAD — External Intelligence Network</title>
+
   <style>
-    *{box-sizing:border-box;margin:0;padding:0}
-    body{font-family:system-ui,sans-serif;background:#0a0a0f;color:#e2e8f0;min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:2rem}
-    .brand{font-size:0.75rem;letter-spacing:0.2em;text-transform:uppercase;color:#6366f1;margin-bottom:1rem}
-    h1{font-size:2.5rem;font-weight:700;margin-bottom:0.5rem}
-    .tagline{color:#94a3b8;margin-bottom:3rem;font-size:1.1rem}
-    .stats{display:flex;gap:3rem;margin-bottom:3rem;flex-wrap:wrap;justify-content:center}
-    .stat{text-align:center}
-    .num{display:block;font-size:3rem;font-weight:800;color:#6366f1;line-height:1}
-    .label{display:block;font-size:0.8rem;letter-spacing:0.1em;text-transform:uppercase;color:#64748b;margin-top:0.25rem}
-    .since{font-size:0.65rem;color:#475569;margin-top:0.15rem}
-    .links{display:flex;gap:1rem;flex-wrap:wrap;justify-content:center}
-    a{color:#818cf8;text-decoration:none;padding:0.5rem 1.25rem;border:1px solid #312e81;border-radius:0.5rem;font-size:0.9rem;transition:border-color 0.15s}
-    a:hover{border-color:#6366f1}
-    .footer{margin-top:4rem;font-size:0.75rem;color:#334155;text-align:center}
-    .dot{display:inline-block;width:7px;height:7px;background:#22c55e;border-radius:50%;margin-right:0.4rem;animation:pulse 2s infinite}
-    @keyframes pulse{0%,100%{opacity:1}50%{opacity:0.4}}
+    :root {
+      --bg: #03060b;
+      --panel: rgba(4, 12, 20, 0.72);
+      --phosphor: #dff8ff;
+      --cyan: #70bfff;
+      --blue: #6b8dff;
+      --dim: #566388;
+      --line: rgba(112, 150, 255, 0.38);
+      --line-soft: rgba(112, 162, 255, 0.12);
+      --glow: rgba(112, 169, 255, 0.65);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html,
+    body {
+      min-height: 100%;
+    }
+
+    body {
+      min-height: 100vh;
+      overflow-x: hidden;
+
+      background:
+        radial-gradient(
+          circle at 50% 42%,
+          rgba(28, 81, 112, 0.18) 0%,
+          rgba(5, 13, 22, 0.05) 38%,
+          transparent 70%
+        ),
+        var(--bg);
+
+      color: var(--phosphor);
+
+      font-family:
+        "Arial Narrow",
+        "Roboto Condensed",
+        "Helvetica Neue",
+        Arial,
+        sans-serif;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      padding: 32px;
+
+      text-transform: uppercase;
+    }
+
+    /* CRT scanlines */
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 100;
+
+      background:
+        repeating-linear-gradient(
+          to bottom,
+          rgba(255,255,255,0.025) 0px,
+          rgba(255,255,255,0.025) 1px,
+          transparent 1px,
+          transparent 4px
+        );
+
+      opacity: 0.5;
+      mix-blend-mode: screen;
+    }
+
+    /* soft CRT vignette */
+    body::after {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 101;
+
+      background:
+        radial-gradient(
+          ellipse at center,
+          transparent 45%,
+          rgba(0, 0, 0, 0.38) 100%
+        );
+    }
+
+    .screen {
+      position: relative;
+
+      width: min(100%, 1120px);
+      min-height: 720px;
+
+      display: flex;
+      flex-direction: column;
+
+      border-top: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+
+      padding: 24px 0 20px;
+    }
+
+    /* technical grid */
+    .screen::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+
+      background-image:
+        linear-gradient(
+          var(--line-soft) 1px,
+          transparent 1px
+        ),
+        linear-gradient(
+          90deg,
+          var(--line-soft) 1px,
+          transparent 1px
+        );
+
+      background-size: 100% 96px, 128px 100%;
+      opacity: 0.18;
+    }
+
+    .topbar {
+      position: relative;
+      z-index: 1;
+
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+
+      border-bottom: 1px solid var(--line);
+
+      padding: 0 8px 14px;
+    }
+
+    .system-id {
+      font-size: 11px;
+      letter-spacing: 0.26em;
+
+      color: var(--cyan);
+
+      text-shadow:
+        0 0 6px var(--glow),
+        0 0 14px rgba(112, 157, 255, 0.25);
+    }
+
+    .system-meta {
+      text-align: right;
+
+      font-size: 9px;
+      letter-spacing: 0.18em;
+      line-height: 1.7;
+
+      color: var(--dim);
+    }
+
+    .hero {
+      position: relative;
+      z-index: 1;
+
+      flex: 1;
+
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+
+      padding: 72px 20px 56px;
+    }
+
+    .classification {
+      margin-bottom: 24px;
+
+      font-size: 10px;
+      letter-spacing: 0.42em;
+
+      color: var(--cyan);
+
+      text-shadow:
+        0 0 7px var(--glow);
+    }
+
+    .logo-wrap {
+      position: relative;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      margin-bottom: 18px;
+    }
+
+    /* side targeting markers */
+    .logo-wrap::before,
+    .logo-wrap::after {
+      content: "";
+
+      width: 80px;
+      height: 1px;
+
+      background: var(--cyan);
+
+      box-shadow: 0 0 8px var(--glow);
+
+      margin: 0 28px;
+    }
+
+    h1 {
+      font-size: clamp(54px, 9vw, 104px);
+      font-weight: 400;
+
+      letter-spacing: 0.06em;
+      line-height: 0.9;
+
+      color: #effdff;
+
+      text-shadow:
+        0 0 4px #ffffff,
+        0 0 12px var(--cyan),
+        0 0 30px rgba(91, 129, 255, 0.4);
+    }
+
+    .tagline {
+      max-width: 680px;
+
+      margin-top: 20px;
+
+      text-align: center;
+
+      font-size: 12px;
+      letter-spacing: 0.22em;
+      line-height: 1.8;
+
+      color: #8fa4cb;
+    }
+
+    .status-strip {
+      width: min(100%, 820px);
+
+      margin-top: 58px;
+
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+
+      border-top: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .stat {
+      position: relative;
+
+      min-height: 120px;
+
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+
+      padding: 20px;
+
+      border-right: 1px solid var(--line);
+    }
+
+    .stat:last-child {
+      border-right: none;
+    }
+
+    .stat::before {
+      content: "";
+
+      position: absolute;
+
+      top: -4px;
+      left: 50%;
+
+      width: 7px;
+      height: 7px;
+
+      transform: translateX(-50%) rotate(45deg);
+
+      background: var(--cyan);
+
+      box-shadow:
+        0 0 6px var(--cyan),
+        0 0 12px var(--cyan);
+    }
+
+    .num {
+      display: block;
+
+      font-size: 48px;
+      font-weight: 300;
+      line-height: 1;
+
+      color: var(--phosphor);
+
+      text-shadow:
+        0 0 7px var(--cyan),
+        0 0 18px rgba(112, 150, 255, 0.38);
+    }
+
+    .label {
+      margin-top: 11px;
+
+      font-size: 9px;
+      letter-spacing: 0.28em;
+
+      color: var(--dim);
+    }
+
+    .since {
+      margin-top: 5px;
+
+      font-size: 8px;
+      letter-spacing: 0.14em;
+
+      color: #394668;
+    }
+
+    .links {
+      width: min(100%, 820px);
+
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+
+      margin-top: 32px;
+
+      border: 1px solid var(--line);
+    }
+
+    .links a {
+      position: relative;
+
+      padding: 15px 12px;
+
+      color: #3964f0;
+
+      text-decoration: none;
+      text-align: center;
+
+      font-size: 9px;
+      letter-spacing: 0.17em;
+
+      border-right: 1px solid var(--line);
+
+      background: rgba(16, 26, 70, 0.06);
+
+      transition:
+        background 0.15s,
+        color 0.15s,
+        text-shadow 0.15s;
+    }
+
+    .links a:last-child {
+      border-right: 0;
+    }
+
+    .links a:hover {
+      color: white;
+
+      background: rgba(49, 110, 243, 0.11);
+
+      text-shadow:
+        0 0 8px var(--cyan),
+        0 0 14px var(--cyan);
+    }
+
+    .links a::before {
+      content: "◇";
+
+      margin-right: 8px;
+
+      color: var(--cyan);
+    }
+
+    .footer {
+      position: relative;
+      z-index: 1;
+
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+
+      padding: 16px 8px 0;
+
+      font-size: 8px;
+      letter-spacing: 0.17em;
+      line-height: 1.8;
+
+      color: #1e63e4;
+    }
+
+    .footer a {
+      color: #1e63e4;
+      text-decoration: none;
+    }
+
+    .footer a:hover {
+      color: var(--phosphor);
+      text-shadow: 0 0 8px var(--cyan);
+    }
+
+    .online {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .dot {
+      width: 5px;
+      height: 5px;
+
+      background: var(--cyan);
+
+      border-radius: 50%;
+
+      box-shadow:
+        0 0 6px var(--cyan),
+        0 0 10px var(--cyan);
+
+      animation: pulse 2.2s infinite;
+    }
+
+    .serial {
+      text-align: right;
+    }
+
+    @keyframes pulse {
+      0%, 100% {
+        opacity: 1;
+      }
+
+      50% {
+        opacity: 0.25;
+      }
+    }
+
+    @media (max-width: 700px) {
+      body {
+        padding: 14px;
+      }
+
+      .screen {
+        min-height: 660px;
+      }
+
+      .logo-wrap::before,
+      .logo-wrap::after {
+        width: 22px;
+        margin: 0 10px;
+      }
+
+      .status-strip {
+        grid-template-columns: 1fr;
+      }
+
+      .stat {
+        border-right: 0;
+        border-bottom: 1px solid var(--line);
+      }
+
+      .stat:last-child {
+        border-bottom: 0;
+      }
+
+      .links {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .links a:nth-child(2) {
+        border-right: 0;
+      }
+
+      .links a:nth-child(-n+2) {
+        border-bottom: 1px solid var(--line);
+      }
+
+      .footer {
+        gap: 20px;
+      }
+    }
   </style>
 </head>
+
 <body>
-  <div class="brand">IntuiTek¹</div>
-  <h1>MYRIAD</h1>
-  <p class="tagline">AI-callable data services. Pay USDC on Base. No accounts.</p>
-  <div class="stats">
-    <div class="stat">
-      <span class="num">${capabilities.length}</span>
-      <span class="label">capabilities</span>
-    </div>
-    <div class="stat">
-      <span class="num">${stats.total}</span>
-      <span class="label">API calls served</span>
-      ${stats.since ? `<span class="since">since ${sinceStr}</span>` : ""}
-    </div>
-    <div class="stat">
-      <span class="num">${stats.uniqueCaps}</span>
-      <span class="label">caps called</span>
-    </div>
-  </div>
-  <div class="links">
-    <a href="/catalog">Browse catalog</a>
-    <a href="/.well-known/x402">x402 manifest</a>
-    <a href="/.well-known/agent.json">Agent card</a>
-    <a href="/stats">Stats JSON</a>
-  </div>
-  <div class="footer">
-    <span class="dot"></span>Live · Base mainnet · x402 · MCP
-    <br><br>
-    Built by <a href="https://synaptiic.org" style="border:none;padding:0">IntuiTek¹</a>
-  </div>
+
+  <main class="screen">
+
+    <header class="topbar">
+
+      <div class="system-id">
+        SYNAPTIIC // MYRIAD
+      </div>
+
+      <div class="system-meta">
+        EXT-INT NETWORK<br>
+        NODE STATUS : ACTIVE<br>
+        REV : 01
+      </div>
+
+    </header>
+
+
+    <section class="hero">
+
+      <div class="classification">
+        EXTERNAL INTELLIGENCE NETWORK
+      </div>
+
+
+      <div class="logo-wrap">
+
+        <h1>
+          MYRIAD
+        </h1>
+
+      </div>
+
+
+      <p class="tagline">
+        CAPABILITIES FOR AUTONOMOUS SOFTWARE TO QUERY THE LIVE WORLD
+      </p>
+
+
+      <div class="status-strip">
+
+        <div class="stat">
+
+          <span class="num">
+            ${capabilities.length}
+          </span>
+
+          <span class="label">
+            Capabilities
+          </span>
+
+        </div>
+
+
+        <div class="stat">
+
+          <span class="num">
+            ${stats.total}
+          </span>
+
+          <span class="label">
+            Calls Served
+          </span>
+
+          ${stats.since
+            ? `<span class="since">Since ${sinceStr}</span>`
+            : ""
+          }
+
+        </div>
+
+
+        <div class="stat">
+
+          <span class="num">
+            ${stats.uniqueCaps}
+          </span>
+
+          <span class="label">
+            Capabilities Called
+          </span>
+
+        </div>
+
+      </div>
+
+
+      <nav class="links">
+
+        <a href="/catalog">
+          Catalog
+        </a>
+
+        <a href="/.well-known/x402">
+          x402
+        </a>
+
+        <a href="/.well-known/agent.json">
+          Agent Card
+        </a>
+
+        <a href="/stats">
+          Statistics
+        </a>
+
+      </nav>
+
+    </section>
+
+
+    <footer class="footer">
+
+      <div class="online">
+
+        <span class="dot"></span>
+
+        <span>
+          ONLINE · ${NETWORK} · X402 · MCP
+        </span>
+
+      </div>
+
+
+      <div class="serial">
+
+        MYRIAD NETWORK NODE<br>
+
+        SYNAPTIIC · 2026
+
+      </div>
+
+    </footer>
+
+  </main>
+
 </body>
+
 </html>`);
 });
 
@@ -955,7 +1536,7 @@ app.get("/llms.txt", (_req, res) => {
 
 > ${capabilities.length} AI-callable pay-per-call data tools. No API keys. Pay USDC on Base or Solana. MCP + REST.
 
-MYRIAD is an x402-native capability chassis by IntuiTek¹. Every capability is a GET endpoint — agents probe, receive a 402 Payment Required with the exact USDC price, pay on Base mainnet (Coinbase CDP facilitator) or Solana mainnet (direct USDC transfer to EairXDfN79D5cw8tYuqmSfFKjYr4jmpPezXCxmd9nztF), and receive the result. No accounts, no subscriptions required.
+MYRIAD is an x402-native capability chassis by SYNAPTIIC. Every capability is a GET endpoint — agents probe, receive a 402 Payment Required with the exact USDC price, pay on Base mainnet (Coinbase CDP facilitator) or Solana mainnet (direct USDC transfer to EairXDfN79D5cw8tYuqmSfFKjYr4jmpPezXCxmd9nztF), and receive the result. No accounts, no subscriptions required.
 
 **Prefer to pay by card (no crypto wallet)?** Buy prepaid credits and call any cap with an "Authorization: Bearer <token>" header — 1 credit per call, no gas, no per-call signing:
 - Buy credits: POST ${BASE_URL}/v1/fiat/checkout with JSON body {"bundle":"starter"} → returns a Stripe checkout URL. Bundles: starter $5 (100 credits), pro $30 (1,000 credits), scale $200 (10,000 credits).

@@ -130,7 +130,7 @@ export default {
       ...body,
       receipt: {
         receipt_id,
-        issuer: "MYRIAD Clearance Layer (IntuiTek¹)",
+        issuer: "MYRIAD Clearance Layer (SYNAPTIIC)",
         result_hash,
         verify: "sha256 of the response body minus this receipt object",
         issued_at: checkedAt,
