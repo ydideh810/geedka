@@ -838,10 +838,10 @@ app.get("/", (_req, res) => {
 
       --white: #f4f7ff;
 
-      --blue: #244cff;
-      --blue-bright: #4b73ff;
-      --blue-hot: #7290ff;
-      --blue-dark: #142b8c;
+      --blue: #ffffff;
+      --blue-bright: #cbccce;
+      --blue-hot: #e6e6e6;
+      --blue-dark: #7a7a7c;
 
       --dim: #53649a;
       --dim-dark: #2d3b70;
