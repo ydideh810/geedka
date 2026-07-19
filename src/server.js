@@ -833,8 +833,8 @@ app.get("/", (_req, res) => {
     @import url('https://fonts.googleapis.com/css2?family=Bungee+Hairline&family=Doto:wght@100..900&display=swap');
 
     :root {
-      --bg: #5a83fc;
-      --bg-deep: #3152f5;
+      --bg: #003791;
+      --bg-deep: #0070CC;
 
       --white: #f4f7ff;
 
