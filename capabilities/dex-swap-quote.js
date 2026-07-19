@@ -12,7 +12,7 @@
 // Priced at $0.012 — 95% below suverse's $0.255; also covers cross-chain routes suverse doesn't.
 
 const LIFI_URL = "https://li.quest/v1/quote";
-const UA       = "the-stall/3.74 (https://intuitek.ai)";
+const UA       = "myriad/3.74 (https://synaptiic.org)";
 const TIMEOUT  = 20_000;
 
 const CHAIN_IDS = {
@@ -146,7 +146,7 @@ export default {
       fromAmount:  fromAmountWei,
       fromAddress: "0x0000000000000000000000000000000000000001",
       slippage:    slippage,
-      integrator:  "the-stall",
+      integrator:  "myriad",
     });
 
     const resp = await fetch(`${LIFI_URL}?${params}`, {

@@ -9,7 +9,7 @@
 // Complements korean-market-movers (CEX) with on-chain DEX flow data.
 
 const GT_BASE_URL = "https://api.geckoterminal.com/api/v2";
-const UA          = "Mozilla/5.0 (compatible; the-stall/1.5; +https://intuitek.ai)";
+const UA          = "Mozilla/5.0 (compatible; myriad/1.5; +https://synaptiic.org)";
 const TIMEOUT_MS  = 10000;
 
 const VALID_NETWORKS = new Set([

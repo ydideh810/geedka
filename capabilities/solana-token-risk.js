@@ -17,7 +17,7 @@
 
 const SOL_RPC    = "https://api.mainnet-beta.solana.com";
 const DEX_BASE   = "https://api.dexscreener.com/latest/dex/tokens";
-const UA         = "Mozilla/5.0 (compatible; the-stall/1.3; +https://intuitek.ai)";
+const UA         = "Mozilla/5.0 (compatible; myriad/1.3; +https://synaptiic.org)";
 const TIMEOUT_MS = 12000;
 
 async function rpcCall(method, params) {

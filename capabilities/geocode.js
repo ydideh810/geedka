@@ -11,7 +11,7 @@
 // max 1 req/sec, attribution required in any display).
 
 const NOMINATIM = "https://nominatim.openstreetmap.org";
-const UA        = "the-stall/3.13 (https://intuitek.ai)";
+const UA        = "myriad/3.13 (https://synaptiic.org)";
 const TIMEOUT   = 10000;
 
 async function nominatimGet(path) {

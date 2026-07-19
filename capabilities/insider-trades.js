@@ -14,7 +14,7 @@
 //   - https://data.sec.gov/submissions/CIK{cik}.json (filing index)
 //   - https://www.sec.gov/Archives/edgar/data/{cik}/{acc}/form4.xml (filing XML)
 
-const UA           = "the-stall/3.64 insider-trades (kyle@intuitek.ai)";
+const UA           = "myriad/3.64 insider-trades (kyle@synaptiic.org)";
 const TICKER_MAP   = "https://www.sec.gov/files/company_tickers.json";
 const SUBS_BASE    = "https://data.sec.gov/submissions/CIK";
 const EDGAR_BASE   = "https://www.sec.gov/Archives/edgar/data";

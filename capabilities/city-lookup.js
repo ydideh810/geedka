@@ -10,7 +10,7 @@
 // sourced from OpenFlights open data (CC-BY, no auth required).
 
 const AIRPORTS_CSV = "https://raw.githubusercontent.com/jpatokal/openflights/master/data/airports.dat";
-const UA           = "Mozilla/5.0 (compatible; the-stall/3.48; +https://intuitek.ai)";
+const UA           = "Mozilla/5.0 (compatible; myriad/3.48; +https://synaptiic.org)";
 const TIMEOUT_MS   = 10000;
 const MAX_RESULTS  = 20;
 

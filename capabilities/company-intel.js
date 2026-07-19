@@ -13,7 +13,7 @@
 
 const EDGAR_SEARCH = "https://efts.sec.gov/LATEST/search-index";
 const EDGAR_SUBS   = "https://data.sec.gov/submissions";
-const UA           = "Mozilla/5.0 (compatible; the-stall/2.8; +https://intuitek.ai)";
+const UA           = "Mozilla/5.0 (compatible; myriad/2.8; +https://synaptiic.org)";
 const TIMEOUT_MS   = 12000;
 
 async function fetchJson(url) {

@@ -15,7 +15,7 @@
 const HF_API     = "https://huggingface.co/api/models";
 const OPENAI_URL = "https://api.openai.com/v1/chat/completions";
 const MODEL      = "gpt-4o-mini";
-const UA         = "the-stall/4.85 (https://intuitek.ai)";
+const UA         = "myriad/4.85 (https://synaptiic.org)";
 const HF_TIMEOUT = 10_000;
 const SYN_TIMEOUT = 20_000;
 

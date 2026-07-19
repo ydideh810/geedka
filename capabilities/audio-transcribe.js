@@ -47,7 +47,7 @@ function extFromUrl(url) {
 async function fetchAudio(url) {
   const resp = await fetch(url, {
     headers: {
-      "User-Agent": "the-stall/4.49 (+https://intuitek.ai)",
+      "User-Agent": "myriad/4.49 (+https://synaptiic.org)",
       Accept: "audio/*, application/octet-stream",
     },
     signal: AbortSignal.timeout(FETCH_MS),

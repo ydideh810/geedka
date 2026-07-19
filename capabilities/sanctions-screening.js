@@ -22,7 +22,7 @@
 const SDN_URL  = "https://www.treasury.gov/ofac/downloads/sdn.csv";
 const ALT_URL  = "https://www.treasury.gov/ofac/downloads/alt.csv";
 const TIMEOUT  = 20_000;
-const UA       = "Mozilla/5.0 (compatible; the-stall/1.0; +https://intuitek.ai)";
+const UA       = "Mozilla/5.0 (compatible; myriad/1.0; +https://synaptiic.org)";
 
 // Module-level cache — survives multiple calls within one Node.js process
 let sdnCache   = null;    // Array of parsed SDN rows

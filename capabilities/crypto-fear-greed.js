@@ -14,7 +14,7 @@
 // Priced at $0.005 — sentiment-layer data, same tier as fomc-tracker.
 
 const FNG_URL = "https://api.alternative.me/fng/?limit=30&format=json";
-const UA      = "Mozilla/5.0 (compatible; the-stall/4.5; +https://intuitek.ai)";
+const UA      = "Mozilla/5.0 (compatible; myriad/4.5; +https://synaptiic.org)";
 const TIMEOUT = 10_000;
 
 function classify(score) {

@@ -26,7 +26,7 @@
 "use strict";
 
 const CBOE_HIST = "https://cdn.cboe.com/api/global/delayed_quotes/charts/historical";
-const UA        = "Mozilla/5.0 (compatible; the-stall/5.0; +https://intuitek.ai)";
+const UA        = "Mozilla/5.0 (compatible; myriad/5.0; +https://synaptiic.org)";
 const TIMEOUT   = 14_000;
 
 function r2(n) { return n != null ? Math.round(n * 100) / 100 : null; }

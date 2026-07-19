@@ -15,7 +15,7 @@
 const NVD_BASE = "https://services.nvd.nist.gov/rest/json/cves/2.0";
 const OSV_BASE = "https://api.osv.dev/v1";
 const TIMEOUT  = 20_000;
-const UA       = "Mozilla/5.0 (compatible; the-stall/1.0; +https://intuitek.ai)";
+const UA       = "Mozilla/5.0 (compatible; myriad/1.0; +https://synaptiic.org)";
 
 async function fetchJson(url, opts = {}) {
   const ctrl = new AbortController();

@@ -10,7 +10,7 @@
 // for distributed teams and agent-driven talent research.
 
 const BASE_URL = "https://jobicy.com/api/v2/remote-jobs";
-const UA       = "Mozilla/5.0 (compatible; the-stall/4.16; +https://intuitek.ai)";
+const UA       = "Mozilla/5.0 (compatible; myriad/4.16; +https://synaptiic.org)";
 const TIMEOUT  = 15_000;
 
 

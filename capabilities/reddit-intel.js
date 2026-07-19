@@ -14,7 +14,7 @@
 
 const PULLPUSH_POST    = "https://api.pullpush.io/reddit/search/submission/";
 const PULLPUSH_COMMENT = "https://api.pullpush.io/reddit/search/comment/";
-const UA               = "Mozilla/5.0 (compatible; the-stall/3.6; +https://intuitek.ai)";
+const UA               = "Mozilla/5.0 (compatible; myriad/3.6; +https://synaptiic.org)";
 
 function epochToISO(ts) {
   if (!ts) return null;

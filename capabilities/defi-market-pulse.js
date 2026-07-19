@@ -13,7 +13,7 @@
 const YIELDS_URL = "https://yields.llama.fi/pools";
 const CG_MARKETS = "https://api.coingecko.com/api/v3/coins/markets";
 const YF_BASE    = "https://query1.finance.yahoo.com/v1/finance/screener/predefined/saved";
-const UA         = "Mozilla/5.0 (compatible; the-stall/0.7; +https://intuitek.ai)";
+const UA         = "Mozilla/5.0 (compatible; myriad/0.7; +https://synaptiic.org)";
 const TIMEOUT    = 20_000;
 
 async function fetchYields({ chain, protocol, minTvl, minApy, stablecoinOnly, limit }) {

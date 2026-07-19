@@ -7,7 +7,7 @@
 // Complements dex-trending-pools (trending) with token-specific pair search.
 
 const DS_BASE = "https://api.dexscreener.com/latest/dex";
-const UA      = "Mozilla/5.0 (compatible; the-stall/1.5; +https://intuitek.ai)";
+const UA      = "Mozilla/5.0 (compatible; myriad/1.5; +https://synaptiic.org)";
 const TIMEOUT = 10000;
 
 async function fetchJson(url) {

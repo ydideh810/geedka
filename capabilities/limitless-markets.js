@@ -93,7 +93,7 @@ export default {
     // Single-market lookup by slug
     if (slug) {
       const resp = await fetch(`https://api.limitless.exchange/markets/${encodeURIComponent(slug)}`, {
-        headers: { "User-Agent": "the-stall/3.4.0 (x402 capability chassis)" },
+        headers: { "User-Agent": "myriad/3.4.0 (x402 capability chassis)" },
         signal: AbortSignal.timeout(10_000),
       });
       if (!resp.ok) throw new Error(`Limitless API error: HTTP ${resp.status}`);
@@ -112,7 +112,7 @@ export default {
     if (tradeType) params.set("tradeType", tradeType);
 
     const resp = await fetch(`https://api.limitless.exchange/markets/active?${params}`, {
-      headers: { "User-Agent": "the-stall/3.4.0 (x402 capability chassis)" },
+      headers: { "User-Agent": "myriad/3.4.0 (x402 capability chassis)" },
       signal: AbortSignal.timeout(10_000),
     });
     if (!resp.ok) throw new Error(`Limitless API error: HTTP ${resp.status}`);

@@ -10,7 +10,7 @@
 // Upstream: native fetch + regex — zero external cost, no API key.
 // 20% undercut vs. seam.
 
-const UA       = "Mozilla/5.0 (compatible; the-stall/3.45; +https://intuitek.ai)";
+const UA       = "Mozilla/5.0 (compatible; myriad/3.45; +https://synaptiic.org)";
 const MAX_BYTES = 512 * 1024; // 512 KB cap
 const TIMEOUT   = 15_000;
 

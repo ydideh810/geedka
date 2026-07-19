@@ -16,7 +16,7 @@
 
 const ASTERPAY_BASE = "https://x402.asterpay.io";
 const TIMEOUT = 12_000;
-const UA = "Mozilla/5.0 (compatible; the-stall/1.0; +https://intuitek.ai)";
+const UA = "Mozilla/5.0 (compatible; myriad/1.0; +https://synaptiic.org)";
 
 async function kyaFetch(address) {
   const url = `${ASTERPAY_BASE}/v1/agent/trust-score/${encodeURIComponent(address)}`;

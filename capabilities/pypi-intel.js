@@ -23,7 +23,7 @@
 
 const PYPI_BASE  = "https://pypi.org/pypi";
 const STATS_BASE = "https://pypistats.org/api/packages";
-const UA         = "Mozilla/5.0 (compatible; the-stall/4.67; +https://intuitek.ai)";
+const UA         = "Mozilla/5.0 (compatible; myriad/4.67; +https://synaptiic.org)";
 const TIMEOUT    = 12_000;
 
 async function pypiGet(url) {

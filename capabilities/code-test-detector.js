@@ -10,7 +10,7 @@
 
 const GITHUB_API = "https://api.github.com";
 const TIMEOUT    = 10000;
-const UA         = "the-stall/3.17 (https://intuitek.ai)";
+const UA         = "myriad/3.17 (https://synaptiic.org)";
 
 // Framework signatures — ordered by specificity
 const FRAMEWORKS = [

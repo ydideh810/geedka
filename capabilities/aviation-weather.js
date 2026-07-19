@@ -14,7 +14,7 @@
 // Both endpoints are public, no auth, officially maintained by NOAA.
 
 const AWC_BASE = "https://aviationweather.gov/api/data";
-const UA       = "the-stall/4.0 (https://intuitek.ai)";
+const UA       = "myriad/4.0 (https://synaptiic.org)";
 const TIMEOUT  = 12_000;
 
 // Top-80 IATA → ICAO for user convenience; falls through to raw ICAO if length=4

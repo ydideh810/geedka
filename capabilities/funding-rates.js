@@ -11,7 +11,7 @@
 // Data source: https://api.hyperliquid.xyz/info (type=metaAndAssetCtxs)
 
 const HL_API = "https://api.hyperliquid.xyz/info";
-const UA     = "Mozilla/5.0 (compatible; the-stall/1.1; +https://intuitek.ai)";
+const UA     = "Mozilla/5.0 (compatible; myriad/1.1; +https://synaptiic.org)";
 
 export default {
   name: "funding-rates",

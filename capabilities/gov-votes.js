@@ -11,7 +11,7 @@
 const SENATE_BASE = "https://www.senate.gov/legislative/LIS/roll_call_lists";
 const HOUSE_BASE  = "https://clerk.house.gov/evs";
 const TIMEOUT     = 18000;
-const UA          = "Mozilla/5.0 (compatible; the-stall/3.24; +https://intuitek.ai)";
+const UA          = "Mozilla/5.0 (compatible; myriad/3.24; +https://synaptiic.org)";
 
 // ─── XML helpers (regex-based; these are simple gov XML files) ───────────────
 

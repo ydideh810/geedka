@@ -11,7 +11,7 @@
 //
 // Free upstream: native Node.js fetch. No auth, no rate limit from our side.
 
-const UA         = "Mozilla/5.0 (compatible; the-stall/3.9; +https://intuitek.ai)";
+const UA         = "Mozilla/5.0 (compatible; myriad/3.9; +https://synaptiic.org)";
 const TIMEOUT_MS = 12000;
 const MAX_BYTES  = 256 * 1024; // read at most 256 KB of the page
 

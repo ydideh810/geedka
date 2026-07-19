@@ -8,7 +8,7 @@
 // Use case: tax reporting, expense reconciliation, financial analysis, accounting.
 
 const BASE_URL = "https://api.frankfurter.app";
-const UA       = "Mozilla/5.0 (compatible; the-stall/2.0; +https://intuitek.ai)";
+const UA       = "Mozilla/5.0 (compatible; myriad/2.0; +https://synaptiic.org)";
 const TIMEOUT  = 10_000;
 
 const SUPPORTED = new Set([

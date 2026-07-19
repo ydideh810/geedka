@@ -20,7 +20,7 @@
 const AV_URL      = "https://www.alphavantage.co/query?function=EARNINGS_CALENDAR&horizon=3month&apikey=demo";
 const OPENAI_URL  = "https://api.openai.com/v1/chat/completions";
 const MODEL       = "gpt-4o-mini";
-const UA          = "Mozilla/5.0 (compatible; the-stall/4.65; +https://intuitek.ai)";
+const UA          = "Mozilla/5.0 (compatible; myriad/4.65; +https://synaptiic.org)";
 const CACHE_TTL   = 2 * 60 * 60 * 1000; // 2h
 const GPT_TMO     = 38_000;
 

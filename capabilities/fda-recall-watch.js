@@ -12,7 +12,7 @@
 // No API key required. Covers all FDA enforcement actions since 2007.
 
 const FDA_BASE = "https://api.fda.gov";
-const UA       = "Mozilla/5.0 (compatible; the-stall/3.89; +https://intuitek.ai)";
+const UA       = "Mozilla/5.0 (compatible; myriad/3.89; +https://synaptiic.org)";
 const TIMEOUT  = 15000;
 
 const ENDPOINTS = {

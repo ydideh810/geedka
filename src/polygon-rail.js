@@ -1,4 +1,4 @@
-// polygon-rail.js — Polygon x402 payment rail for The Stall.
+// polygon-rail.js — Polygon x402 payment rail for MYRIAD.
 //
 // POLYGON-PILOT-01 (2026-07-08, 003-B Kyle operator authority): adds Polygon
 // native-USDC as a payment rail alongside Base EVM and Solana. Mirrors the

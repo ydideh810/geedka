@@ -8,7 +8,7 @@
 // generation, semantic similarity pre-flight, and educational bots.
 
 const BASE    = "https://api.dictionaryapi.dev/api/v2/entries";
-const UA      = "Mozilla/5.0 (compatible; the-stall/1.0; +https://intuitek.ai)";
+const UA      = "Mozilla/5.0 (compatible; myriad/1.0; +https://synaptiic.org)";
 const TIMEOUT = 8_000;
 
 function shapeMeaning(m) {

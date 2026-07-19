@@ -13,7 +13,7 @@
 const ETH_RPC  = "https://eth.drpc.org";
 const BASE_RPC = "https://base.drpc.org";
 const CG_BASE  = "https://api.coingecko.com/api/v3/coins/markets";
-const UA       = "Mozilla/5.0 (compatible; the-stall/0.9; +https://intuitek.ai)";
+const UA       = "Mozilla/5.0 (compatible; myriad/0.9; +https://synaptiic.org)";
 const TIMEOUT  = 15_000;
 
 async function fetchBlock(network) {

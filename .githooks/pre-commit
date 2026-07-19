@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Pre-commit guard: blocks methodology/posture disclosure in the public the-stall repo.
+# Pre-commit guard: blocks methodology/posture disclosure in the public myriad repo.
 # Maintained by Aegis — do not disable without explicit K¹ approval.
 
 set -e
@@ -20,7 +20,7 @@ BLOCKED_STRINGS=(
   "autonomy.disclosure"
   "PROSPECTOR"
   "operating autonomously"
-  "the-stall-scout"
+  "myriad-scout"
   "scout.mjs"
   "sequences.mjs"
   "concentration.mjs"
@@ -33,14 +33,14 @@ STAGED=$(git diff --cached --name-only 2>/dev/null)
 # Check blocked paths
 for path in "${BLOCKED_PATHS[@]}"; do
   if echo "$STAGED" | grep -q "^${path}"; then
-    echo "❌ BLOCKED: Staged files under ${path} are methodology/ops files — move to the-stall-ops."
+    echo "❌ BLOCKED: Staged files under ${path} are methodology/ops files — move to myriad-ops."
     exit 1
   fi
 done
 
 # Check for scout* pattern
 if echo "$STAGED" | grep -qiE "scout"; then
-  echo "❌ BLOCKED: Staged file matching *scout* — methodology file. Move to the-stall-ops."
+  echo "❌ BLOCKED: Staged file matching *scout* — methodology file. Move to myriad-ops."
   exit 1
 fi
 

@@ -7,7 +7,7 @@
 // Priced at $0.001 — matching seam price, differentiating on MCP-native access.
 
 const FEES_URL = "https://api.llama.fi/overview/fees?excludeTotalDataChart=true&excludeTotalDataChartBreakdown=true";
-const UA       = "Mozilla/5.0 (compatible; the-stall/1.0; +https://intuitek.ai)";
+const UA       = "Mozilla/5.0 (compatible; myriad/1.0; +https://synaptiic.org)";
 const TIMEOUT  = 15_000;
 
 export default {

@@ -12,7 +12,7 @@
 // Covers: $10T+ in tracked federal spending since 2007.
 
 const BASE    = "https://api.usaspending.gov/api/v2";
-const UA      = "Mozilla/5.0 (compatible; the-stall/3.87; +https://intuitek.ai)";
+const UA      = "Mozilla/5.0 (compatible; myriad/3.87; +https://synaptiic.org)";
 const TIMEOUT = 20000;
 
 // Award type codes: A-D = contracts, 02-05 = grants, IDVs = indefinite delivery

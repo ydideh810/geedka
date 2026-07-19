@@ -9,7 +9,7 @@
 // Free upstream: DeFiLlama yields API (yields.llama.fi) — no API key required.
 
 const YIELDS_URL = "https://yields.llama.fi/pools";
-const UA         = "Mozilla/5.0 (compatible; the-stall/0.7; +https://intuitek.ai)";
+const UA         = "Mozilla/5.0 (compatible; myriad/0.7; +https://synaptiic.org)";
 
 export default {
   name:  "yield-farming-active",

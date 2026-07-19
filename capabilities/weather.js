@@ -9,7 +9,7 @@
 
 const GEOCODE_URL  = "https://geocoding-api.open-meteo.com/v1/search";
 const FORECAST_URL = "https://api.open-meteo.com/v1/forecast";
-const UA           = "Mozilla/5.0 (compatible; the-stall/2.4; +https://intuitek.ai)";
+const UA           = "Mozilla/5.0 (compatible; myriad/2.4; +https://synaptiic.org)";
 const TIMEOUT_MS   = 10000;
 
 // WMO weather codes → human-readable description

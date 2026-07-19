@@ -9,7 +9,7 @@
 // /api/v1/stocks/fr/price/* endpoint (observed 2026-06-08 via archive.db).
 
 const YF_BASE = "https://query2.finance.yahoo.com/v8/finance/chart";
-const UA      = "Mozilla/5.0 (compatible; the-stall/0.4; +https://intuitek.ai)";
+const UA      = "Mozilla/5.0 (compatible; myriad/0.4; +https://synaptiic.org)";
 
 const MARKET_SUFFIX = {
   fr: ".PA", paris: ".PA",

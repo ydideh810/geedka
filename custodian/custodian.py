@@ -36,8 +36,8 @@ Channel IDs
 -----------
   punkpeye_pr        awesome-mcp-servers PR #7481
   smithery           Smithery registry listing
-  mcp_registry       MCP registry (intuitek.ai namespace)
-  readme             the-stall/README.md
+  mcp_registry       MCP registry (synaptiic.org namespace)
+  readme             myriad/README.md
   telegram           Telegram heartbeat cap-count claims
   glama              Glama listing (read via PR)
   ai4finance_pr      georgezouq/awesome-ai-in-finance PR
@@ -52,7 +52,7 @@ from pathlib import Path
 NOTIFY_SH = os.path.expanduser('~/intuitek/notify.sh')
 
 STATE_FILE = Path(__file__).parent / 'state.json'
-STALL_URL  = 'https://the-stall.intuitek.ai'
+STALL_URL  = 'https://myriad.synaptiic.org'
 
 
 def _now_iso() -> str:

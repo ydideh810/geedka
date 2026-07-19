@@ -8,7 +8,7 @@
 // endpoints/day (signal-intel growth signal, 2026-06-05).
 
 const ALGOLIA_BASE = "https://hn.algolia.com/api/v1";
-const UA           = "Mozilla/5.0 (compatible; the-stall/1.3; +https://intuitek.ai)";
+const UA           = "Mozilla/5.0 (compatible; myriad/1.3; +https://synaptiic.org)";
 
 // Map friendly date-range labels to Algolia numericFilters timestamps
 function dateFilter(range) {

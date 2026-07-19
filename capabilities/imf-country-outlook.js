@@ -14,7 +14,7 @@
 //       for sovereign risk, EM allocation, currency thesis, fiscal sustainability.
 
 const IMF_BASE = "https://www.imf.org/external/datamapper/api/v1";
-const UA       = "Mozilla/5.0 (compatible; the-stall/4.1; +https://intuitek.ai)";
+const UA       = "Mozilla/5.0 (compatible; myriad/4.1; +https://synaptiic.org)";
 const TIMEOUT  = 15_000;
 const CACHE_MS = 4 * 60 * 60 * 1000; // 4 hours
 

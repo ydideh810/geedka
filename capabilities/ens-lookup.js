@@ -8,7 +8,7 @@
 // STALL price: $0.004 (20% undercut). Upstream: api.ensdata.net (free, no auth).
 
 const ENS_API = "https://api.ensdata.net";
-const UA = "the-stall/3.76 (https://intuitek.ai)";
+const UA = "myriad/3.76 (https://synaptiic.org)";
 const TIMEOUT = 10000;
 
 export default {

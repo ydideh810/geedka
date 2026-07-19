@@ -12,7 +12,7 @@
 
 const AV_URL =
   "https://www.alphavantage.co/query?function=EARNINGS_CALENDAR&horizon=3month&apikey=demo";
-const UA = "Mozilla/5.0 (compatible; the-stall/3.56; +https://intuitek.ai)";
+const UA = "Mozilla/5.0 (compatible; myriad/3.56; +https://synaptiic.org)";
 const CACHE_TTL_MS = 2 * 60 * 60 * 1000; // 2 hours
 
 let _cache = null; // { rows: [], ts: number }

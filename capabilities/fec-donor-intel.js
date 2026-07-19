@@ -22,7 +22,7 @@
 const FEC_BASE = "https://api.open.fec.gov/v1";
 const API_KEY  = "DEMO_KEY";   // 2,500 req/day — sufficient for x402 volume
 const TIMEOUT  = 12_000;
-const UA       = "Mozilla/5.0 (compatible; the-stall/1.0; +https://intuitek.ai)";
+const UA       = "Mozilla/5.0 (compatible; myriad/1.0; +https://synaptiic.org)";
 
 async function fecFetch(endpoint, params) {
   const url = new URL(`${FEC_BASE}${endpoint}`);

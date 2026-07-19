@@ -11,7 +11,7 @@
 //   HN:     Algolia HN Search API (hn.algolia.com)
 //   GitHub: GitHub REST Search API (unauthenticated, 60 req/hr/IP)
 
-const UA = "Mozilla/5.0 (compatible; the-stall/social-momentum; +https://intuitek.ai)";
+const UA = "Mozilla/5.0 (compatible; myriad/social-momentum; +https://synaptiic.org)";
 const TIMEOUT_REDDIT = 20_000;
 const TIMEOUT_HN     = 12_000;
 const TIMEOUT_GH     = 12_000;

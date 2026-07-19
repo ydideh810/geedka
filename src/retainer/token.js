@@ -15,7 +15,7 @@ export function loadSigner(){
 export function mintToken({ privateKey }, { payer, plan, scope, windowSeconds, jti }){
   const now = Math.floor(Date.now()/1000);
   const header = { alg:"EdDSA", typ:"JWT" };
-  const payload = { iss:"the-stall.intuitek.ai", sub:payer, plan, scope, jti, iat:now, nbf:now, exp:now+windowSeconds };
+  const payload = { iss:"myriad.synaptiic.org", sub:payer, plan, scope, jti, iat:now, nbf:now, exp:now+windowSeconds };
   const signingInput = b64urlJson(header) + "." + b64urlJson(payload);
   const sig = edSign(null, Buffer.from(signingInput), privateKey);
   return signingInput + "." + b64url(sig);

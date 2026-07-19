@@ -21,7 +21,7 @@
 //
 // Price: $0.020 — multiple EDGAR round-trips per call; unique among x402 MCP caps.
 
-const UA         = "the-stall/4.66 merger-acquisition-intel (kyle@intuitek.ai)";
+const UA         = "myriad/4.66 merger-acquisition-intel (kyle@synaptiic.org)";
 const TICKER_MAP = "https://www.sec.gov/files/company_tickers.json";
 const SUBS_BASE  = "https://data.sec.gov/submissions/CIK";
 const EFTS_BASE  = "https://efts.sec.gov/LATEST/search-index";

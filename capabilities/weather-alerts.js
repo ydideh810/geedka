@@ -23,7 +23,7 @@
 
 const ALERTS_BASE = "https://api.weather.gov/alerts/active";
 const TIMEOUT     = 12_000;
-const UA          = "the-stall/1.0 (+https://intuitek.ai; kyle@intuitek.ai)";
+const UA          = "myriad/1.0 (+https://synaptiic.org; kyle@synaptiic.org)";
 
 const SEVERITY_RANK = { Extreme: 4, Severe: 3, Moderate: 2, Minor: 1, Unknown: 0 };
 

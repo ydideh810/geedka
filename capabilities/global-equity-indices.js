@@ -19,7 +19,7 @@
 // Price: $0.010
 
 const YF_BASE = "https://query2.finance.yahoo.com/v8/finance/chart";
-const UA      = "Mozilla/5.0 (compatible; the-stall/4.2; +https://intuitek.ai)";
+const UA      = "Mozilla/5.0 (compatible; myriad/4.2; +https://synaptiic.org)";
 const TIMEOUT = 10_000;
 
 const INDICES = [

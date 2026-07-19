@@ -13,7 +13,7 @@
 
 const YF_BASE   = "https://query2.finance.yahoo.com/v8/finance/chart";
 const LX_BASE   = "https://api.limitless.exchange/markets";
-const UA        = "Mozilla/5.0 (compatible; the-stall/1.0; +https://intuitek.ai)";
+const UA        = "Mozilla/5.0 (compatible; myriad/1.0; +https://synaptiic.org)";
 const TIMEOUT   = 10_000;
 
 async function get(url) {

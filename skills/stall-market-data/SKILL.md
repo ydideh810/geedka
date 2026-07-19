@@ -13,7 +13,7 @@ metadata:
     requires_toolsets: [terminal]
     config:
       stall.endpoint:
-        default: "https://the-stall.intuitek.ai"
+        default: "https://myriad.synaptiic.org"
         description: "STALL API base URL"
       stall.account:
         description: "Funding pointer / account handle (NOT a private key)"
@@ -22,7 +22,7 @@ metadata:
 
 # STALL Market Data
 
-Authoritative multi-source market data through [The Stall](https://the-stall.intuitek.ai) — 200+ paid caps via standard HTTP-402 payment. Payment is handled by your agent's own wallet/payment skill (stripe-link-cli or mpp-agent) — this skill holds no credentials.
+Authoritative multi-source market data through [MYRIAD](https://myriad.synaptiic.org) — 200+ paid caps via standard HTTP-402 payment. Payment is handled by your agent's own wallet/payment skill (stripe-link-cli or mpp-agent) — this skill holds no credentials.
 
 ## When to Use
 
@@ -83,7 +83,7 @@ Expected: JSON array of caps with name, price, and description fields.
 
 ```bash
 # Via well-known (no repo needed):
-hermes skills install well-known:https://the-stall.intuitek.ai/.well-known/skills/stall-market-data
+hermes skills install well-known:https://myriad.synaptiic.org/.well-known/skills/stall-market-data
 
 # Via GitHub tap:
 hermes skills tap add intuitek/hermes-skills

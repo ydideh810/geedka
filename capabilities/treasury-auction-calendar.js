@@ -12,7 +12,7 @@
 // on-demand for $0.018/call with filtering by type and date window.
 
 const TD_BASE = "https://www.treasurydirect.gov/TA_WS/securities/announced?format=json";
-const UA      = "Aegis/1.0 (the-stall x402; +https://intuitek.ai; kyle@intuitek.ai)";
+const UA      = "Aegis/1.0 (myriad x402; +https://synaptiic.org; kyle@synaptiic.org)";
 const TIMEOUT = 10_000;
 
 const TYPE_MAP = {

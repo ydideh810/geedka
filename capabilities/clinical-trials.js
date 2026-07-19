@@ -112,7 +112,7 @@ export default {
     const url = `${CT_BASE}?${params}`;
     const resp = await fetch(url, {
       headers: {
-        "User-Agent": "the-stall/0.4 (x402 MCP; +https://intuitek.ai)",
+        "User-Agent": "myriad/0.4 (x402 MCP; +https://synaptiic.org)",
         "Accept":     "application/json",
       },
     });

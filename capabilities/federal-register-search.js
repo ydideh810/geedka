@@ -17,7 +17,7 @@
 // Priced at $0.002 — inline with other government-data caps.
 
 const FR_BASE = "https://www.federalregister.gov/api/v1/articles.json";
-const UA      = "Mozilla/5.0 (compatible; the-stall/4.5; +https://intuitek.ai)";
+const UA      = "Mozilla/5.0 (compatible; myriad/4.5; +https://synaptiic.org)";
 const TIMEOUT = 12_000;
 
 // Type relevance tier for sorting — lower = higher priority

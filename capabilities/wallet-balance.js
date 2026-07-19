@@ -16,7 +16,7 @@ const CHAINS = {
 };
 
 const CG_URL = "https://api.coingecko.com/api/v3/simple/price";
-const UA = "Mozilla/5.0 (compatible; the-stall/wallet-balance; +https://intuitek.ai)";
+const UA = "Mozilla/5.0 (compatible; myriad/wallet-balance; +https://synaptiic.org)";
 
 async function rpc(url, method, params) {
   const resp = await fetch(url, {

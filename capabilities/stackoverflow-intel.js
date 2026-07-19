@@ -9,7 +9,7 @@
 // → top scored SO results with accepted answers in one call.
 
 const SE_BASE = "https://api.stackexchange.com/2.3";
-const UA      = "Mozilla/5.0 (compatible; the-stall/4.57; +https://intuitek.ai)";
+const UA      = "Mozilla/5.0 (compatible; myriad/4.57; +https://synaptiic.org)";
 
 function stripHtml(html) {
   if (!html) return null;

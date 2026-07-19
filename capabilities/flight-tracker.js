@@ -28,7 +28,7 @@
 
 const OPENSKY_BASE = "https://opensky-network.org/api";
 const TIMEOUT_MS  = 18_000;
-const UA          = "the-stall/4.69 flight-tracker (kyle@intuitek.ai)";
+const UA          = "myriad/4.69 flight-tracker (kyle@synaptiic.org)";
 
 // Major airport IATA codes → [lat, lon]
 const AIRPORT_COORDS = {

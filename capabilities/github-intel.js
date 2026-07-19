@@ -26,7 +26,7 @@
 // Price: $0.010/call.
 
 const GH_API  = "https://api.github.com";
-const UA      = "Mozilla/5.0 (compatible; the-stall/4.68; +https://intuitek.ai)";
+const UA      = "Mozilla/5.0 (compatible; myriad/4.68; +https://synaptiic.org)";
 const TIMEOUT = 14_000;
 
 function ghHeaders() {

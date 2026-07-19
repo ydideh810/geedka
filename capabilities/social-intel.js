@@ -10,7 +10,7 @@
 // Input: provide a profile URL (platform auto-detected) OR platform + username.
 // Supported platforms: github, reddit, hackernews, twitter, npm
 
-const UA      = "Mozilla/5.0 (compatible; the-stall/3.75; +https://intuitek.ai)";
+const UA      = "Mozilla/5.0 (compatible; myriad/3.75; +https://synaptiic.org)";
 const TIMEOUT = 12_000;
 
 // ── URL-based platform detection ─────────────────────────────────────────────

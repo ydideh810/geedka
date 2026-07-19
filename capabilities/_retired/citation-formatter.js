@@ -9,7 +9,7 @@
 // Upstream: api.crossref.org — free public API, no auth required.
 
 const CROSSREF_URL = "https://api.crossref.org/works/";
-const UA           = "the-stall/3.20 (https://intuitek.ai; mailto:kyle@intuitek.ai)";
+const UA           = "myriad/3.20 (https://synaptiic.org; mailto:kyle@synaptiic.org)";
 const TIMEOUT      = 10000;
 
 async function fetchDoi(doi) {

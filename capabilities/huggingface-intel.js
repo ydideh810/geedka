@@ -20,7 +20,7 @@
 // Price: $0.010/call.
 
 const HF_API   = "https://huggingface.co/api";
-const UA       = "Mozilla/5.0 (compatible; the-stall/4.66; +https://intuitek.ai)";
+const UA       = "Mozilla/5.0 (compatible; myriad/4.66; +https://synaptiic.org)";
 const TIMEOUT  = 12_000;
 
 const PIPELINE_TASKS = [

@@ -16,7 +16,7 @@
 const SEC_BASE    = "https://data.sec.gov";
 const TICKERS_URL = "https://www.sec.gov/files/company_tickers.json";
 const TMO         = 15_000;
-const UA          = "Mozilla/5.0 (compatible; the-stall/1.0; research; +https://intuitek.ai)";
+const UA          = "Mozilla/5.0 (compatible; myriad/1.0; research; +https://synaptiic.org)";
 
 const TX_CODES = {
   S: "sell",

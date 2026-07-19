@@ -15,7 +15,7 @@
 // Quantitative or Whale Watcher subscription. This delivers the same SEC data
 // on-demand for $0.025/call.
 
-const UA       = "Aegis/1.0 (the-stall x402; +https://intuitek.ai; kyle@intuitek.ai)";
+const UA       = "Aegis/1.0 (myriad x402; +https://synaptiic.org; kyle@synaptiic.org)";
 const TIMEOUT  = 12_000;
 const BROWSE   = "https://www.sec.gov/cgi-bin/browse-edgar";
 const SUBS_URL = "https://data.sec.gov/submissions/CIK{CIK}.json";

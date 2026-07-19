@@ -24,12 +24,12 @@
 // Seam: health/diet agents tracking macros for meal plans, grocery agents
 // checking allergens for dietary restrictions, food compliance agents
 // verifying nutrition labels, recipe agents comparing product options.
-// First food/nutrition cap in the STALL catalog — 255-cap gap now closed.
+// First food/nutrition cap in MYRIAD catalog — 255-cap gap now closed.
 //
 // Price: $0.008/call — single Open Food Facts API call.
 
 const OFF_BASE = "https://world.openfoodfacts.org";
-const UA       = "the-stall/4.68.3 open-food-intel (kyle@intuitek.ai)";
+const UA       = "myriad/4.68.3 open-food-intel (kyle@synaptiic.org)";
 const TIMEOUT  = 14_000;
 
 // Fields to request from the API (minimizes payload size)

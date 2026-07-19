@@ -1,8 +1,8 @@
 /**
- * local-facilitator.mjs — Smart proxy x402 facilitator for The Stall.
+ * local-facilitator.mjs — Smart proxy x402 facilitator for MYRIAD.
  *
  * Applies EIP-3009 on-chain bypass for ALL payers where auth.to matches
- * the STALL revenue wallet (WALLET_ADDRESS). This bypasses CDP's
+ * MYRIAD revenue wallet (WALLET_ADDRESS). This bypasses CDP's
  * payment-method-required check, which blocks both seeder and organic
  * settlements since 2026-06-26T21Z.
  *

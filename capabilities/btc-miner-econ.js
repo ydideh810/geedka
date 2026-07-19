@@ -10,7 +10,7 @@
 // Free upstream: mempool.space public API (no auth, rate-limit tolerant).
 
 const MEMPOOL = "https://mempool.space/api";
-const UA      = "Mozilla/5.0 (compatible; the-stall/3.9; +https://intuitek.ai)";
+const UA      = "Mozilla/5.0 (compatible; myriad/3.9; +https://synaptiic.org)";
 const TIMEOUT = 10000;
 
 async function get(path) {

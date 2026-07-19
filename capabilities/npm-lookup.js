@@ -5,7 +5,7 @@
 // before adding them as dependencies.
 
 const NPM_URL    = "https://registry.npmjs.org";
-const UA         = "Mozilla/5.0 (compatible; the-stall/2.3; +https://intuitek.ai)";
+const UA         = "Mozilla/5.0 (compatible; myriad/2.3; +https://synaptiic.org)";
 const TIMEOUT_MS = 8000;
 
 export default {

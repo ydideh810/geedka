@@ -28,7 +28,7 @@
 const SEARCH_URL = "https://itunes.apple.com/search";
 const LOOKUP_URL = "https://itunes.apple.com/lookup";
 const RSS_BASE   = "https://itunes.apple.com/us/rss";
-const UA         = "Mozilla/5.0 (compatible; the-stall/4.76; +https://intuitek.ai)";
+const UA         = "Mozilla/5.0 (compatible; myriad/4.76; +https://synaptiic.org)";
 const TMO        = 12_000;
 
 // Genre/category IDs for top-charts RSS feeds

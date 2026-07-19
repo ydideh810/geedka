@@ -11,7 +11,7 @@
 const UPBIT_MARKETS  = "https://api.upbit.com/v1/market/all?is_details=false";
 const UPBIT_TICKER   = "https://api.upbit.com/v1/ticker?markets=";
 const BITHUMB_ALL    = "https://api.bithumb.com/public/ticker/ALL_KRW";
-const UA             = "Mozilla/5.0 (compatible; the-stall/0.4; +https://intuitek.ai)";
+const UA             = "Mozilla/5.0 (compatible; myriad/0.4; +https://synaptiic.org)";
 const MARKET_LIMIT   = 200; // cap Upbit batch to stay under URL length limits
 
 export default {

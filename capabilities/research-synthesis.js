@@ -12,7 +12,7 @@
 //           + gpt-4o-mini synthesis via OPENAI_API_KEY.
 // Note: GDELT excluded — consistently >10s response time in production tests.
 
-const UA          = "Mozilla/5.0 (compatible; the-stall/3.52; +https://intuitek.ai)";
+const UA          = "Mozilla/5.0 (compatible; myriad/3.52; +https://synaptiic.org)";
 const SRC_TIMEOUT = 8_000;
 const SYN_TIMEOUT = 20_000;
 const OPENAI_URL  = "https://api.openai.com/v1/chat/completions";
@@ -35,7 +35,7 @@ async function fetchHN(query) {
 }
 
 async function fetchOpenAlex(query) {
-  const url = `https://api.openalex.org/works?search=${encodeURIComponent(query)}&per_page=5&mailto=kyle@intuitek.ai&select=title,abstract_inverted_index,publication_year,cited_by_count,primary_location`;
+  const url = `https://api.openalex.org/works?search=${encodeURIComponent(query)}&per_page=5&mailto=kyle@synaptiic.org&select=title,abstract_inverted_index,publication_year,cited_by_count,primary_location`;
   const r   = await fetch(url, { headers: { "User-Agent": UA }, signal: AbortSignal.timeout(SRC_TIMEOUT) });
   if (!r.ok) throw new Error(`OpenAlex ${r.status}`);
   const d = await r.json();

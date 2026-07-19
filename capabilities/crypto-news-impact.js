@@ -14,7 +14,7 @@
 
 const COINDESK_RSS = "https://www.coindesk.com/arc/outboundfeeds/rss/";
 const CG_PRICE     = "https://api.coingecko.com/api/v3/simple/price";
-const UA           = "Mozilla/5.0 (compatible; the-stall/2.9; +https://intuitek.ai)";
+const UA           = "Mozilla/5.0 (compatible; myriad/2.9; +https://synaptiic.org)";
 const TIMEOUT_MS   = 15000;
 
 // keyword (lowercase) → CoinGecko id

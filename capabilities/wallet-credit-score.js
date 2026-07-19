@@ -24,7 +24,7 @@ const USDC_BASE = "0x833589fcd6edb6e08f4c7c32d4f71b54bda02913"; // USDC on Base
 const ERC20_BALANCE_SIG = "0x70a08231"; // balanceOf(address)
 const DECIMALS_USDC = 6;
 const TIMEOUT = 12_000;
-const UA = "Mozilla/5.0 (compatible; the-stall/3.46; +https://intuitek.ai)";
+const UA = "Mozilla/5.0 (compatible; myriad/3.46; +https://synaptiic.org)";
 
 async function rpc(url, method, params) {
   const r = await fetch(url, {

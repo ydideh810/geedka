@@ -1,4 +1,4 @@
-// solana-rail.js — Solana x402 payment rail for The Stall.
+// solana-rail.js — Solana x402 payment rail for MYRIAD.
 //
 // SOLANA-PILOT-01 (2026-07-06): adds Solana USDC as a second payment rail
 // alongside the existing Base EVM rail. Intercepts requests carrying a Solana

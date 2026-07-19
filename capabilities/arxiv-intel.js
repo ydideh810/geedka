@@ -11,7 +11,7 @@
 // grant-writing support, competitive intelligence on emerging techniques.
 
 const BASE    = "https://export.arxiv.org/api/query";
-const UA      = "Mozilla/5.0 (compatible; the-stall/1.0; +https://intuitek.ai)";
+const UA      = "Mozilla/5.0 (compatible; myriad/1.0; +https://synaptiic.org)";
 const TIMEOUT = 15_000;
 
 // arXiv field prefixes for structured search

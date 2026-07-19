@@ -13,7 +13,7 @@
 // No API key, no auth. 15-min delayed during trading hours.
 
 const CBOE_BASE = "https://cdn.cboe.com/api/global/delayed_quotes/options";
-const UA        = "Mozilla/5.0 (compatible; the-stall/3.88; +https://intuitek.ai)";
+const UA        = "Mozilla/5.0 (compatible; myriad/3.88; +https://synaptiic.org)";
 const TIMEOUT   = 12000;
 
 function parseOptionSymbol(sym, tickerLen) {

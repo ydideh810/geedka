@@ -13,7 +13,7 @@
 // [REDACTED]5, 2026-06-06.
 
 const GOPLUS_URL = "https://api.gopluslabs.io/api/v1/address_security";
-const UA         = "Mozilla/5.0 (compatible; the-stall/3.73; +https://intuitek.ai)";
+const UA         = "Mozilla/5.0 (compatible; myriad/3.73; +https://synaptiic.org)";
 const TIMEOUT_MS = 10000;
 
 const CHAIN_ALIASES = {

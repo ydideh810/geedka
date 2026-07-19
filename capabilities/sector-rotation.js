@@ -31,7 +31,7 @@
 // Price: $0.020/call — parallel fetch of 12 symbols (11 sectors + SPY).
 
 const YF_BASE = "https://query2.finance.yahoo.com/v8/finance/chart";
-const UA      = "Mozilla/5.0 (compatible; the-stall/5.0; +https://intuitek.ai)";
+const UA      = "Mozilla/5.0 (compatible; myriad/5.0; +https://synaptiic.org)";
 const TMO     = 14_000;
 
 const SECTORS = {

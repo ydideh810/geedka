@@ -15,7 +15,7 @@
 //   7. Resilience        — HHI mining concentration; decentralization grade
 
 const MEMPOOL = "https://mempool.space/api";
-const UA      = "Mozilla/5.0 (compatible; the-stall/1.0; +https://intuitek.ai)";
+const UA      = "Mozilla/5.0 (compatible; myriad/1.0; +https://synaptiic.org)";
 const T       = 15_000;
 
 async function get(url) {

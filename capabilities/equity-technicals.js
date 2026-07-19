@@ -12,7 +12,7 @@
 // Free upstream: Yahoo Finance v8/finance/chart (1yr daily OHLCV, no auth).
 
 const YF_BASE = "https://query2.finance.yahoo.com/v8/finance/chart";
-const UA = "Mozilla/5.0 (compatible; the-stall/0.9; +https://intuitek.ai)";
+const UA = "Mozilla/5.0 (compatible; myriad/0.9; +https://synaptiic.org)";
 
 function sma(arr, period) {
   const s = arr.slice(-period);

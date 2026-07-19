@@ -11,7 +11,7 @@
 //   - Identifying maintainer activity
 
 const GH_API    = "https://api.github.com";
-const UA         = "Mozilla/5.0 (compatible; the-stall/1.9; +https://intuitek.ai)";
+const UA         = "Mozilla/5.0 (compatible; myriad/1.9; +https://synaptiic.org)";
 const TIMEOUT_MS = 10000;
 const GH_TOKEN   = process.env.GITHUB_TOKEN;
 

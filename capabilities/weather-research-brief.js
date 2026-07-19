@@ -18,13 +18,13 @@
 //           + Open-Meteo Geocoding API (free)
 //           + HN Algolia, OpenAlex, Reddit, arXiv, DuckDuckGo (all free)
 //           + gpt-4o-mini synthesis via OPENAI_API_KEY.
-// Version: the-stall/4.94.0
+// Version: myriad/4.94.0
 
 const GEOCODE_URL = "https://geocoding-api.open-meteo.com/v1/search";
 const ARCHIVE_URL = "https://archive-api.open-meteo.com/v1/archive";
 const OPENAI_URL  = "https://api.openai.com/v1/chat/completions";
 const MODEL       = "gpt-4o-mini";
-const UA          = "Mozilla/5.0 (compatible; the-stall/4.94; +https://intuitek.ai)";
+const UA          = "Mozilla/5.0 (compatible; myriad/4.94; +https://synaptiic.org)";
 const GEO_TIMEOUT = 10_000;
 const WX_TIMEOUT  = 15_000;
 const SRC_TIMEOUT = 8_000;
@@ -149,7 +149,7 @@ async function fetchHN(query) {
 }
 
 async function fetchOpenAlex(query) {
-  const url = `https://api.openalex.org/works?search=${encodeURIComponent(query)}&per_page=5&mailto=kyle@intuitek.ai&select=title,abstract_inverted_index,publication_year,cited_by_count,primary_location`;
+  const url = `https://api.openalex.org/works?search=${encodeURIComponent(query)}&per_page=5&mailto=kyle@synaptiic.org&select=title,abstract_inverted_index,publication_year,cited_by_count,primary_location`;
   const r = await fetch(url, { headers: { "User-Agent": UA }, signal: AbortSignal.timeout(SRC_TIMEOUT) });
   if (!r.ok) throw new Error(`OpenAlex ${r.status}`);
   const d = await r.json();

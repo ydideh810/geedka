@@ -15,7 +15,7 @@ const UPBIT_MARKETS_URL = "https://api.upbit.com/v1/market/all?isDetails=false";
 const UPBIT_TICKER_URL  = "https://api.upbit.com/v1/ticker";
 const CG_URL            = "https://api.coingecko.com/api/v3/coins/markets";
 const YIELDS_URL        = "https://yields.llama.fi/pools";
-const UA                = "Mozilla/5.0 (compatible; the-stall/4.39; +https://intuitek.ai)";
+const UA                = "Mozilla/5.0 (compatible; myriad/4.39; +https://synaptiic.org)";
 const TIMEOUT           = 12000;
 
 async function fetchJSON(url, headers = {}) {

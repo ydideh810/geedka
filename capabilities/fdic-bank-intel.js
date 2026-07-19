@@ -27,7 +27,7 @@
 
 const FDIC_BASE   = "https://api.fdic.gov/banks";
 const TIMEOUT_MS  = 12_000;
-const UA          = "the-stall/4.69 fdic-bank-intel (kyle@intuitek.ai)";
+const UA          = "myriad/4.69 fdic-bank-intel (kyle@synaptiic.org)";
 
 // Resolution type codes → human-readable
 const RESTYPE_MAP = {

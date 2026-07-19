@@ -8,7 +8,7 @@
 // after hours.
 
 const YF_BASE = "https://query2.finance.yahoo.com/v8/finance/chart";
-const UA      = "Mozilla/5.0 (compatible; the-stall/0.4; +https://intuitek.ai)";
+const UA      = "Mozilla/5.0 (compatible; myriad/0.4; +https://synaptiic.org)";
 
 export default {
   name: "us-stock-price",

@@ -106,7 +106,7 @@ export default {
 
     const url = `${USGS_BASE}?${params}`;
     const resp = await fetch(url, {
-      headers: { "User-Agent": "the-stall/0.4 (x402 MCP; +https://intuitek.ai)" },
+      headers: { "User-Agent": "myriad/0.4 (x402 MCP; +https://synaptiic.org)" },
     });
     if (!resp.ok) throw new Error(`USGS API error ${resp.status}: ${await resp.text().catch(() => "")}`);
 

@@ -1,16 +1,16 @@
 /**
  * continuous_seeder.mjs — Persistent capability verification for CDP Bazaar.
  *
- * Rotates through all STALL caps across cron runs, keeping each endpoint
+ * Rotates through all MYRIAD caps across cron runs, keeping each endpoint
  * "verified-live" in CDP Bazaar. Always probes the LIVE 402 price before
  * paying — never uses a hardcoded flat amount.
  *
  * Seeder wallet: 0xf615BDa54D576e757B51A6128aC8A7C67a1C3d6C
- * Rotation state: ~/intuitek/logs/seeder_rotation_state.json
+ * Rotation state: ~/synaptiic/logs/seeder_rotation_state.json
  *
- * Run:   cd ~/intuitek/the-stall && node continuous_seeder.mjs
+ * Run:   cd ~/synaptiic/myriad && node continuous_seeder.mjs
  * Cron:  0 [every-6h] * * * node continuous_seeder.mjs
- *         >> ~/intuitek/logs/continuous_seeder.log 2>&1
+ *         >> ~/synaptiic/logs/continuous_seeder.log 2>&1
  *
  * Directive: Cowork SEEDER task (A), 2026-06-18T21:25Z
  */
@@ -26,14 +26,14 @@ import { encodePaymentSignatureHeader, decodePaymentRequiredHeader } from "@x402
 // ──────────────────────────────────────────────────────────────────────────────
 // CONFIG
 // ──────────────────────────────────────────────────────────────────────────────
-const BASE_URL     = process.env.STALL_BASE_URL || "https://the-stall.intuitek.ai";
+const BASE_URL     = process.env.MYRIAD_BASE_URL || "https://myriad.synaptiic.ai";
 const RPC_URL      = process.env.COINBASE_BASE_RPC || process.env.BASE_RPC_URL
                      || "https://base-rpc.publicnode.com";
 const USDC_ADDR    = "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913";
 const USDC_ABI     = parseAbi(["function balanceOf(address) view returns (uint256)"]);
-const STATE_FILE   = `${process.env.HOME}/intuitek/logs/seeder_rotation_state.json`;
-const LOG_FILE     = `${process.env.HOME}/intuitek/logs/continuous_seeder.log`;
-const NOTIFY_SH    = `${process.env.HOME}/intuitek/notify.sh`;
+const STATE_FILE   = `${process.env.HOME}/synaptiic/logs/seeder_rotation_state.json`;
+const LOG_FILE     = `${process.env.HOME}/synaptiic/logs/continuous_seeder.log`;
+const NOTIFY_SH    = `${process.env.HOME}/synaptiic/notify.sh`;
 
 // Caps to seed per run — reduced 2026-07-01 to cut Tenderly burst rate-limit hits
 // and extend ETH runway while gas topup is pending (was 15)
@@ -49,7 +49,7 @@ const RESEED_AFTER_HOURS = 84;
 // Skip a cap from seeding queue after it fails, for this many hours
 const FAIL_COOLDOWN_HOURS = 24;
 
-// All active STALL caps (sync with capabilities/*.js — excludes _retired/)
+// All active MYRIAD caps (sync with capabilities/*.js — excludes _retired/)
 const ALL_CAPS = [
   "address-security","agent-access-check","agent-kya-score","ai-image-gen","air-quality",
   "analyst-ratings","analyst-upgrades","arxiv-intel","audio-transcribe","aviation-weather","base-season",
@@ -377,6 +377,6 @@ async function main() {
 main().catch(e => {
   const msg = `FATAL: ${e.message}`;
   try { appendFileSync(LOG_FILE, `[${new Date().toISOString()}] ${msg}\n`); } catch {}
-  exec(`bash "${process.env.HOME}/intuitek/notify.sh" "⚠️ [Seeder] FATAL: ${e.message.slice(0, 100).replace(/["`$\\]/g, "'")}"`, () => {});
+  exec(`bash "${process.env.HOME}/synaptiic/notify.sh" "⚠️ [Seeder] FATAL: ${e.message.slice(0, 100).replace(/["`$\\]/g, "'")}"`, () => {});
   process.exitCode = 1;
 });

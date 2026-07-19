@@ -30,14 +30,14 @@ market_verdict_rerun.py
 # pre-patch backups — methodology snapshots, never public
 .backup/
 
-# methodology — lives in the-stall-ops private repo, never track in public
+# methodology — lives in the-myriad-ops private repo, never track in public
 prospector/
 bazaar_seed*.mjs
 fund_seeder*.mjs
 seeder_recycler.mjs
 seam_undercut*.mjs
 
-# ops/methodology files — live in KyleMillion/the-stall-ops
+# ops/methodology files — live in KyleMillion/the-myriad-ops
 prospector/
 bazaar_seed*.mjs
 fund_seeder*.mjs

@@ -10,7 +10,7 @@
 // Priced at $0.001 to match market rate for polling use cases.
 
 const GAMMA_EVENTS_URL = "https://gamma-api.polymarket.com/events";
-const UA               = "Mozilla/5.0 (compatible; the-stall/4.45; +https://intuitek.ai)";
+const UA               = "Mozilla/5.0 (compatible; myriad/4.45; +https://synaptiic.org)";
 const TIMEOUT          = 10_000;
 
 const ASSET_KEYWORDS = {

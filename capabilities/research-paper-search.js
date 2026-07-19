@@ -7,7 +7,7 @@
 // Use case: literature review agents, citation building, prior-art research.
 
 const OPENALEX = "https://api.openalex.org";
-const UA       = "Mozilla/5.0 (compatible; the-stall/1.0; +https://intuitek.ai)";
+const UA       = "Mozilla/5.0 (compatible; myriad/1.0; +https://synaptiic.org)";
 const T        = 12_000;
 
 async function get(url) {

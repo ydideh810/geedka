@@ -8,7 +8,7 @@
 // multi-hop chain (14 wallets, signal strength 0.80, signal-intel 2026-06-05).
 
 const LLAMA_URL = "https://stablecoins.llama.fi/stablecoins?includePrices=true";
-const UA        = "Mozilla/5.0 (compatible; the-stall/0.7; +https://intuitek.ai)";
+const UA        = "Mozilla/5.0 (compatible; myriad/0.7; +https://synaptiic.org)";
 
 function depegStatus(price) {
   const dev = Math.abs(price - 1.0);

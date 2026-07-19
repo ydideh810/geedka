@@ -1,4 +1,4 @@
-// mcp.js — MCP transport integration for The Stall
+// mcp.js — MCP transport integration for MYRIAD
 //
 // Exposes all STALL capabilities as MCP tools via two transports:
 //   - Streamable HTTP (POST /mcp) — stateless, preferred
@@ -43,7 +43,7 @@ function buildZodShape(inputSchema) {
 // Build a fresh McpServer with all STALL capabilities registered as tools.
 // Called once per request (stateless transport requires fresh server per request).
 function buildServer(capabilities) {
-  const server = new McpServer({ name: "The Stall", version: PKG_VERSION });
+  const server = new McpServer({ name: "MYRIAD", version: PKG_VERSION });
 
   for (const cap of capabilities) {
     const inputSchema = buildZodShape(cap.inputSchema);

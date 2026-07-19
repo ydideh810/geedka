@@ -21,7 +21,7 @@
 
 const NPI_BASE = "https://npiregistry.cms.hhs.gov/api/";
 const TIMEOUT  = 12_000;
-const UA       = "Mozilla/5.0 (compatible; the-stall/1.0; +https://intuitek.ai)";
+const UA       = "Mozilla/5.0 (compatible; myriad/1.0; +https://synaptiic.org)";
 
 function buildUrl(query) {
   const url = new URL(NPI_BASE);

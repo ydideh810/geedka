@@ -15,7 +15,7 @@
 // classification based on HY OAS level.
 
 const FRED_BASE = "https://fred.stlouisfed.org/graph/fredgraph.csv";
-const UA        = "Mozilla/5.0 (compatible; the-stall/0.4; +https://intuitek.ai)";
+const UA        = "Mozilla/5.0 (compatible; myriad/0.4; +https://synaptiic.org)";
 
 // FRED series used
 // BAMLH0A0HYM2  — ICE BofA US High Yield Index OAS (% = basis points / 100)

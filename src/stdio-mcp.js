@@ -47,7 +47,7 @@ function buildZodShape(inputSchema) {
 const capabilities = await loadCapabilities();
 process.stderr.write(`[stdio-mcp] loaded ${capabilities.length} capabilities (v${PKG_VERSION})\n`);
 
-const server = new McpServer({ name: "The Stall", version: PKG_VERSION });
+const server = new McpServer({ name: "MYRIAD", version: PKG_VERSION });
 
 for (const cap of capabilities) {
   const inputSchema = buildZodShape(cap.inputSchema);

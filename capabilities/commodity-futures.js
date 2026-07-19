@@ -12,7 +12,7 @@
 // signal-intel source: x402 archive settlement analysis, 2026-06-05.
 
 const YF_BASE = "https://query1.finance.yahoo.com/v8/finance/chart";
-const UA = "Mozilla/5.0 (compatible; the-stall/2.5; +https://the-stall.intuitek.ai)";
+const UA = "Mozilla/5.0 (compatible; myriad/2.5; +https://myriad.synaptiic.org)";
 
 const COMMODITIES = {
   // Energy

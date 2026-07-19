@@ -17,7 +17,7 @@
 //           → youtube-channel-analytics → youtube-channel-intel
 
 const AC_BASE  = "https://suggestqueries.google.com/complete/search";
-const UA       = "Mozilla/5.0 (compatible; the-stall/4.10; +https://intuitek.ai)";
+const UA       = "Mozilla/5.0 (compatible; myriad/4.10; +https://synaptiic.org)";
 const TIMEOUT  = 8_000;
 
 function parseAC(raw) {

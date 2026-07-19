@@ -9,7 +9,7 @@
 // or any workflow that needs USD→KRW/EUR/JPY/etc. conversion.
 
 const ER_URL    = "https://open.er-api.com/v6/latest";
-const UA        = "Mozilla/5.0 (compatible; the-stall/2.0; +https://intuitek.ai)";
+const UA        = "Mozilla/5.0 (compatible; myriad/2.0; +https://synaptiic.org)";
 const TIMEOUT_MS = 8000;
 
 async function fetchJson(url) {

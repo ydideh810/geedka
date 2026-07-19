@@ -11,7 +11,7 @@
 // Supports both IPv4/IPv6 addresses and domain names (auto-resolved).
 
 const IPAPI = "http://ip-api.com/json";
-const UA    = "Mozilla/5.0 (compatible; the-stall/3.10; +https://intuitek.ai)";
+const UA    = "Mozilla/5.0 (compatible; myriad/3.10; +https://synaptiic.org)";
 const FIELDS = "status,message,country,countryCode,region,regionName,city,zip,lat,lon,timezone,isp,org,as,asname,reverse,mobile,proxy,hosting,query";
 
 async function lookupSingle(target) {

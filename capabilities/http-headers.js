@@ -11,7 +11,7 @@
 //
 // Free upstream: native Node.js fetch — no auth, no rate limit.
 
-const UA         = "Mozilla/5.0 (compatible; the-stall/3.13; +https://intuitek.ai)";
+const UA         = "Mozilla/5.0 (compatible; myriad/3.13; +https://synaptiic.org)";
 const TIMEOUT_MS = 10000;
 
 // Security header definitions and grading weights

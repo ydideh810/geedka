@@ -83,7 +83,7 @@ export default {
       "https://gamma-api.polymarket.com/markets?closed=false&active=true&limit=100";
 
     const resp = await fetch(url, {
-      headers: { "User-Agent": "the-stall/1.4.0 (x402 capability chassis)" },
+      headers: { "User-Agent": "myriad/1.4.0 (x402 capability chassis)" },
       signal: AbortSignal.timeout(10_000),
     });
 

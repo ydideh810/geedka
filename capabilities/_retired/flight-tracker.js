@@ -11,7 +11,7 @@
 // This capability accepts both IATA (JFK) and ICAO (KJFK) formats.
 
 const OPENSKY = "https://opensky-network.org/api";
-const UA      = "Mozilla/5.0 (compatible; the-stall/3.2; +https://intuitek.ai)";
+const UA      = "Mozilla/5.0 (compatible; myriad/3.2; +https://synaptiic.org)";
 const TIMEOUT = 15000;
 
 // IATA → ICAO map for top 80 global airports

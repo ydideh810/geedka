@@ -13,7 +13,7 @@
 // 5-year dividend history. Same endpoint as us-stock-price (proven reliable).
 
 const YF_BASE = "https://query2.finance.yahoo.com/v8/finance/chart";
-const UA      = "Mozilla/5.0 (compatible; the-stall/3.63; +https://intuitek.ai)";
+const UA      = "Mozilla/5.0 (compatible; myriad/3.63; +https://synaptiic.org)";
 const TIMEOUT = 15_000;
 
 function detectFrequency(dividendDates) {

@@ -9,7 +9,7 @@
 // Higher confidence than CoinGecko alone — aggregates on-chain DEX prices.
 
 const COINS_BASE = "https://coins.llama.fi";
-const UA         = "Mozilla/5.0 (compatible; the-stall/defillama-coin-price; +https://intuitek.ai)";
+const UA         = "Mozilla/5.0 (compatible; myriad/defillama-coin-price; +https://synaptiic.org)";
 const TIMEOUT    = 12_000;
 
 // Common shorthand aliases for convenience

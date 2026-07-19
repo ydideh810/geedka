@@ -12,7 +12,7 @@
 //   OKX REST API     — https://www.okx.com/api/v5/market/ticker?instId={SYMBOL}-USDT (fallback)
 //   open.er-api.com  — https://open.er-api.com/v6/latest/USD (USD/KRW FX, free tier)
 
-const UA          = "Mozilla/5.0 (compatible; the-stall/3.85; +https://intuitek.ai)";
+const UA          = "Mozilla/5.0 (compatible; myriad/3.85; +https://synaptiic.org)";
 const TIMEOUT_MS  = 10000;
 
 // Kraken uses non-standard pair names for major assets

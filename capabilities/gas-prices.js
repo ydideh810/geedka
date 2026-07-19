@@ -39,7 +39,7 @@ const CHAINS = {
   },
 };
 
-const UA         = "Mozilla/5.0 (compatible; the-stall/2.1; +https://intuitek.ai)";
+const UA         = "Mozilla/5.0 (compatible; myriad/2.1; +https://synaptiic.org)";
 const TIMEOUT_MS = 8000;
 const TRANSFER_GAS = 21000;
 

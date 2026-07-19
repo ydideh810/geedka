@@ -12,7 +12,7 @@
 // Upstream: Yahoo Finance v8 (free). Cron parsing: pure JS, zero external calls.
 
 const YF_BASE      = "https://query2.finance.yahoo.com/v8/finance/chart";
-const UA           = "Mozilla/5.0 (compatible; the-stall/4.91; +https://intuitek.ai)";
+const UA           = "Mozilla/5.0 (compatible; myriad/4.91; +https://synaptiic.org)";
 const FIELD_RANGES = [[0,59],[0,23],[1,31],[1,12],[0,6]];
 const MONTH_NAMES  = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
 const DOW_NAMES    = ["Sun","Mon","Tue","Wed","Thu","Fri","Sat"];

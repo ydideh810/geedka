@@ -23,7 +23,7 @@
 // Price: $0.008/call — one to two NCBI API calls per request.
 
 const BASE    = "https://eutils.ncbi.nlm.nih.gov/entrez/eutils";
-const UA      = "the-stall/4.69 pubmed-intel (kyle@intuitek.ai)";
+const UA      = "myriad/4.69 pubmed-intel (kyle@synaptiic.org)";
 const TIMEOUT = 15_000;
 
 // Article type → PubMed filter term
@@ -39,8 +39,8 @@ const TYPE_MAP = {
 
 async function ncbi(endpoint, params) {
   const url = new URL(`${BASE}/${endpoint}`);
-  url.searchParams.set("tool", "the-stall");
-  url.searchParams.set("email", "kyle@intuitek.ai");
+  url.searchParams.set("tool", "myriad");
+  url.searchParams.set("email", "kyle@synaptiic.org");
   for (const [k, v] of Object.entries(params)) {
     if (v != null) url.searchParams.set(k, String(v));
   }

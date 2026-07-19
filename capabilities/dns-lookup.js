@@ -9,7 +9,7 @@
 // Free upstream: cloudflare-dns.com/dns-query (no auth, no rate limit stated).
 
 const DOH = "https://cloudflare-dns.com/dns-query";
-const UA  = "Mozilla/5.0 (compatible; the-stall/3.11; +https://intuitek.ai)";
+const UA  = "Mozilla/5.0 (compatible; myriad/3.11; +https://synaptiic.org)";
 
 const RECORD_TYPES = ["A", "AAAA", "MX", "TXT", "CNAME", "NS", "SOA", "CAA"];
 

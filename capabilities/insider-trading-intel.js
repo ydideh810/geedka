@@ -26,7 +26,7 @@
 //
 // Price: $0.015 — multiple EDGAR round-trips per call; rivals charge $50+/month.
 
-const UA         = "the-stall/4.72 insider-trading-intel (kyle@intuitek.ai)";
+const UA         = "myriad/4.72 insider-trading-intel (kyle@synaptiic.org)";
 const TICKER_MAP = "https://www.sec.gov/files/company_tickers.json";
 const SUBS_BASE  = "https://data.sec.gov/submissions/CIK";
 const EFTS_BASE  = "https://efts.sec.gov/LATEST/search-index";

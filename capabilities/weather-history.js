@@ -13,11 +13,11 @@
 // event-context enrichment, crop-yield modelling.
 //
 // Upstream: archive-api.open-meteo.com (ERA5 reanalysis, open data, no auth).
-// Version: the-stall/4.59.0
+// Version: myriad/4.59.0
 
 const GEOCODE_URL = "https://geocoding-api.open-meteo.com/v1/search";
 const ARCHIVE_URL = "https://archive-api.open-meteo.com/v1/archive";
-const UA          = "the-stall/4.59.0 (https://intuitek.ai; mailto:kyle@intuitek.ai)";
+const UA          = "myriad/4.59.0 (https://synaptiic.org; mailto:kyle@synaptiic.org)";
 const TIMEOUT     = 20_000;
 
 // Default variable set — temperature, precipitation, wind, sunshine

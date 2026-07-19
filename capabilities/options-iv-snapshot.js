@@ -129,7 +129,7 @@ export default {
     const url = `${CBOE_BASE}/${encodeURIComponent(sym)}.json`;
 
     const resp = await fetch(url, {
-      headers: { "User-Agent": "Mozilla/5.0 (compatible; the-stall/4.9; +https://intuitek.ai)" },
+      headers: { "User-Agent": "Mozilla/5.0 (compatible; myriad/4.9; +https://synaptiic.org)" },
       signal: AbortSignal.timeout(TMO),
     });
 

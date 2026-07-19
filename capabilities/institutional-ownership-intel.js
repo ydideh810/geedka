@@ -22,7 +22,7 @@
 //
 // Price: $0.015 — single YF fetch, crumb-auth, no paid key required.
 
-const UA           = "Mozilla/5.0 (compatible; the-stall/4.74; +https://intuitek.ai)";
+const UA           = "Mozilla/5.0 (compatible; myriad/4.74; +https://synaptiic.org)";
 const YF_CRUMB_SRC = "https://fc.yahoo.com";
 const YF_CRUMB_URL = "https://query2.finance.yahoo.com/v1/test/getcrumb";
 const YF_SUMMARY   = "https://query2.finance.yahoo.com/v10/finance/quoteSummary";

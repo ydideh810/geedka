@@ -11,7 +11,7 @@
 // Fills the gap between image-detect (format only) and ai-image-gen (generate).
 //
 // Upstream: GPT-4o-mini vision via OPENAI_API_KEY ($0.002 avg per call).
-// Version: the-stall/4.61.0
+// Version: myriad/4.61.0
 
 const OPENAI_URL = "https://api.openai.com/v1/chat/completions";
 const MODEL      = "gpt-4o-mini";

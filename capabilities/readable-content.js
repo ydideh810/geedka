@@ -17,7 +17,7 @@
 // Max response size capped at 128 KB to prevent oversized context windows.
 
 const JINA_BASE  = "https://r.jina.ai";
-const UA         = "Mozilla/5.0 (compatible; the-stall/3.41; +https://intuitek.ai)";
+const UA         = "Mozilla/5.0 (compatible; myriad/3.41; +https://synaptiic.org)";
 const TIMEOUT_MS = 20000;
 const MAX_BYTES  = 128 * 1024;
 

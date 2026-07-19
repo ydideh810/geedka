@@ -117,7 +117,7 @@ export default {
     const url   = `${ESPN_BASE}/${league.path}/scoreboard${query.date ? `?dates=${query.date}` : ""}`;
 
     const resp = await fetch(url, {
-      headers: { "User-Agent": "the-stall/3.21 (https://intuitek.ai)", Accept: "application/json" },
+      headers: { "User-Agent": "myriad/3.21 (https://synaptiic.org)", Accept: "application/json" },
       signal: AbortSignal.timeout(TIMEOUT),
     });
     if (!resp.ok) throw new Error(`ESPN API HTTP ${resp.status}`);

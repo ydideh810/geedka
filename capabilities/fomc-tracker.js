@@ -21,7 +21,7 @@
 // Priced at $0.008 — same data-only tier as treasury-yields.
 
 const FRED_BASE = "https://fred.stlouisfed.org/graph/fredgraph.csv";
-const UA        = "Mozilla/5.0 (compatible; the-stall/3.99; +https://intuitek.ai)";
+const UA        = "Mozilla/5.0 (compatible; myriad/3.99; +https://synaptiic.org)";
 const FRED_TMO  = 14_000;
 
 // 2026 FOMC meeting end-dates from federalreserve.gov/monetarypolicy/fomccalendars.htm

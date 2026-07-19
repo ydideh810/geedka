@@ -29,7 +29,7 @@
 // Price: $0.015 — multi-round POST API; unique government procurement dataset.
 
 const BASE_URL   = "https://api.usaspending.gov/api/v2";
-const UA         = "the-stall/4.67 government-contract-intel (kyle@intuitek.ai)";
+const UA         = "myriad/4.67 government-contract-intel (kyle@synaptiic.org)";
 const TIMEOUT_MS = 15_000;
 
 // Contract award type codes (excludes grants, loans)

@@ -19,7 +19,7 @@
 // Priced at $0.010 — aggregates 4 authoritative sources into one sorted calendar.
 
 const BLS_BASE = "https://www.bls.gov/schedule";
-const UA       = "Mozilla/5.0 (compatible; the-stall/4.12; +https://intuitek.ai)";
+const UA       = "Mozilla/5.0 (compatible; myriad/4.12; +https://synaptiic.org)";
 const TIMEOUT  = 14_000;
 
 // ── Priority classification ────────────────────────────────────────────────

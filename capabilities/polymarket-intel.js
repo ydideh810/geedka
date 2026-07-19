@@ -14,7 +14,7 @@
 
 const GAMMA_URL        = "https://gamma-api.polymarket.com/markets";
 const GAMMA_EVENTS_URL = "https://gamma-api.polymarket.com/events";
-const UA               = "Mozilla/5.0 (compatible; the-stall/4.40; +https://intuitek.ai)";
+const UA               = "Mozilla/5.0 (compatible; myriad/4.40; +https://synaptiic.org)";
 const TIMEOUT          = 12_000;
 
 export default {

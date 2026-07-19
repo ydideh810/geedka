@@ -23,7 +23,7 @@
 const FRED_BASE   = "https://fred.stlouisfed.org/graph/fredgraph.csv";
 const OPENAI_URL  = "https://api.openai.com/v1/chat/completions";
 const MODEL       = "gpt-4o-mini";
-const UA          = "Mozilla/5.0 (compatible; the-stall/3.93; +https://intuitek.ai)";
+const UA          = "Mozilla/5.0 (compatible; myriad/3.93; +https://synaptiic.org)";
 const FRED_TMO    = 12_000;
 const GPT_TMO     = 28_000;
 

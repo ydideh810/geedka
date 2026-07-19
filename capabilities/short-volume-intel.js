@@ -7,7 +7,7 @@
 // FINRA posts prior-day consolidated data each morning.
 
 const FINRA_BASE = "https://cdn.finra.org/equity/regsho/daily/CNMSshvol";
-const UA = "Mozilla/5.0 (compatible; the-stall/0.4; +https://intuitek.ai)";
+const UA = "Mozilla/5.0 (compatible; myriad/0.4; +https://synaptiic.org)";
 
 function prevTradingDays(count) {
   const days = [];

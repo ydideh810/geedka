@@ -12,7 +12,7 @@
 // 26 payers, avg $0.0052/call). [REDACTED]4, 2026-06-06.
 
 const EOL_API = "https://endoflife.date/api";
-const UA = "Mozilla/5.0 (compatible; the-stall/3.8; +https://intuitek.ai)";
+const UA = "Mozilla/5.0 (compatible; myriad/3.8; +https://synaptiic.org)";
 
 // Canonical slug for each supported db (matches endoflife.date product names)
 const DB_SLUGS = {

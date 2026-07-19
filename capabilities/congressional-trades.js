@@ -18,7 +18,7 @@
 // feed on-demand for $0.022/call.
 
 const QQ_BASE  = "https://api.quiverquant.com/beta";
-const UA       = "Mozilla/5.0 (compatible; the-stall/4.14; +https://intuitek.ai)";
+const UA       = "Mozilla/5.0 (compatible; myriad/4.14; +https://synaptiic.org)";
 const TIMEOUT  = 12_000;
 
 async function fetchJSON(url) {

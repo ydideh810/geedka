@@ -9,7 +9,7 @@
 // existing solana-token-risk capability with EVM/multi-chain coverage.
 
 const GOPLUS_URL = "https://api.gopluslabs.io/api/v1/token_security";
-const UA         = "Mozilla/5.0 (compatible; the-stall/1.5; +https://intuitek.ai)";
+const UA         = "Mozilla/5.0 (compatible; myriad/1.5; +https://synaptiic.org)";
 const TIMEOUT_MS = 10000;
 
 // Canonical chain IDs by common name

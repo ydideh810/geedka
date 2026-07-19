@@ -10,7 +10,7 @@
 // Free upstream: restcountries.com v3.1 (no auth, open data).
 
 const BASE     = "https://restcountries.com/v3.1";
-const UA       = "Mozilla/5.0 (compatible; the-stall/3.15; +https://intuitek.ai)";
+const UA       = "Mozilla/5.0 (compatible; myriad/3.15; +https://synaptiic.org)";
 const FIELDS   = "name,cca2,cca3,capital,population,area,region,subregion,languages,currencies,borders,flags,idd,timezones,independent";
 const TIMEOUT  = 8000;
 

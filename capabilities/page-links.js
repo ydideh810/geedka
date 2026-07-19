@@ -12,7 +12,7 @@
 // Distinct from web-scrape-links: adds filter (internal/external/all),
 // is_external boolean per link, and per-link domain field.
 
-const UA        = "Mozilla/5.0 (compatible; the-stall/3.78; +https://intuitek.ai)";
+const UA        = "Mozilla/5.0 (compatible; myriad/3.78; +https://synaptiic.org)";
 const TIMEOUT   = 15_000;
 const HARD_CAP  = 500;
 

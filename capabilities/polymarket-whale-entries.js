@@ -15,7 +15,7 @@
 // [REDACTED]5, 2026-06-10.
 
 const DATA_API = "https://data-api.polymarket.com/trades";
-const UA       = "Mozilla/5.0 (compatible; the-stall/4.55; +https://intuitek.ai)";
+const UA       = "Mozilla/5.0 (compatible; myriad/4.55; +https://synaptiic.org)";
 const TIMEOUT  = 15_000;
 const POOL     = 500; // trades to fetch before filtering
 

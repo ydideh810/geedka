@@ -8,7 +8,7 @@
 // We return any coin in any fiat at $0.015 (85% undercut, universal coverage).
 
 const CG_URL    = "https://api.coingecko.com/api/v3/simple/price";
-const UA        = "Mozilla/5.0 (compatible; the-stall/3.5; +https://intuitek.ai)";
+const UA        = "Mozilla/5.0 (compatible; myriad/3.5; +https://synaptiic.org)";
 const TIMEOUT_MS = 10000;
 
 // Common ticker aliases → CoinGecko IDs

@@ -12,7 +12,7 @@
 
 const LLAMA_BASE = "https://api.llama.fi";
 const COINS_BASE = "https://coins.llama.fi";
-const UA         = "Mozilla/5.0 (compatible; the-stall/defillama-pack; +https://intuitek.ai)";
+const UA         = "Mozilla/5.0 (compatible; myriad/defillama-pack; +https://synaptiic.org)";
 const TIMEOUT    = 15_000;
 
 const EXCL = new Set(["staking", "pool2", "borrowed", "Plasma", "offers"]);

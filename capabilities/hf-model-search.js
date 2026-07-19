@@ -7,7 +7,7 @@
 // Price: $0.002 (no competitor in x402 Bazaar; unique coverage of 1M+ HF models).
 
 const HF_API = "https://huggingface.co/api/models";
-const UA = "the-stall/3.77 (https://intuitek.ai)";
+const UA = "myriad/3.77 (https://synaptiic.org)";
 const TIMEOUT = 12000;
 
 const VALID_SORT = new Set(["downloads", "likes", "lastModified", "createdAt"]);

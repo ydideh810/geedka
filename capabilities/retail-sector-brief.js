@@ -31,7 +31,7 @@
 const YF_BASE    = "https://query1.finance.yahoo.com/v8/finance/chart";
 const OPENAI_URL = "https://api.openai.com/v1/chat/completions";
 const MODEL      = "gpt-4o-mini";
-const UA         = "Mozilla/5.0 (compatible; the-stall/4.82; +https://intuitek.ai)";
+const UA         = "Mozilla/5.0 (compatible; myriad/4.82; +https://synaptiic.org)";
 const YF_TMO     = 12_000;
 const GPT_TMO    = 38_000;
 

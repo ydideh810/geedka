@@ -23,7 +23,7 @@
 //
 // Price: $0.015 — EDGAR EFTS + XML round-trips; unique private-company dataset.
 
-const UA         = "the-stall/4.67 vc-funding-intel (kyle@intuitek.ai)";
+const UA         = "myriad/4.67 vc-funding-intel (kyle@synaptiic.org)";
 const EFTS_BASE  = "https://efts.sec.gov/LATEST/search-index";
 const EDGAR_BASE = "https://www.sec.gov/Archives/edgar/data";
 const TIMEOUT_MS = 14_000;

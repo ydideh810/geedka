@@ -1,4 +1,4 @@
-// server.js — The Stall. A domain-agnostic x402 capability chassis.
+// server.js — MYRIAD. A domain-agnostic x402 capability chassis.
 //
 // What it does, end to end:
 //   1. Loads every capability module from /capabilities.
@@ -303,7 +303,7 @@ app.use((req, res, next) => {
 
 const capabilities = await loadCapabilities();
 
-const BASE_URL = process.env.BASE_URL || "https://the-stall.intuitek.ai";
+const BASE_URL = process.env.BASE_URL || "https://myriad.synaptiic.org";
 
 let retainerPlans = {}; // populated by mountRetainer after payment middleware boots
 
@@ -361,7 +361,7 @@ app.get("/glama.json", (_req, res) => {
 
 app.get("/catalog", (_req, res) =>
   res.json({
-    stall: "the-stall",
+    network_name: "myriad",
     network: NETWORK,
     payTo: PAY_TO ? `${PAY_TO.slice(0, 6)}…${PAY_TO.slice(-4)}` : null,
     capabilities: capabilities.map((c) => ({
@@ -588,7 +588,7 @@ app.get("/openapi.json", (_req, res) => {
   res.json({
     openapi: "3.1.0",
     info: {
-      title: "The Stall",
+      title: "MYRIAD",
       description: `Domain-agnostic x402 capability chassis by IntuiTek¹. ${capabilities.length} AI-callable data services — pay USDC on Base mainnet. No accounts or API keys required.`,
       version: PKG_VERSION,
       contact: { url: BASE_URL },
@@ -620,7 +620,7 @@ const USDC_BASE = "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913";
 app.get("/.well-known/x402", (_req, res) =>
   res.json({
     version: "1.0.0",
-    name: "The Stall",
+    name: "MYRIAD",
     description: `${capabilities.length} pay-per-call AI data tools via MCP + x402 on Base mainnet. Finance, crypto, DeFi, prediction markets, macro, OSINT, research, weather, aviation. No API keys or accounts required — pay USDC per call.`,
     url: BASE_URL,
     network: "base",
@@ -673,7 +673,7 @@ app.get("/.well-known/x402", (_req, res) =>
 app.get("/.well-known/x402.json", (_req, res) =>
   res.json({
     version: 1,
-    name: "The Stall",
+    name: "MYRIAD",
     description: `Domain-agnostic x402 capability chassis by IntuiTek¹. ${capabilities.length} AI-callable data services on Base mainnet. No API keys or accounts required.`,
     network: "base",
     currency: "USDC",
@@ -694,13 +694,13 @@ app.get("/.well-known/x402.json", (_req, res) =>
 // ── A2A Agent Card (ACP / Google A2A discovery standard) ─────────────────────
 app.get("/.well-known/agent.json", (_req, res) =>
   res.json({
-    name: "The Stall",
+    name: "MYRIAD",
     description: `Domain-agnostic x402 capability chassis by IntuiTek¹. ${capabilities.length} AI-callable data services for USDC on Base — stock prices, DeFi analytics, token security, prediction markets, macro indicators, research papers, domain WHOIS, company intelligence, weather, flight tracking, and more. MCP interface at /mcp — no wallet, no API keys.`,
     url: BASE_URL,
     version: PKG_VERSION,
     provider: {
       organization: "IntuiTek¹",
-      url: "https://intuitek.ai",
+      url: "https://synaptiic.org",
     },
     capabilities: {
       streaming: false,
@@ -752,7 +752,7 @@ app.get("/.well-known/agent.json", (_req, res) =>
 // ── Smithery server card (skip-scan path for capability enumeration) ─────────
 app.get("/.well-known/mcp/server-card.json", (_req, res) =>
   res.json({
-    name: "The Stall",
+    name: "MYRIAD",
     description: `Domain-agnostic x402 capability chassis by IntuiTek¹. ${capabilities.length} AI-callable data tools: stock prices, market overview, DeFi yields, token security, wallet screening, gas prices, macro indicators, prediction markets, company due diligence, research papers, domain WHOIS, email verification, flight tracking, weather, and more. MCP over Streamable HTTP — no wallet, no API keys, no accounts.`,
     version: PKG_VERSION,
     tools: capabilities.map((c) => ({
@@ -766,17 +766,17 @@ app.get("/.well-known/mcp/server-card.json", (_req, res) =>
 // ── mcpub.dev domain verification ─────────────────────────────────────────────
 app.get("/.well-known/mcp.json", (_req, res) =>
   res.json({
-    name: "The Stall",
+    name: "MYRIAD",
     mcp_endpoint: `${BASE_URL}/mcp`,
     version: PKG_VERSION,
     description: `${capabilities.length} pay-per-call AI capabilities via x402 on Base mainnet. Finance, crypto, DeFi, macro, compliance, OSINT. No API keys.`,
     provider: "IntuiTek¹",
-    contact: "kyle@intuitek.ai",
+    contact: "kyle@synaptiic.org",
   })
 );
 
 // ── Hermes Agent skill discovery (/.well-known/skills/) ───────────────────────
-// Serves the stall-market-data skill for `hermes skills install well-known:URL`.
+// Serves MYRIAD-market-data skill for `hermes skills install well-known:URL`.
 // Files live at skills/stall-market-data/ and are read from disk so they can be
 // updated independently of this server.
 const SKILLS_DIR = join(__dir, "..", "skills");
@@ -826,7 +826,7 @@ app.get("/", (_req, res) => {
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>The Stall — x402 Intelligence Marketplace</title>
+  <title>MYRIAD — x402 Intelligence Marketplace</title>
   <style>
     *{box-sizing:border-box;margin:0;padding:0}
     body{font-family:system-ui,sans-serif;background:#0a0a0f;color:#e2e8f0;min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:2rem}
@@ -848,7 +848,7 @@ app.get("/", (_req, res) => {
 </head>
 <body>
   <div class="brand">IntuiTek¹</div>
-  <h1>The Stall</h1>
+  <h1>MYRIAD</h1>
   <p class="tagline">AI-callable data services. Pay USDC on Base. No accounts.</p>
   <div class="stats">
     <div class="stat">
@@ -874,7 +874,7 @@ app.get("/", (_req, res) => {
   <div class="footer">
     <span class="dot"></span>Live · Base mainnet · x402 · MCP
     <br><br>
-    Built by <a href="https://intuitek.ai" style="border:none;padding:0">IntuiTek¹</a>
+    Built by <a href="https://synaptiic.org" style="border:none;padding:0">IntuiTek¹</a>
   </div>
 </body>
 </html>`);
@@ -951,11 +951,11 @@ app.get("/llms.txt", (_req, res) => {
     return names ? `## ${cat.name}\n\n${names}` : null;
   }).filter(Boolean)].join('\n\n');
   res.setHeader("Content-Type", "text/plain; charset=utf-8");
-  res.send(`# The Stall
+  res.send(`# MYRIAD
 
 > ${capabilities.length} AI-callable pay-per-call data tools. No API keys. Pay USDC on Base or Solana. MCP + REST.
 
-The Stall is an x402-native capability chassis by IntuiTek¹. Every capability is a GET endpoint — agents probe, receive a 402 Payment Required with the exact USDC price, pay on Base mainnet (Coinbase CDP facilitator) or Solana mainnet (direct USDC transfer to EairXDfN79D5cw8tYuqmSfFKjYr4jmpPezXCxmd9nztF), and receive the result. No accounts, no subscriptions required.
+MYRIAD is an x402-native capability chassis by IntuiTek¹. Every capability is a GET endpoint — agents probe, receive a 402 Payment Required with the exact USDC price, pay on Base mainnet (Coinbase CDP facilitator) or Solana mainnet (direct USDC transfer to EairXDfN79D5cw8tYuqmSfFKjYr4jmpPezXCxmd9nztF), and receive the result. No accounts, no subscriptions required.
 
 **Prefer to pay by card (no crypto wallet)?** Buy prepaid credits and call any cap with an "Authorization: Bearer <token>" header — 1 credit per call, no gas, no per-call signing:
 - Buy credits: POST ${BASE_URL}/v1/fiat/checkout with JSON body {"bundle":"starter"} → returns a Stripe checkout URL. Bundles: starter $5 (100 credits), pro $30 (1,000 credits), scale $200 (10,000 credits).
@@ -1062,7 +1062,7 @@ app.get("/mcp", (_req, res) =>
   res.status(200).json({
     jsonrpc: "2.0",
     result: {
-      serverInfo: { name: "The Stall", version: PKG_VERSION },
+      serverInfo: { name: "MYRIAD", version: PKG_VERSION },
       capabilities: { tools: {} },
       protocolVersion: "2024-11-05",
       capabilityCount: capabilities.length,
@@ -1163,7 +1163,7 @@ const solanaRailMiddleware = buildSolanaRailMiddleware(capabilities);
 const polygonRailMiddleware = buildPolygonRailMiddleware(capabilities);
 // T3-1 Move #3: PayAI facilitator canary (ping cap, 30d window 2026-07-07→2026-08-06)
 const payAICanaryMiddleware = buildPayAICanaryMiddleware(capabilities, SOLANA_WALLET, PAY_TO);
-const STALL_INTERNAL_KEY = process.env.STALL_INTERNAL_KEY || null;
+const MYRIAD_INTERNAL_KEY = process.env.MYRIAD_INTERNAL_KEY || null;
 app.use((req, res, next) => {
   if (req.fiatPaid) return next();
   if (STALL_INTERNAL_KEY && req.headers["x-internal-key"] === STALL_INTERNAL_KEY) return next();
@@ -1286,7 +1286,7 @@ for (const cap of capabilities) {
 }
 
 app.listen(PORT, () => {
-  console.log(`\n  THE STALL  ·  open on :${PORT}  ·  network: ${NETWORK}`);
+  console.log(`\n  MYRIAD  ·  open on :${PORT}  ·  network: ${NETWORK}`);
   console.log(`  facilitator: ${FACILITATOR}`);
   console.log(`  payTo: ${PAY_TO || "⚠ NOT SET — paid routes will refuse to boot"}`);
   console.log(`  capabilities (${capabilities.length}): ${capabilities.map((c) => c.name).join(", ") || "none"}`);

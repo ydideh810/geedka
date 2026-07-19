@@ -13,7 +13,7 @@
 // Free upstream: FRED public CSV (fred.stlouisfed.org) — no crumb, no auth.
 
 const FRED_BASE = "https://fred.stlouisfed.org/graph/fredgraph.csv";
-const UA        = "Mozilla/5.0 (compatible; the-stall/0.4; +https://intuitek.ai)";
+const UA        = "Mozilla/5.0 (compatible; myriad/0.4; +https://synaptiic.org)";
 
 async function fetchSeries(id) {
   const url = `${FRED_BASE}?id=${id}`;

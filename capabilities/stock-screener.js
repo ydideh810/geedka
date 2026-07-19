@@ -12,7 +12,7 @@
 // Upstream: Yahoo Finance screener predefined/saved (no-auth, standard UA).
 // Price: $0.025 — top-of-funnel discovery utility for equity-research pipelines.
 
-const UA          = "Mozilla/5.0 (compatible; the-stall/4.10; +https://intuitek.ai)";
+const UA          = "Mozilla/5.0 (compatible; myriad/4.10; +https://synaptiic.org)";
 const YF_SCREENER = "https://query1.finance.yahoo.com/v1/finance/screener/predefined/saved";
 const TMO         = 14_000;
 

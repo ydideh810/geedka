@@ -9,7 +9,7 @@
 //
 // Free upstreams: SEC EDGAR EFTS (no auth, proper UA required), direct fetch.
 
-const UA      = "IntuiTek1/CompanyDueDiligence (kyle@intuitek.ai)";
+const UA      = "IntuiTek1/CompanyDueDiligence (kyle@synaptiic.org)";
 const TIMEOUT = 12000;
 const EDGAR   = "https://efts.sec.gov/LATEST/search-index";
 const SUBMISSIONS = "https://data.sec.gov/submissions";
@@ -27,7 +27,7 @@ async function fetchHtml(url) {
   const r = await fetch(url, {
     headers: {
       "User-Agent":
-        "Mozilla/5.0 (compatible; the-stall/3.42; +https://intuitek.ai)",
+        "Mozilla/5.0 (compatible; myriad/3.42; +https://synaptiic.org)",
       Accept: "text/html",
     },
     signal: AbortSignal.timeout(TIMEOUT),

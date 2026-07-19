@@ -15,7 +15,7 @@ const CHAINS = {
 };
 const TAGS = new Set(["latest", "pending", "earliest", "safe", "finalized"]);
 const LLAMA_URL = "https://stablecoins.llama.fi/stablecoins?includePrices=true";
-const UA = "Mozilla/5.0 (compatible; the-stall/chain-pulse; +https://intuitek.ai)";
+const UA = "Mozilla/5.0 (compatible; myriad/chain-pulse; +https://synaptiic.org)";
 
 async function rpc(url, method, params) {
   const resp = await fetch(url, {

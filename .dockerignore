@@ -6,7 +6,7 @@ logs/
 *.zip
 *.mjs
 custodian/__pycache__/
-stall_server_v*.json
+myriad_server_v*.json
 DIRECTIVE_TO_AEGIS.md
 RELAY_NOTE_FOR_KYLE.md
 WALLET_VERIFIED.md

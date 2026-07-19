@@ -47,7 +47,7 @@
 // Price: $0.010/call — parallel fetch of 5 ETFs × 1-month daily history.
 
 const YF_BASE = "https://query2.finance.yahoo.com/v8/finance/chart";
-const UA      = "Mozilla/5.0 (compatible; the-stall/5.0; +https://intuitek.ai)";
+const UA      = "Mozilla/5.0 (compatible; myriad/5.0; +https://synaptiic.org)";
 const TMO     = 16_000;
 
 const r4 = n => n != null ? Math.round(n * 10000) / 10000 : null;

@@ -103,6 +103,6 @@ export function makeRiskService(provider){
     if(!/^0x[a-fA-F0-9]{40}$/.test(String(address))){ const e=new Error("invalid EVM address"); e.status=400; throw e; }
     const signals=await provider.getSignals(address);
     const result=scoreSignals(signals);
-    return { address, ...result, signals, scored_at:new Date().toISOString(), oracle:"the-stall.intuitek.ai/v1/risk" };
+    return { address, ...result, signals, scored_at:new Date().toISOString(), oracle:"myriad.synaptiic.org/v1/risk" };
   } };
 }

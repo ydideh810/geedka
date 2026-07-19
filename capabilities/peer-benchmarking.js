@@ -13,7 +13,7 @@
 // Upstream: Yahoo Finance quoteSummary (crumb-auth, free) + recommendationsbysymbol (no-auth).
 // All 6 fetches (1 target + 5 peers) run in parallel after the crumb is obtained.
 
-const UA           = "Mozilla/5.0 (compatible; the-stall/4.9; +https://intuitek.ai)";
+const UA           = "Mozilla/5.0 (compatible; myriad/4.9; +https://synaptiic.org)";
 const YF_CRUMB_SRC = "https://fc.yahoo.com";
 const YF_CRUMB_URL = "https://query2.finance.yahoo.com/v1/test/getcrumb";
 const YF_SUMMARY   = "https://query2.finance.yahoo.com/v10/finance/quoteSummary";

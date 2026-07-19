@@ -19,7 +19,7 @@ try:
 except ImportError:
     raise SystemExit("pip install mcp")
 
-STALL_URL = os.environ.get("STALL_ENDPOINT", "https://the-stall.intuitek.ai")
+STALL_URL = os.environ.get("STALL_ENDPOINT", "https://myriad.synaptiic.org")
 
 mcp = FastMCP("stall-mcp")
 

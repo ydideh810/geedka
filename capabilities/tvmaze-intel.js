@@ -36,7 +36,7 @@
 // Price: $0.008/call — one to two TVMaze API calls per request.
 
 const BASE    = "https://api.tvmaze.com";
-const UA      = "the-stall/4.69 tvmaze-intel (kyle@intuitek.ai)";
+const UA      = "myriad/4.69 tvmaze-intel (kyle@synaptiic.org)";
 const TIMEOUT = 12_000;
 
 async function tvmaze(path, params = {}) {

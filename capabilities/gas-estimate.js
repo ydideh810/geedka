@@ -24,7 +24,7 @@ const RPCS = {
 
 const COINGECKO_ETH = "https://api.coingecko.com/api/v3/simple/price?ids=ethereum,matic-network,binancecoin&vs_currencies=usd";
 const TIMEOUT = 10_000;
-const UA = "Mozilla/5.0 (compatible; the-stall/3.55; +https://intuitek.ai)";
+const UA = "Mozilla/5.0 (compatible; myriad/3.55; +https://synaptiic.org)";
 const GAS_TRANSFER = 21_000; // standard ETH transfer gas limit
 
 // In-memory price cache (60s TTL)

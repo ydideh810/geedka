@@ -20,7 +20,7 @@ const CG_URL     = "https://api.coingecko.com/api/v3/simple/price";
 const FGI_URL    = "https://api.alternative.me/fng/?limit=1";
 const OPENAI_URL = "https://api.openai.com/v1/chat/completions";
 const MODEL      = "gpt-4o-mini";
-const UA         = "Mozilla/5.0 (compatible; the-stall/4.65; +https://intuitek.ai)";
+const UA         = "Mozilla/5.0 (compatible; myriad/4.65; +https://synaptiic.org)";
 const CG_TMO     = 12_000;
 const GPT_TMO    = 38_000;
 

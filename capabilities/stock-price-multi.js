@@ -8,7 +8,7 @@
 // Concurrent fetches: all tickers resolve in parallel, response in ≤ 8s.
 
 const YF_BASE = "https://query2.finance.yahoo.com/v8/finance/chart";
-const UA      = "Mozilla/5.0 (compatible; the-stall/3.47; +https://intuitek.ai)";
+const UA      = "Mozilla/5.0 (compatible; myriad/3.47; +https://synaptiic.org)";
 const MAX_TICKERS = 5;
 
 async function fetchTicker(ticker) {

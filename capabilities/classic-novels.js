@@ -12,7 +12,7 @@ const OL_SEARCH  = "https://openlibrary.org/search.json";
 const OL_WORKS   = "https://openlibrary.org";
 const GUTENBERG  = "https://www.gutenberg.org/ebooks/search/?query=";
 const TIMEOUT    = 18000;
-const UA         = "the-stall/3.23 (https://intuitek.ai)";
+const UA         = "myriad/3.23 (https://synaptiic.org)";
 
 async function searchBooks(params) {
   const url  = `${OL_SEARCH}?${new URLSearchParams(params)}`;

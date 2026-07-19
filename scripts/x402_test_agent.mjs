@@ -8,7 +8,7 @@
  *  4. Verifies the response contains real data
  *  5. Logs the receipt and confirms rail integrity
  *
- * Run from ~/intuitek/the-stall/ with:
+ * Run from ~/intuitek/myriad/ with:
  *   node scripts/x402_test_agent.mjs
  *
  * Requires AEGIS_WALLET_PRIVATE_KEY env var (hex, no 0x prefix).
@@ -19,7 +19,7 @@ import { ExactEvmScheme } from "@x402/evm/exact/client";
 import { readFileSync } from "fs";
 import { exec } from "child_process";
 
-const BASE_URL = process.env.STALL_BASE_URL || "https://the-stall.intuitek.ai";
+const BASE_URL = process.env.STALL_BASE_URL || "https://myriad.synaptiic.org";
 const RPC_URL = process.env.BASE_RPC_URL || "https://api.developer.coinbase.com/rpc/v1/base/SH2ERnua9qjQ08v2clFSDgG5c91RTcds";
 
 // Load private key — from env or from credentials file

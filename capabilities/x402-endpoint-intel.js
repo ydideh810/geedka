@@ -1,7 +1,7 @@
 // x402-endpoint-intel.js
 //
 // Market intelligence for x402 endpoints and operator wallets, drawn from
-// the Stall's own signal-intel archive: 4.1M+ settlements, 80K+ operators,
+// MYRIAD's own signal-intel archive: 4.1M+ settlements, 80K+ operators,
 // 10 days of live Base mainnet x402 traffic — no external API needed.
 //
 // Input: resource URL OR pay_to wallet address (auto-detected).
@@ -12,7 +12,7 @@
 // assessing counterparty quality in automated x402 workflows.
 //
 // Edge: no competitor holds this settlement archive. It is built from passive
-// observation of Base mainnet x402 traffic — unique to the Stall.
+// observation of Base mainnet x402 traffic — unique to MYRIAD.
 //
 // [REDACTED]6 · 2026-06-07
 
@@ -102,7 +102,7 @@ export default {
   price: "$0.040",
 
   description:
-    "Market intelligence for any x402 endpoint or operator wallet. Returns settlement volume, unique payer count, price range, reputation tier, activity window, and endpoint description — drawn from 4.1M+ Base mainnet settlements in the Stall's proprietary on-chain dataset. Use before routing agent spend, vetting a counterparty operator, or benchmarking competitor pricing. No external API. Covers 80,000+ operators across 10+ days of live traffic.",
+    "Market intelligence for any x402 endpoint or operator wallet. Returns settlement volume, unique payer count, price range, reputation tier, activity window, and endpoint description — drawn from 4.1M+ Base mainnet settlements in MYRIAD's proprietary on-chain dataset. Use before routing agent spend, vetting a counterparty operator, or benchmarking competitor pricing. No external API. Covers 80,000+ operators across 10+ days of live traffic.",
 
   inputSchema: {
     type: "object",
@@ -143,7 +143,7 @@ export default {
   },
 
   async handler(query) {
-    const raw = (query.target || "https://the-stall.intuitek.ai").trim();
+    const raw = (query.target || "https://myriad.synaptiic.org").trim();
 
     const targetType = detectType(raw);
     if (!targetType) {

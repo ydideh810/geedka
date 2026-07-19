@@ -1,13 +1,13 @@
 #!/usr/bin/env bash
-# RUN_ME.sh — setup and boot The Stall.
+# RUN_ME.sh — setup and boot MYRIAD.
 set -euo pipefail
 cd "$(dirname "$0")"
 
 cat <<'BANNER'
 ────────────────────────────────────────────────────────────────────
-  THE STALL — pay-per-call MCP server (x402 / Base mainnet)
+  MYRIAD — pay-per-call MCP server (x402 / Base mainnet)
 
-  Add https://the-stall.intuitek.ai/mcp to any MCP client.
+  Add https://myriad.synaptiic.org/mcp to any MCP client.
   No API keys. No accounts. Agents pay USDC per call.
 
   TWO GATES BEFORE LIVE USDC:
@@ -32,10 +32,10 @@ fi
 
 echo
 echo "Next moves:"
-echo "  1. Boot the stall on testnet:  npm start"
+echo "  1. Boot MYRIAD on testnet:  npm start"
 echo "  2. Probe it (free):            curl localhost:4021/catalog"
 echo
-read -r -p "Boot the stall now on testnet? [y/N] " ans
+read -r -p "Boot MYRIAD now on testnet? [y/N] " ans
 if [[ "${ans:-N}" =~ ^[Yy]$ ]]; then
   npm start
 else

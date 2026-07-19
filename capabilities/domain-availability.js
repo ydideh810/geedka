@@ -14,7 +14,7 @@
 // Zero operating cost: pure RDAP lookups. No third-party API. No key needed.
 
 const RDAP_BOOTSTRAP = "https://rdap.org/domain/";
-const UA             = "the-stall/4.51 (+https://intuitek.ai)";
+const UA             = "myriad/4.51 (+https://synaptiic.org)";
 const TIMEOUT_MS     = 10_000;
 
 // Most-requested TLDs for startup/brand availability checks

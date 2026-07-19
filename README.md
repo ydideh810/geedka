@@ -1,20 +1,20 @@
-# The Stall
+# MYRIAD
 
 **210 pay-per-call AI data tools** — no subscriptions, no API keys. Pay with crypto (x402/USDC on Base) or card (Stripe prepaid credits).
 
-[![Live](https://img.shields.io/badge/status-LIVE-brightgreen)](https://the-stall.intuitek.ai/health)
+[![Live](https://img.shields.io/badge/status-LIVE-brightgreen)](https://myriad.synaptiic.org/health)
 [![Network](https://img.shields.io/badge/network-Base%20mainnet-0052FF)](https://base.org)
 [![x402](https://img.shields.io/badge/payment-USDC%20%C2%B7%20x402-26A17B)](https://x402.org)
-[![Stripe](https://img.shields.io/badge/payment-card%20%C2%B7%20Stripe-635BFF)](https://the-stall.intuitek.ai/v1/fiat/checkout)
-[![Provider](https://img.shields.io/badge/provider-IntuiTek%C2%B9-5A1AE5)](https://intuitek.ai)
-[![thebrierfox/the-stall MCP server](https://glama.ai/mcp/servers/thebrierfox/the-stall/badges/score.svg)](https://glama.ai/mcp/servers/thebrierfox/the-stall)
+[![Stripe](https://img.shields.io/badge/payment-card%20%C2%B7%20Stripe-635BFF)](https://myriad.synaptiic.org/v1/fiat/checkout)
+[![Provider](https://img.shields.io/badge/provider-IntuiTek%C2%B9-5A1AE5)](https://synaptiic.org)
+[![thebrierfox/myriad MCP server](https://glama.ai/mcp/servers/thebrierfox/myriad/badges/score.svg)](https://glama.ai/mcp/servers/thebrierfox/myriad)
 
-> **Live endpoint:** `https://the-stall.intuitek.ai`
-> **MCP endpoint:** [`/mcp`](https://the-stall.intuitek.ai/mcp) — streamable HTTP, use POST
-> **Agent card:** [`/.well-known/agent.json`](https://the-stall.intuitek.ai/.well-known/agent.json)
-> **x402 discovery:** [`/.well-known/x402`](https://the-stall.intuitek.ai/.well-known/x402)
-> **Catalog:** [`/catalog`](https://the-stall.intuitek.ai/catalog)
-> **MCP registry:** `ai.intuitek.the-stall/the-stall`
+> **Live endpoint:** `https://myriad.synaptiic.org`
+> **MCP endpoint:** [`/mcp`](https://myriad.synaptiic.org/mcp) — streamable HTTP, use POST
+> **Agent card:** [`/.well-known/agent.json`](https://myriad.synaptiic.org/.well-known/agent.json)
+> **x402 discovery:** [`/.well-known/x402`](https://myriad.synaptiic.org/.well-known/x402)
+> **Catalog:** [`/catalog`](https://myriad.synaptiic.org/catalog)
+> **MCP registry:** `ai.intuitek.myriad/myriad`
 
 ---
 
@@ -25,9 +25,9 @@ Two rails, same capabilities, no accounts required:
 **Option A — Crypto (x402, agents and wallets):** Call any `/cap/<name>` endpoint → receive `402 Payment Required` with the USDC price → pay on Base mainnet via the x402 facilitator → result returned automatically. No signup.
 
 **Option B — Card (Stripe, humans and devs):** Buy prepaid credits once, then call any cap with `Authorization: Bearer <token>` — 1 credit per call, no gas, no per-call signing.
-1. `POST https://the-stall.intuitek.ai/v1/fiat/checkout` with `{"bundle":"starter"}` → returns a Stripe checkout URL.
+1. `POST https://myriad.synaptiic.org/v1/fiat/checkout` with `{"bundle":"starter"}` → returns a Stripe checkout URL.
    - `starter` $5 / 100 credits · `pro` $30 / 1,000 credits · `scale` $200 / 10,000 credits
-2. After paying: `GET https://the-stall.intuitek.ai/v1/fiat/token?session_id=<id>` → returns your bearer token.
+2. After paying: `GET https://myriad.synaptiic.org/v1/fiat/token?session_id=<id>` → returns your bearer token.
 3. Add `Authorization: Bearer <token>` to any `/cap/<name>` call.
 
 ---
@@ -232,7 +232,7 @@ Full catalog at `/catalog`. Each capability supports both payment rails — x402
 
 ```bash
 # 1. GET the endpoint — server returns HTTP 402 with payment challenge
-curl https://the-stall.intuitek.ai/cap/us-stock-price?ticker=AAPL
+curl https://myriad.synaptiic.org/cap/us-stock-price?ticker=AAPL
 # → 402 {"x402Version":"1","accepts":[{"network":"base","asset":"USDC","maxAmountRequired":"30000","paymentRequirements":{...}}]}
 
 # 2. Pay in USDC on Base via the x402 facilitator
@@ -246,9 +246,9 @@ See the [x402 protocol spec](https://x402.org) for client SDKs (TypeScript, Pyth
 ```json
 {
   "mcpServers": {
-    "the-stall": {
+    "myriad": {
       "type": "streamable-http",
-      "url": "https://the-stall.intuitek.ai/mcp"
+      "url": "https://myriad.synaptiic.org/mcp"
     }
   }
 }
@@ -271,39 +271,13 @@ a service is auto-cataloged on first settled payment.
 
 So this splits into two parts:
 
-| | **The Stall** | **Intelligence Layer** |
+| | **MYRIAD** | **Intelligence Layer** |
 |---|---|---|
 | is | infra — a reusable paid endpoint | proprietary signal analysis |
 | owns | x402 wiring, payment, schemas | the doctrine + the archive |
 | changes | almost never | every scan cycle |
 | answers | "how does an agent pay me" | "what will an agent pay me for, where the seat is open" |
 
-### [REDACTED]4 — what the [REDACTED] does
-
-v0.4 retires catalog scanning as the primary scout (v0.1/v0.2 keyword counters
-bottomed out — at 2k depth every bucket was contested, catalog is 40k+ anyway).
-The seat doesn't live in the catalog; it lives in the **flows between endpoints**.
-
-Five streams write into a SQLite archive (`archive.db`), four analyses read it:
-
-| Stream | Auth | What it gives |
-|---|---|---|
-| `bazaar` | none | every Bazaar endpoint with first-seen/last-seen → new-endpoint feed |
-| `base_rpc` | **none** | live x402 settlements from Base mainnet via public RPC — payer/recipient/amount per EIP-3009 event |
-| `cloudflare` | `CF_API_TOKEN` | AI-bot traffic share by user-agent and AS → school identity |
-| `dune` | `DUNE_API_KEY` + query IDs | SQL-side aggregation convenience over the same on-chain data (optional) |
-| `x402scan` | `X402SCAN_API_URL` | settlement feed if x402scan publishes a public API (placeholder; none as of 2026-05) |
-
-`base_rpc` removes the auth wall for settlement-level signal. Public Base RPC + the USDC contract's public `AuthorizationUsed` events cover every x402 settlement on Base with no credentials.
-
-| Analysis | Hook | v0.4 status |
-|---|---|---|
-| `growth` | category emergence — list adjacent under convergence price | partial without history |
-| `seam` | collapse a 2-3-endpoint chain, price at 70% of summed | unlocked by `base_rpc` |
-| `convergence` | ship the narrow version agents converged on | unlocked by accruing `base_rpc` over time |
-| `concentration` | better latency/price/schema, surfaced to the dependent cluster | (a) few-payers: unlocked; (b) cluster-dominant: gated |
-
-First end-to-end run with `base_rpc`: 1,222 real settlements pulled in 2.6s, 4 honest concentration signals emitted including one 100%-strength dependency (106 settlements from 2 distinct wallets). All from public data, no auth.
 
 ### The archive thesis (the second timeline)
 
@@ -317,7 +291,7 @@ keeping it as a unified record right now. One build, two timelines.
 ## Layout
 
 ```
-the-stall/
+myriad/
   RUN_ME.sh                  self-documenting setup + boot
   src/
     server.js                the chassis: loads caps, paywalls them, serves free /catalog
@@ -336,7 +310,7 @@ the-stall/
 ```bash
 ./RUN_ME.sh           # installs, scaffolds .env, optionally boots on testnet
 npm run scan          # intelligence scanner: pulls streams, runs analyses, prints seat report
-npm start             # boot the stall (base-sepolia by default = $0 risk)
+npm start             # boot MYRIAD (base-sepolia by default = $0 risk)
 curl localhost:4021/catalog
 ```
 
@@ -358,40 +332,24 @@ Standard Node service. Set env vars (`WALLET_ADDRESS`, `X402_NETWORK=base`,
 
 ## Migrating from orbisapi
 
-Several orbisapi proxy endpoints went offline in June 2026. The Stall covers all of them at lower prices with no x402 configuration required beyond a Base USDC wallet:
+Several orbisapi proxy endpoints went offline in June 2026. MYRIAD covers all of them at lower prices with no x402 configuration required beyond a Base USDC wallet:
 
-| Dead orbisapi endpoint | The Stall replacement | STALL price | Orbisapi price |
+| Dead orbisapi endpoint | MYRIAD replacement | STALL price | Orbisapi price |
 |---|---|---|---|
-| `orbisapi.com/proxy/cryptocurrency-news-api-456a6a` | [`crypto-news-impact`](https://the-stall.intuitek.ai/cap/crypto-news-impact) | $0.008 | $0.005 |
-| `orbisapi.com/proxy/web-scrape-links-api-4e3ed0` | [`page-links`](https://the-stall.intuitek.ai/cap/page-links) | $0.004 | $0.005 |
-| `orbisapi.com/proxy/forex-rate-*` | [`forex-rates`](https://the-stall.intuitek.ai/cap/forex-rates) | $0.005 | $0.005 |
-| `orbisapi.com/proxy/changelog-generate-*` | [`changelog-generate`](https://the-stall.intuitek.ai/cap/changelog-generate) | $0.003 | $0.005 |
-| `orbisapi.com/proxy/defi-yield-strategies-*` | [`defi-yield-strategies`](https://the-stall.intuitek.ai/cap/defi-yield-strategies) | $0.005 | $0.005 |
-| `orbisapi.com/proxy/content-moderation-*` | [`content-moderation`](https://the-stall.intuitek.ai/cap/content-moderation) | $0.003 | $0.012 |
-| `orbisapi.com/proxy/policy-change-impact-mapper-*` | [`policy-impact-mapper`](https://the-stall.intuitek.ai/cap/policy-impact-mapper) | $0.008 | $0.005 |
-| `orbisapi.com/proxy/polymarket-sentiment-shift-*` | [`polymarket-sentiment-shift`](https://the-stall.intuitek.ai/cap/polymarket-sentiment-shift) | $0.005 | $0.005 |
+| `orbisapi.com/proxy/cryptocurrency-news-api-456a6a` | [`crypto-news-impact`](https://myriad.synaptiic.org/cap/crypto-news-impact) | $0.008 | $0.005 |
+| `orbisapi.com/proxy/web-scrape-links-api-4e3ed0` | [`page-links`](https://myriad.synaptiic.org/cap/page-links) | $0.004 | $0.005 |
+| `orbisapi.com/proxy/forex-rate-*` | [`forex-rates`](https://myriad.synaptiic.org/cap/forex-rates) | $0.005 | $0.005 |
+| `orbisapi.com/proxy/changelog-generate-*` | [`changelog-generate`](https://myriad.synaptiic.org/cap/changelog-generate) | $0.003 | $0.005 |
+| `orbisapi.com/proxy/defi-yield-strategies-*` | [`defi-yield-strategies`](https://myriad.synaptiic.org/cap/defi-yield-strategies) | $0.005 | $0.005 |
+| `orbisapi.com/proxy/content-moderation-*` | [`content-moderation`](https://myriad.synaptiic.org/cap/content-moderation) | $0.003 | $0.012 |
+| `orbisapi.com/proxy/policy-change-impact-mapper-*` | [`policy-impact-mapper`](https://myriad.synaptiic.org/cap/policy-impact-mapper) | $0.008 | $0.005 |
+| `orbisapi.com/proxy/polymarket-sentiment-shift-*` | [`polymarket-sentiment-shift`](https://myriad.synaptiic.org/cap/polymarket-sentiment-shift) | $0.005 | $0.005 |
 
-All STALL capabilities are x402-compatible — the same payment flow, USDC on Base, no re-integration needed. Update `pay_to` address and endpoint URL.
-
----
-
-## Status
-
-- [x] Chassis boots, loads capabilities, paywalls them, serves free introspection
-- [x] [REDACTED]4 — five-stream [REDACTED] + SQLite archive + four analysis modules
-- [x] `base_rpc` stream: no-auth on-chain settlement reader (Base public RPC)
-- [x] Concentration (few-payers path) producing real signals from live mainnet
-- [x] Wallet ownership verified (GATE 1) — Base mainnet, EIP-191 signature recovered
-- [x] **210 capabilities LIVE** at `https://the-stall.intuitek.ai` (Base mainnet, v4.64.0, SSE transport added)
-- [x] MCP endpoint at `/mcp` (streamable-http, accepts `application/json`)
-- [x] A2A Agent Card at `/.well-known/agent.json`
-- [x] x402 discovery document at `/.well-known/x402`
-- [x] Official MCP registry: `ai.intuitek.the-stall/the-stall`
-- [x] Payment logging (JSONL) — every settled call recorded
-- [x] First settled call → x402 Bazaar seeded (block 46944973, Base mainnet, 2026-06-05)
-- [x] Settlement intelligence scanner wired to heartbeat cadence (v0.4, 6.6M+ settlements archived)
-- [x] Listed on [Glama](https://glama.ai/mcp/servers/thebrierfox/the-stall)
+All MYRIAD capabilities are x402-compatible — the same payment flow, USDC on Base, no re-integration needed. Update `pay_to` address and endpoint URL.
 
 ---
 
-*Built by [IntuiTek¹](https://intuitek.ai) — autonomous infrastructure for the agentic economy.*
+
+---
+
+*Built by [SYNAPTIIC](https://synaptiic.org) — autonomous infrastructure for the agentic economy.*

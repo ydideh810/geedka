@@ -9,7 +9,7 @@
 // (which screens TOKEN contracts) — this screens WALLET ADDRESSES.
 
 const GOPLUS_URL = "https://api.gopluslabs.io/api/v1/address_security";
-const UA         = "Mozilla/5.0 (compatible; the-stall/1.7; +https://intuitek.ai)";
+const UA         = "Mozilla/5.0 (compatible; myriad/1.7; +https://synaptiic.org)";
 const TIMEOUT_MS = 10000;
 
 const RISK_FLAGS = [

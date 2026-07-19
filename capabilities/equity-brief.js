@@ -33,8 +33,8 @@ const SEC_ARCH   = "https://www.sec.gov/Archives/edgar/data";
 const OPENAI_URL = "https://api.openai.com/v1/chat/completions";
 const MODEL      = "gpt-4o-mini";
 
-const YF_UA  = "Mozilla/5.0 (compatible; the-stall/3.94; +https://intuitek.ai)";
-const SEC_UA = "the-stall/3.94 equity-brief (kyle@intuitek.ai)";
+const YF_UA  = "Mozilla/5.0 (compatible; myriad/3.94; +https://synaptiic.org)";
+const SEC_UA = "myriad/3.94 equity-brief (kyle@synaptiic.org)";
 const CHART_TMO   = 12_000;
 const SEC_TMO     = 12_000;
 const CBOE_TMO    = 10_000;

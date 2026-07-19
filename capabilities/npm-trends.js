@@ -12,7 +12,7 @@
 // Price: $0.020 — cheap comparison utility for dev agents.
 
 const NPM_DL = "https://api.npmjs.org/downloads";
-const UA     = "Mozilla/5.0 (compatible; the-stall/3.93; +https://intuitek.ai)";
+const UA     = "Mozilla/5.0 (compatible; myriad/3.93; +https://synaptiic.org)";
 const TMO    = 12_000;
 
 async function getDownloads(period, packages) {

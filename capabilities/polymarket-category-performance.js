@@ -13,7 +13,7 @@
 // Upstream: gamma-api.polymarket.com (free, no key required).
 
 const GAMMA_BASE = "https://gamma-api.polymarket.com/markets";
-const UA         = "Mozilla/5.0 (compatible; the-stall/3.86; +https://intuitek.ai)";
+const UA         = "Mozilla/5.0 (compatible; myriad/3.86; +https://synaptiic.org)";
 const TIMEOUT    = 15_000;
 const PAGE_LIMIT = 200;
 const MAX_PAGES  = 5;

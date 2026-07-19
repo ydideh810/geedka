@@ -9,7 +9,7 @@
 //
 // Pure text extraction — zero external API calls beyond fetching the URL.
 
-const UA         = "Mozilla/5.0 (compatible; the-stall/3.24; +https://intuitek.ai)";
+const UA         = "Mozilla/5.0 (compatible; myriad/3.24; +https://synaptiic.org)";
 const TIMEOUT_MS = 12000;
 const MAX_BYTES  = 500000;
 

@@ -12,7 +12,7 @@
 // Modules: defaultKeyStatistics, earningsHistory, calendarEvents,
 //          earningsTrend, recommendationTrend, financialData, summaryDetail.
 
-const UA           = "Mozilla/5.0 (compatible; the-stall/4.7; +https://intuitek.ai)";
+const UA           = "Mozilla/5.0 (compatible; myriad/4.7; +https://synaptiic.org)";
 const YF_CRUMB_SRC = "https://fc.yahoo.com";
 const YF_CRUMB_URL = "https://query2.finance.yahoo.com/v1/test/getcrumb";
 const YF_SUMMARY   = "https://query2.finance.yahoo.com/v10/finance/quoteSummary";

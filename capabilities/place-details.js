@@ -11,7 +11,7 @@
 // Upstream: nominatim.openstreetmap.org — free, no auth, 1 req/sec ToS.
 
 const NOMINATIM = "https://nominatim.openstreetmap.org";
-const UA        = "the-stall/3.16 (https://intuitek.ai)";
+const UA        = "myriad/3.16 (https://synaptiic.org)";
 const TIMEOUT   = 10000;
 
 async function searchPlace(query, limit) {

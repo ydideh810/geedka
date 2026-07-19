@@ -12,7 +12,7 @@
 // Upstream: Yahoo Finance v10 quoteSummary, topHoldings module (free, crumb-auth).
 // Same crumb pattern as equity-fundamentals.js.
 
-const UA           = "Mozilla/5.0 (compatible; the-stall/4.11; +https://intuitek.ai)";
+const UA           = "Mozilla/5.0 (compatible; myriad/4.11; +https://synaptiic.org)";
 const YF_CRUMB_SRC = "https://fc.yahoo.com";
 const YF_CRUMB_URL = "https://query2.finance.yahoo.com/v1/test/getcrumb";
 const YF_SUMMARY   = "https://query2.finance.yahoo.com/v10/finance/quoteSummary";

@@ -12,7 +12,7 @@
 // signal-intel signals 62865, 62870 — strength 1.00. 2026-06-06.
 
 const PM_API  = "https://data-api.polymarket.com";
-const UA      = "Mozilla/5.0 (compatible; the-stall/3.57; +https://intuitek.ai)";
+const UA      = "Mozilla/5.0 (compatible; myriad/3.57; +https://synaptiic.org)";
 const TIMEOUT = 15_000;
 
 async function pmFetch(path) {

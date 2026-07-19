@@ -8,7 +8,7 @@
 // Upstream: rdap.org (universal RDAP bootstrap) — free, no auth.
 
 const TIMEOUT = 10000;
-const UA      = "the-stall/3.18 (https://intuitek.ai)";
+const UA      = "myriad/3.18 (https://synaptiic.org)";
 
 function extractEntity(entities, role) {
   if (!Array.isArray(entities)) return null;

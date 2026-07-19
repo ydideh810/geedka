@@ -12,7 +12,7 @@
 // Seam origin: orbisapi.com/proxy/web-change-monitor-api (1,583 settlements/wk,
 // 14 payers, avg $0.005/call). Surfaced by [REDACTED]4, 2026-06-06.
 
-const UA         = "Mozilla/5.0 (compatible; the-stall/0.4; +https://intuitek.ai)";
+const UA         = "Mozilla/5.0 (compatible; myriad/0.4; +https://synaptiic.org)";
 const HASH_LIMIT = 32 * 1024; // 32 KB
 
 export default {

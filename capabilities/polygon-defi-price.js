@@ -12,7 +12,7 @@
 
 const LLAMA_PRICE_URL = "https://coins.llama.fi/prices/current";
 const LLAMA_CHART_URL  = "https://coins.llama.fi/chart";
-const UA               = "Mozilla/5.0 (compatible; the-stall/4.0; +https://intuitek.ai)";
+const UA               = "Mozilla/5.0 (compatible; myriad/4.0; +https://synaptiic.org)";
 const TIMEOUT_MS       = 12_000;
 const PRICE_TTL_MS     = 10_000;  // 10s for spot price cache
 const CHANGE_TTL_MS    = 300_000; // 5min for 24h change cache

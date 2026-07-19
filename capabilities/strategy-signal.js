@@ -14,7 +14,7 @@
 
 const YF_BASE     = "https://query2.finance.yahoo.com/v8/finance/chart";
 const CG_BASE     = "https://api.coingecko.com/api/v3";
-const UA          = "Mozilla/5.0 (compatible; the-stall/3.24; +https://intuitek.ai)";
+const UA          = "Mozilla/5.0 (compatible; myriad/3.24; +https://synaptiic.org)";
 const TIMEOUT_MS  = 15000;
 
 // --- Math helpers ---

@@ -15,7 +15,7 @@
 const LLAMA_PROTOCOLS = "https://api.llama.fi/protocols";
 const LLAMA_CHAINS    = "https://api.llama.fi/chains";
 const COINGECKO_BASE  = "https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&category=base-ecosystem&order=market_cap_desc&per_page=10&page=1&sparkline=false";
-const UA              = "Mozilla/5.0 (compatible; the-stall/3.33; +https://intuitek.ai)";
+const UA              = "Mozilla/5.0 (compatible; myriad/3.33; +https://synaptiic.org)";
 const TIMEOUT_MS      = 15000;
 
 async function fetchJSON(url) {

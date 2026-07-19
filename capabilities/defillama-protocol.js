@@ -7,7 +7,7 @@
 // Upstream: https://api.llama.fi/protocol/:slug (free, no auth)
 
 const LLAMA_BASE = "https://api.llama.fi";
-const UA         = "Mozilla/5.0 (compatible; the-stall/defillama-protocol; +https://intuitek.ai)";
+const UA         = "Mozilla/5.0 (compatible; myriad/defillama-protocol; +https://synaptiic.org)";
 const TIMEOUT    = 20_000;
 
 // Chain TVL keys to exclude from "clean" TVL total

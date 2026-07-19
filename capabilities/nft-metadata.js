@@ -10,7 +10,7 @@
 // signal-intel signal: Media growth + OneSource seam — 2026-06-06.
 
 const ALCHEMY_BASE = "https://{network}.g.alchemy.com/nft/v3/demo/getNFTMetadata";
-const UA = "Mozilla/5.0 (compatible; the-stall/3.58; +https://intuitek.ai)";
+const UA = "Mozilla/5.0 (compatible; myriad/3.58; +https://synaptiic.org)";
 const TIMEOUT = 12_000;
 
 const NETWORK_MAP = {

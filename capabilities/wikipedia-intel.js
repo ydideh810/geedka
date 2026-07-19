@@ -10,7 +10,7 @@
 
 const REST   = "https://en.wikipedia.org/api/rest_v1";
 const SEARCH = "https://en.wikipedia.org/w/api.php";
-const UA     = "Mozilla/5.0 (compatible; the-stall/1.0; +https://intuitek.ai)";
+const UA     = "Mozilla/5.0 (compatible; myriad/1.0; +https://synaptiic.org)";
 const T      = 10_000;
 
 async function get(url) {

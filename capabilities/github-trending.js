@@ -12,7 +12,7 @@
 // Stars desc sort on recently-created repos is a reliable trending proxy.
 
 const GH_SEARCH = "https://api.github.com/search/repositories";
-const UA        = "Mozilla/5.0 (compatible; the-stall/3.62; +https://intuitek.ai)";
+const UA        = "Mozilla/5.0 (compatible; myriad/3.62; +https://synaptiic.org)";
 const TIMEOUT   = 12_000;
 
 function sinceDate(period) {

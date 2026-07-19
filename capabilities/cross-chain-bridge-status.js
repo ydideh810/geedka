@@ -8,7 +8,7 @@
 // Seam origin: Track 3 DeFi expansion per K¹ directive 2026-06-27 ("do these things").
 
 const LIFI_BASE = "https://li.quest/v1";
-const UA = "the-stall/4.64 (https://intuitek.ai)";
+const UA = "myriad/4.64 (https://synaptiic.org)";
 const TIMEOUT = 15_000;
 
 const CHAIN_IDS = {

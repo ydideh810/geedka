@@ -22,7 +22,7 @@ const WIKI_SEARCH = "https://en.wikipedia.org/w/api.php";
 const WIKI_REST   = "https://en.wikipedia.org/api/rest_v1/page/summary";
 const OPENAI_URL  = "https://api.openai.com/v1/chat/completions";
 const MODEL       = "gpt-4o-mini";
-const UA          = "the-stall/5.0 fact-check (kyle@intuitek.ai; +https://intuitek.ai)";
+const UA          = "myriad/5.0 fact-check (kyle@synaptiic.org; +https://synaptiic.org)";
 const TMO         = 15_000;
 
 async function wikiSearch(query) {

@@ -1,8 +1,8 @@
 # STALL Integrator Guide
 
-**Building production agent workflows on The Stall**
+**Building production agent workflows on MYRIAD**
 
-The Stall is an x402 pay-per-call data chassis — agents probe endpoints, pay USDC on Base, receive structured JSON. No accounts, no subscriptions required. This guide covers three proven production workflow patterns.
+MYRIAD is an x402 pay-per-call data chassis — agents probe endpoints, pay USDC on Base, receive structured JSON. No accounts, no subscriptions required. This guide covers three proven production workflow patterns.
 
 ---
 

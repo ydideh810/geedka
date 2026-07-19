@@ -20,7 +20,7 @@
 const WAYBACK_AVAIL = "https://archive.org/wayback/available";
 const CDX_API       = "https://web.archive.org/cdx/search/cdx";
 const TIMEOUT_MS    = 18000;
-const UA            = "Mozilla/5.0 (compatible; the-stall/4.45; +https://intuitek.ai)";
+const UA            = "Mozilla/5.0 (compatible; myriad/4.45; +https://synaptiic.org)";
 
 async function getJSON(url) {
   const r = await fetch(url, {

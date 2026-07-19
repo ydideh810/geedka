@@ -10,7 +10,7 @@
 
 const FGI_URL    = "https://api.alternative.me/fng/?limit=30";
 const DERIBIT    = "https://www.deribit.com/api/v2/public/get_volatility_index_data";
-const UA         = "Mozilla/5.0 (compatible; the-stall/1.8; +https://intuitek.ai)";
+const UA         = "Mozilla/5.0 (compatible; myriad/1.8; +https://synaptiic.org)";
 const TIMEOUT_MS = 10000;
 
 async function fetchJson(url, options = {}) {

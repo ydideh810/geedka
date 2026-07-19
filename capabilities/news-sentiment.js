@@ -13,7 +13,7 @@
 
 const GDELT    = "https://api.gdeltproject.org/api/v2/doc/doc";
 const GN_RSS   = "https://news.google.com/rss/search";
-const UA       = "Mozilla/5.0 (compatible; the-stall/3.44; +https://intuitek.ai)";
+const UA       = "Mozilla/5.0 (compatible; myriad/3.44; +https://synaptiic.org)";
 const TIMEOUT  = 15_000;
 const CACHE_TTL = 10 * 60 * 1000;
 

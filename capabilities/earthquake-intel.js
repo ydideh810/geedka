@@ -31,7 +31,7 @@ async function fetchUSGSFeed(minMag) {
   const feedKey = minMag >= 5.0 ? "5.0_week" : minMag >= 4.5 ? "4.5_week" : "2.5_week";
   const url = FEEDS[feedKey];
   const resp = await fetch(url, {
-    headers: { "User-Agent": "the-stall/4.3 (+https://intuitek.ai)" },
+    headers: { "User-Agent": "myriad/4.3 (+https://synaptiic.org)" },
     signal: AbortSignal.timeout(12_000),
   });
   if (!resp.ok) throw new Error(`USGS feed HTTP ${resp.status}`);
@@ -181,7 +181,7 @@ export default {
         resp = await fetchUSGSFeed(clampedMag);
       } else {
         resp = await fetchUSGS(`${BASE}?${params}`, {
-          headers: { "User-Agent": "the-stall/4.3 (+https://intuitek.ai)" },
+          headers: { "User-Agent": "myriad/4.3 (+https://synaptiic.org)" },
         });
       }
       data = await resp.json();

@@ -18,7 +18,7 @@
 
 const YF_BASE = "https://query2.finance.yahoo.com/v8/finance/chart";
 const VIX_URL = "https://cdn.cboe.com/api/global/delayed_quotes/charts/historical/_VIX.json";
-const UA      = "Mozilla/5.0 (compatible; the-stall/4.38; +https://intuitek.ai)";
+const UA      = "Mozilla/5.0 (compatible; myriad/4.38; +https://synaptiic.org)";
 const TIMEOUT = 12000;
 
 // CBOE delayed quotes historical — rate-limit free, no auth (YF v8 blocks server IPs)

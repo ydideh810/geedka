@@ -10,7 +10,7 @@
 // Upstream: Yahoo Finance v8/finance/chart — free, no API key, no rate limit.
 
 const YF_BASE  = "https://query1.finance.yahoo.com/v8/finance/chart";
-const UA       = "Mozilla/5.0 (compatible; the-stall/4.43; +https://intuitek.ai)";
+const UA       = "Mozilla/5.0 (compatible; myriad/4.43; +https://synaptiic.org)";
 const TIMEOUT  = 12000;
 
 const RESOLUTION_MAP = {

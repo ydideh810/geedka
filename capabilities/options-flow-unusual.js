@@ -28,7 +28,7 @@
 
 const CBOE_BASE = "https://cdn.cboe.com/api/global/delayed_quotes/options";
 const TMO       = 15_000;
-const UA        = "Mozilla/5.0 (compatible; the-stall/1.0; +https://intuitek.ai)";
+const UA        = "Mozilla/5.0 (compatible; myriad/1.0; +https://synaptiic.org)";
 
 function r2(n) {
   return n != null && isFinite(n) ? Math.round(n * 100) / 100 : null;

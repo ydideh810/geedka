@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-health_check.py — End-to-end capability health check for The Stall.
+health_check.py — End-to-end capability health check for MYRIAD.
 
 For each capability registered in /health:
   1. Verify it returns 402 (registered, x402-gated) on GET /cap/<name>
@@ -9,7 +9,7 @@ For each capability registered in /health:
 
 Reports pass/fail per cap. Sends Telegram on any failure.
 
-Run: python3 ~/intuitek/the-stall/scripts/health_check.py
+Run: python3 ~/intuitek/myriad/scripts/health_check.py
 """
 
 import json

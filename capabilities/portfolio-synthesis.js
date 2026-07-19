@@ -15,7 +15,7 @@
 const YF_BASE     = "https://query2.finance.yahoo.com/v8/finance/chart";
 const OPENAI_URL  = "https://api.openai.com/v1/chat/completions";
 const MODEL       = "gpt-4o-mini";
-const UA          = "Mozilla/5.0 (compatible; the-stall/4.82; +https://intuitek.ai)";
+const UA          = "Mozilla/5.0 (compatible; myriad/4.82; +https://synaptiic.org)";
 const SRC_TIMEOUT = 8_000;
 const SYN_TIMEOUT = 25_000;
 const MAX_TICKERS = 5;

@@ -41,7 +41,7 @@
 // Upstream: Yahoo Finance fundamentals timeseries v1 (free, no API key).
 // Price: $0.020/call.
 
-const UA           = "Mozilla/5.0 (compatible; the-stall/4.70; +https://intuitek.ai)";
+const UA           = "Mozilla/5.0 (compatible; myriad/4.70; +https://synaptiic.org)";
 const YF_CRUMB_SRC = "https://fc.yahoo.com";
 const YF_CRUMB_URL = "https://query2.finance.yahoo.com/v1/test/getcrumb";
 const YF_TS_URL    = "https://query1.finance.yahoo.com/ws/fundamentals-timeseries/v1/finance/timeseries";

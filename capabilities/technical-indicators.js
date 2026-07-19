@@ -23,7 +23,7 @@
 // Source: Yahoo Finance v8/finance/chart — public, no API key.
 // Price: $0.025
 
-const UA        = "Mozilla/5.0 (compatible; the-stall/4.65; +https://intuitek.ai)";
+const UA        = "Mozilla/5.0 (compatible; myriad/4.65; +https://synaptiic.org)";
 const YF_CRUMB  = "https://fc.yahoo.com";
 const YF_CRUMB2 = "https://query2.finance.yahoo.com/v1/test/getcrumb";
 const YF_CHART  = "https://query2.finance.yahoo.com/v8/finance/chart";

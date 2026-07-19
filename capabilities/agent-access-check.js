@@ -14,7 +14,7 @@ async function tryFetch(url) {
   try {
     const resp = await fetch(url, {
       method:  "GET",
-      headers: { "User-Agent": "the-stall-agent/1.0 (https://intuitek.ai)" },
+      headers: { "User-Agent": "myriad-agent/1.0 (https://synaptiic.org)" },
       signal:  AbortSignal.timeout(TIMEOUT),
       redirect: "follow",
     });
@@ -103,7 +103,7 @@ export default {
   },
 
   async handler(query) {
-    let rawUrl = (query.url || "https://intuitek.ai").trim();
+    let rawUrl = (query.url || "https://synaptiic.org").trim();
     if (!rawUrl.startsWith("http://") && !rawUrl.startsWith("https://")) {
       rawUrl = "https://" + rawUrl;
     }

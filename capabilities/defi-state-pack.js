@@ -17,7 +17,7 @@ const CHAINS = {
 const BLOCK_TAGS   = new Set(["latest", "pending", "earliest", "safe", "finalized"]);
 const STABLE_URL   = "https://stablecoins.llama.fi/stablecoins?includePrices=true";
 const YIELDS_URL   = "https://yields.llama.fi/pools";
-const UA           = "Mozilla/5.0 (compatible; the-stall/defi-state-pack; +https://intuitek.ai)";
+const UA           = "Mozilla/5.0 (compatible; myriad/defi-state-pack; +https://synaptiic.org)";
 
 async function rpc(url, method, params) {
   const resp = await fetch(url, {

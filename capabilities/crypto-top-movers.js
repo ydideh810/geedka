@@ -13,7 +13,7 @@
 //   - /global        → total market cap, BTC dominance, 24h volume
 
 const CG_BASE    = "https://api.coingecko.com/api/v3";
-const UA         = "Mozilla/5.0 (compatible; the-stall/2.9; +https://intuitek.ai)";
+const UA         = "Mozilla/5.0 (compatible; myriad/2.9; +https://synaptiic.org)";
 const TIMEOUT_MS = 15000;
 const CACHE_TTL_MS = 60_000; // CoinGecko updates every 1-5 min; cache prevents rate-limit 500s under concurrent payers
 

@@ -14,7 +14,7 @@
 // authoritative. Rate limit: 10 req/sec; compliant with SEC open-data policy.
 
 const BASE    = "https://efts.sec.gov/LATEST/search-index";
-const UA      = "the-stall/4.9 sec-full-text-search (kyle@intuitek.ai)";
+const UA      = "myriad/4.9 sec-full-text-search (kyle@synaptiic.org)";
 const TIMEOUT = 12_000;
 
 function daysAgo(n) {

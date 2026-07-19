@@ -1,11 +1,11 @@
 {
   "$schema": "https://glama.ai/mcp/schemas/server.json",
-  "name": "The Stall",
-  "description": "297 pay-per-call AI data tools via MCP + x402 — no API keys, no accounts. Finance: SEC Form 4 insider trades (open-market buys, net sentiment), institutional fund holdings (top holders by position, % float, concentration signal), 13D/13G activist holders, M&A tender offers, Form D VC fundraising, options flow unusual sweep detection, earnings quality Beneish M-Score, equity fundamentals, macro indicators, CPI inflation (headline+core+energy+food MoM/YoY trend+Fed implication). Crypto: DeFi yields, Base on-chain address intelligence, wallet risk, token security. Developer: iOS App Store competitive intel (search+lookup+top-charts, iTunes free API), npm, PyPI, GitHub, HuggingFace. Research: arXiv, news synthesis, OSINT, YouTube keyword research (autocomplete+intent clusters), YouTube niche analysis, TV shows, weather, aviation, and 248+ more. Pay USDC on Base (x402) or Stripe credits. Remote MCP: https://the-stall.intuitek.ai/mcp.",
+  "name": "MYRIAD",
+  "description": "297 pay-per-call AI data tools via MCP + x402 — no API keys, no accounts. Finance: SEC Form 4 insider trades (open-market buys, net sentiment), institutional fund holdings (top holders by position, % float, concentration signal), 13D/13G activist holders, M&A tender offers, Form D VC fundraising, options flow unusual sweep detection, earnings quality Beneish M-Score, equity fundamentals, macro indicators, CPI inflation (headline+core+energy+food MoM/YoY trend+Fed implication). Crypto: DeFi yields, Base on-chain address intelligence, wallet risk, token security. Developer: iOS App Store competitive intel (search+lookup+top-charts, iTunes free API), npm, PyPI, GitHub, HuggingFace. Research: arXiv, news synthesis, OSINT, YouTube keyword research (autocomplete+intent clusters), YouTube niche analysis, TV shows, weather, aviation, and 248+ more. Pay USDC on Base (x402) or Stripe credits. Remote MCP: https://myriad.synaptiic.org/mcp.",
   "maintainers": [
     "thebrierfox"
   ],
-  "url": "https://the-stall.intuitek.ai",
+  "url": "https://myriad.synaptiic.org",
   "license": "MIT",
   "tools": [
     {
@@ -2562,7 +2562,7 @@
     },
     {
       "name": "energy-brief",
-      "description": "AI-synthesized US energy market intelligence brief. Assembles 9 real-time signals from Yahoo Finance: WTI crude futures, Brent crude (with spread), natural gas (Henry Hub proxy), energy sector ETF (XLE), oil services ETF (OIH), ExxonMobil, Chevron, Marathon Petroleum, and Baker Hughes. Returns 52-week context, Brent/WTI spread, market-regime classification, and a 200-word GPT-4o-mini narrative covering oil regime, dominant risk, and agent decision implications. Seam: crownblock upstream $1.00/call — STALL at $0.65 with real-time futures data vs monthly averages.",
+      "description": "AI-synthesized US energy market intelligence brief. Assembles 9 real-time signals from Yahoo Finance: WTI crude futures, Brent crude (with spread), natural gas (Henry Hub proxy), energy sector ETF (XLE), oil services ETF (OIH), ExxonMobil, Chevron, Marathon Petroleum, and Baker Hughes. Returns 52-week context, Brent/WTI spread, market-regime classification, and a 200-word GPT-4o-mini narrative covering oil regime, dominant risk, and agent decision implications. Seam: crownblock upstream $1.00/call — MYRIAD at $0.65 with real-time futures data vs monthly averages.",
       "inputSchema": {
         "type": "object",
         "properties": {
@@ -7644,7 +7644,7 @@
     },
     {
       "name": "x402-endpoint-intel",
-      "description": "Market intelligence for any x402 endpoint or operator wallet. Returns settlement volume, unique payer count, price range, reputation tier, activity window, and endpoint description — drawn from 4.1M+ Base mainnet settlements in the Stall's proprietary on-chain dataset. Use before routing agent spend, vetting a counterparty operator, or benchmarking competitor pricing. No external API. Covers 80,000+ operators across 10+ days of live traffic.",
+      "description": "Market intelligence for any x402 endpoint or operator wallet. Returns settlement volume, unique payer count, price range, reputation tier, activity window, and endpoint description — drawn from 4.1M+ Base mainnet settlements in MYRIAD's proprietary on-chain dataset. Use before routing agent spend, vetting a counterparty operator, or benchmarking competitor pricing. No external API. Covers 80,000+ operators across 10+ days of live traffic.",
       "inputSchema": {
         "type": "object",
         "properties": {

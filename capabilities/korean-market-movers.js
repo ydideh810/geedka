@@ -12,7 +12,7 @@
 
 const UPBIT_MARKET_URL = "https://api.upbit.com/v1/market/all?isDetails=false";
 const UPBIT_TICKER_URL = "https://api.upbit.com/v1/ticker";
-const UA               = "Mozilla/5.0 (compatible; the-stall/1.5; +https://intuitek.ai)";
+const UA               = "Mozilla/5.0 (compatible; myriad/1.5; +https://synaptiic.org)";
 const BATCH_SIZE       = 100;
 const FETCH_TIMEOUT_MS = 12000;
 

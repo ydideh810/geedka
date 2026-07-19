@@ -20,7 +20,7 @@
 // USDC on Base: 0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913.
 // Price: $0.050.
 
-const UA             = "Mozilla/5.0 (compatible; the-stall/4.69; +https://intuitek.ai)";
+const UA             = "Mozilla/5.0 (compatible; myriad/4.69; +https://synaptiic.org)";
 const TIMEOUT        = 15_000;
 const USDC_BASE      = "0x833589fcd6edb6e08f4c7c32d4f71b54bda02913";
 const TRANSFER_TOPIC = "0xddf252ad1be2c89b69c2b068fc378daa952ba7f202e161af3603141f5d74c1a5";

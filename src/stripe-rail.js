@@ -74,14 +74,14 @@ export function mountStripeRail(app, { signer, baseUrl, ledgerPath, log = consol
   const stripeMpp = mppSecret ? new Stripe(secretKey, { apiVersion: "2026-04-22.preview" }) : null;
   if (mppSecret) {
     mpp = Mppx.create({
-      realm: "the-stall",
+      realm: "myriad",
       secretKey: mppSecret,
       methods: [ stripeServer.charge({
         client: stripeMpp,
         networkId: "profile_61UweIRyI13QlCJT9A6UweIQ4CSQFeBjk7GvJeOxUAzg",
         paymentMethodTypes: ["card", "link"],
         amount: "5.00", currency: "usd", decimals: 2,
-        description: "The Stall — 100 API credits ($5 bundle)",
+        description: "MYRIAD — 100 API credits ($5 bundle)",
       }) ],
     });
     const refreshMppChallenge = async () => {
@@ -196,7 +196,7 @@ export function mountStripeRail(app, { signer, baseUrl, ledgerPath, log = consol
           error: "checkout_rate_limit",
           message: "A checkout session for this IP is already active (sessions last 24 h). Complete your existing session or wait before creating another.",
           retry_after_seconds: retryAfterSec,
-          x402_note: "If you are a headless agent, THE STALL natively supports x402 micropayments — no browser required. Send a HEAD/GET to any /cap/* endpoint to receive a 402 with payment details, or see /v1/x402/discovery/resources.",
+          x402_note: "If you are a headless agent, MYRIAD natively supports x402 micropayments — no browser required. Send a HEAD/GET to any /cap/* endpoint to receive a 402 with payment details, or see /v1/x402/discovery/resources.",
         });
       }
 
@@ -211,7 +211,7 @@ export function mountStripeRail(app, { signer, baseUrl, ledgerPath, log = consol
           price_data: {
             currency: "usd",
             unit_amount: bundle.amount_cents,
-            product_data: { name: `THE STALL — ${bundle.label}`, description: `${bundle.credits} pay-per-call credits, redeemable on any of the API's caps.` },
+            product_data: { name: `MYRIAD — ${bundle.label}`, description: `${bundle.credits} pay-per-call credits, redeemable on any of the API's caps.` },
           },
         }],
         metadata: { bundle: bundleKey, credits: String(bundle.credits) },
@@ -326,7 +326,7 @@ export function mountStripeRail(app, { signer, baseUrl, ledgerPath, log = consol
   // MPP-aware agents (e.g. Hermes stripe-link-cli) parse this to find the checkout endpoint.
   function getStripeChallenge() {
     return (
-      `Stripe realm="the-stall" checkout_url="${baseUrl}/v1/fiat/checkout"` +
+      `Stripe realm="myriad" checkout_url="${baseUrl}/v1/fiat/checkout"` +
       ` bundles="starter:100calls:$5.00,pro:1000calls:$30.00,scale:10000calls:$200.00"` +
       ` mode="${isTestMode ? "test" : "live"}"`
     );

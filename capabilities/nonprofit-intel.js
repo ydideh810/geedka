@@ -31,7 +31,7 @@
 // Price: $0.008/call -- single ProPublica API round-trip per invocation.
 
 const PP_BASE    = "https://projects.propublica.org/nonprofits/api/v2";
-const UA         = "the-stall/4.68 nonprofit-intel (kyle@intuitek.ai)";
+const UA         = "myriad/4.68 nonprofit-intel (kyle@synaptiic.org)";
 const TIMEOUT_MS = 14_000;
 
 const NTEE_GROUPS = {

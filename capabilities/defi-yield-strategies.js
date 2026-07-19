@@ -12,7 +12,7 @@
 // Upstream: DeFiLlama yields API (free, no key, 16K+ pools across 400+ protocols).
 
 const YIELDS_URL = "https://yields.llama.fi/pools";
-const UA         = "Mozilla/5.0 (compatible; the-stall/4.42; +https://intuitek.ai)";
+const UA         = "Mozilla/5.0 (compatible; myriad/4.42; +https://synaptiic.org)";
 const TIMEOUT_MS = 15000;
 
 async function fetchPools() {

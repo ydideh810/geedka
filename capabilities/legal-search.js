@@ -10,7 +10,7 @@
 
 const CL_BASE = "https://www.courtlistener.com/api/rest/v4/search/";
 const TIMEOUT = 12000;
-const UA      = "the-stall/3.22 (https://intuitek.ai; mailto:kyle@intuitek.ai)";
+const UA      = "myriad/3.22 (https://synaptiic.org; mailto:kyle@synaptiic.org)";
 
 // Court hierarchy for filtering
 const COURT_GROUPS = {

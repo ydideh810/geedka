@@ -29,7 +29,7 @@ const YF_CRUMB_URL = "https://query2.finance.yahoo.com/v1/test/getcrumb";
 const YF_TS_URL    = "https://query1.finance.yahoo.com/ws/fundamentals-timeseries/v1/finance/timeseries";
 const OPENAI_URL   = "https://api.openai.com/v1/chat/completions";
 const MODEL        = "gpt-4o-mini";
-const UA           = "Mozilla/5.0 (compatible; the-stall/5.0; +https://intuitek.ai)";
+const UA           = "Mozilla/5.0 (compatible; myriad/5.0; +https://synaptiic.org)";
 const TMO          = 20_000;
 const CRUMB_TTL    = 30 * 60 * 1000;
 

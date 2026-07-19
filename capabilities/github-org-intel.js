@@ -13,7 +13,7 @@
 // signal-intel gap: github-repo-intel has 0 org-level analog in STALL.
 
 const GH_API     = "https://api.github.com";
-const UA         = "Mozilla/5.0 (compatible; the-stall/4.41; +https://intuitek.ai)";
+const UA         = "Mozilla/5.0 (compatible; myriad/4.41; +https://synaptiic.org)";
 const TIMEOUT_MS = 12_000;
 const CACHE_TTL  = 3_600_000; // 1 hour in ms
 

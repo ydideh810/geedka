@@ -25,7 +25,7 @@
 //   DCOILBRENTEU — Brent Crude Oil Spot Price
 
 const FRED_BASE = "https://fred.stlouisfed.org/graph/fredgraph.csv";
-const UA        = "Mozilla/5.0 (compatible; the-stall/4.65; +https://intuitek.ai)";
+const UA        = "Mozilla/5.0 (compatible; myriad/4.65; +https://synaptiic.org)";
 const TIMEOUT   = 12_000;
 
 async function fetchSeries(seriesId, limit) {

@@ -13,7 +13,7 @@
 //            HN Algolia (free), arXiv (free)
 //            + gpt-4o-mini synthesis via OPENAI_API_KEY.
 
-const UA          = "Mozilla/5.0 (compatible; the-stall/3.61; +https://intuitek.ai)";
+const UA          = "Mozilla/5.0 (compatible; myriad/3.61; +https://synaptiic.org)";
 const SRC_TIMEOUT = 8_000;
 const SYN_TIMEOUT = 25_000;
 const OPENAI_URL  = "https://api.openai.com/v1/chat/completions";

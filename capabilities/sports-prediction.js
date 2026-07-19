@@ -13,7 +13,7 @@
 // undercut noise and capture the high-volume sports-agent workflow.
 
 const ESPN_BASE = "https://site.api.espn.com/apis/site/v2/sports";
-const UA        = "the-stall/3.0.0 (x402; +https://the-stall.intuitek.ai)";
+const UA        = "myriad/3.0.0 (x402; +https://myriad.synaptiic.org)";
 
 const LEAGUE_MAP = {
   mlb:   ["baseball",    "mlb"],

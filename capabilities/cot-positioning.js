@@ -23,7 +23,7 @@
 
 const CFTC_BASE = "https://publicreporting.cftc.gov/resource/jun7-fc8e.json";
 const TIMEOUT   = 14_000;
-const UA        = "the-stall/4.64 (+https://the-stall.intuitek.ai; cot-positioning)";
+const UA        = "myriad/4.64 (+https://myriad.synaptiic.org; cot-positioning)";
 
 function r(n) { return n != null ? Math.round(Number(n)) : null; }
 function rPct(n, oi) {

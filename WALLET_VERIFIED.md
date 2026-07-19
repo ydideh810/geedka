@@ -1,4 +1,4 @@
-# Wallet Ownership Verification — payTo for the-stall
+# Wallet Ownership Verification — payTo for myriad
 
 **Status:** ✓ verified
 **Date:** 2026-05-28
@@ -20,7 +20,7 @@ This keypair was provisioned for Base mainnet only; no Sepolia variant exists.
 
 **Signed message (verbatim):**
 ```
-the-stall payTo ownership verification 2026-05-28
+myriad payTo ownership verification 2026-05-28
 ```
 
 **Signature (EIP-191 personal_sign, hex):**
@@ -43,7 +43,7 @@ locally:
 ```js
 import { recoverMessageAddress } from 'viem';
 const recovered = await recoverMessageAddress({
-  message: "the-stall payTo ownership verification 2026-05-28",
+  message: "myriad payTo ownership verification 2026-05-28",
   signature: "0x600a70579430a3687e19b9b98f08693f13d6f19b3501b36342fd9d2aa1b468745eca098bb98f30942613a72783900ae294404900b93c98bec91c6c7c859120961c",
 });
 // recovered === "0x03d773c52B67993e60Ecb3134b17436fE03B584c"

@@ -13,7 +13,7 @@
 // currently chain ticker-lookup + EDGAR search + filing-parse in 3+ calls.
 // This collapses the chain into one paid endpoint at $0.018.
 
-const UA      = "Mozilla/5.0 (compatible; the-stall/3.62; +https://intuitek.ai; kyle@intuitek.ai)";
+const UA      = "Mozilla/5.0 (compatible; myriad/3.62; +https://synaptiic.org; kyle@synaptiic.org)";
 const TIMEOUT = 10_000;
 
 const TICKERS_URL    = "https://www.sec.gov/files/company_tickers.json";

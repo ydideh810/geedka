@@ -7,7 +7,7 @@
 // Use case: macro agents, country risk, development economics, policy analysis.
 
 const WB_BASE = "https://api.worldbank.org/v2";
-const UA      = "Mozilla/5.0 (compatible; the-stall/1.0; +https://intuitek.ai)";
+const UA      = "Mozilla/5.0 (compatible; myriad/1.0; +https://synaptiic.org)";
 const T       = 15_000;
 
 // Common indicator aliases → WB codes

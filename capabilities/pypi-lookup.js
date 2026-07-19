@@ -9,7 +9,7 @@
 // Python libraries before including them in toolchains.
 
 const PYPI_URL   = "https://pypi.org/pypi";
-const UA         = "Mozilla/5.0 (compatible; the-stall/2.2; +https://intuitek.ai)";
+const UA         = "Mozilla/5.0 (compatible; myriad/2.2; +https://synaptiic.org)";
 const TIMEOUT_MS = 8000;
 
 export default {

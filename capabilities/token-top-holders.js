@@ -8,7 +8,7 @@
 
 const ETHPLORER  = "https://api.ethplorer.io";
 const FREE_KEY   = "freekey";
-const UA         = "Mozilla/5.0 (compatible; the-stall/1.0; +https://intuitek.ai)";
+const UA         = "Mozilla/5.0 (compatible; myriad/1.0; +https://synaptiic.org)";
 const TIMEOUT    = 15_000;
 
 async function ethplorerFetch(path) {

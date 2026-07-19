@@ -17,7 +17,7 @@ import urllib.request
 import urllib.parse
 import urllib.error
 
-STALL_URL = "https://the-stall.intuitek.ai"
+STALL_URL = "https://myriad.synaptiic.org"
 
 
 def _request(method, path, params=None, headers=None):

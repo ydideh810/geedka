@@ -10,7 +10,7 @@
 // Complements prediction-markets.js (which sorts by volume, not movement).
 
 const GAMMA_URL = "https://gamma-api.polymarket.com/markets?closed=false&active=true&limit=200&order=volumeClob&ascending=false";
-const UA        = "Mozilla/5.0 (compatible; the-stall/3.8; +https://intuitek.ai)";
+const UA        = "Mozilla/5.0 (compatible; myriad/3.8; +https://synaptiic.org)";
 
 export default {
   name: "polymarket-sentiment-shift",

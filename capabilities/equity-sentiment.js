@@ -23,7 +23,7 @@
 
 const YF_BASE   = "https://query2.finance.yahoo.com/v8/finance/chart";
 const FRED_BASE = "https://fred.stlouisfed.org/graph/fredgraph.csv";
-const UA        = "Mozilla/5.0 (compatible; the-stall/4.4; +https://intuitek.ai)";
+const UA        = "Mozilla/5.0 (compatible; myriad/4.4; +https://synaptiic.org)";
 const YF_TMO    = 12_000;
 const FRED_TMO  = 14_000;
 

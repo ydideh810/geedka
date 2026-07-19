@@ -20,7 +20,7 @@
 // Priced at $0.015 — 4-series parallel fetch + trend synthesis.
 
 const FRED_BASE = "https://fred.stlouisfed.org/graph/fredgraph.csv";
-const UA        = "Mozilla/5.0 (compatible; the-stall/4.78; +https://intuitek.ai)";
+const UA        = "Mozilla/5.0 (compatible; myriad/4.78; +https://synaptiic.org)";
 const TMO       = 14_000;
 const MONTHS    = 18; // need ≥15 for 3-month trend comparison (15 = 2 YoY comparators)
 

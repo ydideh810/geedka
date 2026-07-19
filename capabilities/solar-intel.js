@@ -13,7 +13,7 @@
 
 const GEOCODE_URL  = "https://geocoding-api.open-meteo.com/v1/search";
 const FORECAST_URL = "https://api.open-meteo.com/v1/forecast";
-const UA           = "the-stall/3.72 (https://intuitek.ai)";
+const UA           = "myriad/3.72 (https://synaptiic.org)";
 const TIMEOUT_MS   = 12000;
 
 async function fetchJson(url) {

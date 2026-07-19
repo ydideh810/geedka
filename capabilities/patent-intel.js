@@ -27,7 +27,7 @@
 //
 // Price: $0.008/call — single PatentsView API round-trip per invocation.
 
-const UA          = "the-stall/4.68 patent-intel (kyle@intuitek.ai)";
+const UA          = "myriad/4.68 patent-intel (kyle@synaptiic.org)";
 const PV_BASE     = "https://search.patentsview.org/api/v1/patent/";
 const TICKER_MAP  = "https://www.sec.gov/files/company_tickers.json";
 const TIMEOUT_MS  = 14_000;

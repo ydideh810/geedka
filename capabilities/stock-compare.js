@@ -11,7 +11,7 @@
 // Upstream: Yahoo Finance v8/finance/chart (public, no auth, no crumb).
 
 const YF_BASE = "https://query2.finance.yahoo.com/v8/finance/chart";
-const UA      = "Mozilla/5.0 (compatible; the-stall/4.91; +https://intuitek.ai)";
+const UA      = "Mozilla/5.0 (compatible; myriad/4.91; +https://synaptiic.org)";
 
 async function fetchTicker(ticker) {
   const sym = ticker.toUpperCase().replace(/[^A-Z0-9.\-^]/g, "");

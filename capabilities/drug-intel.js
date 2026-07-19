@@ -11,7 +11,7 @@
 // verification, patient education workflows, and medical AI applications.
 
 const BASE    = "https://api.fda.gov/drug";
-const UA      = "Mozilla/5.0 (compatible; the-stall/3.83; +https://intuitek.ai)";
+const UA      = "Mozilla/5.0 (compatible; myriad/3.83; +https://synaptiic.org)";
 const TIMEOUT = 12000;
 
 async function fdaGet(endpoint, params) {

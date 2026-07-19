@@ -10,7 +10,7 @@
 //
 // Upstream cost: zero — pure fetch + byte inspection, no external API.
 
-const UA = "Mozilla/5.0 (compatible; the-stall/0.4; +https://intuitek.ai)";
+const UA = "Mozilla/5.0 (compatible; myriad/0.4; +https://synaptiic.org)";
 
 // Magic byte signatures [offset, bytes, format, mime]
 const MAGIC = [

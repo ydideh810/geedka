@@ -21,7 +21,7 @@
 //
 // Price: $0.020 — multiple EDGAR fetches per call; unique among x402 MCP caps.
 
-const UA           = "the-stall/4.66 activist-investor-intel (kyle@intuitek.ai)";
+const UA           = "myriad/4.66 activist-investor-intel (kyle@synaptiic.org)";
 const TICKER_MAP   = "https://www.sec.gov/files/company_tickers.json";
 const SUBS_BASE    = "https://data.sec.gov/submissions/CIK";
 const EDGAR_ARCH   = "https://www.sec.gov/Archives/edgar/data";

@@ -14,7 +14,7 @@
 const JINA_BASE    = "https://r.jina.ai";
 const OPENAI_URL   = "https://api.openai.com/v1/chat/completions";
 const MODEL        = "gpt-4o-mini";
-const UA           = "Mozilla/5.0 (compatible; the-stall/3.47; +https://intuitek.ai)";
+const UA           = "Mozilla/5.0 (compatible; myriad/3.47; +https://synaptiic.org)";
 const FETCH_TIMEOUT = 18_000;
 const AI_TIMEOUT   = 30_000;
 const MAX_CHARS    = 8_000;

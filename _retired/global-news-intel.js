@@ -15,7 +15,7 @@
 // Rate limit: 1 req/5 sec (GDELT enforced). 429 returned to caller if hit.
 
 const GDELT_BASE = "https://api.gdeltproject.org/api/v2/doc/doc";
-const UA         = "Mozilla/5.0 (compatible; the-stall/4.29; +https://intuitek.ai)";
+const UA         = "Mozilla/5.0 (compatible; myriad/4.29; +https://synaptiic.org)";
 const TIMEOUT    = 15000;
 
 async function gdeltQuery(params) {

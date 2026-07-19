@@ -12,7 +12,7 @@
 
 const DEXSCREENER_BOOST   = "https://api.dexscreener.com/token-boosts/top/v1";
 const DEXSCREENER_TOKENS  = "https://api.dexscreener.com/latest/dex/tokens";
-const UA                  = "Mozilla/5.0 (compatible; the-stall/4.63; +https://intuitek.ai)";
+const UA                  = "Mozilla/5.0 (compatible; myriad/4.63; +https://synaptiic.org)";
 const TIMEOUT             = 20_000;
 
 // Quality score: rewards buy pressure, liquidity depth, volume consistency.

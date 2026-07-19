@@ -27,7 +27,7 @@
 //           No API key. Monthly data. ~15–30 rows needed per call.
 
 const FRED_BASE = "https://fred.stlouisfed.org/graph/fredgraph.csv";
-const UA        = "Mozilla/5.0 (compatible; the-stall/4.64; +https://intuitek.ai)";
+const UA        = "Mozilla/5.0 (compatible; myriad/4.64; +https://synaptiic.org)";
 const FRED_TMO  = 18_000;
 
 const r2 = n => Math.round(n * 100) / 100;
