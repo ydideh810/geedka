@@ -822,7 +822,7 @@ app.get("/", (_req, res) => {
     : "N/A";
   res.setHeader("Content-Type", "text/html; charset=utf-8");
   res.send(`<!DOCTYPE html>
-<html lang="en">
+  <html lang="en">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
@@ -830,16 +830,27 @@ app.get("/", (_req, res) => {
   <title>MYRIAD — External Intelligence Network</title>
 
   <style>
+    @import url('https://fonts.googleapis.com/css2?family=Bungee+Hairline&family=Doto:wght@100..900&display=swap');
+
     :root {
-      --bg: #03060b;
-      --panel: rgba(4, 12, 20, 0.72);
-      --phosphor: #dff8ff;
-      --cyan: #70bfff;
-      --blue: #6b8dff;
-      --dim: #566388;
-      --line: rgba(112, 150, 255, 0.38);
-      --line-soft: rgba(112, 162, 255, 0.12);
-      --glow: rgba(112, 169, 255, 0.65);
+      --bg: #02040a;
+      --bg-deep: #010207;
+
+      --white: #f4f7ff;
+
+      --blue: #244cff;
+      --blue-bright: #4b73ff;
+      --blue-hot: #7290ff;
+      --blue-dark: #142b8c;
+
+      --dim: #53649a;
+      --dim-dark: #2d3b70;
+
+      --line: rgba(64, 95, 255, 0.42);
+      --line-soft: rgba(64, 95, 255, 0.11);
+
+      --glow: rgba(55, 87, 255, 0.72);
+      --glow-soft: rgba(55, 87, 255, 0.22);
     }
 
     * {
@@ -857,30 +868,29 @@ app.get("/", (_req, res) => {
       min-height: 100vh;
       overflow-x: hidden;
 
-      background:
-        radial-gradient(
-          circle at 50% 42%,
-          rgba(28, 81, 112, 0.18) 0%,
-          rgba(5, 13, 22, 0.05) 38%,
-          transparent 70%
-        ),
-        var(--bg);
-
-      color: var(--phosphor);
-
-      font-family:
-        "Arial Narrow",
-        "Roboto Condensed",
-        "Helvetica Neue",
-        Arial,
-        sans-serif;
-
       display: flex;
       align-items: center;
       justify-content: center;
 
       padding: 32px;
 
+      background:
+        radial-gradient(
+          circle at 50% 42%,
+          rgba(26, 45, 130, 0.22) 0%,
+          rgba(7, 11, 30, 0.08) 40%,
+          transparent 72%
+        ),
+        linear-gradient(
+          180deg,
+          rgba(3, 8, 22, 0.22),
+          rgba(1, 2, 7, 0.04)
+        ),
+        var(--bg);
+
+      color: var(--white);
+
+      font-family: "Bungee Hairline", sans-serif;
       text-transform: uppercase;
     }
 
@@ -889,14 +899,15 @@ app.get("/", (_req, res) => {
       content: "";
       position: fixed;
       inset: 0;
+
       pointer-events: none;
       z-index: 100;
 
       background:
         repeating-linear-gradient(
           to bottom,
-          rgba(255,255,255,0.025) 0px,
-          rgba(255,255,255,0.025) 1px,
+          rgba(255, 255, 255, 0.024) 0px,
+          rgba(255, 255, 255, 0.024) 1px,
           transparent 1px,
           transparent 4px
         );
@@ -905,19 +916,20 @@ app.get("/", (_req, res) => {
       mix-blend-mode: screen;
     }
 
-    /* soft CRT vignette */
+    /* CRT vignette */
     body::after {
       content: "";
       position: fixed;
       inset: 0;
+
       pointer-events: none;
       z-index: 101;
 
       background:
         radial-gradient(
           ellipse at center,
-          transparent 45%,
-          rgba(0, 0, 0, 0.38) 100%
+          transparent 46%,
+          rgba(0, 0, 0, 0.42) 100%
         );
     }
 
@@ -930,10 +942,10 @@ app.get("/", (_req, res) => {
       display: flex;
       flex-direction: column;
 
+      padding: 24px 0 20px;
+
       border-top: 1px solid var(--line);
       border-bottom: 1px solid var(--line);
-
-      padding: 24px 0 20px;
     }
 
     /* technical grid */
@@ -941,6 +953,7 @@ app.get("/", (_req, res) => {
       content: "";
       position: absolute;
       inset: 0;
+
       pointer-events: none;
 
       background-image:
@@ -955,7 +968,26 @@ app.get("/", (_req, res) => {
         );
 
       background-size: 100% 96px, 128px 100%;
-      opacity: 0.18;
+
+      opacity: 0.15;
+    }
+
+    .screen::after {
+      content: "MYRIAD NETWORK INTERFACE // SYNAPTIIC SYSTEMS DIVISION";
+
+      position: absolute;
+      left: 8px;
+      bottom: 28px;
+
+      font-size: 6px;
+      letter-spacing: 0.24em;
+
+      color: rgba(82, 104, 190, 0.34);
+
+      writing-mode: vertical-rl;
+      transform: rotate(180deg);
+
+      pointer-events: none;
     }
 
     .topbar {
@@ -966,28 +998,32 @@ app.get("/", (_req, res) => {
       justify-content: space-between;
       align-items: flex-start;
 
-      border-bottom: 1px solid var(--line);
-
       padding: 0 8px 14px;
+
+      border-bottom: 1px solid var(--line);
     }
 
     .system-id {
       font-size: 11px;
-      letter-spacing: 0.26em;
+      letter-spacing: 0.28em;
 
-      color: var(--cyan);
+      color: var(--blue-bright);
 
       text-shadow:
-        0 0 6px var(--glow),
-        0 0 14px rgba(112, 157, 255, 0.25);
+        0 0 5px var(--glow),
+        0 0 14px var(--glow-soft);
     }
 
     .system-meta {
+      font-family: "Doto", monospace;
+
       text-align: right;
 
-      font-size: 9px;
-      letter-spacing: 0.18em;
-      line-height: 1.7;
+      font-size: 10px;
+      font-weight: 500;
+
+      letter-spacing: 0.15em;
+      line-height: 1.65;
 
       color: var(--dim);
     }
@@ -1009,10 +1045,10 @@ app.get("/", (_req, res) => {
     .classification {
       margin-bottom: 24px;
 
-      font-size: 10px;
+      font-size: 11px;
       letter-spacing: 0.42em;
 
-      color: var(--cyan);
+      color: var(--blue-bright);
 
       text-shadow:
         0 0 7px var(--glow);
@@ -1028,7 +1064,6 @@ app.get("/", (_req, res) => {
       margin-bottom: 18px;
     }
 
-    /* side targeting markers */
     .logo-wrap::before,
     .logo-wrap::after {
       content: "";
@@ -1036,40 +1071,47 @@ app.get("/", (_req, res) => {
       width: 80px;
       height: 1px;
 
-      background: var(--cyan);
-
-      box-shadow: 0 0 8px var(--glow);
-
       margin: 0 28px;
+
+      background: var(--blue-bright);
+
+      box-shadow:
+        0 0 6px var(--blue-bright),
+        0 0 12px var(--glow-soft);
     }
 
     h1 {
-      font-size: clamp(54px, 9vw, 104px);
+      font-family: "Bungee Hairline", sans-serif;
+
+      font-size: clamp(60px, 9vw, 112px);
       font-weight: 400;
 
-      letter-spacing: 0.06em;
+      letter-spacing: 0.08em;
       line-height: 0.9;
 
-      color: #effdff;
+      color: var(--white);
 
       text-shadow:
-        0 0 4px #ffffff,
-        0 0 12px var(--cyan),
-        0 0 30px rgba(91, 129, 255, 0.4);
+        0 0 3px #ffffff,
+        0 0 10px var(--blue-bright),
+        0 0 28px rgba(40, 76, 255, 0.52);
     }
 
     .tagline {
-      max-width: 680px;
+      max-width: 720px;
 
-      margin-top: 20px;
+      margin-top: 22px;
 
       text-align: center;
 
       font-size: 12px;
-      letter-spacing: 0.22em;
-      line-height: 1.8;
+      letter-spacing: 0.24em;
+      line-height: 1.9;
 
-      color: #8fa4cb;
+      color: var(--blue-hot);
+
+      text-shadow:
+        0 0 8px rgba(72, 102, 255, 0.18);
     }
 
     .status-strip {
@@ -1116,29 +1158,31 @@ app.get("/", (_req, res) => {
 
       transform: translateX(-50%) rotate(45deg);
 
-      background: var(--cyan);
+      background: var(--blue-bright);
 
       box-shadow:
-        0 0 6px var(--cyan),
-        0 0 12px var(--cyan);
+        0 0 5px var(--blue-bright),
+        0 0 12px var(--blue-bright);
     }
 
     .num {
       display: block;
 
-      font-size: 48px;
-      font-weight: 300;
+      font-family: "Doto", monospace;
+
+      font-size: 54px;
+      font-weight: 600;
       line-height: 1;
 
-      color: var(--phosphor);
+      color: var(--white);
 
       text-shadow:
-        0 0 7px var(--cyan),
-        0 0 18px rgba(112, 150, 255, 0.38);
+        0 0 5px var(--blue-bright),
+        0 0 15px rgba(55, 87, 255, 0.62);
     }
 
     .label {
-      margin-top: 11px;
+      margin-top: 12px;
 
       font-size: 9px;
       letter-spacing: 0.28em;
@@ -1149,10 +1193,14 @@ app.get("/", (_req, res) => {
     .since {
       margin-top: 5px;
 
-      font-size: 8px;
-      letter-spacing: 0.14em;
+      font-family: "Doto", monospace;
 
-      color: #394668;
+      font-size: 9px;
+      font-weight: 500;
+
+      letter-spacing: 0.12em;
+
+      color: var(--dim-dark);
     }
 
     .links {
@@ -1163,7 +1211,8 @@ app.get("/", (_req, res) => {
 
       margin-top: 32px;
 
-      border: 1px solid var(--line);
+      border-top: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
     }
 
     .links a {
@@ -1171,17 +1220,22 @@ app.get("/", (_req, res) => {
 
       padding: 15px 12px;
 
-      color: #3964f0;
+      color: var(--blue-bright);
 
       text-decoration: none;
       text-align: center;
 
       font-size: 9px;
-      letter-spacing: 0.17em;
+      letter-spacing: 0.18em;
 
       border-right: 1px solid var(--line);
 
-      background: rgba(16, 26, 70, 0.06);
+      background:
+        linear-gradient(
+          180deg,
+          rgba(36, 76, 255, 0.02),
+          rgba(36, 76, 255, 0)
+        );
 
       transition:
         background 0.15s,
@@ -1190,25 +1244,30 @@ app.get("/", (_req, res) => {
     }
 
     .links a:last-child {
-      border-right: 0;
+      border-right: none;
     }
 
     .links a:hover {
-      color: white;
+      color: var(--white);
 
-      background: rgba(49, 110, 243, 0.11);
+      background:
+        linear-gradient(
+          180deg,
+          rgba(45, 76, 255, 0.14),
+          rgba(45, 76, 255, 0.04)
+        );
 
       text-shadow:
-        0 0 8px var(--cyan),
-        0 0 14px var(--cyan);
+        0 0 7px var(--blue-bright),
+        0 0 14px var(--blue-bright);
     }
 
     .links a::before {
       content: "◇";
 
-      margin-right: 8px;
+      margin-right: 9px;
 
-      color: var(--cyan);
+      color: var(--blue-bright);
     }
 
     .footer {
@@ -1222,20 +1281,10 @@ app.get("/", (_req, res) => {
       padding: 16px 8px 0;
 
       font-size: 8px;
-      letter-spacing: 0.17em;
+      letter-spacing: 0.18em;
       line-height: 1.8;
 
-      color: #1e63e4;
-    }
-
-    .footer a {
-      color: #1e63e4;
-      text-decoration: none;
-    }
-
-    .footer a:hover {
-      color: var(--phosphor);
-      text-shadow: 0 0 8px var(--cyan);
+      color: var(--blue);
     }
 
     .online {
@@ -1244,23 +1293,38 @@ app.get("/", (_req, res) => {
       gap: 8px;
     }
 
+    .online span:last-child {
+      font-family: "Doto", monospace;
+      font-size: 9px;
+      font-weight: 500;
+
+      letter-spacing: 0.12em;
+    }
+
     .dot {
       width: 5px;
       height: 5px;
 
-      background: var(--cyan);
+      background: var(--blue-bright);
 
       border-radius: 50%;
 
       box-shadow:
-        0 0 6px var(--cyan),
-        0 0 10px var(--cyan);
+        0 0 5px var(--blue-bright),
+        0 0 11px var(--blue-bright);
 
       animation: pulse 2.2s infinite;
     }
 
     .serial {
+      font-family: "Doto", monospace;
+
       text-align: right;
+
+      font-size: 9px;
+      font-weight: 500;
+
+      letter-spacing: 0.12em;
     }
 
     @keyframes pulse {
@@ -1282,6 +1346,10 @@ app.get("/", (_req, res) => {
         min-height: 660px;
       }
 
+      .screen::after {
+        display: none;
+      }
+
       .logo-wrap::before,
       .logo-wrap::after {
         width: 22px;
@@ -1293,12 +1361,12 @@ app.get("/", (_req, res) => {
       }
 
       .stat {
-        border-right: 0;
+        border-right: none;
         border-bottom: 1px solid var(--line);
       }
 
       .stat:last-child {
-        border-bottom: 0;
+        border-bottom: none;
       }
 
       .links {
@@ -1306,7 +1374,7 @@ app.get("/", (_req, res) => {
       }
 
       .links a:nth-child(2) {
-        border-right: 0;
+        border-right: none;
       }
 
       .links a:nth-child(-n+2) {
@@ -1369,7 +1437,7 @@ app.get("/", (_req, res) => {
           </span>
 
           <span class="label">
-            Capabilities
+            Capability Nodes
           </span>
 
         </div>
@@ -1400,7 +1468,7 @@ app.get("/", (_req, res) => {
           </span>
 
           <span class="label">
-            Capabilities Called
+            Active Capabilities
           </span>
 
         </div>
@@ -1411,19 +1479,19 @@ app.get("/", (_req, res) => {
       <nav class="links">
 
         <a href="/catalog">
-          Catalog
+          01 Catalog
         </a>
 
         <a href="/.well-known/x402">
-          x402
+          02 X402
         </a>
 
         <a href="/.well-known/agent.json">
-          Agent Card
+          03 Agent
         </a>
 
         <a href="/stats">
-          Statistics
+          04 Statistics
         </a>
 
       </nav>
@@ -1447,8 +1515,7 @@ app.get("/", (_req, res) => {
       <div class="serial">
 
         MYRIAD NETWORK NODE<br>
-
-        SYNAPTIIC · 2026
+        SYNAPTIIC SYSTEMS · 2026
 
       </div>
 
