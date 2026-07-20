@@ -63,7 +63,9 @@ const ENABLED_CAPABILITIES = new Set([
      "classic-novels",
      "document-qa-prep",
      "aviation-weather",
-     
+     "energy-brief",
+     "roast",
+     "concentration-risk-score",     
   
   
   
