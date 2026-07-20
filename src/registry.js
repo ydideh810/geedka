@@ -22,6 +22,30 @@ const REQUIRED = [
 const ENABLED_CAPABILITIES = new Set([
 
 
+    // UTILITIES
+     "agent-access-check ",
+     "agent-kya-score",
+     "vision-analyze", 
+     "tx-explainer", 
+     "wallet-balance", 
+     "wallet-screener",  
+     "manufacturing-brief", 
+     "news-sentiment", 
+     "twitter-intel", 
+     "web-company-intel", 
+     "tx-intel", 
+     "unit-converter", 
+     "social-intel",  
+     "fda-recall-watch", 
+     "cron-parser", 
+     "regex-tester",  
+     "sports-scores",   
+     "token-top-holders",  
+     "x402-endpoint-intel", 
+     "web-scrape-links",
+  
+  
+  
   // COMPANIES
   "company-due-diligence",
   "company-intel",
