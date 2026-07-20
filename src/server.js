@@ -737,7 +737,7 @@ app.get("/.well-known/agent.json", (_req, res) =>
         type: "mcp",
         transport: "streamable-http",
         url: `${BASE_URL}/mcp`,
-        description: "MCP Streamable HTTP interface — all capabilities available free, no wallet required",
+        description: "MCP Streamable HTTP interface — capability discovery is free. Tool execution requires a MYRIAD prepaid Bearer token.",
       },
       {
         type: "mcp",
@@ -1705,7 +1705,13 @@ app.get("/metrics", (_req, res) => {
 });
 
 // ── MCP Streamable HTTP endpoint (free — handlers called directly, no x402) ──
-app.post("/mcp", makeMcpHandler(capabilities));
+app.post(
+  "/mcp",
+  makeMcpHandler(
+    capabilities,
+    stripeRail.consumeCredits
+  )
+);
 app.get("/mcp", (_req, res) =>
   res.status(200).json({
     jsonrpc: "2.0",
@@ -1722,7 +1728,13 @@ app.get("/mcp", (_req, res) =>
 );
 
 // ── MCP SSE transport (legacy — for clients that require SSE over streamable-http) ──
-const { connect: sseConnect, message: sseMessage } = makeSSEHandlers(capabilities);
+const {
+  connect: sseConnect,
+  message: sseMessage
+} = makeSSEHandlers(
+  capabilities,
+  stripeRail.consumeCredits
+);
 app.get("/sse", sseConnect);
 app.post("/messages", sseMessage);
 
