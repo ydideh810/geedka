@@ -36,13 +36,50 @@ import { Challenge } from "mppx";
 // blended ~ $0.01-0.02/call x402 price: fiat buyers pay a convenience premium and
 // commit cash up front, which is exactly the high-intent demand we want to capture.
 export const FIAT_BUNDLES = {
-  starter: { credits: 100,  amount_cents: 500,   label: "100 call credits"  },  // $5  -> $0.05/call
-  pro:     { credits: 1000, amount_cents: 3000,  label: "1,000 call credits" }, // $30 -> $0.03/call
-  scale:   { credits: 10000, amount_cents: 20000, label: "10,000 call credits" }, // $200 -> $0.02/call
+  starter: {
+    credits: 5000,
+    amount_cents: 500,
+    label: "5,000 MYRIAD credits",
+  },
+
+  pro: {
+    credits: 30000,
+    amount_cents: 3000,
+    label: "30,000 MYRIAD credits",
+  },
+
+  scale: {
+    credits: 200000,
+    amount_cents: 20000,
+    label: "200,000 MYRIAD credits",
+  },
 };
 
 const SCOPE = "cap:*"; // a fiat credit pass is valid against every /cap/* endpoint
 const TOKEN_WINDOW_SECONDS = 60 * 60 * 24 * 30; // token validity 30d; credits are the real limit
+
+// MYRIAD credit denomination:
+// 1 credit = $0.001 USD of capability usage value.
+export const CREDIT_VALUE_USD = 0.001;
+
+// Convert a capability's "$0.012" price into 12 credits.
+// Minimum charge is 1 credit.
+export function creditsForPrice(price) {
+  const priceUsd = Number(
+    String(price).replace("$", "")
+  );
+
+  if (!Number.isFinite(priceUsd) || priceUsd < 0) {
+    throw new Error(
+      `Invalid MYRIAD capability price: ${price}`
+    );
+  }
+
+  return Math.max(
+    1,
+    Math.ceil(priceUsd / CREDIT_VALUE_USD)
+  );
+}
 
 export function mountStripeRail(app, { signer, baseUrl, ledgerPath, log = console }) {
   // Test key takes priority over live key — enables test mode with no real charges.
@@ -54,7 +91,7 @@ export function mountStripeRail(app, { signer, baseUrl, ledgerPath, log = consol
 
   if (!secretKey) {
     log.warn?.("  [stripe-rail] No Stripe key — fiat rail DISABLED (x402 rail unaffected). Set STRIPE_SECRET_KEY_TEST (test) or STRIPE_SECRET_KEY (live) to enable.");
-    return { enabled: false, isTestMode: false, fiatGate: (_req, _res, next) => next(), getStripeChallenge: () => null, getMppChallenge: () => null, mppGate: (_req, _res, next) => next() };
+    return { enabled: false, consumeCredits: () => ({ ok: false, reason: "stripe_disabled",}), isTestMode: false, fiatGate: (_req, _res, next) => next(), getStripeChallenge: () => null, getMppChallenge: () => null, mppGate: (_req, _res, next) => next() };
   }
   const webhookSecret = testKey
     ? (process.env.STRIPE_WEBHOOK_SECRET_TEST || null)
@@ -298,6 +335,67 @@ export function mountStripeRail(app, { signer, baseUrl, ledgerPath, log = consol
 <pre>curl -H "Authorization: Bearer &lt;token&gt;" "${baseUrl}/cap/ping"</pre></body>`);
   });
 
+  function consumeCredits(authHeader, amount = 1) {
+  if (!authHeader?.startsWith("Bearer ")) {
+    return {
+      ok: false,
+      reason: "missing_bearer_token",
+    };
+  }
+
+  if (!Number.isInteger(amount) || amount < 1) {
+    return {
+      ok: false,
+      reason: "invalid_credit_amount",
+    };
+  }
+
+  const token = authHeader.slice(7);
+
+  let payload;
+
+  try {
+    payload = verifyToken(signer, token, {
+      requiredScope: SCOPE,
+    });
+  } catch {
+    return {
+      ok: false,
+      reason: "invalid_or_expired_token",
+    };
+  }
+
+  const ledger = loadLedger();
+  const entry = ledger[payload.jti];
+
+  if (!entry) {
+    return {
+      ok: false,
+      reason: "unknown_credit_account",
+    };
+  }
+
+  if (entry.credits < amount) {
+    return {
+      ok: false,
+      reason: "insufficient_credits",
+      creditsRemaining: entry.credits,
+      creditsRequired: amount,
+    };
+  }
+
+  entry.credits -= amount;
+
+  saveLedger(ledger);
+
+  return {
+    ok: true,
+    jti: payload.jti,
+    creditsUsed: amount,
+    creditsRemaining: entry.credits,
+  };
+}
+
   // ── 4. Pre-x402 gate ──────────────────────────────────────────────────────────
   // If a valid fiat token with remaining credit is present on a /cap/* request,
   // decrement one credit and mark req.fiatPaid so the x402 middleware is bypassed.
@@ -333,7 +431,20 @@ export function mountStripeRail(app, { signer, baseUrl, ledgerPath, log = consol
   }
 
   log.log?.(`  [stripe-rail] ENABLED (${isTestMode ? "TEST" : "LIVE"} mode) — fiat rail mounted at /v1/fiat/* (bundles: ${Object.keys(FIAT_BUNDLES).join(", ")})`);
-  return { enabled: true, isTestMode, fiatGate, getStripeChallenge, getMppChallenge, mppGate, _stripe: stripe, _loadLedger: loadLedger };
+  return {
+  enabled: true,
+  isTestMode,
+
+  fiatGate,
+  consumeCredits,
+
+  getStripeChallenge,
+  getMppChallenge,
+  mppGate,
+
+  _stripe: stripe,
+  _loadLedger: loadLedger,
+};
 }
 
 // Local helpers so the webhook gets raw body while checkout gets JSON, without
