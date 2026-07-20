@@ -1704,39 +1704,7 @@ app.get("/metrics", (_req, res) => {
   });
 });
 
-// ── MCP Streamable HTTP endpoint (free — handlers called directly, no x402) ──
-app.post(
-  "/mcp",
-  makeMcpHandler(
-    capabilities,
-    stripeRail.consumeCredits
-  )
-);
-app.get("/mcp", (_req, res) =>
-  res.status(200).json({
-    jsonrpc: "2.0",
-    result: {
-      serverInfo: { name: "MYRIAD", version: PKG_VERSION },
-      capabilities: { tools: {} },
-      protocolVersion: "2024-11-05",
-      capabilityCount: capabilities.length,
-      endpoint: `${BASE_URL}/mcp`,
-      note: "POST to this endpoint to send MCP messages",
-    },
-    id: null,
-  })
-);
 
-// ── MCP SSE transport (legacy — for clients that require SSE over streamable-http) ──
-const {
-  connect: sseConnect,
-  message: sseMessage
-} = makeSSEHandlers(
-  capabilities,
-  stripeRail.consumeCredits
-);
-app.get("/sse", sseConnect);
-app.post("/messages", sseMessage);
 
 // ── Query param coercion — REST callers pass everything as strings ─────────────
 // For fields with type: "array" in inputSchema, accept comma-separated strings
@@ -1814,6 +1782,40 @@ const stripeRail = mountStripeRail(app, {
 });
 app.use(stripeRail.mppGate);
 app.use(stripeRail.fiatGate);
+
+// ── MCP Streamable HTTP endpoint (free — handlers called directly, no x402) ──
+app.post(
+  "/mcp",
+  makeMcpHandler(
+    capabilities,
+    stripeRail.consumeCredits
+  )
+);
+app.get("/mcp", (_req, res) =>
+  res.status(200).json({
+    jsonrpc: "2.0",
+    result: {
+      serverInfo: { name: "MYRIAD", version: PKG_VERSION },
+      capabilities: { tools: {} },
+      protocolVersion: "2024-11-05",
+      capabilityCount: capabilities.length,
+      endpoint: `${BASE_URL}/mcp`,
+      note: "POST to this endpoint to send MCP messages",
+    },
+    id: null,
+  })
+);
+
+// ── MCP SSE transport (legacy — for clients that require SSE over streamable-http) ──
+const {
+  connect: sseConnect,
+  message: sseMessage
+} = makeSSEHandlers(
+  capabilities,
+  stripeRail.consumeCredits
+);
+app.get("/sse", sseConnect);
+app.post("/messages", sseMessage);
 
 // x402 paywall — fiat-gated or internal-key requests bypass entirely.
 // Order: PayAI canary (ping only) → Polygon rail → Solana rail → EVM x402 paywall.
