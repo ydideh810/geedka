@@ -65,7 +65,8 @@ const ENABLED_CAPABILITIES = new Set([
      "aviation-weather",
      "energy-brief",
      "roast",
-     "concentration-risk-score",     
+     "concentration-risk-score",  
+     "page-links",   
   
   
   
