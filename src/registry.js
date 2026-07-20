@@ -30,7 +30,7 @@ const ENABLED_CAPABILITIES = new Set([
      "wallet-balance", 
      "wallet-screener",  
      "manufacturing-brief", 
-     "news-sentiment", 
+     "labor-brief", 
      "twitter-intel", 
      "web-company-intel", 
      "tx-intel", 
@@ -43,6 +43,17 @@ const ENABLED_CAPABILITIES = new Set([
      "token-top-holders",  
      "x402-endpoint-intel", 
      "web-scrape-links",
+     "korean-market-movers",
+     "json-extract",
+     "job-search",
+     "dictionary-intel",
+     "crypto-top-movers",
+     "crypto-news-impact",
+     "crypto-fiat-price",
+     "crypto-fear-greed",
+     "consumer-brief",
+     "breadcrumb-extractor",
+     
   
   
   
@@ -62,6 +73,7 @@ const ENABLED_CAPABILITIES = new Set([
   "short-volume-intel",
   "web-company-intel",
   "sanctions-screening",
+ 
 
   // RESEARCH
   "arxiv-intel",
@@ -79,6 +91,7 @@ const ENABLED_CAPABILITIES = new Set([
   "stackoverflow-intel",
   "wikipedia-intel",
   "research-synthesis",
+  "clinical-trials",
 
   // WORLD
   "air-quality",
