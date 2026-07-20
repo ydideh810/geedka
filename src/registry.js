@@ -53,6 +53,16 @@ const ENABLED_CAPABILITIES = new Set([
      "crypto-fear-greed",
      "consumer-brief",
      "breadcrumb-extractor",
+     "btc-game-theory",
+     "btc-miner-econ",
+     "btc-systems-theory",
+     "breadcrumb-extractor",
+     "block-intel",
+     "changelog-generate",
+     "chromatic-dispersion",
+     "classic-novels",
+     "document-qa-prep",
+     "aviation-weather",
      
   
   
